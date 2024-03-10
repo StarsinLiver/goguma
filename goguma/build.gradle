@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	// implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	compileOnly 'org.projectlombok:lombok'
@@ -40,10 +40,9 @@ dependencies {
 	
 	// jstl
 	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
-	
-	// websocket
-	
-	
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // 추가
+    // websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
 
 tasks.named('test') {
