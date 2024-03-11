@@ -1,0 +1,34 @@
+.emoji--main-div{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.emoji--table{
+    width: 1000px;
+}
+
+.emoji--table, .emoji--th, .emoji--td{
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+.emoji--th, .emoji--td{
+    padding: 10px;
+
+}
+
+.emoji--th{
+    width: 200px;
+    font-family: 700;
+    text-align: center;
+}
+
+.upload-btn{
+    
+}
