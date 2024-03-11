@@ -68,7 +68,10 @@
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 345727d725cec03e212428c4a63800c9059d9af5
 </head>
 <body class="seo_version">
 
