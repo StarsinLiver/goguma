@@ -41,8 +41,10 @@ dependencies {
 	// jstl
 	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper' // 추가
+	
     // websocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    
 }
 
 tasks.named('test') {

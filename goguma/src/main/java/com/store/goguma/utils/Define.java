@@ -30,4 +30,5 @@ public class Define {
     // 배너광고 업로드
     public static final String FAIL_UPLOAD_AD = "업로드에 실패했습니다.";
 
+
 }
