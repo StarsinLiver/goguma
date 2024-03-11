@@ -49,6 +49,9 @@
 <link rel="stylesheet" href="/customAssets/css/market.css" />
 <link rel="stylesheet" href="/customAssets/css/market2.css" />
 <link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
+<link rel="stylesheet" href="/customAssets/css/emoji/list.css">
+<link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
+
 <!-- Custom CSS -->
 
 
@@ -65,6 +68,7 @@
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body class="seo_version">
 
