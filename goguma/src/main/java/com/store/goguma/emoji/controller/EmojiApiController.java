@@ -25,9 +25,7 @@ public class EmojiApiController {
 	@PostMapping("/upload")
 	public ResponseEntity<?> emojiFileUpload(@RequestPart(value="obj") EmojiUploadDto dto, 
 			@RequestPart(value = "file", required=false) List<MultipartFile> files){	
-		System.out.println(files.get(0).getSize());
-		boolean result = false;
-		//boolean result = service.emojiFileUpload(dto, files);
+		boolean result = service.emojiFileUpload(dto, files);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
 

@@ -34,7 +34,6 @@ public class EmojiUploadService {
 			// 성공하면 for 돌려서 emoji insert(name은 하드코딩 하는걸로..)
 			int uploadResult = 0;
 			dto.setFile(uploadProcess(files.get(0)));
-			System.out.println("메인 이모지 디비 : " + dto.toEntity());
 			int mainResult = repository.mainUpload(dto.toEntity());
 			if(mainResult != 0) {
 				Integer groupId = repository.getMainLastId();
@@ -65,7 +64,7 @@ public class EmojiUploadService {
 
             String saveDirectory = Define.UPLOAD_FILE_DERECTORY;
             File dir = new File(saveDirectory);
-            if (dir.exists()) {
+            if (!dir.exists()) {
                 dir.mkdir();
             }
 
