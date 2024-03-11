@@ -1351,8 +1351,8 @@ body.global footer .social-links a {
 
 /* line 136, app/assets/stylesheets/home/users/show.css.scss */
 #user-filter ul li a.active {
-  border-bottom: 3px solid #f76707;
-  color: #f76707;
+  border-bottom: 3px solid rgb(233,220,107);
+  color: rgb(233,220,107);
   font-weight: 600;
 }
 

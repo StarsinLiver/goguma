@@ -43,7 +43,7 @@ html {
   }
   ::selection {
     color: #212529;
-    background: #FFB98B;
+    background: rgb(152, 255, 152);
   }
   
   /* line 60, app/assets/stylesheets/home/articles/structure.css.scss */

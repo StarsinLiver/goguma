@@ -1,8 +1,8 @@
 package com.store.goguma.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +18,37 @@ public class ProductService {
 
 	@Autowired
 	ProductRepository productRepository;
+	
+	public List<ProductDTO> findAllProduct() {
+	    List<Product> productList = productRepository.findAllProduct();
+
+	    List<ProductDTO> productDTOList = new ArrayList<>();
+
+	    for (Product product : productList) {
+	        ProductDTO productDTO = ProductDTO.builder()
+	                .pId(product.getPId())
+	                .address(product.getAddress())
+	                .name(product.getName())
+	                .price(product.getPrice())
+	                .hostId(product.getHostId())
+	                .description(product.getDescription())
+	                .file(product.getFile())
+	                .mainCategoryId(product.getMainCategoryId())
+	                .subCategoryId(product.getSubCategoryId())
+	                .createAt(product.getCreateAt())
+	                .updateAt(product.getUpdateAt())
+	                .deleteAt(product.getDeleteAt())
+	                .deleteYn(product.getDeleteYn())
+	                .confirmYn(product.getConfirmYn())
+	                .build();
+
+	        productDTOList.add(productDTO);
+	    }
+
+	    return productDTOList;
+	}
+	
+	
 	
 	public ProductDTO findAllBypId(Integer pId) {
 		

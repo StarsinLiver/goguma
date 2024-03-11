@@ -12,7 +12,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class ProductDTO {
-
     private Integer pId;
     private String address;
     private String name;
@@ -27,4 +26,8 @@ public class ProductDTO {
     private String deleteAt;
     private String deleteYn;
     private String confirmYn;
+    
+    public Integer getPid() {
+    	return this.pId;
+    }
 }

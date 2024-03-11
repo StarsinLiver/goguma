@@ -1,5 +1,7 @@
 package com.store.goguma.product.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +21,14 @@ public class ProductController {
 	ProductService productService;
 
 	@GetMapping("/productDetail")
-    public String productDetail(@RequestParam(name = "pId", required = true) Integer pId, Model model) {
-		
-        ProductDTO productDTO = productService.findAllBypId(pId);
+    public String productDetail(@RequestParam(value = "pId") Integer pId, Model model) {
+		ProductDTO productDTO = productService.findAllBypId(pId);
+        List<ProductDTO> productList = productService.findAllProduct();
         
+        log.info(productList.toString());
+
         model.addAttribute("product", productDTO);
+        model.addAttribute("productList", productList);
         
         return "/product/detail";
 	}
