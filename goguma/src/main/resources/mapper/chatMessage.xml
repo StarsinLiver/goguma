@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.store.goguma.repository.ChatMessageRepository">
+
+	<select id="findAllByRoomId"
+		resultType="com.store.goguma.chat.dto.chatMessage.ChatMessageDto">
+		select c.id as messageId ,
+		c.u_id as userId ,
+		c.text as text ,
+		c.file as file ,
+		c.emoji as emoji ,
+		c.room_id as roomId ,
+		c.create_at as createAt ,
+		c.chat_message_type as chatMessageType ,
+		u.name as userName ,
+		u.file as userFile
+		from chat_message c
+		left join user u
+		on c.u_id = u.u_id
+		where c.room_id = #{roomId}
+		and u.u_id is not null
+	</select>
+	
+	<insert id="save">
+		insert into chat_message (u_id , text , file , emoji , room_id , chat_message_type) 
+		values (#{uId}, #{text} , #{file} , #{emoji} , #{roomId} , #{chatMessageType});
+	</insert>
+	
+		<select id="findByRoomId"
+		resultType="com.store.goguma.chat.dto.chatMessage.ChatMessageDto">
+		select c.id as messageId ,
+		c.u_id as userId ,
+		c.text as text ,
+		c.file as file ,
+		c.emoji as emoji ,
+		c.room_id as roomId ,
+		c.create_at as createAt ,
+		c.chat_message_type as chatMessageType ,
+		u.name as userName ,
+		u.file as userFile
+		from chat_message c
+		left join user u
+		on c.u_id = u.u_id
+		where c.room_id = #{roomId}
+		and u.u_id is not null
+		ORDER BY c.id DESC 
+		LIMIT 1
+	</select>
+</mapper>
