@@ -14,7 +14,8 @@ import lombok.ToString;
 public class MainEmoji {
 
 	private Integer id;
-	private Integer mainFile;
+	private String file;
 	private String name;
 	private Integer price;
+	
 }
