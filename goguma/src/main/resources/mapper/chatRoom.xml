@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.store.goguma.repository.ChatRoomRepository">
+
+	<select id="findAllByUserId" resultType="com.store.goguma.chat.dto.chatRoom.ChatRoomDto">
+		select
+		p.p_id as pId ,
+		p.address as productAddress ,
+		p.name as productName ,
+		p.price as productPrice ,
+		p.host_id as productHostId ,
+		p.description as productDescription ,
+		p.file as productFile ,
+		p.main_category_id as mainCategoryId ,
+		p.sub_category_id as subCategoryId ,
+		c.id as roomId ,
+		c.name as roomName,
+		c.u_id as userId ,
+		c.host_id as hostId ,
+		c.create_at as createAt
+		from chat_room c
+		left join product p
+		on p.p_id = c.p_id
+		where p.host_id = #{userId}
+		or c.u_id = #{userId};
+	</select>
+</mapper>

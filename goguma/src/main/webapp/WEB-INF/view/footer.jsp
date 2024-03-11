@@ -145,14 +145,17 @@
 	class="fa fa-angle-up"></i></a>
 
 
-<!-- jqueryCdn -->
-
 <!-- ALL JS FILES -->
 <script src="/assets/js/all.js"></script>
 <!-- ALL PLUGINS -->
 <script src="/assets/js/custom.js"></script>
 <!-- style script -->
 <script src="/customAssets/js/detail.js"></script>
+
+ <!-- Bootstrap JS (Optional) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-8FPOj1KuqbzvEu7wQ/xzQ2QeCy8a90Ai5ms5PhR6w6zyv2X1ZXxPeC5WdrfaXLj6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-nBd17s/SFPXxZb3O02/HX+9kiRE5Al4GQpu/NUdhuATnf6/Jl+zUx0UEvFGScxUJ" crossorigin="anonymous"></script>
+
 <!-- <script src="/customAssets/js/free.js"></script>  -->
 </body>
 </html>
