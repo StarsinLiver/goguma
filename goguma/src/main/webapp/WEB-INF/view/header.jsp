@@ -47,6 +47,9 @@
 <link rel="stylesheet" href="/customAssets/css/market.css" />
 <link rel="stylesheet" href="/customAssets/css/market2.css" />
 <link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
+<link rel="stylesheet" href="/customAssets/css/emoji/list.css">
+<link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
+
 <!-- Custom CSS -->
 
 
@@ -54,7 +57,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body class="seo_version">
 
