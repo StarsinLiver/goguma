@@ -516,6 +516,8 @@ a img.aligncenter {
 .header_style_01 .navbar .btn--login {
     background-color: #FFD800;
     color: #703250;
+    font-size: 16px;
+    line-height: 40px;
 }
 .header_style_01 .navbar .btn--login:hover {
     color: white;
@@ -649,7 +651,7 @@ li.social-links a {
 	margin-top: 22px;
 }
 
-.fixed-menu .navbar-default{
+.header_style_01.fixed-menu .navbar-start{
 	position: fixed;
 	visibility: hidden;
 	left: 0px;
@@ -688,7 +690,7 @@ li.social-links a {
 	animation-iteration-count: 1;
 }
 
-.fixed-menu .navbar-default{
+.header_style_01.fixed-menu .navbar-start{
 	padding: 15px 0px;
 	box-shadow: 0 0 8px 0 rgba(0,0,0,.12);
 }
@@ -2157,7 +2159,6 @@ select.mobile-device {
     font-weight: 400;
     font-size: 20px;
     text-transform: capitalize;
-    line-height: !important;
 }
 
 .footer {
@@ -2458,7 +2459,7 @@ body.seo_version .footer-links a:hover{
     color: #999 !important;
     margin: 0 !important;
     padding: 0 !important;
-    line-height: 1 !important:
+    line-height: 1 !important;
 }
 
 .stat-wrap p {
@@ -2467,7 +2468,7 @@ body.seo_version .footer-links a:hover{
     margin: 0;
     font-weight: 300;
     padding: 4px 0 0;
-    line-height: 1 !important:
+    line-height: 1 !important;
 }
 
 #preloader {
@@ -2553,7 +2554,7 @@ body.seo_version .footer-links a:hover{
 	background-size: cover;
 	background-color: #E8DB6B;
 	background-repeat: no-repeat;
-	padding: 260px 0px 110px 0px;
+    padding: 150px 0px 110px 0px;
 	background-position: center bottom;
 }
 

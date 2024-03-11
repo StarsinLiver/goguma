@@ -12,13 +12,13 @@
 	content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <!-- Site Metas -->
-<title>FlaxSEO - Responsive HTML5 Template</title>
+<title>고구마 마켓</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
 
 <!-- Site Icons -->
-<link rel="shortcut icon" href="/assets/images/favicon.ico"
+<link rel="shortcut icon" href="/assets/images/goguma_mascot.png"
 	type="image/x-icon" />
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
@@ -61,8 +61,7 @@
 	<header class="header header_style_01">
 	<!-- nav 부분 navbar 가 안먹음 -->
 		<nav
-			class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
-			style="top: -100px;">
+			class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0 navbar-start">
 			<a href="/"
 				class="navbar-brand d-flex align-items-center px-4 px-lg-5"> <img
 				src="/assets/images/logo.png" style="width: 100%" height="100%">
