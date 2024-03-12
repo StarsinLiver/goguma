@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.emoji.dto.EmojiUploadDto;
 import com.store.goguma.entity.Emoji;
+import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.repository.EmojiRepository;
 import com.store.goguma.utils.Define;
 
@@ -29,19 +30,19 @@ public class EmojiUploadService {
 	private EmojiRepository repository;
 
 	public boolean emojiFileUpload(EmojiUploadDto dto, List<MultipartFile> files) {
-		if(uploadProcess(files.get(0)) != null) {
-			// main_emoji insert
-			// 성공하면 for 돌려서 emoji insert(name은 하드코딩 하는걸로..)
+		String fileName = uploadProcess(files.get(0));
+		if(fileName != null) {
 			int uploadResult = 0;
-			dto.setFile(uploadProcess(files.get(0)));
+			dto.setFile(fileName);
 			int mainResult = repository.mainUpload(dto.toEntity());
 			if(mainResult != 0) {
 				Integer groupId = repository.getMainLastId();
 				for(int i = 1; i < files.size(); i++) {
-					if(uploadProcess(files.get(i)) != null) {
+					String subFileName = uploadProcess(files.get(i));
+					if(subFileName != null) {
 						Emoji emoji = Emoji.builder()
-								.file(uploadProcess(files.get(i)))
-								.name(null)// 하드코딩 하는걸로..
+								.file(subFileName)
+								.name("emoji_" + fileName + "_" + i)
 								.groupId(groupId)
 								.build();
 						uploadResult += repository.subUpload(emoji);
@@ -74,7 +75,6 @@ public class EmojiUploadService {
             String uploadPath = Define.UPLOAD_FILE_DERECTORY + File.separator + fileName;
             File destination = new File(uploadPath);
 
-            System.out.println("업로드 패쓰 : " + uploadPath );
             try {
                 file.transferTo(destination);
             } catch (IllegalStateException | IOException e) {
@@ -84,4 +84,19 @@ public class EmojiUploadService {
         }
 		return null;
 	}
+
+
+	public List<MainEmoji> getEmojiMainList(int num) {
+		List<MainEmoji> list = null;
+		if(num == 0) {
+			list = repository.getEmojiMainList();
+		}else if(num == 1) {
+			list = repository.getEmojiMainListPopular();
+		}else {
+			list = repository.getEmojiMainList();
+		}
+		return list;
+	}
+
+
 }

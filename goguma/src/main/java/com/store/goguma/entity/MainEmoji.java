@@ -16,4 +16,5 @@ public class MainEmoji {
 	private String file;
 	private String name;
 	private Integer price;
+	private int downloadCount;
 }
