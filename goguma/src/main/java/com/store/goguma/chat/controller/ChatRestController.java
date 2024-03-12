@@ -58,9 +58,10 @@ public class ChatRestController {
 	public ResponseEntity<?> getMethodName(@PathVariable(value = "roomId") Integer roomId) {
 		try {
 
+			// 만약 유저가 로그인이 되어 잇지 않다면
 			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 			if (user == null) {
-				// 오류 로직 처리
+				return new ResponseEntity<>(ChatUtil.USER_NOT_LOGIN, HttpStatus.OK);
 			}
 
 			List<ChatMessageDto> messageList = chatMessageService.findAllByRoomId(roomId);
@@ -123,9 +124,10 @@ public class ChatRestController {
 			@RequestParam(value = "text") String text, @RequestParam(value = "file") List<MultipartFile> file,
 			@RequestParam(value = "chatMessageType") Integer messageType) {
 		try {
+			// 만약 유저가 로그인이 되어 잇지 않다면
 			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 			if (user == null) {
-				// 오류 로직 처리
+				return new ResponseEntity<>(ChatUtil.USER_NOT_LOGIN, HttpStatus.OK);
 			}
 
 			String path = emojiUploadService.uploadFileProcess(file.get(0));
