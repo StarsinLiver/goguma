@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,10 @@ import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.utils.Define;
+
+import com.store.goguma.entity.User;
+import com.store.goguma.repository.UserRepository;
+import com.store.goguma.user.dto.UserDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -102,5 +107,31 @@ public class UserService {
         // 파일 첨부 안했을 경우
         return null;
 		
+	}
+	
+	// u_id로 유저 조회
+	public UserDTO findAllByuId(Integer uId) {
+		
+		User user = userRepository.findAllByuId(uId);
+		
+		UserDTO dto = UserDTO.builder()
+			.uId(user.getUId())
+			.name(user.getName())
+			.email(user.getEmail())
+			.social(user.getSocial())
+			.tel(user.getTel())
+			.address(user.getAddress())
+			.description(user.getAddress())
+			.zip(user.getZip())
+			.report(user.getReport())
+            .createAt(user.getCreateAt())
+            .updateAt(user.getUpdateAt())
+            .deleteAt(user.getDeleteAt())
+            .deleteYn(user.getDeleteYn())
+            .role(user.getRole())
+            .file(user.getFile())
+            .build();
+		
+		return dto;
 	}
 }

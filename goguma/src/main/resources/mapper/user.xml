@@ -12,4 +12,10 @@
 		update `user` set `zip`=#{zip}, `address`=#{address}, `tel`=#{tel}, `file`=#{file},`update_at`=NOW()
 			where `social`=#{social} and `email`=#{email}
 	</update>
+	
+	
+	<select id="findAllByuId">
+		select * from user where u_id = #{uId}
+	</select>
+
 </mapper>
