@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="/assets/css/custom.css" />
 <link rel="stylesheet" href="/customAssets/css/market.css" />
 <link rel="stylesheet" href="/customAssets/css/market2.css" />
+<link rel="stylesheet" href="/customAssets/css/userProduct.css" />
 <link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
 <link rel="stylesheet" href="/customAssets/css/emoji/list.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">

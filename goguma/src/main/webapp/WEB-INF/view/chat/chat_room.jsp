@@ -31,7 +31,7 @@
 </style>
 
 <div>
-<input type="hidden" value="${principal.getUId()}" id="userId"/>
+	<input type="hidden" value="${principal.getUId()}" id="userId" />
 	<div id="home" class="parallax first-section"
 		data-stellar-background-ratio="0.4"
 		style="background-image: url('/assets/uploads/background-12.png');">
@@ -266,107 +266,42 @@
 															data-bs-dismiss="modal" aria-label="Close"></button>
 													</div>
 													<div class="modal-body">
-														<!-- 헤더 -->
-														<ul class="nav nav-underline">
-															<li class="nav-item"><a class="nav-link active"
-																aria-current="page" href="#section1"
-																data-bs-toggle="tab">Active</a></li>
-															<li class="nav-item"><a class="nav-link"
-																href="#section2" data-bs-toggle="tab">Link 1</a></li>
-															<li class="nav-item"><a class="nav-link"
-																href="#section3" data-bs-toggle="tab">Link 2</a></li>
-														</ul>
+														<c:forEach var="mainEmoji" items="${mainEmojiList}">
+															<!-- 헤더 -->
+															<ul class="nav nav-underline">
+																<li class="nav-item"><a class="nav-link active"
+																	aria-current="page" href="#section${mainEmoji.id}"
+																	data-bs-toggle="tab">${mainEmoji.name}</a></li>
+															</ul>
 
-														<div class="tab-content">
-															<div class="tab-pane fade show active" id="section1">
-																<!-- Content for section 1 -->
+															<div class="tab-content">
+																<c:forEach var="subEmoji" items="${emojiList}">
+																<div class="tab-pane fade show active" id="section${subEmoji.groupId}">
+																	<!-- Content for section 1 -->
+																	<!-- Emoticon Sections -->
+																	<div class="emoticon-section active"
+																		id="section-smileys">
+																		<!-- Smileys Emoticons -->
+																		<button class="btn btn-light"
+																			style="width: 100px; height: 100px;">
+																			<img
+																				src="/images/upload/${subEmoji.file}"
+																				alt="image">
+																			<p class="visually-hidden">${subEmoji.file}</p>
+																		</button>
+	
+																		<!-- Add more emoticons as needed -->
+																	</div>
 
-																<p>This is the content of section 1.</p>
-																<!-- Emoticon Sections -->
-																<div class="emoticon-section active"
-																	id="section-smileys">
-																	<!-- Smileys Emoticons -->
-																	<button class="btn btn-light"
-																		style="width: 100px; height: 100px;">
-																		<img
-																			src="https://ptetutorials.com/images/user-profile.png"
-																			alt="sunil">
-																		<p class="visually-hidden">https://ptetutorials.com/images/user-profile.png</p>
-																	</button>
-																	<button class="btn btn-light">😀</button>
-																	<button class="btn btn-light">😁</button>
-																	<!-- Add more emoticons as needed -->
+																	<!-- Add more sections as needed -->
 																</div>
-																<div class="emoticon-section" id="section-animals">
-																	<!-- Animal Emoticons -->
-																	<button class="btn btn-light">🐶</button>
-																	<button class="btn btn-light">🐱</button>
-																	<button class="btn btn-light">🐰</button>
-																	<!-- Add more emoticons as needed -->
-																</div>
-																<!-- Add more sections as needed -->
+																</c:forEach>
 															</div>
-															<div class="tab-pane fade" id="section2">
-																<!-- Content for section 2 -->
-																<p>This is the content of section 2.</p>
+															<!-- 헤더 종료 -->
 
-																<!-- Emoticon Sections -->
-																<div class="emoticon-section active"
-																	id="section-smileys">
-																	<!-- Smileys Emoticons -->
-																	<button class="btn btn-light"
-																		style="width: 100px; height: 100px;">
-																		<img
-																			src="https://ptetutorials.com/images/user-profile.png"
-																			alt="sunil">
-																		<p class="visually-hidden">ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㄹㅇㅁ룸나ㅣ안무ㅏㅣ위ㅏㅁ누아ㅣㄴ무ㅏ이ㅏㄴ무마ㅣ</p>
-																	</button>
-																	<button class="btn btn-light">😀</button>
-																	<button class="btn btn-light">😁</button>
-																	<!-- Add more emoticons as needed -->
-																</div>
-																<div class="emoticon-section" id="section-animals">
-																	<!-- Animal Emoticons -->
-																	<button class="btn btn-light">🐶</button>
-																	<button class="btn btn-light">🐱</button>
-																	<button class="btn btn-light">🐰</button>
-																	<!-- Add more emoticons as needed -->
-																</div>
-																<!-- Add more sections as needed -->
-															</div>
-															<div class="tab-pane fade" id="section3">
-																<!-- Content for section 3 -->
-																<p>This is the content of section 3.</p>
-
-																<!-- Emoticon Sections -->
-																<div class="emoticon-section active"
-																	id="section-smileys">
-																	<!-- Smileys Emoticons -->
-																	<button class="btn btn-light"
-																		style="width: 100px; height: 100px;">
-																		<img
-																			src="https://ptetutorials.com/images/user-profile.png"
-																			alt="sunil">
-																		<p class="visually-hidden">ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㄹㅇㅁ룸나ㅣ안무ㅏㅣ위ㅏㅁ누아ㅣㄴ무ㅏ이ㅏㄴ무마ㅣ</p>
-																	</button>
-																	<button class="btn btn-light">😀</button>
-																	<button class="btn btn-light">😁</button>
-																	<!-- Add more emoticons as needed -->
-																</div>
-																<div class="emoticon-section" id="section-animals">
-																	<!-- Animal Emoticons -->
-																	<button class="btn btn-light">🐶</button>
-																	<button class="btn btn-light">🐱</button>
-																	<button class="btn btn-light">🐰</button>
-																	<!-- Add more emoticons as needed -->
-																</div>
-																<!-- Add more sections as needed -->
-															</div>
-														</div>
-														<!-- 헤더 종료 -->
-
-
+														</c:forEach>
 													</div>
+													
 												</div>
 											</div>
 										</div>

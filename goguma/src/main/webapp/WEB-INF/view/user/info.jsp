@@ -5,6 +5,22 @@
 <link rel="stylesheet" href="/customAssets/css/user.css" />
 
 
+<style>
+	#myProgress {
+	  width: 450px;
+	  background-color: #e9ecef;
+	}
+	
+
+	#myBar {
+	  width: 10%;
+	  height: 30px;
+	  text-align: center; 
+	  line-height: 30px;
+	  color: white;
+	}
+</style>
+
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
@@ -52,7 +68,7 @@
 			
 			<img class="rounded-circle mt-5" id="profileImage"
 				style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
-				src="/assets/images/goguma_mascot.png">
+				src="${profile}">
 				
 			<table class="table-count">
 				<thead>
@@ -60,7 +76,6 @@
 					  <th>게시글 수</th>
 					  <th>문의 수</th>
 					  <th>찜 갯수</th>
-					  <th>평판</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -68,10 +83,17 @@
 				      <td>10</td>
 				      <td>3</td>
 				      <td>12</td>
-				      <td>100</td>
 				    </tr>
 			    </tbody>
 			</table>
+			
+			<!-- 내 평판 -->
+			<div class="user-report" style="position: absolute;right: 40px;top: 230px;">
+				<p style="display: inline-block;">내 온도</p>
+				<div id="myProgress">
+				  <div id="myBar">0</div>
+				</div>
+			</div>
 		</div>
 		<table class="table table-hover">
 		  <thead>
@@ -82,30 +104,78 @@
 		  <tbody>
 		    <tr>
 		      <th scope="row">이메일</th>
-		      <td>이메일</td>
+		      <td>${user.email}</td>
 		    </tr>
 		    <tr>
 		      <th scope="row">휴대폰</th>
-		      <td>휴대폰</td>
+		      <td>${user.tel}</td>
 		    </tr>
 		    <tr>
 		      <th scope="row">우편번호</th>
-		      <td>23445</td>
+		      <td>${user.zip}</td>
 		    </tr>
 		    <tr>
 		      <th scope="row">주소</th>
-		      <td>부산광역시 **구 **동</td>
+		      <td>${user.address}</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">가입일자</th>
+		      <td>${user.createAt}</td>
 		    </tr>
 		  </tbody>
 		</table>
+		<p style="color: #939393;font-size: 12px;">※ 정보 수정은 프로필 사진, 휴대폰 번호, 주소만 가능합니다.</p>
 		
 		<div class="links">
 			<!-- <a href="#" class="btn btn-danger">탈퇴하기</a> -->
-			<a href="#" class="btn btn-warning btn-complete"><i class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
+			<a href="/user/modify" class="btn btn-warning btn-complete"><i class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
 		</div>
 	</div>
 </div>
 <!-- 메인 종료 -->
+
+<script>
+	let i = 0;
+	function move() {
+	  if (i == 0) {
+	    i = 1;
+	    let elem = document.getElementById("myBar");
+	    let width = 1;
+	    let id = setInterval(frame, 20);
+	    function frame() {
+	      if (width >= 100) {
+	        clearInterval(id);
+	        i = 0;
+	      } else {
+	        width++;
+	        elem.style.width = width + "%";
+	        elem.innerHTML = width + "%";
+	        
+	     	// 그라데이션 색상 계산
+            let color;
+			if (width >= 80) {
+			    let red = 0; // 초록색에서는 빨간색은 항상 0
+			    let green = Math.floor((width - 80) * 3.1875); // 초록색 계산
+			    color = "rgb(" + red + ", " + (255 - green) + ", 0)";
+			} else if (width >= 40 && width <= 79) {
+			    let red = Math.floor(255 - (width - 40) * 2); // 노랑에서 초록으로 자연스럽게 계산
+			    let green = 255;
+			    color = "rgb(" + red + ", " + green + ", 0)";
+			} else {
+			    let red = 255;
+			    let green = Math.floor(width * 6.375);
+			    color = "rgb(" + red + ", " + green + ", 0)";
+			}
+
+            // 배경색 변경
+            elem.style.backgroundColor = color;
+	        
+	      }
+	    }
+	  }
+	}
+	move();
+</script>
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
