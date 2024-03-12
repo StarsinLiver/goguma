@@ -1,0 +1,1197 @@
+/* Slider */
+
+.slick-slider
+{
+  position: relative;
+
+  display: block;
+  box-sizing: border-box;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+}
+.slick-list:focus
+{
+  outline: none;
+}
+.slick-list.dragging
+{
+  cursor: pointer;
+  cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+  transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+  position: relative;
+  top: 0;
+  left: 0;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slick-track:before,
+.slick-track:after
+{
+  display: table;
+
+  content: '';
+}
+.slick-track:after
+{
+  clear: both;
+}
+.slick-loading .slick-track
+{
+  visibility: hidden;
+}
+
+.slick-slide
+{
+  display: none;
+  float: left;
+
+  height: 100%;
+  min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+  float: right;
+}
+.slick-slide img
+{
+  display: block;
+}
+.slick-slide.slick-loading img
+{
+  display: none;
+}
+.slick-slide.dragging img
+{
+  pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+  display: block;
+}
+.slick-loading .slick-slide
+{
+  visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+  display: block;
+
+  height: auto;
+
+  border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+  display: none;
+}
+/*
+
+*/
+/* line 10, app/assets/stylesheets/home/articles/image_slider.scss */
+.slick-slide:focus, .slick-slide a {
+  outline: none;
+}
+
+/* line 16, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap {
+  position: relative;
+}
+
+/* line 18, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slider {
+  border: none;
+}
+
+/* line 21, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-arrow {
+  outline: none;
+  width: 11px;
+  height: 21px;
+  text-indent: -9999px;
+}
+
+/* line 27, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-prev {
+  position: absolute;
+  left: 0;
+  top: 240px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  z-index: 99;
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/icon-slider-left-4c0e713bfa2cd12bd959e6dd9ef456cd6fc094953c41e605f6b9a59bc1680686.svg) no-repeat;
+}
+
+/* line 37, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-prev:hover {
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/icon-slider-left-hover-bbda49cc160e798261c2dd4894cc623d0118a701fbb705546fc06de658ce3996.svg) no-repeat;
+}
+
+/* line 40, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-next {
+  position: absolute;
+  right: 0;
+  top: 240px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/icon-slider-right-134c53f44716c3bef227ec30da385b4b09c9c068d339a617a23093718f379d02.svg) no-repeat;
+}
+
+/* line 49, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-next:hover {
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/icon-slider-right-hover-c71a5a4d1745bf59f056660eadc57e451f619b5bddaff0c9fdf2f8e3b4d955f8.svg) no-repeat;
+}
+
+/* line 52, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-dots {
+  position: absolute;
+  bottom: 3px;
+  left: 26px;
+  right: 26px;
+  width: 677px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 8px;
+  list-style: none;
+  text-align: center;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background-blend-mode: multiply;
+}
+
+/* line 67, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-dots li {
+  position: relative;
+  bottom: 0;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* line 72, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-dots li button {
+  display: block;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: transparent;
+  margin: 0 4px;
+  width: 8px;
+}
+
+/* line 82, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-dots li button:before {
+  content: ' ';
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.3;
+}
+
+/* line 95, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .slick-dots .slick-active button:before {
+  background-color: #fff;
+  opacity: 0.8;
+}
+
+/* line 101, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .image-wrap {
+  position: relative;
+  width: 677px;
+  margin: 0 auto;
+  height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* line 110, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .image-wrap img {
+  border-radius: 8px;
+  position: relative;
+  min-width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: transparent;
+}
+
+/* line 123, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .image-wrap .landscape {
+  height: 100%;
+  width: auto;
+}
+
+/* line 127, app/assets/stylesheets/home/articles/image_slider.scss */
+#image-slider .slider-wrap .image-wrap .portrait {
+  width: 100%;
+  height: auto;
+}
+/*
+
+*/
+/* line 17, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#no-article {
+  padding: 120px 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* line 23, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-images {
+  position: relative;
+  width: 729px;
+  margin: 0 auto;
+}
+
+/* line 29, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.text-gray {
+  color: #adb5bd;
+}
+
+/* line 33, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.text-dark-gray {
+  color: #868e96;
+}
+
+/* line 37, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.text-light-gray {
+  color: #dee2e6;
+}
+
+/* line 41, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile {
+  width: 677px;
+  margin: 0 auto;
+}
+
+/* line 44, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-link {
+  text-decoration: none;
+  display: block;
+  margin-top: 25px;
+  padding-bottom: 23px;
+  position: relative;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* line 53, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-link:hover #nickname {
+  text-decoration: underline;
+}
+
+/* line 57, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-image {
+  display: inline-block;
+}
+
+/* line 59, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-image img {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+}
+
+/* line 68, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile .space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* line 73, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-smb-user_note {
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.46;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  margin-top: 16px;
+  color: #212529;
+}
+
+/* line 82, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+/* line 85, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-left #nickname {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.6px;
+  color: #212529;
+}
+
+/* line 92, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-left #region-name {
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.6px;
+  color: #212529;
+}
+
+/* line 99, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #smb-profile-right {
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 103, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #smb-profile-right #smb-reviews-count-text {
+  color: #56c271;
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.5px;
+  font-weight: bold;
+}
+
+/* line 110, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #smb-profile-right #smb-likes-count-text {
+  color: #212529;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.5px;
+}
+
+/* line 118, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right {
+  position: absolute;
+  right: 0;
+  padding-right: 36px;
+}
+
+/* line 122, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right dl {
+  display: block;
+  width: 100px;
+}
+
+/* line 125, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right dl dt {
+  position: absolute;
+  top: 36px;
+  right: 0px;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.6px;
+  color: #868e96;
+}
+
+/* line 134, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right dl dd {
+  position: absolute;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: #212529;
+  margin-top: 1px;
+  width: 100px;
+  text-align: right;
+}
+
+/* line 146, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters {
+  clear: both;
+  display: block;
+  width: 100px;
+  background-color: #e9ecef;
+  height: 4px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  position: relative;
+  vertical-align: middle;
+  margin-top: 24px;
+}
+
+/* line 158, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #495057;
+  height: 4px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+}
+
+/* line 169, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-01 {
+  background-color: #072038;
+}
+
+/* line 170, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-02 {
+  background-color: #0d3a65;
+}
+
+/* line 171, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-03 {
+  background-color: #1561a9;
+}
+
+/* line 172, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-04 {
+  background-color: #319e45;
+}
+
+/* line 173, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-05 {
+  background-color: #df9100;
+}
+
+/* line 174, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-06 {
+  background-color: #de5d06;
+}
+
+/* line 175, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-01.karrot-rating {
+  background-color: #7AA3CB;
+}
+
+/* line 176, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-02.karrot-rating {
+  background-color: #9C8BF3;
+}
+
+/* line 177, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-03.karrot-rating {
+  background-color: #58B9ED;
+}
+
+/* line 178, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-04.karrot-rating {
+  background-color: #66D06B;
+}
+
+/* line 179, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-05.karrot-rating {
+  background-color: #FFB938;
+}
+
+/* line 180, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .meters .bar-color-06.karrot-rating {
+  background-color: #FF8A3D;
+}
+
+/* line 182, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .face {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* line 187, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-karrot-score {
+  color: #212124;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* line 192, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-01 {
+  color: #072038;
+}
+
+/* line 193, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-02 {
+  color: #0d3a65;
+}
+
+/* line 194, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-03 {
+  color: #1561a9;
+}
+
+/* line 195, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-04 {
+  color: #319e45;
+}
+
+/* line 196, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-05 {
+  color: #df9100;
+}
+
+/* line 197, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-06 {
+  color: #de5d06;
+}
+
+/* line 198, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-01.karrot-rating {
+  color: #7AA3CB;
+}
+
+/* line 199, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-02.karrot-rating {
+  color: #9C8BF3;
+}
+
+/* line 200, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-03.karrot-rating {
+  color: #58B9ED;
+}
+
+/* line 201, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-04.karrot-rating {
+  color: #66D06B;
+}
+
+/* line 202, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-05.karrot-rating {
+  color: #FFB938;
+}
+
+/* line 203, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-profile #article-profile-right .text-color-06.karrot-rating {
+  color: #FF8A3D;
+}
+
+/* line 207, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description {
+  padding: 32px 0;
+  width: 677px;
+  margin: 0 auto;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* line 212, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description .status {
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  font-size: 15px;
+  line-height: 1.27;
+  letter-spacing: -0.6px;
+  text-align: center;
+  color: #fff;
+  padding: 7px 12px;
+  display: inline-block;
+}
+
+/* line 224, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #ongoing {
+  background-color: #495057;
+}
+
+/* line 227, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #reserved {
+  background-color: #56c271;
+}
+
+/* line 230, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #closed {
+  background-color: #ff8a3d;
+}
+
+/* line 233, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-title {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.6px;
+}
+
+/* line 240, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-category {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.6px;
+  color: #868e96;
+}
+
+/* line 247, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-price {
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.76;
+  letter-spacing: -0.6px;
+}
+
+/* line 254, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-price-nanum {
+  color: #ff8a3d;
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.76;
+  letter-spacing: -0.6px;
+}
+
+/* line 262, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-detail {
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+/* line 265, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-detail p {
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: -0.6px;
+  margin: 16px 0;
+  word-break: break-all;
+}
+
+/* line 272, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-detail a {
+  color: #ff8a3d;
+  text-decoration: none;
+}
+
+/* line 276, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-detail a:hover {
+  text-decoration: underline;
+}
+
+/* line 279, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-detail .masking-url {
+  color: #dee2e6;
+}
+
+/* line 283, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-description #article-counts {
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.6px;
+  color: #868e96;
+}
+
+/* line 291, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments {
+  width: 677px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
+/* line 295, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments h3 {
+  text-align: left;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.47;
+  margin-bottom: 24px;
+}
+
+/* line 302, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list {
+  list-style-type: none;
+}
+
+/* line 304, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment {
+  padding: 16px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* line 307, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-wrap {
+  display: inline-block;
+  width: calc(100% - 16px - 10px - 10px);
+}
+
+/* line 311, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-profile {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 314, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-profile img {
+  width: 24px;
+  height: 24px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+}
+
+/* line 323, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-nickname {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.47;
+  letter-spacing: -0.5px;
+  margin-right: 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* line 332, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-nickname a {
+  color: #212529;
+  text-decoration: none;
+}
+
+/* line 336, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-nickname a:hover {
+  text-decoration: underline;
+}
+
+/* line 340, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-region-name {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.5px;
+  vertical-align: middle;
+}
+
+/* line 347, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-kind {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: bold;
+  color: #868e96;
+  border-radius: 100px;
+  border: 1px solid #868e96;
+  padding: 3px 6px;
+  margin-left: 4px;
+}
+
+/* line 359, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-kind.article-comment-best {
+  color: #fff;
+  background-color: #ff8a3d;
+  border: none;
+}
+
+/* line 365, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-useful {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.46;
+  letter-spacing: -0.5px;
+  margin-top: 8px;
+}
+
+/* line 371, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-useful .article-comment-useful-text,
+#article-comments #article-comments-list .article-comment .article-comment-useful .article-comment-useful-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 377, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-text {
+  padding-top: 8px;
+  font-size: 15px;
+  line-height: 1.47;
+  letter-spacing: -0.5px;
+  word-break: break-all;
+}
+
+/* line 383, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-text .masking-url {
+  color: #dee2e6;
+}
+
+/* line 387, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-time {
+  display: block;
+  font-size: 13px;
+  line-height: 1.46;
+  letter-spacing: -0.5px;
+  color: #868e96;
+  margin-top: 8px;
+}
+
+/* line 395, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-destroyed {
+  font-size: 15px;
+  line-height: 1.46;
+  letter-spacing: -0.5px;
+  color: #868e96;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+/* line 403, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-comment-destroyed-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 408, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment .article-child-comment {
+  width: 9px;
+  height: 9px;
+  border-bottom: 1px solid #adb5bd;
+  border-left: 1px solid #adb5bd;
+  display: inline-block;
+  margin-right: 16px;
+  vertical-align: top;
+}
+
+/* line 418, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comments-list .article-comment:last-child {
+  border: none;
+}
+
+/* line 422, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comment-more {
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+  padding: 32px 0;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.5px;
+}
+
+/* line 430, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comment-more #article-comment-download-buttons {
+  margin-top: 24px;
+}
+
+/* line 432, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comment-more #article-comment-download-buttons .download-button {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  text-decoration: none;
+  margin: 0 4px;
+  border: 1px solid #495057;
+}
+
+/* line 441, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comment-more #article-comment-download-buttons .download-button .download-text {
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  vertical-align: middle;
+}
+
+/* line 449, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comment-more #article-comment-download-buttons .download-button:hover {
+  border: 1px solid #868e96;
+}
+
+/* line 451, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#article-comments #article-comment-more #article-comment-download-buttons .download-button:hover .download-text {
+  color: #868e96;
+}
+
+/* line 459, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info {
+  width: 677px;
+  margin: 1.6rem auto;
+  border-radius: 6px;
+}
+
+/* line 464, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #header {
+  position: relative;
+  padding: 24px;
+  background: #212529;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFFFFF;
+  line-height: 125%;
+}
+
+/* line 476, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #header #get-money {
+  color: #FF8A3D;
+}
+
+/* line 480, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #header img {
+  position: absolute;
+  right: 24px;
+  top: 20px;
+}
+
+/* line 487, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #desc {
+  padding: 2rem;
+  border: 1px solid #E9ECEF;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+/* line 495, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #desc .msg {
+  margin-bottom: 16px;
+}
+
+/* line 496, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #desc .ins-title {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* line 500, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #desc ol {
+  list-style: none;
+  counter-reset: custom-counter;
+}
+
+/* line 504, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #desc ol li {
+  counter-increment: custom-counter;
+  margin-bottom: 4px;
+}
+
+/* line 508, app/assets/stylesheets/home/articles/flea_market.css.scss */
+#invitation-info #desc ol li::before {
+  content: counter(custom-counter) ". ";
+  color: #212529;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* line 518, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-01,
+.face-02,
+.face-03,
+.face-04,
+.face-05,
+.face-06,
+.karrot-symbol {
+  display: inline-block;
+  overflow: hidden;
+  text-indent: -9999px;
+  text-align: left;
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/face-icon-set-0cffc52be32961b0bb4a308c272d8f526ddcdeda66dbde6eb32618eeb22b74e6.png) no-repeat;
+  background-size: 29px 147px;
+}
+
+/* line 532, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-01.karrot-rating,
+.face-02.karrot-rating,
+.face-03.karrot-rating,
+.face-04.karrot-rating,
+.face-05.karrot-rating,
+.face-06.karrot-rating,
+.karrot-symbol.karrot-rating {
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/global-face-icon-set-36fb1cf5289950c15192a1df619c2768bff8ecbe0de64a1ba923e7c46940a7bf.png) no-repeat;
+  background-size: 24px 144px;
+}
+
+/* line 537, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-01.karrot-score,
+.face-02.karrot-score,
+.face-03.karrot-score,
+.face-04.karrot-score,
+.face-05.karrot-score,
+.face-06.karrot-score,
+.karrot-symbol.karrot-score {
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/symbol-karrot-web-ef7ad6e219cb7aeb4cde22bbbca93723da4456c33d099ad170ebf12faccaa96b.png) no-repeat;
+  background-size: 24px 24px;
+}
+
+/* line 542, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-01.karrot-score-rebrand,
+.face-02.karrot-score-rebrand,
+.face-03.karrot-score-rebrand,
+.face-04.karrot-score-rebrand,
+.face-05.karrot-score-rebrand,
+.face-06.karrot-score-rebrand,
+.karrot-symbol.karrot-score-rebrand {
+  background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/symbol-karrot-web-rebrand-670143359984a57944b3d5b7ee3a6a66fd519a8d95d1e6b61695855062c9d2ad.png) no-repeat;
+  background-size: 24px 24px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
+  /* line 551, app/assets/stylesheets/home/articles/flea_market.css.scss */
+  .face-01,
+.face-02,
+.face-03,
+.face-04,
+.face-05,
+.face-06,
+.karrot-symbol {
+    background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/face-icon-set@2x-0bece009c619b4706f52a750aca82448334aa3e39d353579f2ce9c365639a03b.png) no-repeat;
+    background-size: 29px 147px;
+  }
+  /* line 561, app/assets/stylesheets/home/articles/flea_market.css.scss */
+  .face-01.karrot-rating,
+.face-02.karrot-rating,
+.face-03.karrot-rating,
+.face-04.karrot-rating,
+.face-05.karrot-rating,
+.face-06.karrot-rating,
+.karrot-symbol.karrot-rating {
+    background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/global-face-icon-set@2x-dc77e8a112c099e43cca5e959d1f8985b35fcea0b72edd22cd8417ad4400604c.png) no-repeat;
+    background-size: 24px 144px;
+  }
+  /* line 566, app/assets/stylesheets/home/articles/flea_market.css.scss */
+  .face-01.karrot-score,
+.face-02.karrot-score,
+.face-03.karrot-score,
+.face-04.karrot-score,
+.face-05.karrot-score,
+.face-06.karrot-score,
+.karrot-symbol.karrot-score {
+    background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/symbol-karrot-web-ef7ad6e219cb7aeb4cde22bbbca93723da4456c33d099ad170ebf12faccaa96b.png) no-repeat;
+    background-size: 24px 24px;
+  }
+  /* line 571, app/assets/stylesheets/home/articles/flea_market.css.scss */
+  .face-01.karrot-score-rebrand,
+.face-02.karrot-score-rebrand,
+.face-03.karrot-score-rebrand,
+.face-04.karrot-score-rebrand,
+.face-05.karrot-score-rebrand,
+.face-06.karrot-score-rebrand,
+.karrot-symbol.karrot-score-rebrand {
+    background: url(https://d1unjqcospf8gs.cloudfront.net/assets/home/articles/symbol-karrot-web-rebrand-670143359984a57944b3d5b7ee3a6a66fd519a8d95d1e6b61695855062c9d2ad.png) no-repeat;
+    background-size: 24px 24px;
+  }
+}
+
+/* line 578, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-01 {
+  background-position: -0px -27px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 579, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-02 {
+  background-position: -0px -51px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 580, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-03 {
+  background-position: -0px -75px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 581, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-04 {
+  background-position: -0px -99px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 582, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-05 {
+  background-position: -0px -123px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 583, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-06 {
+  background-position: -0px -0px;
+  width: 29px;
+  height: 27px;
+}
+
+/* line 584, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.karrot-symbol {
+  background-position: -0px -0px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 586, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-01.karrot-rating {
+  background-position: -0px -0px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 587, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-02.karrot-rating {
+  background-position: -0px -24px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 588, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-03.karrot-rating {
+  background-position: -0px -48px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 589, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-04.karrot-rating {
+  background-position: -0px -72px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 590, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-05.karrot-rating {
+  background-position: -0px -96px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 591, app/assets/stylesheets/home/articles/flea_market.css.scss */
+.face-06.karrot-rating {
+  background-position: -0px -120px;
+  width: 24px;
+  height: 24px;
+}
+
+/* line 594, app/assets/stylesheets/home/articles/flea_market.css.scss */
+body.global #article-description {
+  border-bottom: none;
+}

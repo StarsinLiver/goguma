@@ -1,0 +1,135 @@
+.emoji--main-div{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.emoji--head-menu-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+.emoji--head-menu{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    cursor: pointer;
+}
+.emoji--head-menu:hover{
+    border-bottom: 2px solid black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    cursor: pointer;
+}
+
+.emoji--head-menu-title{
+    font-size: 25px;
+    cursor: pointer;
+}
+/* on 처리 */
+.emoji--head-menu-on{
+    border-bottom: 2px solid black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    cursor: pointer;
+}
+
+.emoji--head-menu-title-on{
+    font-size: 25px;
+    font-weight: 800;
+    
+}
+/* on 처리 */
+
+.emoji--body{
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji--content-box{
+    display: flex;
+    align-items: center;
+    flex-flow:row wrap;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.emoji--item-box{
+    width: 300px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.emoji--img-box{
+    margin-bottom: 20px;
+}
+
+.emoji--img-box img{
+    width: 100%;
+    
+}
+
+.emoji--item-title-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji--item-title-box span{
+
+}
+
+.emoji--page-box{
+    margin-top: 100px;
+    display: flex;
+
+}
+
+.emoji--arrow-box{
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji--num-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji--num-box span{
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.emoji--arrow-box span{
+    cursor: pointer;
+}
+
