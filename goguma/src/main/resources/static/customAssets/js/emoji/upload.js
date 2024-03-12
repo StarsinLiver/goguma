@@ -41,14 +41,9 @@ btn.onclick = () => {
 		price : inputs[1].value
 	}
 	formData.append("obj", new Blob([JSON.stringify(obj)], {type: "application/json"}));
-	//formData.append("file", new Blob([JSON.stringify(fileArray)], {type: "application/json"}));
-	
-	for(var i = 0; i < fileArray.length; i++) {
+	for(let i = 0; i < fileArray.length; i++) {
 		formData.append("file", fileArray[i]);
 	}
-	
-	console.log("업로드 직전", fileArray);
-	console.log("업로드 직전2", JSON.stringify(fileArray));
 	$.ajax({
 		type : "post",
 		url : "/emoji/api/upload",
@@ -59,7 +54,7 @@ btn.onclick = () => {
 		success : function(data){
 			if(data == true){
 				alert("업로드가 완료되었습니다.");
-				//location.href = "/";
+				location.href = "/emoji/file";
 			}else{
 				alert("업로드 실패");
 			}

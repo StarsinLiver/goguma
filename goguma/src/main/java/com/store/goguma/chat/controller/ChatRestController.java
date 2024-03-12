@@ -18,10 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.chat.dto.chatMessage.ChatMessageDto;
+import com.store.goguma.chat.dto.chatMessage.ChatMessageReqDto;
 import com.store.goguma.entity.ChatMessage;
 import com.store.goguma.service.ChatMessageService;
+import com.store.goguma.service.EmojiUploadService;
+import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.utils.ChatType;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -32,6 +36,12 @@ public class ChatRestController {
 	@Autowired
 	ChatMessageService chatMessageService;
 
+	@Autowired
+	EmojiUploadService emojiUploadService;
+
+	@Autowired
+	HttpSession httpSession;
+
 	/**
 	 * 방 번호에 대한 모든 채팅 가져오기
 	 * 
@@ -41,6 +51,11 @@ public class ChatRestController {
 	@GetMapping("/message/{roomId}")
 	public ResponseEntity<?> getMethodName(@PathVariable(value = "roomId") Integer roomId) {
 		try {
+
+			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+			if (user == null) {
+				// 오류 로직 처리
+			}
 
 			List<ChatMessageDto> messageList = chatMessageService.findAllByRoomId(roomId);
 			log.info(messageList.toString());
@@ -58,33 +73,37 @@ public class ChatRestController {
 	 * @param chatMessage
 	 */
 	@MessageMapping("/chat/sendMessage")
-	public void sendMessage(@Payload ChatMessage chatMessage) {
-		log.info(chatMessage.toString());
+	public ResponseEntity<?> sendMessage(@Payload ChatMessageReqDto chatMessage) {
+		try {
 
-		int userId = 1;
-		ChatMessage chatMessage2 = ChatMessage.builder().text(chatMessage.getText()).emoji(chatMessage.getEmoji())
-				.emoji(chatMessage.getEmoji()).roomId(chatMessage.getRoomId()).uId(userId)
-				.chatMessageType(chatMessage.getChatMessageType()).build();
+			ChatMessage chatMessage2 = ChatMessage.builder().text(chatMessage.getText()).emoji(chatMessage.getEmoji())
+					.emoji(chatMessage.getEmoji()).roomId(chatMessage.getRoomId()).uId(chatMessage.getUserId())
+					.chatMessageType(chatMessage.getChatMessageType()).build();
 
-		int result = chatMessageService.save(chatMessage2);
-		if (result == 0) {
-			// 서버 에러 로직
+			int result = chatMessageService.save(chatMessage2);
+			if (result == 0) {
+				// 서버 에러 로직
+			}
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 	@PostMapping("/image")
 	public ResponseEntity<?> postMethodName(@RequestParam(value = "roomId") Integer roomId,
-			@RequestParam(value = "text") String text, 
-			@RequestParam(value = "file") List<MultipartFile> file,
+			@RequestParam(value = "text") String text, @RequestParam(value = "file") List<MultipartFile> file,
 			@RequestParam(value = "chatMessageType") Integer messageType) {
 		try {
-			log.info("방번호 : " + roomId);
-			log.info("text : " + text);
-			log.info("file : " + file);
-			log.info("messageType : " + messageType);
-			int userId = 1;
-			ChatMessage chatMessage = ChatMessage.builder().roomId(roomId).uId(userId).text(text).file("임의 저장")
+			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+			if (user == null) {
+				// 오류 로직 처리
+			}
+
+			String path = emojiUploadService.uploadProcess(file.get(0));
+
+			ChatMessage chatMessage = ChatMessage.builder().roomId(roomId).uId(user.getUId()).text(text).file(path)
 					.chatMessageType(ChatType.IMAGE).build();
 
 			int result = chatMessageService.save(chatMessage);

@@ -3,34 +3,58 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.store.goguma.repository.EmojiRepository">
-	
+
 	<insert id="mainUpload">
 		insert into main_emoji(file, name, price, create_at)
 		values(
-			#{file},
-			#{name},
-			#{price},
-			now()
+		#{file},
+		#{name},
+		#{price},
+		now()
 		);
 	</insert>
-	
+
 	<select id="getMainLastId" resultType="Integer">
-		select max(id) from main_emoji;
+		select max(id) from
+		main_emoji;
 	</select>
-	
+
 	<insert id="subUpload">
 		insert into emoji(file, name, group_id)
 		values(
-			#{file},
-			#{name},
-			#{groupId}
+		#{file},
+		#{name},
+		#{groupId}
 		);
 	</insert>
+
+	<select id="findByGroupId"
+		resultType="com.store.goguma.entity.Emoji" parameterType="java.util.List">
+		select
+		id as id ,
+		file as file,
+		name as name ,
+		group_id
+		as groupId
+		from
+		emoji
+		where group_id in
+		<foreach item="item" collection="mainEmojiList" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+		order by group_id
+	</select>
+
 	
+	<select id="getEmojiMainList" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji;
+	</select>
 	
+	<select id="getEmojiMainListPopular" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji order by download_count desc;
+	</select>
 	
-	
-	
-	
+
 
 </mapper>

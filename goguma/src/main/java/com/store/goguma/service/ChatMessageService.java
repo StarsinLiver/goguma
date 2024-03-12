@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.chat.dto.chatMessage.ChatMessageDto;
 import com.store.goguma.entity.ChatMessage;
@@ -38,6 +39,7 @@ public class ChatMessageService {
 	 * @param chatMessage
 	 * @return
 	 */
+	@Transactional
 	public int save(ChatMessage chatMessage) {
 		log.info("db 들어가기 전 확인 : " + chatMessage.toString());
 		int result = chatMessageRepository.save(chatMessage);

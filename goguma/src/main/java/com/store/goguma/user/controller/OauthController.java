@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.store.goguma.service.OauthService;
@@ -20,8 +19,6 @@ import com.store.goguma.user.dto.KakaoProfile;
 import com.store.goguma.user.dto.OAuthToken;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.OauthResisterDTO;
-import com.store.goguma.user.dto.ResOauthUserDTO;
-import com.store.goguma.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
@@ -106,20 +103,14 @@ public class OauthController {
 
 		
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(),dto.getSocial());
-
-		
-		log.info("오스 로그인시 오스레지스트 디티오 값 확인: "+ dto);
+	
 		
 		if(oldUser != null) {
-			httpSession.setAttribute("principal", dto);
-			
-			log.info("oldUser 있음 ㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ");
-			
+			httpSession.setAttribute("principal", oldUser);
+
 			return "redirect:/";
-		}else {
+		} else {
 			httpSession.setAttribute("principal", dto);
-			
-			log.info("oldUser 없음 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
 			
 			return "redirect:/oauth/register";
 		}
@@ -155,27 +146,15 @@ public class OauthController {
 
 	@GetMapping("/register")
 	public String OauthRegister() {
-		
-		log.info("오스 회원가입 맵핑 시작~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
-		Object user =  httpSession.getAttribute("principal");
-		
-		log.info("오스 회원가입 세션 객체 확인+++++++++++++++++++++++++++++++++++ " + user);
-		
-		
+
 		return "login/oauthRegister";
 	}
 	
 	@PostMapping("/register")
 	public String OauthRegisterProc(OauthResisterDTO dto) {
 		
-		log.info("오스 회원가입 추가 정보 포스트 맵핑 시작 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + dto);
-		
 		OauthResisterDTO user = (OauthResisterDTO) httpSession.getAttribute("principal");
-		
-		
-		log.info("오스 회원가입 요청 들어왔음 세션 확인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@: " + user);
-		
+
 		String address = dto.getAddr1() + dto.getAddr2();
 		
 		
@@ -189,9 +168,11 @@ public class OauthController {
 													.build();
 										
 		
-		oauthService.createUser(userDTO);
+		int result = oauthService.createUser(userDTO);
+		OauthDTO oldUser = oauthService.readUserByUserEmail(user.getEmail(),user.getSocial());
+		log.info(oldUser.toString());
 		
-		
+		httpSession.setAttribute("principal", oldUser);
 		
 		
 		return "redirect:/";

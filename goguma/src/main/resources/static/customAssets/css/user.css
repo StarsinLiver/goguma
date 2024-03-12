@@ -1,0 +1,164 @@
+/**
+* 마이페이지
+*/
+
+.user-page {
+	display: flex;
+	margin: 100px auto;
+	width: 1200px;
+	height: auto;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.user-page .user-page-title {
+	font-size: 32px;
+    font-weight: bold;
+}
+
+/* 페이지네이션 */
+.user-page .pagination {
+	display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.user-page .pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  font-size: 18px;
+}
+
+.user-page .pagination a.active {
+  color: #FFD800;
+  font-weight: bold;
+}
+
+.user-page .pagination a:hover:not(.active) {background-color: #ccc;}
+
+/* 버튼 */
+.btn-complete {
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	margin-right: 5px;
+}
+.btn-complete:hover {
+	color: #fff !important;
+}
+
+/* aside 바 */
+#user-aside {
+	padding: 20px;
+	box-sizing: border-box;
+	border-radius: 15px;
+	background-color: #fff06d;
+}
+
+#user-aside li {
+	width: 150px;
+	margin-bottom: 10px;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+#user-aside li>a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+}
+
+#user-aside li> a:hover {
+	color: #934262;
+	font-weight: bold;
+}
+
+
+/* 내 정보 */
+.user-page .info-container {
+	width: 800px;
+	height: auto;
+	padding: 40px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-container .top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.info-container .top-info .table-count {
+	border: 1px solid #ccc;
+	text-align: center;
+}	
+
+.info-container .top-info tbody {
+	border: 1px solid #ccc;	
+}
+.info-container .top-info th {
+	width: 100px;
+}
+
+.info-container table {
+	margin-top: 20px;	
+}
+.info-container table th, td {
+	height: 45px;
+    line-height: 45px;
+}
+.info-container .links {
+	float: right;
+	margin-top: 20px;
+}
+
+
+/* 결제 내역 */
+
+/* 내 게시글 */
+
+/* 내 문의내역 */
+.user-page .my-qna-container {
+	width: 850px;
+	height: auto;
+	border-radius: 5px;
+}
+
+.my-qna-container .board-title > th {
+	text-align: center !important;
+}
+.my-qna-container table tbody {
+	text-align: center;
+}
+.my-qna-container table tbody th:nth-of-type(1),
+.my-qna-container table tbody td:nth-of-type(1) {
+	width: 50px;
+}
+.my-qna-container table tbody th:nth-of-type(2),
+.my-qna-container table tbody td:nth-of-type(2) {
+	width: 70px;
+}
+.my-qna-container table tbody th:nth-of-type(3),
+.my-qna-container table tbody td:nth-of-type(3) {
+	text-align: left;
+	padding-left: 20px;
+}
+.my-qna-container table tbody th:nth-of-type(4),
+.my-qna-container table tbody td:nth-of-type(4) {
+	width: 100px;
+}
+.my-qna-container table tbody th:nth-of-type(5),
+.my-qna-container table tbody td:nth-of-type(5) {
+	width: 100px;
+}
+
+.my-qna-container .board-utils {
+	margin-top: 15px;
+}
+.my-qna-container .board-utils > div {
+	float: right;
+}
