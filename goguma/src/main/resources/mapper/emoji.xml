@@ -27,7 +27,13 @@
 		);
 	</insert>
 	
+	<select id="getEmojiMainList" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji;
+	</select>
 	
+	<select id="getEmojiMainListPopular" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji order by download_count desc;
+	</select>
 	
 	
 	

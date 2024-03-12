@@ -1,5 +1,7 @@
 package com.store.goguma.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.store.goguma.entity.Emoji;
@@ -22,6 +24,10 @@ public interface EmojiRepository {
 	public Integer getMainLastId();
 
 	public int subUpload(Emoji emoji);
+
+	public List<MainEmoji> getEmojiMainList();
+
+	public List<MainEmoji> getEmojiMainListPopular();
 
 
 	
