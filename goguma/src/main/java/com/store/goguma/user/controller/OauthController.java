@@ -93,15 +93,15 @@ public class OauthController {
 		 * 현재 로그인시 signUpFormDto와
 		 */
 
-		// 최초 사용자 판단 여부 -- 사용자 username 존재 여부 확인
-		// 로컬의 유저네임과 카카오의 유저네임이 동일 할 수 있음(문제 발생)
+		
 		KakaoProfile kakaoProfile = response2.getBody();
 
 		OauthResisterDTO dto = OauthResisterDTO.builder().email(kakaoProfile.getKakao_account().getEmail())
 				.name(kakaoProfile.getProperties().getNickname())
 				.social("kakao_").build(); 
 
-		
+		// 최초 사용자 판단 여부 -- 사용자 username 존재 여부 확인
+				// 로컬의 유저네임과 카카오의 유저네임이 동일 할 수 있음(문제 발생)
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(),dto.getSocial());
 	
 		
