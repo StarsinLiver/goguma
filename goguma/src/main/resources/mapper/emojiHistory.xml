@@ -23,4 +23,9 @@
 		and confirm_yn = 'Y'
 		order by m.id desc;
 	</select>
+	
+	<!-- 유저 결제 내역 -->
+	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.entity.EmojiHistory">
+		select * from `emoji_history` where `u_id`=#{uId};
+	</select>
 </mapper>

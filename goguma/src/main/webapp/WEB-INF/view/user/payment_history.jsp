@@ -80,29 +80,15 @@
 								<td colspan="5">내역이 없습니다.</td>
 							</tr>
 							<!-- 실제 데이터 행 -->
+							<c:forEach var="history" items="${histories}">
 							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
+								<td id="id">${history.merchantId}</td>
+								<td id="purchaseDate">${history.mainEmojiId}</td>
 								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">없음</td>
+								<td id="refundYn">${history.confirmYn}</td>
 								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
 							</tr>
-							<!-- 실제 데이터 행 -->
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">없음</td>
-								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
-							</tr>
-							<!-- 실제 데이터 행 -->
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">없음</td>
-								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 
 					</table>

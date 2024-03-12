@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.User;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
@@ -39,18 +41,6 @@ public class UserController {
 		
 		User userEntity = userService.readByuser(dto);
 		log.info("userEntity : "+userEntity);
-		
-		// 외부 파일 불러오기
-		String profile = Define.UPLOAD_USERIMAGE_FILE_DERECTORY + userEntity.getFile();
-		
-		File imageFile = new File(profile);
-        try {
-			InputStream inputStream = new FileInputStream(imageFile);
-			model.addAttribute("profile", profile);
-			
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("프로필 사진에 문제가 발생했습니다.");
-		}
 		
 		model.addAttribute("user", userEntity);
 		
@@ -88,12 +78,20 @@ public class UserController {
 		
 		userService.modifyUser(dto);
 		
-		return "/user/info_modify";
+		return "redirect:/user/info";
 	}
 	
 	// 결제 내역 페이지
 	@GetMapping("/payment")
-	public String paymentPage() {
+	public String paymentPage(Model model, HttpSession session) {
+		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
+		int uId = sessionUser.getUId();
+		
+		// 출력
+		List<EmojiHistory> historyList = userService.myEmojiHistory(uId);
+		log.info("historyList"+historyList);
+		
+		model.addAttribute("histories", historyList);
 		
 		return "/user/payment_history";
 	}
