@@ -15,13 +15,13 @@
 	content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <!-- Site Metas -->
-<title>FlaxSEO - Responsive HTML5 Template</title>
+<title>고구마 마켓</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
 
 <!-- Site Icons -->
-<link rel="shortcut icon" href="/assets/images/favicon.ico"
+<link rel="shortcut icon" href="/assets/images/goguma_mascot.png"
 	type="image/x-icon" />
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
@@ -68,18 +68,13 @@
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
-
-=======
->>>>>>> 345727d725cec03e212428c4a63800c9059d9af5
 </head>
 <body class="seo_version">
 
 	<header class="header header_style_01">
 		<!-- nav 부분 navbar 가 안먹음 -->
 		<nav
-			class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
-			style="top: -100px;">
+			class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0 navbar-start">
 			<a href="/"
 				class="navbar-brand d-flex align-items-center px-4 px-lg-5"> <img
 				src="/assets/images/logo.png" style="width: 100%" height="100%">
@@ -125,9 +120,9 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="#" class="dropdown-item">이모티콘 목록</a> <a href="#"
+							<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a> <a href="/user/product"
 								class="dropdown-item">채팅 내역</a> <a href="#"
-								class="dropdown-item">거래 내역</a> <a href="#"
+								class="dropdown-item">거래 내역</a> <a href="/user/info"
 								class="dropdown-item">내 정보</a>
 						</div>
 					</div>

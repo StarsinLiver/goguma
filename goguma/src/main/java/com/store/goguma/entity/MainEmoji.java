@@ -20,5 +20,5 @@ public class MainEmoji {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
-
+	private int downloadCount;
 }

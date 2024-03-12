@@ -24,5 +24,8 @@ public class EmojiPageController {
 	public String file() {
 		return "emoji/upload";
 	}
-	
+	@GetMapping("/detail/{id}")
+	public String detail() {
+		return "emoji/detail";
+	}
 }

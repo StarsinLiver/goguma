@@ -26,8 +26,15 @@ public interface EmojiRepository {
 
 	public int subUpload(Emoji emoji);
 
+
 	// 메인 이모지에 포함된 (group_id) 모든 이모지 가져오기
 	public List<Emoji> findByGroupId(@Param("mainEmojiList")List<Integer> mainEmojiList);
+
+	public List<MainEmoji> getEmojiMainList();
+
+	public List<MainEmoji> getEmojiMainListPopular();
+
+
 	
 
 }
