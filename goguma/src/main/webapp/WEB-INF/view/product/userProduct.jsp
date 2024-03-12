@@ -3,7 +3,6 @@
 
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
-
 <!DOCTYPE html>
 <section id="content">
 	<section id="user-profile">
@@ -38,14 +37,13 @@
 			<section class="cards-wrap">
 				<c:forEach var="product" items="${userProdList}">
 					<article class="card ">
-						<a class="card-link " href="/productDetail?pId=${product.getPid()}">
+						<a class="card-link "
+							href="/productDetail?pId=${product.getPid()}">
 							<div class="card-photo ">
 								<img alt="/images/upload/${product.file}" src="">
 							</div>
 							<div class="card-desc">
-								<h2 class="card-title">
-								
-								${product.name}</h2>
+								<h2 class="card-title">${product.name}</h2>
 								<div class="card-price ">${product.price}원</div>
 								<div class="card-region-name">${product.address}</div>
 								<div class="card-counts">
@@ -63,5 +61,20 @@
 	</div>
 </section>
 
+<script>
+	$(document).ready(function() {
+		$('.card:gt(5)').hide();
+
+		$('#view-more a').click(function(event) {
+			event.preventDefault();
+
+			$('.card:hidden:lt(6)').show();
+
+			if ($('.card:hidden').length === 0) {
+				$('#view-more').hide(); // 모든 항목이 표시되었으면 더 보기 버튼 숨기기
+			}
+		});
+	});
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

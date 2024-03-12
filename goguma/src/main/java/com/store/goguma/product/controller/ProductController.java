@@ -49,7 +49,7 @@ public class ProductController {
 	    UserDTO userDTO = userService.findAllByuId(uId);
 
 	    userProdList.get(0).getPid();
-	    log.info("유저유저유저상상품품품" +userProdList.toString());
+	    log.info("유저상품 : " +userProdList.toString());
 	    
 	    model.addAttribute("userProdList", userProdList);
 	    model.addAttribute("user", userDTO);
