@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.store.goguma.emoji.dto.EmojiHistoryReqDto;
 import com.store.goguma.emoji.dto.EmojiUploadDto;
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
@@ -42,7 +43,7 @@ public class EmojiUploadService {
 					if(subFileName != null) {
 						Emoji emoji = Emoji.builder()
 								.file(subFileName)
-								.name("emoji_" + fileName + "_" + i)
+								.name("emoji_" + groupId + "_" + i)
 								.groupId(groupId)
 								.build();
 						uploadResult += repository.subUpload(emoji);
@@ -63,7 +64,7 @@ public class EmojiUploadService {
                 throw new RuntimeException("파일 크기가 큽니다.");
             }
 
-            String saveDirectory = Define.UPLOAD_FILE_DERECTORY;
+            String saveDirectory = Define.UPLOAD_EMOJI_FILE_DERECTORY;
             File dir = new File(saveDirectory);
             if (!dir.exists()) {
                 dir.mkdir();
@@ -72,7 +73,7 @@ public class EmojiUploadService {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
 
-            String uploadPath = Define.UPLOAD_FILE_DERECTORY + File.separator + fileName;
+            String uploadPath = Define.UPLOAD_EMOJI_FILE_DERECTORY + File.separator + fileName;
             File destination = new File(uploadPath);
 
             try {
@@ -89,13 +90,26 @@ public class EmojiUploadService {
 	public List<MainEmoji> getEmojiMainList(int num) {
 		List<MainEmoji> list = null;
 		if(num == 0) {
-			list = repository.getEmojiMainList();
+			list = repository.getEmojiMainListHome();
 		}else if(num == 1) {
 			list = repository.getEmojiMainListPopular();
 		}else {
 			list = repository.getEmojiMainList();
 		}
 		return list;
+	}
+
+	public List<Emoji> getEmojiDetailList(int num) {
+		return repository.getEmojiDetailList(num);
+	}
+
+	public MainEmoji getEmojiDetailMain(int num) {
+		return repository.getEmojiDetailMain(num);
+	}
+
+	public boolean emojiOrder(EmojiHistoryReqDto dto) {
+		int result = repository.emojiOrder(dto.toEntity());
+		return result != 0;
 	}
 
 
