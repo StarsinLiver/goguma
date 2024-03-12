@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.store.goguma.chat.dto.ChatUtil;
 import com.store.goguma.chat.dto.chatMessage.ChatMessageDto;
 import com.store.goguma.chat.dto.chatMessage.ChatMessageReqDto;
+import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.entity.ChatMessage;
 import com.store.goguma.service.ChatMessageService;
+import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.EmojiUploadService;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.utils.ChatType;
@@ -35,6 +38,9 @@ public class ChatRestController {
 
 	@Autowired
 	ChatMessageService chatMessageService;
+
+	@Autowired
+	ChatRoomService chatRoomService;
 
 	@Autowired
 	EmojiUploadService emojiUploadService;
@@ -52,14 +58,36 @@ public class ChatRestController {
 	public ResponseEntity<?> getMethodName(@PathVariable(value = "roomId") Integer roomId) {
 		try {
 
+			// 만약 유저가 로그인이 되어 잇지 않다면
 			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 			if (user == null) {
-				// 오류 로직 처리
+				return new ResponseEntity<>(ChatUtil.USER_NOT_LOGIN, HttpStatus.OK);
 			}
 
 			List<ChatMessageDto> messageList = chatMessageService.findAllByRoomId(roomId);
 			log.info(messageList.toString());
 			return new ResponseEntity<>(messageList, HttpStatus.OK);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// 사용자가 포함되어 있는 모든 방 번호 가져오기
+	@GetMapping("/user/room")
+	public ResponseEntity<?> findAllUserRoom() {
+		try {
+			
+			// 만약 유저가 로그인이 되어 잇지 않다면
+			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+			if (user == null) {
+				return new ResponseEntity<>(ChatUtil.USER_NOT_LOGIN, HttpStatus.OK);
+			}
+			// 만약 유저가 로그인 되어 있다면
+			// 채팅방 가져오기
+			List<ChatRoomDto> chatRoomList = chatRoomService.findAllByUserId(user.getUId());
+			log.info("모든 방 가져오기 : " + chatRoomList);
+			return new ResponseEntity<>(chatRoomList, HttpStatus.OK);
 		} catch (Exception e) {
 			log.info(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -96,12 +124,13 @@ public class ChatRestController {
 			@RequestParam(value = "text") String text, @RequestParam(value = "file") List<MultipartFile> file,
 			@RequestParam(value = "chatMessageType") Integer messageType) {
 		try {
+			// 만약 유저가 로그인이 되어 잇지 않다면
 			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 			if (user == null) {
-				// 오류 로직 처리
+				return new ResponseEntity<>(ChatUtil.USER_NOT_LOGIN, HttpStatus.OK);
 			}
 
-			String path = emojiUploadService.uploadProcess(file.get(0));
+			String path = emojiUploadService.uploadFileProcess(file.get(0));
 
 			ChatMessage chatMessage = ChatMessage.builder().roomId(roomId).uId(user.getUId()).text(text).file(path)
 					.chatMessageType(ChatType.IMAGE).build();
@@ -123,4 +152,5 @@ public class ChatRestController {
 	public void joinRoom(@DestinationVariable String roomId) {
 		System.out.println("구독 룸넘버  | " + roomId);
 	}
+
 }

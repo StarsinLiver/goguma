@@ -86,6 +86,35 @@ public class EmojiUploadService {
 		return null;
 	}
 
+	// -------------------------- sanha
+	public String uploadFileProcess(MultipartFile file) {// 파일만 c드라이브에 업로드됨
+        if (file.isEmpty() == false) {
+            if (file.getSize() > com.store.goguma.utils.Define.MAX_IMG_FILE_SIZE) {// 5메가 제한
+                throw new RuntimeException("파일 크기가 큽니다.");
+            }
+
+            String saveDirectory = Define.UPLOAD_FILE_DERECTORY;
+            File dir = new File(saveDirectory);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
+
+            String uploadPath = Define.UPLOAD_FILE_DERECTORY + File.separator + fileName;
+            File destination = new File(uploadPath);
+
+            try {
+                file.transferTo(destination);
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+            return fileName;
+        }
+		return null;
+	}
+	// --------------------------
 
 	public List<MainEmoji> getEmojiMainList(int num) {
 		List<MainEmoji> list = null;

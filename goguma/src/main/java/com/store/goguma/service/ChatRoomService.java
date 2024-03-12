@@ -19,6 +19,7 @@ public class ChatRoomService {
 	@Autowired
 	ChatRoomRepository chatRoomRepository;
 	
+	// 유저에 포함되어 있는 모든 방 찾기
 	public List<ChatRoomDto> findAllByUserId(int userId) {
 		return chatRoomRepository.findAllByUserId(userId);
 				
