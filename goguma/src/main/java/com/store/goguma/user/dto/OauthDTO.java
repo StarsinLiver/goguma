@@ -1,14 +1,18 @@
 package com.store.goguma.user.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
 @Builder
 @ToString
 @Data
-// 세션에 값을 남기기 위한 dto
+@NoArgsConstructor
+@AllArgsConstructor
+//세션에 값을 남기기 위한 dto
 public class OauthDTO {
 	private Integer uId;
 	private String email;
