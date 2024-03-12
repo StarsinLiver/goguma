@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class FileDto {
+public class EmojiFileDto {
 
 	private List<MultipartFile> file;
 }
