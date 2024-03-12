@@ -54,7 +54,30 @@
 	<select id="getEmojiMainListPopular" resultType="com.store.goguma.entity.MainEmoji">
 		select * from main_emoji order by download_count desc;
 	</select>
+
+	<select id="getEmojiMainListHome" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji order by id desc;
+	</select>
 	
+	<select id="getEmojiDetailList" resultType="com.store.goguma.entity.Emoji">
+		select * from emoji where group_id = #{id};
+	</select>
+	
+	<select id="getEmojiDetailMain" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji where id = #{id};
+	</select>
+	
+	<insert id="emojiOrder">
+		insert into emoji_history(merchant_id, main_emoji_id, price, u_id, bank, create_at)
+		values(
+			#{merchantId},
+			#{mainEmojiId},
+			#{price},
+			#{uId},
+			#{bank},
+			now()
+		);
+	</insert>
 
 
 </mapper>

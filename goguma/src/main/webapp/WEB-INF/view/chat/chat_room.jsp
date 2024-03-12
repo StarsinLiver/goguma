@@ -202,7 +202,7 @@
 																					data-bs-toggle="pill" href="#pills-${mainEmoji.id}"
 																					role="tab" aria-controls="pills-${mainEmoji.id}"
 																					aria-selected="${loop.index == 0 ? 'true' : 'false'}">
-																						<img src="/images/upload/${mainEmoji.file}"
+																						<img src="/images/upload/emoji/${mainEmoji.file}"
 																						alt="이미지설명"
 																						style="max-width: 30px; max-height: 30px; border-radius: 50%;">
 																				</a>
@@ -235,7 +235,7 @@
 																						<button
 																							class="btn btn-light rounded-circle p-3 border border-2 border-primary"
 																							style="width: 100px; height: 100px;">
-																							<img src="/images/upload/${subEmoji.file}"
+																							<img src="/images/upload/emoji/${subEmoji.file}"
 																								alt="image" class="img-fluid">
 																							<p class="visually-hidden">${subEmoji.file}</p>
 																						</button>

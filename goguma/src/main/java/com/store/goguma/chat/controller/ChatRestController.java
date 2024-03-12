@@ -128,7 +128,7 @@ public class ChatRestController {
 				// 오류 로직 처리
 			}
 
-			String path = emojiUploadService.uploadProcess(file.get(0));
+			String path = emojiUploadService.uploadFileProcess(file.get(0));
 
 			ChatMessage chatMessage = ChatMessage.builder().roomId(roomId).uId(user.getUId()).text(text).file(path)
 					.chatMessageType(ChatType.IMAGE).build();

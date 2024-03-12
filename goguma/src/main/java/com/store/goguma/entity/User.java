@@ -20,8 +20,8 @@ public class User {
 	private String address;
 	private String description;
 	private String zip;
-	private String report;
-	private String delete_yn;
+	private Integer report;
+	private String deleteYn;
 	private String createAt;
 	private String updateAt;
 	private String deleteAt;

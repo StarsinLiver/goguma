@@ -46,7 +46,7 @@ function innerFun(list){
 			innr += `
 				<div class="emoji--item-box" id="${list[i].id}">
                     <div class="emoji--img-box">
-                        <img src="/images/upload/${list[i].file}" alt="이모티콘">
+                        <img src="/images/upload/emoji/${list[i].file}" alt="이모티콘">
                     </div>
                     <div class="emoji--item-title-box">
                         <span>${list[i].name}</span>

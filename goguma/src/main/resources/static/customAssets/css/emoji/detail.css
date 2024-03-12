@@ -1,0 +1,238 @@
+.emoji--main-div{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.emoji--head-menu-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+.emoji--head-menu{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    cursor: pointer;
+}
+.emoji--head-menu:hover{
+    border-bottom: 2px solid black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    cursor: pointer;
+}
+
+.emoji--head-menu-title{
+    font-size: 25px;
+    cursor: pointer;
+}
+/* on 처리 */
+.emoji--head-menu-on{
+    border-bottom: 2px solid black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    cursor: pointer;
+}
+
+.emoji--head-menu-title-on{
+    font-size: 25px;
+    font-weight: 800;
+    
+}
+/* on 처리 */
+.emoji--body{
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji--content-box{
+    display: flex;
+    align-items: center;
+    flex-flow:row wrap;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.emoji--item-box{
+    width: 300px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.emoji--img-box{
+    margin-bottom: 20px;
+}
+
+.emoji--img-box img{
+    width: 100%;
+    
+}
+
+.emoji--item-title-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------------------------------------------------- */
+
+.content-main{
+    display: flex;
+    justify-content: space-around;
+    width: 1000px;
+}
+
+.main-img-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.main-img-box img{
+    width: 100%;
+}
+
+.main-title-box{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.price-box{
+    margin-bottom: 30px;
+}
+
+/* ---------------------------------------------------- */
+
+.emoji--modal{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    top: 300px;
+    left: 900px;
+    width: 400px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.emoji--sec1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.emoji--close-btn{
+    cursor: pointer;
+}
+
+.emoji--sec2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.emoji--sec2-title-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.emoji--sec2-title{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.emoji--sec2-img-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji--sec2-img-box img{
+    width: 150px;
+}
+
+.emoji--sec3{
+    width: 100%;
+    height: 5px;
+    background-color: antiquewhite;
+    margin: 40px 0;
+}
+.emoji--sec4{
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.emoji--agree-check{
+    width: 30px;
+    margin-right: 10px;
+}
+
+.emoji--sec5{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.emoji--sec5 span{
+    margin-bottom: 5px;
+}
+
+.emoji--order-btn2{
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    color: gray;
+    font-size: 25px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emoji--order-btn2-on{
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: yellow;
+    font-size: 25px;
+    cursor: pointer;
+}
