@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.goguma.repository.ProductRepository">
+
+	<!-- 중고상품 전체 -->
+	<select id="findAllProduct">
+		select * from product where delete_yn = 'N' and
+		confirm_yn = 'N'
+	</select>
+
+	<!-- 중고상품 조회 -->
+	<select id="findAllBypId">
+		select * from product where p_id = #{pId}
+	</select>
+
+	<!-- host_id로 상품 조회 -->
+	<select id="findByHostId">
+		select * from product
+		where host_id = #{hostId}
+		and delete_yn = 'N' 
+		and confirm_yn = 'N'
+	</select>
+</mapper>
