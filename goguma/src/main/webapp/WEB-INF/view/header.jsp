@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
 <link rel="stylesheet" href="/customAssets/css/emoji/list.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <!-- Custom CSS -->
 
 
@@ -68,6 +68,10 @@
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
+<!-- 토스티파이 -->	
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	
 </head>
 <body class="seo_version">
 
@@ -111,7 +115,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">채팅</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/chat/room" class="dropdown-item">방찾기</a>
+							<a href="/chat/room" class="dropdown-item">채팅하기</a>
 
 						</div>
 					</div>

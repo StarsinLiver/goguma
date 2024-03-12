@@ -61,8 +61,10 @@ public class ChatController {
 		}
 		// 채팅방 가져오기
 		List<ChatRoomDto> chatRoomList = chatRoomService.findAllByUserId(user.getUId());
+		log.info(chatRoomList.toString());
 		// 모든 메인 이모지 가져오기
 		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
+		log.info(mainEmojiList.toString());
 		// 자식 이모티콘
 		List<Emoji> emojiList = new ArrayList<>();
 		

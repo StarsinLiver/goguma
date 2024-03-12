@@ -97,7 +97,7 @@
 					<div class="section-title text-center">
 						<small>chat</small>
 						<h3>채팅방</h3>
-						<p>이곳에서 원하시는 채팅방을 선택할 수 있습니다.</p>
+						<p>여러 채팅을 해 보세요!!</p>
 					</div>
 					<!-- end title -->
 
@@ -108,64 +108,35 @@
 								<div class="inbox_people">
 									<div class="headind_srch">
 										<div class="recent_heading">
-											<h4>Recent</h4>
+											<h4>ChatRoom</h4>
 										</div>
-										<div class="srch_bar">
-											<div class="stylish-input-group">
-												<input type="text" class="search-bar" placeholder="Search">
-												<span class="input-group-addon">
-													<button type="button">
-														<i class="fa fa-search" aria-hidden="true"></i>
-													</button>
-												</span>
-											</div>
-										</div>
+
 									</div>
 
 									<!-- 채팅방 시작 -->
 									<div class="inbox_chat">
 										<c:forEach items="${chatRoomList}" var="list">
-											<div class="chat_list active_chat"
+											<div class="chat_list" data-roomid="${list.roomId}"
 												onclick="chatListItemsFunc(${list.roomId})">
 												<div class="chat_people">
-
-
 													<div class="chat_img">
 														<img
 															src="https://ptetutorials.com/images/user-profile.png"
 															alt="sunil">
 													</div>
 													<div class="chat_ib">
-														<h5>
-															${list.roomId}번방.&nbsp;${list.roomName} <span
-																class="chat_date">${list.createAt}</span>
+														<h5>${list.roomName}
+															<span class="chat_date">${list.formatCreateAt()}</span>
 														</h5>
 														<c:if test="${list.hostId == principal.getUId()}">
-														⭐🌟
-													</c:if>
+                   											 ⭐🌟
+                										</c:if>
 														<p>상품명 : ${list.productName}</p>
 													</div>
 												</div>
 											</div>
 										</c:forEach>
-										<!-- 샘플용ㅇ -->
-										<div class="chat_list">
-											<div class="chat_people">
-												<div class="chat_img">
-													<img src="https://ptetutorials.com/images/user-profile.png"
-														alt="sunil">
-												</div>
-												<div class="chat_ib">
 
-													<h5>
-														Sunil Rajput <span class="chat_date">Dec 25</span>
-													</h5>
-													<p>Test, which is a new approach to have all solutions
-														astrology under one roof.</p>
-												</div>
-											</div>
-										</div>
-										<!-- 샘플용 -->
 									</div>
 								</div>
 								<!-- 채팅방 종료 -->
@@ -173,62 +144,8 @@
 								<!-- 메시지 섹션 시작 -->
 								<div class="mesgs">
 									<h4 id="chatingRoomName"></h4>
-									<hr />
-									<div class="msg_history">
-										<div class="incoming_msg">
-											<div class="incoming_msg_img">
-												<img src="https://ptetutorials.com/images/user-profile.png"
-													alt="sunil">
-											</div>
-											<div class="received_msg">
-												<div class="received_withd_msg">
 
-													<p>Test which is a new approach to have all solutions</p>
-													<img src="/assets/images/cat-1.png"
-														style="width: 200px; height: 100px;" /> <span
-														class="time_date"> 11:01 AM | June 9</span>
-												</div>
-											</div>
-										</div>
-										<div class="outgoing_msg">
-											<div class="sent_msg">
-												<p>Test which is a new approach to have all solutions</p>
-												<span class="time_date"> 11:01 AM | June 9</span>
-											</div>
-										</div>
-										<div class="incoming_msg">
-											<div class="incoming_msg_img">
-												<img src="https://ptetutorials.com/images/user-profile.png"
-													alt="sunil">
-											</div>
-											<div class="received_msg">
-												<div class="received_withd_msg">
-													<p>Test, which is a new approach to have</p>
-													<span class="time_date"> 11:01 AM | Yesterday</span>
-												</div>
-											</div>
-										</div>
-										<div class="outgoing_msg">
-											<div class="sent_msg">
-												<p>Apollo University, Delhi, India Test</p>
-												<span class="time_date"> 11:01 AM | Today</span>
-											</div>
-										</div>
-										<div class="incoming_msg">
-											<div class="incoming_msg_img">
-												<img src="https://ptetutorials.com/images/user-profile.png"
-													alt="sunil">
-											</div>
-											<div class="received_msg">
-												<div class="received_withd_msg">
-													<p>We work directly with our designers and suppliers,
-														and sell direct to you, which means quality, exclusive
-														products, at a price anyone can afford.</p>
-													<span class="time_date"> 11:01 AM | Today</span>
-												</div>
-											</div>
-										</div>
-									</div>
+									<div class="msg_history"></div>
 									<!-- 메시지 input 태그 시작 -->
 									<div id="selectedImages"></div>
 									<div class="type_msg">
@@ -240,7 +157,7 @@
 											<!-- 이미지 -->
 											<input type="file" class="form-control-file" id="imageInput"
 												style="display: none;" accept="image/*"> <label
-												for="imageInput" class="btn btn-secondary">Image</label>
+												for="imageInput" class="btn btn-secondary">이미지</label>
 											<!-- 이미지 -->
 											<!-- 이모티콘 -->
 											<button type="button" class="btn btn-primary"
@@ -259,53 +176,88 @@
 											aria-labelledby="emoticonModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-lg">
 												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="emoticonModalLabel">Select
+													<div
+														class="modal-header d-flex justify-content-between align-items-center">
+														<h5 class="modal-title" id="emoticonModalLabel">Choose
 															an Emoticon</h5>
 														<button type="button" class="btn-close"
 															data-bs-dismiss="modal" aria-label="Close"></button>
 													</div>
 													<div class="modal-body">
-														<c:forEach var="mainEmoji" items="${mainEmojiList}">
-															<!-- 헤더 -->
-															<ul class="nav nav-underline">
-																<li class="nav-item"><a class="nav-link active"
-																	aria-current="page" href="#section${mainEmoji.id}"
-																	data-bs-toggle="tab">${mainEmoji.name}</a></li>
-															</ul>
+														<!-- 헤더 -->
+														<div class="container-fluid">
+															<div class="row">
+																<div class="col-12">
+																	<div class="nav-scroll"
+																		style="max-width: 100%; overflow-x: auto;"
+																		id="scrollable-menu">
+																		<ul class="nav nav-pills mb-3 flex-nowrap"
+																			id="pills-tab" role="tablist">
+																			<c:forEach var="mainEmoji" items="${mainEmojiList}"
+																				varStatus="loop">
+																				<li class="nav-item me-2" role="presentation">
+																					<a
+																					class="nav-link ${loop.index == 0 ? 'active' : ''}"
+																					id="pills-${mainEmoji.id}-tab"
+																					data-bs-toggle="pill" href="#pills-${mainEmoji.id}"
+																					role="tab" aria-controls="pills-${mainEmoji.id}"
+																					aria-selected="${loop.index == 0 ? 'true' : 'false'}">
+																						<img src="/images/upload/${mainEmoji.file}"
+																						alt="이미지설명"
+																						style="max-width: 30px; max-height: 30px; border-radius: 50%;">
+																				</a>
+																				</li>
+																			</c:forEach>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- 헤더 끝 -->
 
-															<div class="tab-content">
-																<c:forEach var="subEmoji" items="${emojiList}">
-																<div class="tab-pane fade show active" id="section${subEmoji.groupId}">
-																	<!-- Content for section 1 -->
+														<div class="tab-content" id="pills-tabContent">
+															<c:forEach var="mainEmoji" items="${mainEmojiList}"
+																varStatus="loop">
+																<div
+																	class="tab-pane fade ${loop.index == 0 ? 'show active' : ''}"
+																	id="pills-${mainEmoji.id}" role="tabpanel"
+																	aria-labelledby="pills-${mainEmoji.id}-tab">
 																	<!-- Emoticon Sections -->
-																	<div class="emoticon-section active"
+																	<div
+																		class="emoticon-section d-flex justify-content-center"
 																		id="section-smileys">
 																		<!-- Smileys Emoticons -->
-																		<button class="btn btn-light"
-																			style="width: 100px; height: 100px;">
-																			<img
-																				src="/images/upload/${subEmoji.file}"
-																				alt="image">
-																			<p class="visually-hidden">${subEmoji.file}</p>
-																		</button>
-	
-																		<!-- Add more emoticons as needed -->
+																		<div class="row">
+																			<c:forEach var="subEmoji" items="${emojiList}">
+																				<c:if test="${mainEmoji.id == subEmoji.groupId}">
+																					<div
+																						class="col-3 mb-3 d-flex justify-content-center align-items-center">
+																						<button
+																							class="btn btn-light rounded-circle p-3 border border-2 border-primary"
+																							style="width: 100px; height: 100px;">
+																							<img src="/images/upload/${subEmoji.file}"
+																								alt="image" class="img-fluid">
+																							<p class="visually-hidden">${subEmoji.file}</p>
+																						</button>
+																					</div>
+																				</c:if>
+																			</c:forEach>
+																			<!-- Add more emoticons as needed -->
+																		</div>
 																	</div>
-
 																	<!-- Add more sections as needed -->
 																</div>
-																</c:forEach>
-															</div>
-															<!-- 헤더 종료 -->
-
-														</c:forEach>
+															</c:forEach>
+														</div>
+														<!-- 헤더 종료 -->
 													</div>
-													
 												</div>
 											</div>
 										</div>
 										<!-- Modal 종료 -->
+
+
+
 
 									</div>
 									<!-- 메시지 input 태그 종료 -->

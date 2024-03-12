@@ -1,6 +1,8 @@
 package com.store.goguma.chat.dto.chatRoom;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
 
@@ -20,4 +22,17 @@ public class ChatRoomDto {
 	private Integer userId;
 	private Integer hostId;
 	private Timestamp createAt;
+	
+	public String formatCreateAt() {
+		
+		// Timestamp를 LocalDateTime으로 변환
+        LocalDateTime localDateTime = createAt.toLocalDateTime();
+
+        // 변환된 LocalDateTime을 원하는 형식의 문자열로 포맷팅
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDateTime = localDateTime.format(formatter);
+
+        // 포맷팅된 문자열 출력
+       return formattedDateTime;
+	}
 }

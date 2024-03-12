@@ -305,6 +305,6 @@
 		<!-- end section -->
 	</div>
 </div>
-
+<script src="/customAssets/js/chat_aside.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

@@ -5,9 +5,10 @@ import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -29,11 +30,12 @@ public class MvcConfig implements WebMvcConfigurer {
 	// 정적 리소스 매핑 ( 필요없음 )
 //	@Override
 //	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//		registry.addResourceHandler("/assets/css/css/owl.carousel.css").addResourceLocations("classpath:/assets/css/owl.carousel.css")
+//		registry.addResourceHandler("/customAssets/js/chat_aside.js").addResourceLocations("classpath:/customAssets/js/chat_aside.js")
 //				.setCachePeriod(20);
 //
 //		registry.addResourceHandler("/assets/css/css/flaticon.css ").addResourceLocations("classpath:/assets/css/flaticon.css ")
 //				.setCachePeriod(20);
 //	}
+
 
 }
