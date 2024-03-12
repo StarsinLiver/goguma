@@ -68,14 +68,15 @@
 	</select>
 	
 	<insert id="emojiOrder">
-		insert into emoji_history(merchant_id, main_emoji_id, price, u_id, bank, create_at)
+		insert into emoji_history(merchant_id, main_emoji_id, price, u_id, bank, create_at, confirm_yn)
 		values(
 			#{merchantId},
 			#{mainEmojiId},
 			#{price},
 			#{uId},
 			#{bank},
-			now()
+			now(),
+			"Y"
 		);
 	</insert>
 
