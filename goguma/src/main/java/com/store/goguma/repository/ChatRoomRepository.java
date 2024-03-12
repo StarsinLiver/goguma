@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
+import com.store.goguma.entity.ChatRoom;
 
 @Mapper
 public interface ChatRoomRepository {
@@ -15,4 +16,8 @@ public interface ChatRoomRepository {
 	 * @return
 	 */
 	public List<ChatRoomDto> findAllByUserId(int userId);
+	
+	// 채팅방 생성
+	public int saveRoom(ChatRoom chatRoom);
+	
 }

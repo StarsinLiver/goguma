@@ -38,7 +38,7 @@
 				<c:forEach var="product" items="${userProdList}">
 					<article class="card ">
 						<a class="card-link "
-							href="/productDetail?pId=${product.getPid()}">
+							href="/productDetail?pId=${product.getThisPid()}">
 							<div class="card-photo ">
 								<img alt="/images/upload/${product.file}" src="">
 							</div>

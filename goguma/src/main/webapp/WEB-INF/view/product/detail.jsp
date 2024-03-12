@@ -4,6 +4,13 @@
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
 
+<style>
+.chat-button {
+	border: 1px solid red;
+	float: inline-end;
+	margin-right: 5px;
+}
+</style>
 <!-- 메인 섹션 -->
 <article id="content">
 	<h1 class="hide">제목</h1>
@@ -71,7 +78,43 @@
 	</section>
 	<section id="article-description">
 		<h1 property="schema:name" id="article-title" style="margin-top: 0px">
-			${product.name}</h1>
+			${product.name}
+			<!-- 버튼 -->
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+				data-bs-target="#exampleModal">채팅하기</button>
+
+			<!-- 모달 창 -->
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">방 제목 입력</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<!-- 방 제목 입력 폼 -->
+							<form method="post" action="/saveRoom">
+								<input type="text" class="form-control"
+									placeholder="방 제목을 입력하세요" name="name" required> <input
+									type="hidden" value="${product.getThisPid()}" name="pId">
+								<input type="hidden" value="${product.hostId}" name="hostId">
+								<div class="mt-3">
+									<!-- <button type="submit" class="btn btn-primary">확인</button> -->
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">취소</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<button class="chat-button">찜</button>
+			<button class="chat-button">신고하기</button>
+		</h1>
+
 		<p id="article-category">
 			타이틀 ∙
 			<time id="createAt">${product.createAt}</time>
@@ -97,7 +140,7 @@
 			<c:if test="${loop.index < 6}">
 				<article class="card">
 					<a class="card-link ga-click"
-						href="/productDetail?pId=${list.getPid()}">
+						href="/productDetail?pId=${list.getThisPid()}">
 						<div class="card-photo">
 							<img alt="" src="" />
 						</div>

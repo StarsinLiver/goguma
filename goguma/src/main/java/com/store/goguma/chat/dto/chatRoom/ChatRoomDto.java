@@ -20,4 +20,9 @@ public class ChatRoomDto {
 	private Integer userId;
 	private Integer hostId;
 	private Timestamp createAt;
+	
+	
+	public Integer getPid() {
+		return this.pId;
+	}
 }
