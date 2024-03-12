@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.store.goguma.repository.BannerRepository">
+<mapper namespace="com.store.goguma.repository.UserRepository">
 
+	<select id="findAllByuId">
+		select * from user where u_id = #{uId}
+	</select>
 
 </mapper>

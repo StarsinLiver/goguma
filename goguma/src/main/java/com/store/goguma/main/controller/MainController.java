@@ -19,8 +19,6 @@ public class MainController {
 	@GetMapping("/")
 	public String mainForm() {
 		
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		
 		return "main";
 	}
 	
