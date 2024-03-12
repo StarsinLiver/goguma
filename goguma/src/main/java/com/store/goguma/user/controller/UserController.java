@@ -1,12 +1,18 @@
 package com.store.goguma.user.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	@Autowired
+	private HttpSession httpSession;
 	
 	// 유저 페이지
 	
@@ -57,4 +63,14 @@ public class UserController {
 		
 		return "/user/wish";
 	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logOutProc() {
+		
+		httpSession.invalidate();
+		
+		return "main";
+	}
+	
 }
