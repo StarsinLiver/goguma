@@ -83,7 +83,7 @@
 							<c:forEach var="history" items="${histories}">
 							<tr id="dataRow">
 								<td id="id">${history.merchantId}</td>
-								<td id="purchaseDate">${history.mainEmojiId}</td>
+								<td id="purchaseDate">${history.createAt}</td>
 								<td id="pointName">new 고구미 이모티콘</td>
 								<td id="refundYn">${history.confirmYn}</td>
 								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
