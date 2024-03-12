@@ -1,6 +1,9 @@
 package com.store.goguma.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
@@ -23,7 +26,8 @@ public interface EmojiRepository {
 
 	public int subUpload(Emoji emoji);
 
-
+	// 메인 이모지에 포함된 (group_id) 모든 이모지 가져오기
+	public List<Emoji> findByGroupId(@Param("mainEmojiList")List<Integer> mainEmojiList);
 	
 
 }
