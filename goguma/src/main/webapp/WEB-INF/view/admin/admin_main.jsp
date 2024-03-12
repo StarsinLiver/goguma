@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<!-- 헤더 -->
+<%@ include file="/WEB-INF/view/header.jsp"%>
 
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+<!-- 푸터 -->
+<%@ include file="/WEB-INF/view/footer.jsp"%>

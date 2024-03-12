@@ -35,6 +35,17 @@ public class OauthController {
 
 	@Autowired
 	private OauthService oauthService;
+	
+
+	
+	// localhost://oauth/register
+	// 최초 로그인 추가정보 페이지
+	@GetMapping("/register")
+	public String OauthRegister() {
+
+		return "login/oauthRegister";
+	}
+
 
 	/*
 	 * @RequestMapping("/user") 때문에 /user 가 달려있다. 카카오 디벨로퍼에서 redirect key 를 줄바꿈으로
@@ -105,45 +116,41 @@ public class OauthController {
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(),dto.getSocial());
 	
 		
-		if(oldUser != null) {
+		
+		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
+		if (oldUser != null) {
+			
+			
+			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
+			if(oldUser.getDeleteyn().equals("Y")) {
+				
+				log.info("올드유저 notnull 진입후  deleteY값 탔음:!!!!");
+				
+				
+				return "redirect:/login";
+				
+			}else {
+			
+				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
+				
+				
+				httpSession.setAttribute("principal", oldUser);
 
-			httpSession.setAttribute("principal", oldUser);
-
-			return "redirect:/";
+				return "main";
+			}
 		} else {
+
+			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			
 			httpSession.setAttribute("principal", dto);
 
 			return "redirect:/oauth/register";
 		}
 
-		/*
-		 * 
-		 * 최초 가입이라면 oldUser에는 null이 담겨 있다. 해서 아래 두가지 처리
-		 * oldUser.setUsername(dto.getUsername());
-		 * oldUser.setFullname(dto.getFullname());
-		 *
-		 */
-		/*
-		 * if(oldUser == null) { oauthService.createUser(dto);
-		 * 
-		 * 
-		 * 267라인 oldUser가 null 값이 들어올 때 java.lang.NullPointerException Cannot invoke
-		 * "com.tenco.bank.repository.entity.User.setUsername(String)" because "oldUser"
-		 * is null
-		 * 
-		 * 
-		 * oldUser= new ResOauthUserDTO();
-		 * 
-		 * oldUser.setUsername(dto.getUsername());
-		 * oldUser.setFullname(dto.getFullname()); }
-		 */
-
-		// 로그인 처리
-
-		// 단 최초 요청 사용자라면 회원 가입 처리 후 로그인 처리
 
 	}
-
+	
+	
 	// 구글 로그인
 	@GetMapping("/google-callback")
 	public String googleCallback(@RequestParam("code") String accessCode) {
@@ -176,19 +183,39 @@ public class OauthController {
 
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(), dto.getSocial());
 
+		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
 		if (oldUser != null) {
+			
+			
+			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
+			if(oldUser.getDeleteyn().equals("Y")) {
+				
+				log.info("올드유저 notnull 진입후  deleteY값 탔음:!!!!");
+				
+				
+				return "redirect:/login";
+				
+			}else {
+			
+				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
+				
+				
+				httpSession.setAttribute("principal", oldUser);
 
-			httpSession.setAttribute("principal", oldUser);
-
-			return "redirect:/";
+				return "main";
+			}
 		} else {
 
+			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			
 			httpSession.setAttribute("principal", dto);
 
 			return "redirect:/oauth/register";
 		}
 
+
 	}
+	
 
 	// 네이버 로그인
 	@GetMapping("/naver-callback")
@@ -226,14 +253,35 @@ public class OauthController {
 				.social("naver_").build();
 		
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(), dto.getSocial());
-
+		
+		
+		log.info("올드유저 notnull 진입:!!!!222222222222222222222222222222222222222222222222222");
+	
+		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
 		if (oldUser != null) {
+			
+			
+			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
+			if(oldUser.getDeleteyn().equals("Y")) {
+				
+				log.info("올드유저 notnull 진입후  deleteY값 탔음:!!!!");
+				
+				
+				return "redirect:/login";
+				
+			}else {
+			
+				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
+				
+				
+				httpSession.setAttribute("principal", oldUser);
 
-			httpSession.setAttribute("principal", oldUser);
-
-			return "main";
+				return "main";
+			}
 		} else {
 
+			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			
 			httpSession.setAttribute("principal", dto);
 
 			return "redirect:/oauth/register";
@@ -241,16 +289,8 @@ public class OauthController {
 
 
 	}
-
-	// localhost://oauth/register
-	// 최초 로그인 추가정보 페이지
-	@GetMapping("/register")
-	public String OauthRegister() {
-
-		return "login/oauthRegister";
-	}
-
 	
+
 	// 최초 로그인 추가정보 프로세스
 	@PostMapping("/register")
 	public String OauthRegisterProc(OauthResisterDTO dto) {
@@ -265,7 +305,6 @@ public class OauthController {
 
 		int result = oauthService.createUser(userDTO);
 		OauthDTO oldUser = oauthService.readUserByUserEmail(user.getEmail(), user.getSocial());
-		log.info(oldUser.toString());
 
 		httpSession.setAttribute("principal", oldUser);
 
