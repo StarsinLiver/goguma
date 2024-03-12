@@ -18,11 +18,17 @@ import com.store.goguma.emoji.dto.EmojiUploadDto;
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.service.EmojiUploadService;
+import com.store.goguma.user.dto.OauthDTO;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @RestController
 @RequestMapping("/emoji/api")
 public class EmojiApiController {
+	
+	@Autowired
+	HttpSession httpSession;
 	
 	@Autowired
 	private EmojiUploadService service;
@@ -54,6 +60,10 @@ public class EmojiApiController {
 	
 	@PostMapping("/order")
 	public ResponseEntity<?> emojiOrder(EmojiHistoryReqDto dto){
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user != null) {
+			dto.setUId(user.getUId());
+		}
 		boolean result = service.emojiOrder(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
