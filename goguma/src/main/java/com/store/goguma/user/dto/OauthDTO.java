@@ -12,7 +12,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//세션에 값을 남기기 위한 dto
+// 세션에 값을 남기기 위한 dto
 public class OauthDTO {
 	private Integer uId;
 	private String email;
