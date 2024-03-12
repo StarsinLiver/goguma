@@ -1,20 +1,94 @@
 package com.store.goguma.user.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.store.goguma.entity.User;
+import com.store.goguma.service.UserService;
+import com.store.goguma.user.dto.ModifyUserDto;
+import com.store.goguma.user.dto.OauthDTO;
+import com.store.goguma.utils.Define;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
-	// 유저 페이지
+	@Autowired
+	private UserService userService;
 	
-	// 내 정보 페이지
+	// 내 정보 조회 + 페이지
 	@GetMapping("/info")
-	public String infoPage() {
+	public String infoPage(Model model, HttpSession session) {
+		OauthDTO dto = (OauthDTO) session.getAttribute("principal");
+		String email = dto.getEmail();
+		log.info("내 정보 : "+dto);
+		log.info("이메일 : "+email);
+		
+		User userEntity = userService.readByuser(dto);
+		log.info("userEntity : "+userEntity);
+		
+		// 외부 파일 불러오기
+		String profile = Define.UPLOAD_USERIMAGE_FILE_DERECTORY + userEntity.getFile();
+		
+		File imageFile = new File(profile);
+        try {
+			InputStream inputStream = new FileInputStream(imageFile);
+			model.addAttribute("profile", profile);
+			
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("프로필 사진에 문제가 발생했습니다.");
+		}
+		
+		model.addAttribute("user", userEntity);
 		
 		return "/user/info";
+	}
+	
+	// 내 정보 수정 페이지
+	@GetMapping("/modify")
+	public String userModifyPage(Model model, HttpSession session) {
+		OauthDTO dto = (OauthDTO) session.getAttribute("principal");
+		String email = dto.getEmail();
+		log.info("내 정보 : "+dto);
+		log.info("이메일 : "+email);
+		
+		User userEntity = userService.readByuser(dto);
+		log.info("userEntity : "+userEntity);
+		
+		model.addAttribute("user", userEntity);
+		
+		return "/user/info_modify";
+	}
+	
+	// 내 정보 수정 기능
+	@PostMapping("/modify")
+	public String userModify(ModifyUserDto dto, HttpSession session) {
+		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
+		String email = sessionUser.getEmail();
+		String social = sessionUser.getSocial();
+		
+		log.info("social : "+social);
+		log.info("이메일 : "+email);
+		
+		dto.setEmail(email);
+		dto.setSocial(social);
+		
+		userService.modifyUser(dto);
+		
+		return "/user/info_modify";
 	}
 	
 	// 결제 내역 페이지
@@ -57,4 +131,5 @@ public class UserController {
 		
 		return "/user/wish";
 	}
+	
 }

@@ -9,8 +9,10 @@ public class Define {
 
     public static final String UPLOAD_FILE_DERECTORY = "C:\\dev_tools\\upload";
     public static final String UPLOAD_CHAT_FILE_DERECTORY = "C:\\dev_tools\\chat";
+    public static final String UPLOAD_USERIMAGE_FILE_DERECTORY = "C:\\dev_tools\\profile";
     public static final int MAX_FILE_SIZE = 1024 * 1024 * 20;	// 20MB
     public static final int MAX_IMG_FILE_SIZE = 1024 * 1024 * 5;	// 5MB
+    public static final int MAX_PROFILE_FILE_SIZE = 1024 * 250; // 250KB
 
 
     //  User

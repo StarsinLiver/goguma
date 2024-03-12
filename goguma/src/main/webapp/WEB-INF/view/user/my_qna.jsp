@@ -13,28 +13,7 @@
 		font-weight: bold;
 	}
 	
-	.my-qna-container .search-div {
-		display: flex;
-		margin: 10px 0;
-	}
 	
-	.my-qna-container .search-div input[type=text] {
-	  width: 130px;
-	  box-sizing: border-box;
-	  border: 1px solid #ccc;
-	  border-radius: 4px;
-	  font-size: 16px;
-	  background-color: white;
-	  background-position: 10px 10px; 
-	  background-repeat: no-repeat;
-	  padding: 5px 10px;
-	  -webkit-transition: width 0.4s ease-in-out;
-	  transition: width 0.4s ease-in-out;
-	}
-	
-	.my-qna-container .search-div input[type=text]:focus {
-	  width: 90%;
-	}
 </style>
 
 <!-- 메인 시작 -->

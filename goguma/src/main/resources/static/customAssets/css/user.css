@@ -79,6 +79,7 @@
 
 /* 내 정보 */
 .user-page .info-container {
+	position: relative;
 	width: 800px;
 	height: auto;
 	padding: 40px;
