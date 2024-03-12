@@ -31,6 +31,7 @@
 </style>
 
 <div>
+<input type="hidden" value="${principal.getUId()}" id="userId"/>
 	<div id="home" class="parallax first-section"
 		data-stellar-background-ratio="0.4"
 		style="background-image: url('/assets/uploads/background-12.png');">
@@ -139,7 +140,7 @@
 															${list.roomId}번방.&nbsp;${list.roomName} <span
 																class="chat_date">${list.createAt}</span>
 														</h5>
-														<c:if test="${list.hostId == 2}">
+														<c:if test="${list.hostId == principal.getUId()}">
 														⭐🌟
 													</c:if>
 														<p>상품명 : ${list.productName}</p>
@@ -370,9 +371,6 @@
 											</div>
 										</div>
 										<!-- Modal 종료 -->
-
-
-
 
 									</div>
 									<!-- 메시지 input 태그 종료 -->

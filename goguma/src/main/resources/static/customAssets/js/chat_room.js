@@ -3,7 +3,8 @@ const chatListItems = document.querySelectorAll('.chat_list');
 // 채팅에 관한 클래스
 let msgHistory = document.querySelector(".msg_history");
 let mesgs = document.querySelector(".mesgs");
-	
+const userId = document.getElementById("userId").value;
+
 let messageRoomId = 0;
 const chatListItemsFunc = (roomId) => {
 	messageRoomId = roomId;
@@ -165,7 +166,7 @@ function scrollUl() {
 		console.log(res);
 		let message = "";
 		// 만약 유저가 다른사람이라면
-		if(res.userId == 2) {
+		if(res.userId != userId) {
 			message += `<br/><div class="incoming_msg">
 						 <div class="incoming_msg_img">
 												<img src="${res.userFile}"
@@ -173,8 +174,8 @@ function scrollUl() {
 											</div>
 											<div class="received_msg">`
 			// 만약 이미지가 있다면
-			message += res.chatMessageType == 'IMAGE'? '<img src="/assets/images/cat-1.png" style="width : 200px ; height : 100px;"/>' : '';					
-			message += res.chatMessageType == 'EMOJI'? '<img src="https://ptetutorials.com/images/user-profile.png" style="width : 200px ; height : 100px;"/>' : '';					
+			message += res.chatMessageType == 'IMAGE'? `<img src="/images/upload/${res.file}" style="width : 200px ; height : 100px;"/>` : '';					
+			message += res.chatMessageType == 'EMOJI'? `<img src="/images/upload/${res.emoji}" style="width : 200px ; height : 100px;"/>` : '';					
 								
 			message += 		`<h5>${res.userName}</h5>
 							<div class="received_withd_msg">
@@ -186,12 +187,12 @@ function scrollUl() {
 		}
 		
 		// 만약 유저가 자신이라면
-		if(res.userId == 1) {
+		if(res.userId == userId) {
 			message += `<br/><div class="outgoing_msg">
 											<div class="sent_msg">`
 			// 만약 이미지가 있다면
-			message += res.chatMessageType == 'IMAGE'? '<img src="/assets/images/cat-1.png" style="width : 200px ; height : 100px;"/>' : '';													
-			message += res.chatMessageType == 'EMOJI'? '<img src="https://ptetutorials.com/images/user-profile.png" style="width : 200px ; height : 100px;"/>' : '';													
+			message += res.chatMessageType == 'IMAGE'? `<img src="/images/upload/${res.file}" style="width : 200px ; height : 100px;"/>` : '';													
+			message += res.chatMessageType == 'EMOJI'? `<img src="/images/upload/${res.emoji}" style="width : 200px ; height : 100px;"/>` : '';														
 			
 			message +=	`<p>${res.text}</p><span class="time_date">${res.createAt}</span>
 							</div>
@@ -235,7 +236,6 @@ function scrollUl() {
 const sendMessage = () => {
 	// 일반 텍스트
 	if(file == null && emoticonImg == null) {
-		console.log("왜 여기임")
 		sendTextMessage(0);
 		return ;
 	} else 
@@ -256,10 +256,13 @@ const sendMessage = () => {
         const messageInput = document.getElementById("messageInput");
         const message = messageInput.value;
         
+        console.log(userId)
+        
         stompClient.send(
           "/pub/chat/sendMessage",
           {},
           JSON.stringify({
+			userId : userId ,
             text: message,
             emoji : emoticonImg,
             roomId: messageRoomId,
@@ -273,6 +276,9 @@ const sendMessage = () => {
 const sendImgMessage = (messageType) => {
 		const messageInput = document.getElementById("messageInput");
         const message = messageInput.value;
+        
+        console.log(file);
+        console.log(emoticonImg);
         
 	    var formData = new FormData();
         formData.append("roomId", messageRoomId);

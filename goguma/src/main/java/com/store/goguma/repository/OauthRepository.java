@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.OauthUserEntity;
+import com.store.goguma.entity.User;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.OauthResisterDTO;
 import com.store.goguma.user.dto.ResOauthUserDTO;
@@ -15,5 +16,5 @@ public interface OauthRepository {
 
 	public int insert(OauthUserEntity userEntity);
 	
-	
+	public User findByUserId(int userId);
 }

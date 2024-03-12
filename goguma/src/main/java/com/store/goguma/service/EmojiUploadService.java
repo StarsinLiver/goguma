@@ -74,6 +74,7 @@ public class EmojiUploadService {
             String uploadPath = Define.UPLOAD_FILE_DERECTORY + File.separator + fileName;
             File destination = new File(uploadPath);
 
+            System.out.println("업로드 패쓰 : " + uploadPath );
             try {
                 file.transferTo(destination);
             } catch (IllegalStateException | IOException e) {
@@ -83,6 +84,4 @@ public class EmojiUploadService {
         }
 		return null;
 	}
-
-	
 }

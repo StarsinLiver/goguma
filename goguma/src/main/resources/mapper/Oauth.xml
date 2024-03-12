@@ -13,9 +13,12 @@
 
 	<insert id="insert">
 		insert into user (email, name, social, tel, address, zip, file, create_at)
-		values( #{email}, #{name}, #{social}, #{tel}, #{address}, #{zip}, #{file}, now())
+		values( #{email}, #{name}, #{social}, #{tel}, #{address}, #{zip}, #{file}, now());
 	</insert>
 	
-	
+	<select id="findByUserId">
+		select * from user 
+		where u_id = #{userId}
+	</select>
 	
 </mapper>

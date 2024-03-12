@@ -8,6 +8,7 @@ public class Define {
 // 이미지 관련
 
     public static final String UPLOAD_FILE_DERECTORY = "C:\\dev_tools\\upload";
+    public static final String UPLOAD_CHAT_FILE_DERECTORY = "C:\\dev_tools\\chat";
     public static final int MAX_FILE_SIZE = 1024 * 1024 * 20;	// 20MB
     public static final int MAX_IMG_FILE_SIZE = 1024 * 1024 * 5;	// 5MB
 

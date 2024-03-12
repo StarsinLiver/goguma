@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 @Data
 public class OauthDTO {
-	
+	private Integer uId;
 	private String email;
 	private String name;
 	private String social;
