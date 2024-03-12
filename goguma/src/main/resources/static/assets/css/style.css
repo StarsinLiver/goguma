@@ -434,10 +434,12 @@ a img.aligncenter {
         opacity: 0;
         visibility: hidden;
         transition: .5s;
+        
     }
 
     .header_style_01 .navbar .dropdown-menu.fade-down {
         top: 100%;
+        left: -10px;
         transform: rotateX(-75deg);
         transform-origin: 0% 0%;
     }
@@ -448,6 +450,15 @@ a img.aligncenter {
         visibility: visible;
         transition: .5s;
         opacity: 1;
+    }
+    
+    .header_style_01 .navbar .nav-item  .dropdown-item {
+    	font-size: 16px;
+    	padding: 0.25rem 1rem !important;
+    }
+    .header_style_01 .navbar .nav-item  .dropdown-item:active {
+    	background-color: #FFD800;
+    	color: #fff;
     }
 }
 

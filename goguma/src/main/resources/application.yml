@@ -19,16 +19,19 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: asd1234
+  devtools:
+    restart:
+      enabled: false
 
-  sql:
-    init: # 초기 sql 파일 읽기
-      mode: never #  always : 서버 실행시마다 data, schema 읽음, never : 읽지 않음
-#      이부분은 gradle implementation h2 일때만 사용
-      schema-locations: # 스키마 (테이블 생성 등)
-        - classpath:schema.sql
-      data-locations: # 샘플 데이터
-        - classpath:data.sql
-          
+#  sql:
+#    init: # 초기 sql 파일 읽기
+#      mode: never #  always : 서버 실행시마다 data, schema 읽음, never : 읽지 않음
+##      이부분은 gradle implementation h2 일때만 사용
+#      schema-locations: # 스키마 (테이블 생성 등)
+#        - classpath:schema.sql
+#      data-locations: # 샘플 데이터
+#        - classpath:data.sql
+ 
 mybatis:
   mapper-locations:
   - classpath:mapper/**.xml 

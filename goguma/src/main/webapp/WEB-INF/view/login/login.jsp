@@ -75,7 +75,7 @@
 <div class="log-container">
 	<h2>소셜 로그인</h2>
 	<div class="log-form-group">
-		<a href="/oauth2/authorization/kakao"> <img alt="kakao"
+		<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=aeff9f33b9d74346008005686767c513&redirect_uri=http://localhost/oauth/kakao-callback"> <img alt="kakao"
 			src="/assets/images/kakao_login_medium_narrow.png" height="38">
 		</a> <a href="/oauth2/authorization/naver"><img height="38"
 			width="154.53" src="/assets/images/btnG_완성형.png" /></a>

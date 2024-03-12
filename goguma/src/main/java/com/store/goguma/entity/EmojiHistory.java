@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class ImojiHistory {
+public class EmojiHistory {
 	private String merchantId;
 	private Integer mainEmojiId;
 	private Integer price;
