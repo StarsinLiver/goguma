@@ -18,5 +18,7 @@ public interface AdminRepository {
 
 	int countEmojiHistoryByCancleY();
 
-	
+	EmojiHistory selectCancelByMaerchantId(String merchantId);
+
+	void updateConfirmPayment(String merchantId);
 }

@@ -12,7 +12,6 @@
 	border-radius: 5px;
 }
 </style>
-
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
@@ -23,7 +22,6 @@
 	<!--End Page-->
 </div>
 <!-- end section -->
-
 <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
 	version="1.1" width="100%" height="100" viewBox="0 0 85 100"
 	preserveAspectRatio="none">
@@ -52,15 +50,12 @@
         </path>
     </svg>
 <!-- Header End -->
-
 <div class="user-page" style="width: 80%; height: 80%">
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-
 	<div class="payment-container" style="margin-right: 20%;">
 		<h4 class="user-page-title">결제 내역</h4>
-
 		<div class="col-sm-12">
 			<div class="card mb-3">
 				<div class="card-header text-white">
@@ -71,7 +66,7 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>순번</th>
+								<th>머천트키</th>
 								<th>구매일자</th>
 								<th>구매상품명</th>
 								<th>환불요청<br />여부
@@ -86,43 +81,119 @@
 							</tr>
 							<!-- 실제 데이터 행 -->
 							<c:forEach var="history" items="${histories}">
-							<tr id="dataRow">
-								<td id="id">${history.merchantId}</td>
-								<td id="purchaseDate">${history.createAt}</td>
-								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">${history.confirmYn}</td>
-								<td>
-									<button id="refundButton" data-value="${history.merchantId}" 
-										class="btn btn-warning btn-complete cancel-request">승인하기</button>
-								</td>
-							</tr>
+								<tr id="dataRow">
+									<td id="id">${history.merchantId}</td>
+									<td id="purchaseDate">${history.createAt}</td>
+									<td id="pointName">new 고구미 이모티콘</td>
+									<td id="refundYn">${history.confirmYn}</td>
+									<td>
+										<button id="refundButton" data-value="${history.merchantId}"
+											class="btn btn-warning btn-complete cancel-request">승인하기</button>
+									</td>
+								</tr>
 							</c:forEach>
 						</tbody>
-
 					</table>
-
-				<div class="pagination">
-					
+					<div class="pagination">
 						<!-- 페이지 처리 -->
 						<c:if test="${start > 1}">
-						<a href="/admin/history?pg=${start - 1}">&laquo;</a>
-					  	</c:if>
-					  	<!-- 페이지 번호 -->
-					  	<c:forEach var="i" begin="${start}" end="${end}">
+							<a href="/admin/history?pg=${start - 1}">&laquo;</a>
+						</c:if>
+						<!-- 페이지 번호 -->
+						<c:forEach var="i" begin="${start}" end="${end}">
 							<a href="/admin/history?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
 						</c:forEach>
-					  	<c:if test="${end < last}">
-						<a href="/admin/history?pg=${end + 1}">&raquo;</a>
+						<c:if test="${end < last}">
+							<a href="/admin/history?pg=${end + 1}">&raquo;</a>
 						</c:if>
 					</div>
 				</div>
-
 			</div>
 		</div>
+	</div>
+	<div class="modal fade" id="exampleModalPassword" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalCenterTitle"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<!-- 이메일 변경 내용을 입력하는 폼 -->
+				<div style="display: flex; flex-direction: column;">
+					<div class="register-form">
+						<label for="password">Confirm Password</label> <input
+							type="password" name="userPassword" id="userPassword"
+							placeholder="Enter password again"> <span
+							class="msgPass2">비밀번호 재입력</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="confirm"
+						data-dismiss="modal">승인</button>
+					<button type="button" class="btn btn-secondary" id="cancel"
+						data-dismiss="modal">닫기</button>
+				</div>
+			</div>
 
+		</div>
 	</div>
 </div>
+</div>
 <!-- 메인 종료 -->
+<!-- 승인 모달 -->
 
+<!-- 승인 모달 end -->
 <!-- 푸터 -->
+<script>
+	$(document).ready(function() {
+		$('.cancel-request').click(function() {
+			var merchantId = $(this).data('value');
+
+			// AJAX 호출
+			$.ajax({
+				type : 'POST',
+				url : '/admin/payment-reason', // 컨트롤러 주소
+				data : {
+					merchantId : merchantId
+				},
+				success : function(data) {
+					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
+					$('#reasonText').val(data); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
+					$('#exampleModalPassword').modal('show'); // 모달 창을 보여줌
+				},
+				error : function(xhr, status, error) {
+					// 에러 처리
+					console.error(xhr.responseText);
+				}
+			});
+		});
+
+		$('.confirm').click(function() {
+
+			//AJAX 호출
+			$.ajax({
+				type : 'POST',
+				url : '/admin/payment-confirm', // 컨트롤러 주소
+				data : {
+					merchantId : merchantId
+				},
+				success : function(data) {
+
+					window.location.href = '/admin/history';
+				},
+				error : function(xhr, status, error) {
+					// 에러 처리
+					console.error(xhr.responseText);
+				}
+
+			})
+
+		})
+
+		// "닫기" 버튼 클릭 시
+		$('#cancel').click(function() {
+			// 모달 닫기
+			$('#exampleModalPassword').modal('hide');
+		});
+	});
+</script>
 <%@ include file="/WEB-INF/view/footer.jsp"%>

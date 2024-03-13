@@ -16,33 +16,41 @@
 	</div>
 </div>
 <!-- Header End -->
-    <div class="emoji--main-div">
-        <div class="emoji--head-menu-box">
-            <div class="emoji--head-menu">
-                <span class="emoji--head-menu-title">홈</span>
-            </div>
-            <div class="emoji--head-menu">
-                <span class="emoji--head-menu-title">인기</span>
-            </div>
-            <div class="emoji--head-menu">
-                <span class="emoji--head-menu-title">신규</span>
-            </div>
-        </div>
-        <div class="emoji--body">
-            <div class="emoji--content-box"></div>
-            <div class="emoji--page-box">
-                <div class="emoji--arrow-box">
-                    <span>◀</span>
-                </div>
-                <div class="emoji--num-box">
-                    <span class="emoji--num">1</span>
-                </div>
-                <div class="emoji--arrow-box">
-                    <span>▶</span>
-                </div>
-            </div>
-        </div>
-    </div>
+<div style="display: flex; margin: 0 50px;">
+	<div >
+		<!-- aside -->
+		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
+		<!-- aside end -->
+	</div>
+	<div class="emoji--main-div">
+		<div class="emoji--head-menu-box">
+			<div class="emoji--head-menu">
+				<span class="emoji--head-menu-title">홈</span>
+			</div>
+			<div class="emoji--head-menu">
+				<span class="emoji--head-menu-title">인기</span>
+			</div>
+			<div class="emoji--head-menu">
+				<span class="emoji--head-menu-title">신규</span>
+			</div>
+		</div>
+		<div class="emoji--body">
+			<div class="emoji--content-box"></div>
+			<div class="emoji--page-box">
+				<div class="emoji--arrow-box">
+					<span>◀</span>
+				</div>
+				<div class="emoji--num-box">
+					<span class="emoji--num">1</span>
+				</div>
+				<div class="emoji--arrow-box">
+					<span>▶</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
 <script src="/customAssets/js/emoji/list.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

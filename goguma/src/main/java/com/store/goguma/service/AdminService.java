@@ -35,7 +35,7 @@ public class AdminService {
 		
 	}
 
-
+	// 환불 사유 페이징, 리스트 출력
 	public EmojiHistoryResDTO selectAllPayHistoryByY(EmojiHistoryReqDTO historyReqDTO) {
 		
 		int start = (historyReqDTO.getPg() - 1) * historyReqDTO.getSize();
@@ -47,8 +47,6 @@ public class AdminService {
 		
 		
 		
-		
-		
 		return EmojiHistoryResDTO.builder()
 				.emojiHistoryReqDTO(historyReqDTO)
 				.dtoList(history)
@@ -56,6 +54,22 @@ public class AdminService {
 				.build();
 	}
 
+	// 환불 사유 검색
+	public EmojiHistory selectCancelByMaerchantId(String merchantId) {
+
+		return repository.selectCancelByMaerchantId(merchantId);
+		
+	}
+	
+	// 환불 완료
+	public void updateConfirmPayment(String merchantId) {
+		
+		repository.updateConfirmPayment(merchantId);
+		
+	}
+
+	
+	
 	
 	
 	

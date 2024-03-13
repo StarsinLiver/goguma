@@ -77,7 +77,7 @@ public class AdminController {
 
 	// 이모지 페이지
 	// 이모지 리스트 출력, 페이징
-	@GetMapping("/Emoji")
+	@GetMapping("/emoji")
 	public String managementEmoji() {
 
 		
@@ -106,6 +106,31 @@ public class AdminController {
 		return "admin/admin_payment_history";
 	}
 
+	// admin 활불 사유 검색 ajax
+	@PostMapping("/payment-reason")
+	public String paymentReasonProc(String merchantId) {
+		
+		// merchantId로 환불 사유 검색
+		EmojiHistory cancel = adminService.selectCancelByMaerchantId(merchantId); 
+		 
+		String reason = cancel.getCancelReason();
+		
+		log.info("돌아오는 리즌 데이터 확인: "+reason);
+		
+		return reason;
+	}
+	
+	// admin 환불 처리 ajax
+	@PostMapping("/payment-confirm")
+	public void updateConfirmPayment(String merchantId) {
+		
+		// merchantId로 환불 사유 검색
+		adminService.updateConfirmPayment(merchantId); 
+		
+	}
+	
+	
+	
 	@GetMapping("/notice")
 	public String managementNotice() {
 
