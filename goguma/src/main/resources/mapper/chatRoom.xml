@@ -24,7 +24,7 @@
 		from chat_room c
 		left join product p
 		on p.p_id = c.p_id
-		where p.host_id = #{userId}
+		where c.host_id = #{userId}
 		or c.u_id = #{userId};
 	</select>
 </mapper>

@@ -30,7 +30,7 @@
             <tr class="emoji--table">
                 <th class="emoji--th">가격</th>
                 <td class="emoji--td">
-                    <input type="number" class="inputs">
+                    <input type="number" class="inputs" value="2000">
                 </td>
             </tr>
             <tr class="emoji--table">

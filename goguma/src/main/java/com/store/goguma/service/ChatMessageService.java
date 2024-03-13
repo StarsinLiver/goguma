@@ -47,6 +47,14 @@ public class ChatMessageService {
 		return result;
 	}
 	
+	// 메시지 여러장 보낼 때
+	public void sendMessageAll(int roomId) {
+		List<ChatMessageDto> list = findAllByRoomId(roomId);
+		messagingTemplate.convertAndSend("/sub/chat/" + roomId , list);
+	}
+	
+	
+	// 메시지 마지막 하나만 보낼 때
 	public void sendMessage(int roomId) {
 		ChatMessageDto chatMessageDto = chatMessageRepository.findByRoomId(roomId);
 		messagingTemplate.convertAndSend("/sub/chat/" + roomId , chatMessageDto);

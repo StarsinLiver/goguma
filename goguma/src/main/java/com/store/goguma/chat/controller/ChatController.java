@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
+import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiService;
@@ -57,12 +58,14 @@ public class ChatController {
 
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
-			// 오류 로직 처리
+			throw new LoginRestfulException("로그인을 해 주세요." , HttpStatus.BAD_REQUEST);
 		}
 		// 채팅방 가져오기
 		List<ChatRoomDto> chatRoomList = chatRoomService.findAllByUserId(user.getUId());
+		log.info(chatRoomList.toString());
 		// 모든 메인 이모지 가져오기
 		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
+		log.info(mainEmojiList.toString());
 		// 자식 이모티콘
 		List<Emoji> emojiList = new ArrayList<>();
 		

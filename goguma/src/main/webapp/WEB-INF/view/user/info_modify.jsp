@@ -217,9 +217,9 @@ h2 {
 				<div style="margin-bottom: 10px;">
 					<img class="rounded-circle mt-5" id="profileImage"
 					style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
-					src="/assets/images/goguma_mascot.png">
+					src="/profile/${user.file}">
 					<label for="file">profile</label>
-					<input type="file" name="file" onchange="readURL(this);"/>
+					<input type="file" name="file" id="file-input" onchange="readURL(this);"/>
 					<span>사진 크기 권장 사이즈 128px,용량 최대 250KB</span>
 				</div>
 				<label for="Address">Address</label> <input type="text" name="zip"
@@ -231,12 +231,12 @@ h2 {
 				</div>
 				<div>
 					<input type="text" name="addr2" id="addr2" size="50"
-						placeholder="Address Detail" />
+						placeholder="Address Detail"  />
 				</div>
 			</div>
 			<div class="register-form">
 				<label for="usertel">tel</label> <input type="text" name="tel"
-					id="tel" placeholder="Enter tel" /> <span class="msgTel"> - 포함
+					id="tel" placeholder="Enter tel" value="${user.tel}" /> <span class="msgTel"> - 포함
 					13자리를 입력하세요.</span>
 				</td>
 			</div>

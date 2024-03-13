@@ -23,4 +23,5 @@
 		and confirm_yn = 'Y'
 		order by m.id desc;
 	</select>
+	
 </mapper>

@@ -69,18 +69,16 @@
     display: flex;
     align-items: center;
     flex-flow:row wrap;
-    border: 1px solid black;
     padding: 10px;
 }
 
 .emoji--item-box{
     width: 300px;
-    padding: 5px;
+    padding: 5px 5px 20px 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     margin: 20px;
     cursor: pointer;
 }
@@ -102,7 +100,8 @@
 }
 
 .emoji--item-title-box span{
-
+	font-size: 20px;
+	font-weight: 700;
 }
 
 .emoji--page-box{

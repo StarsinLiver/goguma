@@ -21,7 +21,7 @@ spring:
     password: Sa1953vb!
   devtools:
     restart:
-      enabled: false
+      enabled: true
 
 #  sql:
 #    init: # 초기 sql 파일 읽기
