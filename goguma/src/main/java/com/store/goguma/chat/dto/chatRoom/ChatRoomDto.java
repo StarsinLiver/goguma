@@ -21,6 +21,8 @@ public class ChatRoomDto {
 	private String roomName;
 	private Integer userId;
 	private Integer hostId;
+	private String hostName;
+	private String userName;
 	private Timestamp createAt;
 	
 	public String formatCreateAt() {

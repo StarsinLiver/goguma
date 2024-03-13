@@ -110,9 +110,7 @@
 										<div class="recent_heading">
 											<h4>ChatRoom</h4>
 										</div>
-
 									</div>
-
 									<!-- 채팅방 시작 -->
 									<div class="inbox_chat">
 										<c:forEach items="${chatRoomList}" var="list">
@@ -125,18 +123,39 @@
 															alt="sunil">
 													</div>
 													<div class="chat_ib">
-														<h5>${list.roomName}
+														<h5>
+															<c:choose>
+																<c:when
+																	test="${list.roomName == null && principal.getUId() == list.userId}">
+																${list.hostName}
+															</c:when>
+																<c:when
+																	test="${list.roomName == null && principal.getUId() == list.hostId}">
+																${list.userName}
+															</c:when>
+																<c:otherwise>
+																${list.roomName}
+															</c:otherwise>
+															</c:choose>
+
 															<span class="chat_date">${list.formatCreateAt()}</span>
 														</h5>
 														<c:if test="${list.hostId == principal.getUId()}">
                    											 ⭐🌟
                 										</c:if>
 														<p>상품명 : ${list.productName}</p>
+
+														<a href="/chat/room/update/${list.roomId}"
+															class="btn btn-success">방 관리</a>
+														<form action="/chat/room/exit" method="post" onsubmit="return confirm('채팅방에서 나가시겠습니까?');">
+															<input type="hidden" name="_method" value="delete"/> <input
+																type="hidden" name="roomId" value="${list.roomId}" />
+															<button class="btn btn-danger">채팅방 나가기</button>
+														</form>
 													</div>
 												</div>
 											</div>
 										</c:forEach>
-
 									</div>
 								</div>
 								<!-- 채팅방 종료 -->
@@ -255,10 +274,6 @@
 											</div>
 										</div>
 										<!-- Modal 종료 -->
-
-
-
-
 									</div>
 									<!-- 메시지 input 태그 종료 -->
 								</div>
@@ -275,15 +290,7 @@
 		</div>
 	</div>
 </div>
-<!-- Bootstrap JS (Optional) -->
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-	integrity="sha384-8FPOj1KuqbzvEu7wQ/xzQ2QeCy8a90Ai5ms5PhR6w6zyv2X1ZXxPeC5WdrfaXLj6"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-	integrity="sha384-nBd17s/SFPXxZb3O02/HX+9kiRE5Al4GQpu/NUdhuATnf6/Jl+zUx0UEvFGScxUJ"
-	crossorigin="anonymous"></script>
+
 
 <script src="/customAssets/js/chat_room.js"></script>
 <!-- 푸터 -->

@@ -33,6 +33,7 @@ public class Define {
 
     // 배너광고 업로드
     public static final String FAIL_UPLOAD_AD = "업로드에 실패했습니다.";
-
-
+;
+    public static final String INTERVAL_SERVER_ERROR = "서버 에러가 발생하였습니다.";
+    public static final String ENTER_ROOM_NAME = "업데이트 하실 채팅방의 이름을 입력해 주세요.";
 }

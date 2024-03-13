@@ -187,6 +187,7 @@ function scrollUl() {
 			res = JSON.parse(res);
 		}
 		let message = "";
+		
 		// 만약 유저가 다른사람이라면
 		if(res.userId != userId) {
 			message += `<br/><div class="incoming_msg">
@@ -207,6 +208,7 @@ function scrollUl() {
 										</div>
 									</div>
 							</div>`;
+			return message;
 		}
 		
 		// 만약 유저가 자신이라면
@@ -220,9 +222,14 @@ function scrollUl() {
 			message +=	`<p>${res.text}</p><span class="time_date">${formatDate(res.createAt)}</span>
 							</div>
 						</div>`;	
+			return message;
 		}
+		
 		return message;
 	}
+	
+	
+	
 	
 	// 메시지 에 들어갈 date 포맷	
 	const formatDate = (createAt) => {

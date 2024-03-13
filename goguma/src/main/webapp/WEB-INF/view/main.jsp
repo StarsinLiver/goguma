@@ -305,6 +305,9 @@
 		<!-- end section -->
 	</div>
 </div>
+<c:if test="${principal != null}">
+	<input type="hidden" value="${principal.getUId()}" id="principal"/>
+</c:if>
 <script src="/customAssets/js/chat_aside.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
