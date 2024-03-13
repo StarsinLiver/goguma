@@ -64,40 +64,27 @@
 	<div id="about" class="section wb nopadtop">
 		<div class="container">
 
-<!-- 메인 시작 -->
-<div id="main-cards" class="row">
-    <div class="col-md-6 col-sm-12 mb-4">
-        <div class="card shadow">
-        <a href="/chat/room">
-            <img class="card-img-top" src="/customAssets/images/sweet_potato_image.png" alt="고구마 이미지">
-            <div class="card-body">
-                <h5 class="card-title text-center">마켓 고구마</h5>
-                <p class="card-text text-center">자신의 상품과 관련된 채팅</p>
-                <div class="text-center">
-                    <a href="#" class="btn btn-primary btn-sm">채팅 이용하기</a>
-                </div>
-            </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-12 mb-4">
-        <div class="card shadow">
-                <a href="/chat/room">
-            <img class="card-img-top" src="/customAssets/images/sweet_potato_image2.png" alt="고구마 이미지">
-            <div class="card-body">
-                <h5 class="card-title text-center">마켓 고구마</h5>
-                <p class="card-text text-center">자신이 사고싶은 상품과 관련된 채팅</p>
-                <div class="text-center">
-                    <a href="#" class="btn btn-primary btn-sm">채팅 이용하기</a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 메인 종료 -->
-
-
+			<!-- 메인 시작 -->
+			<div id="case" class="section wb">
+				<div class="container">
+					<!-- title start -->
+					<div class="section-title text-center">
+						<small>chat update</small>
+						<h3>채팅방 수정</h3>
+						<p>채팅방 이름 수정하기</p>
+					</div>
+					<!-- end title -->
+					<div class="section-title text-center">
+						<form action="/chat/room/update" method="post">
+							<input type="hidden" name="_method" value="put"/> <input
+								type="text" name="roomName" value="${room.roomName}" /> <input
+								type="hidden" name="roomId" value="${room.id}" />
+							<button class="btn btn-success">이름 수정</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- 메인 종료 -->
 			<!-- end section -->
 		</div>
 	</div>
