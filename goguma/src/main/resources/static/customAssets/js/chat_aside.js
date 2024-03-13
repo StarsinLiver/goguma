@@ -1,6 +1,7 @@
-
 // AJAX GET 요청 보내기
 // ajax 통신
+
+let principal = 0;
 
 let response = null;
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
        success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 			console.log(res);
 			if(res != 'USER_NOT_LOGIN') {
+			principal = document.querySelector("#principal").value;
 			for(let i = 0; i < res.length; i++) {
 				subscribe(res[i].roomId);
 			} // 반복문 종료
@@ -32,11 +34,9 @@ console.log("Session ID: " + frame.headers["user-name"]);
 }); // connect 종료
              // 연결 , 구독
 const subscribe = (roomId) => {
-	
 stompClient.subscribe(`/sub/chat/${roomId}`, (message) => {
     let body = JSON.parse(message.body);
     let img = jsonImage(body);
-    
     // 토스트 메시지
     // 새로운 div 엘리먼트를 생성합니다.
     var toastElement = document.createElement('div');
@@ -47,7 +47,7 @@ stompClient.subscribe(`/sub/chat/${roomId}`, (message) => {
     var toastContent = document.createElement('div');
     var userName = body.userName.length > 20 ? body.userName.substring(0, 17) + "..." : body.userName;
     var textContent = body.text.length > 20 ? body.text.substring(0, 17) + "..." : body.text;
-    toastContent.innerHTML = "<h4><b>" + body.roomName + "</b></h4><p><b>" + userName + "</b>: " + textContent + "</p>";
+    toastContent.innerHTML = "<h4><b>" + userName + "</b></h4><p>" + textContent + "</p>";
 
     // 생성한 엘리먼트를 토스트 메시지에 추가합니다.
     toastElement.appendChild(toastContent);
@@ -137,5 +137,3 @@ const jsonImage = (res) => {
 	
 	return img;
 }
-
-

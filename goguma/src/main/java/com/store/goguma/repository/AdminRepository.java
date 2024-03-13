@@ -11,4 +11,5 @@ public interface AdminRepository {
 
 	OauthDTO selectAdminByUid(Integer uId);
 
+	
 }

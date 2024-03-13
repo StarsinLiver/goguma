@@ -86,7 +86,7 @@ public class ChatRestController {
 			// 만약 유저가 로그인 되어 있다면
 			// 채팅방 가져오기
 			List<ChatRoomDto> chatRoomList = chatRoomService.findAllByUserId(user.getUId());
-			log.info("모든 방 가져오기 : " + chatRoomList);
+
 			return new ResponseEntity<>(chatRoomList, HttpStatus.OK);
 		} catch (Exception e) {
 			log.info(e.getMessage());
@@ -110,7 +110,7 @@ public class ChatRestController {
 
 			int result = chatMessageService.save(chatMessage2);
 			if (result == 0) {
-				// 서버 에러 로직
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {

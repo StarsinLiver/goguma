@@ -11,15 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class ChatRoom {
+public class ChatRoomName {
 	private Integer id;
-	private Integer pId;
 	private Integer uId;
-	private Integer hostId;
-	private String createAt;
-	private String updateAt;
-	private String deleteAt;
-	private String deleteYn;
-	private String userExit;
-	private String hostExit;
+	private Integer roomId;
+	private String roomName;
 }

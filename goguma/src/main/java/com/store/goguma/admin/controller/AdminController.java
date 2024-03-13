@@ -87,6 +87,8 @@ public class AdminController {
 	@GetMapping("/history")
 	public String salesHistory() {
 
+		
+		
 		return "admin/admin_payment_history";
 	}
 
