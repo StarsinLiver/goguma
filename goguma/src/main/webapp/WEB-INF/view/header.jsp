@@ -52,6 +52,8 @@
 <link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
 <link rel="stylesheet" href="/customAssets/css/emoji/list.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<link rel="stylesheet" href="/customAssets/css/emoji/detail.css">
 
 <!-- Custom CSS -->
 
@@ -69,6 +71,11 @@
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
+<!-- 토스티파이 -->	
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 </head>
 <body class="seo_version">
 
@@ -86,8 +93,8 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav ms-auto p-4 p-lg-0">
-					<a href="/" class="nav-item nav-link active">Home</a> <a href="/"
-						class="nav-item nav-link">이모티콘</a> <a href="/about"
+					<a href="/" class="nav-item nav-link active">Home</a> <a href="/emoji/list"
+						class="nav-item nav-link">이모티콘</a> <a href="/"
 						class="nav-item nav-link">회사 소개</a>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
@@ -112,7 +119,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">채팅</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/chat/room" class="dropdown-item">방찾기</a>
+							<a href="/chat/room" class="dropdown-item">채팅하기</a>
 
 						</div>
 					</div>

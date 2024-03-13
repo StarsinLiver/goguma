@@ -129,7 +129,7 @@ img {
 }
 
 .received_withd_msg p {
-	background: #ebebeb none repeat scroll 0 0;
+	background: #FFD800 none repeat scroll 0 0;
 	border-radius: 3px;
 	color: #646464;
 	font-size: 14px;
@@ -157,7 +157,7 @@ img {
 }
 
 .sent_msg p {
-	background: #05728f none repeat scroll 0 0;
+	background: rgb(147,66,98) none repeat scroll 0 0;
 	border-radius: 3px;
 	font-size: 14px;
 	margin: 0;
@@ -210,7 +210,7 @@ img {
 }
 
 .msg_history {
-	height: 516px;
+	height: 542px;
 	overflow-y: auto;
 }
 
@@ -222,3 +222,28 @@ img {
   z-index: 999; /* 다른 요소들 위로 띄우기 위해 높은 값을 설정 */
   /* 그 외 원하는 스타일을 지정하세요 */
 }
+
+  .chat-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .incoming_msg_img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .received_msg {
+    padding-left: 10px;
+  }
+
+  .received_msg img {
+    width: 200px;
+    height: 100px;
+  }
+
+  .time_date {
+    color: #9c9c9c;
+    font-size: 12px;
+  }

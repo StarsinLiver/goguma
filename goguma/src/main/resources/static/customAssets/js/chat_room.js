@@ -7,17 +7,30 @@ const userId = document.getElementById("userId").value;
 
 let messageRoomId = 0;
 const chatListItemsFunc = (roomId) => {
-	messageRoomId = roomId;
-	console.log(messageRoomId);
 	
+	    // 모든 채팅방 요소를 선택합니다.
+    var chatListItems = document.querySelectorAll('.chat_list');
+
+    // 선택된 채팅방을 나타내는 요소를 찾습니다.
+    var selectedChatRoom = document.querySelector('.chat_list[data-roomid="' + roomId + '"]');
+
+    // 모든 채팅방 요소에서 active 클래스를 제거합니다.
+    chatListItems.forEach(function(item) {
+        item.classList.remove('active_chat');
+    });
+
+    // 선택된 채팅방 요소에 active 클래스를 추가합니다.
+    selectedChatRoom.classList.add('active_chat');
+	
+	
+	messageRoomId = roomId;
+
         	// 채팅창을 표시하도록 화면 상태를 변경할 수 있습니다.
        		// ajax 통신
             $.ajax({
                 type : "GET",            // HTTP method type(GET, POST) 형식이다.
-                url : "/chat/message/" + roomId,      // 컨트롤러에서 대기중인 URL 주소이다.
+                url : "http://localhost/chat/message/" + roomId,      // 컨트롤러에서 대기중인 URL 주소이다.
                 success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-                    // 응답코드 > 0000
-                    console.log("데이터" , res);
                     displayChat(res);
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
@@ -64,13 +77,16 @@ function scrollUl() {
     // 해당 파일
 	let file = null;
     // 이미지 선택
-    document.getElementById('imageInput').addEventListener('change', function(event) {
+    document.getElementById('imageInput').addEventListener('change', function(event) {	
+	  // 원래 있던 이미지 전체 삭제
+	  emoticonImg = null;
       file = event.target.files[0];
       displaySelectedImage(file);
     });
 
 	// 이미지 미리보기
     function displaySelectedImage(image) {
+		
       const reader = new FileReader();
       reader.onload = function(event) {
         const imageUrl = event.target.result;
@@ -91,6 +107,7 @@ function scrollUl() {
         removeText.addEventListener('click', function() {
          selectedImagesContainer.removeChild(selectedImageDiv);
          file = null;
+         emoticonImg = null;
         });
         selectedImageDiv.appendChild(removeText);
 
@@ -111,7 +128,7 @@ function scrollUl() {
         selectedImageDiv.classList.add('selected-emoji');
         
         const img = document.createElement('img');
-        img.src = emoji;
+        img.src = "/images/upload/emoji/" + emoji;
         img.style ="height : 100px; width : 100px"
         selectedImageDiv.appendChild(img);
 
@@ -127,11 +144,12 @@ function scrollUl() {
 
         selectedImagesContainer.appendChild(selectedImageDiv);
 	}
-    
 
   // Show the selected section and hide others
   document.querySelectorAll('.emoticon-section button').forEach(button => {
     button.addEventListener('click', () => {
+	   // 원래 있던 이미지 전체 삭제
+	  resetFileAndEmoticon();
       // Handle the selected emoticon
       const emoticon = button.textContent.trim();
       emoticonImg = emoticon;
@@ -146,6 +164,11 @@ function scrollUl() {
     });
   });
     
+    // 이모티콘 또는 파일 없애기
+    const resetFileAndEmoticon = () => {
+		 file = null;
+         emoticonImg = null;
+	}
     
     // 메시지 보낸 후 여러 없애기
     const resetText = () => {
@@ -163,7 +186,6 @@ function scrollUl() {
 		if(type == "one") {
 			res = JSON.parse(res);
 		}
-		console.log(res);
 		let message = "";
 		// 만약 유저가 다른사람이라면
 		if(res.userId != userId) {
@@ -172,15 +194,16 @@ function scrollUl() {
 												<img src="${res.userFile}"
 													alt="sunil">
 											</div>
-											<div class="received_msg">`
+											
+											<div class="received_msg"><h5>${res.userName}</h5>`
 			// 만약 이미지가 있다면
-			message += res.chatMessageType == 'IMAGE'? `<img src="/images/upload/${res.file}" style="width : 200px ; height : 100px;"/>` : '';					
-			message += res.chatMessageType == 'EMOJI'? `<img src="/images/upload/${res.emoji}" style="width : 200px ; height : 100px;"/>` : '';					
+			message += res.chatMessageType == 'IMAGE'? `<img src="/images/upload/${res.file}" style="width : 200px ; height : 100px; "/>` : '';					
+			message += res.chatMessageType == 'EMOJI'? `<img src="/images/upload/emoji/${res.emoji}" style="width : 200px ; height : 100px;"/>` : '';					
 								
-			message += 		`<h5>${res.userName}</h5>
+			message += 		`
 							<div class="received_withd_msg">
 									  <p>${res.text}</p>
-										<span class="time_date">${res.createAt}</span>
+										<span class="time_date">${formatDate(res.createAt)}</span>
 										</div>
 									</div>
 							</div>`;
@@ -192,19 +215,47 @@ function scrollUl() {
 											<div class="sent_msg">`
 			// 만약 이미지가 있다면
 			message += res.chatMessageType == 'IMAGE'? `<img src="/images/upload/${res.file}" style="width : 200px ; height : 100px;"/>` : '';													
-			message += res.chatMessageType == 'EMOJI'? `<img src="/images/upload/${res.emoji}" style="width : 200px ; height : 100px;"/>` : '';														
+			message += res.chatMessageType == 'EMOJI'? `<img src="/images/upload/emoji/${res.emoji}" style="width : 200px ; height : 100px;"/>` : '';														
 			
-			message +=	`<p>${res.text}</p><span class="time_date">${res.createAt}</span>
+			message +=	`<p>${res.text}</p><span class="time_date">${formatDate(res.createAt)}</span>
 							</div>
 						</div>`;	
 		}
-		console.log("변환된 메시지 : "  + message);
 		return message;
 	}
 	
+	// 메시지 에 들어갈 date 포맷	
+	const formatDate = (createAt) => {
+    const dateTimeString = createAt;
+    const dateTime = new Date(dateTimeString);
+    const currentTime = new Date();
+    
+    const timeDifferenceInMilliseconds = currentTime - dateTime;
+    
+    // 밀리초를 분, 시간, 일로 변환합니다.
+    const timeDifferenceInMinutes = Math.floor(timeDifferenceInMilliseconds / (1000 * 60));
+    const timeDifferenceInHours = Math.floor(timeDifferenceInMilliseconds / (1000 * 60 * 60));
+    const timeDifferenceInDays = Math.floor(timeDifferenceInMilliseconds / (1000 * 60 * 60 * 24));
+    
+    let formattedTimeDifference;
+    
+    if (timeDifferenceInMinutes < 1) {
+        formattedTimeDifference = '방금 전';
+    } else if (timeDifferenceInMinutes < 60) {
+        formattedTimeDifference = `${timeDifferenceInMinutes}분 전`;
+    } else if (timeDifferenceInHours < 24) {
+        formattedTimeDifference = `${timeDifferenceInHours}시간 전`;
+    } else {
+        formattedTimeDifference = `${timeDifferenceInDays}일 전`;
+    }
+    
+    return formattedTimeDifference;
+}
+
+	
     // ---------------------------------- stomp
     // 소켓
-      const socket = new SockJS("http://localhost:80/ws");
+      const socket = new SockJS("http://localhost:80/ws"); // 이 부분 교체 작업 진행해야함
       const stompClient = Stomp.over(socket);
     
 
@@ -217,10 +268,7 @@ function scrollUl() {
           // 연결 , 구독
     const connectStomp =(roomId) => {
         stompClient.subscribe(`/sub/chat/${roomId}`, (message) => {
-            console.log("Received message: " + message);
-            console.log("메시지: " + message.body);
             let text = addMessage(message.body , "one");
-            console.log(text);
             	//  채팅 넣기
 			msgHistory.innerHTML += text;
 			scrollUl();
@@ -240,12 +288,12 @@ const sendMessage = () => {
 		return ;
 	} else 
 	// 이미지
-	if(file != null) {
+	if(file != null && emoticonImg == null) {
 		sendImgMessage(1);
 		return ;
 	} else
 	// 이모티콘
-	if(emoticonImg != null) {
+	if(emoticonImg != null && file == null) {
 		sendTextMessage(2);
 		return ;
 	}
@@ -255,8 +303,6 @@ const sendMessage = () => {
       function sendTextMessage(messageType) {
         const messageInput = document.getElementById("messageInput");
         const message = messageInput.value;
-        
-        console.log(userId)
         
         stompClient.send(
           "/pub/chat/sendMessage",
@@ -276,10 +322,7 @@ const sendMessage = () => {
 const sendImgMessage = (messageType) => {
 		const messageInput = document.getElementById("messageInput");
         const message = messageInput.value;
-        
-        console.log(file);
-        console.log(emoticonImg);
-        
+
 	    var formData = new FormData();
         formData.append("roomId", messageRoomId);
         formData.append("text", message);
@@ -301,5 +344,7 @@ const sendImgMessage = (messageType) => {
           },
         });
 }
+
+
 
 

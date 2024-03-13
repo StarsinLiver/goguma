@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.Emoji;
+import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.MainEmoji;
 
 @Mapper
@@ -33,6 +34,14 @@ public interface EmojiRepository {
 	public List<MainEmoji> getEmojiMainList();
 
 	public List<MainEmoji> getEmojiMainListPopular();
+
+	public List<Emoji> getEmojiDetailList(int id);
+
+	public MainEmoji getEmojiDetailMain(int id);
+
+	public int emojiOrder(EmojiHistory entity);
+
+	public List<MainEmoji> getEmojiMainListHome();
 
 
 	
