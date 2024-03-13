@@ -19,7 +19,7 @@ public class EmojiHistoryResDTO {
 	
 	private int merchantId;
 	
-	private List<EmojiHistory> dtoList;
+	private List<UserEmojiDTO> dtoList;
 	
     private int pg;
     private int size;
@@ -30,7 +30,7 @@ public class EmojiHistoryResDTO {
     private boolean prev, next;
     
     @Builder
-    public EmojiHistoryResDTO(EmojiHistoryReqDTO emojiHistoryReqDTO,List<EmojiHistory> dtoList, int total) {
+    public EmojiHistoryResDTO(EmojiHistoryReqDTO emojiHistoryReqDTO,List<UserEmojiDTO> dtoList, int total) {
         this.pg  = emojiHistoryReqDTO.getPg();
         this.total  = total;
         this.size = emojiHistoryReqDTO.getSize();

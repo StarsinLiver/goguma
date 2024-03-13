@@ -5,8 +5,11 @@
 <mapper namespace="com.store.goguma.repository.MyUserRepository">
 
 	<!-- 유저 결제 내역 -->
-	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.entity.EmojiHistory">
-		select * from `emoji_history` 
+	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
+		SELECT me.id, me.`name`, me.`file` , eh.* 
+		FROM `emoji_history` AS eh
+		JOIN `main_emoji` AS me 
+		ON eh.main_emoji_id = me.id
 		where `u_id`=#{uId}
 		ORDER BY `merchant_id` DESC
 		LIMIT #{start},10

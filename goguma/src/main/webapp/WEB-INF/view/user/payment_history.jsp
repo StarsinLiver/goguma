@@ -12,7 +12,51 @@
 	border-radius: 5px;
 }
 
+/* The Modal (background) */
+.my-modal {
+    max-width: 1200px;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 280px;
+    padding-top: 100px;
+    width: 100%;
+    height: 100%;
+}
+.my-modal-content {
+    margin: auto;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+/* The Close Button */
+.close {
+	
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.my-modal-content textarea {
+	resize: none;
+	margin: 10px;
+}
 </style>
 
 <!-- 메인 시작 -->
@@ -68,7 +112,7 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>순번</th>
+								<th>제품코드</th>
 								<th>구매일자</th>
 								<th>구매상품명</th>
 								<th>환불요청<br/>여부
@@ -84,9 +128,9 @@
 							<!-- 실제 데이터 행 -->
 							<c:forEach var="history" items="${histories}">
 							<tr id="dataRow">
-								<td id="id">${history.merchantId}</td>
+								<td id="id">${history.mainEmojiId}</td>
 								<td id="purchaseDate">${history.createAt}</td>
-								<td id="pointName">new 고구미 이모티콘</td>
+								<td id="pointName">${history.name}</td>
 								<td id="refundYn">${history.confirmYn}</td>
 								<td>
 									<button id="refundButton" data-value="${history.merchantId}" 
@@ -119,23 +163,57 @@
 		</div>
 		
 	</div>
-	<!-- Modal -->
 	
+	<!-- Modal -->
+	<div class="my-modal">
+	  <div class="my-modal-content">
+	    <span class="close">&times;</span>
+	    <article>
+	    	<p>2,000원</p>
+	    	
+	    	<table>
+	    		<tr>
+	    			<td>거래일자</td>
+	    			<td>2023/04/11</td>
+	    		</tr>
+	    		<tr>
+	    			<td>상품 제목</td>
+	    			<td>임티2</td>
+	    		</tr>
+	    		<tr>
+	    			<td>뱅크</td>
+	    			<td>임티2</td>
+	    		</tr>
+	    	</table>
+	    	<p>환불 사유 :</p>
+	    	<textarea></textarea>
+	    </article>
+	  </div>
+	</div>
 	
 </div>
 <!-- 메인 종료 -->
 
 <script>
-	const modal = $('.modal');
+	const modal = $('.my-modal');
 	
 	// 모달 창 열기
 	$(".cancel-request").click(function(){
 		const id = $(this).data('value');
 		
-		
+		modal.css("display", "block");
 	});
 	
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
 	
+	// 모달창 나오기
+	$(".close").on("click", function() {
+	  modal.css("display", "none");
+	});
 </script>
 
 

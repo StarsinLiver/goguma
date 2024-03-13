@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.User;
-import com.store.goguma.repository.EmojiHistoryRepository;
 import com.store.goguma.repository.MyUserRepository;
 import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
@@ -19,6 +17,7 @@ import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
 import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
 import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
+import com.store.goguma.user.dto.my.UserEmojiDTO;
 import com.store.goguma.utils.Define;
 
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +71,7 @@ public class UserService {
 		int start = (historyReqDTO.getPg() - 1) * historyReqDTO.getSize();
 		log.info("start : "+start);
 		
-		List<EmojiHistory> history = myUserRepository.findEmojiHistoryByUser(uId, start);
+		List<UserEmojiDTO> history = myUserRepository.findEmojiHistoryByUser(uId, start);
 		int total = myUserRepository.countEmojiHistoryByUser(uId);
 		log.info("total : "+total);
 		
