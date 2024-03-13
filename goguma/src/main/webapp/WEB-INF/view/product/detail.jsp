@@ -79,40 +79,88 @@
 	<section id="article-description">
 		<h1 property="schema:name" id="article-title" style="margin-top: 0px">
 			${product.name}
-			<!-- 버튼 -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-				data-bs-target="#exampleModal">채팅하기</button>
+			<div class="d-flex justify-content-start align-items-center" style="float:right; margin-top: -20px;">
+				<!-- 버튼 -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#exampleModal" style="margin-right:10px;">채팅하기</button>
 
-			<!-- 모달 창 -->
-			<div class="modal fade" id="exampleModal" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">방 제목 입력</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<!-- 방 제목 입력 폼 -->
-							<form method="post" action="/saveRoom">
-								<input type="text" class="form-control"
-									placeholder="방 제목을 입력하세요" name="name" required> <input
-									type="hidden" value="${product.getThisPid()}" name="pId">
-								<input type="hidden" value="${product.hostId}" name="hostId">
-								<div class="mt-3">
-									<!-- <button type="submit" class="btn btn-primary">확인</button> -->
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">취소</button>
-								</div>
-							</form>
+				<!-- 모달 창 -->
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">방 제목 입력</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<!-- 방 제목 입력 폼 -->
+								<form method="post" action="/saveRoom">
+									<input type="text" class="form-control"
+										placeholder="방 제목을 입력하세요" name="name" required> <input
+										type="hidden" value="${product.getThisPid()}" name="pId">
+									<input type="hidden" value="${product.hostId}" name="hostId">
+									<div class="mt-3">
+										<button type="submit" class="btn btn-primary">확인</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">취소</button>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
+
+
+				<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+					data-bs-target="#reportModal" style="margin-right:10px;">신고하기</button>
+
+				<div class="modal fade" id="reportModal" tabindex="-1"
+					aria-labelledby="reportModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header bg-danger text-white">
+								<h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+								<button type="button" class="btn-close btn-close-white"
+									data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p>정말 신고하시겠습니까?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									id="confirmReportButton">네</button>
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">아니요</button>
+							</div>
+						</div>
+					</div>
+				</div>
+								<!-- 찜하기 버튼 또는 찜 삭제 버튼 -->
+				<c:choose>
+					<c:when test="${prodWishlist}">
+						<form method="post" action="/deleteWishList" style="margin-top: 5px;">
+							<input type="hidden" name="pId" value="${product.getThisPid()}">
+							<p style="text-align: right">
+								<button class="btn btn-danger btn-circle" type="submit">
+									<i class="fa fa-frown-o"></i> 찜해제
+								</button>
+							</p>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<form method="post" action="/addWishList" style="margin-top: 5px;">
+							<input type="hidden" name="pId" value="${product.getThisPid()}">
+							<p style="text-align: right">
+								<button class="btn btn-success btn-circle" type="submit">
+									<i class="fa fa-smile-o"></i> 찜하기
+								</button>
+							</p>
+						</form>
+					</c:otherwise>
+				</c:choose>
 			</div>
-			
-			<button class="chat-button">찜</button>
-			<button class="chat-button">신고하기</button>
 		</h1>
 
 		<p id="article-category">
@@ -194,5 +242,4 @@
 		}
 	}
 </script>
-
 

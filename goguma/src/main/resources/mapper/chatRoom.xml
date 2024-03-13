@@ -28,8 +28,8 @@
 		or c.u_id = #{userId};
 	</select>
 	
-	<!-- 채팅방 개설 -->
+	<!-- 채팅방 개설 -->	
 	<insert id="saveRoom">
-		insert into chat_room (name, p_id, u_id, host_id) values (#{name}, #{pId}, #{uId}, #{hostId})
+		insert into chat_room (p_id, u_id, host_id) values (#{pId}, #{uId}, #{hostId})
 	</insert>
 </mapper>
