@@ -30,6 +30,7 @@ public class UserController {
 	private HttpSession httpSession;
 	
 	// 유저 페이지
+	@Autowired
 	private UserService userService;
 	
 	// 내 정보 조회 + 페이지

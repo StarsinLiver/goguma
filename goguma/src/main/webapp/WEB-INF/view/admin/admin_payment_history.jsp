@@ -60,7 +60,7 @@
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">이모티콘 구매내역</h5>
+					<h5 class="card-title">이모티콘 구매</h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">
@@ -71,7 +71,7 @@
 								<th>구매상품명</th>
 								<th>환불요청<br/>여부
 								</th>
-								<th>환불요청</th>
+								<th>승인 여부</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -24,7 +24,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	// 관리자 유저 수정 페이지
+	// 관리자 마이 페이지
 	// localhost://admin/modiUser
 	@GetMapping("/user")
 	public String User(Model model) {
@@ -69,13 +69,21 @@ public class AdminController {
 		return "redirect:/admin/user";
 	}
 
+	// 이모지 페이지
+	// 이모지 리스트 출력, 페이징
 	@GetMapping("/Emoji")
 	public String managementEmoji() {
 
-		return "";
+		
+		
+		return "admin/emoji_management";
 	}
 
-	// admin 상품 결제 이력 관리 페이지
+	
+	/* 
+	 * admin 상품 결제 이력 관리 페이지
+	 * 결제 이력 리스트 출력, 페이징
+     */ 
 	@GetMapping("/history")
 	public String salesHistory() {
 
