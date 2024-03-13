@@ -4,6 +4,7 @@ package com.store.goguma.user.dto;
 import lombok.Data;
 
 @Data
+// 카카오에서 들어오는 데이터 중 profile 객체 데이터
 public class Profile {
 
 	private String nickname;

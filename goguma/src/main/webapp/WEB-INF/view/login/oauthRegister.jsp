@@ -212,7 +212,6 @@ h2 {
 <!-- 회원가입 폼 종료 -->
 <!-- 메인 종료 -->
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/customAssets/js/oauth/zipcode.js">
-</script>
+<script src="/customAssets/js/oauth/zipcode.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

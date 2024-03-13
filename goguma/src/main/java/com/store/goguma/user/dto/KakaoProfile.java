@@ -5,6 +5,7 @@ package com.store.goguma.user.dto;
 import lombok.Data;
 
 @Data
+// res 카카오 dto
 public class KakaoProfile {
 
 	private Long id;
