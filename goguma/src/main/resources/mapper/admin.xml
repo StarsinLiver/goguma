@@ -4,6 +4,7 @@
 
 <mapper namespace="com.store.goguma.repository.AdminRepository">
 
+	<!-- admin계정 정보 업데이트 -->
 	<update id="modifyAdminByEmail">
 
 		update `user` set `zip`=#{zip}, `address`=#{address}, `tel`=#{tel},
@@ -12,13 +13,27 @@
 
 	</update>
 	
-	
+	<!-- 업데이트한 유저데이터 호출 -->
 	<select id="selectAdminByUid" resultType="com.store.goguma.user.dto.OauthDTO">
 		
 		select * from user where u_id = #{uid}
 	
 	</select>
 
+	<!-- 상품 환불 리스트 출력 -->
+	<select id="findEmojiHistoryByUser">
+		select * from `emoji_history` 
+		where `cancel_yn`= 'Y'
+		ORDER BY `merchant_id` DESC
+		LIMIT #{start},10
+	
+	</select>
+	
 
-
+	<!-- 상품 환불 리스트 카운트 -->
+	<select id="countEmojiHistoryByCancleY">
+	
+		select count(*) from emoji_history where cancel_yn = 'Y';
+	
+	</select>
 </mapper>

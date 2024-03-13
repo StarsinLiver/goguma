@@ -1,5 +1,7 @@
 package com.store.goguma.admin.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.store.goguma.admin.dto.PageReqDTO;
+import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.service.AdminService;
 import com.store.goguma.user.dto.OauthDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
@@ -85,8 +91,16 @@ public class AdminController {
 	 * 결제 이력 리스트 출력, 페이징
      */ 
 	@GetMapping("/history")
-	public String salesHistory() {
-
+	public String salesHistory(EmojiHistoryReqDTO historyReqDTO, Model model, PageReqDTO page) {
+		log.info("history로 들어오는 pagedto"+page);
+		
+		EmojiHistoryResDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);	
+		
+		model.addAttribute("histories", list.getDtoList());
+		model.addAttribute("pg", list.getPg());
+		model.addAttribute("start", list.getStart());
+		model.addAttribute("end", list.getEnd());
+		model.addAttribute("last", list.getLast());
 		
 		
 		return "admin/admin_payment_history";

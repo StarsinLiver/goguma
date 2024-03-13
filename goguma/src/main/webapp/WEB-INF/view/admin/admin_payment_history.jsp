@@ -15,15 +15,20 @@
 
 <!-- 메인 시작 -->
 <!-- Header Start -->
-<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
-        <div class="container text-center">
-            <h1>마이페이지</h1>
-        </div>
-        <!--End Page-->
-    </div><!-- end section -->
+<div class="all-page-title"
+	style="background-image: url(/assets/images/pattern-4.png);">
+	<div class="container text-center">
+		<h1>마이페이지</h1>
+	</div>
+	<!--End Page-->
+</div>
+<!-- end section -->
 
-    <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 85 100" preserveAspectRatio="none">
-        <path d="M-5 100 Q 0 20 5 100 Z
+<svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
+	version="1.1" width="100%" height="100" viewBox="0 0 85 100"
+	preserveAspectRatio="none">
+        <path
+		d="M-5 100 Q 0 20 5 100 Z
             M0 100 Q 5 0 10 100
             M5 100 Q 10 30 15 100
             M10 100 Q 15 10 20 100
@@ -52,10 +57,10 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-	
+
 	<div class="payment-container" style="margin-right: 20%;">
 		<h4 class="user-page-title">결제 내역</h4>
-		
+
 		<div class="col-sm-12">
 			<div class="card mb-3">
 				<div class="card-header text-white">
@@ -69,7 +74,7 @@
 								<th>순번</th>
 								<th>구매일자</th>
 								<th>구매상품명</th>
-								<th>환불요청<br/>여부
+								<th>환불요청<br />여부
 								</th>
 								<th>승인 여부</th>
 							</tr>
@@ -80,47 +85,41 @@
 								<td colspan="5">내역이 없습니다.</td>
 							</tr>
 							<!-- 실제 데이터 행 -->
+							<c:forEach var="history" items="${histories}">
 							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
+								<td id="id">${history.merchantId}</td>
+								<td id="purchaseDate">${history.createAt}</td>
 								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">없음</td>
-								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
+								<td id="refundYn">${history.confirmYn}</td>
+								<td>
+									<button id="refundButton" data-value="${history.merchantId}" 
+										class="btn btn-warning btn-complete cancel-request">승인하기</button>
+								</td>
 							</tr>
-							<!-- 실제 데이터 행 -->
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">없음</td>
-								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
-							</tr>
-							<!-- 실제 데이터 행 -->
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">new 고구미 이모티콘</td>
-								<td id="refundYn">없음</td>
-								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
-							</tr>
+							</c:forEach>
 						</tbody>
 
 					</table>
+
+				<div class="pagination">
 					
-					<div class="pagination">
-					  <a href="#">&laquo;</a>
-					  <a href="#">1</a>
-					  <a class="active" href="#">2</a>
-					  <a href="#">3</a>
-					  <a href="#">4</a>
-					  <a href="#">5</a>
-					  <a href="#">&raquo;</a>
+						<!-- 페이지 처리 -->
+						<c:if test="${start > 1}">
+						<a href="/admin/history?pg=${start - 1}">&laquo;</a>
+					  	</c:if>
+					  	<!-- 페이지 번호 -->
+					  	<c:forEach var="i" begin="${start}" end="${end}">
+							<a href="/admin/history?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+						</c:forEach>
+					  	<c:if test="${end < last}">
+						<a href="/admin/history?pg=${end + 1}">&raquo;</a>
+						</c:if>
 					</div>
 				</div>
 
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 <!-- 메인 종료 -->
