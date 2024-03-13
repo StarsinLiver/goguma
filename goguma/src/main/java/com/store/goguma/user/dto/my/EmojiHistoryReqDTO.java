@@ -4,22 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Builder
-public class EmojiHostoryRequestDto {
+public class EmojiHistoryReqDTO {
 	
 	@Builder.Default
     private int pg = 1;
 
     @Builder.Default
     private int size = 10;
-
-    private int merchantId;
-    
-    
 }

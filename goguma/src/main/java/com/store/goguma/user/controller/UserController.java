@@ -1,9 +1,5 @@
 package com.store.goguma.user.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,8 @@ import com.store.goguma.entity.User;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.utils.Define;
+import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -83,15 +80,20 @@ public class UserController {
 	
 	// 결제 내역 페이지
 	@GetMapping("/payment")
-	public String paymentPage(Model model, HttpSession session) {
+	public String paymentPage(EmojiHistoryReqDTO historyReqDTO, Model model, HttpSession session) {
+		log.info("EmojiHistoryReqDTO :"+historyReqDTO);
 		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
 		int uId = sessionUser.getUId();
 		
 		// 출력
-		List<EmojiHistory> historyList = userService.myEmojiHistory(uId);
-		log.info("historyList"+historyList);
+		EmojiHistoryResDTO response = userService.myEmojiHistory(uId, historyReqDTO);
 		
-		model.addAttribute("histories", historyList);
+		
+		model.addAttribute("histories", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
 		
 		return "/user/payment_history";
 	}

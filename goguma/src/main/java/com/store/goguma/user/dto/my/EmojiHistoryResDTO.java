@@ -15,11 +15,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class EmojiHostoryResponseDto {
+public class EmojiHistoryResDTO {
 	
 	private int merchantId;
 	
-	private List<EmojiHistory> emojiHistoryList;
+	private List<EmojiHistory> dtoList;
 	
     private int pg;
     private int size;
@@ -30,12 +30,12 @@ public class EmojiHostoryResponseDto {
     private boolean prev, next;
     
     @Builder
-    public EmojiHostoryResponseDto(EmojiHostoryRequestDto csPageRequestDTO, List<EmojiHistory> emojiHistoryList, int total, int cno) {
-        this.pg  = csPageRequestDTO.getPg();
+    public EmojiHistoryResDTO(EmojiHistoryReqDTO emojiHistoryReqDTO,List<EmojiHistory> dtoList, int total) {
+        this.pg  = emojiHistoryReqDTO.getPg();
         this.total  = total;
-        this.size = csPageRequestDTO.getSize();
+        this.size = emojiHistoryReqDTO.getSize();
 
-        this.emojiHistoryList = emojiHistoryList;
+        this.dtoList = dtoList;
 
         this.end   = (int) (Math.ceil(this.pg / 10.0)) * 10;
         this.start = this.end - 9;

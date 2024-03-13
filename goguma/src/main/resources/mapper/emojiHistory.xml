@@ -24,8 +24,4 @@
 		order by m.id desc;
 	</select>
 	
-	<!-- 유저 결제 내역 -->
-	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.user.dto.my.EmojiHostoryRequestDto">
-		select * from `emoji_history` where `u_id`=#{uId};
-	</select>
 </mapper>

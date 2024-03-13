@@ -11,6 +11,8 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+
+
 </style>
 
 <!-- 메인 시작 -->
@@ -86,21 +88,30 @@
 								<td id="purchaseDate">${history.createAt}</td>
 								<td id="pointName">new 고구미 이모티콘</td>
 								<td id="refundYn">${history.confirmYn}</td>
-								<td><button id="refundButton" class="btn btn-warning btn-complete">환불요청</button></td>
+								<td>
+									<button id="refundButton" data-value="${history.merchantId}" 
+										class="btn btn-warning btn-complete cancel-request">환불요청</button>
+								</td>
 							</tr>
 							</c:forEach>
 						</tbody>
 
 					</table>
 					
+					
 					<div class="pagination">
-					  <a href="#">&laquo;</a>
-					  <a href="#">1</a>
-					  <a class="active" href="#">2</a>
-					  <a href="#">3</a>
-					  <a href="#">4</a>
-					  <a href="#">5</a>
-					  <a href="#">&raquo;</a>
+					
+						<!-- 페이지 처리 -->
+						<c:if test="${start > 1}">
+						<a href="/user/payment?pg=${start - 1}">&laquo;</a>
+					  	</c:if>
+					  	<!-- 페이지 번호 -->
+					  	<c:forEach var="i" begin="${start}" end="${end}">
+							<a href="/user/payment?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+						</c:forEach>
+					  	<c:if test="${end < last}">
+						<a href="/user/payment?pg=${end + 1}">&raquo;</a>
+						</c:if>
 					</div>
 				</div>
 
@@ -108,8 +119,25 @@
 		</div>
 		
 	</div>
+	<!-- Modal -->
+	
+	
 </div>
 <!-- 메인 종료 -->
+
+<script>
+	const modal = $('.modal');
+	
+	// 모달 창 열기
+	$(".cancel-request").click(function(){
+		const id = $(this).data('value');
+		
+		
+	});
+	
+	
+</script>
+
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

@@ -12,10 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.User;
 import com.store.goguma.repository.EmojiHistoryRepository;
+import com.store.goguma.repository.MyUserRepository;
 import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
 import com.store.goguma.utils.Define;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +31,7 @@ public class UserService {
 	private UserRepository userRepository;
 	
 	@Autowired
-	private EmojiHistoryRepository emojiHistoryRepository;
+	private MyUserRepository myUserRepository;
 	
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
@@ -65,11 +68,19 @@ public class UserService {
 	}
 	
 	// 유저 결제 내역
-	public List<EmojiHistory> myEmojiHistory(int uId) {
+	public EmojiHistoryResDTO myEmojiHistory(int uId, EmojiHistoryReqDTO historyReqDTO) {
+		int start = (historyReqDTO.getPg() - 1) * historyReqDTO.getSize();
+		log.info("start : "+start);
 		
-		List<EmojiHistory> history = emojiHistoryRepository.findEmojiHistoryByUser(uId);
+		List<EmojiHistory> history = myUserRepository.findEmojiHistoryByUser(uId, start);
+		int total = myUserRepository.countEmojiHistoryByUser(uId);
+		log.info("total : "+total);
 		
-		return history;
+		return EmojiHistoryResDTO.builder()
+				.emojiHistoryReqDTO(historyReqDTO)
+				.dtoList(history)
+				.total(total)
+				.build();
 	}
 	
 	// 프로필 사진 변경
