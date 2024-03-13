@@ -30,6 +30,7 @@ public class ChatMessageDto {
 	private String file;
 	private String emoji;
 	private Integer roomId;
+	private String roomName;
 	private Timestamp createAt;
 	private String chatMessageType;
 	private String userName;

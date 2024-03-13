@@ -68,7 +68,7 @@
 			
 			<img class="rounded-circle mt-5" id="profileImage"
 				style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
-				src="${profile}">
+				src="/profile/${user.file}">
 				
 			<table class="table-count">
 				<thead>
@@ -175,6 +175,12 @@
 	  }
 	}
 	move();
+	
+	function notImage() {
+		
+		
+		
+	}
 </script>
 
 <!-- 푸터 -->

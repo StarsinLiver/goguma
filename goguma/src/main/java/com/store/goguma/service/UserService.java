@@ -2,23 +2,24 @@ package com.store.goguma.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.User;
+import com.store.goguma.repository.EmojiHistoryRepository;
+import com.store.goguma.repository.MyUserRepository;
 import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.utils.Define;
-
-import com.store.goguma.entity.User;
-import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.UserDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
+import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
+import com.store.goguma.utils.Define;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +29,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private MyUserRepository myUserRepository;
 	
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
@@ -63,6 +67,21 @@ public class UserService {
 		return 0;
 	}
 	
+	// 유저 결제 내역
+	public EmojiHistoryResDTO myEmojiHistory(int uId, EmojiHistoryReqDTO historyReqDTO) {
+		int start = (historyReqDTO.getPg() - 1) * historyReqDTO.getSize();
+		log.info("start : "+start);
+		
+		List<EmojiHistory> history = myUserRepository.findEmojiHistoryByUser(uId, start);
+		int total = myUserRepository.countEmojiHistoryByUser(uId);
+		log.info("total : "+total);
+		
+		return EmojiHistoryResDTO.builder()
+				.emojiHistoryReqDTO(historyReqDTO)
+				.dtoList(history)
+				.total(total)
+				.build();
+	}
 	
 	// 프로필 사진 변경
 	public String uploadProfile(ModifyUserDto dto) {
@@ -78,7 +97,7 @@ public class UserService {
             log.info("fileUpload...3"+path);
             File directory = new File(Define.UPLOAD_USERIMAGE_FILE_DERECTORY);
             
-         // 디렉토리가 존재하지 않으면 생성
+            // 디렉토리가 존재하지 않으면 생성
             if (!directory.exists()) {
                 directory.mkdirs();
             }
@@ -88,6 +107,8 @@ public class UserService {
                 throw new RuntimeException("사진 용량이 250KB를 초과하였습니다.");
             }
             
+            
+            // 이름 중복처리
             String oName = mf.getOriginalFilename();
             String ext = oName.substring(oName.lastIndexOf("."));
             String sName = UUID.randomUUID().toString()+ext;
@@ -96,6 +117,8 @@ public class UserService {
 
             try {
                 log.info("fileUpload...5");
+                
+                // 파일 등록
                 mf.transferTo(new File(path, sName));
             } catch (IOException e) {
                 throw new RuntimeException("프로필 변경에 실패했습니다.");
