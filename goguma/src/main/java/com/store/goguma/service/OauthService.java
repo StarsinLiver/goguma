@@ -24,7 +24,11 @@ public class OauthService {
 
 		log.info("서비스 유저 이메일 합쳐진것 확인!!!!!!!!@!!" + userEmail);
 
-		return oauthRepository.readUserByUserEmail(userEmail);
+		OauthDTO dto = oauthRepository.readUserByUserEmail(userEmail);
+
+		log.info("####################### " + dto);
+
+		return dto;
 	}
 
 	public int createUser(OauthResisterDTO dto) {
@@ -51,5 +55,10 @@ public class OauthService {
 			// 오류 처리
 		}
 		return user;
+	}
+
+	public OauthDTO checkDeleteUser(String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

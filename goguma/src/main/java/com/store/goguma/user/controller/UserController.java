@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+import jakarta.servlet.http.HttpSession;
 import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.User;
 import com.store.goguma.service.UserService;
@@ -17,7 +19,6 @@ import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
 import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,6 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	
 	@Autowired
+	private HttpSession httpSession;
+	
+	// 유저 페이지
 	private UserService userService;
 	
 	// 내 정보 조회 + 페이지
@@ -130,6 +134,15 @@ public class UserController {
 	public String wishPage() {
 		
 		return "/user/wish";
+	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logOutProc() {
+		
+		httpSession.invalidate();
+		
+		return "main";
 	}
 	
 }
