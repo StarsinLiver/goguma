@@ -212,16 +212,8 @@ h2 {
 	<div class="container"
 		style="background: #fff; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); width: 550px; margin-top: 5%; margin-bottom: 5%">
 			<h2 style="margin-top: 10px;">Register With Us</h2>
-			<form action="/user/modify" id="form" class="form" method="post" enctype="multipart/form-data">
+			<form action="/admin/modify" id="form" class="form" method="post" >
 			<div class="register-form">
-				<div style="margin-bottom: 10px;">
-					<img class="rounded-circle mt-5" id="profileImage"
-					style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
-					src="/assets/images/goguma_mascot.png">
-					<label for="file">profile</label>
-					<input type="file" name="file" onchange="readURL(this);"/>
-					<span>사진 크기 권장 사이즈 128px,용량 최대 250KB</span>
-				</div>
 				<label for="Address">Address</label> <input type="text" name="zip"
 					id="zip" placeholder="Enter Adress" onclick="zipcode()" readonly />
 				<span class="msgZip"></span>
@@ -256,18 +248,5 @@ h2 {
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/customAssets/js/oauth/zipcode.js"></script>
 
-<script>
-	function readURL(input) {
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('profileImage').src = e.target.result;
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('profileImage').src = "";
-	  }
-	}
-</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
