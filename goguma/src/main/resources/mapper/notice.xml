@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.goguma.repository.NoticeRepository">
+
+	<select id="getNoticeList" resultType="com.store.goguma.entity.Notice">
+		select * from notice order by id desc;
+	</select>
+	
+	<select id="getNoticeDetail">
+		select * from notice where id = #{id};
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
