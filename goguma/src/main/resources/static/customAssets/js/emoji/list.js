@@ -50,7 +50,6 @@ function innerFun(list){
                     </div>
                     <div class="emoji--item-title-box">
                         <span>${list[i].name}</span>
-                        <span>${list[i].price}</span>
                     </div>
                 </div>
 			`;
