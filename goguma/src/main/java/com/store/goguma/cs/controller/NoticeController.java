@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/cs/api")
-public class CsApiController {
+public class NoticeController {
 	
 	@Autowired
 	private NoticeService service;
@@ -58,4 +58,5 @@ public class CsApiController {
 		boolean result = service.noticeDelete(id);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
+	
 }

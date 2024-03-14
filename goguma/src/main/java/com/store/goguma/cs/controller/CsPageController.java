@@ -18,6 +18,11 @@ public class CsPageController {
 		return "cs/notice/detail";
 	}
 	
+	@GetMapping("/qna/write")
+	public String qnaWrite() {
+		return "cs/qna/write";
+	}
+	
 	
 	
 	// admin
