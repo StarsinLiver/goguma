@@ -24,5 +24,9 @@ public interface MyUserRepository {
 	
 	
 	// 구매 거래 내역
-	public List<ProductHistoryDTO> myReadByproducthistory(Integer uId);
+	public List<ProductHistoryDTO> myReadByproducthistory(@Param("uId") Integer uId, 
+															@Param("start") Integer start);
+	
+	// 구매 거래 내역 갯수
+	public int countProductHistoryByUser(@Param("uId") Integer uId);
 }

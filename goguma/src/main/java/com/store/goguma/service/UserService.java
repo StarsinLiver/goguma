@@ -97,8 +97,17 @@ public class UserService {
 	}
 	
 	// 구매 거래 내역
-	public List<ProductHistoryDTO> productList(int uId){
-		return myUserRepository.myReadByproducthistory(uId);
+	public ResponsePageDTO productList(int uId, RequestPageDTO requestPageDTO){
+		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		
+		List<ProductHistoryDTO> dto = myUserRepository.myReadByproducthistory(uId, start);
+		int total = myUserRepository.countProductHistoryByUser(uId);
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(requestPageDTO)
+				.dtoList(dto)
+				.total(total)
+				.build();
 	}
 	
 	// 프로필 사진 변경

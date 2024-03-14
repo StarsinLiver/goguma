@@ -97,13 +97,17 @@
 					
 					
 					<div class="pagination">
-					  <a href="#">&laquo;</a>
-					  <a href="#">1</a>
-					  <a class="active" href="#">2</a>
-					  <a href="#">3</a>
-					  <a href="#">4</a>
-					  <a href="#">5</a>
-					  <a href="#">&raquo;</a>
+						<!-- 페이지 처리 -->
+						<c:if test="${start > 1}">
+						<a href="/user/product?pg=${start - 1}">&laquo;</a>
+					  	</c:if>
+					  	<!-- 페이지 번호 -->
+					  	<c:forEach var="i" begin="${start}" end="${end}">
+							<a href="/user/product?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+						</c:forEach>
+					  	<c:if test="${end < last}">
+						<a href="/user/product?pg=${end + 1}">&raquo;</a>
+						</c:if>
 					</div>
 				</div>
 			</div>

@@ -49,10 +49,16 @@
 			p.`name` as `prodName`,
 			u.`name` as `userName`
 		FROM `product_history` AS ph
-		JOIN  `product` AS p ON ph.p_id = p.p_id
-		JOIN `user` AS u ON p.host_id = u.u_id
-		WHERE ph.`u_id`=#{uId};
+			JOIN  `product` AS p ON ph.p_id = p.p_id
+			JOIN `user` AS u ON p.host_id = u.u_id
+		WHERE ph.`u_id`=#{uId}
+		ORDER BY ph.id DESC
+		LIMIT #{start},10
 	</select>
 	
-	
+	<select id="countProductHistoryByUser">
+		SELECT COUNT(*) FROM `product_history` as ph
+		JOIN  `product` AS p ON ph.p_id = p.p_id
+        	where `u_id`=#{uId}
+	</select>
 </mapper>

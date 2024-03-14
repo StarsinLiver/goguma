@@ -16,4 +16,5 @@ public class RequestPageDTO {
 
     @Builder.Default
     private int size = 10;
+    
 }

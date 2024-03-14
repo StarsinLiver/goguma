@@ -129,14 +129,17 @@ public class UserController {
 	
 	// 중고거래 내역 페이지
 	@GetMapping("/product")
-	public String productPage(HttpSession session, Model model) {
+	public String productPage(RequestPageDTO pageDTO,HttpSession session, Model model) {
 		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
 		int uId = sessionUser.getUId();
 		
-		List<ProductHistoryDTO> list = userService.productList(uId);
-		log.info(""+list);
-		model.addAttribute("pHistories", list);
+		ResponsePageDTO response = userService.productList(uId, pageDTO);
 		
+		model.addAttribute("pHistories", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
 		
 		return "/user/product_history";
 	}
