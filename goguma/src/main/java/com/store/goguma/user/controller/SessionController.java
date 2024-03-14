@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.store.goguma.entity.User;
+import com.store.goguma.user.dto.OauthDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,11 +18,10 @@ public class SessionController {
 	
 	@GetMapping("/session")
 	public ResponseEntity<?> getSession(){
-		User user = (User) session.getAttribute("principal");
+		OauthDTO user = (OauthDTO) session.getAttribute("principal");
 		if(user != null) {
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			return new ResponseEntity<OauthDTO>(user, HttpStatus.OK);
 		}
 		return null;
 	}
 }
-// uId

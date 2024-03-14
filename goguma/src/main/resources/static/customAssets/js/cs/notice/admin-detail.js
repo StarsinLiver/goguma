@@ -3,7 +3,10 @@ const updateBtn = document.querySelector(".admin-notice-update-btn");
 const deleteBtn = document.querySelector(".admin-notice-delete-btn");
 
 let userInfo = getSession();
-
+if(userInfo == "" || userInfo.role == "USER" || userInfo.role == ""){
+	alert("잘못된 접근입니다.");
+	location.href = "/";
+}
 
 let address = location.pathname.split("/")[5];
 

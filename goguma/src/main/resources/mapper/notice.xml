@@ -22,7 +22,9 @@
 		);
 	</insert>
 	
-	
+	<delete id="noticeDelete">
+		delete from notice where id = #{id};
+	</delete>
 	
 	
 	

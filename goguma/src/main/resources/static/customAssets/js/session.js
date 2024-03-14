@@ -5,8 +5,7 @@ function getSession(){
 		url : "/session",
 		async : false,
 		success : function(data){
-			if(data != false){
-				console.log("유저정보", data);
+			if(data != null){
 				userData = data;
 			}else{
 				console.log("유저정보 없음");
