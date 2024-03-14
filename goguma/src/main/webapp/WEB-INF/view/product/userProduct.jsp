@@ -38,9 +38,11 @@
 				<c:forEach var="product" items="${userProdList}">
 					<article class="card ">
 						<a class="card-link "
-							href="/productDetail?pId=${product.getThisPid()}">
+							href="/product/productDetail?pId=${product.getThisPid()}">
 							<div class="card-photo ">
-								<img alt="/images/upload/${product.file}" src="">
+							<c:forTokens delims="," items="${product.file}" var="file">
+								<img alt="" src="/images/upload/${file}">
+							</c:forTokens>
 							</div>
 							<div class="card-desc">
 								<h2 class="card-title">${product.name}</h2>

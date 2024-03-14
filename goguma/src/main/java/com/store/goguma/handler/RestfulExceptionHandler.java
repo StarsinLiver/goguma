@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.store.goguma.handler.exception.BackPageRestfulException;
+import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
+import com.store.goguma.handler.exception.ReportException;
 
 
 @Order(1)
@@ -40,4 +42,25 @@ public class RestfulExceptionHandler {
 		sb.append("</script>");
 		return sb.toString();
 	}
+	
+	@ExceptionHandler(ReportException.class)
+	public String basicException(ReportException e) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script>");
+		sb.append("alert('" + e.getMessage() + "');");
+		sb.append("window.history.back();");	// 뒤로가기
+		sb.append("</script>");
+		return sb.toString();
+	}
+	
+	@ExceptionHandler(ChatRoomException.class)
+	public String basicException(ChatRoomException e) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script>");
+		sb.append("alert('" + e.getMessage() + "');");
+		sb.append("location.href='/chat/room';");	// 채팅방 페이지 이동
+		sb.append("</script>");
+		return sb.toString();
+	}
+	
 }

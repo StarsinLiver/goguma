@@ -12,6 +12,7 @@ public interface ProductRepository {
 	// 상품 전체 조회
 	public List<Product> findAllProduct();
 	public List<Product> findByHostId(Integer hostId);
+	public List<Product> findWishAndChat(Integer pId);
 	// 특정 상품 조회
 	public Product findAllBypId(Integer pId);
 

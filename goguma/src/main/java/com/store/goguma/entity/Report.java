@@ -11,22 +11,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class Product {
-	private Integer pId;
-	private String address;
-	private String name;
-	private Integer price;
+public class Report {
+
+	private Integer id;
 	private Integer hostId;
-	private String description;
-	private String file;
-	private Integer mainCategoryId;
-	private Integer subCategoryId;
+	private Integer callId;
+	private String reson;
 	private String createAt;
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
-	private String confirmYn;
-    private Integer countChatRoom;
-    private Integer countWishList;
-    
 }

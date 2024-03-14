@@ -19,6 +19,7 @@ public class ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	
+	// 모든 상품 리스트
 	public List<ProductDTO> findAllProduct() {
 	    List<Product> productList = productRepository.findAllProduct();
 
@@ -71,6 +72,8 @@ public class ProductService {
                 .deleteAt(product.getDeleteAt())
                 .deleteYn(product.getDeleteYn())
                 .confirmYn(product.getConfirmYn())
+                .countWishList(product.getCountWishList())
+                .countChatRoom(product.getCountChatRoom())
                 .build();
         
         return dto;
@@ -98,6 +101,36 @@ public class ProductService {
 	        productDTO.setDeleteAt(product.getDeleteAt());
 	        productDTO.setDeleteYn(product.getDeleteYn());
 	        productDTO.setConfirmYn(product.getConfirmYn());
+
+	        userProdListDTO.add(productDTO);
+	    }
+	    return userProdListDTO;
+	}
+	
+	// 상품 찜,채팅 개수
+	public List<ProductDTO> findWishAndChat(Integer pId) {
+
+	    List<Product> userProdList = productRepository.findWishAndChat(pId);
+	    List<ProductDTO> userProdListDTO = new ArrayList<>();
+
+	    for (Product product : userProdList) {
+	        ProductDTO productDTO = new ProductDTO();
+	        productDTO.setPId(product.getPId());
+	        productDTO.setAddress(product.getAddress());
+	        productDTO.setName(product.getName());
+	        productDTO.setPrice(product.getPrice());
+	        productDTO.setHostId(product.getHostId());
+	        productDTO.setDescription(product.getDescription());
+	        productDTO.setFile(product.getFile());
+	        productDTO.setMainCategoryId(product.getMainCategoryId());
+	        productDTO.setSubCategoryId(product.getSubCategoryId());
+	        productDTO.setCreateAt(product.getCreateAt());
+	        productDTO.setUpdateAt(product.getUpdateAt());
+	        productDTO.setDeleteAt(product.getDeleteAt());
+	        productDTO.setDeleteYn(product.getDeleteYn());
+	        productDTO.setConfirmYn(product.getConfirmYn());
+	        productDTO.setCountWishList(product.getCountWishList());
+	        productDTO.setCountChatRoom(product.getCountChatRoom());
 
 	        userProdListDTO.add(productDTO);
 	    }
