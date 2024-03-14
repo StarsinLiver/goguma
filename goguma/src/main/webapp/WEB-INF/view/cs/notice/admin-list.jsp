@@ -33,16 +33,16 @@
                 </thead>
                 <tbody class="notice--tbody"></tbody>
             </table>
-                <div class="notice--page-box">
-                    <div class="notice--arrow-box">
-                        <span>◀</span>
-                    </div>
-                    <div class="notice--num-box">
-                        <span class="p-num">1</span>
-                    </div>
-                    <div class="notice--arrow-box">
-                        <span>▶</span>
-                    </div>
+            <button class="admin-notice-write-btn" style="padding: 20px; background-color: aqua;">글쓰기</button>
+            <div class="notice--page-box">
+                <div class="notice--arrow-box">
+                    <span>◀</span>
+                </div>
+                <div class="notice--num-box">
+                    <span class="p-num">1</span>
+                </div>
+                <div class="notice--arrow-box">
+                    <span>▶</span>
                 </div>
             </div>
         </div>

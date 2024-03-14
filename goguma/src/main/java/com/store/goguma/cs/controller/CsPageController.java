@@ -18,6 +18,11 @@ public class CsPageController {
 		return "cs/notice/detail";
 	}
 	
+	@GetMapping("/qna/write")
+	public String qnaWrite() {
+		return "cs/qna/write";
+	}
+	
 	
 	
 	// admin
@@ -39,6 +44,6 @@ public class CsPageController {
 	
 	@GetMapping("/notice/update/admin/{id}")
 	public String noticeUpdate() {
-		return "cs/notice/admin-write";
+		return "cs/notice/admin-update";
 	}
 }

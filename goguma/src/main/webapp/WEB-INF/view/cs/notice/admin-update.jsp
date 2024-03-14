@@ -32,7 +32,7 @@
             </tr>
             <tr class="cs-notice--tr">
                 <th class="cs-notice--th" colspan="2">
-                    <button type="button" class="cs-notice--insert-btn">등록</button>
+                    <button type="button" class="cs-notice--update-btn">수정하기</button>
                 </th>
             </tr>
         </table>

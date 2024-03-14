@@ -1,0 +1,88 @@
+/* Sidebar styles */
+#user-aside {
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background-color: #fff06d;
+    width: 250px; /* Adjust width as needed */
+}
+
+#user-aside ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#user-aside li {
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden; /* Hide overflowing text */
+}
+
+#user-aside li a {
+    display: block;
+    padding: 15px;
+    color: #4d4d4d;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#user-aside li a:hover {
+    background-color: #e6e6e6;
+    color: #000;
+}
+
+/* Input styles */
+#user-aside input[type="text"] {
+    width: calc(100% - 30px); /* Adjust width as needed */
+    padding: 10px;
+    margin: 10px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+#user-aside input[type="number"] {
+    width: calc(100% - 30px); /* Adjust width as needed */
+    padding: 10px;
+    margin: 10px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+/* Title style */
+#user-aside h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #4d4d4d;
+}
+
+/* Button style */
+#user-aside .btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #934262;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#user-aside .btn:hover {
+    background-color: #6f2d4f;
+}
+
+/* Selected style */
+#user-aside .selected {
+    background-color: #ffd800;
+    color: #fff;
+}
+
+#button1 {
+	margin-top: 10px;
+}

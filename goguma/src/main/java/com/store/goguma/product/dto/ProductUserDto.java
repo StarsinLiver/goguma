@@ -1,4 +1,4 @@
-package com.store.goguma.entity;
+package com.store.goguma.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
-public class Product {
+public class ProductUserDto {
 	private Integer pId;
 	private String address;
 	private String name;
@@ -26,7 +26,10 @@ public class Product {
 	private String deleteAt;
 	private String deleteYn;
 	private String confirmYn;
-    private Integer countChatRoom;
-    private Integer countWishList;
-    
+	private Integer countChatRoom;
+	private Integer countWishList;
+
+	public int getThisPid() {
+		return this.pId;
+	}
 }

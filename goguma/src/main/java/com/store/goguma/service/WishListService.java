@@ -43,4 +43,8 @@ public class WishListService {
 
         return count > 0;
     }
+    // 찜 개수 count
+    public int getCountWishlist(int pId) {
+        return wishListRepository.countWishList(pId);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.goguma.entity.Product;
 import com.store.goguma.product.dto.ProductDTO;
+import com.store.goguma.product.dto.ProductUserDto;
 import com.store.goguma.repository.ProductRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ public class ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	
+	// 모든 상품 리스트
 	public List<ProductDTO> findAllProduct() {
 	    List<Product> productList = productRepository.findAllProduct();
 
@@ -71,15 +73,24 @@ public class ProductService {
                 .deleteAt(product.getDeleteAt())
                 .deleteYn(product.getDeleteYn())
                 .confirmYn(product.getConfirmYn())
+                .countWishList(product.getCountWishList())
+                .countChatRoom(product.getCountChatRoom())
                 .build();
         
         return dto;
 	}
 	
 	// 유저가 등록한 상품목록 조회
-	public List<ProductDTO> findByHostId(Integer hostId) {
+	public List<ProductUserDto> findByHostId(Integer hostId) {
 
-	    List<Product> userProdList = productRepository.findByHostId(hostId);
+	    List<ProductUserDto> userProdList = productRepository.findByHostId(hostId);
+	    return userProdList;
+	}
+	
+	// 상품 찜,채팅 개수
+	public List<ProductDTO> findWishAndChat(Integer pId) {
+
+	    List<Product> userProdList = productRepository.findWishAndChat(pId);
 	    List<ProductDTO> userProdListDTO = new ArrayList<>();
 
 	    for (Product product : userProdList) {
@@ -98,6 +109,8 @@ public class ProductService {
 	        productDTO.setDeleteAt(product.getDeleteAt());
 	        productDTO.setDeleteYn(product.getDeleteYn());
 	        productDTO.setConfirmYn(product.getConfirmYn());
+	        productDTO.setCountWishList(product.getCountWishList());
+	        productDTO.setCountChatRoom(product.getCountChatRoom());
 
 	        userProdListDTO.add(productDTO);
 	    }
