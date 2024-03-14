@@ -103,7 +103,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="#" class="dropdown-item">리스트</a> <a href="#"
+							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="#"
 								class="dropdown-item">통합검색</a>
 						</div>
 					</div>

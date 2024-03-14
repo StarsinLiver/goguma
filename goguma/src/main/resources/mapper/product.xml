@@ -16,10 +16,16 @@
 	</select>
 
 	<!-- host_id로 상품 조회 -->
-	<select id="findByHostId">
-		select * from product
-		where host_id = #{hostId}
-		and delete_yn = 'N' 
-		and confirm_yn = 'N'
+	<select id="findByHostId" resultType="com.store.goguma.product.dto.ProductUserDto">
+		select p.* , ifnull(count(c.id), 0) as countChatRoom , ifnull(count(w.id), 0) as countWishList
+		from product p
+		left join chat_room c
+		on p.p_id = c.p_id and p.host_id = c.host_id
+		left join wish_list w
+		on w.p_id = p.p_id
+		where p.host_id = #{hostId}
+		and p.delete_yn = 'N'
+		and p.confirm_yn = 'N'
+		group by p.p_id
 	</select>
 </mapper>

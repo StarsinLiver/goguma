@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.store.goguma.entity.Product;
 import com.store.goguma.product.dto.ProductDTO;
+import com.store.goguma.product.dto.ProductUserDto;
 import com.store.goguma.repository.ProductRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -77,30 +78,9 @@ public class ProductService {
 	}
 	
 	// 유저가 등록한 상품목록 조회
-	public List<ProductDTO> findByHostId(Integer hostId) {
+	public List<ProductUserDto> findByHostId(Integer hostId) {
 
-	    List<Product> userProdList = productRepository.findByHostId(hostId);
-	    List<ProductDTO> userProdListDTO = new ArrayList<>();
-
-	    for (Product product : userProdList) {
-	        ProductDTO productDTO = new ProductDTO();
-	        productDTO.setPId(product.getPId());
-	        productDTO.setAddress(product.getAddress());
-	        productDTO.setName(product.getName());
-	        productDTO.setPrice(product.getPrice());
-	        productDTO.setHostId(product.getHostId());
-	        productDTO.setDescription(product.getDescription());
-	        productDTO.setFile(product.getFile());
-	        productDTO.setMainCategoryId(product.getMainCategoryId());
-	        productDTO.setSubCategoryId(product.getSubCategoryId());
-	        productDTO.setCreateAt(product.getCreateAt());
-	        productDTO.setUpdateAt(product.getUpdateAt());
-	        productDTO.setDeleteAt(product.getDeleteAt());
-	        productDTO.setDeleteYn(product.getDeleteYn());
-	        productDTO.setConfirmYn(product.getConfirmYn());
-
-	        userProdListDTO.add(productDTO);
-	    }
-	    return userProdListDTO;
+	    List<ProductUserDto> userProdList = productRepository.findByHostId(hostId);
+	    return userProdList;
 	}
 }

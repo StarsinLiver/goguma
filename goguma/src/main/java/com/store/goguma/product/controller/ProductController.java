@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.product.dto.ProductDTO;
+import com.store.goguma.product.dto.ProductUserDto;
 import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.service.ChatRoomNameService;
 import com.store.goguma.service.ChatRoomService;
@@ -28,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@RequestMapping("/product")
 public class ProductController {
 	
 	@Autowired
@@ -135,15 +138,21 @@ public class ProductController {
 	@GetMapping("/userProduct")
 	public String userProduct(@RequestParam(value = "uId") Integer uId, Model model)  {
 	    
-	    List<ProductDTO> userProdList = productService.findByHostId(uId);
+	    List<ProductUserDto> userProdList = productService.findByHostId(uId);
 	    UserDTO userDTO = userService.findAllByuId(uId);
-
-	    userProdList.get(0).getThisPid();
-	    log.info("유저상품 : " +userProdList.toString());
+	    
+	    
 	    
 	    model.addAttribute("userProdList", userProdList);
 	    model.addAttribute("user", userDTO);
 	    
 	    return "product/userProduct";
 	}	
+	
+	@GetMapping("/product-list")
+	public String productList() {
+		
+		
+		return "product/product_list";
+	}
 }
