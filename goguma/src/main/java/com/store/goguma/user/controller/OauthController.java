@@ -208,6 +208,9 @@ public class OauthController {
 
 			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			
+			dto.setUId(0);
+			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@" + dto.toString());
+			
 			httpSession.setAttribute("principal", dto);
 
 			return "redirect:/oauth/register";
