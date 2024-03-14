@@ -17,4 +17,9 @@ public class CsPageController {
 	public String noticeDetail() {
 		return "cs/notice/detail";
 	}
+	
+	@GetMapping("/notice/write")
+	public String noticeWrete() {
+		return "cs/notice/write";
+	}
 }

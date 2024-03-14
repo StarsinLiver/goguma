@@ -56,6 +56,7 @@
 <link rel="stylesheet" href="/customAssets/css/emoji/detail.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/list.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
 
 <!-- Custom CSS -->
 

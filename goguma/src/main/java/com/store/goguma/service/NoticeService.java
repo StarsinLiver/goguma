@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.store.goguma.cs.dto.NoticeRequestDto;
 import com.store.goguma.entity.Notice;
 import com.store.goguma.repository.NoticeRepository;
 
@@ -23,6 +24,11 @@ public class NoticeService {
 
 	public Notice getNoticeDetail(int id) {
 		return repository.getNoticeDetail(id);
+	}
+
+	public boolean getNoticeWrite(NoticeRequestDto dto) {
+		int result = repository.getNoticeWrite(dto.toEntity());
+		return result != 0;
 	}
 	
 

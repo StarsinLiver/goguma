@@ -13,4 +13,6 @@ public interface NoticeRepository {
 
 	public Notice getNoticeDetail(int id);
 
+	public int getNoticeWrite(Notice entity);
+
 }
