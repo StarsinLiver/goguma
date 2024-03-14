@@ -1,5 +1,5 @@
 const tbody = document.querySelector(".notice--tbody");
-
+const writeBtn = document.querySelector(".admin-notice-write-btn");
 
 load();
 function load(){
@@ -40,4 +40,8 @@ function pageFun(id){
 			location.href = "/cs/notice/detail/admin/" + id[i].id;
 		}
 	}
+}
+
+writeBtn.onclick = () => {
+	location.href = "/cs/notice/write/admin";
 }

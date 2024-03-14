@@ -11,12 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class NoticeRequestDto {
 
+	private Integer id;
 	private String title;
 	private String content;
 	private Integer uId;
 	
 	public Notice toEntity() {
 		return Notice.builder()
+				.id(id)
 				.title(title)
 				.content(content)
 				.uId(uId)

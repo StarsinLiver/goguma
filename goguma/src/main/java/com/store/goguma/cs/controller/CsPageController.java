@@ -39,6 +39,6 @@ public class CsPageController {
 	
 	@GetMapping("/notice/update/admin/{id}")
 	public String noticeUpdate() {
-		return "cs/notice/admin-write";
+		return "cs/notice/admin-update";
 	}
 }

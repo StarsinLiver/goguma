@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +44,12 @@ public class CsApiController {
 	@PostMapping("/notice/write")// 공지사항 등록(관리자쪽으로 이동해야함)
 	public ResponseEntity<?> getNoticeWrite(NoticeRequestDto dto){
 		boolean result = service.getNoticeWrite(dto);
+		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+	}
+	
+	@PutMapping("/notice/update")
+	public ResponseEntity<?> noticeUpdate(NoticeRequestDto dto){
+		boolean result = service.noticeUpdate(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
 	

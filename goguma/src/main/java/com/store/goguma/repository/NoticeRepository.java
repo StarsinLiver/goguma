@@ -17,4 +17,6 @@ public interface NoticeRepository {
 
 	public int noticeDelete(int id);
 
+	public int noticeUpdate(Notice entity);
+
 }

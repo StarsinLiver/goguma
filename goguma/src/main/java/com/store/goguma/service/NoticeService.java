@@ -35,6 +35,11 @@ public class NoticeService {
 		int result = repository.noticeDelete(id);
 		return result != 0;
 	}
+
+	public boolean noticeUpdate(NoticeRequestDto dto) {
+		int result = repository.noticeUpdate(dto.toEntity());
+		return result != 0;
+	}
 	
 
 }
