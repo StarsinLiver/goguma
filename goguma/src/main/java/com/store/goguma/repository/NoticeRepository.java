@@ -15,4 +15,8 @@ public interface NoticeRepository {
 
 	public int getNoticeWrite(Notice entity);
 
+	public int noticeDelete(int id);
+
+	public int noticeUpdate(Notice entity);
+
 }

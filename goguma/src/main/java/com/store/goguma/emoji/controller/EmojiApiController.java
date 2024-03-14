@@ -61,10 +61,6 @@ public class EmojiApiController {
 	
 	@PostMapping("/order")
 	public ResponseEntity<?> emojiOrder(EmojiHistoryReqDto dto){
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user != null) {
-			dto.setUId(user.getUId());
-		}
 		boolean result = service.emojiOrder(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}

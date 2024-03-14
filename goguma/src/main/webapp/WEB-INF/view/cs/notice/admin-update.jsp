@@ -32,11 +32,11 @@
             </tr>
             <tr class="cs-notice--tr">
                 <th class="cs-notice--th" colspan="2">
-                    <button type="button" class="cs-notice--insert-btn">등록</button>
+                    <button type="button" class="cs-notice--update-btn">수정하기</button>
                 </th>
             </tr>
         </table>
     </div>
-<script src="/customAssets/js/cs/notice/write.js"></script>
+<script src="/customAssets/js/cs/notice/admin-update.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
