@@ -18,6 +18,7 @@ const agreeSub = document.querySelectorAll(".agree-sub-box");
 let pageId = location.pathname.split("/")[3];
 IMP.init('imp37413392');
 let mainEmojiNum = 0;
+let userInfo = getSession();
 
 load();
 
@@ -115,7 +116,7 @@ function requestPay(merchantId) {
       pg: "goguma",
       pay_method: "card",
       merchant_uid: merchantId,   // 주문번호
-      name: mainTitle[0].textContent,//상품이름
+      name: mainTitle1.textContent,//상품이름
       amount: Number(mainPrice[0].textContent),//상품가격
       buyer_email: "bugger0330@naver.com",
       buyer_name: "강민",
@@ -141,7 +142,7 @@ function buyFun(merchantId){
 			merchantId : merchantId,
 			mainEmojiId : mainEmojiNum,
 			price : Number(mainPrice[0].textContent),
-			//uId : 1,// 유저아이디 나중에 수정해야함
+			uId : userInfo.uId,
 			bank : "KAKAO"
 		},
 		success : function(data){

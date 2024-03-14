@@ -4,7 +4,14 @@
 let principal = 0;
 
 let response = null;
-document.addEventListener('DOMContentLoaded', function() {
+// --------------------------------------------------- 소켓
+const socket = new SockJS("http://localhost:80/ws"); // 이 부분 교체 작업 진행해야함
+const stompClient = Stomp.over(socket);
+
+stompClient.connect({}, (frame) => {
+console.log("Connected to WebSocket");
+console.log("Session ID: " + frame.headers["user-name"]);
+
  $.ajax({
       type : "GET",            // HTTP method type(GET, POST) 형식이다.
       url : "http://localhost:80/chat/user/room",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -21,16 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("통신 실패.")
            }
      }); // ajax 완료
-});
 
-
-// --------------------------------------------------- 소켓
-const socket = new SockJS("http://localhost:80/ws"); // 이 부분 교체 작업 진행해야함
-const stompClient = Stomp.over(socket);
-
-stompClient.connect({}, (frame) => {
-console.log("Connected to WebSocket");
-console.log("Session ID: " + frame.headers["user-name"]);
 }); // connect 종료
              // 연결 , 구독
 const subscribe = (roomId) => {

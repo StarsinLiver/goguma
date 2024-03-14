@@ -27,7 +27,7 @@ public class ProductDTO {
 	private String deleteYn;
 	private String confirmYn;
 
-	public Integer getPid() {
+	public int getThisPid() {
 		return this.pId;
 	}
 }

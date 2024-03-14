@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomUpdateDto;
+import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
+import com.store.goguma.entity.ChatRoom;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.ChatRoomRepository;
 
@@ -26,6 +28,24 @@ public class ChatRoomService {
 		return chatRoomRepository.findAllByUserId(userId);
 				
 	}
+
+	
+	// 채팅방 개설
+    public int saveRoom(SaveRoomDTO dto) {
+
+        ChatRoom chatRoom = ChatRoom.builder()
+                .pId(dto.getPId())
+                .uId(dto.getUId())
+                .hostId(dto.getHostId())
+                .build();
+
+        int result = chatRoomRepository.saveRoom(chatRoom);
+        if(result == 0) {
+            // 오류 처리
+        }
+        return chatRoom.getId();
+    }
+
 	// 해당 방의 방 이름을 찾기
 	public ChatRoomUpdateDto findByRoomId(int roomId , int userId) {
 		ChatRoomUpdateDto chatRoomUpdateDto = chatRoomRepository.findByRoomId(roomId, userId);
@@ -46,4 +66,5 @@ public class ChatRoomService {
 	public int updateHostExit(int roomId) {
 		return chatRoomRepository.updateHostExit(roomId);
 	}
+
 }

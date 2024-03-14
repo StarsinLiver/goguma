@@ -4,6 +4,13 @@
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
 
+<style>
+.chat-button {
+	border: 1px solid red;
+	float: inline-end;
+	margin-right: 5px;
+}
+</style>
 <!-- 메인 섹션 -->
 <article id="content">
 	<h1 class="hide">제목</h1>
@@ -71,7 +78,120 @@
 	</section>
 	<section id="article-description">
 		<h1 property="schema:name" id="article-title" style="margin-top: 0px">
-			${product.name}</h1>
+			${product.name}
+			<div class="d-flex justify-content-start align-items-center"
+				style="float: right; margin-top: -20px;">
+				<!-- 버튼 -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#exampleModal" style="margin-right: 10px;">채팅하기</button>
+
+				<!-- 모달 창 -->
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">방 제목 입력</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<!-- 방 제목 입력 폼 -->
+								<form method="post" action="/saveRoom">
+									<input type="text" class="form-control"
+										placeholder="방 제목을 입력하세요" name="name" required> <input
+										type="hidden" value="${product.getThisPid()}" name="pId">
+									<input type="hidden" value="${product.hostId}" name="hostId">
+									<div class="mt-3">
+										<button type="submit" class="btn btn-primary">확인</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">취소</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- 신고하기 버튼 -->
+				<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+					data-bs-target="#reportModal" style="margin-right: 10px;">신고하기</button>
+
+				<!-- 신고 모달 -->
+				<div class="modal fade" id="reportModal" tabindex="-1"
+					aria-labelledby="reportModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header bg-danger text-white">
+								<h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+								<button type="button" class="btn-close btn-close-white"
+									data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p>정말 신고하시겠습니까?</p>
+								<!-- 드롭다운 메뉴 -->
+								<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle" type="button"
+										id="dropdownMenuButton" data-bs-toggle="dropdown"
+										aria-expanded="false"
+										style="width: 200px; height: 25px; margin-bottom: 10px;">
+										신고 이유 선택</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<li><a class="dropdown-item" href="#" data-value="스팸">스팸</a></li>
+										<li><a class="dropdown-item" href="#" data-value="욕설/비속어">욕설/비속어</a></li>
+										<li><a class="dropdown-item" href="#"
+											data-value="폭력적인 콘텐츠">폭력적인 콘텐츠</a></li>
+										<li><a class="dropdown-item" href="#" data-value="기타">기타</a></li>
+									</ul>
+								</div>
+								<!-- 텍스트 입력란 -->
+								<div class="mb-3">
+									<div id="selectedReason"
+										style="font-weight: bold; color: red; margin-bottom: 10px;"></div>
+									<textarea class="form-control" id="additionalReason" rows="3"
+										style="resize: vertical;"></textarea>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									id="confirmReportButton">신고</button>
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">취소</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<!-- 찜하기 버튼 또는 찜 삭제 버튼 -->
+				<c:choose>
+					<c:when test="${prodWishlist}">
+						<form method="post" action="/deleteWishList"
+							style="margin-top: 5px;">
+							<input type="hidden" name="pId" value="${product.getThisPid()}">
+							<p style="text-align: right">
+								<button class="btn btn-danger btn-circle" type="submit">
+									<i class="fa fa-frown-o"></i> 찜해제
+								</button>
+							</p>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<form method="post" action="/addWishList" style="margin-top: 5px;">
+							<input type="hidden" name="pId" value="${product.getThisPid()}">
+							<p style="text-align: right">
+								<button class="btn btn-success btn-circle" type="submit">
+									<i class="fa fa-smile-o"></i> 찜하기
+								</button>
+							</p>
+						</form>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h1>
+
 		<p id="article-category">
 			타이틀 ∙
 			<time id="createAt">${product.createAt}</time>
@@ -97,7 +217,7 @@
 			<c:if test="${loop.index < 6}">
 				<article class="card">
 					<a class="card-link ga-click"
-						href="/productDetail?pId=${list.getPid()}">
+						href="/productDetail?pId=${list.getThisPid()}">
 						<div class="card-photo">
 							<img alt="" src="" />
 						</div>
@@ -151,5 +271,20 @@
 		}
 	}
 </script>
-
-
+<script>
+	// 드롭다운 메뉴 항목을 클릭했을 때 호출되는 함수
+	document.querySelectorAll('.dropdown-item').forEach(item => {
+	    item.addEventListener('click', event => {
+	        const selectedReason = event.target.getAttribute('data-value');
+	        document.getElementById('selectedReason').innerText = selectedReason;
+	    });
+	});
+	// 모달이 닫힐 때 초기화하는 함수
+	function resetModal() {
+	    document.getElementById('selectedReason').innerText = '';
+	    document.getElementById('additionalReason').value = '';
+	}
+	document.getElementById('reportModal').addEventListener('hidden.bs.modal', function () {
+	    resetModal();
+	});
+</script>

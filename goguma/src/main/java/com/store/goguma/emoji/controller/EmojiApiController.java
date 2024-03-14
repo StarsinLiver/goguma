@@ -43,6 +43,7 @@ public class EmojiApiController {
 	@GetMapping("/list/{num}")
 	public ResponseEntity<?> getEmojiMainList(@PathVariable int num){
 		List<MainEmoji> list = service.getEmojiMainList(num);
+		System.out.println("리스트 수 : " + list.size());
 		return new ResponseEntity<List<MainEmoji>>(list, HttpStatus.OK);
 	}
 	
@@ -60,10 +61,6 @@ public class EmojiApiController {
 	
 	@PostMapping("/order")
 	public ResponseEntity<?> emojiOrder(EmojiHistoryReqDto dto){
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user != null) {
-			dto.setUId(user.getUId());
-		}
 		boolean result = service.emojiOrder(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}

@@ -188,6 +188,18 @@ function scrollUl() {
 		}
 		let message = "";
 		
+		if(res.chatMessageType == "LEAVE") {
+			message += `<div class="container text-center">
+  							<div class="received_msg">
+     							 <div>
+         							 <span class="time_date" style="background-color: seagreen; border-radius: 10px; color: white;">` + res.userName + `님 께서 채팅방을 나갔습니다.</span>
+    							 </div>
+ 							 </div>
+						</div>
+					<br/>`
+			return message;
+		}
+		
 		// 만약 유저가 다른사람이라면
 		if(res.userId != userId) {
 			message += `<br/><div class="incoming_msg">
@@ -224,8 +236,6 @@ function scrollUl() {
 						</div>`;	
 			return message;
 		}
-		
-		return message;
 	}
 	
 	
