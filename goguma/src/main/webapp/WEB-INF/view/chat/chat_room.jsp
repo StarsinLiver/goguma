@@ -143,15 +143,27 @@
 														<c:if test="${list.hostId == principal.getUId()}">
                    											 ⭐🌟
                 										</c:if>
-														<p>상품명 : ${list.productName}</p>
-
+														<c:choose>
+															<c:when test="${list.confirmYn == 'Y'}">
+																<p>
+																	<del>상품명 : ${list.productName}</del>
+																	&nbsp;확정된 상품
+																</p>
+															</c:when>
+															<c:otherwise>
+																<p>상품명 : ${list.productName}</p>
+															</c:otherwise>
+														</c:choose>
+														<div style="display: flex;">
 														<a href="/chat/room/update/${list.roomId}"
-															class="btn btn-success">방 관리</a>
-														<form action="/chat/room/exit" method="post" onsubmit="return confirm('채팅방에서 나가시겠습니까?');">
-															<input type="hidden" name="_method" value="delete"/> <input
+															class="btn btn-success m-1">방 관리</a>
+														<form action="/chat/room/exit" method="post"
+															onsubmit="return confirm('채팅방에서 나가시겠습니까?');">
+															<input type="hidden" name="_method" value="delete" /> <input
 																type="hidden" name="roomId" value="${list.roomId}" />
 															<button class="btn btn-danger">채팅방 나가기</button>
 														</form>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -176,11 +188,11 @@
 											<!-- 이미지 -->
 											<input type="file" class="form-control-file" id="imageInput"
 												style="display: none;" accept="image/*"> <label
-												for="imageInput" class="btn btn-secondary">이미지</label>
+												for="imageInput" class="btn btn-secondary" style="background: #FFD800; border-radius: 10px;">이미지</label>
 											<!-- 이미지 -->
 											<!-- 이모티콘 -->
 											<button type="button" class="btn btn-primary"
-												data-bs-toggle="modal" data-bs-target="#emoticonModal">
+												data-bs-toggle="modal" data-bs-target="#emoticonModal" style="border-radius: 10px;">
 												이모티콘</button>
 											<!-- 이모티콘 -->
 											<button class="msg_send_btn btn btn-primary" type="button"

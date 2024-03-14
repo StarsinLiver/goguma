@@ -17,6 +17,7 @@
 		p.file AS productFile,
 		p.main_category_id AS mainCategoryId,
 		p.sub_category_id AS subCategoryId,
+		p.confirm_yn as confirmYn ,
 		c.id AS roomId,
 		c.u_id AS userId,
 		c.host_id AS hostId,

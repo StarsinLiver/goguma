@@ -164,24 +164,24 @@ public class ChatController {
 
 		
 		// 채팅방 나가기 - exit = 'Y'
-		ChatRoomUpdateDto chatRoomUpdateDto = chatRoomService.findByRoomId(roomId, user.getUId());
-		log.info(chatRoomUpdateDto.toString());
-
-		int result = 0;
-		// 만약 유저가 채팅방의 u_id 라면
-		if (user.getUId() == chatRoomUpdateDto.getUserId()) {
-			result = chatRoomService.updateUserExit(roomId);
-		}
-
-		// 만약 유저가 채팅방의 host_id 라면
-		if (user.getUId() == chatRoomUpdateDto.getHostId()) {
-			result = chatRoomService.updateHostExit(roomId);
-		}
-
-		if (result == 0) {
-			throw new BackPageRestfulException(com.store.goguma.utils.Define.INTERVAL_SERVER_ERROR,
-					HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+//		ChatRoomUpdateDto chatRoomUpdateDto = chatRoomService.findByRoomId(roomId, user.getUId());
+//		log.info(chatRoomUpdateDto.toString());
+//
+//		int result = 0;
+//		// 만약 유저가 채팅방의 u_id 라면
+//		if (user.getUId() == chatRoomUpdateDto.getUserId()) {
+//			result = chatRoomService.updateUserExit(roomId);
+//		}
+//
+//		// 만약 유저가 채팅방의 host_id 라면
+//		if (user.getUId() == chatRoomUpdateDto.getHostId()) {
+//			result = chatRoomService.updateHostExit(roomId);
+//		}
+//
+//		if (result == 0) {
+//			throw new BackPageRestfulException(com.store.goguma.utils.Define.INTERVAL_SERVER_ERROR,
+//					HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
 		// 채팅 - EXIT 찍기
 		ChatMessage message = ChatMessage.builder().uId(user.getUId()).text(user.getName() + "님께서 방에서 나가셨습니다.")
 				.roomId(roomId).chatMessageType(ChatType.LEAVE).build();
