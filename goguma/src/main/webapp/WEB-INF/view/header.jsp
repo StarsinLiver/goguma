@@ -57,6 +57,7 @@
 <link rel="stylesheet" href="/customAssets/css/cs/notice/list.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
+<link rel="stylesheet" href="/customAssets/css/cs/qna/write.css">
 
 <!-- Custom CSS -->
 
@@ -78,10 +79,12 @@
 <!-- 토스티파이 -->	
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-
+<script src="/customAssets/js/session.js"></script>
 </head>
 <body class="seo_version" style="background: #fff">
-
+	<c:if test="${principal != null}">
+		<input type="hidden" value="${principal.getUId()}" id="principal"/>
+	</c:if>
 	<header class="header header_style_01">
 		<!-- nav 부분 navbar 가 안먹음 -->
 		<nav
@@ -103,7 +106,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="#" class="dropdown-item">리스트</a> <a href="#"
+							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="#"
 								class="dropdown-item">통합검색</a>
 						</div>
 					</div>
@@ -112,7 +115,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="#"
+							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="/cs/qna/write"
 								class="dropdown-item">문의하기</a> <a href="#" class="dropdown-item">자주
 								묻는 질문</a>
 						</div>

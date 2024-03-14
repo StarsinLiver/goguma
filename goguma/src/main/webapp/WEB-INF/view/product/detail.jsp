@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
-
+<link rel="stylesheet" href="/customAssets/css/product/userProduct.css">
 <style>
 .chat-button {
 	border: 1px solid red;

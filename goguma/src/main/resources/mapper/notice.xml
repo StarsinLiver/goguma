@@ -22,9 +22,16 @@
 		);
 	</insert>
 	
+	<delete id="noticeDelete">
+		delete from notice where id = #{id};
+	</delete>
 	
-	
-	
+	<update id="noticeUpdate">
+		update notice set
+			title = #{title},
+			content = #{content}
+		where id = #{id};
+	</update>
 	
 	
 	

@@ -16,6 +16,7 @@ import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.handler.exception.ReportException;
 import com.store.goguma.product.dto.ProductDTO;
+import com.store.goguma.product.dto.ProductUserDto;
 import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.ChatRoomNameService;
@@ -174,16 +175,21 @@ public class ProductController {
 	@GetMapping("/userProduct")
 	public String userProduct(@RequestParam(value = "uId") Integer uId, Model model)  {
 	    
-	    List<ProductDTO> userProdList = productService.findByHostId(uId);
+	    List<ProductUserDto> userProdList = productService.findByHostId(uId);
 	    UserDTO userDTO = userService.findAllByuId(uId);
-
-	    userProdList.get(0).getThisPid();
-	    log.info("유저상품 : " +userProdList.toString());
+	    
+	    
 	    
 	    model.addAttribute("userProdList", userProdList);
 	    model.addAttribute("user", userDTO);
 	    
 	    return "product/userProduct";
 	}	
-
+	
+	@GetMapping("/product-list")
+	public String productList() {
+		
+		
+		return "product/product_list";
+	}
 }

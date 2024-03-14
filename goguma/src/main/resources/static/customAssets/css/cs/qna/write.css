@@ -1,0 +1,36 @@
+.qna-write-main-div{
+    width: 90%;
+    margin: 50px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.qna-write-table{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.qna-write-tr{
+    border-bottom: 1px solid black;
+}
+
+.qna-write-th{
+    font-size: 20px;
+    font-weight: 700;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+.qna-write-select{
+    width: 200px;
+    padding: 10px;
+}
+
+.qna-write-insert-btn{
+    padding: 10px;
+    background-color: antiquewhite;
+    cursor: pointer;
+}

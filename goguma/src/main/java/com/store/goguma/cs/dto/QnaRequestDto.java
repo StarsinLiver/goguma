@@ -1,6 +1,6 @@
 package com.store.goguma.cs.dto;
 
-import com.store.goguma.entity.Notice;
+import com.store.goguma.entity.Qna;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class NoticeRequestDto {
+public class QnaRequestDto {
 
-	private Integer id;
 	private String title;
 	private String content;
 	private Integer uId;
+	private String optionName;
 	
-	public Notice toEntity() {
-		return Notice.builder()
-				.id(id)
+	public Qna toEntity() {
+		return Qna.builder()
+				.uId(uId)
 				.title(title)
 				.content(content)
-				.uId(uId)
+				.optionName(optionName)
 				.build();
 	}
 }
