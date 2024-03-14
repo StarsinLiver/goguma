@@ -84,10 +84,14 @@ public class ProductController {
 			// 오류 로직 처리
 		}
 		
+		// chat_room 저장
 		dto.setUId(user.getUId());
 		log.info("방개설 : "+ dto.toString());
 		chatRoomService.saveRoom(dto);
-
+		
+		// chat_room_name 저장
+		
+		
 		return "redirect:/productDetail?pId=" + dto.getPId();
 	}
 	
