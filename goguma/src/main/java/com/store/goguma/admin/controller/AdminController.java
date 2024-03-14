@@ -3,15 +3,23 @@ package com.store.goguma.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.EmojiHistory;
+import com.store.goguma.entity.MainEmoji;
+import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.AdminService;
+import com.store.goguma.service.EmojiHistoryService;
+import com.store.goguma.service.EmojiUploadService;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
 import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
@@ -30,19 +38,24 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
+	@Autowired
+	private EmojiHistoryService emojiHistoryService;
+	
+	
+	
+	
 	// 관리자 마이 페이지
 	// localhost://admin/modiUser
 	@GetMapping("/user")
 	public String User(Model model) {
 
 		OauthDTO principal = (OauthDTO) httpSession.getAttribute("principal");
-		
+
 		OauthDTO updateUser = adminService.selectAdminByUid(principal.getUId());
 
 		model.addAttribute("user", updateUser);
-		
-		log.info("셀렉트한 유저 마이페이지 데이터 "+ updateUser);
-		
+
+		log.info("셀렉트한 유저 마이페이지 데이터 " + updateUser);
 
 		return "admin/admin_user";
 	}
@@ -71,65 +84,75 @@ public class AdminController {
 
 		adminService.modifyAdminByEmail(dto);
 
-
 		return "redirect:/admin/user";
 	}
 
-	// 이모지 페이지
-	// 이모지 리스트 출력, 페이징
-	@GetMapping("/emoji")
-	public String managementEmoji() {
-
-		
-		
-		return "admin/emoji_management";
-	}
-
-	
-	/* 
-	 * admin 상품 결제 이력 관리 페이지
-	 * 결제 이력 리스트 출력, 페이징
-     */ 
+	/*
+	 * admin 상품 결제 이력 관리 페이지 결제 이력 리스트 출력, 페이징
+	 */
 	@GetMapping("/history")
 	public String salesHistory(EmojiHistoryReqDTO historyReqDTO, Model model, PageReqDTO page) {
-		log.info("history로 들어오는 pagedto"+page);
-		
-		EmojiHistoryResDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);	
-		
+		log.info("history로 들어오는 pagedto" + page);
+
+		EmojiHistoryResDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);
+
 		model.addAttribute("histories", list.getDtoList());
 		model.addAttribute("pg", list.getPg());
 		model.addAttribute("start", list.getStart());
 		model.addAttribute("end", list.getEnd());
 		model.addAttribute("last", list.getLast());
-		
-		
+
 		return "admin/admin_payment_history";
 	}
 
 	// admin 활불 사유 검색 ajax
 	@PostMapping("/payment-reason")
-	public String paymentReasonProc(String merchantId) {
-		
+	@ResponseBody
+	public EmojiHistory paymentReasonProc(String merchantId) {
+
 		// merchantId로 환불 사유 검색
-		EmojiHistory cancel = adminService.selectCancelByMaerchantId(merchantId); 
-		 
+		EmojiHistory cancel = adminService.selectCancelByMaerchantId(merchantId);
+
 		String reason = cancel.getCancelReason();
-		
-		log.info("돌아오는 리즌 데이터 확인: "+reason);
-		
-		return reason;
+
+		log.info("돌아오는 리즌 데이터 확인: " + reason);
+
+		return cancel;
 	}
-	
+
 	// admin 환불 처리 ajax
 	@PostMapping("/payment-confirm")
-	public void updateConfirmPayment(String merchantId) {
-		
+	public int updateConfirmPayment(String merchantId) {
+
+		log.info("환불 승인시 아이디 확인@@@@@@@@@@@@@@@@@@@@@: " + merchantId);
+
 		// merchantId로 환불 사유 검색
-		adminService.updateConfirmPayment(merchantId); 
+		adminService.updateConfirmPayment(merchantId);
+
+		return 1;
+	}
+
+	// 이모지 페이지
+	// 이모지 리스트 출력, 페이징
+	@GetMapping("/emoji")
+	public String managementEmoji(Model model) {
+
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
 		
+		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
+        log.info(mainEmojiList.toString());
+		
+        
+        
+		
+		
+		return "admin/emoji_management";
 	}
 	
-	
+
 	
 	@GetMapping("/notice")
 	public String managementNotice() {
@@ -140,13 +163,25 @@ public class AdminController {
 	@GetMapping("/report")
 	public String managementReport() {
 
-		return "";
+		return "admin/admin_management_report";
 	}
 
+	// 유저간 거래 상품 관리 페이지
 	@GetMapping("/product")
-	public String managementProduct() {
+	public String managementProduct(Model model) {
 
-		return "";
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
+        log.info(mainEmojiList.toString());
+		
+        
+		
+		
+		return "admin/admin_management_product";
 	}
 
 	@GetMapping("/banner")

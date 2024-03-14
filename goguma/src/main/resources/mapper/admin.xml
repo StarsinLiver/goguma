@@ -33,7 +33,7 @@
 	<!-- 상품 환불 리스트 카운트 -->
 	<select id="countEmojiHistoryByCancleY">
 	
-		select count(*) from emoji_history where cancel_yn = 'Y';
+		select count(*) from emoji_history where cancel_yn = 'Y' and confirm_yn = 'N';
 	
 	</select>
 	

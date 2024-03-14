@@ -50,63 +50,48 @@
         </path>
     </svg>
 <!-- Header End -->
-<div class="user-page" style="width: 80%; height: 80%">
+<div class="user-page" style="width: 95%; height: 80%; margin: 5% 5% 53% 5% ">
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-	<div class="payment-container" style="margin-right: 20%;">
-		<h4 class="user-page-title">결제 내역</h4>
+	<div class="payment-container" style="width:70%; margin-right: 15%;">
+		<h4 class="user-page-title">거래 상품 관리</h4>
 		<div class="col-sm-12">
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">이모티콘 구매</h5>
+					<h5 class="card-title">유저 상품 리스트</h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>머천트키</th>
-								<th>구매일자</th>
-								<th>구매상품명</th>
-								<th>환불요청<br />여부
-								</th>
-								<th>승인 여부</th>
+								<th>게시글 번호</th>
+								<th>판매자</th>
+								<th>구매자</th>
+								<th>제품명</th>
+								<th>등록일</th>
+								<th>구매확정 여부</th>
+								<th>관리하기</th>
 							</tr>
 						</thead>
 						<tbody>
-							<!-- 데이터가 없을 때 표시될 행 -->
-							<tr id="noDataMessage" style="display: none;">
-								<td colspan="5">내역이 없습니다.</td>
-							</tr>
-							<!-- 실제 데이터 행 -->
-							<c:forEach var="history" items="${histories}">
+						
 								<tr id="dataRow">
-									<td id="id">${history.merchantId}</td>
-									<td id="purchaseDate">${history.createAt}</td>
-									<td id="pointName">new 고구미 이모티콘</td>
-									<td id="refundYn">${history.confirmYn}</td>
+									<td id="id">1</td>
+									<td id="purchaseDate">정영재</td>
+									<td id="pointName">호구</td>
+									<td id="refundYn">벽돌폰</td>
+									<td id="refundYn">150000</td>
+									<td id="refundYn">N</td>
 									<td>
-										<button id="refundButton" data-value="${history.merchantId}"
-											class="btn btn-warning btn-complete cancel-request">승인하기</button>
+										<button id="refundButton"
+											class="btn btn-warning btn-complete cancel-request">삭제하기</button>
 									</td>
 								</tr>
-							</c:forEach>
 						</tbody>
 					</table>
-					<div class="pagination">
-						<!-- 페이지 처리 -->
-						<c:if test="${start > 1}">
-							<a href="/admin/history?pg=${start - 1}">&laquo;</a>
-						</c:if>
-						<!-- 페이지 번호 -->
-						<c:forEach var="i" begin="${start}" end="${end}">
-							<a href="/admin/history?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
-						</c:forEach>
-						<c:if test="${end < last}">
-							<a href="/admin/history?pg=${end + 1}">&raquo;</a>
-						</c:if>
-					</div>
+			
 				</div>
 			</div>
 		</div>
