@@ -98,7 +98,7 @@ public class ProductController {
 		// chat_room_name 저장
 		chatRoomNameService.save(user.getUId(), key, dto.getName());
 		
-		return "redirect:/productDetail?pId=" + dto.getPId();
+		return "redirect:/product/productDetail?pId=" + dto.getPId();
 	}
 	
 	// 찜 하기
@@ -114,7 +114,7 @@ public class ProductController {
 	    
 	    wishListService.addWishList(dto);
 
-	    return "redirect:/productDetail?pId=" + pId;
+	    return "redirect:/product/productDetail?pId=" + pId;
 	}
 	
 	// 찜 삭제
@@ -130,7 +130,7 @@ public class ProductController {
 		
 		wishListService.deleteWishList(dto);
 		
-		return "redirect:/productDetail?pId=" + pId;
+		return "redirect:/product/productDetail?pId=" + pId;
 	}
 
 	// 유저 상품 페이지
@@ -149,10 +149,12 @@ public class ProductController {
 	    return "product/userProduct";
 	}	
 	
+	/**
+	 * 페이지 이동하기
+	 * @return
+	 */
 	@GetMapping("/product-list")
 	public String productList() {
-		
-		
 		return "product/product_list";
 	}
 }

@@ -97,7 +97,7 @@
 							</div>
 							<div class="modal-body">
 								<!-- 방 제목 입력 폼 -->
-								<form method="post" action="/saveRoom">
+								<form method="post" action="/product/saveRoom">
 									<input type="text" class="form-control"
 										placeholder="방 제목을 입력하세요" name="name" required> <input
 										type="hidden" value="${product.getThisPid()}" name="pId">
@@ -168,7 +168,7 @@
 				<!-- 찜하기 버튼 또는 찜 삭제 버튼 -->
 				<c:choose>
 					<c:when test="${prodWishlist}">
-						<form method="post" action="/deleteWishList"
+						<form method="post" action="/product/deleteWishList"
 							style="margin-top: 5px;">
 							<input type="hidden" name="pId" value="${product.getThisPid()}">
 							<p style="text-align: right">
@@ -179,7 +179,7 @@
 						</form>
 					</c:when>
 					<c:otherwise>
-						<form method="post" action="/addWishList" style="margin-top: 5px;">
+						<form method="post" action="/product/addWishList" style="margin-top: 5px;">
 							<input type="hidden" name="pId" value="${product.getThisPid()}">
 							<p style="text-align: right">
 								<button class="btn btn-success btn-circle" type="submit">
