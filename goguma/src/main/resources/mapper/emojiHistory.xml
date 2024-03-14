@@ -24,4 +24,14 @@
 		order by m.id desc;
 	</select>
 	
+	
+	<select id="findMainEmojiAll"
+		resultType="com.store.goguma.entity.MainEmoji">
+		
+		select * from main_emoji
+	
+	
+	</select>
+	
+	
 </mapper>

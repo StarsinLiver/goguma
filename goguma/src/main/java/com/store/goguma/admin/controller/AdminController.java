@@ -41,7 +41,8 @@ public class AdminController {
 	@Autowired
 	private EmojiHistoryService emojiHistoryService;
 	
-	
+	@Autowired
+	private EmojiUploadService emojiUploadService;
 	
 	
 	// 관리자 마이 페이지
@@ -128,31 +129,46 @@ public class AdminController {
 
 		// merchantId로 환불 사유 검색
 		adminService.updateConfirmPayment(merchantId);
-
+		// 에이젝스 success를 위해 하드코딩 
 		return 1;
 	}
 
 	// 이모지 페이지
 	// 이모지 리스트 출력, 페이징
 	@GetMapping("/emoji")
-	public String managementEmoji(Model model) {
+	public String managementEmoji() {
 
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-		
-		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
-        log.info(mainEmojiList.toString());
-		
-        
-        
-		
+	
+		log.info("여기는 거치니?");
 		
 		return "admin/emoji_management";
 	}
 	
+	// 이모지 리스트 출력, 페이징
+	@GetMapping("/emoji/{num}")
+	public ResponseEntity<?> managementEmoji(@PathVariable int num) {
 
+		log.info("이모지 num 밸류 타긴하니??? ");
+		log.info("이모지 num 밸류 확인: " +  num);
+		
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		List<MainEmoji> list = emojiUploadService.getEmojiMainList(num);
+		
+		System.out.println("리스트 수 : " + list.size());
+		
+        
+		
+        return new ResponseEntity<List<MainEmoji>>(list, HttpStatus.OK);
+		
+	}
 	
 	@GetMapping("/notice")
 	public String managementNotice() {
@@ -178,7 +194,6 @@ public class AdminController {
 		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
         log.info(mainEmojiList.toString());
 		
-        
 		
 		
 		return "admin/admin_management_product";
@@ -188,6 +203,14 @@ public class AdminController {
 	public String managementBanner() {
 
 		return "";
+	}
+	
+	// 팀장님 행복을 위한 플렉스 테스트
+	@GetMapping("/happy")
+	public String happysanha() {
+		
+		
+		return "user/happy_sanha";
 	}
 
 }

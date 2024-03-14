@@ -11,7 +11,7 @@ function load(num){
 	headMenusBorder[num].className = "emoji--head-menu-title-on";
 	$.ajax({
 		type : "get",
-		url : "/admin/emoji/" + num,
+		url : "/emoji/api/list/" + num,
 		async : false,
 		success : function(data){
 			if(data != ""){

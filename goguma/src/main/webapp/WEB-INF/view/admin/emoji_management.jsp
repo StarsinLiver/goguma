@@ -51,6 +51,6 @@
 	</div>
 
 </div>
-<script src="/customAssets/js/emoji/list.js"></script>
+<script src="/customAssets/js/admin/list.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

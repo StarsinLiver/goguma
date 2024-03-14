@@ -12,5 +12,7 @@ import com.store.goguma.entity.MainEmoji;
 public interface EmojiHistoryRepository {
 
 	public List<MainEmoji> findMainEmojiAllByUserId(int userId);
+
+	public List<MainEmoji> findMainEmojiAll();
 	
 }
