@@ -54,6 +54,9 @@
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/detail.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/list.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
 
 <!-- Custom CSS -->
 
@@ -109,7 +112,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="#" class="dropdown-item">공지사항</a> <a href="#"
+							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="#"
 								class="dropdown-item">문의하기</a> <a href="#" class="dropdown-item">자주
 								묻는 질문</a>
 						</div>
