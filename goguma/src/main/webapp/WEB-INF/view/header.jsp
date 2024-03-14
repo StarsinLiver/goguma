@@ -78,10 +78,12 @@
 <!-- 토스티파이 -->	
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-
+<script src="/customAssets/js/session.js"></script>
 </head>
 <body class="seo_version" style="background: #fff">
-
+	<c:if test="${principal != null}">
+		<input type="hidden" value="${principal.getUId()}" id="principal"/>
+	</c:if>
 	<header class="header header_style_01">
 		<!-- nav 부분 navbar 가 안먹음 -->
 		<nav

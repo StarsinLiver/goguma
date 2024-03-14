@@ -18,8 +18,27 @@ public class CsPageController {
 		return "cs/notice/detail";
 	}
 	
-	@GetMapping("/notice/write")
-	public String noticeWrete() {
-		return "cs/notice/write";
+	
+	
+	// admin
+
+	@GetMapping("/notice/list/admin")
+	public String noticeAdminList() {
+		return "cs/notice/admin-list";
+	}
+	
+	@GetMapping("/notice/detail/admin/{id}")
+	public String noticeAdminDetail() {
+		return "cs/notice/admin-detail";
+	}
+	
+	@GetMapping("/notice/write/admin")
+	public String noticeWrite() {
+		return "cs/notice/admin-write";
+	}
+	
+	@GetMapping("/notice/update/admin/{id}")
+	public String noticeUpdate() {
+		return "cs/notice/admin-write";
 	}
 }

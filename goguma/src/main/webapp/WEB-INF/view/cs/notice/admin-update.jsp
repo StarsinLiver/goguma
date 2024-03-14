@@ -37,6 +37,6 @@
             </tr>
         </table>
     </div>
-<script src="/customAssets/js/cs/notice/write.js"></script>
+<script src="/customAssets/js/cs/notice/admin-update.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

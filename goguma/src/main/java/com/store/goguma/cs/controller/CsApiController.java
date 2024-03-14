@@ -42,11 +42,6 @@ public class CsApiController {
 	
 	@PostMapping("/notice/write")// 공지사항 등록(관리자쪽으로 이동해야함)
 	public ResponseEntity<?> getNoticeWrite(NoticeRequestDto dto){
-		System.out.println(dto);
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user != null) {
-			dto.setUId(user.getUId());
-		}
 		boolean result = service.getNoticeWrite(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
