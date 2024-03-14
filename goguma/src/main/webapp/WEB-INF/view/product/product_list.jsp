@@ -46,7 +46,7 @@
 <!-- Header End -->
 
 <div class="user-page"
-	style="display: flex; margin: 100px auto; width: 100%; max-width: 1450px; height: auto; justify-content: space-between; align-items: flex-start;">
+	style="display: flex; margin: 100px auto; width: 100%; min-width : 250px; height: auto; justify-content: space-between; align-items: flex-start;">
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/product/product_aside.jsp"%>
 	<!-- aside end -->

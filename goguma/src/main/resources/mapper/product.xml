@@ -12,7 +12,20 @@
 
 	<!-- 중고상품 조회 -->
 	<select id="findAllBypId">
-		select * from product where p_id = #{pId}
+		SELECT p.*, COALESCE(w.countWishList, 0) AS countWishList,
+		COALESCE(cr.countChatRoom, 0) AS countChatRoom
+		FROM product p
+		LEFT JOIN (
+		SELECT p_id, COUNT(p_id) AS countWishList
+		FROM wish_list
+		GROUP BY p_id
+		) AS w ON p.p_id = w.p_id
+		LEFT JOIN (
+		SELECT p_id, COUNT(p_id) AS countChatRoom
+		FROM chat_room
+		GROUP BY p_id
+		) AS cr ON p.p_id = cr.p_id
+		WHERE p.p_id = #{pId}
 	</select>
 
 	<!-- host_id로 상품 조회 -->
@@ -33,6 +46,7 @@
 		and p.confirm_yn = 'N'
 		group by p.p_id
 	</select>
+
 
 	<select id="searchAll"
 		resultType="com.store.goguma.product.dto.ProductSearchDto">
@@ -103,4 +117,27 @@
 		) AS
 		result;
 	</select>
+
+	<select id="findWishAndChat">
+		SELECT p.*, COALESCE(w.countWishList, 0) AS
+		countWishList,
+		COALESCE(cr.countChatRoom, 0) AS countChatRoom
+		FROM (
+		SELECT p_id, COUNT(p_id) AS countWishList
+		FROM wish_list
+		GROUP BY p_id
+		ORDER BY countWishList DESC
+		LIMIT 6
+		) AS w
+		JOIN product p ON w.p_id =
+		p.p_id
+		LEFT JOIN (
+		SELECT p_id, COUNT(p_id) AS countChatRoom
+		FROM
+		chat_room
+		GROUP BY p_id
+		) AS cr ON p.p_id = cr.p_id
+	</select>
+
+
 </mapper>

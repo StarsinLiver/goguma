@@ -26,6 +26,8 @@ public class ProductDTO {
 	private String deleteAt;
 	private String deleteYn;
 	private String confirmYn;
+    private Integer countChatRoom;
+    private Integer countWishList;
 
 	public int getThisPid() {
 		return this.pId;
