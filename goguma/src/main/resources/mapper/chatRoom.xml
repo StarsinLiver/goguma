@@ -5,31 +5,85 @@
 <mapper
 	namespace="com.store.goguma.repository.ChatRoomRepository">
 
-	<select id="findAllByUserId" resultType="com.store.goguma.chat.dto.chatRoom.ChatRoomDto">
+	<select id="findAllByUserId"
+		resultType="com.store.goguma.chat.dto.chatRoom.ChatRoomDto">
+		SELECT
+		p.p_id AS pId,
+		p.address AS productAddress,
+		p.name AS
+		productName,
+		p.price AS productPrice,
+		p.host_id AS productHostId,
+		p.description AS productDescription,
+		p.file AS productFile,
+		p.main_category_id AS mainCategoryId,
+		p.sub_category_id AS
+		subCategoryId,
+		p.confirm_yn as confirmYn ,
+		c.id AS roomId,
+		c.u_id AS
+		userId,
+		c.host_id AS hostId,
+		c.create_at AS createAt,
+		hu.name AS
+		hostName,
+		u.name AS userName ,
+		rm.u_id as u_id ,
+		rm.room_id as roomId,
+		rm.room_name as roomName
+		FROM
+		chat_room c
+		LEFT JOIN
+		product p
+		ON p.p_id = c.p_id
+		INNER JOIN user hu
+		ON hu.u_id = c.host_id
+		INNER JOIN user u
+		ON u.u_id = c.u_id
+		left join chat_room_name rm
+		on c.id = rm.room_id and rm.u_id = #{userId}
+		WHERE
+		(c.host_id = #{userId}
+		AND c.host_exit != 'Y')
+		OR (c.u_id = #{userId} AND c.user_exit != 'Y');
+	</select>
+
+	<select id="findByRoomId"
+		resultType="com.store.goguma.chat.dto.chatRoom.ChatRoomUpdateDto">
 		select
-		p.p_id as pId ,
-		p.address as productAddress ,
-		p.name as productName ,
-		p.price as productPrice ,
-		p.host_id as productHostId ,
-		p.description as productDescription ,
-		p.file as productFile ,
-		p.main_category_id as mainCategoryId ,
-		p.sub_category_id as subCategoryId ,
-		c.id as roomId ,
-		c.name as roomName,
+		c.id as id,
+		c.p_id as productId ,
 		c.u_id as userId ,
 		c.host_id as hostId ,
-		c.create_at as createAt
-		from chat_room c
-		left join product p
-		on p.p_id = c.p_id
-		where c.host_id = #{userId}
-		or c.u_id = #{userId};
+		c.create_at as createAt ,
+		c.user_exit
+		as userExit ,
+		c.host_exit as hostExit ,
+		rm.room_name as roomName
+		from
+		chat_room c
+		left join chat_room_name rm
+		on c.id = rm.room_id and rm.u_id = #{userId}
+		where c.id = #{roomId};
 	</select>
-	
-	<!-- 채팅방 개설 -->	
-	<insert id="saveRoom">
-		insert into chat_room (p_id, u_id, host_id) values (#{pId}, #{uId}, #{hostId})
+
+	<!-- 채팅방 개설 -->
+	<insert id="saveRoom" useGeneratedKeys="true" keyProperty="id"
+		keyColumn="id">
+		insert into chat_room (p_id, u_id, host_id)
+		values (#{pId}, #{uId}, #{hostId})
 	</insert>
+
+	<update id="updateHostExit">
+		update chat_room
+		set host_exit = 'Y'
+		where id = #{roomId}
+	</update>
+
+	<update id="updateUserExit">
+		update chat_room
+		set user_exit = 'Y'
+		where id = #{roomId}
+	</update>
+
 </mapper>

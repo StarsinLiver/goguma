@@ -187,6 +187,19 @@ function scrollUl() {
 			res = JSON.parse(res);
 		}
 		let message = "";
+		
+		if(res.chatMessageType == "LEAVE") {
+			message += `<div class="container text-center">
+  							<div class="received_msg">
+     							 <div>
+         							 <span class="time_date" style="background-color: seagreen; border-radius: 10px; color: white;">` + res.userName + `님 께서 채팅방을 나갔습니다.</span>
+    							 </div>
+ 							 </div>
+						</div>
+					<br/>`
+			return message;
+		}
+		
 		// 만약 유저가 다른사람이라면
 		if(res.userId != userId) {
 			message += `<br/><div class="incoming_msg">
@@ -207,6 +220,7 @@ function scrollUl() {
 										</div>
 									</div>
 							</div>`;
+			return message;
 		}
 		
 		// 만약 유저가 자신이라면
@@ -220,9 +234,12 @@ function scrollUl() {
 			message +=	`<p>${res.text}</p><span class="time_date">${formatDate(res.createAt)}</span>
 							</div>
 						</div>`;	
+			return message;
 		}
-		return message;
 	}
+	
+	
+	
 	
 	// 메시지 에 들어갈 date 포맷	
 	const formatDate = (createAt) => {

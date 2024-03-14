@@ -11,6 +11,7 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+// 결합된 oauth 데이터 받을때 사용 or 최초 로그인시 회원가입 데이터를 받을 때 사용
 public class OauthResisterDTO {
 	
 	private String email;

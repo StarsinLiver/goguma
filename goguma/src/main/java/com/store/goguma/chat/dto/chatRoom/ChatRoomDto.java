@@ -17,10 +17,13 @@ public class ChatRoomDto {
 	private String productFile;
 	private Integer mainCategoryId;
 	private Integer subCategoryId;
+	private String confirmYn;
 	private Integer roomId;
 	private String roomName;
 	private Integer userId;
 	private Integer hostId;
+	private String hostName;
+	private String userName;
 	private Timestamp createAt;
 	
 	

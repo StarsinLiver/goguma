@@ -14,6 +14,7 @@ import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.product.dto.ProductDTO;
 import com.store.goguma.product.dto.WishListDTO;
+import com.store.goguma.service.ChatRoomNameService;
 import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.ProductService;
 import com.store.goguma.service.UserService;
@@ -37,6 +38,8 @@ public class ProductController {
 	ChatRoomService chatRoomService;
 	@Autowired
 	WishListService wishListService;
+	@Autowired
+	ChatRoomNameService chatRoomNameService;
 	
 	@Autowired
 	HttpSession httpSession;
@@ -87,10 +90,10 @@ public class ProductController {
 		// chat_room 저장
 		dto.setUId(user.getUId());
 		log.info("방개설 : "+ dto.toString());
-		chatRoomService.saveRoom(dto);
+		int key = chatRoomService.saveRoom(dto);
 		
 		// chat_room_name 저장
-		
+		chatRoomNameService.save(user.getUId(), key, dto.getName());
 		
 		return "redirect:/productDetail?pId=" + dto.getPId();
 	}

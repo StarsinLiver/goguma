@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.goguma.repository.MyUserRepository">
+
+	<!-- 유저 결제 내역 -->
+	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.entity.EmojiHistory">
+		select * from `emoji_history` 
+		where `u_id`=#{uId}
+		ORDER BY `merchant_id` DESC
+		LIMIT #{start},10
+	</select>
+	
+	<!-- 유저 결제 내역 갯수 -->
+	<select id="countEmojiHistoryByUser">
+        SELECT COUNT(*) FROM `emoji_history`
+        where `u_id`=#{uId}
+    </select>
+	
+	<select id="findEmojiHistoryById">
+	
+	</select>
+
+</mapper>

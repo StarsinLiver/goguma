@@ -3,13 +3,18 @@ const headMenusBorder = document.querySelectorAll(".emoji--head-menu-title");
 const innerBody = document.querySelector(".emoji--content-box");
 
 const mainImg = document.querySelectorAll(".e-img");
-const mainTitle = document.querySelectorAll(".e-title");
+const mainTitle1 = document.querySelector(".e-title");
+const mainTitle2 = document.querySelector(".e-title2");
 const mainPrice = document.querySelectorAll(".e-price");
 const orderBtn = document.querySelector(".emoji--order-btn");
 const orderBtn2 = document.querySelector(".emoji--order-btn2");
 const modalMain = document.querySelector(".emoji--modal");
 const agreeCheck = document.querySelector(".emoji--agree-check");
 const modalCloseBtn = document.querySelector(".emoji--close-btn");
+
+const agreeMain = document.querySelectorAll(".agree-main-box");
+const agreeSub = document.querySelectorAll(".agree-sub-box");
+
 let pageId = location.pathname.split("/")[3];
 IMP.init('imp37413392');
 let mainEmojiNum = 0;
@@ -59,8 +64,8 @@ for(let i = 0; i < headMenus.length; i++){
 function innerMain(data){
 	mainImg[0].src = "/images/upload/emoji/" + data.file;
 	mainImg[1].src = "/images/upload/emoji/" + data.file;
-	mainTitle[0].textContent = data.name;
-	mainTitle[1].textContent = data.name;
+	mainTitle1.textContent = data.name;
+	mainTitle2.textContent = data.name;
 	mainPrice[0].textContent = data.price;
 	mainPrice[1].textContent = data.price;
 }
@@ -70,8 +75,8 @@ function innerFun(list){
 	if(list != ""){
 		for(let i = 0; i < list.length; i++){
 			innr += `
-				<div class="emoji--item-box">
-                    <div class="emoji--img-box">
+				<div class="emoji--detail--item-box">
+                    <div class="emoji--detail--img-box">
                         <img src="/images/upload/emoji/${list[i].file}" alt="이모티콘">
                     </div>
                 </div>
@@ -101,6 +106,7 @@ orderBtn2.onclick = () => {
 	if(orderBtn2.className == "emoji--order-btn2-on" && agreeCheck.checked == true){
 		let merchantId = 'merchant_'+new Date().getTime();
 		requestPay(merchantId);
+		modalMain.style.display = "none";
 	}
 }
 
@@ -121,7 +127,8 @@ function requestPay(merchantId) {
       if (rsp.success) {
 		  buyFun(merchantId);
 	  }else{
-		  alert("구매실패.");
+		  alert("취소되었습니다.");
+		  location.href = "/emoji/detail/" + pageId;
 	  }
     });
 }
@@ -149,7 +156,12 @@ function buyFun(merchantId){
 	});
 }
 
-
+agreeMain,agreeSub
+for(let i = 0; i < agreeMain.length; i++){
+	agreeMain[i].onclick = () => {
+		agreeSub[i].style.display = "flex";
+	}
+}
 
 
 

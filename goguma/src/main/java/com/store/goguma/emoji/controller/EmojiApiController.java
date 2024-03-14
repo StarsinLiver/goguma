@@ -43,6 +43,7 @@ public class EmojiApiController {
 	@GetMapping("/list/{num}")
 	public ResponseEntity<?> getEmojiMainList(@PathVariable int num){
 		List<MainEmoji> list = service.getEmojiMainList(num);
+		System.out.println("리스트 수 : " + list.size());
 		return new ResponseEntity<List<MainEmoji>>(list, HttpStatus.OK);
 	}
 	

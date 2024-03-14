@@ -54,6 +54,9 @@
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/detail.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/list.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
+<link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
 
 <!-- Custom CSS -->
 
@@ -77,7 +80,7 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 </head>
-<body class="seo_version">
+<body class="seo_version" style="background: #fff">
 
 	<header class="header header_style_01">
 		<!-- nav 부분 navbar 가 안먹음 -->
@@ -109,7 +112,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="#" class="dropdown-item">공지사항</a> <a href="#"
+							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="#"
 								class="dropdown-item">문의하기</a> <a href="#" class="dropdown-item">자주
 								묻는 질문</a>
 						</div>
@@ -128,8 +131,8 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a> <a href="/user/product"
-								class="dropdown-item">채팅 내역</a> <a href="#"
+							<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a> <a
+								href="/user/product" class="dropdown-item">채팅 내역</a> <a href="#"
 								class="dropdown-item">거래 내역</a> <a href="/user/info"
 								class="dropdown-item">내 정보</a>
 						</div>
@@ -139,11 +142,19 @@
 				<!-- 이부분은 관리자계정으로 로그인시 표시되게 설정해야함 -->
 			</div>
 			<!-- 이부분은 로그인하였을 경우 로그아웃 버튼으로, 로그인하지 않았을 경우 로그인/회원가입 버튼으로 -->
+			<c:choose>
+				<c:when test="${principal ne null}">
+					<a href="/user/logout"
+						class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">로그아웃<i
+						class="fa fa-arrow-right ms-3"></i></a>
 
-			<a href="/login"
-				class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">로그인/회원가입<i
-				class="fa fa-arrow-right ms-3"></i></a>
-
+				</c:when>
+				<c:otherwise>
+					<a href="/login"
+						class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">로그인/회원가입<i
+						class="fa fa-arrow-right ms-3"></i></a>
+				</c:otherwise>
+			</c:choose>
 		</nav>
 	</header>
 
