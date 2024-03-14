@@ -170,6 +170,13 @@ public class AdminController {
 		
 	}
 	
+	@GetMapping("/emoji/detail/{id}")
+	public String detail() {
+		return "admin/emoji_detail";
+	}
+	
+	
+	
 	@GetMapping("/notice")
 	public String managementNotice() {
 
@@ -182,6 +189,7 @@ public class AdminController {
 		return "admin/admin_management_report";
 	}
 
+	
 	// 유저간 거래 상품 관리 페이지
 	@GetMapping("/product")
 	public String managementProduct(Model model) {
@@ -194,11 +202,10 @@ public class AdminController {
 		List<MainEmoji> mainEmojiList = emojiHistoryService.findMainEmojiAllByUserId(user.getUId());
         log.info(mainEmojiList.toString());
 		
-		
-		
 		return "admin/admin_management_product";
 	}
 
+	
 	@GetMapping("/banner")
 	public String managementBanner() {
 

@@ -139,43 +139,47 @@ nav.open ~ .overlay {
 <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
 	rel="stylesheet" />
 </head>
-		<div class="sidebar" style="top:275px; left:0; height:0; padding:0;">
-			<div class="logo">
-				<i class="bx bx-menu menu-icon"></i> <span class="logo-name">관리자 메뉴</span>
-			</div>
+<div class="sidebar" style="top: 275px; left: 0; height: 0; padding: 0;">
+	<div class="logo">
+		<i class="bx bx-menu menu-icon"></i> <span class="logo-name">관리자
+			메뉴</span>
+	</div>
 
-			<div class="sidebar-content">
-				<ul class="lists">
-					<li class="list"><a href="/admin/user" class="nav-link"> <i
-							class="bx bx-home-alt icon"></i> <span class="link">내정보 수정</span>
-					</a></li>
-					<li class="list"><a href="/admin/history" class="nav-link"> <i
-							class="bx bx-bar-chart-alt-2 icon"></i> <span class="link">결제 내역</span>
-					</a></li>
-					<li class="list"><a href="/admin/notice" class="nav-link"> <i
-							class="bx bx-bell icon"></i> <span class="link">공지사항 관리</span>
-					</a></li>
-					<li class="list"><a href="/admin/emoji" class="nav-link"> <i
-							class="bx bx-heart icon"></i> <span class="link">이모티콘 관리</span>
-					</a></li>
-					<li class="list"><a href="/admin/report" class="nav-link"> <i
-							class="bx bx-folder-open icon"></i> <span class="link">신고 관리</span>
-					</a></li>
-					<li class="list"><a href="/admin/product" class="nav-link"> <i
-							class="bx bx-folder-open icon"></i> <span class="link">상품 관리</span>
-					</a></li>
-					<li class="list"><a href="/admin/banner" class="nav-link"> <i
-							class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
-					</a></li>
-				</ul>
+	<div class="sidebar-content">
+		<ul class="lists">
+			<li class="list"><a href="/admin/user" class="nav-link"> <i
+					class="bx bx-home-alt icon"></i> <span class="link">내정보 수정</span>
+			</a></li>
+			<li class="list"><a href="/admin/history" class="nav-link">
+					<i class="bx bx-bar-chart-alt-2 icon"></i> <span class="link">결제
+						내역</span>
+			</a></li>
+			<li class="list"><a href="/cs/notice/list/admin"
+				class="nav-link"> <i class="bx bx-bell icon"></i> <span
+					class="link">공지사항 관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/emoji" class="nav-link"> <i
+					class="bx bx-heart icon"></i> <span class="link">이모티콘 관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/report" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">신고 관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/product" class="nav-link">
+					<i class="bx bx-folder-open icon"></i> <span class="link">상품
+						관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/banner" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
+			</a></li>
+		</ul>
 
-			
-			</div>
-		</div>
 
-	<section class="overlay"></section>
+	</div>
+</div>
 
-	<script src="script.js"></script>
+<section class="overlay"></section>
+
+<script src="script.js"></script>
 <script>
 const navBar = document.querySelector("nav"),
 menuBtns = document.querySelectorAll(".menu-icon"),

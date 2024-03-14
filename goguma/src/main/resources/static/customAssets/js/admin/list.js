@@ -43,11 +43,13 @@ for(let i = 0; i < headMenus.length; i++){
 function innerFun(list){
 	
 		console.log('이너펑션 시작 리스트 데이터 확인: ' + list);
+		
 	let innr = "";
 	innerBody.textContent = "";
 	if(list != ""){
 		for(let i = 0; i < list.length; i++){
-			innr += `
+			innr += 
+			`
 				<div class="emoji--item-box" id="${list[i].id}">
                     <div class="emoji--img-box">
                         <img src="/images/upload/emoji/${list[i].file}" alt="이모티콘">
@@ -64,21 +66,12 @@ function innerFun(list){
 	}
 }
 
+
 function detailPaging(detail){
 	for(let i = 0; i < detail.length; i++){
 		detail[i].onclick = () => {
-			location.href = "/emoji/detail/" + detail[i].id;
+			location.href = "/admin/emoji/detail/" + detail[i].id;
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
 
