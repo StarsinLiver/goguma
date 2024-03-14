@@ -1,21 +1,27 @@
 package com.store.goguma.user.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.User;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
-import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.user.dto.my.ProductHistoryDTO;
+import com.store.goguma.user.dto.my.UserEmojiDTO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -80,13 +86,13 @@ public class UserController {
 	
 	// 결제 내역 페이지
 	@GetMapping("/payment")
-	public String paymentPage(EmojiHistoryReqDTO historyReqDTO, Model model, HttpSession session) {
+	public String paymentPage(RequestPageDTO historyReqDTO, Model model, HttpSession session) {
 		log.info("EmojiHistoryReqDTO :"+historyReqDTO);
 		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
 		int uId = sessionUser.getUId();
 		
 		// 출력
-		EmojiHistoryResDTO response = userService.myEmojiHistory(uId, historyReqDTO);
+		ResponsePageDTO response = userService.myEmojiHistory(uId, historyReqDTO);
 		
 		
 		model.addAttribute("histories", response.getDtoList());
@@ -97,9 +103,40 @@ public class UserController {
 		
 		return "/user/payment_history";
 	}
+	
+	// 이모티콘 구매내역 상세
+	@GetMapping("/historyDetail")
+	@ResponseBody
+	public UserEmojiDTO historyDetail(@RequestParam("id") String id) {
+		UserEmojiDTO history = userService.EmojiHistoryDetail(id);
+		return history;
+	}
+	
+	// 이모티콘 환불 사유 전송
+	@PutMapping("/emojiReason")
+	public int reason(@RequestBody Map<String, String> data) {
+		String id = data.get("id");
+		log.info("포트원 번호 : "+id);
+		
+		int result = userService.cancelEmoji(id);
+		
+		if(result > 1) {
+			throw new RuntimeException("환불 기한이 지났습니다");
+		}
+		
+		return result;
+	}
+	
 	// 중고거래 내역 페이지
 	@GetMapping("/product")
-	public String productPage() {
+	public String productPage(HttpSession session, Model model) {
+		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
+		int uId = sessionUser.getUId();
+		
+		List<ProductHistoryDTO> list = userService.productList(uId);
+		log.info(""+list);
+		model.addAttribute("pHistories", list);
+		
 		
 		return "/user/product_history";
 	}

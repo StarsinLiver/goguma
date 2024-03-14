@@ -54,7 +54,7 @@
 	<!-- aside end -->
 	
 	<div class="payment-container">
-		<h4 class="user-page-title">중고 거래 내역</h4>
+		<h4 class="user-page-title">판매 거래 내역</h4>
 		
 		<div class="col-sm-12">
 			<!-- 구매내역 -->
@@ -70,7 +70,6 @@
 								<th>순번</th>
 								<th>거래일자</th>
 								<th>상품명</th>
-								<th>금액</th>
 								<th>판매자</th>
 								<th>신고</th>
 							</tr>
@@ -81,20 +80,37 @@
 								<td colspan="5">내역이 없습니다.</td>
 							</tr>
 							<!-- 실제 데이터 행 -->
-							<c:forEach var="product" items="${pHistories}">
 							<tr id="dataRow">
-								<td id="id">${product.id}</td>
-								<td id="purchaseDate">${product.createAt}</td>
-								<td id="pointName">${product.prodName}</td>
-								<td id="pointName">${product.formatBalance()}</td>
-								<td id="refundYn">${product.userName}</td>
+								<td id="id">1</td>
+								<td id="purchaseDate">2024.03.01</td>
+								<td id="pointName">상품 이름</td>
+								<td id="refundYn">gogumi</td>
 								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
 							</tr>
-							</c:forEach>
+							<tr id="dataRow">
+								<td id="id">1</td>
+								<td id="purchaseDate">2024.03.01</td>
+								<td id="pointName">상품 이름</td>
+								<td id="refundYn">gogumi</td>
+								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
+							</tr>
+							<tr id="dataRow">
+								<td id="id">1</td>
+								<td id="purchaseDate">2024.03.01</td>
+								<td id="pointName">상품 이름</td>
+								<td id="refundYn">gogumi</td>
+								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
+							</tr>
+							<tr id="dataRow">
+								<td id="id">1</td>
+								<td id="purchaseDate">2024.03.01</td>
+								<td id="pointName">상품 이름</td>
+								<td id="refundYn">gogumi</td>
+								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
+							</tr>
 						</tbody>
 
 					</table>
-					
 					
 					<div class="pagination">
 					  <a href="#">&laquo;</a>

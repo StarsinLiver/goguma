@@ -1,5 +1,7 @@
 package com.store.goguma.user.dto.my;
 
+import java.text.DecimalFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,4 +34,12 @@ public class UserEmojiDTO {
 	private Integer id;
 	private String name;
 	private String file;
+	
+	// 포메터 기능
+	public String formatBalance() {
+ 		// 1000 --> 1,000
+ 		DecimalFormat df = new DecimalFormat("###,###");
+ 		String formaterNumber = df.format(price);
+ 		return formaterNumber+"원";
+ 	}
 }

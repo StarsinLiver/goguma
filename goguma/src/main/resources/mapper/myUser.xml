@@ -7,11 +7,11 @@
 	<!-- 유저 결제 내역 -->
 	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
 		SELECT me.id, me.`name`, me.`file` , eh.* 
-		FROM `emoji_history` AS eh
-		JOIN `main_emoji` AS me 
-		ON eh.main_emoji_id = me.id
+			FROM `emoji_history` AS eh
+			JOIN `main_emoji` AS me 
+			ON eh.main_emoji_id = me.id
 		where `u_id`=#{uId}
-		ORDER BY `merchant_id` DESC
+		ORDER BY eh.create_at DESC
 		LIMIT #{start},10
 	</select>
 	
@@ -21,8 +21,38 @@
         where `u_id`=#{uId}
     </select>
 	
-	<select id="findEmojiHistoryById">
-	
+	<select id="findEmojiHistoryBymerchantId" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
+		SELECT me.id, me.`name`, me.`file` , eh.* 
+			FROM `emoji_history` AS eh
+			JOIN `main_emoji` AS me 
+			ON eh.main_emoji_id = me.id
+		where `merchant_id`=#{merchantId}
 	</select>
-
+	
+	<update id="updateEmojiHistoryCancel">
+		update `emoji_history` set 
+			`cancel_amount`=`price`,
+			`cancel_yn`='Y', 
+			`update_at`=NOW()
+		where `merchant_id`=#{merchantId}
+			and create_at &lt;= DATE_ADD(DATE(NOW()), INTERVAL 3 DAY)
+	</update>
+	
+	<select id="myReadByproducthistory" resultType="com.store.goguma.user.dto.my.ProductHistoryDTO">
+		SELECT ph.*, 
+			p.address AS productAddress, 
+			p.host_id AS productHostId,
+			p.main_category_id AS productMainCategoryId, 
+			p.sub_category_id AS productSubCategoryId,
+			p.price AS productPrice, 
+			p.file AS productFile,
+			p.`name` as `prodName`,
+			u.`name` as `userName`
+		FROM `product_history` AS ph
+		JOIN  `product` AS p ON ph.p_id = p.p_id
+		JOIN `user` AS u ON p.host_id = u.u_id
+		WHERE ph.`u_id`=#{uId};
+	</select>
+	
+	
 </mapper>

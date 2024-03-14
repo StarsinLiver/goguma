@@ -15,8 +15,9 @@ import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
-import com.store.goguma.user.dto.my.EmojiHistoryReqDTO;
-import com.store.goguma.user.dto.my.EmojiHistoryResDTO;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.user.dto.my.ProductHistoryDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 import com.store.goguma.utils.Define;
 
@@ -66,8 +67,13 @@ public class UserService {
 		return 0;
 	}
 	
+	// 결제 내역 이모티콘 상세
+	public UserEmojiDTO EmojiHistoryDetail(String id) {
+		return myUserRepository.findEmojiHistoryBymerchantId(id);
+	}
+	
 	// 유저 결제 내역
-	public EmojiHistoryResDTO myEmojiHistory(int uId, EmojiHistoryReqDTO historyReqDTO) {
+	public ResponsePageDTO myEmojiHistory(int uId, RequestPageDTO historyReqDTO) {
 		int start = (historyReqDTO.getPg() - 1) * historyReqDTO.getSize();
 		log.info("start : "+start);
 		
@@ -75,11 +81,24 @@ public class UserService {
 		int total = myUserRepository.countEmojiHistoryByUser(uId);
 		log.info("total : "+total);
 		
-		return EmojiHistoryResDTO.builder()
-				.emojiHistoryReqDTO(historyReqDTO)
+		return ResponsePageDTO.builder()
+				.requestPageDTO(historyReqDTO)
 				.dtoList(history)
 				.total(total)
 				.build();
+	}
+	
+	
+	
+	// 이모티콘 환불
+	public int cancelEmoji(String id) {
+		int result = myUserRepository.updateEmojiHistoryCancel(id);
+		return result;
+	}
+	
+	// 구매 거래 내역
+	public List<ProductHistoryDTO> productList(int uId){
+		return myUserRepository.myReadByproducthistory(uId);
 	}
 	
 	// 프로필 사진 변경

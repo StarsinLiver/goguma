@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmojiHistoryReqDTO {
+public class RequestPageDTO {
 	
 	@Builder.Default
     private int pg = 1;

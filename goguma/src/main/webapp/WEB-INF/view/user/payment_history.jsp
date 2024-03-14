@@ -54,12 +54,6 @@
   cursor: pointer;
 }
 
-.my-modal-content textarea {
-	width: 100%;
-	height: 100px;
-	resize: block;
-	min-height: 50px;
-}
 .my-modal-content table {
 	width: 100%;
 	margin-bottom: 10px;
@@ -67,7 +61,11 @@
 .my-modal-content tr {
 	border-bottom: 1px solid #ccc;
 }
-
+.user-page .emoji-name {
+	margin-left: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
 </style>
 
 <!-- 메인 시작 -->
@@ -126,9 +124,8 @@
 								<th>제품코드</th>
 								<th>구매일자</th>
 								<th>구매상품명</th>
-								<th>환불요청<br/>여부
-								</th>
-								<th>환불요청</th>
+								<th>환불여부</th>
+								<th>상세 정보</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -142,22 +139,19 @@
 								<td id="id">${history.mainEmojiId}</td>
 								<td class="purchaseDate">${history.createAt}</td>
 								<td id="pointName">${history.name}</td>
-								<td id="refundYn">${history.confirmYn}</td>
+								<td class="refundYn">${history.cancelYn}</td>
 								<td>
 									<button id="refundButton" data-value="${history.merchantId}" 
-										data-name="${history.name}" data-bank="${history.bank}"
-										data-price="${history.price}" data-date="${history.createAt}"
-										class="btn btn-warning btn-complete cancel-request">환불요청</button>
+										class="btn btn-warning btn-complete cancel-request">상세</button>
 								</td>
 							</tr>
 							</c:forEach>
 						</tbody>
 
 					</table>
-					
+					<p>※ 환불 기간은 구매일자 기준 최대 3일 안에만 가능합니다.</p>
 					
 					<div class="pagination">
-					
 						<!-- 페이지 처리 -->
 						<c:if test="${start > 1}">
 						<a href="/user/payment?pg=${start - 1}">&laquo;</a>
@@ -166,7 +160,6 @@
 					  	<c:forEach var="i" begin="${start}" end="${end}">
 							<a href="/user/payment?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
 						</c:forEach>
-						
 					  	<c:if test="${end < last}">
 						<a href="/user/payment?pg=${end + 1}">&raquo;</a>
 						</c:if>
@@ -183,11 +176,16 @@
 	  <div class="my-modal-content">
 	    <span class="close">&times;</span>
 	    <article style="padding: 20px;">
-	    	<p style="font-size: 20px; font-weight: 700;" class="emoji-price"></p>
-	    	
+	    	<img id="imoji-img" style="width: 100px; height: 100px;" 
+	    		src="/assets/images/goguma_mascot.png" alt="이모티콘"/>
+	    	<span class="emoji-name"></span>
 	    	<table>
 	    		<tr>
-	    			<td>거래 식별번호</td>
+	    			<td>금액</td>
+	    			<td class="emoji-price"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>결제 번호</td>
 	    			<td class="emoji-id"></td>
 	    		</tr>
 	    		<tr>
@@ -195,16 +193,10 @@
 	    			<td class="emoji-date"></td>
 	    		</tr>
 	    		<tr>
-	    			<td>상품 제목</td>
-	    			<td class="emoji-name"></td>
-	    		</tr>
-	    		<tr>
 	    			<td>거래은행</td>
 	    			<td class="emoji-history-bank"></td>
 	    		</tr>
 	    	</table>
-	    	<p>환불 사유 :</p>
-	    	<textarea class="text-reason"></textarea>
 	    	<button type="button" style="float: right;" 
 	    		class="btn btn-warning btn-complete req-text">등록</button>
 	    </article>
@@ -215,33 +207,61 @@
 <!-- 메인 종료 -->
 
 <script>
+
 	const modal = $('.my-modal');
 	
 	// 모달 창 열기
 	$(".cancel-request").click(function(){
 		const id = $(this).data('value');
-		const name = $(this).data('name');
-		const bank = $(this).data('bank');
-		const price = $(this).data('price');
-		const date = $(this).data('date');
 		console.log("포트원 키 :"+id);
 		
-		$('.emoji-id').text(id);
-		$('.emoji-price').text(price+'원');
-		$('.emoji-name').text(name);
-		$('.emoji-history-bank').text(bank);
-		$('.emoji-name').text(name);
-		$('.emoji-date').text(date);
+		$.ajax({
+		    type: 'get',
+		    url: '/user/historyDetail?id=' + id,
+		    headers: {
+		        "Content-Type": "application/json"
+		    },
+		    success: function(result) {
+		    	
+		        const bank = result.bank;
+		        const price = result.price;
+		        const name = result.name;
+		        const date = result.createAt;
+		        const cancelYn = result.cancelYn;
+		        const file = result.file;
+		        console.log(result);
+		        
+		        $('.emoji-id').text(id);
+				$('.emoji-price').text(price+'원');
+				$('.emoji-name').text(name);
+				$('.emoji-history-bank').text(bank);
+				$('.emoji-name').text(name);
+				$('.emoji-date').text(date);
+				$('#imoji-img').attr('src', '/images/upload/emoji/'+file);
+				
+				// 환불 여부
+				if(cancelYn === 'Y'){
+					$('.req-text').hide();
+				} else {
+					$('.req-text').show();
+				}
+				
+		    },
+		    error: function(request, status, error) {
+		        console.log(error);
+		    }
+		});
+		
+		
+		
 		
 		modal.css("display", "block");
-		
 	});
 	
 	// 등록
 	$('.req-text').click(function(){
 		const id = $('.emoji-id').text();
-	    const reason = $('.text-reason').val();
-		alert("아이디 : "+id+"reason : "+reason);
+		alert("아이디 : "+id);
 		
 		$.ajax({    
 			type : 'put',               
@@ -250,11 +270,13 @@
 				"Content-Type" : "application/json"    
 			},    
 			data : JSON.stringify({  
-			"id" : id,      
-			"content": content
+				"id" : id
 			}),    
 			success : function(result) {       
-				console.log(result);    
+				console.log(result);
+				alert('환불되었습니다.');
+				location.reload();
+				modal.css("display", "none");
 			},    
 			error : function(request, status, error) {     
 				console.log(error)    
