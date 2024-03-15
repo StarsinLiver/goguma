@@ -147,7 +147,7 @@ function buyFun(merchantId){
 			merchantId : merchantId,
 			mainEmojiId : mainEmojiNum,
 			price : Number(mainPrice[0].textContent),
-			uId : userInfo.uId,
+			uId : userInfo.uid,
 			bank : "KAKAO"
 		},
 		success : function(data){

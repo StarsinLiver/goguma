@@ -41,5 +41,7 @@ public class NoticeService {
 		return result != 0;
 	}
 	
-
+	public List<Notice>  findLimitEightFromMain() {
+		return repository.findLimitEightFromMain();
+	}
 }

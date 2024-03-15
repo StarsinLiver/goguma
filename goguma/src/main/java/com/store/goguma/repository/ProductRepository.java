@@ -27,4 +27,9 @@ public interface ProductRepository {
 	// 상품 전체 search 조회
 	public List<ProductSearchDto> searchAll(@Param("search") String search ,@Param("searchAddress") String searchAddress , @Param("lowPrice") int lowPrice , @Param("highPrice") int highPrice , @Param("sortWishList") String sortWishList ,@Param("sortChatRoom") String sortChatRoom ,@Param("sortLowPrice") String sortLowPrice ,@Param("sortHighPrice") String sortHighPrice ,@Param("pageReq") PageReq pageReq);
 	public int countSearchAll(@Param("search") String search ,@Param("searchAddress") String searchAddress , @Param("lowPrice")Integer lowPrice , @Param("highPrice") Integer highPrice);
+	
+	// 메인 상품
+	public List<ProductSearchDto> findLimitEightFromMain();
+	// 전체 상품 갯수
+	public int countProductAll();
 }

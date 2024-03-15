@@ -15,4 +15,6 @@ public interface UserRepository {
 
 	// u_id로 유저 조회
 	public User findAllByuId(Integer uId);
+	
+	public int countUserAll();
 }

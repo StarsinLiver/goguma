@@ -162,4 +162,9 @@ public class UserService {
 		
 		return dto;
 	}
+	
+	// 모든 유저 카운트
+	public int countUserAll() {
+		return userRepository.countUserAll();
+	}
 }
