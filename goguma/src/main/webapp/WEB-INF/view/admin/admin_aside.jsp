@@ -139,7 +139,7 @@ nav.open ~ .overlay {
 <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
 	rel="stylesheet" />
 </head>
-<div class="sidebar" style="top: 275px; left: 0; height: 0; padding: 0;">
+<div class="sidebar" style="top: 275px; left: 0;  padding: 0;">
 	<div class="logo">
 		<i class="bx bx-menu menu-icon"></i> <span class="logo-name">관리자
 			메뉴</span>

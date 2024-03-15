@@ -16,7 +16,7 @@
 	</div>
 </div>
 <!-- Header End -->
-<div class="notice--main-div" style="display: flex;">
+<div class="notice--main-div" style="display: flex; flex-direction: row;">
 	<div>
 		<!-- aside -->
 		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
