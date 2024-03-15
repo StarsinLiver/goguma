@@ -19,7 +19,7 @@
 		</ul>
 		<div id="profile-image">
 			<img alt="소확행"
-				src="${user.file}" />
+				src="/images/upload/${user.file}" />
 		</div>
 	</section>
 	<div id="user-records-detail">
