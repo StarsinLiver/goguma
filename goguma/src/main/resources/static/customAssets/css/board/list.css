@@ -1,0 +1,64 @@
+.board-main-div{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-box{
+    display: flex;
+}
+
+.board-left-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.board-menu-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-menu-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid black;
+}
+
+.board-menu-sub{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.board-right-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-table{
+    width: 800px;
+    text-align: center;
+    
+}
+
+.board-table, .board-th, .board-td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.board-th, .board-td{
+    padding: 10px;
+}

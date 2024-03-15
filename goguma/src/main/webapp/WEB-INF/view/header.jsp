@@ -60,6 +60,7 @@
 <link rel="stylesheet" href="/customAssets/css/cs/qna/write.css">
 <link rel="stylesheet" href="/customAssets/css/cs/faq/list.css">
 <link rel="stylesheet" href="/customAssets/css/about/about.css">
+<link rel="stylesheet" href="/customAssets/css/board/list.css">
 
 <!-- Custom CSS -->
 <script type="text/javascript"
