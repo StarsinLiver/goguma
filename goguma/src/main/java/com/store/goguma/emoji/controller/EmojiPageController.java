@@ -28,4 +28,8 @@ public class EmojiPageController {
 	public String detail() {
 		return "emoji/detail";
 	}
+	@GetMapping("/refund")
+	public String refund() {
+		return "emoji/refund";
+	}
 }

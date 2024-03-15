@@ -31,6 +31,8 @@
     padding: 10px;
     margin-bottom: 5px;
     border: 1px solid black;
+    cursor: pointer;
+    width: 100px;
 }
 
 .board-menu-sub{
@@ -40,6 +42,8 @@
     align-items: center;
     padding: 10px;
     border: 1px solid black;
+    cursor: pointer;
+    width: 100px;
 }
 
 .board-right-box{
