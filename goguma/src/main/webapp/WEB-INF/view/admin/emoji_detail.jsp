@@ -112,6 +112,6 @@
         </div>
     </div>
     
-<script src="/customAssets/js/emoji/detail.js"></script>
+<script src="/customAssets/js/admin/detail.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

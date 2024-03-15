@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.admin.dto.PageReqDTO;
+import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.handler.exception.LoginRestfulException;
@@ -170,10 +171,15 @@ public class AdminController {
 		
 	}
 	
+	// admin emoji detail 페이지 
 	@GetMapping("/emoji/detail/{id}")
 	public String detail() {
 		return "admin/emoji_detail";
 	}
+	
+	
+	
+	
 	
 	
 	
