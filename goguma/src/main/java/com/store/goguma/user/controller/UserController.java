@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.entity.User;
+import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
@@ -38,6 +40,12 @@ public class UserController {
 	@GetMapping("/info")
 	public String infoPage(Model model, HttpSession session) {
 		OauthDTO dto = (OauthDTO) session.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (dto == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
 		String email = dto.getEmail();
 		log.info("내 정보 : "+dto);
 		log.info("이메일 : "+email);
@@ -54,6 +62,12 @@ public class UserController {
 	@GetMapping("/modify")
 	public String userModifyPage(Model model, HttpSession session) {
 		OauthDTO dto = (OauthDTO) session.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (dto == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
 		String email = dto.getEmail();
 		log.info("내 정보 : "+dto);
 		log.info("이메일 : "+email);
@@ -70,6 +84,12 @@ public class UserController {
 	@PostMapping("/modify")
 	public String userModify(ModifyUserDto dto, HttpSession session) {
 		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
 		String email = sessionUser.getEmail();
 		String social = sessionUser.getSocial();
 		
@@ -89,7 +109,15 @@ public class UserController {
 	public String paymentPage(RequestPageDTO historyReqDTO, Model model, HttpSession session) {
 		log.info("EmojiHistoryReqDTO :"+historyReqDTO);
 		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
 		int uId = sessionUser.getUId();
+		
+		
 		
 		// 출력
 		ResponsePageDTO response = userService.myEmojiHistory(uId, historyReqDTO);
@@ -131,6 +159,12 @@ public class UserController {
 	@GetMapping("/product")
 	public String productPage(RequestPageDTO pageDTO,HttpSession session, Model model) {
 		OauthDTO sessionUser = (OauthDTO) session.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
 		int uId = sessionUser.getUId();
 		
 		ResponsePageDTO response = userService.productList(uId, pageDTO);
