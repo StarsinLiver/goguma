@@ -7,50 +7,88 @@
 	<!-- admin계정 정보 업데이트 -->
 	<update id="modifyAdminByEmail">
 
-		update `user` set `zip`=#{zip}, `address`=#{address}, `tel`=#{tel},
+		update `user` set `zip`=#{zip}, `address`=#{address},
+		`tel`=#{tel},
 		`update_at`=NOW()
-		where `social`=#{social} and `email`=#{email} and `role` = #{role}
+		where `social`=#{social} and
+		`email`=#{email} and `role` = #{role}
 
 	</update>
-	
+
 	<!-- 업데이트한 유저데이터 호출 -->
-	<select id="selectAdminByUid" resultType="com.store.goguma.user.dto.OauthDTO">
-		
+	<select id="selectAdminByUid"
+		resultType="com.store.goguma.user.dto.OauthDTO">
+
 		select * from user where u_id = #{uid}
-	
+
 	</select>
 
 	<!-- 상품 환불 리스트 출력 -->
 	<select id="findEmojiHistoryByUser">
-		select * from `emoji_history` 
-		where `cancel_yn`= 'Y' and `confirm_yn` = 'N'
+		select * from `emoji_history`
+		where `cancel_yn`= 'Y'
+		and `confirm_yn` = 'N'
 		ORDER BY `merchant_id` DESC
 		LIMIT #{start},10
-	
+
 	</select>
-	
+
 
 	<!-- 상품 환불 리스트 카운트 -->
 	<select id="countEmojiHistoryByCancleY">
-	
-		select count(*) from emoji_history where cancel_yn = 'Y' and confirm_yn = 'N';
-	
+
+		select count(*) from emoji_history where cancel_yn =
+		'Y' and confirm_yn =
+		'N';
+
 	</select>
-	
-	
+
+
 	<!-- 환불 사유 출력 -->
-	<select id="selectCancelByMaerchantId" resultType="com.store.goguma.entity.EmojiHistory">
-	
-		select * from emoji_history where merchant_id = #{merchantId}
-	
+	<select id="selectCancelByMaerchantId"
+		resultType="com.store.goguma.entity.EmojiHistory">
+
+		select * from emoji_history where merchant_id =
+		#{merchantId}
+
 	</select>
-	
-		
-	<!-- 환불 완료 처리-->
+
+
+	<!-- 환불 완료 처리 -->
 	<update id="updateConfirmPayment">
-	
-		UPDATE emoji_history SET confirm_yn = 'Y' WHERE  merchant_id = #{merchantId};
-	
+
+		UPDATE emoji_history SET confirm_yn = 'Y' WHERE
+		merchant_id = #{merchantId};
+
 	</update>
+
+	<!-- 이모지 수정 처리 -->
+	<update id="modifyAdminEmojiModify">
+
+		UPDATE main_emoji SET name = #{name}, price =
+		#{price} , file = #{file}
+		WHERE id = #{id};
+
+	</update>
+
+	<!-- 메인 이모지 업데이트 처리 -->
+	<update id="mainModify">
+
+		UPDATE main_emoji set file = #{file}, name = #{name},
+		price = #{price},
+		update_at = now() WHERE id = #{id} ;
+
+	</update>
+
+	<!-- 서브 이모지 업데이트 처리 -->
+	<update id="subModify">
+		update emoji SET file = #{file}, name = #{name} WHERE
+		group_id = #{groupId} and file = #{file};
+
+
+	</update>
+
+	<!-- 메인 이모지 라스트 update num -->
 	
+
 </mapper>

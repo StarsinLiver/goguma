@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="botton-box">
-                        <button type="button" class="emoji--order-btn">구매하기</button>
+                        <button type="button" class="emoji--modify-btn">수정하기</button>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
     
     <div class="emoji--modal">
         <div class="emoji--sec1">
-            <span>구매하기</span>
+            <span>이모티콘 변경하기</span>
             <span class="emoji--close-btn">Ⅹ</span>
         </div>
         <div class="emoji--sec2">
@@ -96,18 +96,25 @@
             <div class="emoji--sec2-img-box">
                 <img src="" alt="이모티콘" class="e-img">
             </div>
+            <br>
+            <br>
         </div>
         <div class="emoji--sec3"></div>
-        <div class="emoji--sec4">
-            <input type="checkbox" class="emoji--agree-check">
-            <span>아래 내용에 동의합니다.</span>
-        </div>
         <div class="emoji--sec5">
-            <span>· 쿠폰은 중복사용 불가하며, 일부 결제수단은 할인쿠폰 적용이 불가합니다.</span>
-            <span>· 주문취소 및 환불 시 이미 사용한 쿠폰은 재발급되지 않습니다.</span>
+        	<h4>변경할 파일 선택</h4>
+        	<input type="file" id ="changeFile" onchange="readURL(this);" multiple>
+        	<div class="emoji--sec2-img-box">
+                <img src=""  id="c-img" style="width: 100%">
+            </div>
+            <span>변경할 이름</span>
+            <input type="text" id="changeName" class="changeName">
+            
+            <span>변경할 가격</span>
+            <input type="text" id="changePrice" class="changeName">
+            
         </div>
         <div class="emoji--sec3"></div>
-        <button type="button" class="emoji--order-btn2">구매하기</button>
+        <button type="button" class="emoji--modify-btn2" onclick="emojiModify()">수정하기</button>
         <div class="emoji--sec6">
         </div>
     </div>
