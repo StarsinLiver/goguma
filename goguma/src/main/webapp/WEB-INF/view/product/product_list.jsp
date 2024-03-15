@@ -46,55 +46,19 @@
 <!-- Header End -->
 
 <div class="user-page"
-	style="display: flex; margin: 100px auto; width: 100%; max-width: 1450px; height: auto; justify-content: space-between; align-items: flex-start;">
+	style="display: flex; margin: 100px auto; width: 100%; min-width : 250px; height: auto; justify-content: space-between; align-items: flex-start;">
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/product/product_aside.jsp"%>
 	<!-- aside end -->
 	<div id="flexBox"
 		style="display: flex; flex-wrap: wrap; margin-left: 5%;">
 		<!-- 개별 카드 시작 -->
-		<article class="card ">
-			<a class="card-link " href="/productDetail?pId=2">
-				<div class="card-photo">
-					<img src="/images/upload/dg.png" />
-
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">이름</h2>
-					<div class="card-price ">가격 원</div>
-					<div class="card-region-name">주소</div>
-					<div class="card-counts">
-						<span>관심 0 </span> ∙ <span>채팅 0</span>
-					</div>
-				</div>
-			</a>
-		</article>
 		<!-- 개별 카드 엔드 -->
-		<!-- 개별 카드 시작 -->
-		<article class="card ">
-			<a class="card-link " href="/productDetail?pId=2">
-				<div class="card-photo">
-					<img src="/images/upload/dg.png" />
-
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">이름</h2>
-					<div class="card-price ">가격 원</div>
-					<div class="card-region-name">주소</div>
-					<div class="card-counts">
-						<span>관심 0 </span> ∙ <span>채팅 0</span>
-					</div>
-				</div>
-			</a>
-		</article>
-		<!-- 개별 카드 엔드 -->
-
 	</div>
 </div>
-<div class="pagination">
-	<a href="#">&laquo;</a> <a href="#">1</a> <a class="active" href="#">2</a>
-	<a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">&raquo;</a>
-</div>
+<ul class="pagination">
+
+</ul>
 <!-- 메인 종료 -->
 
 <!-- JavaScript -->

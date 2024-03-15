@@ -41,7 +41,7 @@
 				<c:forEach var="product" items="${userProdList}">
 					<article class="card ">
 						<a class="card-link "
-							href="/productDetail?pId=${product.getThisPid()}">
+							href="/product/productDetail?pId=${product.getThisPid()}">
 							<div class="card-photo">
 								<c:forTokens items="${product.file}" delims="," var="file"
 									varStatus="loop">

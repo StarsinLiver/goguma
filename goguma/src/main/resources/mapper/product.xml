@@ -29,17 +29,93 @@
 	</select>
 
 	<!-- host_id로 상품 조회 -->
-	<select id="findByHostId" resultType="com.store.goguma.product.dto.ProductUserDto">
-		select p.* , ifnull(count(c.id), 0) as countChatRoom , ifnull(count(w.id), 0) as countWishList
+	<select id="findByHostId"
+		resultType="com.store.goguma.product.dto.ProductUserDto">
+		select p.* , ifnull(count(c.id), 0) as countChatRoom ,
+		ifnull(count(w.id), 0) as countWishList
 		from product p
-		left join chat_room c
+		left join
+		chat_room c
 		on p.p_id = c.p_id and p.host_id = c.host_id
-		left join wish_list w
+		left join
+		wish_list w
 		on w.p_id = p.p_id
 		where p.host_id = #{hostId}
-		and p.delete_yn = 'N'
+		and
+		p.delete_yn = 'N'
 		and p.confirm_yn = 'N'
 		group by p.p_id
+	</select>
+
+
+	<select id="searchAll"
+		resultType="com.store.goguma.product.dto.ProductSearchDto">
+		select p.p_id as pId,
+		p.address as address,
+		p.name as name,
+		p.price as price,
+		p.host_id as hostId,
+		p.description as description,
+		p.file as file,
+		p.main_category_id as mainCategoryId,
+		p.sub_category_id as subCategoryId,
+		p.create_at as createAt,
+		p.update_at as updateAt,
+		p.delete_at as deleteAt,
+		p.delete_yn as deleteYn,
+		p.confirm_yn as confirmYn,
+        ifnull(count(c.id), 0) as countChatRoom,
+		ifnull(count(w.id), 0) as countWishList from product p
+		left join
+		chat_room c
+		on p.p_id = c.p_id and p.host_id = c.host_id
+		left join
+		wish_list w
+		on w.p_id = p.p_id
+		where name like CONCAT('%', #{search}, '%')
+		and address like CONCAT('%', #{searchAddress}, '%')
+		and price between #{lowPrice} and
+		#{highPrice}
+		group by p.p_id
+		order by
+		<if test="sortWishList == 'Y'.toString()">
+		countWishList desc , 
+		</if>
+		<if test="sortChatRoom == 'Y'.toString()">
+		countChatRoom desc , 
+		</if>
+		<if test="sortLowPrice == 'Y'.toString()">
+		p.price asc ,
+		</if>
+		<if test="sortHighPrice == 'Y'.toString()">
+		p.price desc ,
+		</if>
+		p.p_id desc
+		LIMIT
+		#{pageReq.cal},#{pageReq.size}
+	</select>
+
+	<select id="countSearchAll" resultType="int">
+		SELECT COUNT(*) AS
+		resultCount
+		FROM (
+		select p.* , ifnull(count(c.id), 0) as countChatRoom,
+		ifnull(count(w.id), 0)
+		as countWishList from product p
+		left join
+		chat_room c
+		on p.p_id = c.p_id
+		and p.host_id = c.host_id
+		left join
+		wish_list w
+		on w.p_id = p.p_id
+		where name like CONCAT('%', #{search}, '%')
+		and address like CONCAT('%', #{searchAddress}, '%')
+		and price between #{lowPrice} and
+		#{highPrice}
+		group by p.p_id
+		) AS
+		result;
 	</select>
 
 	<select id="findWishAndChat">
@@ -62,5 +138,6 @@
 		GROUP BY p_id
 		) AS cr ON p.p_id = cr.p_id
 	</select>
+
 
 </mapper>

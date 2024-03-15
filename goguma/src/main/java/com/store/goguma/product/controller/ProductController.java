@@ -186,10 +186,12 @@ public class ProductController {
 	    return "product/userProduct";
 	}	
 	
+	/**
+	 * 페이지 이동하기
+	 * @return
+	 */
 	@GetMapping("/product-list")
 	public String productList() {
-		
-		
 		return "product/product_list";
 	}
 }

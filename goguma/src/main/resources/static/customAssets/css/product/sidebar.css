@@ -4,7 +4,8 @@
     box-sizing: border-box;
     border-radius: 15px;
     background-color: #fff06d;
-    width: 250px; /* Adjust width as needed */
+    min-width: 250px; /* Adjust width as needed */
+    margin-left: 20px;
 }
 
 #user-aside ul {
@@ -85,4 +86,24 @@
 
 #button1 {
 	margin-top: 10px;
+}
+
+/* 페이지네이션 컨테이너 */
+.pagination {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* 페이지 링크 스타일 */
+.pagination li {
+    display: inline;
+    margin-right: 5px;
+}
+
+/* 페이지 활성 링크 스타일 */
+.pagination li a.active {
+    color: gold; /* 활성 링크의 색상을 여기에 지정하세요 (금색으로 변경) */
+    font-weight: bold; /* 활성 링크의 글꼴을 볼드로 지정하세요 */
+    text-decoration: underline; /* 활성 링크에 밑줄 추가 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
 }

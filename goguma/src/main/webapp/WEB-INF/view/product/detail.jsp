@@ -89,6 +89,10 @@
 
 				<!-- 채팅 버튼 -->
 				<c:choose>
+					<c:when test="${product.hostId == principal.getUId()}">
+						<a class="btn btn-primary" href="/chat/room"
+							style="margin-right: 10px;">채팅방이동</a>
+					</c:when>
 					<c:when test="${isExistChatRoom == 0}">
 						<button type="button" class="btn btn-primary"
 							data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -129,8 +133,12 @@
 				</div>
 
 				<!-- 신고 버튼 -->
-				<button type="button" class="btn btn-danger" data-bs-toggle="modal"
-					data-bs-target="#reportModal" style="margin-right: 10px;">신고하기</button>
+
+					<c:if test="${product.hostId != principal.getUId()}">
+						<button type="button" class="btn btn-danger"
+							data-bs-toggle="modal" data-bs-target="#reportModal"
+							style="margin-right: 10px;">신고하기</button>
+					</c:if>
 				<div class="modal fade" id="reportModal" tabindex="-1"
 					aria-labelledby="reportModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered">
@@ -181,6 +189,9 @@
 
 				<!-- 찜하기 버튼 또는 찜 삭제 버튼 -->
 				<c:choose>
+					<c:when test="${product.hostId == principal.getUId()}">
+							<!-- 빈 공간 -->
+					</c:when>
 					<c:when test="${prodWishlist}">
 						<form method="post" action="/product/deleteWishList"
 							style="margin-top: 5px;">
@@ -195,6 +206,7 @@
 					<c:otherwise>
 						<form method="post" action="/product/addWishList"
 							style="margin-top: 5px;">
+
 							<input type="hidden" name="pId" value="${product.getThisPid()}">
 							<p style="text-align: right">
 								<button class="btn btn-success btn-circle" type="submit">
@@ -217,7 +229,10 @@
 		<div property="schema:description" id="article-detail">
 			<p>${product.description}</p>
 		</div>
-		<p id="article-counts">관심 ${product.countWishList} ∙ <span>채팅 ${product.countChatRoom} </span></p>
+		<p id="article-counts">
+			관심 ${product.countWishList} ∙ <span>채팅
+				${product.countChatRoom} </span>
+		</p>
 	</section>
 </article>
 
@@ -241,7 +256,8 @@
 							<div class="card-price">${list.price}원</div>
 							<div class="card-region-name">${list.address}</div>
 							<div class="card-counts">
-								<span>관심 ${list.countWishList} </span> ∙ <span>채팅 ${list.countChatRoom} </span>
+								<span>관심 ${list.countWishList} </span> ∙ <span>채팅
+									${list.countChatRoom} </span>
 							</div>
 						</div>
 					</a>
