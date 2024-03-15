@@ -132,3 +132,34 @@
     cursor: pointer;
 }
 
+.emoji-search-box{
+    width: 530px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    border: 1px solid black;
+    margin: 30px;
+}
+
+.emoji-select{
+    margin-right: 20px;
+    width: 150px;
+    padding: 10px;
+}
+
+.emoji-search-input{
+    width: 400px;
+    margin-right: 20px;
+    border: none;
+    font-size: 25px;
+    border-bottom: 1px solid black;
+}
+
+.emoji-search-btn {
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}

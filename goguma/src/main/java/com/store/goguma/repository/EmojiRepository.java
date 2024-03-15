@@ -43,6 +43,8 @@ public interface EmojiRepository {
 
 	public List<MainEmoji> getEmojiMainListHome();
 
+	public List<MainEmoji> emojiSearch(String title);
+
 
 	
 
