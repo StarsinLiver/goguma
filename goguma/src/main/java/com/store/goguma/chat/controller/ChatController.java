@@ -96,7 +96,7 @@ public class ChatController {
 			mainEmojiList.forEach((e) -> mainListToInt.add(e.getId()));
 			emojiList = emojiService.findByGroupId(mainListToInt);
 		}
-
+		
 		log.info(emojiList.toString());
 
 		model.addAttribute("chatRoomList", chatRoomList);

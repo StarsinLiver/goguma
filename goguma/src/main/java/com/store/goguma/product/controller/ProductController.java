@@ -58,7 +58,8 @@ public class ProductController {
 	public String productDetail(@RequestParam(value = "pId") Integer pId, Model model, HttpSession session) {
 	    ProductDTO productDTO = productService.findAllBypId(pId);
 	    List<ProductDTO> userProdList = productService.findWishAndChat(pId);
-	    
+	    log.info("상품 정보: {}", productDTO);
+	    log.info("userProdList : {}" , userProdList);
 	    // 찜 버튼을 눌렀을 때만 사용자 정보를 가져오도록 수정
 	    OauthDTO user = (OauthDTO) session.getAttribute("principal");
 	    Integer uId = null;
@@ -70,18 +71,16 @@ public class ProductController {
 	    }
 
 	    // 사용자 정보가 null이 아닌 경우, DTO에 사용자 정보 설정
-	    UserDTO userDTO = null;
+	    UserDTO userDTO = userService.findAllByuId(productDTO.getHostId());
 	    int isExistChatRoom = 0;
 	    if (uId != null) {
-	        userDTO = userService.findAllByuId(uId);
 	        isExistChatRoom = chatRoomService.isExistChatRoom(pId, uId);
 	    }
 	    
 		// 상품의 찜 개수 조회
 		Integer wishlistCount = wishListService.getCountWishlist(pId);
+	    log.info("사용자 정보: {}", userDTO);
 	    
-	    log.info("사용자 정보: {}", user);
-	    log.info("상품 정보: {}", productDTO);
 	    model.addAttribute("product", productDTO);
 	    model.addAttribute("productList", userProdList);    
 	    model.addAttribute("user", userDTO);

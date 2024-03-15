@@ -76,6 +76,7 @@
 		and address like CONCAT('%', #{searchAddress}, '%')
 		and price between #{lowPrice} and
 		#{highPrice}
+		and p.delete_yn = 'N'
 		group by p.p_id
 		order by
 		<if test="sortWishList == 'Y'.toString()">
@@ -113,6 +114,7 @@
 		and address like CONCAT('%', #{searchAddress}, '%')
 		and price between #{lowPrice} and
 		#{highPrice}
+		and p.delete_yn = 'N'
 		group by p.p_id
 		) AS
 		result;

@@ -21,7 +21,7 @@
 	</update>
 	
 	
-	<select id="findAllByuId">
+	<select id="findAllByuId" resultType="com.store.goguma.entity.User">
 		select * from user where u_id = #{uId}
 	</select>
 
