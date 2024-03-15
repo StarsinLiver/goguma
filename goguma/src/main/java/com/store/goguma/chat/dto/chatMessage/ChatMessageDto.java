@@ -2,8 +2,6 @@ package com.store.goguma.chat.dto.chatMessage;
 
 import java.sql.Timestamp;
 
-import com.store.goguma.utils.ChatType;
-
 import lombok.Data;
 
 //select c.id as messageId ,

@@ -15,6 +15,8 @@ import lombok.ToString;
 @Builder
 public class ChatMessageReqDto {
 	private Integer userId;
+	private String userName;
+	private String userFile;
 	private String text;
 	private String file;
 	private String emoji;
