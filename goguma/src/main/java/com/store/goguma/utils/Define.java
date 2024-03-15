@@ -36,4 +36,6 @@ public class Define {
 ;
     public static final String INTERVAL_SERVER_ERROR = "서버 에러가 발생하였습니다.";
     public static final String ENTER_ROOM_NAME = "업데이트 하실 채팅방의 이름을 입력해 주세요.";
+    
+    public static final String NOT_FOUND_USER = "유저가 탈퇴 하였거나 유저를 찾을 수 없습니다.";
 }

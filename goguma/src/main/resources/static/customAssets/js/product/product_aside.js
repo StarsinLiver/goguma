@@ -105,7 +105,7 @@ function resetSelection() {
 
 // 조회
 const find = (selectedItems, search, searchAddress, lowPrice, highPrice, page, size) => {
-	console.log(selectedItems);
+	currentPageIndex = 0;
 	let sortWishList = "N";
 	let sortChatRoom = "N";
 	let sortHighPrice = "N";
