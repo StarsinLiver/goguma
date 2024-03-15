@@ -87,27 +87,6 @@
 								<td id="refundYn">gogumi</td>
 								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
 							</tr>
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">상품 이름</td>
-								<td id="refundYn">gogumi</td>
-								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
-							</tr>
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">상품 이름</td>
-								<td id="refundYn">gogumi</td>
-								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
-							</tr>
-							<tr id="dataRow">
-								<td id="id">1</td>
-								<td id="purchaseDate">2024.03.01</td>
-								<td id="pointName">상품 이름</td>
-								<td id="refundYn">gogumi</td>
-								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
-							</tr>
 						</tbody>
 
 					</table>

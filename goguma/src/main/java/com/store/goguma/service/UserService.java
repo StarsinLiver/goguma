@@ -18,6 +18,7 @@ import com.store.goguma.user.dto.UserDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
+import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 import com.store.goguma.utils.Define;
 
@@ -36,12 +37,8 @@ public class UserService {
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
 		String userEmail = dto.getSocial() + dto.getEmail();
-		log.info("readByuser1111111111111111111111: "+userEmail);
 		
 		User user = userRepository.selectByEmail(userEmail);
-		
-		
-		
 		return user;
 	}
 	
@@ -105,6 +102,22 @@ public class UserService {
 		
 		List<ProductHistoryDTO> dto = myUserRepository.myReadByproducthistory(uId, start);
 		int total = myUserRepository.countProductHistoryByUser(uId);
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(requestPageDTO)
+				.dtoList(dto)
+				.total(total)
+				.build();
+	}
+	
+	// 내 문의하기 내역
+	public ResponsePageDTO qnaList(RequestPageDTO requestPageDTO,int uId){
+		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		String search = requestPageDTO.getSearch();
+		String searchType = requestPageDTO.getSearchType();
+		
+		List<QnaUserDTO> dto = myUserRepository.findQnaByUid(uId, start, search, searchType);
+		int total = myUserRepository.countQnaByUid(uId, search, searchType);
 		
 		return ResponsePageDTO.builder()
 				.requestPageDTO(requestPageDTO)

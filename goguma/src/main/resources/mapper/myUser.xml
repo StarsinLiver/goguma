@@ -38,6 +38,7 @@
 			and create_at &lt;= DATE_ADD(DATE(NOW()), INTERVAL 3 DAY)
 	</update>
 	
+	<!-- 중고거래 구매 내역 -->
 	<select id="myReadByproducthistory" resultType="com.store.goguma.user.dto.my.ProductHistoryDTO">
 		SELECT ph.*, 
 			p.address AS productAddress, 
@@ -56,9 +57,58 @@
 		LIMIT #{start},10
 	</select>
 	
+	<!-- 중고거래 구매 내역 갯수 -->
 	<select id="countProductHistoryByUser">
 		SELECT COUNT(*) FROM `product_history` as ph
 		JOIN  `product` AS p ON ph.p_id = p.p_id
         	where `u_id`=#{uId}
 	</select>
+	
+	<!-- 문의하기 내역 -->
+	<select id="findQnaByUid" resultType="com.store.goguma.user.dto.my.QnaUserDTO">
+		SELECT q.*,
+		cu.`name` AS userName,
+		au.`name` AS adminName
+			FROM `qna` AS q
+			JOIN `user` AS cu ON q.u_id = cu.u_id <!-- 회원 정보 -->
+			LEFT JOIN `user` AS au ON q.admin_id = au.u_id <!-- 관리자 정보 -->
+		WHERE q.u_id =#{uId}
+		<include refid="searchBox"/>
+		ORDER BY q.id DESC
+		LIMIT #{start},10
+	</select>
+	
+	
+	
+	<!-- 문의하기 내역 갯수 -->
+	<select id="countQnaByUid">
+		SELECT COUNT(*) FROM `qna`
+        	where `u_id`=#{uId}
+        	<include refid="searchBox"/>
+	</select>
+	
+	<!-- 검색 쿼리 -->
+	<sql id="searchBox">
+		<choose>
+			<when test="searchType == 'titleOrContent'">
+				AND title LIKE CONCAT('%', #{search}, '%') OR content LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'title'">
+				AND title LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'content'">
+				AND content LIKE CONCAT('%', #{search}, '%')
+			</when>
+		</choose>
+	</sql>
+	
+	<!-- 
+	<update id="updateDeleteByQnaId">
+		update `qna` set 
+			``=#{}, 
+			`delete_yn`='Y', 
+			`delete_at`=NOW() 
+		where `id`=#{id}
+	</update>
+	 -->
 </mapper>

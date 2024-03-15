@@ -88,7 +88,8 @@
 								<td id="pointName">${product.prodName}</td>
 								<td id="pointName">${product.formatBalance()}</td>
 								<td id="refundYn">${product.userName}</td>
-								<td><button id="refundButton" class="btn btn-danger btn-complete">신고</button></td>
+								<td><button id="refundButton" data-value="${product.id}"
+									class="btn btn-danger btn-complete">신고</button></td>
 							</tr>
 							</c:forEach>
 						</tbody>

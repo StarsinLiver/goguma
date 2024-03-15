@@ -17,4 +17,10 @@ public class RequestPageDTO {
     @Builder.Default
     private int size = 10;
     
+    // 검색 내용
+    private String search;
+    
+    // 검색 타입
+    private String searchType;
+    
 }

@@ -13,7 +13,25 @@
 		font-weight: bold;
 	}
 	
+	.search-div form {
+		display: flex;
+	    padding: 20px;
+	    box-sizing: border-box;
+	    justify-content: flex-end;
+	    align-items: center;
+	}
+	.search-div form > * {
+		margin-left: 10px;
+	}
 	
+	.search-div input {
+		font-size: 16px;
+		padding: 8px;
+		border: 1px solid #ddd;
+	}
+	.search-div select {
+		padding: 11px;
+	}
 </style>
 
 <!-- 메인 시작 -->
@@ -60,8 +78,15 @@
 		<h4 class="user-page-title">문의내역</h4>
 		
 		<div class="search-div">
-			<button type="button" class="btn btn-warning btn-complete">검색</button>
-			<input type="text" name="search" placeholder="검색..."/>
+			<form action="/user/myQna">
+				<select name="searchType">
+					<option value="titleOrContent">제목+내용</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+				</select>
+				<input type="text" name="search" placeholder="검색..."/>
+				<button type="submit" class="btn btn-warning btn-complete">검색</button>
+			</form>
 		</div>
 		<table class="table table-hover">
 		  <tbody>
@@ -72,59 +97,120 @@
 					<th>작성일</th>
 					<th>확인여부</th>
 			    </tr>
-			    <tr>
-			      <td><input type="checkbox" name="checkbox"/></td>
-			      <td>11</td>
-			      <td>테스트 제목</td>
-			      <td>2024.03.01</td>
-			      <td class="reply complete">답변완료</td>
+			    <c:forEach var="qna" items="${qnaList}">
+			    <tr class="qna--data">
+			      <td><input type="checkbox" name="checkbox" class="check" value="${qna.id}"/></td>
+			      <td>${qna.id}</td>
+			      <td><a href="#">${qna.title}</a></td>
+			      <td>${qna.formatCreatedAt()}</td>
+			      <td class="reply">${qna.answerYn}</td>
 			    </tr>
-			    <tr>
-			      <td><input type="checkbox" name="checkbox"/></td>
-			      <td>11</td>
-			      <td>테스트 제목</td>
-			      <td>2024.03.01</td>
-			      <td class="reply">답변 대기</td>
-			    </tr>
-			    <tr>
-			      <td><input type="checkbox" name="checkbox"/></td>
-			      <td>11</td>
-			      <td>테스트 제목</td>
-			      <td>2024.03.01</td>
-			      <td class="reply">답변 대기</td>
-			    </tr>
-			    <tr>
-			      <td><input type="checkbox" name="checkbox"/></td>
-			      <td>11</td>
-			      <td>테스트 제목</td>
-			      <td>2024.03.01</td>
-			      <td class="reply complete">답변완료</td>
-			    </tr>
+			    </c:forEach>
 		  </tbody>
 		</table>
 		<div class="board-utils">
 			<label>
-				<input type="checkbox"/>&nbsp;
+				<input type="checkbox" name="allChack" id="allChack"/>&nbsp;
 				<span>모두 선택</span>
 			</label>
 			
 			<div>
-				<button href="#" class="btn btn-warning btn-complete">삭제</button>
+				<button id="delete-qna" onclick="deleteFun()" class="btn btn-warning btn-complete">삭제</button>
 				<a href="#" class="btn btn-warning btn-complete">문의하기</a>
 			</div>
 		</div>
 		<div class="pagination">
-		  <a href="#">&laquo;</a>
-		  <a href="#">1</a>
-		  <a class="active" href="#">2</a>
-		  <a href="#">3</a>
-		  <a href="#">4</a>
-		  <a href="#">5</a>
-		  <a href="#">&raquo;</a>
+			<!-- 페이지 처리 -->
+			<c:if test="${start > 1}">
+			<a href="/user/myQna?pg=${start - 1}">&laquo;</a>
+		  	</c:if>
+		  	<!-- 페이지 번호 -->
+		  	<c:forEach var="i" begin="${start}" end="${end}">
+				<a href="/user/myQna?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+			</c:forEach>
+		  	<c:if test="${end < last}">
+			<a href="/user/myQna?pg=${end + 1}">&raquo;</a>
+			</c:if>
 		</div>
 	</div>
 </div>
 <!-- 메인 종료 -->
+<script>
+	const deleteBtn = document.getElementById('delete-qna');
+	
+	// 답변 여부
+	document.addEventListener("DOMContentLoaded", function() {
+	    const replyElements = document.querySelectorAll('.reply');
+	    
+	    replyElements.forEach(function(replyElement) {
+	        if (replyElement.textContent.trim() === 'N') {
+	            replyElement.textContent = '대기중';
+	        } else if (replyElement.textContent.trim() === 'Y') {
+	            replyElement.textContent = '답변완료';
+	            replyElement.classList.add('complete');
+	        }
+	    });
+	});
+    
+    
+ 	// 페이지가 로드된 후 실행됨
+    window.onload = function() {
+        // 현재 URL 가져오기
+        let currentUrl = window.location.href;
 
+        let url = new URL(currentUrl);
+
+        // 추가할 파라미터
+        let searchType = url.searchParams.get('searchType');
+        let search = url.searchParams.get('search');
+
+        // pagination 클래스를 가진 요소 찾기
+        let paginationLinks = document.querySelectorAll('.pagination a');
+
+        // 각 링크에 추가 파라미터 추가
+        paginationLinks.forEach(function(link) {
+            let linkUrl = new URL(link.href);
+
+            // 파라미터 추가
+            if (searchType && search) {
+                linkUrl.searchParams.append('searchType', searchType);
+                linkUrl.searchParams.append('search', search);
+            }
+
+            // 변경된 URL을 href 속성에 설정
+            link.href = linkUrl.href;
+        });
+    };
+    
+    // 모두 선택
+    
+    // 게시글 삭제
+  	function deleteFun() {
+  		const checked = document.querySelectorAll('input[name="checkbox"]:checked');
+  		let qnaIds = [];
+  		
+  		// 체크박스 값 넣기
+  		checked.forEach(function(item) {
+  			qnaIds.push(Number(item.value));
+  	    });
+  		console.log(qnaIds);
+  		
+  		$.ajax({
+		    type: 'put',
+		    url: '/user/myQna/delete',
+		    dataType: 'json',
+		    data: JSON.stringify(qnaIds),
+		    contentType: 'application/json',
+		    async : false,
+		    success: function(result) {
+				
+		    },
+		    error: function(request, status, error) {
+		        console.log(error);
+		    }
+		});
+    	
+    }
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

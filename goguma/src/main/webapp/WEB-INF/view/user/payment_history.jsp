@@ -139,7 +139,7 @@
 								<td id="id">${history.mainEmojiId}</td>
 								<td class="purchaseDate">${history.createAt}</td>
 								<td id="pointName">${history.name}</td>
-								<td class="refundYn">${history.cancelYn}</td>
+								<td class="refundYn">${history.cancelResult()}</td>
 								<td>
 									<button id="refundButton" data-value="${history.merchantId}" 
 										class="btn btn-warning btn-complete cancel-request">상세</button>
@@ -207,13 +207,12 @@
 <!-- 메인 종료 -->
 
 <script>
-
 	const modal = $('.my-modal');
 	
 	// 모달 창 열기
 	$(".cancel-request").click(function(){
 		const id = $(this).data('value');
-		console.log("포트원 키 :"+id);
+		
 		
 		$.ajax({
 		    type: 'get',
@@ -222,14 +221,12 @@
 		        "Content-Type": "application/json"
 		    },
 		    success: function(result) {
-		    	
 		        const bank = result.bank;
-		        const price = result.price;
+		        const price = result.price.toLocaleString();
 		        const name = result.name;
 		        const date = result.createAt;
 		        const cancelYn = result.cancelYn;
 		        const file = result.file;
-		        console.log(result);
 		        
 		        $('.emoji-id').text(id);
 				$('.emoji-price').text(price+'원');
@@ -258,7 +255,7 @@
 		modal.css("display", "block");
 	});
 	
-	// 등록
+	// 환불 등록
 	$('.req-text').click(function(){
 		const id = $('.emoji-id').text();
 		alert("아이디 : "+id);
@@ -284,7 +281,7 @@
 	});
 	
 	
-	// 모달창 나오기
+	// 모달창 나가기
 	$(".close").on("click", function() {
 	  modal.css("display", "none");
 	});

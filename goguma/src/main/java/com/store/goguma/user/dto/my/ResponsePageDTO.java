@@ -24,6 +24,9 @@ public class ResponsePageDTO {
     private int pg;
     private int size;
     private int total;
+    
+    private String search;
+    private String searchType;
 
     private int start, end;
     private int last;
@@ -36,6 +39,9 @@ public class ResponsePageDTO {
         this.size = requestPageDTO.getSize();
 
         this.dtoList = dtoList;
+        
+        this.search = requestPageDTO.getSearch();
+        this.searchType = requestPageDTO.getSearchType();
 
         this.end   = (int) (Math.ceil(this.pg / 10.0)) * 10;
         this.start = this.end - 9;

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
+import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 
 @Mapper
@@ -28,5 +29,16 @@ public interface MyUserRepository {
 															@Param("start") Integer start);
 	
 	// 구매 거래 내역 갯수
-	public int countProductHistoryByUser(@Param("uId") Integer uId);
+	public int countProductHistoryByUser(Integer uId);
+	
+	// 내 문의하기 내역
+	public List<QnaUserDTO> findQnaByUid(@Param("uId") Integer uId, 
+										@Param("start") Integer start,
+										@Param("search")String search, 
+										@Param("searchType")String searchType);
+	
+	// 문의 내역 갯수
+	public int countQnaByUid(@Param("uId") Integer uId, 
+							@Param("search")String search, 
+							@Param("searchType")String searchType);
 }
