@@ -1,0 +1,47 @@
+.notice-detail-main-div{
+    width: 90%;
+    margin: 50px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notice-detail-table{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+.notice-detail-tr{
+    border-bottom: 1px solid black;
+}
+
+.notice-detail-th{
+    width: 100px;
+    background-color: aliceblue;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+.notice-detail-td{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.admin-notice-update-btn{
+	margin: 10px;
+	background-color: gray;
+	color: white;
+	padding: 20px;
+}
+
+.admin-notice-delete-btn{
+	margin: 10px;
+	background-color: gray;
+	color: white;
+	padding: 20px;
+}

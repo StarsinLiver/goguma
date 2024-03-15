@@ -7,13 +7,14 @@
 
 	<select id="findAllByRoomId"
 		resultType="com.store.goguma.chat.dto.chatMessage.ChatMessageDto">
-		select c.id as messageId ,
+		select 
+        c.id as messageId ,
 		c.u_id as userId ,
 		c.text as text ,
 		c.file as file ,
 		c.emoji as emoji ,
 		c.room_id as roomId ,
-		c.create_at as createAt ,
+        c.create_at as createAt ,
 		c.chat_message_type as chatMessageType ,
 		u.name as userName ,
 		u.file as userFile
@@ -38,7 +39,6 @@
 		c.file as file ,
 		c.emoji as emoji ,
 		c.room_id as roomId ,
-		r.name as roomName ,
         c.create_at as createAt ,
 		c.chat_message_type as chatMessageType ,
 		u.name as userName ,
@@ -46,8 +46,6 @@
 		from chat_message c
 		left join user u
 		on c.u_id = u.u_id
-        left join chat_room r
-        on c.room_id = r.id
 		where c.room_id = #{roomId}
 		and u.u_id is not null
 		ORDER BY c.id DESC 

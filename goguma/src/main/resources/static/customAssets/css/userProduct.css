@@ -1060,7 +1060,7 @@ body.global footer .social-links a {
 /* line 6, app/assets/stylesheets/home/articles/cards.scss */
 .cards-wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: normal;
   flex-wrap: wrap;
   width: 100%;
   margin: 0 auto;
@@ -1178,7 +1178,7 @@ body.global footer .social-links a {
 /* line 93, app/assets/stylesheets/home/articles/cards.scss */
 .cards-wrap .card {
   width: calc(33% - 16px);
-  margin-right: 16px;
+  margin-right: 26px;
 }
 
 /* line 97, app/assets/stylesheets/home/articles/cards.scss */

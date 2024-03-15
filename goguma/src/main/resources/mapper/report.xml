@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.goguma.repository.ReportRepository">
+
+	<insert id="addReport">
+		INSERT INTO report (reson, host_id, call_id) VALUES
+		(#{reson}, #{hostId}, #{callId})
+	</insert>
+	
+	<select id="existsByHostIdAndCallId"
+		resultType="java.lang.Boolean">
+		SELECT EXISTS (SELECT 1 FROM report WHERE host_id = #{hostId} AND call_id =
+		#{callId})
+	</select>
+</mapper>

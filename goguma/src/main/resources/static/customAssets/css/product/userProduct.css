@@ -1,0 +1,57 @@
+@charset "UTF-8";
+    /* 카드 스타일 */
+    .card {
+        width: calc(33.33% - 20px); /* 가로로 3개씩 배치하고 간격을 조정 */
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        margin-bottom: 20px; /* 아래쪽 여백 추가 */
+        display: inline-block; /* 인라인 블록 요소로 설정하여 가로로 나열되도록 함 */
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* 호버시 약간 위로 이동 */
+    }
+
+    /* 카드 이미지 */
+    .card-photo img {
+        width: 100%;
+        height: auto;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    /* 카드 설명 부분 */
+    .card-desc {
+        padding: 15px;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .card-price {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .card-region-name {
+        font-size: 14px;
+        color: #999;
+    }
+
+    .card-counts {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #999;
+    }
+
+.not-found-product {
+	text-align: center;
+	margin: auto;
+}

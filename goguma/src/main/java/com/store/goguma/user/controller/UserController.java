@@ -1,6 +1,5 @@
 package com.store.goguma.user.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
-import com.store.goguma.user.dto.my.ProductHistoryDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user")
 public class UserController {
 	
+	@Autowired
+	private HttpSession httpSession;
+	
+	// 유저 페이지
 	@Autowired
 	private UserService userService;
 	
@@ -204,6 +206,15 @@ public class UserController {
 	public String wishPage() {
 		
 		return "/user/wish";
+	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logOutProc() {
+		
+		httpSession.invalidate();
+		
+		return "main";
 	}
 	
 }

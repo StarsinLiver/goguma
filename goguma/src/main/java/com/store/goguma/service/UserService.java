@@ -36,8 +36,11 @@ public class UserService {
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
 		String userEmail = dto.getSocial() + dto.getEmail();
+		log.info("readByuser1111111111111111111111: "+userEmail);
 		
 		User user = userRepository.selectByEmail(userEmail);
+		
+		
 		
 		return user;
 	}

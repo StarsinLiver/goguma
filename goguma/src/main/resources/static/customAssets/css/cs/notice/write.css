@@ -1,0 +1,34 @@
+.cs-notice--main-div{
+    width: 90%;
+    margin: 50px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cs-notice--table{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+.cs-notice--tr{
+    border-bottom: 1px solid black;
+}
+
+.cs-notice--th{
+    width: 100px;
+    background-color: aliceblue;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+.cs-notice--td{
+    font-size: 20px;
+    padding: 10px;
+}
+

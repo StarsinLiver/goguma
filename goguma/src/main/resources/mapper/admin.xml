@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.goguma.repository.AdminRepository">
+
+	<!-- admin계정 정보 업데이트 -->
+	<update id="modifyAdminByEmail">
+
+		update `user` set `zip`=#{zip}, `address`=#{address}, `tel`=#{tel},
+		`update_at`=NOW()
+		where `social`=#{social} and `email`=#{email} and `role` = #{role}
+
+	</update>
+	
+	<!-- 업데이트한 유저데이터 호출 -->
+	<select id="selectAdminByUid" resultType="com.store.goguma.user.dto.OauthDTO">
+		
+		select * from user where u_id = #{uid}
+	
+	</select>
+
+	<!-- 상품 환불 리스트 출력 -->
+	<select id="findEmojiHistoryByUser">
+		select * from `emoji_history` 
+		where `cancel_yn`= 'Y' and `confirm_yn` = 'N'
+		ORDER BY `merchant_id` DESC
+		LIMIT #{start},10
+	
+	</select>
+	
+
+	<!-- 상품 환불 리스트 카운트 -->
+	<select id="countEmojiHistoryByCancleY">
+	
+		select count(*) from emoji_history where cancel_yn = 'Y' and confirm_yn = 'N';
+	
+	</select>
+	
+	
+	<!-- 환불 사유 출력 -->
+	<select id="selectCancelByMaerchantId" resultType="com.store.goguma.entity.EmojiHistory">
+	
+		select * from emoji_history where merchant_id = #{merchantId}
+	
+	</select>
+	
+		
+	<!-- 환불 완료 처리-->
+	<update id="updateConfirmPayment">
+	
+		UPDATE emoji_history SET confirm_yn = 'Y' WHERE  merchant_id = #{merchantId};
+	
+	</update>
+	
+</mapper>

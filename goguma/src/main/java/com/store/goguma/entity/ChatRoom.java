@@ -13,7 +13,6 @@ import lombok.ToString;
 @Builder
 public class ChatRoom {
 	private Integer id;
-	private String name;
 	private Integer pId;
 	private Integer uId;
 	private Integer hostId;
@@ -21,4 +20,6 @@ public class ChatRoom {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
+	private String userExit;
+	private String hostExit;
 }

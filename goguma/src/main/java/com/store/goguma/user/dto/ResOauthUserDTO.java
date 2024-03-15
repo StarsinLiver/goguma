@@ -13,6 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+//  oauthDTO용 TODO 제거 할지 봐야함 현재 보류
 public class ResOauthUserDTO {
 
 	private Integer id;

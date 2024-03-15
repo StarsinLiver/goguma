@@ -1,15 +1,24 @@
-
 // AJAX GET 요청 보내기
 // ajax 통신
 
+let principal = 0;
+
 let response = null;
-document.addEventListener('DOMContentLoaded', function() {
+// --------------------------------------------------- 소켓
+const socket = new SockJS("http://localhost:80/ws"); // 이 부분 교체 작업 진행해야함
+const stompClient = Stomp.over(socket);
+
+stompClient.connect({}, (frame) => {
+console.log("Connected to WebSocket");
+console.log("Session ID: " + frame.headers["user-name"]);
+
  $.ajax({
       type : "GET",            // HTTP method type(GET, POST) 형식이다.
       url : "http://localhost:80/chat/user/room",      // 컨트롤러에서 대기중인 URL 주소이다.
        success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 			console.log(res);
 			if(res != 'USER_NOT_LOGIN') {
+			principal = document.querySelector("#principal").value;
 			for(let i = 0; i < res.length; i++) {
 				subscribe(res[i].roomId);
 			} // 반복문 종료
@@ -19,24 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("통신 실패.")
            }
      }); // ajax 완료
-});
 
-
-// --------------------------------------------------- 소켓
-const socket = new SockJS("http://localhost:80/ws"); // 이 부분 교체 작업 진행해야함
-const stompClient = Stomp.over(socket);
-
-stompClient.connect({}, (frame) => {
-console.log("Connected to WebSocket");
-console.log("Session ID: " + frame.headers["user-name"]);
 }); // connect 종료
              // 연결 , 구독
 const subscribe = (roomId) => {
-	
 stompClient.subscribe(`/sub/chat/${roomId}`, (message) => {
     let body = JSON.parse(message.body);
     let img = jsonImage(body);
-    
     // 토스트 메시지
     // 새로운 div 엘리먼트를 생성합니다.
     var toastElement = document.createElement('div');
@@ -47,7 +45,7 @@ stompClient.subscribe(`/sub/chat/${roomId}`, (message) => {
     var toastContent = document.createElement('div');
     var userName = body.userName.length > 20 ? body.userName.substring(0, 17) + "..." : body.userName;
     var textContent = body.text.length > 20 ? body.text.substring(0, 17) + "..." : body.text;
-    toastContent.innerHTML = "<h4><b>" + body.roomName + "</b></h4><p><b>" + userName + "</b>: " + textContent + "</p>";
+    toastContent.innerHTML = "<h4><b>" + userName + "</b></h4><p>" + textContent + "</p>";
 
     // 생성한 엘리먼트를 토스트 메시지에 추가합니다.
     toastElement.appendChild(toastContent);
@@ -137,5 +135,3 @@ const jsonImage = (res) => {
 	
 	return img;
 }
-
-

@@ -3,7 +3,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
+<link rel="stylesheet" href="/customAssets/css/product/userProduct.css">
+<style>
+.chat-button {
+	border: 1px solid red;
+	float: inline-end;
+	margin-right: 5px;
+}
 
+.darken-on-hover:hover {
+	filter: brightness(85%);
+}
+</style>
 <!-- 메인 섹션 -->
 <article id="content">
 	<h1 class="hide">제목</h1>
@@ -42,7 +53,8 @@
 		</div>
 	</section>
 	<section id="article-profile">
-		<a id="article-profile-link" href="/userProduct?uId=${product.hostId}">
+		<a id="article-profile-link"
+			href="/product/userProduct?uId=${product.hostId}">
 			<h3 class="hide">프로필</h3>
 			<div class="space-between">
 				<div style="display: flex">
@@ -71,7 +83,142 @@
 	</section>
 	<section id="article-description">
 		<h1 property="schema:name" id="article-title" style="margin-top: 0px">
-			${product.name}</h1>
+			${product.name}
+			<div class="d-flex justify-content-start align-items-center"
+				style="float: right; margin-top: -20px;">
+
+				<!-- 채팅 버튼 -->
+				<c:choose>
+					<c:when test="${product.hostId == principal.getUId()}">
+						<a class="btn btn-primary" href="/chat/room"
+							style="margin-right: 10px;">채팅방이동</a>
+					</c:when>
+					<c:when test="${isExistChatRoom == 0}">
+						<button type="button" class="btn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							style="margin-right: 10px;">채팅하기</button>
+					</c:when>
+					<c:otherwise>
+						<a class="btn btn-primary" href="/chat/room"
+							style="margin-right: 10px;">채팅방이동</a>
+					</c:otherwise>
+				</c:choose>
+				<div class="modal fade" id="exampleModal" tabindex="-1"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">방 제목 입력</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<!-- 방 제목 입력 폼 -->
+								<form method="post" action="/product/saveRoom">
+									<input type="text" class="form-control"
+										placeholder="방 제목을 입력하세요" name="name" style="height: 50px;"
+										required> <input type="hidden"
+										value="${product.getThisPid()}" name="pId"> <input
+										type="hidden" value="${product.hostId}" name="hostId">
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end"
+										style="margin-top: 8px;">
+										<button type="submit" class="btn btn-primary">확인</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">취소</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 신고 버튼 -->
+
+					<c:if test="${product.hostId != principal.getUId()}">
+						<button type="button" class="btn btn-danger"
+							data-bs-toggle="modal" data-bs-target="#reportModal"
+							style="margin-right: 10px;">신고하기</button>
+					</c:if>
+				<div class="modal fade" id="reportModal" tabindex="-1"
+					aria-labelledby="reportModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header bg-danger text-white">
+								<h5 class="modal-title" id="reportModalLabel"
+									style="font-weight: bold; font-size: 1.25rem;">신고하기</h5>
+								<button type="button" class="btn-close btn-close-white"
+									data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<form id="reportForm" action="addReport" method="post">
+									<input type="hidden" name="pId" value="${product.getThisPid()}">
+									<input type="hidden" name="hostId" value="${product.hostId}">
+									<div class="dropdown">
+										<button class="btn btn-secondary dropdown-toggle"
+											type="button" id="dropdownMenuButton"
+											data-bs-toggle="dropdown" aria-expanded="false"
+											style="width: 200px; height: 25px; margin-bottom: 10px; background-color: tomato;">
+											신고 이유 선택</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<li><a class="dropdown-item" href="#"
+												data-value="사기/광고성 상품">사기/광고성 상품</a></li>
+											<li><a class="dropdown-item" href="#"
+												data-value="적절하지않은 상품">적절하지않은 상품</a></li>
+											<li><a class="dropdown-item" href="#"
+												data-value="욕설/비속어">욕설/비속어</a></li>
+											<li><a class="dropdown-item" href="#" data-value="기타">기타</a></li>
+										</ul>
+									</div>
+									<div id="selectedReason"
+										style="font-weight: bold; color: red; margin-bottom: 10px;"></div>
+									<textarea class="form-control" id="additionalReason"
+										name="additionalReason" rows="3" style="resize: vertical;"
+										placeholder="신고 이유를 작성해주세요"></textarea>
+									<input type="hidden" id="resonInput" name="reson">
+									<div class="d-grid gap-2 d-md-flex justify-content-md-end"
+										style="margin-top: 8px;">
+										<button type="submit" class="btn btn-danger">신고</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">취소</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 찜하기 버튼 또는 찜 삭제 버튼 -->
+				<c:choose>
+					<c:when test="${product.hostId == principal.getUId()}">
+							<!-- 빈 공간 -->
+					</c:when>
+					<c:when test="${prodWishlist}">
+						<form method="post" action="/product/deleteWishList"
+							style="margin-top: 5px;">
+							<input type="hidden" name="pId" value="${product.getThisPid()}">
+							<p style="text-align: right">
+								<button class="btn btn-danger btn-circle" type="submit">
+									<i class="fa fa-frown-o"></i> 찜해제
+								</button>
+							</p>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<form method="post" action="/product/addWishList"
+							style="margin-top: 5px;">
+
+							<input type="hidden" name="pId" value="${product.getThisPid()}">
+							<p style="text-align: right">
+								<button class="btn btn-success btn-circle" type="submit">
+									<i class="fa fa-smile-o"></i> 찜하기
+								</button>
+							</p>
+						</form>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h1>
+
 		<p id="article-category">
 			타이틀 ∙
 			<time id="createAt">${product.createAt}</time>
@@ -82,7 +229,10 @@
 		<div property="schema:description" id="article-detail">
 			<p>${product.description}</p>
 		</div>
-		<p id="article-counts">관심 0 ∙ 채팅 0</p>
+		<p id="article-counts">
+			관심 ${product.countWishList} ∙ <span>채팅
+				${product.countChatRoom} </span>
+		</p>
 	</section>
 </article>
 
@@ -97,7 +247,7 @@
 			<c:if test="${loop.index < 6}">
 				<article class="card">
 					<a class="card-link ga-click"
-						href="/productDetail?pId=${list.getPid()}">
+						href="productDetail?pId=${list.getThisPid()}">
 						<div class="card-photo">
 							<img alt="" src="" />
 						</div>
@@ -106,7 +256,8 @@
 							<div class="card-price">${list.price}원</div>
 							<div class="card-region-name">${list.address}</div>
 							<div class="card-counts">
-								<span>관심 0 </span> ∙ <span>채팅 0 </span>
+								<span>관심 ${list.countWishList} </span> ∙ <span>채팅
+									${list.countChatRoom} </span>
 							</div>
 						</div>
 					</a>
@@ -117,10 +268,8 @@
 </section>
 <!-- 메인 섹션 종료 -->
 
-
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
-
 
 <script>
 	// 페이지 로딩 후 실행되는 함수
@@ -151,5 +300,34 @@
 		}
 	}
 </script>
-
-
+<script>
+	// 드롭다운 메뉴 항목을 클릭했을 때 호출되는 함수
+	document.querySelectorAll('.dropdown-item').forEach(item => {
+	    item.addEventListener('click', event => {
+	        const selectedReason = event.target.getAttribute('data-value');
+	        document.getElementById('selectedReason').innerText = selectedReason;
+	    });
+	});
+	// 모달이 닫힐 때 초기화하는 함수
+	function resetModal() {
+	    document.getElementById('selectedReason').innerText = '';
+	    document.getElementById('additionalReason').value = '';
+	}
+	document.getElementById('reportModal').addEventListener('hidden.bs.modal', function () {
+	    resetModal();
+	});
+    // textarea에 작성된 내용도 reson으로 설정
+    $("#additionalReason").on("input", function() {
+        var additionalReason = $(this).val();
+        $("#resonInput").val(additionalReason);
+    });
+</script>
+<script>
+    // 모달 닫힐 때 입력 필드 초기화
+    $('#exampleModal').on('hidden.bs.modal', function () {
+        // 입력 필드 초기화
+        $('#exampleModal input[name="name"]').val('');
+        $('#exampleModal input[name="pId"]').val('');
+        $('#exampleModal input[name="hostId"]').val('');
+    });
+</script>

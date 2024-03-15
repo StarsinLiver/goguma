@@ -11,8 +11,11 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+// 결합된 oauth 데이터 받을때 사용 or 최초 로그인시 회원가입 데이터를 받을 때 사용
 public class OauthResisterDTO {
 	
+	
+	private int uId;
 	private String email;
 	private String name;
 	private String social;
@@ -20,6 +23,7 @@ public class OauthResisterDTO {
 	private String zip;
 	private String addr1;
 	private String addr2;
+	private String role;
 	
 	
 	
