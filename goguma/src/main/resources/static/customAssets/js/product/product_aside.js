@@ -156,16 +156,18 @@ const find = (selectedItems, search, searchAddress, lowPrice, highPrice, page, s
 
 // 카드 만들기
 const makeCard = (content) => {
-
+	
 	let div = "";
 	for (var i = 0; i < content.length; i++) {
+		
+		let file = content[i].file.split(",");
+		console.log(file);
 		div +=
 			`
 		<article class="card">
-			<a class="card-link" href="/product/productDetail?pId=2">
+			<a class="card-link" href="/product/productDetail?pId=${content[i].pid}">
 				<div class="card-photo" style="width : 229px; height : 274px;">
-					<img src="/images/upload/${content[i].file}" />
-
+					<img src="/images/upload/${file[0]}" />
 				</div>
 				<div class="card-desc">
 					<h2 class="card-title">${content[i].name}</h2>
