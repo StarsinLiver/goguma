@@ -17,7 +17,7 @@ function load(num){
 			if(data != ""){
 				innerFun(data);
 			}else{
-				alert("실패");
+				innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
 			}
 		},
 		error : function(){

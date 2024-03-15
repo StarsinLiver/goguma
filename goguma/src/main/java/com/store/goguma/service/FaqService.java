@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.store.goguma.cs.dto.FaqRequestDto;
 import com.store.goguma.entity.Faq;
 import com.store.goguma.repository.FaqRepository;
 
@@ -19,6 +20,11 @@ public class FaqService {
 
 	public List<Faq> getFaqList() {
 		return repository.getFaqList();
+	}
+
+	public boolean faqWrite(FaqRequestDto dto) {
+		int result = repository.faqWrite(dto.toEntity());
+		return result != 0;
 	}
 	
 	

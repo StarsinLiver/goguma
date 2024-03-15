@@ -11,10 +11,16 @@
 .qna-write-table{
     border-top: 2px solid black;
     border-bottom: 2px solid black;
+    width: 600px;
+    padding: 20px;
 }
 
 .qna-write-tr{
     border-bottom: 1px solid black;
+}
+
+.qna-write-th .qna-write-td{
+    
 }
 
 .qna-write-th{
@@ -26,11 +32,32 @@
 
 .qna-write-select{
     width: 200px;
-    padding: 10px;
+    padding: 4px 10px;
+    border: none;
+}
+
+.qna-write-input{
+	width: 100%;
+	margin: 0;
+	padding: 5px;
+	border: none;
+}
+
+.qna-write-textarea{
+	width: 100%;
+	resize: none;
+	margin: 0;
+	padding: 5px;
+	height: 300px;
+	border: none;
 }
 
 .qna-write-insert-btn{
     padding: 10px;
-    background-color: antiquewhite;
+    background-color: gray;
+    color: white;
     cursor: pointer;
+    margin-top: 50px;
+    border: none;
+    border-radius: 10px;
 }

@@ -7,5 +7,15 @@
 	<select id="getFaqList" resultType="com.store.goguma.entity.Faq">
 		select * from faq;
 	</select>
+	
+	<insert id="faqWrite">
+		insert into faq(title, content, u_id, create_at)
+		values(
+			#{title},
+			#{content},
+			#{uId},
+			now()
+		);
+	</insert>
 
 </mapper>

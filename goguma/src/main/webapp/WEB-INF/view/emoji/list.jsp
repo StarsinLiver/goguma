@@ -30,7 +30,7 @@
         </div>
         <div class="emoji--body">
             <div class="emoji--content-box"></div>
-            <div class="emoji--page-box">
+            <!-- <div class="emoji--page-box">
                 <div class="emoji--arrow-box">
                     <span>◀</span>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="emoji--arrow-box">
                     <span>▶</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 <script src="/customAssets/js/emoji/list.js"></script>

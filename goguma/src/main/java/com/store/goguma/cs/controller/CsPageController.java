@@ -30,6 +30,8 @@ public class CsPageController {
 	
 	
 	
+	
+	
 	// admin
 
 	@GetMapping("/notice/list/admin")
@@ -50,5 +52,10 @@ public class CsPageController {
 	@GetMapping("/notice/update/admin/{id}")
 	public String noticeUpdate() {
 		return "cs/notice/admin-update";
+	}
+	
+	@GetMapping("/faq/write/admin")
+	public String faqWrite() {
+		return "cs/faq/admin-write";
 	}
 }
