@@ -1,0 +1,74 @@
+.faq--main-div {
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq--box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    font-size: 20px;
+}
+
+.faq--col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 10px 20px;
+    
+}
+
+.faq--col-main {
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.faq--left-box {
+    display: flex;
+}
+
+.faq--num-box {
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq--title-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq--right-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq--col-sub{
+    width: 1000px;
+    display: none;
+    flex-direction: column;
+}
+
+.faq--col-sub-on{
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+
+.faq--col-sub pre{
+    margin: 0 10px;
+}

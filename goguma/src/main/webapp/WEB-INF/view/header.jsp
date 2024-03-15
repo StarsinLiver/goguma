@@ -58,6 +58,7 @@
 <link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
 <link rel="stylesheet" href="/customAssets/css/cs/qna/write.css">
+<link rel="stylesheet" href="/customAssets/css/cs/faq/list.css">
 
 <!-- Custom CSS -->
 
@@ -116,7 +117,7 @@
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="/cs/qna/write"
-								class="dropdown-item">문의하기</a> <a href="#" class="dropdown-item">자주
+								class="dropdown-item">문의하기</a> <a href="/cs/faq/list" class="dropdown-item">자주
 								묻는 질문</a>
 						</div>
 					</div>
