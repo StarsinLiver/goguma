@@ -68,7 +68,9 @@ function checkSelected() {
 
 	searchTypes.forEach(function(type) {
 		if (type.classList.contains("selected") && type.dataset.type !== "title" && type.dataset.type !== "address") {
-			if (type.dataset.type === "price-high") {
+			if (type.dataset.type === "chat") {
+				selectedItems.push(2);
+			} else if (type.dataset.type === "price-high") {
 				selectedItems.push(3);
 			} else if (type.dataset.type === "price-low") {
 				selectedItems.push(4);
