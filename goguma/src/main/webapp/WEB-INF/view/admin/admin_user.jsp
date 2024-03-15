@@ -23,7 +23,7 @@
 
 <!-- 메인 시작 -->
 <!-- Header Start -->
-<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
+<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png); background-color: #b93474e6;">
         <div class="container text-center">
             <h1>마이페이지</h1>
         </div>
@@ -59,7 +59,7 @@
 <div class="user-page">
 
 	<!-- aside -->
-	<%@ include file="/WEB-INF/view/user/myPageAside.jsp"%>
+	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	
 	<div class="info-container">
@@ -93,54 +93,11 @@
 		
 		<div class="links">
 			<!-- <a href="#" class="btn btn-danger">탈퇴하기</a> -->
-			<a href="/user/modify" class="btn btn-warning btn-complete"><i class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
+			<a href="/admin/modify" class="btn btn-warning btn-complete"><i class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
 		</div>
 	</div>
 </div>
 <!-- 메인 종료 -->
-
-<script>
-	let i = 0;
-	function move() {
-	  if (i == 0) {
-	    i = 1;
-	    let elem = document.getElementById("myBar");
-	    let width = 1;
-	    let id = setInterval(frame, 20);
-	    function frame() {
-	      if (width >= 100) {
-	        clearInterval(id);
-	        i = 0;
-	      } else {
-	        width++;
-	        elem.style.width = width + "%";
-	        elem.innerHTML = width + "%";
-	        
-	     	// 그라데이션 색상 계산
-            let color;
-			if (width >= 80) {
-			    let red = 0; // 초록색에서는 빨간색은 항상 0
-			    let green = Math.floor((width - 80) * 3.1875); // 초록색 계산
-			    color = "rgb(" + red + ", " + (255 - green) + ", 0)";
-			} else if (width >= 40 && width <= 79) {
-			    let red = Math.floor(255 - (width - 40) * 2); // 노랑에서 초록으로 자연스럽게 계산
-			    let green = 255;
-			    color = "rgb(" + red + ", " + green + ", 0)";
-			} else {
-			    let red = 255;
-			    let green = Math.floor(width * 6.375);
-			    color = "rgb(" + red + ", " + green + ", 0)";
-			}
-
-            // 배경색 변경
-            elem.style.backgroundColor = color;
-	        
-	      }
-	    }
-	  }
-	}
-	move();
-</script>
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

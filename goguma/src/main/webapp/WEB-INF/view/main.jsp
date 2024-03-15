@@ -273,7 +273,6 @@
 						<h3>Complated Projects</h3>
 					</div>
 					<!-- end col -->
-
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<span data-scroll class="global-radius icon_wrap effect-1"><i
 							class="flaticon-happy"></i></span>
