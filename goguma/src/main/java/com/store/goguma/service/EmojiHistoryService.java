@@ -25,4 +25,10 @@ public class EmojiHistoryService {
 	public List<MainEmoji> findMainEmojiAllByUserId(int userId) {
 		return emojiHistoryRepository.findMainEmojiAllByUserId(userId);
 	}
+
+	// admin 모든 이모지 출력
+	public List<MainEmoji> findMainEmojiAll() {
+		// TODO Auto-generated method stub
+		return emojiHistoryRepository.findMainEmojiAll();
+	}
 }

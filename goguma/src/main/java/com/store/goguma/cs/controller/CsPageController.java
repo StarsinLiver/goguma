@@ -23,6 +23,11 @@ public class CsPageController {
 		return "cs/qna/write";
 	}
 	
+	@GetMapping("/faq/list")
+	public String getFaqList() {
+		return "cs/faq/list";
+	}
+	
 	
 	
 	// admin

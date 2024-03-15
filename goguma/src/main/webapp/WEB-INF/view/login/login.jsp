@@ -64,7 +64,6 @@
 <div class="container-fluid bg-warning py-5 mb-5 page-header">
 	<div class="container py-5">
 		<div class="row justify-content-center">
-			1
 			<div class="col-lg-10 text-center">
 				<h3 class="display-5 text-white animated slideInDown">로그인</h3>
 			</div>

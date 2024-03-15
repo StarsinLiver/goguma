@@ -23,6 +23,8 @@ public class OauthDTO {
 	private String addr1;
 	private String addr2;
 	private String deleteyn;
+	private String role;
+	
 	
 	
 	

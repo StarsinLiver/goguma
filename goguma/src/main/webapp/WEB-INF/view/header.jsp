@@ -58,6 +58,7 @@
 <link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
 <link rel="stylesheet" href="/customAssets/css/cs/qna/write.css">
+<link rel="stylesheet" href="/customAssets/css/cs/faq/list.css">
 
 <!-- Custom CSS -->
 
@@ -116,7 +117,7 @@
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="/cs/qna/write"
-								class="dropdown-item">문의하기</a> <a href="#" class="dropdown-item">자주
+								class="dropdown-item">문의하기</a> <a href="/cs/faq/list" class="dropdown-item">자주
 								묻는 질문</a>
 						</div>
 					</div>
@@ -144,6 +145,11 @@
 				</div>
 				<!-- 이부분은 관리자계정으로 로그인시 표시되게 설정해야함 -->
 			</div>
+			<c:if test="${principal.role == 'ADMIN'}">
+							<a href="/admin/user"
+						class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">관리자 페이지<i
+						class="fa fa-arrow-right ms-3"></i></a>
+			</c:if>
 			<!-- 이부분은 로그인하였을 경우 로그아웃 버튼으로, 로그인하지 않았을 경우 로그인/회원가입 버튼으로 -->
 			<c:choose>
 				<c:when test="${principal ne null}">

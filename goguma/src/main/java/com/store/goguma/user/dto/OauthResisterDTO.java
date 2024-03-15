@@ -23,6 +23,7 @@ public class OauthResisterDTO {
 	private String zip;
 	private String addr1;
 	private String addr2;
+	private String role;
 	
 	
 	
