@@ -184,6 +184,7 @@
     
     // 모두 선택
     
+    
     // 게시글 삭제
   	function deleteFun() {
   		const checked = document.querySelectorAll('input[name="checkbox"]:checked');
@@ -193,7 +194,6 @@
   		checked.forEach(function(item) {
   			qnaIds.push(Number(item.value));
   	    });
-  		console.log(qnaIds);
   		
   		$.ajax({
 		    type: 'put',
@@ -203,7 +203,8 @@
 		    contentType: 'application/json',
 		    async : false,
 		    success: function(result) {
-				
+		    	
+		    	location.reload();
 		    },
 		    error: function(request, status, error) {
 		        console.log(error);

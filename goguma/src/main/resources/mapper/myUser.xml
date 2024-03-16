@@ -72,7 +72,7 @@
 			FROM `qna` AS q
 			JOIN `user` AS cu ON q.u_id = cu.u_id <!-- 회원 정보 -->
 			LEFT JOIN `user` AS au ON q.admin_id = au.u_id <!-- 관리자 정보 -->
-		WHERE q.u_id =#{uId}
+		WHERE q.u_id =#{uId} and q.`delete_yn` = "N"
 		<include refid="searchBox"/>
 		ORDER BY q.id DESC
 		LIMIT #{start},10
@@ -102,13 +102,29 @@
 		</choose>
 	</sql>
 	
-	<!-- 
+	<!-- 문의하기 게시글 삭제 -->
 	<update id="updateDeleteByQnaId">
 		update `qna` set 
-			``=#{}, 
 			`delete_yn`='Y', 
 			`delete_at`=NOW() 
 		where `id`=#{id}
 	</update>
-	 -->
+	
+	<!-- 유저 이모티콘 목록 -->
+	<select id="selectAllImoji" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
+		SELECT me.id, me.`name`, me.`file` , eh.* 
+			FROM `emoji_history` AS eh
+			JOIN `main_emoji` AS me 
+			ON eh.main_emoji_id = me.id
+		where `u_id`=#{uId} AND `cancel_yn` = "N"
+		ORDER BY me.id DESC
+		LIMIT #{start},10
+	</select>
+	
+	<!-- 유저 결제 내역 갯수 -->
+	<select id="countImoji">
+        SELECT COUNT(*) FROM `emoji_history`
+        where `u_id`=#{uId} AND `cancel_yn` = "N"
+    </select>
+	
 </mapper>

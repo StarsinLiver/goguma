@@ -41,4 +41,14 @@ public interface MyUserRepository {
 	public int countQnaByUid(@Param("uId") Integer uId, 
 							@Param("search")String search, 
 							@Param("searchType")String searchType);
+	
+	// 문의내역 삭제
+	public int updateDeleteByQnaId(Integer id);
+	
+	// 이모티콘 목록 조회
+	public List<UserEmojiDTO> selectAllImoji(@Param("uId") Integer uId, 
+			@Param("start") Integer start);
+	
+	// 이모티콘 갯수
+	public int countImoji(Integer uId);
 }

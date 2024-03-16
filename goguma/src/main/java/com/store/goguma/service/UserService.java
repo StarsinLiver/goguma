@@ -126,6 +126,35 @@ public class UserService {
 				.build();
 	}
 	
+	// 문의하기 글 삭제
+	public int deleteQna(Integer[] qnaIds) {
+		int deletedCount = 0;
+		
+	    for (int qnaId : qnaIds) {
+	        int result = myUserRepository.updateDeleteByQnaId(qnaId);
+	        log.info("qnaId : "+qnaId);
+	        if (result > 0) {
+	            deletedCount++;
+	        }
+	    }
+		
+	    return deletedCount;
+	}
+	
+	// 이모티콘 목록
+	public ResponsePageDTO imojiList(RequestPageDTO requestPageDTO,int uId) {
+		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		
+		List<UserEmojiDTO> list = myUserRepository.selectAllImoji(uId, start);
+		int total = myUserRepository.countImoji(uId);
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(requestPageDTO)
+				.dtoList(list)
+				.total(total)
+				.build();
+	}
+	
 	// 프로필 사진 변경
 	public String uploadProfile(ModifyUserDto dto) {
 		

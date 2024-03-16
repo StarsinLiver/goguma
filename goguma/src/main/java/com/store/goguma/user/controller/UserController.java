@@ -219,16 +219,36 @@ public class UserController {
 	// 문의 내역 삭제
 	@PutMapping("/myQna/delete")
 	@ResponseBody
-	public int qnaDelete(@RequestBody Long[] qnaIds) {
+	public int qnaDelete(@RequestBody Integer[] qnaIds) {
 		log.info("qnaDelete...1");
 		
+		int result = userService.deleteQna(qnaIds);
 		
-		return 0;
+		return result;
 	}
 	
 	// 이모티콘(상품) 목록 페이지
 	@GetMapping("/imoji")
-	public String imojiPage() {
+	public String imojiPage(RequestPageDTO requestPageDTO,Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		log.info("requestPageDTO : "+requestPageDTO);
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
+		int uId = sessionUser.getUId();
+		
+		ResponsePageDTO response = userService.imojiList(requestPageDTO, uId);
+		
+		log.info("response : "+response);
+		
+		model.addAttribute("imojiList", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
 		
 		return "/user/my_imoji";
 	}
