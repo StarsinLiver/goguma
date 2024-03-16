@@ -10,7 +10,7 @@
 	<div class="container py-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
-				<h3 class="display-5 text-white animated slideInDown">qna</h3>
+				<h3 class="display-5 text-white animated slideInDown">faq</h3>
 			</div>
 		</div>
 	</div>
@@ -18,16 +18,6 @@
 <!-- Header End -->
     <div class="qna-write-main-div">
         <table class="qna-write-table">
-            <tr class="qna-write-tr">
-                <th class="qna-write-th">분류</th>
-                <td class="qna-write-td">
-                    <select class="qna-write-select">
-                        <option value="">선택</option>
-                        <option value="상품">상품</option>
-                        <option value="회원정보">회원정보</option>
-                    </select>
-                </td>
-            </tr>
             <tr class="qna-write-tr">
                 <th class="qna-write-th">제목</th>
                 <td class="qna-write-td">
@@ -41,8 +31,8 @@
                 </td>
             </tr>
         </table>
-        <button type="button" class="qna-write-insert-btn">문의하기</button>
+        <button type="button" class="qna-write-insert-btn">faq등록</button>
     </div>
-<script src="/customAssets/js/cs/qna/write.js"></script>
+<script src="/customAssets/js/cs/faq/admin-write.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

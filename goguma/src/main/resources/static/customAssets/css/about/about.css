@@ -1,0 +1,67 @@
+.about-main-div{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-introduce-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.about-text-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.about-in1{
+    font-size: 20px;
+    font-weight: 800;
+    color: rgb(178, 178, 178);
+    margin-bottom: 20px;
+}
+.about-in2{
+    font-size: 40px;
+}
+.about-in3{
+    font-size: 16px;
+    color: rgb(204, 204, 204);
+    margin-top: 20px;
+}
+.about-in4{
+    font-size: 16px;
+    color: rgb(204, 204, 204);
+}
+
+.about-map-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.map-header{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+

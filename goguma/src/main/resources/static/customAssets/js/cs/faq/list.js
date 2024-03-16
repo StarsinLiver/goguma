@@ -22,14 +22,14 @@ function innerFun(data){
                 <div class="faq--col-main">
                     <div class="faq--left-box">
                         <div class="faq--num-box">
-                            <span>${data[i].id}</span>
+                            <span class="faq-num-color">${data[i].id}</span>
                         </div>
                         <div class="faq--title-box">
                             <span>${data[i].title}</span>
                         </div>
                     </div>
                     <div class="faq--right-box">
-                        <span>v</span>
+                        <span class="check-text">▼</span>
                     </div>
                 </div>
                 <div class="faq--col-sub">
@@ -41,14 +41,20 @@ function innerFun(data){
 	faqBody.innerHTML = innr;
 	const mainBody = document.querySelectorAll(".faq--col-main");
 	const subBody = document.querySelectorAll(".faq--col-sub");
-	clickFun(mainBody, subBody);
+	const checkText = document.querySelectorAll(".check-text");
+	clickFun(mainBody, subBody, checkText);
+	
 }
 
-function clickFun(a, b){
+function clickFun(a, b, c){
 	for(let i = 0; i < a.length; i++){
 		a[i].onclick = () => {
-			let to1 = b[i].classList;
-			to1.toggle("faq--col-sub-on");
+			for(let k = 0; k < a.length; k++){
+				b[k].className = "faq--col-sub"
+				c[k].textContent = "▼";
+			}
+			b[i].className = "faq--col-sub-on";
+			c[i].textContent = "▲";
 		}
 	}
 }

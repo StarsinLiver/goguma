@@ -1,6 +1,10 @@
 const headMenus = document.querySelectorAll(".emoji--head-menu");
 const headMenusBorder = document.querySelectorAll(".emoji--head-menu-title");
 const innerBody = document.querySelector(".emoji--content-box");
+
+const searchInput = document.querySelector(".emoji-search-input");
+const searchBtn = document.querySelector(".emoji-search-btn");
+
 let num = 0;
 
 let listData = "";
@@ -17,7 +21,7 @@ function load(num){
 			if(data != ""){
 				innerFun(data);
 			}else{
-				alert("실패");
+				innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
 			}
 		},
 		error : function(){
@@ -68,7 +72,39 @@ function detailPaging(detail){
 	}
 }
 
-
+searchBtn.onclick = () => {
+	if(searchInput.value == ""){
+		alert("검색어를 입력해주세요!");
+		searchInput.focus();
+		return;
+	}
+	let str = searchInput.value;
+	let pattern = /^[a-zA-Zㄱ-힣0-9|s]*$/;
+	
+	if (str.match(pattern)) {
+	    if (str.match(pattern).length > 0) {
+			$.ajax({
+				type : "get",
+				url : "/emoji/api/search",
+				data : {
+					title : searchInput.value
+				},
+				success : function(data){
+					if(data != ""){
+						innerFun(data);
+					}else{
+						innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
+					}
+				},
+				error : function(){
+					alert("에러");
+				}
+			});
+	    }
+	}else{
+		innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
+	}
+}
 
 
 

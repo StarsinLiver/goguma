@@ -52,6 +52,7 @@
 <link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
 <link rel="stylesheet" href="/customAssets/css/emoji/list.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
+<link rel="stylesheet" href="/customAssets/css/emoji/refund.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/detail.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/list.css">
@@ -59,10 +60,12 @@
 <link rel="stylesheet" href="/customAssets/css/cs/notice/write.css">
 <link rel="stylesheet" href="/customAssets/css/cs/qna/write.css">
 <link rel="stylesheet" href="/customAssets/css/cs/faq/list.css">
+<link rel="stylesheet" href="/customAssets/css/about/about.css">
+<link rel="stylesheet" href="/customAssets/css/board/list.css">
 
 <!-- Custom CSS -->
-
-
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5275edbfc405960aad1f6f12211cdd04"></script>
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -101,7 +104,7 @@
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav ms-auto p-4 p-lg-0">
 					<a href="/" class="nav-item nav-link active">Home</a> <a href="/emoji/list"
-						class="nav-item nav-link">이모티콘</a> <a href="/"
+						class="nav-item nav-link">이모티콘</a> <a href="/about"
 						class="nav-item nav-link">회사 소개</a>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"

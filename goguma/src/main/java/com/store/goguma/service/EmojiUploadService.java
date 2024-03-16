@@ -141,5 +141,9 @@ public class EmojiUploadService {
 		return result != 0;
 	}
 
+	public List<MainEmoji> emojiSearch(String title) {
+		return repository.emojiSearch(title);
+	}
+
 
 }
