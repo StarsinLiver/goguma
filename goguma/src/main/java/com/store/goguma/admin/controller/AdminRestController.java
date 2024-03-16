@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.admin.dto.EmojiModifyDTO;
+import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.AdminModifyEmojiService;
 import com.store.goguma.service.AdminService;
 
@@ -57,4 +58,27 @@ public class AdminRestController {
 		 return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		
 	}
+	
+	@PutMapping("/report/reason-confirm")
+	public int ReportConfirmProc(@RequestParam("id")int id, @RequestParam("host")int hostId) {
+		
+		adminService.confirmReportById(id, hostId);
+		
+		return 0;
+	}
+	
+	@PostMapping("/report-Reason")
+	public ReportDTO ReportReasonProc(int id) {
+		
+		log.info("리포트 리즌" + id);
+		
+		ReportDTO result = adminService.selectReportReasonById(id);
+		
+		 
+		
+		
+		return result;
+	}
+	
+	
 }

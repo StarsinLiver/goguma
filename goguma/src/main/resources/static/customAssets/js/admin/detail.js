@@ -96,8 +96,21 @@ function readURL(input) {
 
 
 
+// 클릭한 이미지의 테두리 변경
+$('.emoji--detail--img-box').on('click', function() {
+    // 이미지에 테두리가 있는지 확인
+    var hasBorder = $(this).css('border') === '2px solid red';
+    
+    // 모든 이미지에서 선택된 이미지 테두리 스타일 초기화
+    $(this).css('border', 'none');
 
-
+    // 클릭된 이미지에 테두리 스타일 적용 또는 제거
+    if (!hasBorder) {
+        $(this).css('border', '2px solid red');
+    }else{
+		$(this).css('border', 'none');
+	}
+});
 
 
 

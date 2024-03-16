@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.store.goguma.admin.dto.AdminReportDTO;
 import com.store.goguma.admin.dto.EmojiModifyDTO;
 import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.handler.exception.LoginRestfulException;
+import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.AdminService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiUploadService;
@@ -192,8 +194,19 @@ public class AdminController {
 	}
 
 	@GetMapping("/report")
-	public String managementReport() {
+	public String managementReport(Model model,AdminReportDTO dto, PageReqDTO page) {
 
+		AdminReportDTO report = adminService.selectReportAll(page);
+			
+		log.info("report List Info: " + report.getDtoList().toString());
+		
+		model.addAttribute("report", report.getDtoList());
+		model.addAttribute("pg", report.getPg());
+		model.addAttribute("start", report.getStart());
+		model.addAttribute("end", report.getEnd());
+		model.addAttribute("last", report.getLast());
+		
+		
 		return "admin/admin_management_report";
 	}
 
