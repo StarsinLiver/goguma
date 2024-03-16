@@ -55,22 +55,22 @@
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	<div class="payment-container" style="margin-right: 20%;">
-		<h4 class="user-page-title">결제 내역</h4>
+		<h4 class="user-page-title">신고 내역</h4>
 		<div class="col-sm-12">
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">이모티콘 구매</h5>
+					<h5 class="card-title">신고 내역</h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>머천트키</th>
-								<th>구매일자</th>
-								<th>구매상품명</th>
-								<th>환불요청<br />여부
-								</th>
+								<th>글 번호</th>
+								<th>신고자</th>
+								<th>신고 대상</th>
+								<th>신고 분류</th>
+								<th>신고일</th>
 								<th>승인 여부</th>
 							</tr>
 						</thead>
@@ -80,14 +80,15 @@
 								<td colspan="5">내역이 없습니다.</td>
 							</tr>
 							<!-- 실제 데이터 행 -->
-							<c:forEach var="history" items="${histories}">
+							<c:forEach var="report" items="${report}">
 								<tr id="dataRow">
-									<td id="id">${history.merchantId}</td>
-									<td id="purchaseDate">${history.createAt}</td>
-									<td id="pointName">new 고구미 이모티콘</td>
-									<td id="refundYn">${history.confirmYn}</td>
+									<td id="id">1</td>
+									<td id="pointName">${report.callId}</td>
+									<td id="hostId">${report.hostId}</td>
+									<td id="purchaseDate">${report.createAt}</td>
+									<td id="refundYn">${report.deleteYn}</td>
 									<td>
-										<button id="refundButton" data-value="${history.merchantId}"
+										<button id="refundButton" data-value="${report.id}"
 											class="btn btn-warning btn-complete cancel-request">승인하기</button>
 									</td>
 								</tr>
@@ -97,14 +98,14 @@
 					<div class="pagination">
 						<!-- 페이지 처리 -->
 						<c:if test="${start > 1}">
-							<a href="/admin/history?pg=${start - 1}">&laquo;</a>
+							<a href="/admin/report?pg=${start - 1}">&laquo;</a>
 						</c:if>
 						<!-- 페이지 번호 -->
 						<c:forEach var="i" begin="${start}" end="${end}">
-							<a href="/admin/history?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+							<a href="/admin/report?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
 						</c:forEach>
 						<c:if test="${end < last}">
-							<a href="/admin/history?pg=${end + 1}">&raquo;</a>
+							<a href="/admin/report?pg=${end + 1}">&raquo;</a>
 						</c:if>
 					</div>
 				</div>
@@ -124,7 +125,7 @@
 						<br>
 						<br>
 						<textarea rows="12" cols="12" id="reasonText" readonly="readonly" style="border: none"></textarea>
-						<input type="" id="hidMerchant">
+						<input type="hidden" id="hideId">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -146,7 +147,7 @@
 <script>
 	$(document).ready(function() {
 		$('.cancel-request').click(function() {
-			var merchantId = $(this).data('value');
+			var id = $(this).data('value');
 
 
 	$('#modalReason').modal('show'); // 모달 창을 보여줌
@@ -154,15 +155,15 @@
 			// AJAX 호출
 			$.ajax({
 				type : 'POST',
-				url : '/admin/payment-reason', // 컨트롤러 주소
+				url : '/admin/report-Reason', // 컨트롤러 주소
 				data : {
-					merchantId : merchantId
+					id : id
 				},
 				dataType: 'json',
 				success : function(data) {
 					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
-					$('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.merchantId); 
+					$('#reasonText').val(data.reson); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
+					$('#hidMerchant').val(data.id); 
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
@@ -173,19 +174,22 @@
 
 		$('#confirm').click(function() {
 
-			var merchantId = $('#hidMerchant').val();
+			var id = $('#hideId').text();
+			var host= $('#hostId').text();
 			
-			console.log('머천트 아이디 값: ' + merchantId);
+			console.log('하이드 아이디 값: ' + id);
+			console.log('호스트 아이디 값: ' + host);
 			//AJAX 호출
 			$.ajax({
-				type : 'POST',
-				url : '/admin/payment-confirm', // 컨트롤러 주소
+				type : 'PUT',
+				url : '/admin/reason-confirm', // 컨트롤러 주소
 				data : {
-					merchantId : merchantId
+					id : id,
+					host : host				
 				},
 				success : function(data) {
 
-					window.location.href = '/admin/history';
+					window.location.href = '/admin/report';
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
