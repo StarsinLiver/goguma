@@ -110,12 +110,6 @@ public class AdminService {
 		
 	}
 
-	public int confirmReportById(int id, int hostId) {
-
-		repository.updateConfirmReportById(id, hostId);
-		
-		return 1;
-	}
 
 	
 	

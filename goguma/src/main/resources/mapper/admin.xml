@@ -117,14 +117,7 @@
 
 	</select>
 
-	<!-- 신고 완료 처리 -->
-	<update id="updateConfirmReportById">
 
-		UPDATE report as a join user as b on a.host_id =
-		b.u_id SET a.delete_yn = 'Y', b.report = b.report +1 WHERE a.host_id =
-		#{hostId} and b.u_id = #{hostId} and a.id = #{id};
-
-	</update>
 
 
 </mapper>

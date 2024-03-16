@@ -59,26 +59,6 @@ public class AdminRestController {
 		
 	}
 	
-	@PutMapping("/report/reason-confirm")
-	public int ReportConfirmProc(@RequestParam("id")int id, @RequestParam("host")int hostId) {
-		
-		adminService.confirmReportById(id, hostId);
-		
-		return 0;
-	}
-	
-	@PostMapping("/report-Reason")
-	public ReportDTO ReportReasonProc(int id) {
-		
-		log.info("리포트 리즌" + id);
-		
-		ReportDTO result = adminService.selectReportReasonById(id);
-		
-		 
-		
-		
-		return result;
-	}
-	
+
 	
 }

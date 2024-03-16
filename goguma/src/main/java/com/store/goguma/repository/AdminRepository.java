@@ -42,5 +42,4 @@ public interface AdminRepository {
 
 	ReportDTO selectReportReasonById(int id);
 
-	int updateConfirmReportById(@Param("id") int id,@Param("hostId") int hostId);
 }
