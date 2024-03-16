@@ -65,7 +65,11 @@ public class EmojiApiController {
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/search")
+	public ResponseEntity<?> emojiSearch(String title){
+		List<MainEmoji> list = service.emojiSearch(title);
+		return new ResponseEntity<List<MainEmoji>>(list, HttpStatus.OK);
+	}
 	
 	
 	

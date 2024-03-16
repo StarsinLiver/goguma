@@ -102,4 +102,8 @@
 	<select id="countChatRoom">
 		SELECT COUNT(*) FROM chat_room WHERE p_id = #{pId}
 	</select>
+	
+	<select id="countChatRoomAll">
+		select count(*) from chat_room
+	</select>
 </mapper>

@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.entity.User;
+import com.store.goguma.handler.exception.BackPageRestfulException;
+import com.store.goguma.repository.EmojiHistoryRepository;
 import com.store.goguma.repository.MyUserRepository;
 import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
@@ -206,8 +209,11 @@ public class UserService {
 	
 	// u_id로 유저 조회
 	public UserDTO findAllByuId(Integer uId) {
-		
+
 		User user = userRepository.findAllByuId(uId);
+		if(user == null) {
+			throw new BackPageRestfulException(Define.NOT_FOUND_USER, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
 		UserDTO dto = UserDTO.builder()
 			.uId(user.getUId())
@@ -228,5 +234,10 @@ public class UserService {
             .build();
 		
 		return dto;
+	}
+	
+	// 모든 유저 카운트
+	public int countUserAll() {
+		return userRepository.countUserAll();
 	}
 }

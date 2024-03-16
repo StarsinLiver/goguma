@@ -96,7 +96,7 @@ public class ChatController {
 			mainEmojiList.forEach((e) -> mainListToInt.add(e.getId()));
 			emojiList = emojiService.findByGroupId(mainListToInt);
 		}
-
+		
 		log.info(emojiList.toString());
 
 		model.addAttribute("chatRoomList", chatRoomList);
@@ -186,7 +186,7 @@ public class ChatController {
 		ChatMessage message = ChatMessage.builder().uId(user.getUId()).text(user.getName() + "님께서 방에서 나가셨습니다.")
 				.roomId(roomId).chatMessageType(ChatType.LEAVE).build();
 
-		chatMessageService.save(message);
+		chatMessageService.save(message , null);
 		return "redirect:/chat/room";
 	}
 }

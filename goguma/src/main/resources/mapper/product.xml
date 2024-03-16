@@ -76,6 +76,7 @@
 		and address like CONCAT('%', #{searchAddress}, '%')
 		and price between #{lowPrice} and
 		#{highPrice}
+		and p.delete_yn = 'N'
 		group by p.p_id
 		order by
 		<if test="sortWishList == 'Y'.toString()">
@@ -113,6 +114,7 @@
 		and address like CONCAT('%', #{searchAddress}, '%')
 		and price between #{lowPrice} and
 		#{highPrice}
+		and p.delete_yn = 'N'
 		group by p.p_id
 		) AS
 		result;
@@ -139,5 +141,37 @@
 		) AS cr ON p.p_id = cr.p_id
 	</select>
 
-
+	<select id="findLimitEightFromMain">
+		select p.p_id as pId,
+		p.address as address,
+		p.name as name,
+		p.price as price,
+		p.host_id as hostId,
+		p.description as description,
+		p.file as file,
+		p.main_category_id as mainCategoryId,
+		p.sub_category_id as subCategoryId,
+		p.create_at as createAt,
+		p.update_at as updateAt,
+		p.delete_at as deleteAt,
+		p.delete_yn as deleteYn,
+		p.confirm_yn as confirmYn,
+        ifnull(count(c.id), 0) as countChatRoom,
+		ifnull(count(w.id), 0) as countWishList from product p
+		left join
+		chat_room c
+		on p.p_id = c.p_id and p.host_id = c.host_id
+		left join
+		wish_list w
+		on w.p_id = p.p_id
+		where p.delete_yn = 'N'
+		group by p.p_id
+		order by countWishList desc , countChatRoom desc
+		limit 8
+	</select>
+	
+	<select id="countProductAll" resultType="int">
+		select count(*) from product
+		where delete_yn = 'N'
+	</select>
 </mapper>

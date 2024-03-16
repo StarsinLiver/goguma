@@ -79,6 +79,19 @@
 			"Y"
 		);
 	</insert>
-
+	
+	<select id="emojiSearch" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji where name like concat('%', #{title}, '%');
+	</select>
+	
+	<select id="getMainEmoji" resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji where id = #{id};
+	</select>
+	
+	<update id="mainEmojiDownloadCountPlus">
+		update main_emoji set
+			download_count = #{downloadCount}
+		where id = #{id}
+	</update>
 
 </mapper>

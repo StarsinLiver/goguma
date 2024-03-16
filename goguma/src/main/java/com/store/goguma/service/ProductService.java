@@ -142,4 +142,13 @@ public class ProductService {
 	    }
 	    return userProdListDTO;
 	}
+	
+	// 메인 상품
+	public List<ProductSearchDto> findLimitEightFromMain() {
+		return productRepository.findLimitEightFromMain();
+	}
+	
+	public int countProductAll() {
+		return productRepository.countProductAll();
+	}
 }

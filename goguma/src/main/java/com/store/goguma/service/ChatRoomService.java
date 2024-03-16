@@ -71,4 +71,8 @@ public class ChatRoomService {
 	public int isExistChatRoom(int pId, int uId) {
 		return chatRoomRepository.isExistChatRoom(pId, uId);
 	}
+	
+	public int countChatRoomAll() {
+		return chatRoomRepository.countChatRoomAll();
+	}
 }

@@ -19,4 +19,5 @@ public interface NoticeRepository {
 
 	public int noticeUpdate(Notice entity);
 
+	public List<Notice>  findLimitEightFromMain();
 }

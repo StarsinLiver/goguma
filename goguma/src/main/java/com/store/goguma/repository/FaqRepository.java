@@ -11,4 +11,6 @@ public interface FaqRepository {
 
 	public List<Faq> getFaqList();
 
+	public int faqWrite(Faq entity);
+
 }

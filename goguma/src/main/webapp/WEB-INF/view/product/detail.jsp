@@ -23,31 +23,16 @@
 		<div id="image-slider">
 			<div class="slider-wrap">
 				<div class="slider">
-					<a href="">
-						<div>
-							<div class="image-wrap">
-								<img data-lazy="" class="landscape" alt="" src="" />
+					<c:forTokens items="${product.file}" delims="," var="file">
+						<a href="">
+							<div>
+								<div class="image-wrap">
+									<img data-lazy="" class="landscape" alt=""
+										src="/images/upload/${file}" />
+								</div>
 							</div>
-						</div>
-					</a> <a href="">
-						<div>
-							<div class="image-wrap">
-								<img data-lazy="" class="landscape" alt="" src="" />
-							</div>
-						</div>
-					</a> <a href="">
-						<div>
-							<div class="image-wrap">
-								<img data-lazy="" class="landscape" alt="" src="" />
-							</div>
-						</div>
-					</a> <a href="">
-						<div>
-							<div class="image-wrap">
-								<img data-lazy="" class="landscape" alt="" src="" />
-							</div>
-						</div>
-					</a>
+						</a>
+					</c:forTokens>
 				</div>
 			</div>
 		</div>
@@ -59,11 +44,11 @@
 			<div class="space-between">
 				<div style="display: flex">
 					<div id="article-profile-image">
-						<img alt="이름" src="" />
+						<img alt="이름" src="/images/upload/${user.file}" />
 					</div>
 					<div id="article-profile-left">
-						<div id="nickname">${product.name}</div>
-						<div id="region-name">${product.address}</div>
+						<div id="nickname">${user.name}</div>
+						<div id="region-name">${user.address}</div>
 					</div>
 				</div>
 				<div id="article-profile-right">
@@ -134,11 +119,10 @@
 
 				<!-- 신고 버튼 -->
 
-					<c:if test="${product.hostId != principal.getUId()}">
-						<button type="button" class="btn btn-danger"
-							data-bs-toggle="modal" data-bs-target="#reportModal"
-							style="margin-right: 10px;">신고하기</button>
-					</c:if>
+				<c:if test="${product.hostId != principal.getUId()}">
+					<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+						data-bs-target="#reportModal" style="margin-right: 10px;">신고하기</button>
+				</c:if>
 				<div class="modal fade" id="reportModal" tabindex="-1"
 					aria-labelledby="reportModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered">
@@ -190,7 +174,7 @@
 				<!-- 찜하기 버튼 또는 찜 삭제 버튼 -->
 				<c:choose>
 					<c:when test="${product.hostId == principal.getUId()}">
-							<!-- 빈 공간 -->
+						<!-- 빈 공간 -->
 					</c:when>
 					<c:when test="${prodWishlist}">
 						<form method="post" action="/product/deleteWishList"
@@ -249,7 +233,11 @@
 					<a class="card-link ga-click"
 						href="productDetail?pId=${list.getThisPid()}">
 						<div class="card-photo">
-							<img alt="" src="" />
+							<c:forTokens items="${list.file}" delims="," var="file" varStatus="loop">
+							<c:if test="${loop.first}">
+								<img alt="" src="/images/upload/${file}" />
+								</c:if>
+							</c:forTokens>
 						</div>
 						<div class="card-desc">
 							<h2 class="card-title">${list.name}</h2>

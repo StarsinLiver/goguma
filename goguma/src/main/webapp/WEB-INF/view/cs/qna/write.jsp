@@ -10,7 +10,7 @@
 	<div class="container py-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
-				<h3 class="display-5 text-white animated slideInDown">이모티콘</h3>
+				<h3 class="display-5 text-white animated slideInDown">qna</h3>
 			</div>
 		</div>
 	</div>
@@ -40,12 +40,8 @@
                     <textarea class="qna-write-textarea"></textarea>
                 </td>
             </tr>
-            <tr class="qna-write-tr">
-                <th class="qna-write-th" colspan="2">
-                    <button type="button" class="qna-write-insert-btn">문의하기</button>
-                </th>
-            </tr>
         </table>
+        <button type="button" class="qna-write-insert-btn">문의하기</button>
     </div>
 <script src="/customAssets/js/cs/qna/write.js"></script>
 <!-- 푸터 -->

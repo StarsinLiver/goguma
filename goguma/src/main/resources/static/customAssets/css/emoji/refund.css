@@ -1,0 +1,28 @@
+.refund-main-div{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto;
+}
+
+.refund-table{
+    width: 700px;
+    text-align: center;
+}
+
+.refund-table, .refund-th, .refund-td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.refund-th, .refund-td{
+	padding: 10px;
+	
+}
+
+.refund-btn{
+    background-color: aliceblue;
+    padding: 20px;
+}

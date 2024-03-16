@@ -16,7 +16,7 @@
 							당신 근처의 <br> 지역 생활 커뮤니티
 						</h2>
 						<p class="lead">고민없이 구매 가능한 마켓 고구마 마켓에서 가까운 이웃과 함께해요.</p>
-						<a href="#support"
+						<a href="/product/product-list"
 							class="btn btn-light btn-radius btn-brd ban-btn">중고 거래 이용하기</a>
 					</div>
 				</div>
@@ -67,7 +67,7 @@
 				<h2 style="margin-right: auto;">
 					<i class="fa-solid fa-flag me-3"></i>공지사항
 				</h2>
-				<a href="/notice/list" class="btn btn-warning">공지사항 바로가기</a>
+				<a href="/cs/notice/list" class="btn btn-warning">공지사항 바로가기</a>
 				<!-- 공지사항 바로가기 버튼 -->
 			</div>
 
@@ -82,6 +82,13 @@
 						</tr>
 					</thead>
 					<tbody class="text-center">
+						<c:forEach items="${noticeList}" var="notice">
+							<tr>
+								<td><a href="/cs/notice/detail/${notice.id}">${notice.id}</a></td>
+								<td><a href="/cs/notice/detail/${notice.id}">${notice.title}</a></td>
+								<td><a href="/cs/notice/detail/${notice.id}">관리자</a></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -92,8 +99,6 @@
 			<div class="container-xxl py-5 category">
 				<div class="container">
 					<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-						<h6 class="section-title bg-white text-center text-primary px-3">고구마
-							마켓 둘러보기</h6>
 						<h1 class="mb-5">카테고리</h1>
 					</div>
 					<div class="row g-3">
@@ -113,7 +118,7 @@
 								</div>
 								<div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
 									<a class="position-relative d-block overflow-hidden"
-										href="/book/list-all"> <img class="img-fluid"
+										href="/emoji/list"> <img class="img-fluid"
 										src="/assets/images/cat-2.png" alt="">
 										<div
 											class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
@@ -123,9 +128,8 @@
 									</a>
 								</div>
 								<div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-									<a class="position-relative d-block overflow-hidden"
-										href="/club/save"> <img class="img-fluid"
-										src="/assets/images/cat-3.png" alt="">
+									<a class="position-relative d-block overflow-hidden" href="#">
+										<img class="img-fluid" src="/assets/images/cat-3.png" alt="">
 										<div
 											class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
 											style="margin: 1px;">
@@ -138,7 +142,7 @@
 						<div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s"
 							style="min-height: 350px;">
 							<a class="position-relative d-block h-100 overflow-hidden"
-								href="/share/write"> <img
+								href="/product/product-list"> <img
 								class="img-fluid position-absolute w-100 h-100"
 								src="/assets/images/cat-4.png" alt="" style="object-fit: cover;">
 								<div
@@ -164,98 +168,42 @@
 				<div class="section-title text-center">
 					<small>최신글</small>
 					<h3>중고거래</h3>
-					<p class="lead">We offer unlimited solutions to all your
-						business needs. in the installation package we prepare search
-						engine optimization, social media support, we provide corporate
-						identity and graphic design services.</p>
+					<p class="lead">
+						"고구마"<br /> 사용자들이 중고 제품을 사고 팔 수 있는 온라인 플랫폼입니다. 다양한 상품 카테고리와 편리한 거래
+						시스템을 통해 사용자들은 안전하고 신속하게 거래를 진행할 수 있습니다. 저렴한 가격과 환경 보호를 위한 재활용 문화를
+						지원합니다.
+					</p>
 				</div>
 				<!-- end title -->
 
 				<div class="owl-screenshots owl-carousel owl-theme text-center">
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/assets/uploads/version_01.jpg" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/assets/uploads/version_01.jpg"
-									alt="" class="img-responsive img-rounded">
-								<div class="magnifier"></div>
+
+					<c:forEach var="product" items="${productList}">
+						<div class="owl-screen">
+							<div class="service-widget">
+								<div class="post-media entry wow fadeIn">
+									<c:forTokens items="${product.file}" delims="," var="file"
+										varStatus="loop">
+										<c:if test="${loop.first}">
+											<a href="/images/upload/${file}" data-rel="prettyPhoto[gal]"
+												class="hoverbutton global-radius"><i
+												class="flaticon-unlink"></i></a>
+											<img src="/images/upload/${file}" alt=""
+												class="img-responsive img-rounded">
+											<div class="magnifier"></div>
+										</c:if>
+									</c:forTokens>
+								</div>
+
+								<h3>${product.name}</h3>
+								<small><a
+									href="/product/productDetail?pId=${product.getPId()}">< 상품 보러
+										가기 ></a></small>
 							</div>
-
-							<h3>Web Design Project</h3>
-							<small>Landing Page</small>
+							<!-- end service -->
 						</div>
-						<!-- end service -->
-					</div>
-					<!-- end col -->
-
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/assets/uploads/version_02.jpg" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/assets/uploads/version_02.jpg"
-									alt="" class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-
-							<h3>App Project</h3>
-							<small>Landing Page</small>
-						</div>
-						<!-- end service -->
-					</div>
-					<!-- end col -->
-
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/assets/uploads/version_03.jpg" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/assets/uploads/version_03.jpg"
-									alt="" class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-
-							<h3>Watch Project</h3>
-							<small>Landing Page</small>
-						</div>
-						<!-- end service -->
-					</div>
-					<!-- end col -->
-
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/assets/uploads/version_04.jpg" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/assets/uploads/version_04.jpg"
-									alt="" class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-
-							<h3>Hosting Project</h3>
-							<small>Landing Page</small>
-						</div>
-						<!-- end service -->
-					</div>
-					<!-- end col -->
-
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/assets/uploads/version_05.jpg" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/assets/uploads/version_05.jpg"
-									alt="" class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-
-							<h3>SEO Project</h3>
-							<small>Landing Page</small>
-						</div>
-						<!-- end service -->
-					</div>
-					<!-- end col -->
+						<!-- end col -->
+					</c:forEach>
 				</div>
 				<!-- end owl -->
 			</div>
@@ -269,31 +217,31 @@
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<span data-scroll class="global-radius icon_wrap effect-1"><i
 							class="flaticon-briefcase"></i></span>
-						<p class="stat_count">1200</p>
-						<h3>Complated Projects</h3>
+						<p class="stat_count">${countProduct}</p>
+						<h3>상품 갯수</h3>
 					</div>
 					<!-- end col -->
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<span data-scroll class="global-radius icon_wrap effect-1"><i
 							class="flaticon-happy"></i></span>
-						<p class="stat_count">3210</p>
-						<h3>Happy Clients</h3>
+						<p class="stat_count">${countProductHistory}</p>
+						<h3>거래 완료 횟수</h3>
 					</div>
 					<!-- end col -->
 
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<span data-scroll class="global-radius icon_wrap effect-1"><i
 							class="flaticon-idea"></i></span>
-						<p class="stat_count">3781</p>
-						<h3>Customer Services</h3>
+						<p class="stat_count">${countUser}</p>
+						<h3>사용자 수</h3>
 					</div>
 					<!-- end col -->
 
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<span data-scroll class="global-radius icon_wrap effect-1"><i
 							class="flaticon-customer-service"></i></span>
-						<p class="stat_count">4300</p>
-						<h3>Answered Questions</h3>
+						<p class="stat_count">${countChatRoom}</p>
+						<h3>채팅 방 수</h3>
 					</div>
 					<!-- end col -->
 				</div>

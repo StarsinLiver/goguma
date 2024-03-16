@@ -28,9 +28,13 @@
                 <span class="emoji--head-menu-title">신규</span>
             </div>
         </div>
+        <div class="emoji-search-box">
+	        <input type="text" class="emoji-search-input">
+	        <button type="button" class="emoji-search-btn">검색</button>
+	    </div>
         <div class="emoji--body">
             <div class="emoji--content-box"></div>
-            <div class="emoji--page-box">
+            <!-- <div class="emoji--page-box">
                 <div class="emoji--arrow-box">
                     <span>◀</span>
                 </div>
@@ -40,7 +44,7 @@
                 <div class="emoji--arrow-box">
                     <span>▶</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 <script src="/customAssets/js/emoji/list.js"></script>
