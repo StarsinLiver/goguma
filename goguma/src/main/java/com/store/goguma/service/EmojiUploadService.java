@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.emoji.dto.EmojiHistoryReqDto;
@@ -136,9 +137,22 @@ public class EmojiUploadService {
 		return repository.getEmojiDetailMain(num);
 	}
 
+	@Transactional
 	public boolean emojiOrder(EmojiHistoryReqDto dto) {
 		int result = repository.emojiOrder(dto.toEntity());
-		return result != 0;
+		if(result == 0) {
+			throw new RuntimeException("emoji_history 등록 실패!");
+		}
+		MainEmoji mainEmoji = repository.getMainEmoji(dto.getMainEmojiId());
+		if(mainEmoji != null) {
+			mainEmoji.setDownloadCount(mainEmoji.getDownloadCount() + 1);
+			int mainResult = repository.mainEmojiDownloadCountPlus(mainEmoji);
+			if(mainResult == 0) {
+				throw new RuntimeException("main_emoji download_count 수정 실패");
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public List<MainEmoji> emojiSearch(String title) {
