@@ -12,4 +12,7 @@ public interface ReportRepository {
 	public int addReport(Report report);
 
 	public boolean existsByHostIdAndCallId(@Param("hostId") Integer hostId, @Param("callId")  Integer callId);
+	
+	// 관리자가 신고 취소를 했을 때
+	public int update(int id);
 }

@@ -31,4 +31,9 @@ public class EmojiHistoryService {
 		// TODO Auto-generated method stub
 		return emojiHistoryRepository.findMainEmojiAll();
 	}
+	
+	// 이모지를 사용하고 있는 유저들의 카운트
+	public int countByMainEmojiId(int groupId) {
+		return emojiHistoryRepository.countByMainEmojiId(groupId);
+	}
 }

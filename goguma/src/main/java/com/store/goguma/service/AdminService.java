@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.admin.dto.AdminReportDTO;
+import com.store.goguma.admin.dto.EmojiHistoryDto;
 import com.store.goguma.admin.dto.EmojiModifyDTO;
 import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.EmojiHistory;
@@ -50,7 +51,7 @@ public class AdminService {
 		int start = (historyReqDTO.getPg() - 1) * historyReqDTO.getSize();
 		log.info("start : "+start);
 		
-		List<EmojiHistory> history = repository.findEmojiHistoryByUser(start);
+		List<EmojiHistoryDto> history = repository.findEmojiHistoryByUser(start);
 		int total = repository.countEmojiHistoryByCancleY();
 		log.info("total : "+total);
 		
@@ -71,9 +72,9 @@ public class AdminService {
 	}
 	
 	// 환불 완료
-	public void updateConfirmPayment(String merchantId) {
+	public void updateCancelYnPayment(String merchantId) {
 		
-		repository.updateConfirmPayment(merchantId);
+		repository.updateCancelYnPayment(merchantId);
 		
 	}
 

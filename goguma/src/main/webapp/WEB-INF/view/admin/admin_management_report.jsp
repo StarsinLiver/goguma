@@ -69,9 +69,10 @@
 								<th>글 번호</th>
 								<th>신고자</th>
 								<th>신고 대상</th>
-								<th>신고 분류</th>
 								<th>신고일</th>
-								<th>승인 여부</th>
+								<th>신고 이유</th>
+								<th>신고 여부</th>
+								<th>신고 취소</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -83,13 +84,18 @@
 							<c:forEach var="report" items="${report}">
 								<tr id="dataRow">
 									<td id="id">1</td>
-									<td id="pointName">${report.callId}</td>
-									<td id="hostId">${report.hostId}</td>
+									<td id="pointName">${report.callName}</td>
+									<td id="hostId">${report.hostName}</td>
 									<td id="purchaseDate">${report.createAt}</td>
+									<td id="reason">${report.reason}</td>
 									<td id="refundYn">${report.deleteYn}</td>
 									<td>
-										<button id="refundButton" data-value="${report.id}"
-											class="btn btn-warning btn-complete cancel-request">승인하기</button>
+									<form action="/admin/update-report/${report.id}" method="post">
+										<input type="hidden" name="_method" value="put"/>
+											<button
+												class="btn btn-warning btn-complete"
+												onclick="if(!confirm('취소하시겠습니까??')){return false;}">취소하기</button>
+										</form>
 									</td>
 								</tr>
 							</c:forEach>
@@ -121,10 +127,9 @@
 				<!-- 이메일 변경 내용을 입력하는 폼 -->
 				<div style="display: flex; flex-direction: column;">
 					<div class="register-form">
-						<label for="password">Confirm Password</label> 
-						<br>
-						<br>
-						<textarea rows="12" cols="12" id="reasonText" readonly="readonly" style="border: none"></textarea>
+						<label for="password">Confirm Password</label> <br> <br>
+						<textarea rows="12" cols="12" id="reasonText" readonly="readonly"
+							style="border: none"></textarea>
 						<input type="hidden" id="hideId">
 					</div>
 				</div>
@@ -149,8 +154,7 @@
 		$('.cancel-request').click(function() {
 			var id = $(this).data('value');
 
-
-	$('#modalReason').modal('show'); // 모달 창을 보여줌
+			$('#modalReason').modal('show'); // 모달 창을 보여줌
 
 			// AJAX 호출
 			$.ajax({
@@ -159,11 +163,11 @@
 				data : {
 					id : id
 				},
-				dataType: 'json',
+				dataType : 'json',
 				success : function(data) {
 					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
 					$('#reasonText').val(data.reson); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.id); 
+					$('#hidMerchant').val(data.id);
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
@@ -175,8 +179,8 @@
 		$('#confirm').click(function() {
 
 			var id = $('#hideId').text();
-			var host= $('#hostId').text();
-			
+			var host = $('#hostId').text();
+
 			console.log('하이드 아이디 값: ' + id);
 			console.log('호스트 아이디 값: ' + host);
 			//AJAX 호출
@@ -185,7 +189,7 @@
 				url : '/admin/reason-confirm', // 컨트롤러 주소
 				data : {
 					id : id,
-					host : host				
+					host : host
 				},
 				success : function(data) {
 

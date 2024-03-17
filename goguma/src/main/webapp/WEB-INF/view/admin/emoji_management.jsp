@@ -23,16 +23,16 @@
 		<!-- aside end -->
 	</div>
 	<div class="emoji--main-div">
-		<div class="emoji--head-menu-box">
+	<div class="emoji--head-menu-box">
 			<div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">홈</span>
 			</div>
-			<div class="emoji--head-menu">
+				<!--  <div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">인기</span>
 			</div>
 			<div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">신규</span>
-			</div>
+			</div>-->
 		</div>
 		<div class="emoji--body">
 			<div class="emoji--content-box"></div>

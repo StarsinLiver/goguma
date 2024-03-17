@@ -19,7 +19,7 @@ function load(num){
 				console.log('로드 에이젝스 성공' + data);
 				innerFun(data);
 			}else{
-				alert("실패");
+				console.log("실패");
 			}
 		},
 		error : function(){

@@ -133,7 +133,8 @@
 
 						</div>
 					</div>
-
+					<c:if test="${principal.role == 'USER'}">
+					
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
@@ -144,6 +145,7 @@
 								class="dropdown-item">내 정보</a>
 						</div>
 					</div>
+					</c:if>
 					<!-- 이부분은 로그인 되었을 경우에만 표시되게 설정 -->
 				</div>
 				<!-- 이부분은 관리자계정으로 로그인시 표시되게 설정해야함 -->

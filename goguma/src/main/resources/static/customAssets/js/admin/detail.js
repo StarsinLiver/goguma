@@ -20,54 +20,55 @@ const agreeSub = document.querySelectorAll(".agree-sub-box");
 
 let pageId = location.pathname.split("/")[4];
 
+const deleteButton = document.querySelector(".emoji--delete-btn");
+
 IMP.init('imp37413392');
 let mainEmojiNum = 0;
 let userInfo = getSession();
 
 load();
 
-function load(){
-	alert("pageId"+ pageId);
+function load() {
 	$.ajax({
-		type : "get",
-		url : "/emoji/api/detail/main/" + pageId,
-		async : false,
-		success : function(data){
-			if(data != ""){
+		type: "get",
+		url: "/emoji/api/detail/main/" + pageId,
+		async: false,
+		success: function(data) {
+			if (data != "") {
 				innerMain(data);
 				mainEmojiNum = data.id;
-			}else{
-				alert("로드 디테일 실패");
+			} else {
+				console.log("로드 디테일 실패");
 			}
 		},
-		error : function(){
-			alert("로드 디테일 에러");
+		error: function() {
+			console.log("로드 디테일 에러");
 		}
 	});
 	$.ajax({
-		type : "get",
-		url : "/emoji/api/detail/sub/" + pageId,
-		async : false,
-		success : function(data){
-			if(data != ""){
+		type: "get",
+		url: "/emoji/api/detail/sub/" + pageId,
+		async: false,
+		success: function(data) {
+			if (data != "") {
 				innerFun(data);
-			}else{
-				alert("로드 디테일 서브 실패");
+			} else {
+				console.log("로드 디테일 서브 실패");
 			}
 		},
-		error : function(){
-			alert("로드 디테일 서브 에러");
+		error: function() {
+			console.log("로드 디테일 서브 에러");
 		}
 	});
 }
 
-for(let i = 0; i < headMenus.length; i++){
+for (let i = 0; i < headMenus.length; i++) {
 	headMenus[i].onclick = () => {
 		location.href = "/emoji/list";
 	}
 }
 
-function innerMain(data){
+function innerMain(data) {
 	mainImg[0].src = "/images/upload/emoji/" + data.file;
 	mainImg[1].src = "/images/upload/emoji/" + data.file;
 	mainTitle1.textContent = data.name;
@@ -81,33 +82,51 @@ function innerMain(data){
 
 
 // 이모티콘 변경하기 모달 창에서 선택한 파일 출력
+const fileArray = new Array();
 function readURL(input) {
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('c-img').src = e.target.result;
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('c-img').src = "";
-	  }
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById('c-img').src = e.target.result;
+		};
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		document.getElementById('c-img').src = "";
 	}
+
+	// array 에 담기
+	for (let i = 0; i < input.files.length; i++) {
+		if (input.files[i].size > 5242880) { // 5 mb 까지만 가능
+			alert("첨부파일은 5mb 이하만 가능합니다.");
+			input.value = "";
+			return;
+		}
+
+		const reader = new FileReader();
+
+		reader.readAsDataURL(input.files[i]);
+		reader.onload = () => {
+			fileValue = input.files[i];
+			fileArray.push(fileValue);
+		}
+	}
+}
 
 
 
 
 // 클릭한 이미지의 테두리 변경
 $('.emoji--detail--img-box').on('click', function() {
-    // 이미지에 테두리가 있는지 확인
-    var hasBorder = $(this).css('border') === '2px solid red';
-    
-    // 모든 이미지에서 선택된 이미지 테두리 스타일 초기화
-    $(this).css('border', 'none');
+	// 이미지에 테두리가 있는지 확인
+	var hasBorder = $(this).css('border') === '2px solid red';
 
-    // 클릭된 이미지에 테두리 스타일 적용 또는 제거
-    if (!hasBorder) {
-        $(this).css('border', '2px solid red');
-    }else{
+	// 모든 이미지에서 선택된 이미지 테두리 스타일 초기화
+	$(this).css('border', 'none');
+
+	// 클릭된 이미지에 테두리 스타일 적용 또는 제거
+	if (!hasBorder) {
+		$(this).css('border', '2px solid red');
+	} else {
 		$(this).css('border', 'none');
 	}
 });
@@ -115,10 +134,10 @@ $('.emoji--detail--img-box').on('click', function() {
 
 
 
-function innerFun(list){
+function innerFun(list) {
 	let innr = "";
-	if(list != ""){
-		for(let i = 0; i < list.length; i++){
+	if (list != "") {
+		for (let i = 0; i < list.length; i++) {
 			innr += `
 				<div class="emoji--detail--item-box">
                     <div class="emoji--detail--img-box">
@@ -139,58 +158,54 @@ modalCloseBtn.onclick = () => {
 	modalMain.style.display = "none";
 }
 
+function emojiModify() {
 
-
-
-function emojiModify(){
-	
-	const changeFile = document.querySelector("#changeFile");  // 변경할 이미지 인풋 태그
-	const changePrice = document.querySelector("#changePrice");
+	const changePrice = document.querySelector("#changePrice").value;
 	const changeTitle = document.querySelector("#changeName").value;  // 변경할 이미지 인풋 태그
-	
-	alert("1: " + changeFile);
-	
-	
-	alert("2: " + changeTitle);
+
 	// 변경할 파일명
-	const fileName = changeFile.files[0];
-	
-	alert("변경 파일명  " + fileName);
-	
-	alert("pageId"+ pageId);
-	
-	    // FormData 객체 생성
-    const formData = new FormData();
-    
-    // FormData에 필드 추가
-    formData.append('file', fileName);
-    formData.append('price', changePrice);
-    formData.append('title', changeTitle);
-    
-	
-	
-	
+
+	// FormData 객체 생성
+	const formData = new FormData();
+
+	// FormData에 필드 추가
+	for (var i = 0; i < fileArray.length; i++) {
+		formData.append('files', fileArray[i]);
+	}
+	formData.append('price', changePrice);
+	formData.append('title', changeTitle);
+
 	$.ajax({
-		type : 'PUT',
-		url : '/admin/emoji/modify/' + pageId,
+		type: 'PUT',
+		url: '/admin/emoji/modify/' + pageId,
+		processData: false,
+		contentType: false,
 		data: formData,
-		async : false,
-		success : function(data){
-			alert('얼럿 데이터!!!! 석세스탐: '+data);
-			if(data != ""){
-				
-				'redirect:/admin/emoji/detail/' + pageId ;
-			}else{
-				alert("이모지 변경 실패 대~실패");
-			}
+		encType: "multipart/form-data",
+		success: function(data) {
+			window.location.reload();
 		},
-		error : function(){
-			alert("이모지 변경 에러");
+		error: function(xhr) {
+			alert("서버 에러가 발생하였습니다.");
 		}
 	});
-	
 }
 
+deleteButton.onclick = () => {
 
-
-
+	if (!confirm('삭제하시면 복구할 수 없습니다. \n 정말로 삭제하시겠습니까??')) { return false; }
+	
+	$.ajax({
+		type: 'delete',
+		url: '/admin/emoji/delete/' + pageId,
+		success: function(data) {
+			location.href = "/admin/emoji";
+		},
+		error: function(xhr) {
+			if(xhr.status == 400) 
+				alert("이미 이용자가 사용하고 있습니다.")
+			if(xhr.status == 500) 
+				alert("서버 에러가 발생하였습니다.");
+		}
+	});
+}

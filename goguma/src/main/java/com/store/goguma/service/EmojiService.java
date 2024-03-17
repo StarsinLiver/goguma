@@ -25,4 +25,26 @@ public class EmojiService {
 	public List<Emoji> findByGroupId(List<Integer> mainEmojiList) {
 		return emojiRepository.findByGroupId(mainEmojiList);
 	}
+	
+	// 메인 이모지 update
+	public int updateMainEmoji(String file , String name , int price , int id) {
+		return emojiRepository.updateMainEmoji(file, name, price, id);
+	}
+	
+	// 메인 이모지 삭제
+	public int deleteMainEmojiById(int id) {
+		return emojiRepository.deleteMainEmojiById(id);
+	}
+	
+	// 서브 이모지 전체 삭제
+	public int deleteSubEmojiByGroupId(int groupId) {
+		return emojiRepository.deleteSubEmojiByGroupId(groupId);
+	}
+	
+	// 서브 이모지 insert
+	public int subUpload(Emoji emoji) {
+		return emojiRepository.subUpload(emoji);
+	}
+	
+	
 }

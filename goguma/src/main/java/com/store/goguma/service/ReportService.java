@@ -27,9 +27,18 @@ public class ReportService {
 		Report report = Report.builder()
 				.hostId(dto.getHostId())
 				.callId(dto.getCallId())
-				.reson(dto.getReson())
+				.reson(dto.getReason())
 				.build();
 		
 		reportRepository.addReport(report);
+	}
+	
+	/**
+	 * 관리자가 신고 취소를 했을 때
+	 * @param id
+	 * @return
+	 */
+	public int update(int id) {
+		return reportRepository.update(id);
 	}
 }
