@@ -83,7 +83,7 @@
 	<!-- 문의하기 내역 갯수 -->
 	<select id="countQnaByUid">
 		SELECT COUNT(*) FROM `qna`
-        	where `u_id`=#{uId}
+        	where `u_id`=#{uId} and q.`delete_yn` = "N"
         	<include refid="searchBox"/>
 	</select>
 	
@@ -112,16 +112,16 @@
 	
 	<!-- 유저 이모티콘 목록 -->
 	<select id="selectAllImoji" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
-		SELECT me.id, me.`name`, me.`file` , eh.* 
+		SELECT me.`name`, me.`file` , eh.* 
 			FROM `emoji_history` AS eh
 			JOIN `main_emoji` AS me 
 			ON eh.main_emoji_id = me.id
 		where `u_id`=#{uId} AND `cancel_yn` = "N"
 		ORDER BY me.id DESC
-		LIMIT #{start},10
+		LIMIT #{start},8
 	</select>
 	
-	<!-- 유저 결제 내역 갯수 -->
+	<!-- 유저 이모티콘 갯수 -->
 	<select id="countImoji">
         SELECT COUNT(*) FROM `emoji_history`
         where `u_id`=#{uId} AND `cancel_yn` = "N"

@@ -110,7 +110,7 @@
 		</table>
 		<div class="board-utils">
 			<label>
-				<input type="checkbox" name="allChack" id="allChack"/>&nbsp;
+				<input type="checkbox" name="allChack" onchange="selectAll()" id="allChack"/>&nbsp;
 				<span>모두 선택</span>
 			</label>
 			
@@ -183,7 +183,13 @@
     };
     
     // 모두 선택
-    
+    function selectAll()  {
+   	 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+   	  checkboxes.forEach((checkbox) => {
+   	    checkbox.checked = selectAll.checked
+   	  })
+    	
+    }
     
     // 게시글 삭제
   	function deleteFun() {

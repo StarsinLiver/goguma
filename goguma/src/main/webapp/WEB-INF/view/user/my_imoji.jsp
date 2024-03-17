@@ -9,6 +9,10 @@
 		width: 1000px;
 		height: auto;
 	}
+	
+	.my-imoji-container .emoji--item-box {
+		width: 150px;
+	}
 </style>
 
 
@@ -67,7 +71,18 @@
         
         </div>
         <div class="emoji--body">
-            <div class="emoji--content-box"></div>
+            <div class="emoji--content-box">
+            	<c:forEach var="imoji" items="${imojiList}">
+            	<div class="emoji--item-box">
+                    <div class="emoji--img-box">
+                        <img src="/images/upload/emoji/${imoji.file}" alt="이모티콘">
+                    </div>
+                    <div class="emoji--item-title-box">
+                        <span class="name--text">${imoji.name}</span>
+                    </div>
+                </div>
+                </c:forEach>
+            </div>
             
             <div class="pagination">
 				<!-- 페이지 처리 -->
@@ -88,6 +103,22 @@
 	</div>
 </div>
 <!-- 메인 종료 -->
+<script>
 
+	const names = document.querySelectorAll('.name--text');
+
+	names.forEach(function(name) {
+	    maskString(name);
+	});
+
+	// 긴제목 마스킹 처리
+	function maskString(name) {
+	    let textContent = name.textContent;
+	    
+	    if (textContent.length >= 6) {
+	        name.textContent = textContent.slice(0, 6) + '...';
+	    }
+	}
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

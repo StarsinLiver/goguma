@@ -68,7 +68,7 @@
 			
 			<img class="rounded-circle mt-5" id="profileImage"
 				style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
-				src="/profile/${user.file}">
+				src="/profile/${user.file}" onerror="this.src='/assets/images/goguma_mascot.png'">
 				
 			<table class="table-count">
 				<thead>
@@ -176,11 +176,6 @@
 	}
 	move();
 	
-	function notImage() {
-		
-		
-		
-	}
 </script>
 
 <!-- 푸터 -->
