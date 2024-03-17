@@ -2,6 +2,7 @@ package com.store.goguma.admin.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,24 +11,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.admin.dto.AdminReportDTO;
+import com.store.goguma.admin.dto.EmojiModifyDTO;
 import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.MainEmoji;
-import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
+import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.AdminService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiUploadService;
-import com.store.goguma.service.ReportService;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.user.dto.my.RequestPageDTO;
-import com.store.goguma.user.dto.my.ResponsePageDTO;
-import com.store.goguma.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
@@ -49,23 +47,15 @@ public class AdminController {
 	@Autowired
 	private EmojiUploadService emojiUploadService;
 	
-	@Autowired
-	ReportService reportService;
-	
-
-	
 	
 	// 관리자 마이 페이지
 	// localhost://admin/modiUser
 	@GetMapping("/user")
 	public String User(Model model) {
-		
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
-		}
 
-		OauthDTO updateUser = adminService.selectAdminByUid(user.getUId());
+		OauthDTO principal = (OauthDTO) httpSession.getAttribute("principal");
+
+		OauthDTO updateUser = adminService.selectAdminByUid(principal.getUId());
 
 		model.addAttribute("user", updateUser);
 
@@ -77,11 +67,6 @@ public class AdminController {
 	// admin 개인정보 update 페이지
 	@GetMapping("/modify")
 	public String adminModify(Model model) {
-		
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
-		}
 
 		return "admin/admin_modi";
 	}
@@ -109,26 +94,20 @@ public class AdminController {
 	/*
 	 * admin 상품 결제 이력 관리 페이지 결제 이력 리스트 출력, 페이징
 	 */
-	@GetMapping("/history")
-	public String salesHistory(RequestPageDTO historyReqDTO, Model model, PageReqDTO page) {
-		
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
-		}
-		
-		log.info("history로 들어오는 pagedto" + page);
-
-		ResponsePageDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);
-
-		model.addAttribute("histories", list.getDtoList());
-		model.addAttribute("pg", list.getPg());
-		model.addAttribute("start", list.getStart());
-		model.addAttribute("end", list.getEnd());
-		model.addAttribute("last", list.getLast());
-
-		return "admin/admin_payment_history";
-	}
+	/*
+	 * @GetMapping("/history") public String salesHistory(EmojiHistoryReqDTO
+	 * historyReqDTO, Model model, PageReqDTO page) {
+	 * log.info("history로 들어오는 pagedto" + page);
+	 * 
+	 * EmojiHistoryResDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);
+	 * 
+	 * model.addAttribute("histories", list.getDtoList()); model.addAttribute("pg",
+	 * list.getPg()); model.addAttribute("start", list.getStart());
+	 * model.addAttribute("end", list.getEnd()); model.addAttribute("last",
+	 * list.getLast());
+	 * 
+	 * return "admin/admin_payment_history"; }
+	 */
 
 	// admin 활불 사유 검색 ajax
 	@PostMapping("/payment-reason")
@@ -144,6 +123,8 @@ public class AdminController {
 
 		return cancel;
 	}
+
+
 
 	// 이모지 페이지
 	// 이모지 리스트 출력, 페이징
@@ -188,6 +169,12 @@ public class AdminController {
 		return "admin/emoji_detail";
 	}
 	
+
+	
+	
+	
+	
+	
 	@GetMapping("/notice")
 	public String managementNotice() {
 
@@ -196,11 +183,6 @@ public class AdminController {
 
 	@GetMapping("/report")
 	public String managementReport(Model model,AdminReportDTO dto, PageReqDTO page) {
-		
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
-		}
 
 		AdminReportDTO report = adminService.selectReportAll(page);
 			
@@ -211,6 +193,7 @@ public class AdminController {
 		model.addAttribute("start", report.getStart());
 		model.addAttribute("end", report.getEnd());
 		model.addAttribute("last", report.getLast());
+		
 		
 		return "admin/admin_management_report";
 	}
@@ -238,29 +221,38 @@ public class AdminController {
 		return "";
 	}
 	
-	// 팀장님 행복을 위한 플렉스 테스트
-	@GetMapping("/happy")
-	public String happysanha() {
+
+	// banner 관리 페이지
+	@GetMapping("/modify/banner")
+	public String Modify_banner() {
 		
 		
-		return "user/happy_sanha";
-	}
-	
-	@PutMapping("/update-report/{id}")
-	public String updateReport(@PathVariable(value = "id") Integer id) {
-		
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
-		}
-		
-		int result = reportService.update(id);
-		
-		if(result == 0) {
-			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return "redirect:/admin/report";
+		return "admin/modify_banner";
 	}
 
+	
+	
+	
+	// free_board 생성 페이지
+	@GetMapping("/create/freeBoard")
+	public String Create_freeBoard() {
+		
+		
+		return "admin/create_freeBoard";
+	}
+
+	
+	
+	
+	// free_board 관리 페이지
+	@GetMapping("/modify/freeBoard")
+	public String Modify_freeBoard() {
+		
+		
+		return "admin/modify_freeBoard";
+	}
+
+	
+	
+	
 }

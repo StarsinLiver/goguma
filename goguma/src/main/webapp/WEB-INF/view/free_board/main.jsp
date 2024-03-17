@@ -4,8 +4,10 @@
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
 
+
 <section id="result">
-	<div class="result-container">
+	<div class="result-container" style="display: flex; width: 100%">
+	<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
 		<div id="local-wrap" class="articles-wrap">
 			<p class="article-kind local-article-kind">자유게시판</p>
 			<hr class="article-hr-border" />
