@@ -23,4 +23,16 @@ public class FreeboardController {
 		return "/free_board/free-list";
 	}
 	
+	@GetMapping("/card")
+	public String boardCard() {
+		
+		return "/free_board/free-card";
+	}
+	
+	@GetMapping("/write")
+	public String boardWrite() {
+		
+		return "/free_board/free-write";
+	}
+	
 }

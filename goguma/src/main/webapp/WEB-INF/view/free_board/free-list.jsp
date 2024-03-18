@@ -16,12 +16,20 @@
 .form-select {
 	width: calc(13% - 5px); /* 셀렉트 박스 폭 조절 */
 }
+h2 {
+	background-color: #f2f2f2;
+	padding: 10px;
+	margin-top: 20px;
+}
 </style>
 
 <div class="container mt-4">
 	<div class="row justify-content-center">
+			<section class="section nopad cac text-center" style="width: 67%;">
+			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
+		</section>
 		<div class="col-lg-8">
-			<h2>게시판 - 카테고리 이름</h2>
+			<h2>게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float:right;">메인으로</a></h2>
 			<!-- 리스트 테이블 -->
 			<table class="table table-bordered">
 				<thead>
@@ -223,7 +231,7 @@
 					</ul>
 				</nav>
 				<!-- 글 작성 버튼 -->
-				<a class="btn btn-outline-secondary" href="#">글쓰기</a>
+				<a class="btn btn-outline-secondary" href="/freeBoard/write">글쓰기</a>
 			</div>
 			<!-- 검색창 -->
 			<form class="d-flex justify-content-center mt-3">
