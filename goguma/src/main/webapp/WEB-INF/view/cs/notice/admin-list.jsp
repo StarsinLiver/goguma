@@ -22,8 +22,8 @@
 		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 		<!-- aside end -->
 	</div>
-	<div class="notice--body">
-		<table class="notice--table">
+	<div class="notice--body" >
+		<table class="notice--table" style="width: 1000px;">
 			<colgroup>
 				<col width="10%" />
 				<col width="60%" />

@@ -49,7 +49,11 @@ public interface EmojiRepository {
 
 	public int mainEmojiDownloadCountPlus(MainEmoji mainEmoji);
 
-
-	
+	// 메인 이모지 변경
+	public int updateMainEmoji(@Param("file") String file , @Param("name") String name , @Param("price") int price , @Param("id") int id);
+	// 서브 이모지 전체 삭제
+	public int deleteSubEmojiByGroupId(int groupId);
+	// 메인 이모지 삭제
+	public int deleteMainEmojiById(int id);
 
 }

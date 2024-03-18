@@ -29,9 +29,15 @@
 		resultType="com.store.goguma.entity.MainEmoji">
 		
 		select * from main_emoji
+		where delete_yn = 'N'
 	
 	
 	</select>
 	
-	
+	<select id="countByMainEmojiId" resultType="int"> 
+		select count(*) from emoji_history
+		where main_emoji_id = #{groupId}
+		and confirm_yn = 'Y'
+		and cancel_yn = 'N'
+	</select>
 </mapper>
