@@ -257,6 +257,16 @@ public class AdminController {
 	}
 	
 
+	// banner 생성 페이지
+	@GetMapping("/create/banner")
+	public String Create_banner() {
+		
+		
+		return "admin/create_banner";
+	}
+
+	
+
 	// banner 관리 페이지
 	@GetMapping("/modify/banner")
 	public String Modify_banner() {

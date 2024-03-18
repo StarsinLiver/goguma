@@ -170,6 +170,25 @@ nav.open ~ .overlay {
 			<li class="list"><a href="/admin/banner" class="nav-link"> <i
 					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
 			</a></li>
+			<!-- 
+			 <li class="list">
+                    <div class="nav-link" onclick="toggleSubMenu(this)">
+                        <i class="bx bx-folder-open icon"></i>
+                        <span class="link">광고 관리</span>
+                        <i class='bx bx-chevron-down arrow'></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="/admin/create/banner">광고 등록</a></li>
+                        <li><a href="/admin/modify/banner">광고 편집/삭제</a></li>
+                        <li><a href="/admin/list/banner">광고 리스트</a></li>
+                    </ul>
+                </li>
+			
+			
+			
+			
+			 -->
+			
 
 			<li class="list"><a href="/admin/chat" class="nav-link"> <i
 					class="bx bx-folder-open icon"></i> <span class="link">채팅 로그
@@ -209,6 +228,31 @@ overlay.addEventListener("click", () => {
 navBar.classList.remove("open");
 });
 
+
+/* 
+
+      function toggleSubMenu() {
+            const submenu = document.querySelector('.submenu');
+            submenu.classList.toggle('show');
+        }
+
+        const navBar = document.querySelector("nav"),
+            menuBtns = document.querySelectorAll(".menu-icon"),
+            overlay = document.querySelector(".overlay");
+
+        menuBtns.forEach((menuBtn) => {
+            menuBtn.addEventListener("click", () => {
+                navBar.classList.toggle("open");
+            });
+        });
+
+        overlay.addEventListener("click", () => {
+            navBar.classList.remove("open");
+        });
+
+
+
+*/
 
 </script>
 </html>
