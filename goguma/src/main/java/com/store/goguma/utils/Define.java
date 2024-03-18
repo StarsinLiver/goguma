@@ -38,4 +38,10 @@ public class Define {
     public static final String ENTER_ROOM_NAME = "업데이트 하실 채팅방의 이름을 입력해 주세요.";
     
     public static final String NOT_FOUND_USER = "유저가 탈퇴 하였거나 유저를 찾을 수 없습니다.";
+    
+    public static final String NO_VALID_CONTENT = "컨텐츠를 적어주세요";
+    public static final String NO_VALID_TITLE = "제목를 적어주세요";
+    public static final String NO_VALID_CLIENT = "클라이언트 이름을 적어주세요";
+    public static final String NO_VALID_PRICE = "금액을 다시 적어주세요";
+    public static final String NO_VALID_TYPE = "타입을 다시 적어주세요";
 }

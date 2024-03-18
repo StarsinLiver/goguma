@@ -50,11 +50,12 @@
         </path>
     </svg>
 <!-- Header End -->
-<div class="user-page" style="width: 95%; height: 80%; margin: 5% 5% 53% 5% ">
+<div class="user-page"
+	style="width: 95%; height: 80%; margin: 5% 5% 53% 5%">
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-	<div class="payment-container" style="width:70%; margin-right: 15%;">
+	<div class="payment-container" style="width: 70%; margin-right: 15%;">
 		<h4 class="user-page-title">거래 상품 관리</h4>
 		<div class="col-sm-12">
 			<div class="card mb-3">
@@ -66,49 +67,77 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>게시글 번호</th>
+								<th>제품 번호</th>
+								<th>제품 이름</th>
 								<th>판매자</th>
 								<th>구매자</th>
-								<th>제품명</th>
+								<th>상품 가격</th>
 								<th>등록일</th>
-								<th>구매확정 여부</th>
-								<th>관리하기</th>
+								<th>거래완료</th>
+								<th>거래일</th>
+								<th>삭제 YN</th>
+								<th>삭제하기</th>
 							</tr>
 						</thead>
 						<tbody>
-						
+							<c:forEach items="${productList}" var="product">
 								<tr id="dataRow">
-									<td id="id">1</td>
-									<td id="purchaseDate">정영재</td>
-									<td id="pointName">호구</td>
-									<td id="refundYn">벽돌폰</td>
-									<td id="refundYn">150000</td>
-									<td id="refundYn">N</td>
-									<td>
-										<button id="refundButton"
-											class="btn btn-warning btn-complete cancel-request">삭제하기</button>
-									</td>
+									<td id="">${product.getPId()}</td>
+									<td id="">${product.productName}</td>
+									<td id="">${product.hostName}</td>
+									<td id="">${product.userName}</td>
+									<td id="">${product.price}</td>
+									<td id="">${product.formatProductCreateAt()}</td>
+									<td id="">${product.confirmYn}</td>
+									
+									<td id="">${product.formatHistoryCreateAt()}</td>
+									<td id="">${product.productDeleteYn}</td>
+
+									<td><c:if test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">
+											<form action="/admin/product/delete/${product.getPId()}" method="post">
+											<input type="hidden" name="_method" value="delete"/>
+												<button id="refundButton" onclick="if(!confirm('삭제하시겠습니까?')) return false; "
+													class="btn btn-warning btn-complete cancel-request" >삭제하기</button>
+											</form>
+										</c:if></td>
+
 								</tr>
+							</c:forEach>
 						</tbody>
+
 					</table>
-			
+					<div class="pagination">
+						<!-- 페이지 처리 -->
+						<c:if test="${start > 1}">
+							<a href="/admin/product?pg=${start - 1}">&laquo;</a>
+						</c:if>
+						<!-- 페이지 번호 -->
+						<c:forEach var="i" begin="${start}" end="${end}">
+							<a href="/admin/product?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+						</c:forEach>
+						<c:if test="${end < last}">
+							<a href="/admin/product?pg=${end + 1}">&raquo;</a>
+						</c:if>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="modalReason" tabindex="-1" role="dialog"
+
+
+<!-- 이메일 변경 내용을 입력하는 폼 -->
+<!-- <div class="modal fade" id="modalReason" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<!-- 이메일 변경 내용을 입력하는 폼 -->
+				
 				<div style="display: flex; flex-direction: column;">
 					<div class="register-form">
-						<label for="password">Confirm Password</label> 
-						<br>
-						<br>
-						<textarea rows="12" cols="12" id="reasonText" readonly="readonly" style="border: none"></textarea>
+						<label for="password">Confirm Password</label> <br> <br>
+						<textarea rows="12" cols="12" id="reasonText" readonly="readonly"
+							style="border: none"></textarea>
 						<input type="" id="hidMerchant">
 					</div>
 				</div>
@@ -122,7 +151,7 @@
 
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- 메인 종료 -->
 <!-- 승인 모달 -->
 
@@ -133,8 +162,7 @@
 		$('.cancel-request').click(function() {
 			var merchantId = $(this).data('value');
 
-
-	$('#modalReason').modal('show'); // 모달 창을 보여줌
+			$('#modalReason').modal('show'); // 모달 창을 보여줌
 
 			// AJAX 호출
 			$.ajax({
@@ -143,11 +171,11 @@
 				data : {
 					merchantId : merchantId
 				},
-				dataType: 'json',
+				dataType : 'json',
 				success : function(data) {
 					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
 					$('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.merchantId); 
+					$('#hidMerchant').val(data.merchantId);
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
@@ -159,7 +187,7 @@
 		$('#confirm').click(function() {
 
 			var merchantId = $('#hidMerchant').val();
-			
+
 			console.log('머천트 아이디 값: ' + merchantId);
 			//AJAX 호출
 			$.ajax({

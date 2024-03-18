@@ -10,13 +10,14 @@
 	<div class="container py-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
-				<h3 class="display-5 text-white animated slideInDown">로그인</h3>
+				<h3 class="display-5 text-white animated slideInDown">이모티콘 등록</h3>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- Header End -->
     <div class="emoji--main-div">
+    	
         <table class="emoji--table">
             <tr class="emoji--table">
                 <th class="emoji--th" colspan="2">이모티콘 업로드</th>

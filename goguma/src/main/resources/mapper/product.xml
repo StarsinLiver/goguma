@@ -12,19 +12,24 @@
 
 	<!-- 중고상품 조회 -->
 	<select id="findAllBypId">
-		SELECT p.*, COALESCE(w.countWishList, 0) AS countWishList,
+		SELECT p.*, COALESCE(w.countWishList, 0) AS
+		countWishList,
 		COALESCE(cr.countChatRoom, 0) AS countChatRoom
-		FROM product p
+		FROM
+		product p
 		LEFT JOIN (
 		SELECT p_id, COUNT(p_id) AS countWishList
-		FROM wish_list
+		FROM
+		wish_list
 		GROUP BY p_id
 		) AS w ON p.p_id = w.p_id
 		LEFT JOIN (
-		SELECT p_id, COUNT(p_id) AS countChatRoom
+		SELECT p_id,
+		COUNT(p_id) AS countChatRoom
 		FROM chat_room
 		GROUP BY p_id
-		) AS cr ON p.p_id = cr.p_id
+		) AS cr ON
+		p.p_id = cr.p_id
 		WHERE p.p_id = #{pId}
 	</select>
 
@@ -53,43 +58,52 @@
 		select p.p_id as pId,
 		p.address as address,
 		p.name as name,
-		p.price as price,
+		p.price as
+		price,
 		p.host_id as hostId,
 		p.description as description,
 		p.file as file,
 		p.main_category_id as mainCategoryId,
-		p.sub_category_id as subCategoryId,
+		p.sub_category_id as
+		subCategoryId,
 		p.create_at as createAt,
 		p.update_at as updateAt,
 		p.delete_at as deleteAt,
 		p.delete_yn as deleteYn,
-		p.confirm_yn as confirmYn,
-        ifnull(count(c.id), 0) as countChatRoom,
-		ifnull(count(w.id), 0) as countWishList from product p
+		p.confirm_yn as
+		confirmYn,
+		ifnull(count(c.id), 0) as countChatRoom,
+		ifnull(count(w.id),
+		0) as countWishList from
+		product p
 		left join
 		chat_room c
-		on p.p_id = c.p_id and p.host_id = c.host_id
+		on p.p_id =
+		c.p_id and p.host_id =
+		c.host_id
 		left join
 		wish_list w
 		on w.p_id = p.p_id
-		where name like CONCAT('%', #{search}, '%')
-		and address like CONCAT('%', #{searchAddress}, '%')
+		where name like
+		CONCAT('%', #{search}, '%')
+		and address like CONCAT('%',
+		#{searchAddress}, '%')
 		and price between #{lowPrice} and
 		#{highPrice}
 		and p.delete_yn = 'N'
 		group by p.p_id
 		order by
 		<if test="sortWishList == 'Y'.toString()">
-		countWishList desc , 
+			countWishList desc ,
 		</if>
 		<if test="sortChatRoom == 'Y'.toString()">
-		countChatRoom desc , 
+			countChatRoom desc ,
 		</if>
 		<if test="sortLowPrice == 'Y'.toString()">
-		p.price asc ,
+			p.price asc ,
 		</if>
 		<if test="sortHighPrice == 'Y'.toString()">
-		p.price desc ,
+			p.price desc ,
 		</if>
 		p.p_id desc
 		LIMIT
@@ -110,12 +124,15 @@
 		left join
 		wish_list w
 		on w.p_id = p.p_id
-		where name like CONCAT('%', #{search}, '%')
+		where name like CONCAT('%', #{search},
+		'%')
 		and address like CONCAT('%', #{searchAddress}, '%')
-		and price between #{lowPrice} and
+		and price
+		between #{lowPrice} and
 		#{highPrice}
 		and p.delete_yn = 'N'
-		group by p.p_id
+		group by
+		p.p_id
 		) AS
 		result;
 	</select>
@@ -144,34 +161,91 @@
 	<select id="findLimitEightFromMain">
 		select p.p_id as pId,
 		p.address as address,
-		p.name as name,
+		p.name as
+		name,
 		p.price as price,
 		p.host_id as hostId,
-		p.description as description,
+		p.description as
+		description,
 		p.file as file,
 		p.main_category_id as mainCategoryId,
 		p.sub_category_id as subCategoryId,
 		p.create_at as createAt,
 		p.update_at as updateAt,
 		p.delete_at as deleteAt,
-		p.delete_yn as deleteYn,
+		p.delete_yn as
+		deleteYn,
 		p.confirm_yn as confirmYn,
-        ifnull(count(c.id), 0) as countChatRoom,
-		ifnull(count(w.id), 0) as countWishList from product p
+		ifnull(count(c.id), 0) as
+		countChatRoom,
+		ifnull(count(w.id), 0) as countWishList from
+		product p
 		left join
 		chat_room c
-		on p.p_id = c.p_id and p.host_id = c.host_id
-		left join
+		on p.p_id = c.p_id and p.host_id =
+		c.host_id
+		left
+		join
 		wish_list w
 		on w.p_id = p.p_id
 		where p.delete_yn = 'N'
-		group by p.p_id
+		group by
+		p.p_id
 		order by countWishList desc , countChatRoom desc
 		limit 8
 	</select>
-	
+
+	<select id="adminFindAll"
+		resultType="com.store.goguma.admin.dto.AdminProductDto">
+		SELECT P.p_id as pId ,
+		p.name as productName ,
+		p.address as productAddress ,
+		p.price as price ,
+		p.host_id as hostId ,
+		p.file as productFile ,
+		p.create_at as productCreateAt ,
+		p.delete_yn as productDeleteYn ,
+		p.confirm_yn as confirmYn ,
+		host.name as hostName,
+		host.email as hostEmail ,
+		host.social as hostSocial ,
+		host.tel as hostTel ,
+		host.zip as hostZip ,
+		host.role as hostRole ,
+		h.create_at as historyCreateAt,
+		u.u_id as userId ,
+		u.name as userName
+		FROM PRODUCT P
+		inner JOIN USER host
+		ON P.HOST_ID = host.U_ID
+		left join product_history h
+		on p.p_id = h.p_id
+		left join user u
+		on u.u_id = h.u_id
+		LIMIT #{start} , 20
+	</select>
+
+	<select id="adminCountFindAll" resultType="int">
+		SELECT count(*)
+		FROM PRODUCT P
+		inner JOIN USER host
+		ON P.HOST_ID = host.U_ID
+		left join product_history h
+		on p.p_id = h.p_id
+		left join user u
+		on u.u_id = h.u_id
+	</select>
+
 	<select id="countProductAll" resultType="int">
-		select count(*) from product
+		select count(*) from
+		product
 		where delete_yn = 'N'
 	</select>
+	
+	<delete id="adminDeleteProduct">
+		update product
+		set update_at = now() , delete_at = now() ,
+		delete_yn = 'Y'
+		where p_id = #{pId}
+	</delete>
 </mapper>

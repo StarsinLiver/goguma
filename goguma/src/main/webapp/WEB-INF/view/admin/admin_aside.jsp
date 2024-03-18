@@ -151,16 +151,24 @@ nav.open ~ .overlay {
 					class="bx bx-home-alt icon"></i> <span class="link">내정보 수정</span>
 			</a></li>
 			<li class="list"><a href="/admin/history" class="nav-link">
-					<i class="bx bx-bar-chart-alt-2 icon"></i> <span class="link">결제
-						내역</span>
+					<i class="bx bx-bar-chart-alt-2 icon"></i> <span class="link">이모티콘
+						결제 내역</span>
+			</a></li>
+			<li class="list"><a href="/emoji/file" class="nav-link"> <i
+					class="bx bx-heart icon"></i> <span class="link">이모티콘 등록</span>
+			</a></li>
+			<li class="list"><a href="/admin/emoji" class="nav-link"> <i
+					class="bx bx-heart icon"></i> <span class="link">이모티콘 관리</span>
 			</a></li>
 			<li class="list"><a href="/cs/notice/list/admin"
 				class="nav-link"> <i class="bx bx-bell icon"></i> <span
 					class="link">공지사항 관리</span>
 			</a></li>
-			<li class="list"><a href="/admin/emoji" class="nav-link"> <i
-					class="bx bx-heart icon"></i> <span class="link">이모티콘 관리</span>
+			<li class="list"><a href="/admin/qna" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">1 : 1
+						문의 관리</span>
 			</a></li>
+
 			<li class="list"><a href="/admin/report" class="nav-link"> <i
 					class="bx bx-folder-open icon"></i> <span class="link">신고 관리</span>
 			</a></li>
@@ -168,12 +176,22 @@ nav.open ~ .overlay {
 					<i class="bx bx-folder-open icon"></i> <span class="link">상품
 						관리</span>
 			</a></li>
-			<li class="list"><a href="/admin/banner" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
+
+			<li class="list"><a href="/admin/user/role-management"
+				class="nav-link"> <i class="bx bx-folder-open icon"></i> <span
+					class="link">유저 권한 관리</span>
 			</a></li>
 
 			<li class="list"><a href="/admin/chat" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">채팅 로그 관리</span>
+					class="bx bx-folder-open icon"></i> <span class="link">채팅 로그
+						관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/chat" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">자유
+						게시판 관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/banner" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
 			</a></li>
 		</ul>
 

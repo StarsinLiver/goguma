@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.store.goguma.admin.dto.AdminProductDto;
 import com.store.goguma.entity.Product;
 import com.store.goguma.product.dto.ProductSearchDto;
 import com.store.goguma.product.dto.ProductUserDto;
@@ -32,4 +33,11 @@ public interface ProductRepository {
 	public List<ProductSearchDto> findLimitEightFromMain();
 	// 전체 상품 갯수
 	public int countProductAll();
+	
+	// 관리자 계정에서 전체 보기
+	public List<AdminProductDto> adminFindAll(int start);
+	// 관리자 계정 전체 보기 카운트
+	public int adminCountFindAll();
+	// 관리자 계쩡으로 상품 삭제
+	public int adminDeleteProduct(int pId);
 }
