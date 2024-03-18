@@ -16,6 +16,7 @@
 .form-select {
 	width: calc(13% - 5px); /* 셀렉트 박스 폭 조절 */
 }
+
 h2 {
 	background-color: #f2f2f2;
 	padding: 10px;
@@ -25,11 +26,13 @@ h2 {
 
 <div class="container mt-4">
 	<div class="row justify-content-center">
-			<section class="section nopad cac text-center" style="width: 67%;">
+		<section class="section nopad cac text-center" style="width: 67%;">
 			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
 		</section>
 		<div class="col-lg-8">
-			<h2>게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float:right;">메인으로</a></h2>
+			<h2>
+				게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float: right;">메인으로</a>
+			</h2>
 			<!-- 리스트 테이블 -->
 			<table class="table table-bordered">
 				<thead>
@@ -44,8 +47,8 @@ h2 {
 				</thead>
 				<tbody>
 					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -55,8 +58,8 @@ h2 {
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
 					</tr>
 					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -64,9 +67,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -74,9 +78,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -84,9 +89,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -94,9 +100,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -104,9 +111,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -114,9 +122,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -124,9 +133,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -134,9 +144,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -144,9 +155,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -154,9 +166,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -164,9 +177,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -174,9 +188,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -184,9 +199,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -194,9 +210,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>
@@ -204,9 +221,10 @@ h2 {
 						<td><span class="w_date">2024-03-18 10:25</span></td>
 						<td class="text-center">1777</td>
 						<td class="text-center"><span class="badge bg-primary">105</span></td>
-					</tr>					<tr>
-						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span class="badge bg-secondary">[0]</span></a>
-						</td>
+					</tr>
+					<tr>
+						<td><a href=""> 대박! 미국이 경악하고 러시아가 극찬하고 중국이 무릎꿇은 부산 고구마 <span
+								class="badge bg-secondary">[0]</span></a></td>
 						<td><a id="article-profile-link"
 							href="/product/userProduct?uId=1"> <img src="" alt="프로필"
 								class="img-thumbnail"> <span class="hu_nick_txt">작성자</span>

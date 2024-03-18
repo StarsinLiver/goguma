@@ -38,7 +38,7 @@ h2 {
 	border: 1px solid #ccc; /* 테두리 스타일과 색상 지정 */
 	border-radius: 10px; /* 카드의 모서리를 둥글게 만듦 */
 	padding: 10px; /* 내부 여백 추가 */
-	margin-top:30px;
+	margin-top: 30px;
 }
 
 /* CSS */
@@ -58,7 +58,7 @@ h2 {
 
 .txt-wrap .user span, .txt-wrap .cnt span {
 	margin-right: 10px;
-		margin-left: 5px;
+	margin-left: 5px;
 }
 
 .board-img::before {
@@ -84,19 +84,21 @@ h2 {
 	width: 17px;
 	height: 15px;
 	background-position: -326px -7px;
+}
 
-}
 .cnt span {
-    margin-right: 10px;
-    position: relative;
-    display: flex;
+	margin-right: 10px;
+	position: relative;
+	display: flex;
 }
+
 .txt-wrap .user span.layerNickName {
-    font-size: 14px;
-    color: gray; 
+	font-size: 14px;
+	color: gray;
 }
+
 .txt-wrap a.subject-link {
-    font-weight: bold;
+	font-weight: bold;
 }
 </style>
 
@@ -107,7 +109,9 @@ h2 {
 			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
 		</section>
 		<div class="col-lg-8">
-			<h2>카테고리 <a href="/freeBoard/main" style="float:right;">메인으로</a></h2>
+			<h2>
+				카테고리 <a href="/freeBoard/main" style="float: right;">메인으로</a>
+			</h2>
 			<div class="row">
 				<div class="col-md-3">
 					<div class="card2">
@@ -128,7 +132,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -147,7 +151,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -166,7 +170,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -185,7 +189,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -204,7 +208,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -223,7 +227,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -242,7 +246,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -261,7 +265,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -280,7 +284,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -299,7 +303,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
@@ -318,7 +322,7 @@ h2 {
 						</a>
 					</div>
 				</div>
-								<div class="col-md-3">
+				<div class="col-md-3">
 					<div class="card2">
 						<a class="cardA" href="#"> <img src="/assets/images/cat-1.png"
 							class="card2-img-top" alt="이미지 1" style="height: 182px;">
