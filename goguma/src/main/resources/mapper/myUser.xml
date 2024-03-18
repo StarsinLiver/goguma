@@ -72,7 +72,7 @@
 			FROM `qna` AS q
 			JOIN `user` AS cu ON q.u_id = cu.u_id <!-- 회원 정보 -->
 			LEFT JOIN `user` AS au ON q.admin_id = au.u_id <!-- 관리자 정보 -->
-		WHERE q.u_id =#{uId} and q.`delete_yn` = "N"
+		WHERE q.u_id =#{uId} and q.`delete_yn` = 'N'
 		<include refid="searchBox"/>
 		ORDER BY q.id DESC
 		LIMIT #{start},10
@@ -83,7 +83,7 @@
 	<!-- 문의하기 내역 갯수 -->
 	<select id="countQnaByUid">
 		SELECT COUNT(*) FROM `qna`
-        	where `u_id`=#{uId} and q.`delete_yn` = "N"
+        	where `u_id`=#{uId} and `delete_yn` = 'N'
         	<include refid="searchBox"/>
 	</select>
 	
@@ -127,4 +127,27 @@
         where `u_id`=#{uId} AND `cancel_yn` = "N"
     </select>
 	
+	<!-- 찜 목록 -->
+	<select id="selectWishListByUid" resultType="com.store.goguma.user.dto.my.WishProductDTO">
+		SELECT 
+			w.id as `id`,
+			w.p_id as `productId`,
+			w.u_id as `uId`,
+			w.create_at as `createAt`,
+			p.address,  
+			p.`name`, 
+			p.price,  
+			p.`file` as `productFile`
+		FROM `wish_list` AS w
+			JOIN `product` AS p ON w.p_id = p.p_id
+		WHERE w.u_id=#{uId}
+		ORDER BY w.id DESC
+		LIMIT #{start},6
+	</select>
+	
+	<!-- 찜 목록 갯수 -->
+	<select id="countWishListByUid">
+		SELECT COUNT(*) FROM `wish_list`
+		WHERE `u_id`=#{uId}
+	</select>
 </mapper>

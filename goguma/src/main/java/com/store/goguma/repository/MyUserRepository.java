@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
 import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
+import com.store.goguma.user.dto.my.WishProductDTO;
 
 @Mapper
 public interface MyUserRepository {
@@ -51,4 +52,11 @@ public interface MyUserRepository {
 	
 	// 이모티콘 갯수
 	public int countImoji(Integer uId);
+	
+	// 찜 목록
+	public List<WishProductDTO> selectWishListByUid(@Param("uId") Integer uId, 
+			@Param("start") Integer start);
+	
+	// 찜 갯수
+	public int countWishListByUid(Integer uId);
 }

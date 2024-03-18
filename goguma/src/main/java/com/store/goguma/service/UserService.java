@@ -23,6 +23,7 @@ import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
 import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
+import com.store.goguma.user.dto.my.WishProductDTO;
 import com.store.goguma.utils.Define;
 
 import lombok.extern.slf4j.Slf4j;
@@ -150,6 +151,20 @@ public class UserService {
 		
 		List<UserEmojiDTO> list = myUserRepository.selectAllImoji(uId, start);
 		int total = myUserRepository.countImoji(uId);
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(requestPageDTO)
+				.dtoList(list)
+				.total(total)
+				.build();
+	}
+	
+	// 찜 목록
+	public ResponsePageDTO wishList(RequestPageDTO requestPageDTO, int uId) {
+		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		
+		List<WishProductDTO> list = myUserRepository.selectWishListByUid(uId, start);
+		int total = myUserRepository.countWishListByUid(uId);
 		
 		return ResponsePageDTO.builder()
 				.requestPageDTO(requestPageDTO)

@@ -82,21 +82,26 @@
                     </div>
                 </div>
                 </c:forEach>
+                <c:if test="${empty imojiList}">
+                	<span>문의하기 내역이 존재하지 않습니다.</span>
+                </c:if>
             </div>
             
-            <div class="pagination">
-				<!-- 페이지 처리 -->
-				<c:if test="${start > 1}">
-				<a href="/user/imoji?pg=${start - 1}">&laquo;</a>
-			  	</c:if>
-			  	<!-- 페이지 번호 -->
-			  	<c:forEach var="i" begin="${start}" end="${end}">
-					<a href="/user/imoji?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
-				</c:forEach>
-			  	<c:if test="${end < last}">
-				<a href="/user/imoji?pg=${end + 1}">&raquo;</a>
-				</c:if>
-			</div>
+            <c:if test="${start ne 0}">
+	            <div class="pagination">
+					<!-- 페이지 처리 -->
+					<c:if test="${start > 1}">
+					<a href="/user/imoji?pg=${start - 1}">&laquo;</a>
+				  	</c:if>
+				  	<!-- 페이지 번호 -->
+				  	<c:forEach var="i" begin="${start}" end="${end}">
+						<a href="/user/imoji?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+					</c:forEach>
+				  	<c:if test="${end < last}">
+					<a href="/user/imoji?pg=${end + 1}">&raquo;</a>
+					</c:if>
+				</div>
+			</c:if>
         </div>
     </div>
 				

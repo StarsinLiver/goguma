@@ -55,109 +55,43 @@
 		<h4 class="user-page-title">찜 목록</h4>
 		
 		<!-- 시작 -->
-
-	<section id="article-detail-hot-more">
 		<section class="cards-wrap">
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-		</section>
+				<c:forEach var="wish" items="${wishList}">
+					<article class="card">
+						<a class="card-link ga-click" href="/product/productDetail?pId=${wish.productId}">
+							<div class="card-photo">
+								<img alt="이미지" src="/images/upload/${wish.productFile}">
+							</div>
+							<div class="card-desc">
+								<h2 class="card-title">${wish.name}</h2>
+								<div class="card-price">${wish.price}</div>
+							</div>
+						</a>
+						<form method="post" action="/product/deleteWishList" style="margin-top: 5px;">
+								<input type="hidden" name="pId" value="${wish.productId}">
+								<p style="text-align: right">
+									<button class="btn btn-danger btn-circle" type="submit">
+										<i class="fa fa-frown-o"></i> 찜해제
+									</button>
+								</p>
+							</form>
+					</article>
+				</c:forEach>
+		
+	</section>
 		
 		<div class="pagination">
-		  <a href="#">&laquo;</a>
-		  <a href="#">1</a>
-		  <a class="active" href="#">2</a>
-		  <a href="#">3</a>
-		  <a href="#">4</a>
-		  <a href="#">5</a>
-		  <a href="#">&raquo;</a>
+			<!-- 페이지 처리 -->
+			<c:if test="${start > 1}">
+			<a href="/user/myQna?pg=${start - 1}">&laquo;</a>
+		  	</c:if>
+		  	<!-- 페이지 번호 -->
+		  	<c:forEach var="i" begin="${start}" end="${end}">
+				<a href="/user/myQna?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+			</c:forEach>
+		  	<c:if test="${end < last}">
+			<a href="/user/myQna?pg=${end + 1}">&raquo;</a>
+			</c:if>
 		</div>
 	</section>
 	<!-- 메인 섹션 종료 -->

@@ -116,7 +116,7 @@
 			
 			<div>
 				<button id="delete-qna" onclick="deleteFun()" class="btn btn-warning btn-complete">삭제</button>
-				<a href="#" class="btn btn-warning btn-complete">문의하기</a>
+				<a href="/cs/qna/write" class="btn btn-warning btn-complete">문의하기</a>
 			</div>
 		</div>
 		<div class="pagination">

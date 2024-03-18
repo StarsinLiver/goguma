@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.LoginRestfulException;
+import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
@@ -26,6 +27,7 @@ import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
+import com.store.goguma.user.dto.my.WishProductDTO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -255,7 +257,24 @@ public class UserController {
 	
 	// 찜 목록 페이지
 	@GetMapping("/wish")
-	public String wishPage() {
+	public String wishPage(RequestPageDTO requestPageDTO,Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		log.info("requestPageDTO : "+requestPageDTO);
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		int uId = sessionUser.getUId();
+		
+		ResponsePageDTO response = userService.wishList(requestPageDTO, uId);
+		
+		model.addAttribute("wishList", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
+		
 		
 		return "/user/wish";
 	}
