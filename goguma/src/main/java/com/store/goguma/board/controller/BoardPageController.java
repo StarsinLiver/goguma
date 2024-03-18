@@ -12,4 +12,9 @@ public class BoardPageController {
 	public String list() {
 		return "board/list";
 	}
+	
+	@GetMapping("/cate-setting")
+	public String cateSetting() {
+		return "board/admin-cate-setting";
+	}
 }
