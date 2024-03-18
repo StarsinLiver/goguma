@@ -35,7 +35,15 @@ h2 {
 </style>
 
 <!-- 메인 컨텐츠 -->
+<!-- aside 시작 -->
+<div style="display: flex;">
+<div
+	style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
+	<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
+</div>
+<!-- aside 끝 -->
 <div class="container mt-4">
+
 	<div class="row justify-content-center">
 		<section class="section nopad cac text-center" style="width: 67%;">
 			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
@@ -242,7 +250,7 @@ h2 {
 						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
 				</div>
-								<div class="owl-screen">
+				<div class="owl-screen">
 					<div class="service-widget">
 						<div class="post-media entry wow fadeIn">
 							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
@@ -255,7 +263,7 @@ h2 {
 						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
 				</div>
-								<div class="owl-screen">
+				<div class="owl-screen">
 					<div class="service-widget">
 						<div class="post-media entry wow fadeIn">
 							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
@@ -268,7 +276,7 @@ h2 {
 						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
 				</div>
-								<div class="owl-screen">
+				<div class="owl-screen">
 					<div class="service-widget">
 						<div class="post-media entry wow fadeIn">
 							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
@@ -281,7 +289,7 @@ h2 {
 						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
 				</div>
-								<div class="owl-screen">
+				<div class="owl-screen">
 					<div class="service-widget">
 						<div class="post-media entry wow fadeIn">
 							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
@@ -298,7 +306,7 @@ h2 {
 		</div>
 	</div>
 </div>
-
+</div>
 <!-- 부트스트랩 자바스크립트 및 필수 자바스크립트 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
