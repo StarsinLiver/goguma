@@ -21,8 +21,11 @@
 	</update>
 	
 	
-	<select id="findAllByuId">
-		select * from user where u_id = #{uId}
+	<select id="findAllByuId" resultType="com.store.goguma.entity.User">
+		select * from user where u_id = #{uId} AND delete_yn = 'N'
 	</select>
 
+	<select id="countUserAll" resultType="int">
+		select count(*) from user 
+	</select>
 </mapper>

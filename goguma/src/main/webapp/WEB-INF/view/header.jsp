@@ -111,7 +111,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="#" class="dropdown-item">리스트</a> <a href="#"
+							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="#"
 								class="dropdown-item">통합검색</a>
 						</div>
 					</div>
@@ -158,6 +158,11 @@
 				</div>
 				<!-- 이부분은 관리자계정으로 로그인시 표시되게 설정해야함 -->
 			</div>
+			<c:if test="${principal.role == 'ADMIN'}">
+							<a href="/admin/user"
+						class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">관리자 페이지<i
+						class="fa fa-arrow-right ms-3"></i></a>
+			</c:if>
 			<!-- 이부분은 로그인하였을 경우 로그아웃 버튼으로, 로그인하지 않았을 경우 로그인/회원가입 버튼으로 -->
 			<c:choose>
 				<c:when test="${principal ne null}">

@@ -4,37 +4,42 @@
 
 <mapper namespace="com.store.goguma.repository.NoticeRepository">
 
-	<select id="getNoticeList" resultType="com.store.goguma.entity.Notice">
+	<select id="getNoticeList"
+		resultType="com.store.goguma.entity.Notice">
 		select * from notice order by id desc;
 	</select>
-	
+
 	<select id="getNoticeDetail">
 		select * from notice where id = #{id};
 	</select>
-	
+
 	<insert id="getNoticeWrite">
 		insert into notice(title, content, u_id, create_at)
 		values(
-			#{title},
-			#{content},
-			#{uId},
-			now()
+		#{title},
+		#{content},
+		#{uId},
+		now()
 		);
 	</insert>
-	
+
 	<delete id="noticeDelete">
 		delete from notice where id = #{id};
 	</delete>
-	
+
 	<update id="noticeUpdate">
 		update notice set
-			title = #{title},
-			content = #{content}
+		title = #{title},
+		content = #{content}
 		where id = #{id};
 	</update>
-	
-	
-	
-	
-	
+
+
+	<select id="findLimitEightFromMain"
+		resultType="com.store.goguma.entity.Notice">
+		select * from notice order by id desc
+		limit 8
+	</select>
+
+
 </mapper>

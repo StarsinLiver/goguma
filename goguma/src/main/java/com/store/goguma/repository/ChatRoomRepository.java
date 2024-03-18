@@ -47,4 +47,7 @@ public interface ChatRoomRepository {
 	 */
 	public int updateHostExit(int roomId);
 
+	public int isExistChatRoom(@Param("pId")int pId, @Param("uId")int uId);
+	
+	public int countChatRoomAll();
 }

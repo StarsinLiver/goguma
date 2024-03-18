@@ -23,6 +23,16 @@ spring:
     restart:
       enabled: true
 
+#  datasource:
+#    url: jdbc:mysql://13.211.47.78/goguma?serverTimeZone=Asia/Seoul
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: Sa1953vb!
+#  devtools:
+#    restart:
+#      enabled: true
+
+
 #  sql:
 #    init: # 초기 sql 파일 읽기
 #      mode: never #  always : 서버 실행시마다 data, schema 읽음, never : 읽지 않음

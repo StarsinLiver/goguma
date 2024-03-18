@@ -67,4 +67,12 @@ public class ChatRoomService {
 		return chatRoomRepository.updateHostExit(roomId);
 	}
 
+	// 채팅 중복 조회
+	public int isExistChatRoom(int pId, int uId) {
+		return chatRoomRepository.isExistChatRoom(pId, uId);
+	}
+	
+	public int countChatRoomAll() {
+		return chatRoomRepository.countChatRoomAll();
+	}
 }

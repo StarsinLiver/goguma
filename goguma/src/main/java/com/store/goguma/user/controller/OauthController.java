@@ -133,9 +133,13 @@ public class OauthController {
 			
 				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
 				
-				
 				httpSession.setAttribute("principal", oldUser);
 
+				int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
+
+				// 변경된 세션의 유효 시간을 설정합니다.
+				httpSession.setMaxInactiveInterval(secondsInAWeek);
+				
 				return "main";
 			}
 		} else {
@@ -202,6 +206,11 @@ public class OauthController {
 				
 				httpSession.setAttribute("principal", oldUser);
 
+				int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
+
+				// 변경된 세션의 유효 시간을 설정합니다.
+				httpSession.setMaxInactiveInterval(secondsInAWeek);
+				
 				return "main";
 			}
 		} else {
@@ -258,7 +267,6 @@ public class OauthController {
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(), dto.getSocial());
 		
 		
-		log.info("올드유저 notnull 진입:!!!!222222222222222222222222222222222222222222222222222");
 	
 		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
 		if (oldUser != null) {
@@ -267,26 +275,27 @@ public class OauthController {
 			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
 			if(oldUser.getDeleteyn().equals("Y")) {
 				
-				log.info("올드유저 notnull 진입후  deleteY값 탔음:!!!!");
-				
-				
 				return "redirect:/login";
 				
 			}else {
 			
-				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
-				
 				
 				httpSession.setAttribute("principal", oldUser);
 
+				
+				int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
+
+				// 변경된 세션의 유효 시간을 설정합니다.
+				httpSession.setMaxInactiveInterval(secondsInAWeek);
+				
+				
+				
 				return "main";
 			}
 		} else {
 
-			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			
 			httpSession.setAttribute("principal", dto);
-
+			
 			return "redirect:/oauth/register";
 		}
 
@@ -311,6 +320,13 @@ public class OauthController {
 
 		httpSession.setAttribute("principal", oldUser);
 
+		
+		int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
+
+		// 변경된 세션의 유효 시간을 설정합니다.
+		httpSession.setMaxInactiveInterval(secondsInAWeek);
+		
+		
 		return "redirect:/";
 	}
 

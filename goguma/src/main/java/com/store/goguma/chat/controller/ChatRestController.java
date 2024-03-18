@@ -108,8 +108,10 @@ public class ChatRestController {
 					.emoji(chatMessage.getEmoji()).roomId(chatMessage.getRoomId()).uId(chatMessage.getUserId())
 					.chatMessageType(chatMessage.getChatMessageType()).build();
 
-			int result = chatMessageService.save(chatMessage2);
-			if (result == 0) {
+			OauthDTO user = OauthDTO.builder().uId(chatMessage.getUserId()).name(chatMessage.getUserName()).file(chatMessage.getFile()).build();
+					
+			boolean result = chatMessageService.save(chatMessage2 , user);
+			if (result) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -135,8 +137,8 @@ public class ChatRestController {
 			ChatMessage chatMessage = ChatMessage.builder().roomId(roomId).uId(user.getUId()).text(text).file(path)
 					.chatMessageType(ChatType.IMAGE).build();
 
-			int result = chatMessageService.save(chatMessage);
-			if (result == 0) {
+			boolean result = chatMessageService.save(chatMessage , user);
+			if (result) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			return new ResponseEntity<>(HttpStatus.OK);

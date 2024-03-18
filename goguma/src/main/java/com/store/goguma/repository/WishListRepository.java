@@ -13,4 +13,6 @@ public interface WishListRepository {
 	public int deleteWishList(WishList WishList);
 
 	public int findByWishList(@Param("pId") int pId, @Param("uId") int uId);
+
+	public int countWishList(int pId);
 }

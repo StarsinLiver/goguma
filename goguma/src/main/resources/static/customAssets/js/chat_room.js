@@ -4,7 +4,7 @@ const chatListItems = document.querySelectorAll('.chat_list');
 let msgHistory = document.querySelector(".msg_history");
 let mesgs = document.querySelector(".mesgs");
 const userId = document.getElementById("userId").value;
-
+let user = getSession();
 let messageRoomId = 0;
 const chatListItemsFunc = (roomId) => {
 	
@@ -326,6 +326,8 @@ const sendMessage = () => {
           {},
           JSON.stringify({
 			userId : userId ,
+			userName : user.name ,
+			userFile : user.file ,
             text: message,
             emoji : emoticonImg,
             roomId: messageRoomId,

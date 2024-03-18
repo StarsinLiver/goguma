@@ -35,13 +35,16 @@
 		chat_room c
 		LEFT JOIN
 		product p
-		ON p.p_id = c.p_id
+		ON p.p_id =
+		c.p_id
 		INNER JOIN user hu
 		ON hu.u_id = c.host_id
 		INNER JOIN user u
-		ON u.u_id = c.u_id
+		ON
+		u.u_id = c.u_id
 		left join chat_room_name rm
-		on c.id = rm.room_id and rm.u_id = #{userId}
+		on c.id = rm.room_id and
+		rm.u_id = #{userId}
 		WHERE
 		(c.host_id = #{userId}
 		AND c.host_exit != 'Y')
@@ -62,7 +65,8 @@
 		rm.room_name as roomName
 		from
 		chat_room c
-		left join chat_room_name rm
+		left
+		join chat_room_name rm
 		on c.id = rm.room_id and rm.u_id = #{userId}
 		where c.id = #{roomId};
 	</select>
@@ -71,19 +75,35 @@
 	<insert id="saveRoom" useGeneratedKeys="true" keyProperty="id"
 		keyColumn="id">
 		insert into chat_room (p_id, u_id, host_id)
-		values (#{pId}, #{uId}, #{hostId})
+		values (#{pId},
+		#{uId}, #{hostId})
 	</insert>
 
 	<update id="updateHostExit">
 		update chat_room
 		set host_exit = 'Y'
-		where id = #{roomId}
+		where id =
+		#{roomId}
 	</update>
 
 	<update id="updateUserExit">
 		update chat_room
 		set user_exit = 'Y'
-		where id = #{roomId}
+		where id =
+		#{roomId}
 	</update>
 
+	<select id="isExistChatRoom" resultType="int">
+		select count(*) from chat_room
+		where p_id = #{pId} and u_id = #{uId}
+		and user_exit = 'N';
+	</select>
+	
+	<select id="countChatRoom">
+		SELECT COUNT(*) FROM chat_room WHERE p_id = #{pId}
+	</select>
+	
+	<select id="countChatRoomAll">
+		select count(*) from chat_room
+	</select>
 </mapper>
