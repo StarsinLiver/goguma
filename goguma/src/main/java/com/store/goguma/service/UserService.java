@@ -95,14 +95,26 @@ public class UserService {
 	
 	
 	// 이모티콘 환불
-	public int cancelEmoji(String id) {
-		int result = myUserRepository.updateEmojiHistoryCancel(id);
-		return result;
+	public UserEmojiDTO cancelEmoji(String merchantid, int uId, String reason) {
+		
+		// 환불 요청
+		int result = myUserRepository.updateEmojiHistoryCancel(merchantid, uId, reason);
+		
+		// 기간 제한
+		if(result > 1) {
+			throw new BackPageRestfulException("기한이 지났습니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 이모티콘 결제 정보 조회
+		UserEmojiDTO dto = myUserRepository.findEmojiHistoryBymerchantId(merchantid);
+		
+		
+		return dto;
 	}
 	
 	// 구매 거래 내역
 	public ResponsePageDTO productList(int uId, RequestPageDTO requestPageDTO){
-		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		int start = (requestPageDTO.getPg() - 1) * 6;
 		
 		List<ProductHistoryDTO> dto = myUserRepository.myReadByproducthistory(uId, start);
 		int total = myUserRepository.countProductHistoryByUser(uId);

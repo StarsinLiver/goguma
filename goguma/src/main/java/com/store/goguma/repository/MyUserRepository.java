@@ -22,7 +22,9 @@ public interface MyUserRepository {
 	public UserEmojiDTO findEmojiHistoryBymerchantId(String merchantId);
 	
 	// 유저 이모티콘 환불
-	public int updateEmojiHistoryCancel(String merchantId);
+	public int updateEmojiHistoryCancel(@Param("merchantId") String merchantId, 
+										@Param("uId") Integer uId,
+										@Param("reason") String reason);
 	
 	
 	// 구매 거래 내역

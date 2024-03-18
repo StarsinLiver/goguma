@@ -1,5 +1,7 @@
 package com.store.goguma.user.dto.my;
 
+import java.text.DecimalFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,4 +25,12 @@ public class WishProductDTO {
     private String name;
     private Integer price;
     private String productFile;
+    
+ // 포메터 기능
+  	public String formatBalance() {
+  		// 1000 --> 1,000
+  		DecimalFormat df = new DecimalFormat("###,###");
+  		String formaterNumber = df.format(price);
+  		return formaterNumber+"원";
+  	}
 }

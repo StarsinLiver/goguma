@@ -124,6 +124,33 @@
 	        name.textContent = textContent.slice(0, 6) + '...';
 	    }
 	}
+	
+	// 페이지가 로드된 후 실행됨
+    window.onload = function() {
+        // 현재 URL 가져오기
+        let currentUrl = window.location.href;
+
+        let url = new URL(currentUrl);
+
+        // 추가할 파라미터
+        let size = url.searchParams.get('size');
+
+        // pagination 클래스를 가진 요소 찾기
+        let paginationLinks = document.querySelectorAll('.pagination a');
+
+        // 각 링크에 추가 파라미터 추가
+        paginationLinks.forEach(function(link) {
+            let linkUrl = new URL(link.href);
+
+            // 파라미터 추가
+            if (size) {
+                linkUrl.searchParams.append('size', size);
+            }
+
+            // 변경된 URL을 href 속성에 설정
+            link.href = linkUrl.href;
+        });
+    };
 </script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

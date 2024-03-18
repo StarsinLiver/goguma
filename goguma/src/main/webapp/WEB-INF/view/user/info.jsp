@@ -151,21 +151,16 @@
 	        elem.style.width = width + "%";
 	        elem.innerHTML = width + "%";
 	        
-	     	// 그라데이션 색상 계산
-            let color;
-			if (width >= 80) {
-			    let red = 0; // 초록색에서는 빨간색은 항상 0
-			    let green = Math.floor((width - 80) * 3.1875); // 초록색 계산
-			    color = "rgb(" + red + ", " + (255 - green) + ", 0)";
-			} else if (width >= 40 && width <= 79) {
-			    let red = Math.floor(255 - (width - 40) * 2); // 노랑에서 초록으로 자연스럽게 계산
-			    let green = 255;
-			    color = "rgb(" + red + ", " + green + ", 0)";
-			} else {
-			    let red = 255;
-			    let green = Math.floor(width * 6.375);
-			    color = "rgb(" + red + ", " + green + ", 0)";
-			}
+	        let color;
+	        if (width >= 80) {
+	            color = "green"; // width가 80 이상이면 초록색
+	        }
+	        if (width >= 40 && width <= 79) {
+	            color = "orange"; // width가 40에서 79 사이면 주황색
+	        } 
+	        if (width >= 30) {
+	            color = "red"; // 그 외의 경우에는 빨간색
+	        }
 
             // 배경색 변경
             elem.style.backgroundColor = color;

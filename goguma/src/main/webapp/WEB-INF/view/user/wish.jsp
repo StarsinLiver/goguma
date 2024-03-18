@@ -64,10 +64,10 @@
 							</div>
 							<div class="card-desc">
 								<h2 class="card-title">${wish.name}</h2>
-								<div class="card-price">${wish.price}</div>
+								<div class="card-price">${wish.formatBalance()}</div>
 							</div>
 						</a>
-						<form method="post" action="/product/deleteWishList" style="margin-top: 5px;">
+						<form method="post" action="/user/wish/delete" style="margin-top: 5px;">
 								<input type="hidden" name="pId" value="${wish.productId}">
 								<p style="text-align: right">
 									<button class="btn btn-danger btn-circle" type="submit">
@@ -83,14 +83,14 @@
 		<div class="pagination">
 			<!-- 페이지 처리 -->
 			<c:if test="${start > 1}">
-			<a href="/user/myQna?pg=${start - 1}">&laquo;</a>
+			<a href="/user/wish?pg=${start - 1}">&laquo;</a>
 		  	</c:if>
 		  	<!-- 페이지 번호 -->
 		  	<c:forEach var="i" begin="${start}" end="${end}">
-				<a href="/user/myQna?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+				<a href="/user/wish?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
 			</c:forEach>
 		  	<c:if test="${end < last}">
-			<a href="/user/myQna?pg=${end + 1}">&raquo;</a>
+			<a href="/user/wish?pg=${end + 1}">&raquo;</a>
 			</c:if>
 		</div>
 	</section>
@@ -99,6 +99,33 @@
 	</div>
 </div>
 <!-- 메인 종료 -->
+<script>
+	// 페이지가 로드된 후 실행됨
+    window.onload = function() {
+        // 현재 URL 가져오기
+        let currentUrl = window.location.href;
 
+        let url = new URL(currentUrl);
+
+        // 추가할 파라미터
+        let size = url.searchParams.get('size');
+
+        // pagination 클래스를 가진 요소 찾기
+        let paginationLinks = document.querySelectorAll('.pagination a');
+
+        // 각 링크에 추가 파라미터 추가
+        paginationLinks.forEach(function(link) {
+            let linkUrl = new URL(link.href);
+
+            // 파라미터 추가
+            if (size) {
+                linkUrl.searchParams.append('size', size);
+            }
+
+            // 변경된 URL을 href 속성에 설정
+            link.href = linkUrl.href;
+        });
+    };
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

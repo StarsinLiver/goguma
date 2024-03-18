@@ -10,7 +10,7 @@
 		<li><a href="/user/product-host">내 상품 목록</a></li>
 		<li><a href="/user/board">내 게시글</a></li>
 		<li><a href="/user/myQna">문의 내역</a></li>
-		<li><a href="/user/imoji">이모티콘 목록</a></li>
-		<li><a href="/user/wish">찜 목록</a></li>
+		<li><a href="/user/imoji?size=8">이모티콘 목록</a></li>
+		<li><a href="/user/wish?size=6">찜 목록</a></li>
 	</ul>
 </aside>

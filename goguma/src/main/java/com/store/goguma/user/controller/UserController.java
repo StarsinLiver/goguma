@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.product.dto.WishListDTO;
+import com.store.goguma.service.PaymentService;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
@@ -43,6 +45,9 @@ public class UserController {
 	// 유저 페이지
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	PaymentService paymentService;
 	
 	// 내 정보 조회 + 페이지
 	@GetMapping("/info")
@@ -148,17 +153,35 @@ public class UserController {
 	
 	// 이모티콘 환불 사유 전송
 	@PutMapping("/emojiReason")
-	public int reason(@RequestBody Map<String, String> data) {
-		String id = data.get("id");
-		log.info("포트원 번호 : "+id);
+	public ResponseEntity<?> reason(@RequestBody Map<String, String> data) {
+		String merchantid = data.get("id"); // 포트원 번호
+		String reason = data.get("content"); // 환불 사유
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
 		
-		int result = userService.cancelEmoji(id);
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
 		
-		if(result > 1) {
-			throw new RuntimeException("환불 기한이 지났습니다");
+		int uId = sessionUser.getUId();
+		
+		// 환불 신청
+		UserEmojiDTO dto = userService.cancelEmoji(merchantid, uId, reason);
+		String content = dto.getCancelReason(); // 환불 사유
+		int price = dto.getCancelAmount(); // 환불 비용
+		
+		
+		// 환불 전송
+		String token = paymentService.getFortOneToken();
+		boolean isTrue = paymentService.refund(token, merchantid, content, price);
+		
+		// 환불 신청이 완료 되었다면 cancel_Yn = 'Y'
+		if (isTrue) {
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		
-		return result;
+		
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	// 중고거래 내역 페이지
