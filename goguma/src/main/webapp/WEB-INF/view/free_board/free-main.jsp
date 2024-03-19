@@ -85,6 +85,17 @@ h2 {
 	overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
 	text-overflow: ellipsis; /* 넘친 내용을 ...으로 표시 */
 }
+
+.card-details {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
 </style>
 
 <!-- 메인 컨텐츠 -->
@@ -94,257 +105,162 @@ h2 {
 			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
 		</section>
 		<div class="col-lg-4">
-			<h2>베스트 사진게시물<a href="/freeBoard/card" style="float:right;">더보기</a></h2>
+			<h2>
+				베스트 사진게시물<a href="/freeBoard/card" style="float: right;">더보기</a>
+			</h2>
 			<div class="row">
-				<div class="col-md-6 mb-3">
-					<div class="card2">
-						<a href="/#"> <img src="/assets/images/cat-1.png"
-							class="card2-img-top" alt="이미지 1">
-							<p>제목</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6 mb-3">
-					<div class="card2">
-						<a href="/#"> <img src="/assets/images/cat-1.png"
-							class="card2-img-top" alt="이미지 1">
-							<p>제목</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6 mb-3">
-					<div class="card2">
-						<a href="/#"> <img src="/assets/images/cat-1.png"
-							class="card2-img-top" alt="이미지 1">
-							<p>제목</p>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6 mb-3">
-					<div class="card2">
-						<a href="/#"> <img src="/assets/images/cat-1.png"
-							class="card2-img-top" alt="이미지 1">
-							<p>제목</p>
-						</a>
-					</div>
-				</div>
-
+				<c:forEach var="board" items="${boardList}" varStatus="loop">
+					<c:if test="${loop.index < 4}">
+						<div class="col-md-6 mb-3">
+							<div class="card2" onmouseover="highlightCard(this)"
+								onmouseout="unhighlightCard(this)">
+								<a href="#"> <img src="/images/upload/${board.file}"
+									class="card2-img-top" alt="${board.title} 이미지"
+									style="height: 105px">
+									<div class="card-details">
+										<p>${board.title}</p>
+										<p>작성자닉네임</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
 			</div>
 		</div>
 
 		<!-- 리스트 형식의 글 목록 -->
 		<div class="col-lg-4">
-			<h2>베스트 게시물<a href="/freeBoard/list" style="float:right;">더보기</a></h2>
+			<h2>
+				베스트 게시물<a href="/freeBoard/list" style="float: right;">더보기</a>
+			</h2>
 			<ul class="list-group">
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판@@@@@@@</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">62321316</span> <span
-								class="like board-img">105163</span>
-						</div>
-				</td>
-				</li>
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
-
+				<c:forEach var="board" items="${rDList}" varStatus="loop">
+					<c:if test="${loop.index < 6}">
+						<li class="list-group-item">
+							<td><a href="">${board.title}</a></td>
+							<td class="text-center">
+								<div class="cnt">
+									<span class="view board-img">626</span> <span
+										class="like board-img">${board.goodCount}</span>
+								</div>
+						</td>
+						</li>
+					</c:if>
+				</c:forEach>
 			</ul>
 		</div>
 
 		<div class="container mt-8">
 			<div class="row justify-content-center">
-				<!-- 첫 번째 섹션 -->
 				<div class="col-lg-3" style="width: 22%;">
 					<h2>카테고리</h2>
 					<div class="row">
-						<div class="col-md-6 mb-3">
-							<div class="card2">
-								<a href="/#"> <img src="/assets/images/cat-1.png"
-									class="card2-img-top" alt="이미지 1">
-									<p>제목</p>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-6 mb-3">
-							<div class="card2">
-								<a href="/#"> <img src="/assets/images/cat-1.png"
-									class="card2-img-top" alt="이미지 1">
-									<p>제목</p>
-								</a>
-							</div>
-						</div>
+						<c:forEach var="board" items="${boardList}" varStatus="loop">
+							<c:if test="${loop.index < 2}">
+								<div class="col-md-6 mb-3">
+									<div class="card2" onmouseover="highlightCard(this)"
+										onmouseout="unhighlightCard(this)">
+										<a href="#"> <img src="/images/upload/${board.file}"
+											class="card2-img-top" alt="${board.title} 이미지"
+											style="height: 105px">
+											<div class="card-details">
+												<p>${board.title}</p>
+											</div>
+										</a>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 					<ul class="list-group">
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
+						<c:forEach var="board" items="${rDList}" varStatus="loop">
+							<c:if test="${loop.index < 4}">
 								<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
-								<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
+									<td><a href="">${board.title}</a></td>
+									<td class="text-center">
+										<div class="cnt">
+											<span class="view board-img">626</span> <span
+												class="like board-img">${board.goodCount}</span>
+										</div>
+								</td>
+								</li>
+							</c:if>
+						</c:forEach>
 					</ul>
 				</div>
 
-				<!-- 두 번째 섹션 -->
 				<div class="col-lg-3" style="width: 22%;">
 					<h2>카테고리</h2>
 					<div class="row">
-						<div class="col-md-6 mb-3">
-							<div class="card2">
-								<a href="/#"> <img src="/assets/images/cat-1.png"
-									class="card2-img-top" alt="이미지 1">
-									<p>제목</p>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-6 mb-3">
-							<div class="card2">
-								<a href="/#"> <img src="/assets/images/cat-1.png"
-									class="card2-img-top" alt="이미지 1">
-									<p>제목</p>
-								</a>
-							</div>
-						</div>
+						<c:forEach var="board" items="${boardList}" varStatus="loop">
+							<c:if test="${loop.index < 2}">
+								<div class="col-md-6 mb-3">
+									<div class="card2" onmouseover="highlightCard(this)"
+										onmouseout="unhighlightCard(this)">
+										<a href="#"> <img src="/images/upload/${board.file}"
+											class="card2-img-top" alt="${board.title} 이미지"
+											style="height: 105px">
+											<div class="card-details">
+												<p>${board.title}</p>
+											</div>
+										</a>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 					<ul class="list-group">
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
+						<c:forEach var="board" items="${rDList}" varStatus="loop">
+							<c:if test="${loop.index < 4}">
+								<li class="list-group-item">
+									<td><a href="">${board.title}</a></td>
+									<td class="text-center">
+										<div class="cnt">
+											<span class="view board-img">626</span> <span
+												class="like board-img">${board.goodCount}</span>
+										</div>
+								</td>
+								</li>
+							</c:if>
+						</c:forEach>
 					</ul>
 				</div>
 
-				<!-- 세 번째 섹션 -->
 				<div class="col-lg-3" style="width: 22%;">
 					<h2>카테고리</h2>
 					<div class="row">
-						<div class="col-md-6 mb-3">
-							<div class="card2">
-								<a href="/#"> <img src="/assets/images/cat-1.png"
-									class="card2-img-top" alt="이미지 1">
-									<p>제목</p>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-6 mb-3">
-							<div class="card2">
-								<a href="/#"> <img src="/assets/images/cat-1.png"
-									class="card2-img-top" alt="이미지 1">
-									<p>제목</p>
-								</a>
-							</div>
-						</div>
+						<c:forEach var="board" items="${rDList}" varStatus="loop">
+							<c:if test="${loop.index < 2}">
+								<div class="col-md-6 mb-3">
+									<div class="card2" onmouseover="highlightCard(this)"
+										onmouseout="unhighlightCard(this)">
+										<a href="#"> <img src="/images/upload/${board.file}"
+											class="card2-img-top" alt="${board.title} 이미지"
+											style="height: 105px">
+											<div class="card-details">
+												<p>${board.title}</p>
+											</div>
+										</a>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 					<ul class="list-group">
-				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>				<li class="list-group-item">
-					<td><a href=""> 어려운 자유게시판</a></td>
-					<td class="text-center">
-						<div class="cnt">
-							<span class="view board-img">626</span> <span
-								class="like board-img">1</span>
-						</div>
-				</td>
-				</li>
+						<c:forEach var="board" items="${rDList}" varStatus="loop">
+							<c:if test="${loop.index < 4}">
+								<li class="list-group-item">
+									<td><a href="">${board.title}</a></td>
+									<td class="text-center">
+										<div class="cnt">
+											<span class="view board-img">626</span> <span
+												class="like board-img">${board.goodCount}</span>
+										</div>
+								</td>
+								</li>
+							</c:if>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -426,6 +342,16 @@ h2 {
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script>
+	function highlightCard(card) {
+		var details = card.querySelector('.card-details');
+		details.style.display = 'block';
+	}
 
+	function unhighlightCard(card) {
+		var details = card.querySelector('.card-details');
+		details.style.display = 'none';
+	}
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
