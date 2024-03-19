@@ -1,24 +1,29 @@
-package com.store.goguma.user.dto.my;
+package com.store.goguma.product.dto;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 
 @Data
-@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductHostDTO {
+@Builder
+public class ProductWriteFormDTO {
 	
-	private Integer prodId;
-	private String address;
+	private Integer pId;
+	private String zip;
+	private String addr1;
+	private String addr2;
 	private String name;
 	private Integer price;
 	private Integer hostId;
 	private String description;
-	private String file;
+	private MultipartFile file;
 	private Integer mainCategoryId;
 	private Integer subCategoryId;
 	private String createAt;
@@ -26,6 +31,6 @@ public class ProductHostDTO {
 	private String deleteAt;
 	private String deleteYn;
 	private String confirmYn;
-	
-	
+    private Integer countChatRoom;
+    private Integer countWishList;
 }

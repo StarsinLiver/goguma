@@ -1,15 +1,14 @@
 package com.store.goguma.user.controller;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,30 +16,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.store.goguma.admin.dto.AdminQnaDto;
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.LoginRestfulException;
+import com.store.goguma.service.PaymentService;
+import com.store.goguma.service.QnaService;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 	
-	@Autowired
-	private HttpSession httpSession;
+	private final HttpSession httpSession;
+	private final UserService userService;
+	private final PaymentService paymentService;
+	private final QnaService qnaService;
 	
-	// 유저 페이지
-	@Autowired
-	private UserService userService;
 	
 	// 내 정보 조회 + 페이지
 	@GetMapping("/info")
@@ -146,17 +148,35 @@ public class UserController {
 	
 	// 이모티콘 환불 사유 전송
 	@PutMapping("/emojiReason")
-	public int reason(@RequestBody Map<String, String> data) {
-		String id = data.get("id");
-		log.info("포트원 번호 : "+id);
+	public ResponseEntity<?> reason(@RequestBody Map<String, String> data) {
+		String merchantid = data.get("id"); // 포트원 번호
+		String reason = data.get("content"); // 환불 사유
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
 		
-		int result = userService.cancelEmoji(id);
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
 		
-		if(result > 1) {
-			throw new RuntimeException("환불 기한이 지났습니다");
+		int uId = sessionUser.getUId();
+		
+		// 환불 신청
+		UserEmojiDTO dto = userService.cancelEmoji(merchantid, uId, reason);
+		String content = dto.getCancelReason(); // 환불 사유
+		int price = dto.getCancelAmount(); // 환불 비용
+		
+		
+		// 환불 전송
+		String token = paymentService.getFortOneToken();
+		boolean isTrue = paymentService.refund(token, merchantid, content, price);
+		
+		// 환불 신청이 완료 되었다면 cancel_Yn = 'Y'
+		if (isTrue) {
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		
-		return result;
+		
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	// 중고거래 내역 페이지
@@ -180,6 +200,32 @@ public class UserController {
 		model.addAttribute("last", response.getLast());
 		
 		return "/user/product_history";
+	}
+	
+	// 내 물품 목록 페이지
+	@GetMapping("/product/host")
+	public String productHostPage(RequestPageDTO pageDTO, Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
+		int uId = sessionUser.getUId();
+		
+		ResponsePageDTO response = userService.productHostList(uId, pageDTO);
+		
+		log.info("test : "+response.getDtoList());
+		
+		model.addAttribute("productList", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
+		
+		
+		return "/user/product_host_history";
 	}
 	
 	// 내 게시글 페이지
@@ -216,6 +262,26 @@ public class UserController {
 		return "/user/my_qna";
 	}
 	
+	// 내 문의하기 상세
+	@GetMapping("/myQna/view/{qid}")
+	public String myViewPage(@PathVariable("qid") int qid,Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
+		AdminQnaDto adminQnaDto = qnaService.adminFindByQid(qid);
+		
+		log.info("상세 : "+adminQnaDto);
+		
+		model.addAttribute("detail", adminQnaDto);
+		
+		return "/user/my_qna_view";
+	}
+	
+	
 	// 문의 내역 삭제
 	@PutMapping("/myQna/delete")
 	@ResponseBody
@@ -227,7 +293,7 @@ public class UserController {
 		return result;
 	}
 	
-	// 이모티콘(상품) 목록 페이지
+	// 이모티콘 목록 페이지
 	@GetMapping("/imoji")
 	public String imojiPage(RequestPageDTO requestPageDTO,Model model) {
 		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
@@ -255,9 +321,32 @@ public class UserController {
 	
 	// 찜 목록 페이지
 	@GetMapping("/wish")
-	public String wishPage() {
+	public String wishPage(RequestPageDTO requestPageDTO,Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		log.info("requestPageDTO : "+requestPageDTO);
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		int uId = sessionUser.getUId();
+		
+		ResponsePageDTO response = userService.wishList(requestPageDTO, uId);
+		
+		model.addAttribute("wishList", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
+		
 		
 		return "/user/wish";
+	}
+	
+	@GetMapping("/chat")
+	public String chatPage() {
+		
+		return "/user/chat_product_list";
 	}
 	
 	// 로그아웃

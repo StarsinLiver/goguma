@@ -270,4 +270,11 @@
 		delete_yn = 'Y'
 		where p_id = #{pId}
 	</delete>
+	
+	<!-- 상품 등록 -->
+	<insert id="insertProduct">
+		INSERT INTO product 
+			(address,`name`,price,host_id, `description`, `file`,`main_category_id`,`sub_category_id`,`create_at`)
+			VALUES (#{address},#{name},#{price},#{hostId},#{description},#{file},1,2,NOW());
+	</insert>
 </mapper>

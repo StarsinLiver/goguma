@@ -101,7 +101,7 @@
 			    <tr class="qna--data">
 			      <td><input type="checkbox" name="checkbox" class="check" value="${qna.id}"/></td>
 			      <td>${qna.id}</td>
-			      <td><a href="#">${qna.title}</a></td>
+			      <td><a href="/user/myQna/view/${qna.id}">${qna.title}</a></td>
 			      <td>${qna.formatCreatedAt()}</td>
 			      <td class="reply">${qna.answerYn}</td>
 			    </tr>
@@ -110,13 +110,13 @@
 		</table>
 		<div class="board-utils">
 			<label>
-				<input type="checkbox" name="allChack" id="allChack"/>&nbsp;
+				<input type="checkbox" name="allChack" onchange="selectAll(this)" id="allChack"/>&nbsp;
 				<span>모두 선택</span>
 			</label>
 			
 			<div>
 				<button id="delete-qna" onclick="deleteFun()" class="btn btn-warning btn-complete">삭제</button>
-				<a href="#" class="btn btn-warning btn-complete">문의하기</a>
+				<a href="/cs/qna/write" class="btn btn-warning btn-complete">문의하기</a>
 			</div>
 		</div>
 		<div class="pagination">
@@ -182,8 +182,14 @@
         });
     };
     
-    // 모두 선택
-    
+ 	// 모두 체크
+	function selectAll(selectAllCheckbox) {
+        const checkboxes = document.querySelectorAll('.check');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    }
     
     // 게시글 삭제
   	function deleteFun() {

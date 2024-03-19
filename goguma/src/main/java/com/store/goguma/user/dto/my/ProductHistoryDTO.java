@@ -16,7 +16,7 @@ public class ProductHistoryDTO {
 	
 	// ProductHistory 테이블
     private Integer id;
-    private Integer pId;
+    private Integer prodId;
     private Integer uId;
     private String confirmYn;
     private String createAt;
