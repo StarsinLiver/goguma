@@ -88,9 +88,10 @@ input[type="checkbox"] {
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	<div class="payment-container" style="width: 100%; height: 100%">
-		<h4 class="user-page-title">배너 수정</h4>
+		<h4 class="user-page-title">배너 수정 하기</h4>
 		<form action="/admin/banner/update/${banner.id}" method="post"
 			enctype="multipart/form-data">
+			<input type="hidden" name="_method" value="put"/>
 			<div class="col-sm-12">
 				<div class="card mb-12">
 					<div class="card-header text-white">
@@ -113,7 +114,7 @@ input[type="checkbox"] {
 									<th>URL 입력</th>
 									<td>
 										<div class="form-floating mb-3">
-											<input type="text" class="form-control" name="url"
+											<input type="text" class="form-control" name="url" 
 												value="${banner.url}" style="font-size: 2rem; padding: 0;">
 										</div>
 									</td>
@@ -139,8 +140,8 @@ input[type="checkbox"] {
 									
 									<td class="emoji--td"><select name="useYn"
 										value="${banner.useYn}">
-											<option value="Y">사용</option>
-											<option value="N">사용 안함</option>
+											<option value="Y" >사용</option>
+											<option value="N" >사용 안함</option>
 									</select></td>
 
 								</tr>
@@ -165,8 +166,6 @@ input[type="checkbox"] {
 									</select></td>
 								</tr>
 							</thead>
-
-
 
 							<tbody>
 								<!-- 데이터가 없을 때 표시될 행 -->

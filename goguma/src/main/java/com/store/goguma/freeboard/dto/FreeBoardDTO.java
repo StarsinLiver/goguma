@@ -8,24 +8,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@ToString
-public class FreeBoardDTO {
 
-	private int id;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
+public class FreeBoardDTO {
+	private Integer id;
 	private String title;
 	private String content;
-	private int uid;
+	private Integer uId;
 	private String file;
-	private Timestamp createAt;
-	private Timestamp updateAt;
-	private Timestamp deleteAt;
-	private String deleteYN;
-	private String mainCategory;
-	private String subCategory;
-	
-	
+	private String createAt;
+	private String updateAt;
+	private String deleteAt;
+	private String deleteYn;
+	private String goodCount;
 }

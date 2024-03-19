@@ -11,13 +11,35 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+
+.search-div form {
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search-div form>* {
+	margin-left: 10px;
+}
+
+.search-div input {
+	font-size: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.search-div select {
+	padding: 11px;
+}
 </style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>결제 내역</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -58,6 +80,15 @@
 		style="margin-right: 3%; width: 2500px; max-width: 75%;">
 		<h4 class="user-page-title">결제 내역</h4>
 		<div class="col-sm-12">
+			<div class="search-div">
+				<form action="/admin/history">
+					<select name="searchType">
+						<option value="merchantId">결제 번호</option>
+						<option value="productName">상품명</option>
+					</select> <input type="text" name="search" placeholder="검색 .." />
+					<button type="submit" class="btn btn-warning btn-complete">검색</button>
+				</form>
+			</div>
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
@@ -69,7 +100,7 @@
 							<tr>
 								<th>결제 번호</th>
 								<th>구매일자</th>
-								<th>구매상품명</th>
+								<th>상품명</th>
 								<th>구매<br />여부
 								</th>
 								<th>환불 완료</th>
@@ -91,7 +122,8 @@
 									<td id="refundYn">${history.cancelYn}</td>
 									<td><c:if test="${history.cancelYn == 'N'}">
 											<button id="refundButton" data-value="${history.merchantId}"
-												class="btn btn-warning btn-complete cancel-request">승인하기</button>
+												class="btn btn-warning btn-complete cancel-request">환불
+												하기</button>
 										</c:if></td>
 								</tr>
 							</c:forEach>

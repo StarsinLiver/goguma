@@ -2,8 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.store.goguma.repository.BannerRepository">
+<mapper namespace="com.store.goguma.repository.BannerRepository">
 
+	<select id="findAll" resultType="com.store.goguma.entity.Banner">
+		select * from banner
+		where
+		delete_yn = 'N'
+		and
+		<if test="searchType == 'title'.toString()">
+			title
+		</if>
+		<if test="searchType == 'client'.toString()">
+			client
+		</if>
+		like concat('%',#{search},'%')
+		order by id desc
+		limit
+		#{start} , 10
+	</select>
 
+	<select id="countFindAll" resultType="int">
+		select count(*) from banner
+		where delete_yn = 'N'
+		and
+		<if test="searchType == 'title'.toString()">
+			title
+		</if>
+		<if test="searchType == 'client'.toString()">
+			client
+		</if>
+		like concat('%',#{search},'%')
+	</select>
+
+	<select id="findById"
+		resultType="com.store.goguma.entity.Banner">
+		select * from banner
+		where delete_yn = 'N'
+		and id = #{id}
+	</select>
+
+	<insert id="insert">
+		insert into banner (title , file , client , price ,
+		type , url)
+		values(#{title} , #{file} , #{client} , #{price} , #{type} , #{url})
+	</insert>
+
+	<update id="update">
+		update banner
+		set title = #{title} , file = #{file} , url = #{url} ,
+		client = #{client} , use_yn = #{useYn} , price = #{price} , type = #{type} ,
+		update_at = now()
+		where id = #{id};
+	</update>
+	
+	<update id="delete">
+		update banner
+		set delete_at = now() , delete_yn = 'Y'
+		where id = #{id}
+	</update>
 </mapper>

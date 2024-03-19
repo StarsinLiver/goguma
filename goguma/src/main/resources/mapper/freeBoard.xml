@@ -9,20 +9,23 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
-	<!--게시글 좋아요 개수 카운트 -->
+<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
-		select fb.id as free_board_id,
-		fb.title as
-		free_board_title,
-		count(fr.free_board_id) as like_count
-		from free_board
-		as fb
-		left join free_board_recommendation fr on fb.id =
-		fr.free_board_id and
+		select fb.id as id,
+		fb.title as title,
+		fb.content as content,
+		fb.u_id as u_id,
+		fb.file as file,
+		fb.create_at as created_at,
+		fb.update_at as updated_at,
+		fb.delete_at as deleted_at,
+		count(fr.free_board_id) as good_count
+		from free_board as fb
+		left join free_board_recommendation fr on fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
 		where fb.delete_yn = 'N'
-		group by
-		fb.id, fb.title
+		group by fb.id, fb.title, fb.content, fb.u_id, fb.file, fb.create_at,
+		fb.update_at, fb.delete_at
 	</select>
 
 	<!-- 게시글 좋아요 추가 -->
@@ -33,7 +36,8 @@
 
 	<!-- 게시글 좋아요 취소 -->
 	<update id="deleteRecommendation">
-
+		update free_board_recommendation set delete_yn = 'N'
+		where free_board_id = #{freeBoardId} and u_id = #{uId}
 	</update>
 
 	<!-- 게시판 형식 select -->
@@ -48,12 +52,21 @@
 	</select>
 
 
+	<!-- 게시글 조회수 확인 -->
+	<select id="getFreeView">
+		select view from free_board_view where free_board_id
+		= #{freeBoardId}
+	</select>
 
-
-
-
-
-
-
-
+	<!-- 게시글 조회수 증가 -->
+	<update id="plusFreeView">
+		UPDATE free_board_view
+		SET view = view + 1
+		WHERE
+		free_board_id = #{freeBoardId}
+	</update>
+	
+	<insert id="addFreeView">
+		
+	</insert>
 </mapper>

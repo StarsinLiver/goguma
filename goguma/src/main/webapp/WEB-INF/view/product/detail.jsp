@@ -158,7 +158,7 @@
 									<textarea class="form-control" id="additionalReason"
 										name="additionalReason" rows="3" style="resize: vertical;"
 										placeholder="신고 이유를 작성해주세요"></textarea>
-									<input type="hidden" id="resonInput" name="reson">
+									<input type="hidden" id="resonInput" name="reason">
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end"
 										style="margin-top: 8px;">
 										<button type="submit" class="btn btn-danger">신고</button>

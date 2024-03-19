@@ -162,7 +162,6 @@ public class ChatController {
 		}
 
 
-		
 		// 채팅방 나가기 - exit = 'Y'
 //		ChatRoomUpdateDto chatRoomUpdateDto = chatRoomService.findByRoomId(roomId, user.getUId());
 //		log.info(chatRoomUpdateDto.toString());
@@ -186,7 +185,7 @@ public class ChatController {
 		ChatMessage message = ChatMessage.builder().uId(user.getUId()).text(user.getName() + "님께서 방에서 나가셨습니다.")
 				.roomId(roomId).chatMessageType(ChatType.LEAVE).build();
 
-		chatMessageService.save(message , null);
+		chatMessageService.save(message , user);
 		return "redirect:/chat/room";
 	}
 }

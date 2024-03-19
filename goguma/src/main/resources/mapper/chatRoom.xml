@@ -48,7 +48,8 @@
 		WHERE
 		(c.host_id = #{userId}
 		AND c.host_exit != 'Y')
-		OR (c.u_id = #{userId} AND c.user_exit != 'Y');
+		OR (c.u_id = #{userId} AND c.user_exit != 'Y')
+		and c.delete_yn = 'N'
 	</select>
 
 	<select id="findByRoomId"
@@ -94,16 +95,122 @@
 	</update>
 
 	<select id="isExistChatRoom" resultType="int">
-		select count(*) from chat_room
+		select count(*) from
+		chat_room
 		where p_id = #{pId} and u_id = #{uId}
 		and user_exit = 'N';
 	</select>
-	
+
 	<select id="countChatRoom">
 		SELECT COUNT(*) FROM chat_room WHERE p_id = #{pId}
 	</select>
-	
+
 	<select id="countChatRoomAll">
 		select count(*) from chat_room
 	</select>
+
+	<select id="adminFindAllByProductName"
+		resultType="com.store.goguma.admin.dto.AdminChatRoomDto">
+		SELECT
+		p.p_id AS pId,
+		p.address AS productAddress,
+		p.name AS
+		productName,
+		p.price AS productPrice,
+		p.host_id AS productHostId,
+		p.description AS
+		productDescription,
+		p.file AS productFile,
+		p.main_category_id AS
+		mainCategoryId,
+		p.sub_category_id AS
+		subCategoryId,
+		p.confirm_yn as
+		confirmYn ,
+		c.id AS roomId,
+		c.u_id AS
+		userId,
+		c.host_id AS hostId,
+		c.create_at AS createAt,
+		c.delete_at as
+		deleteAt,
+		c.delete_yn as deleteYn
+		,
+		hu.name AS
+		hostName,
+		u.name AS
+		userName
+		FROM
+		chat_room c
+		LEFT JOIN
+		product p
+		ON p.p_id
+		=
+		c.p_id
+		INNER JOIN
+		user hu
+		ON hu.u_id = c.host_id
+		INNER JOIN user
+		u
+		ON
+		u.u_id = c.u_id
+		where
+		<if test="searchType == 'productName'.toString">
+			p.name
+		</if>
+		<if test="searchType == 'productId'.toString">
+			p.p_id
+		</if>
+		<if test="searchType == 'roomId'.toString">
+			c.id
+		</if>
+		<if test="searchType == 'hostName'.toString">
+			hu.name
+		</if>
+		like CONCAT('%',#{search},'%')
+		order by p.create_at desc
+		LIMIT
+		#{start} , 12
+	</select>
+
+	<select id="countAdminFindAllByProductName" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		chat_room c
+		LEFT JOIN
+		product p
+		ON p.p_id =
+		c.p_id
+		INNER
+		JOIN
+		user hu
+		ON hu.u_id = c.host_id
+		INNER JOIN user u
+		ON
+		u.u_id = c.u_id
+		where
+		<if test="searchType == 'productName'.toString">
+			p.name
+		</if>
+		<if test="searchType == 'productId'.toString">
+			p.p_id
+		</if>
+		<if test="searchType == 'roomId'.toString">
+			c.id
+		</if>
+		<if test="searchType == 'hostName'.toString">
+			hu.name
+		</if>
+		like CONCAT('%',#{search},'%')
+	</select>
+
+	<update id="deleteChatRoom">
+		update chat_room
+		set delete_yn = 'Y' ,
+		delete_at =
+		now() ,
+		update_at = now()
+		where id = #{id}
+	</update>
 </mapper>

@@ -49,7 +49,7 @@ input[type="checkbox"] {
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>배너 수정</h1>
+		<h1>마이페이지</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -88,9 +88,8 @@ input[type="checkbox"] {
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	<div class="payment-container" style="width: 100%; height: 100%">
-		<h4 class="user-page-title">배너 수정</h4>
-		<form action="/admin/banner/update/${banner.id}" method="post"
-			enctype="multipart/form-data">
+		<h4 class="user-page-title">배너 생성 하기</h4>
+		<form action="/admin/banner/add" method="post" enctype="multipart/form-data">
 			<div class="col-sm-12">
 				<div class="card mb-12">
 					<div class="card-header text-white">
@@ -98,14 +97,16 @@ input[type="checkbox"] {
 						<h3 class="card-title">제목 입력</h3>
 					</div>
 					<div class="card-body">
+					
 						<table class="table text-center">
 							<thead>
+								
 								<tr>
 									<th>배너 제목 입력</th>
 									<td>
 										<div class="form-floating mb-3">
 											<input type="text" class="form-control" name="title"
-												value="${banner.title}" style="font-size: 2rem; padding: 0;">
+												style="font-size: 2rem; padding: 0;">
 										</div>
 									</td>
 								</tr>
@@ -114,7 +115,7 @@ input[type="checkbox"] {
 									<td>
 										<div class="form-floating mb-3">
 											<input type="text" class="form-control" name="url"
-												value="${banner.url}" style="font-size: 2rem; padding: 0;">
+												style="font-size: 2rem; padding: 0;">
 										</div>
 									</td>
 								</tr>
@@ -122,7 +123,6 @@ input[type="checkbox"] {
 									<th>광고주/업체명</th>
 									<td><div class="form-floating mb-3">
 											<input type="text" class="form-control" name="client"
-												value="${banner.client}"
 												style="font-size: 2rem; padding: 0;">
 										</div></td>
 								</tr>
@@ -130,26 +130,16 @@ input[type="checkbox"] {
 									<th>가격</th>
 									<td><div class="form-floating mb-3">
 											<input type="number" class="form-control" name="price"
-												value="${banner.price}" step="1000" min="0" value="0"
+												step="1000" min="0" value="0"
 												style="font-size: 2rem; padding: 0;">
 										</div></td>
 								</tr>
 								<tr>
-									<th>광고 표시 여부</th>
-									
-									<td class="emoji--td"><select name="useYn"
-										value="${banner.useYn}">
-											<option value="Y">사용</option>
-											<option value="N">사용 안함</option>
-									</select></td>
-
-								</tr>
-								<tr>
-									<th>배너 이미지 선택 <br/>(미첨부시 원래 이미지가 들어갑니다.)</th>
+									<th>배너 이미지 선택</th>
 									<td>
 										<div class="mb-3" style="padding: 5px 0px 0px 0px;">
 											<input class="form-control" type="file" id="formFileMultiple"
-												name="file" style="font-size: 1.5rem" accept="image/gif, image/jpeg, image/png"
+												name="file" style="font-size: 1.5rem"
 												onchange="readURL(this);"> <img src=""
 												id="bannerImage"
 												style="margin: 2%; max-height: 200px; width: 98%; max-width: 2000px">
@@ -164,10 +154,9 @@ input[type="checkbox"] {
 											<option value="FREE_BOARD">자유게시판</option>
 									</select></td>
 								</tr>
+								
 							</thead>
-
-
-
+							
 							<tbody>
 								<!-- 데이터가 없을 때 표시될 행 -->
 								<tr id="noDataMessage" style="display: none;">
