@@ -32,8 +32,8 @@ public class PaymentService {
 
       // Request Body 설정
       JSONObject requestBody = new JSONObject();
-      requestBody.put("imp_key", "2076220350658738"); // Rest API 키
-      requestBody.put("imp_secret", "UidsW7v862X8nxk9NnjaPvpxYuiwSiG67gLkAYzx0tMxRRbwVOIHBsYZZ7I3rz78gqgA3oroohDtXDlp"); // Rest API Secret 키
+      requestBody.put("imp_key", "6640183131657097"); // Rest API 키
+      requestBody.put("imp_secret", "84d17513864db7cea3a806d2c138d6b2e87c5d6294b41586130ef7c4b6c2804f65a0b6cc4f2a673e"); // Rest API Secret 키
 
 //헤더 + 바디 결합
       HttpEntity<?> entity = new HttpEntity(requestBody.toString(), headers);

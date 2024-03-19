@@ -7,11 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.store.goguma.admin.dto.AdminProductDto;
 import com.store.goguma.entity.Product;
 import com.store.goguma.product.dto.ProductDTO;
 import com.store.goguma.product.dto.ProductSearchDto;
 import com.store.goguma.product.dto.ProductUserDto;
 import com.store.goguma.repository.ProductRepository;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.utils.page.PageReq;
 import com.store.goguma.utils.page.PageRes;
 
@@ -150,5 +153,24 @@ public class ProductService {
 	
 	public int countProductAll() {
 		return productRepository.countProductAll();
+	}
+	
+	// 관리자 계쩡 상품 전체 보기
+	public ResponsePageDTO adminFindAll(RequestPageDTO pageDTO) {
+		int start = (pageDTO.getPg() -1) * pageDTO.getSize();
+		
+		List<AdminProductDto> list = productRepository.adminFindAll(start , pageDTO.getSearch() , pageDTO.getSearchType());
+		int count = productRepository.adminCountFindAll(pageDTO.getSearch() , pageDTO.getSearchType());
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(pageDTO)
+				.dtoList(list)
+				.total(count)
+				.build();
+	}
+	
+	// 관리자 계정에서 상품 삭제
+	public int adminDeleteProduct(int pId) {
+		return productRepository.adminDeleteProduct(pId);
 	}
 }

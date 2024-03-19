@@ -6,8 +6,34 @@
 
 	<select id="getNoticeList"
 		resultType="com.store.goguma.entity.Notice">
-		select * from notice order by id desc;
+		select * from notice where delete_yn = 'N' order by id desc
 	</select>
+
+	<select id="adminFindAll"
+		resultType="com.store.goguma.entity.Notice">
+		select * from notice where delete_yn = 'N' and
+		<if test="searchType == 'title'.toString()">
+			title
+		</if>
+		<if test="searchType == 'content'.toString()">
+			content
+		</if>
+		like concat('%',#{search},'%')
+		order by id desc
+		limit #{start} , 10
+	</select>
+
+	<select id="countAdminFindAll" resultType="int">
+		select count(*) from notice where delete_yn = 'N' and
+		<if test="searchType == 'title'.toString()">
+			title
+		</if>
+		<if test="searchType == 'content'.toString()">
+			content
+		</if>
+		like concat('%',#{search},'%')
+	</select>
+
 
 	<select id="getNoticeDetail">
 		select * from notice where id = #{id};
@@ -30,7 +56,8 @@
 	<update id="noticeUpdate">
 		update notice set
 		title = #{title},
-		content = #{content}
+		content =
+		#{content}
 		where id = #{id};
 	</update>
 

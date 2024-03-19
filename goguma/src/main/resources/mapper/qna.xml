@@ -5,15 +5,97 @@
 <mapper namespace="com.store.goguma.repository.QnaRepository">
 
 	<insert id="qnaUserWrite">
-		insert into qna(title, content, u_id, create_at, option_name)
+		insert into qna(title, content, u_id, create_at,
+		option_name)
 		values(
-			#{title},
-			#{content},
-			#{uId},
-			now(),
-			#{optionName}
+		#{title},
+		#{content},
+		#{uId},
+		now(),
+		#{optionName}
 		);
 	</insert>
-	
-	
+
+	<select id="adminFindAll"
+		resultType="com.store.goguma.admin.dto.AdminQnaDto">
+		select q.id as id ,
+		q.title as questionTitle ,
+		q.content as
+		questionContent ,
+		q.u_id as userId ,
+		q.admin_id as adminId,
+		q.answer_content as answerContent ,
+		q.answer_yn as answerYn ,
+		q.create_at as createAt ,
+		q.delete_at as delete_at ,
+		q.delete_yn as
+		deleteYn ,
+		q.option_name as optionName ,
+		u.name as userName
+		from qna q
+		inner join user u
+		on u.u_id =
+		q.u_id
+		where q.option_name like concat('%',#{optionName},'%')
+		and
+		q.title like concat('%',#{search},'%')
+		and q.delete_yn = 'N'
+		order by
+		q.create_at desc
+		limit
+		#{start} , 10
+	</select>
+
+	<select id="countAdminFindAll" resultType="int">
+		select count(*)
+		from
+		qna q
+		inner join user u
+		on u.u_id =
+		q.u_id
+		where q.option_name like
+		concat('%',#{optionName},'%')
+		and q.title like
+		concat('%',#{search},'%')
+		and q.delete_yn = 'N'
+	</select>
+
+	<select id="adminFindByQid"
+		resultType="com.store.goguma.admin.dto.AdminQnaDto">
+		select q.id as id ,
+		q.title as questionTitle ,
+		q.content as
+		questionContent ,
+		q.u_id as userId ,
+		q.admin_id as adminId,
+		q.answer_content as answerContent ,
+		q.answer_yn as answerYn ,
+		q.option_name as optionName ,
+		q.create_at as createAt ,
+		q.delete_at as
+		delete_at ,
+		q.delete_yn as deleteYn ,
+		u.name as userName
+		from qna q
+		inner
+		join user u
+		on u.u_id = q.u_id
+		where q.id = #{qid}
+	</select>
+
+	<update id="adminAnswerQna">
+		update qna
+		set admin_id = #{adminId} ,
+		answer_content =
+		#{answerContent} ,
+		answer_yn = 'Y' ,
+		update_at = now()
+		where id = #{qid}
+	</update>
+
+	<update id="adminDeleteQna">
+		update qna
+		set delete_yn = 'Y' , delete_at = now()
+		where id = #{id}
+	</update>
 </mapper>
