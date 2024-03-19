@@ -100,16 +100,33 @@ h2 {
 .txt-wrap a.subject-link {
 	font-weight: bold;
 }
+
+.col-lg-8 {
+	font-family: Gamja Flower, sans-serif;
+	font-size: large;
+}
+
+.h2font {
+	font-family: Gamja Flower, sans-serif;
+	font-size: large;
+}
+
 </style>
 
 <!-- 메인 컨텐츠 -->
-<div class="container mt-4">
+<div class="container mt-4" style="display: flex; max-width: 100%; width: 2500px; margin-top: 0px !important;">
+	<!-- aside 시작 -->
+	<div
+		style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
+		<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
+	</div>
+	<!-- aside 끝 -->
 	<div class="row justify-content-center">
 		<section class="section nopad cac text-center" style="width: 67%;">
 			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
 		</section>
 		<div class="col-lg-8">
-			<h2>
+			<h2 class="h2font">
 				카테고리 <a href="/freeBoard/main" style="float: right;">메인으로</a>
 			</h2>
 			<div class="row">

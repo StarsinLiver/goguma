@@ -63,7 +63,35 @@
 <link rel="stylesheet" href="/customAssets/css/about/about.css">
 <link rel="stylesheet" href="/customAssets/css/board/list.css">
 <link rel="stylesheet" href="/customAssets/css/board/admin-cate-setting.css">
-
+<!-- font-family -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<!-- ex 
+.sunflower-light {
+  font-family: "Sunflower", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+} 
+-->
+<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Stylish&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<!-- 
+.dongle-regular {
+  font-family: "Dongle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+ -->
+ <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Stylish&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+ <!-- 
+ .gamja-flower-regular {
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+  -->
+ 
+<!-- font-family end -->
 <!-- Custom CSS -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5275edbfc405960aad1f6f12211cdd04"></script>

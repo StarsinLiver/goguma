@@ -54,7 +54,8 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-	<div class="payment-container" style="margin-right: 20%;">
+	<div class="payment-container"
+		style="margin-right: 2%; max-width: 75%; width: 2500px;">
 		<h4 class="user-page-title">신고 내역</h4>
 		<div class="col-sm-12">
 			<div class="card mb-3">
@@ -90,10 +91,9 @@
 									<td id="reason">${report.reason}</td>
 									<td id="refundYn">${report.deleteYn}</td>
 									<td>
-									<form action="/admin/update-report/${report.id}" method="post">
-										<input type="hidden" name="_method" value="put"/>
-											<button
-												class="btn btn-warning btn-complete"
+										<form action="/admin/update-report/${report.id}" method="post">
+											<input type="hidden" name="_method" value="put" />
+											<button class="btn btn-warning btn-complete"
 												onclick="if(!confirm('취소하시겠습니까??')){return false;}">취소하기</button>
 										</form>
 									</td>
