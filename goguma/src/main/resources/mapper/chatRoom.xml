@@ -216,7 +216,7 @@
 	
 	<!-- 상품 채팅 목록 -->
 	<select id="selectByProductId" resultType="com.store.goguma.entity.User">
-		SELECT u.`name` FROM chat_room c
+		SELECT u.* FROM chat_room c
 		INNER JOIN user u
 		ON u.u_id = c.u_id
 		WHERE c.p_id = #{pId}
