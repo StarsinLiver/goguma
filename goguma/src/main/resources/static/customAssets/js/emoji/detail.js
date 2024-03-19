@@ -15,6 +15,9 @@ const modalCloseBtn = document.querySelector(".emoji--close-btn");
 const agreeMain = document.querySelectorAll(".agree-main-box");
 const agreeSub = document.querySelectorAll(".agree-sub-box");
 
+const principalId = document.querySelector("#principal");
+
+
 let pageId = location.pathname.split("/")[3];
 IMP.init('imp37413392');
 let mainEmojiNum = 0;
@@ -140,6 +143,7 @@ function requestPay(merchantId) {
 }
 
 function buyFun(merchantId){
+
 	$.ajax({
 		type : "post",
 		url : "/emoji/api/order",
@@ -147,7 +151,7 @@ function buyFun(merchantId){
 			merchantId : merchantId,
 			mainEmojiId : mainEmojiNum,
 			price : Number(mainPrice[0].textContent),
-			uId : userInfo.uId,
+			uId : principalId.value,
 			bank : "KAKAO"
 		},
 		success : function(data){

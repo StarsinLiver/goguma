@@ -39,7 +39,7 @@
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>상품 관리</h1>
+		<h1>공지 관리</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -78,64 +78,51 @@
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	<div class="payment-container" style="width: 70%; margin-right: 15%;">
-		<h4 class="user-page-title">거래 상품 관리</h4>
+		<h4 class="user-page-title">공지 관리</h4>
+		<div class="add-div">
+			<a href="/cs/notice/write/admin" class="btn btn-warning btn-complete"
+				style="float: right; margin-top: 20px;">등록하기</a>
+		</div>
 		<div class="col-sm-12">
 			<div class="search-div">
-				<form action="/admin/product">
-					<select name="searchType">
-						<option value="productName">제품 이름</option>
-						<option value="hostName">판매자</option>
-						<option value="userName">구매자</option>
-					</select> <input type="text" name="search" placeholder="검색..." />
+				<form action="/admin/notice">
+				<select name="searchType">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+				</select>
+					<input type="text" name="search" placeholder="검색..." />
 					<button type="submit" class="btn btn-warning btn-complete">검색</button>
 				</form>
 			</div>
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">거래 상품 관리</h5>
+					<h5 class="card-title">공지 관리</h5>
 				</div>
+
 				<div class="card-body">
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>제품 번호</th>
-								<th>제품 이름</th>
-								<th>판매자</th>
-								<th>구매자</th>
-								<th>상품 가격</th>
-								<th>등록일</th>
-								<th>거래완료</th>
-								<th>거래일</th>
-								<th>삭제 YN</th>
-								<th>삭제하기</th>
+								<th>공지 번호</th>
+								<th>제목</th>
+								<th>작성자 번호</th>
+								<th>작성일</th>
+								<th>삭제일</th>
+								<th>삭제 여부</th>
+								<th>상세 조회</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${productList}" var="product">
+							<c:forEach items="${noticeList}" var="notice">
 								<tr id="dataRow">
-									<td id="">${product.getPId()}</td>
-									<td id="">${product.productName}</td>
-									<td id="">${product.hostName}</td>
-									<td id="">${product.userName}</td>
-									<td id="">${product.price}</td>
-									<td id="">${product.formatProductCreateAt()}</td>
-									<td id="">${product.confirmYn}</td>
-
-									<td id="">${product.formatHistoryCreateAt()}</td>
-									<td id="">${product.productDeleteYn}</td>
-
-									<td><c:if
-											test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">
-											<form action="/admin/product/delete/${product.getPId()}"
-												method="post">
-												<input type="hidden" name="_method" value="delete" />
-												<button id="refundButton"
-													onclick="if(!confirm('삭제하시겠습니까?')) return false; "
-													class="btn btn-warning btn-complete cancel-request">삭제하기</button>
-											</form>
-										</c:if></td>
-
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.id}</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.title}</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.getUId()}</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.createAt}</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.deleteAt}</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.deleteYn}</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}"  class="btn btn-success">상세조회</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -144,14 +131,15 @@
 					<div class="pagination">
 						<!-- 페이지 처리 -->
 						<c:if test="${start > 1}">
-							<a href="/admin/product?pg=${start - 1}">&laquo;</a>
+							<a href="/admin/notice?pg=${start - 1}">&laquo;</a>
 						</c:if>
 						<!-- 페이지 번호 -->
 						<c:forEach var="i" begin="${start}" end="${end}">
-							<a href="/admin/product?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+							<a href="/admin/notice?pg=${i}"
+								class="${pg == i ? 'active':''}">${i}</a>
 						</c:forEach>
 						<c:if test="${end < last}">
-							<a href="/admin/product?pg=${end + 1}">&raquo;</a>
+							<a href="/admin/notice?pg=${end + 1}">&raquo;</a>
 						</c:if>
 					</div>
 				</div>
@@ -167,7 +155,7 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				
+
 				<div style="display: flex; flex-direction: column;">
 					<div class="register-form">
 						<label for="password">Confirm Password</label> <br> <br>
@@ -191,64 +179,4 @@
 <!-- 승인 모달 -->
 
 <!-- 승인 모달 end -->
-<!-- 푸터 -->
-<script>
-	$(document).ready(function() {
-		$('.cancel-request').click(function() {
-			var merchantId = $(this).data('value');
-
-			$('#modalReason').modal('show'); // 모달 창을 보여줌
-
-			// AJAX 호출
-			$.ajax({
-				type : 'POST',
-				url : '/admin/payment-reason', // 컨트롤러 주소
-				data : {
-					merchantId : merchantId
-				},
-				dataType : 'json',
-				success : function(data) {
-					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
-					$('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.merchantId);
-				},
-				error : function(xhr, status, error) {
-					// 에러 처리
-					console.error(xhr.responseText);
-				}
-			});
-		});
-
-		$('#confirm').click(function() {
-
-			var merchantId = $('#hidMerchant').val();
-
-			console.log('머천트 아이디 값: ' + merchantId);
-			//AJAX 호출
-			$.ajax({
-				type : 'POST',
-				url : '/admin/payment-confirm', // 컨트롤러 주소
-				data : {
-					merchantId : merchantId
-				},
-				success : function(data) {
-
-					window.location.href = '/admin/history';
-				},
-				error : function(xhr, status, error) {
-					// 에러 처리
-					console.error(xhr.responseText);
-				}
-
-			})
-
-		})
-
-		// "닫기" 버튼 클릭 시
-		$('#cancel').click(function() {
-			// 모달 닫기
-			$('#modalReason').modal('hide');
-		});
-	});
-</script>
 <%@ include file="/WEB-INF/view/footer.jsp"%>

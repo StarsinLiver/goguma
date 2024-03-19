@@ -25,7 +25,8 @@
 	<div class="emoji--main-div">
 	<div class="emoji--head-menu-box">
 			<div class="emoji--head-menu">
-				<span class="emoji--head-menu-title">홈</span>
+				<span class="emoji--head-menu-title">홈</span>		
+				
 			</div>
 				<!--  <div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">인기</span>
@@ -33,9 +34,11 @@
 			<div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">신규</span>
 			</div>-->
+			
 		</div>
 		<div class="emoji--body">
 			<div class="emoji--content-box"></div>
+			
 			<div class="emoji--page-box">
 				<div class="emoji--arrow-box">
 					<span>◀</span>
@@ -46,6 +49,7 @@
 				<div class="emoji--arrow-box">
 					<span>▶</span>
 				</div>
+				
 			</div>
 		</div>
 	</div>

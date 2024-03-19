@@ -21,9 +21,9 @@ public interface AdminRepository {
 
 	OauthDTO selectAdminByUid(Integer uId);
 
-	List<EmojiHistoryDto> findEmojiHistoryByUser(int start);
+	List<EmojiHistoryDto> findEmojiHistoryByUser(@Param("start")int start , @Param("search") String search , @Param("searchType") String searchType);
 
-	int countEmojiHistoryByCancleY();
+	int countEmojiHistoryByCancleY( @Param("search") String search , @Param("searchType") String searchType);
 
 	EmojiHistory selectCancelByMaerchantId(String merchantId);
 
@@ -37,9 +37,9 @@ public interface AdminRepository {
 
 	Integer getMainLastId();
 
-	List<ReportDTO> selecReportAll(int start);
+	List<ReportDTO> selecReportAll(@Param("start")int start , @Param("search") String search , @Param("searchType") String searchType);
 
-	int countReportAll();
+	int countReportAll(@Param("search") String search , @Param("searchType") String searchType);
 
 	ReportDTO selectReportReasonById(int id);
 

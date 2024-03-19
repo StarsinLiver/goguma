@@ -16,7 +16,7 @@ public class Report {
 	private Integer id;
 	private Integer hostId;
 	private Integer callId;
-	private String reson;
+	private String reason;
 	private String createAt;
 	private String updateAt;
 	private String deleteAt;

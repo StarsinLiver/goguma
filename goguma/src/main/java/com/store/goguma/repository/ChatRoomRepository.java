@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 
+import com.store.goguma.admin.dto.AdminChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomUpdateDto;
 import com.store.goguma.entity.ChatRoom;
@@ -50,4 +51,12 @@ public interface ChatRoomRepository {
 	public int isExistChatRoom(@Param("pId")int pId, @Param("uId")int uId);
 	
 	public int countChatRoomAll();
+	
+	// 관리자 채팅방 목록 전체 불러오기
+	public List<AdminChatRoomDto>  adminFindAllByProductName(@Param("start") int start , @Param("search") String productName , @Param("searchType") String searchType);
+	// 관리자 채팅방 목록 전체 불러오기 카운트
+	public int countAdminFindAllByProductName(@Param("search") String productName , @Param("searchType") String searchType);
+	
+	// 관리자가 채팅방 삭제
+	public int deleteChatRoom(int id);
 }

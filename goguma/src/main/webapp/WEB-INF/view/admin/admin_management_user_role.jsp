@@ -11,13 +11,35 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+
+.search-div form {
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search-div form>* {
+	margin-left: 10px;
+}
+
+.search-div input {
+	font-size: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.search-div select {
+	padding: 11px;
+}
 </style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>권한 관리</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -50,65 +72,88 @@
         </path>
     </svg>
 <!-- Header End -->
-<div class="user-page" style="width: 80%; height: 80%">
+<div class="user-page"
+	style="width: 95%; height: 80%; margin: 5% 5% 53% 5%">
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-	<div class="payment-container" style="margin-right: 20%;">
-		<h4 class="user-page-title">결제 내역</h4>
+	<div class="payment-container" style="width: 70%; margin-right: 15%;">
+		<h4 class="user-page-title">유저 권한 관리</h4>
 		<div class="col-sm-12">
+			<div class="search-div">
+				<form action="/admin/user/role-management">
+					<input type="text" name="search" placeholder="이름을 검색해 주세요" />
+					<button type="submit" class="btn btn-warning btn-complete">검색</button>
+				</form>
+			</div>
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">이모티콘 구매</h5>
+					<h5 class="card-title">유저 권한 관리</h5>
 				</div>
+
 				<div class="card-body">
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>결제 번호</th>
-								<th>구매일자</th>
-								<th>구매상품명</th>
-								<th>구매<br />여부
-								</th>
-								<th>환불 완료</th>
-								<th>환불 신청</th>
+								<th>유저 번호</th>
+								<th>유저 이름</th>
+								<th>이메일</th>
+								<th>소셜</th>
+								<th>전화번호</th>
+								<th>주소</th>
+								<th>우편번호</th>
+								<th>생성일</th>
+								<th>삭제일</th>
+								<th>권한</th>
+								<th>권한 수정</th>
 							</tr>
 						</thead>
 						<tbody>
-							<!-- 데이터가 없을 때 표시될 행 -->
-							<tr id="noDataMessage" style="display: none;">
-								<td colspan="5">내역이 없습니다.</td>
-							</tr>
-							<!-- 실제 데이터 행 -->
-							<c:forEach var="history" items="${histories}">
+							<c:forEach items="${userList}" var="user">
 								<tr id="dataRow">
-									<td id="id">${history.merchantId}</td>
-									<td id="purchaseDate">${history.createAt}</td>
-									<td id="pointName">${history.mainEmojiName}</td>
-									<td id="refundYn">${history.confirmYn}</td>
-									<td id="refundYn">${history.cancelYn}</td>
-									<td>
-									<c:if test="${history.cancelYn == 'N'}">
-									<button id="refundButton" data-value="${history.merchantId}"
-											class="btn btn-warning btn-complete cancel-request">승인하기</button>
-									</c:if>
-									</td>
+									<td id=""><a href="/product/userProduct?uId=${user.getUId()}">${user.getUId()}</a></td>
+									<td id=""><a href="/product/userProduct?uId=${user.getUId()}">${user.name}</a></td>
+									<td id="">${user.email}</td>
+									<td id="">${user.social}</td>
+									<td id="">${user.tel}</td>
+									<td id="">${user.address}</td>
+									<td id="">${user.zip}</td>
+
+									<td id="">${user.createAt}</td>
+									<td id="">${user.deleteAt}</td>
+									<td id="">${user.role}</td>
+
+									<td><c:if test="${user.deleteAt == null}">
+											<form action="/admin/user/role-management/${user.getUId()}"
+												method="post">
+												<input type="hidden" name="_method" value="PUT" /> <input
+													type="hidden" name="role"
+													value="${user.role == 'ADMIN'? 'USER' : 'ADMIN'}" />
+												<button id="refundButton"
+													onclick="if(!confirm('${user.role} 을 ${user.role == 'ADMIN'? 'USER' : 'ADMIN'} 으로 바꾸시겠습니까?')) return false; "
+													class="btn btn-warning btn-complete cancel-request">권한
+													수정</button>
+											</form>
+										</c:if></td>
+
 								</tr>
 							</c:forEach>
 						</tbody>
+
 					</table>
 					<div class="pagination">
 						<!-- 페이지 처리 -->
 						<c:if test="${start > 1}">
-							<a href="/admin/history?pg=${start - 1}">&laquo;</a>
+							<a href="/admin/user/role-management?pg=${start - 1}">&laquo;</a>
 						</c:if>
 						<!-- 페이지 번호 -->
 						<c:forEach var="i" begin="${start}" end="${end}">
-							<a href="/admin/history?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+							<a href="/admin/user/role-management?pg=${i}"
+								class="${pg == i ? 'active':''}">${i}</a>
 						</c:forEach>
 						<c:if test="${end < last}">
-							<a href="/admin/history?pg=${end + 1}">&raquo;</a>
+							<a href="/admin/user/role-management?pg=${end + 1}">&raquo;</a>
 						</c:if>
 					</div>
 				</div>
@@ -116,21 +161,21 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="modalReason" tabindex="-1" role="dialog"
+
+
+<!-- 이메일 변경 내용을 입력하는 폼 -->
+<!-- <div class="modal fade" id="modalReason" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<!-- 이메일 변경 내용을 입력하는 폼 -->
+
 				<div style="display: flex; flex-direction: column;">
 					<div class="register-form">
-						<label for="password">이유를 적어주세요.</label> 
-						<br>
-						<br>
-						<textarea rows="12" cols="60" id="reasonText" ></textarea>
-						<br/>
-						<input type="hidden" id="hidMerchant" readonly="readonly"/>
-						<input type="hidden" id="amount" readonly="readonly"/>
+						<label for="password">Confirm Password</label> <br> <br>
+						<textarea rows="12" cols="12" id="reasonText" readonly="readonly"
+							style="border: none"></textarea>
+						<input type="" id="hidMerchant">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -143,7 +188,7 @@
 
 		</div>
 	</div>
-</div>
+</div> -->
 <!-- 메인 종료 -->
 <!-- 승인 모달 -->
 
@@ -154,8 +199,7 @@
 		$('.cancel-request').click(function() {
 			var merchantId = $(this).data('value');
 
-
-	$('#modalReason').modal('show'); // 모달 창을 보여줌
+			$('#modalReason').modal('show'); // 모달 창을 보여줌
 
 			// AJAX 호출
 			$.ajax({
@@ -164,12 +208,11 @@
 				data : {
 					merchantId : merchantId
 				},
-				dataType: 'json',
+				dataType : 'json',
 				success : function(data) {
 					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
-					// $('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.merchantId); 
-					$('#amount').val(data.price); 
+					$('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
+					$('#hidMerchant').val(data.merchantId);
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
@@ -179,43 +222,26 @@
 		});
 
 		$('#confirm').click(function() {
-			
-			
 
 			var merchantId = $('#hidMerchant').val();
-			var reason = $('#reasonText').val();
-			var amount = $('#amount').val();
-			
+
 			console.log('머천트 아이디 값: ' + merchantId);
 			//AJAX 호출
 			$.ajax({
 				type : 'POST',
-				url : '/admin/payment-cancel', // 컨트롤러 주소
+				url : '/admin/payment-confirm', // 컨트롤러 주소
 				data : {
-					merchantId : merchantId ,
-					reason : reason ,
-					amount : amount
+					merchantId : merchantId
 				},
-				dataType : "json",
 				success : function(data) {
-					console.log(data);
+
+					window.location.href = '/admin/history';
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
-					console.log(xhr.status)
-					
-					if(xhr.status == 400) {
-						alert("이유를 적어주세요.");
-					}
-					if(xhr.status == 404) {
-						alert("거래내역을 찾을 수 없습니다.");
-					}
-					
-					if(xhr.status == 500) {
-						alert("서버 에러가 발생하였습니다.");
-					}
-					window.location.reload();
+					console.error(xhr.responseText);
 				}
+
 			})
 
 		})
