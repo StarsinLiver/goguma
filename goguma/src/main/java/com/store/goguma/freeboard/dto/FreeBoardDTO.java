@@ -22,4 +22,7 @@ public class FreeBoardDTO {
 	private String deleteAt;
 	private String deleteYn;
 	private String goodCount;
+	private String mainCategory;
+	private String subCategory;
+	private Integer totalPosts;
 }

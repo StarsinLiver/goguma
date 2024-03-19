@@ -1,5 +1,7 @@
 package com.store.goguma.entity;
 
+import com.store.goguma.freeboard.dto.FreeBoardDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +24,6 @@ public class FreeBoard {
 	private String deleteAt;
 	private String deleteYn;
 	private String goodCount;
+	private String mainCategory;
+	private String subCategory;
 }

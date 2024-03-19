@@ -13,19 +13,82 @@
 	<select id="countRecommendation">
 		select fb.id as id,
 		fb.title as title,
-		fb.content as content,
+		fb.content as
+		content,
 		fb.u_id as u_id,
 		fb.file as file,
 		fb.create_at as created_at,
 		fb.update_at as updated_at,
 		fb.delete_at as deleted_at,
+		fb.main_category as main_category,
+		fb.sub_category as sub_category,
 		count(fr.free_board_id) as good_count
 		from free_board as fb
-		left join free_board_recommendation fr on fb.id = fr.free_board_id and
+		left join
+		free_board_recommendation fr on fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
 		where fb.delete_yn = 'N'
-		group by fb.id, fb.title, fb.content, fb.u_id, fb.file, fb.create_at,
-		fb.update_at, fb.delete_at
+		group by fb.id, fb.title,
+		fb.content, fb.u_id, fb.file, fb.create_at,
+		fb.update_at, fb.delete_at,
+		fb.main_category, fb.sub_category
+		order by
+		good_count desc
+	</select>
+
+	<!-- 카테고리별 좋아요 많은 순서 -->
+	<select id="countRecommendationByCate" resultType="com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto">
+		SELECT
+		fb.id AS id,
+		fb.title AS title,
+		fb.content AS content,
+		fb.u_id AS userId,
+		fb.file AS file,
+		fb.create_at AS createAt,
+		fb.update_at AS updatedAt,
+		fb.delete_at AS deletedAt,
+		fb.delete_yn as deleteYn ,
+		main_cat.id AS mainCategoryId,
+		sub_cat.id AS subCategoryId,
+		main_cat.name as mainCategoryName ,
+		sub_cat.name as subCategoryName ,
+		ifnull(COUNT(fr.free_board_id), 0) AS goodCount
+		FROM
+		free_board AS fb
+		LEFT JOIN free_board_recommendation AS fr ON fb.id = fr.free_board_id AND
+		fr.good_yn = 'Y'
+		INNER JOIN board_sub_category AS sub_cat ON fb.sub_category = sub_cat.id
+		INNER JOIN board_main_category AS main_cat ON sub_cat.group_id =
+		main_cat.id
+		WHERE
+		fb.delete_yn = 'N'
+		AND main_cat.id = #{mainCategoryId}
+		AND sub_cat.id = #{subCategoryId}
+		GROUP BY
+		fb.id
+		ORDER BY
+		goodCount DESC
+	</select>
+
+	<!-- 게시글 많은 카테고리 3개 -->
+	<select id="manyFreeBoard" resultType="com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto">
+		SELECT
+		main_cat.id AS mainCategoryId,
+		sub_cat.id AS subCategoryId,
+		sub_cat.name as subCategoryName
+		FROM
+		board_main_category AS main_cat
+		INNER JOIN
+		board_sub_category AS sub_cat ON main_cat.id = sub_cat.group_id
+		LEFT
+		JOIN free_board AS fb ON sub_cat.id = fb.sub_category AND
+		main_cat.id =
+		fb.main_category AND fb.delete_yn = 'N'
+		GROUP BY
+		main_cat.id, sub_cat.id
+		ORDER BY
+		COUNT(fb.id) DESC
+		LIMIT 3
 	</select>
 
 	<!-- 게시글 좋아요 추가 -->
@@ -53,8 +116,8 @@
 		WHERE
 		free_board_id = #{freeBoardId}
 	</update>
-	
+
 	<insert id="addFreeView">
-		
+
 	</insert>
 </mapper>
