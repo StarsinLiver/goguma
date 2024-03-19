@@ -46,4 +46,5 @@ public class Define {
     public static final String NO_VALID_TYPE = "타입을 다시 적어주세요";
     public static final String NO_VALID_URL = "url을 다시 적어주세요";
     public static final String NO_VALID_FILE = "파일을 넣어주세요";
+    public static final String NO_VALID_ADDRESS = "주소를 적어주세요";
 }

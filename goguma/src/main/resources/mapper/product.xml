@@ -233,6 +233,7 @@
 			u.name
 		</if>
 		like concat('%',#{search},'%')
+		order by p.p_id
 		LIMIT #{start} , 10
 	</select>
 
