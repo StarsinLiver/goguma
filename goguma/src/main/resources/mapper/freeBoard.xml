@@ -9,11 +9,12 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
-<!--게시글 좋아요 개수 카운트 -->
+	<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
 		select fb.id as id,
 		fb.title as title,
-		fb.content as content,
+		fb.content as
+		content,
 		fb.u_id as u_id,
 		fb.file as file,
 		fb.create_at as created_at,
@@ -21,10 +22,12 @@
 		fb.delete_at as deleted_at,
 		count(fr.free_board_id) as good_count
 		from free_board as fb
-		left join free_board_recommendation fr on fb.id = fr.free_board_id and
+		left join
+		free_board_recommendation fr on fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
 		where fb.delete_yn = 'N'
-		group by fb.id, fb.title, fb.content, fb.u_id, fb.file, fb.create_at,
+		group by fb.id, fb.title,
+		fb.content, fb.u_id, fb.file, fb.create_at,
 		fb.update_at, fb.delete_at
 	</select>
 
@@ -41,14 +44,13 @@
 	</update>
 
 	<!-- 게시판 형식 select -->
-	<select id="selectByBoardType"
-		resultType="com.store.goguma.freeboard.dto.BoardTypeResDTO">
-		SELECT COALESCE(m.id, s.id) AS id, m.name , s.name ,
+	<select id="selectArticleType"
+		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
+		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname ,s.id as subId , s.name ,
 		s.row_count, s.`number`, s.background, s.font, s.list_type
 		FROM board_main_category AS m
 		JOIN board_sub_category AS s
-		ON m.id = s.group_id
-
+		ON m.id = s.group_id where m.id = #{cate1} AND s.id = #{id}
 	</select>
 
 
@@ -65,8 +67,8 @@
 		WHERE
 		free_board_id = #{freeBoardId}
 	</update>
-	
+
 	<insert id="addFreeView">
-		
+
 	</insert>
 </mapper>

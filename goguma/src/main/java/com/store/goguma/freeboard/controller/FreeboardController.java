@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.store.goguma.freeboard.dto.BoardTypeDTO;
+import com.store.goguma.freeboard.dto.FreeBoardCateListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.service.FreeBoardService;
 
@@ -41,26 +43,26 @@ public class FreeboardController {
 	
 	// list타입 게시글 목록
 	@GetMapping("/list")
-	public String boardList(@RequestParam("cate1")int cate1, @RequestParam("cate2")int cate2 ) {
+	public String boardList(@RequestParam("cate1")int cate1, @RequestParam("id")int id, Model model) {
 		
-		// 게시판 형식
-		//service.selectArticleType(cate1, cate2);
+		// 값들어옴 확인했음 테스트 주소 http://localhost/freeBoard/list?cate1=1&cate2=1&name=잡담
+		log.info("cate1 "+cate1);
 		
 		
-		// 게시판 목록
-		//service.selectArticleAllBycate(cate1, cate2);
+		// 게시판 형식 일단 게시판 형식부터 ㄱ
+		BoardTypeDTO listType = freeBoardService.selectArticleType(cate1, id);
+		
+		log.info("프리보드 리스트 컨트롤러 리스트 타입 값 확인"+listType.toString());
+		
+		// 게시판 목록  페이징 하삼
+		//freeBoardService.selectArticleAllBycate(cate1, cate2);
+		
+		model.addAttribute("type", listType);
+		
 		
 		return "/free_board/free-list";
 	}
 	
-	//aside 테스트용
-	@GetMapping("/aside")
-	public String aside() {
-		
-		
-		return "free_board/free_board_aside";
-		
-	}
 	
 	// 자유 게시판 상세 보기
 	@GetMapping("/detail")

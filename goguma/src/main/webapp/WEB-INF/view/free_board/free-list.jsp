@@ -23,15 +23,27 @@ h2 {
 	margin-top: 20px;
 }
 
+/* background 적용 css */
+.mt-4 {
+    margin-top: -0.5rem !important;
+    /* background-image: url("/images/upload/bg1.jpg"); */
+    background-image: url("/images/upload/${type.backGround}");
+    background-size: cover; /* 이미지를 요소에 맞게 조절 */
+    background-repeat: no-repeat; /* 이미지 반복을 하지 않음 */
+}
+
+/* 폰트 적용을 위한 css */
 .col-lg-8 {
-	font-family: Gamja Flower, sans-serif;
+	font-family:  ${type.font}, sans-serif;
 	font-size: large;
 }
 
 .h2font {
-	font-family: Gamja Flower, sans-serif;
+	font-family: ${type.font}, sans-serif;
 	font-size: large;
 }
+/* 폰트 적용을 위한 css end */
+
 </style>
 
 <div class="container mt-4"
@@ -51,7 +63,8 @@ h2 {
 				게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float: right;">메인으로</a>
 			</h2>
 			<!-- 리스트 테이블 -->
-			<table class="table table-bordered">
+			<input type="text" value="${type.listType}" id="listType"/>
+			<table class="table table-bordered" style="background: white;" data-value="${type.listType}">
 				<thead>
 					<tr>
 
@@ -287,6 +300,27 @@ h2 {
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	const urlParam = new URL(location.href).searchParams;
+	const listType = document.getElementById("listType");
+	
+	const Type = listType.dataset.value;
+	
+	
+	alert('urlParam'+ urlParam);  // cate1 cate2 값 	
+	alert('Type'+ Type);  // 
+		
+		
+		
+		
+		
+	});
+
+
+</script>
+
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

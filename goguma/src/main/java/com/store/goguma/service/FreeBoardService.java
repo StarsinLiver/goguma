@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.store.goguma.entity.FreeBoard;
+import com.store.goguma.freeboard.dto.BoardTypeDTO;
+import com.store.goguma.freeboard.dto.FreeBoardCateListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.repository.FreeBoardRepository;
 
@@ -54,5 +56,15 @@ public class FreeBoardService {
 		}
 		return recommendationDTOList;
 
+	}
+
+	public BoardTypeDTO selectArticleType(int cate1, int id) {
+
+		
+		return freeBoardRepository.selectArticleType(cate1, id); 
+	}
+
+	public void selectArticleAllBycate(int cate1, int cate2) {
+		freeBoardRepository.selectArticleAllBycate(cate1, cate2);
 	}
 }

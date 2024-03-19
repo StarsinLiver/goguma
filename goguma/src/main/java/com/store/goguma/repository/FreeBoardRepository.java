@@ -3,8 +3,11 @@ package com.store.goguma.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.FreeBoard;
+import com.store.goguma.freeboard.dto.BoardTypeDTO;
+import com.store.goguma.freeboard.dto.FreeBoardCateListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 
 
@@ -21,8 +24,14 @@ public interface FreeBoardRepository {
 	public int addRecommendation(FreeBoard freeBoard);
 	public int deleteRecommendation(FreeBoard freeBoard);
 
-
 	
+	// 리스트 타입 조회 - y
+	public BoardTypeDTO selectArticleType(@Param("cate1") int cate1, @Param("id") int id);
+
+	// 카테고리에 따른 리스트 조회 - y
+	public void selectArticleAllBycate(@Param("cate1") int cate1, @Param("cate2") int cate2);
+
+
 	
 	
 	
