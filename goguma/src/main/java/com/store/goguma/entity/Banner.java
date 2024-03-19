@@ -22,6 +22,7 @@ public class Banner {
 	private Integer viewCtn;
 	private Integer price;
 	private BannerType type;
+	private String url;
 	private String createAt;
 	private String updateAt;
 	private String deleteAt;

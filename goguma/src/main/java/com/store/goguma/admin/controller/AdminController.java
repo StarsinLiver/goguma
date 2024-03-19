@@ -21,7 +21,6 @@ import com.store.goguma.admin.dto.AdminBannerDto;
 import com.store.goguma.admin.dto.AdminChatRoomAndMessageDto;
 import com.store.goguma.admin.dto.AdminChatRoomDto;
 import com.store.goguma.admin.dto.AdminQnaDto;
-import com.store.goguma.admin.dto.AdminReportDTO;
 import com.store.goguma.admin.dto.AdminResponsePageDto;
 import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.Banner;
@@ -37,6 +36,7 @@ import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiUploadService;
 import com.store.goguma.service.FaqService;
+import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.service.NoticeService;
 import com.store.goguma.service.ProductService;
 import com.store.goguma.service.QnaService;
@@ -71,6 +71,7 @@ public class AdminController {
 	private final EmojiUploadService fileService;
 	private final NoticeService noticeService;
 	private final FaqService faqService;
+	private final FreeBoardService freeBoardService;
 
 	// 관리자 마이 페이지
 	// localhost://admin/modiUser
@@ -298,6 +299,7 @@ public class AdminController {
 
 		return "redirect:/admin/product";
 	}
+
 
 	/**
 	 * 유저 권한 관리
@@ -597,11 +599,16 @@ public class AdminController {
 		if (banner.getType() == null) {
 			throw new BackPageRestfulException(Define.NO_VALID_TYPE, HttpStatus.BAD_REQUEST);
 		}
-
+		if (banner.getFile().getSize() == 0) {
+			throw new BackPageRestfulException(Define.NO_VALID_FILE, HttpStatus.BAD_REQUEST);
+		}
+		if(banner.getUrl() == null || banner.getUrl().isEmpty()) {
+			throw new BackPageRestfulException(Define.NO_VALID_URL, HttpStatus.BAD_REQUEST);
+		}
 		String file = fileService.uploadFileProcess(banner.getFile());
 
 		Banner enttiy = Banner.builder().title(banner.getTitle()).client(banner.getClient()).price(banner.getPrice())
-				.type(banner.getType()).file(file).build();
+				.type(banner.getType()).file(file).url(banner.getUrl()).build();
 
 		int result = bannerService.insert(enttiy);
 		if (result == 0) {
@@ -654,12 +661,16 @@ public class AdminController {
 		if (banner.getUseYn() == null || banner.getUseYn().isEmpty()) {
 			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		if(banner.getUrl() == null || banner.getUrl().isEmpty()) {
+			throw new BackPageRestfulException(Define.NO_VALID_URL, HttpStatus.BAD_REQUEST);
+		}
+		
 		entity.setClient(banner.getClient());
 		entity.setTitle(banner.getTitle());
 		entity.setPrice(banner.getPrice());
 		entity.setType(banner.getType());
 		entity.setUseYn(banner.getUseYn());
+		entity.setUrl(banner.getUrl());
 
 		int result = bannerService.update(entity);
 		if (result == 0) {
@@ -788,6 +799,63 @@ public class AdminController {
 		}
 		return "redirect:/admin/faq";
 	}
+
+	@GetMapping("/freeboard") 
+	public String freeboardListForm(RequestPageDTO req, Model model) {
+		
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		if(req.getSearch() == null) {
+			req.setSearch("");
+		}
+		if(req.getSearchType() == null) {
+			req.setSearchType("title");
+		}
+		
+ 		ResponsePageDTO res = freeBoardService.adminFindAll(req);
+		
+		model.addAttribute("freeBoardList", res.getDtoList());
+		model.addAttribute("pg", res.getPg());
+		model.addAttribute("start", res.getStart());
+		model.addAttribute("end", res.getEnd());
+		model.addAttribute("last", res.getLast());
+		return "admin/admin_free_board";
+	}
+	
+	@DeleteMapping("/freeboard/delete/{id}")
+	public String deleteFreeBoard(@PathVariable(value = "id") Integer id) {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		int result = freeBoardService.deleteById(id);
+		if(result == 0) {
+			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return "redirect:/admin/freeboard";
+	}
+	
+	// free_board 생성 페이지
+	@GetMapping("/create/freeBoard")
+	public String Create_freeBoard() {
+		
+		
+		return "admin/freeBoard_create";
+	}
+
 	
 	
+	
+	// free_board 관리 페이지
+	@GetMapping("/modify/freeBoard")
+	public String Modify_freeBoard() {
+		
+		
+		return "admin/freeBoard_modify";
+	}
+
 }

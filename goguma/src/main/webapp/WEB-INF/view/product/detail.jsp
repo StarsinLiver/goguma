@@ -223,7 +223,7 @@
 <section id="article-detail-hot-more">
 	<h3>인기중고</h3>
 	<div id="hot-more-link">
-		<a href="/#">더 구경하기</a>
+		<a href="/product/product-list">더 구경하기</a>
 	</div>
 	<!-- 찜 개수가 가장 많은 상품 6개 보여줄 예정 -->
 	<section class="cards-wrap">

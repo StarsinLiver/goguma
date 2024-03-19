@@ -21,4 +21,5 @@ public class FreeBoard {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
+	private String goodCount;
 }

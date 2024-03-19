@@ -170,7 +170,7 @@
 		like CONCAT('%',#{search},'%')
 		order by p.create_at desc
 		LIMIT
-		#{start} , 12
+		#{start} , 10
 	</select>
 
 	<select id="countAdminFindAllByProductName" resultType="int">

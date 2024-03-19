@@ -3,6 +3,7 @@
 
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
+<link rel="stylesheet" href="/customAssets/css/user.css" />
 
 <!-- 메인 시작 -->
 <!-- Header Start -->

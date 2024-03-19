@@ -43,13 +43,13 @@
 
 	<insert id="insert">
 		insert into banner (title , file , client , price ,
-		type)
-		values(#{title} , #{file} , #{client} , #{price} , #{type})
+		type , url)
+		values(#{title} , #{file} , #{client} , #{price} , #{type} , #{url})
 	</insert>
 
 	<update id="update">
 		update banner
-		set title = #{title} , file = #{file} ,
+		set title = #{title} , file = #{file} , url = #{url} ,
 		client = #{client} , use_yn = #{useYn} , price = #{price} , type = #{type} ,
 		update_at = now()
 		where id = #{id};
