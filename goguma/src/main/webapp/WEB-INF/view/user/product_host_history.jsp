@@ -11,6 +11,70 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+/* The Modal (background) */
+#my-modal {
+    max-width: 1200px;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 70px;
+    padding-top: 100px;
+    width: 100%;
+    height: 100%;
+}
+.my-modal-content {
+    margin: auto;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.my-modal-content table {
+	width: 100%;
+	margin-bottom: 10px;
+}
+.my-modal-content tr {
+	border-bottom: 1px solid #ccc;
+}
+.my-modal-content textarea {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	max-height: 177px;
+}
+.user-page .emoji-name {
+	margin-left: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.complete {
+	color: green;
+}
 </style>
 
 <!-- 메인 시작 -->
@@ -68,6 +132,11 @@
 						<div class="card-price">${product.price}</div>
 					</div>
 				</a>
+				<!-- 모달 -->
+				<c:if test="${product.confirmYn == 'N'}">
+				<button class="btn btn-warning btn-confirm" onclick="openChatList()"
+					data-value="${product.prodId}">결제 완료</button>
+				</c:if>
 			</article>
 			</c:forEach>
 		</div>
@@ -88,8 +157,71 @@
 			</c:if>
 		</div>
 	</div>
+	
+		<!-- Modal -->
+	<div id="my-modal">
+	  <div class="my-modal-content">
+	    <span class="close" onclick="deleteClose()">&times;</span>
+	    <article style="padding: 20px;">
+	    	<table>
+	    		<tr>
+	    			<td>유저 이름</td>
+	    			<td>확인</td>
+	    		</tr>
+	    		<tr>
+	    			<td>1111</td>
+	    			<td><button type="button" class="btn btn-warning">완료</button></td>
+	    		</tr>
+	    	</table>
+	    	
+	    </article>
+	  </div>
+	</div>
+	
 </div>
 <!-- 메인 종료 -->
-
+<script>
+	const priceDiv = document.querySelectorAll(".card-price");
+	const modal = document.getElementById("my-modal");
+	const close = document.getElementsByClassName("close")[0];
+	const btn = document.getElementsByClassName("btn-confirm")[0];
+	
+	
+	// 챗 리스트 생성
+	function openChatList(){
+		let pid = btn.dataset.value;
+		console.log(pid);
+		
+		
+		$.ajax({
+		    type: 'get',
+		    url: '/user/chat/product?pId=' + pid,
+		    headers: {
+		        "Content-Type": "application/json"
+		    },
+		    success: function(result) {
+		        console.log(result);
+				
+		        ChatUserList(result, pid);
+		        
+		    },
+		    error: function(request, status, error) {
+		        console.log(error);
+		    }
+		});
+		// 모달창 보여주기
+		modal.style.display = "block";
+	}
+	
+	// 모달창 나가기
+	function deleteClose(){
+		modal.style.display = "none";
+	}
+	
+	// 상품 구매자 목록
+	function ChatUserList(result, pid){
+		
+	}
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

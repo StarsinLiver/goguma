@@ -10,6 +10,7 @@ import com.store.goguma.admin.dto.AdminChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomUpdateDto;
 import com.store.goguma.entity.ChatRoom;
+import com.store.goguma.entity.User;
 
 @Mapper
 public interface ChatRoomRepository {
@@ -59,4 +60,7 @@ public interface ChatRoomRepository {
 	
 	// 관리자가 채팅방 삭제
 	public int deleteChatRoom(int id);
+	
+	// 채팅 목록
+	public List<User> selectByProductId(int pId);
 }

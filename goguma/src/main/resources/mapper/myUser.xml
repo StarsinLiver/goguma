@@ -146,6 +146,8 @@
         where `u_id`=#{uId} AND `cancel_yn` = "N"
     </select>
 	
+	
+	
 	<!-- 찜 목록 -->
 	<select id="selectWishListByUid" resultType="com.store.goguma.user.dto.my.WishProductDTO">
 		SELECT 
