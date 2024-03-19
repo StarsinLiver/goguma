@@ -58,6 +58,12 @@
 		<div class="col-sm-12">
 			<div class="search-div">
 				<form action="/admin/chat">
+				<select name="searchType">
+					<option value="productName">상품 이름</option>
+					<option value="productId">상품 번호</option>
+					<option value="roomId">방 번호</option>
+					<option value="hostName">호스트 이름</option>
+				</select>
 					<input type="text" name="search" placeholder="상품 이름을 검색해주세요" />
 					<button type="submit" class="btn btn-warning btn-complete">검색</button>
 				</form>
@@ -74,10 +80,13 @@
 								<a
 									href="/product/productDetail?pId=${chatRoom.adminChatRoomDto.getPId()}">
 									<h4>
+										<b>방 번호 : ${chatRoom.adminChatRoomDto.roomId}</b>
+									</h4>
+									<h4>
 										<b>상품명 : ${chatRoom.adminChatRoomDto.productName}</b>
 									</h4>
 									<h4>
-										<b>상품 번호 : ${chatRoom.adminChatRoomDto.roomId}</b>
+										<b>상품 번호 : ${chatRoom.adminChatRoomDto.getPId()}</b>
 									</h4>
 								</a> <a
 									href="/product/userProduct?uId=${chatRoom.adminChatRoomDto.hostId}">
@@ -107,6 +116,15 @@
 									<!-- 채팅방 내용 -->
 									<c:forEach items="${chatRoom.chatMessageDto}" var="chatMessage">
 										<p>${chatMessage.userName}&nbsp;:&nbsp;${chatMessage.text}</p>
+										
+										<c:if test="${chatMessage.chatMessageType == 'IMAGE'}">
+											<img src="/images/upload/${chatMessage.file}"/>
+										</c:if>
+										<c:if test="${chatMessage.chatMessageType == 'EMOJI'}">
+											<img src="/images/upload/emoji/${chatMessage.file}"/>
+										</c:if>
+										<p>${chatMessage.createAt}</p>
+										<br/>
 									</c:forEach>
 								</div>
 							</div>
@@ -140,6 +158,6 @@
 		</div>
 	</div>
 </div>
-<script src="/customAssets/js/product/admin_management_chat.js"></script>
+<script src="/customAssets/js/admin/admin_management_chat.js"></script>
 
 <%@ include file="/WEB-INF/view/footer.jsp"%>

@@ -118,12 +118,15 @@
 		productName,
 		p.price AS productPrice,
 		p.host_id AS productHostId,
-		p.description AS productDescription,
+		p.description AS
+		productDescription,
 		p.file AS productFile,
-		p.main_category_id AS mainCategoryId,
+		p.main_category_id AS
+		mainCategoryId,
 		p.sub_category_id AS
 		subCategoryId,
-		p.confirm_yn as confirmYn ,
+		p.confirm_yn as
+		confirmYn ,
 		c.id AS roomId,
 		c.u_id AS
 		userId,
@@ -131,7 +134,8 @@
 		c.create_at AS createAt,
 		c.delete_at as
 		deleteAt,
-		c.delete_yn as deleteYn ,
+		c.delete_yn as deleteYn
+		,
 		hu.name AS
 		hostName,
 		u.name AS
@@ -146,11 +150,24 @@
 		INNER JOIN
 		user hu
 		ON hu.u_id = c.host_id
-		INNER JOIN user u
+		INNER JOIN user
+		u
 		ON
 		u.u_id = c.u_id
 		where
-		p.name like CONCAT('%',#{productName},'%')
+		<if test="searchType == 'productName'.toString">
+			p.name
+		</if>
+		<if test="searchType == 'productId'.toString">
+			p.p_id
+		</if>
+		<if test="searchType == 'roomId'.toString">
+			c.id
+		</if>
+		<if test="searchType == 'hostName'.toString">
+			hu.name
+		</if>
+		like CONCAT('%',#{search},'%')
 		order by p.create_at desc
 		LIMIT
 		#{start} , 12
@@ -165,20 +182,34 @@
 		product p
 		ON p.p_id =
 		c.p_id
-		INNER JOIN
+		INNER
+		JOIN
 		user hu
 		ON hu.u_id = c.host_id
 		INNER JOIN user u
 		ON
 		u.u_id = c.u_id
 		where
-		p.name like CONCAT('%',#{productName},'%')
+		<if test="searchType == 'productName'.toString">
+			p.name
+		</if>
+		<if test="searchType == 'productId'.toString">
+			p.p_id
+		</if>
+		<if test="searchType == 'roomId'.toString">
+			c.id
+		</if>
+		<if test="searchType == 'hostName'.toString">
+			hu.name
+		</if>
+		like CONCAT('%',#{search},'%')
 	</select>
 
 	<update id="deleteChatRoom">
 		update chat_room
 		set delete_yn = 'Y' ,
-		delete_at = now() ,
+		delete_at =
+		now() ,
 		update_at = now()
 		where id = #{id}
 	</update>

@@ -29,15 +29,11 @@ public class CsPageController {
 	}
 	
 	
-	
-	
-	
 	// admin
-
-	@GetMapping("/notice/list/admin")
-	public String noticeAdminList() {
-		return "cs/notice/admin-list";
-	}
+//	@GetMapping("/notice/list/admin")
+//	public String noticeAdminList() {
+//		return "cs/notice/admin-list";
+//	}
 	
 	@GetMapping("/notice/detail/admin/{id}")
 	public String noticeAdminDetail() {

@@ -84,8 +84,8 @@ public class ChatRoomService {
 	public AdminResponsePageDto<AdminChatRoomDto> adminFindAllByRoomName(RequestPageDTO request) {
 		int start = (request.getPg() -1) * request.getSize();
 		
-		List<AdminChatRoomDto> list = chatRoomRepository.adminFindAllByProductName(start , request.getSearch());
-		int count = chatRoomRepository.countAdminFindAllByProductName(request.getSearch());
+		List<AdminChatRoomDto> list = chatRoomRepository.adminFindAllByProductName(start , request.getSearch() ,request.getSearchType());
+		int count = chatRoomRepository.countAdminFindAllByProductName(request.getSearch() , request.getSearchType());
 		
 		return new AdminResponsePageDto<AdminChatRoomDto>(request , list , count);
 	}

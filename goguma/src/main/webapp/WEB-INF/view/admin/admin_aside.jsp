@@ -160,7 +160,7 @@ nav.open ~ .overlay {
 			<li class="list"><a href="/admin/emoji" class="nav-link"> <i
 					class="bx bx-heart icon"></i> <span class="link">이모티콘 관리</span>
 			</a></li>
-			<li class="list"><a href="/cs/notice/list/admin"
+			<li class="list"><a href="/admin/notice"
 				class="nav-link"> <i class="bx bx-bell icon"></i> <span
 					class="link">공지사항 관리</span>
 			</a></li>

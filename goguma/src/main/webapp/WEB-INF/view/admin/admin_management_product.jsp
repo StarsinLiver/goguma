@@ -11,13 +11,35 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+
+.search-div form {
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search-div form>* {
+	margin-left: 10px;
+}
+
+.search-div input {
+	font-size: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.search-div select {
+	padding: 11px;
+}
 </style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>상품 관리</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -58,10 +80,20 @@
 	<div class="payment-container" style="width: 70%; margin-right: 15%;">
 		<h4 class="user-page-title">거래 상품 관리</h4>
 		<div class="col-sm-12">
+			<div class="search-div">
+				<form action="/admin/product">
+					<select name="searchType">
+						<option value="productName">제품 이름</option>
+						<option value="hostName">판매자</option>
+						<option value="userName">구매자</option>
+					</select> <input type="text" name="search" placeholder="검색..." />
+					<button type="submit" class="btn btn-warning btn-complete">검색</button>
+				</form>
+			</div>
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">유저 상품 리스트</h5>
+					<h5 class="card-title">거래 상품 관리</h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">
@@ -89,15 +121,18 @@
 									<td id="">${product.price}</td>
 									<td id="">${product.formatProductCreateAt()}</td>
 									<td id="">${product.confirmYn}</td>
-									
+
 									<td id="">${product.formatHistoryCreateAt()}</td>
 									<td id="">${product.productDeleteYn}</td>
 
-									<td><c:if test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">
-											<form action="/admin/product/delete/${product.getPId()}" method="post">
-											<input type="hidden" name="_method" value="delete"/>
-												<button id="refundButton" onclick="if(!confirm('삭제하시겠습니까?')) return false; "
-													class="btn btn-warning btn-complete cancel-request" >삭제하기</button>
+									<td><c:if
+											test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">
+											<form action="/admin/product/delete/${product.getPId()}"
+												method="post">
+												<input type="hidden" name="_method" value="delete" />
+												<button id="refundButton"
+													onclick="if(!confirm('삭제하시겠습니까?')) return false; "
+													class="btn btn-warning btn-complete cancel-request">삭제하기</button>
 											</form>
 										</c:if></td>
 

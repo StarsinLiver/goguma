@@ -34,6 +34,7 @@ import com.store.goguma.service.ChatMessageService;
 import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiUploadService;
+import com.store.goguma.service.NoticeService;
 import com.store.goguma.service.ProductService;
 import com.store.goguma.service.QnaService;
 import com.store.goguma.service.ReportService;
@@ -65,6 +66,7 @@ public class AdminController {
 	private final QnaService qnaService;
 	private final BannerService bannerService;
 	private final EmojiUploadService fileService;
+	private final NoticeService noticeService;
 
 	// 관리자 마이 페이지
 	// localhost://admin/modiUser
@@ -129,6 +131,14 @@ public class AdminController {
 		}
 
 		log.info("history로 들어오는 pagedto" + page);
+		if (historyReqDTO.getSearchType() == null) {
+			historyReqDTO.setSearchType("merchantId");
+		}
+		if (historyReqDTO.getSearch() == null) {
+			historyReqDTO.setSearch("");
+		}
+		
+		log.info("검색 : {}" , historyReqDTO);
 
 		ResponsePageDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);
 
@@ -197,12 +207,6 @@ public class AdminController {
 		return "admin/emoji_detail";
 	}
 
-	@GetMapping("/notice")
-	public String managementNotice() {
-
-		return "";
-	}
-
 	/**
 	 * 신고 관리
 	 * 
@@ -212,16 +216,20 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/report")
-	public String managementReport(Model model, AdminReportDTO dto, PageReqDTO page) {
+	public String managementReport(RequestPageDTO page , Model model) {
 
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (page.getSearchType() == null) {
+			page.setSearchType("id");
+		}
+		if (page.getSearch() == null) {
+			page.setSearch("");
+		}
 
-		AdminReportDTO report = adminService.selectReportAll(page);
-
-		log.info("report List Info: " + report.getDtoList().toString());
+		ResponsePageDTO report = adminService.selectReportAll(page);
 
 		model.addAttribute("report", report.getDtoList());
 		model.addAttribute("pg", report.getPg());
@@ -246,7 +254,14 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-
+		
+		log.info("타입 : {}" , requestPageDTO.getSearchType());
+		if (requestPageDTO.getSearchType() == null) {
+			requestPageDTO.setSearchType("productName");
+		}
+		if (requestPageDTO.getSearch() == null) {
+			requestPageDTO.setSearch("");
+		}
 		// 페이징 객체
 		ResponsePageDTO res = productService.adminFindAll(requestPageDTO);
 
@@ -365,6 +380,9 @@ public class AdminController {
 		// 검색 기본 default 값
 		String search = request.getSearch() == null ? "" : request.getSearch();
 		request.setSearch(search);
+		String searchType = request.getSearchType() == null ? "productName"  : request.getSearchType();
+		request.setSearchType(searchType);
+		log.info("검색 검색 : {}" , request.toString());
 		// 모든 채팅방 가져오기
 		AdminResponsePageDto<AdminChatRoomDto> res = chatRoomService.adminFindAllByRoomName(request);
 
@@ -416,8 +434,8 @@ public class AdminController {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
 
-		String search = req.getSearch() == null ? "" : req.getSearch();
-		String option = req.getSearchType() == null ? "" : req.getSearchType();
+		String search = req.getSearch() == null  ? "" : req.getSearch();
+		String option = req.getSearchType() == null || req.getSearchType().equals("") ? "" : req.getSearchType();
 		req.setSearch(search);
 		req.setSearchType(option);
 		ResponsePageDTO res = qnaService.adminFindAll(req);
@@ -645,5 +663,40 @@ public class AdminController {
 		}
 
 		return "redirect:/admin/banner";
+	}
+	
+	
+	
+	
+	/**
+	 * 공지 관리
+	 * @return
+	 */
+	@GetMapping("/notice")
+	public String noticeAdminList(RequestPageDTO req, Model model) {
+
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		if (req.getSearchType() == null) {
+			req.setSearchType("title");
+		}
+		if (req.getSearch() == null) {
+			req.setSearch("");
+		}
+		
+		log.info("로그 : {}"  , req);
+		
+		ResponsePageDTO res = noticeService.adminFindAll(req);
+		
+		
+		model.addAttribute("noticeList", res.getDtoList());
+		model.addAttribute("pg", res.getPg());
+		model.addAttribute("start", res.getStart());
+		model.addAttribute("end", res.getEnd());
+		model.addAttribute("last", res.getLast());
+		return "admin/admin_management_notice";
 	}
 }

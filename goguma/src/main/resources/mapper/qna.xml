@@ -30,6 +30,7 @@
 		q.delete_at as delete_at ,
 		q.delete_yn as
 		deleteYn ,
+		q.option_name as optionName ,
 		u.name as userName
 		from qna q
 		inner join user u

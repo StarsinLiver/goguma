@@ -99,6 +99,7 @@ const jsonImage = (res) => {
 		
 		message = `<p>${res.userName}&nbsp;:&nbsp;${res.text}</p>`
 		message += res.chatMessageType == 'TEXT'? "" : `<img src="${img}" style="width : 200px ; height : 100px;"/>`;
+		message += `<p>${res.createAt}</p><br/>`
 //			message += `<br/><div class="outgoing_msg"> 
 //											<div class="sent_msg"><b style="text-align: right;">${res.userName}</b>`
 //			// 만약 이미지가 있다면

@@ -82,7 +82,7 @@
 		<div class="search-div">
 			<form action="/admin/qna">
 				<select name="searchType">
-					<option value="">전체</option>
+					<option value="">문의 종류</option>
 					<option value="상품">상품</option>
 					<option value="회원정보">회원정보</option>
 				</select> <input type="text" name="search" placeholder="검색..." />
@@ -104,6 +104,7 @@
 								<th>문의 제목</th>
 								<th>질문자</th>
 								<th>등록일</th>
+								<th>종류</th>
 								<th>답변 여부</th>
 								<th>삭제 YN</th>
 								<th>상세 조회</th>
@@ -116,7 +117,9 @@
 									<td id="">${qna.id}</td>
 									<td id="">${qna.questionTitle}</td>
 									<td id="">${qna.userName}</td>
+									
 									<td id="">${qna.formatDate()}</td>
+									<td id="">${qna.optionName}</td>
 									<td id="">${qna.answerYn}</td>
 									<td id="">${qna.deleteYn}</td>
 

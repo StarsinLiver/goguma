@@ -35,9 +35,9 @@ public interface ProductRepository {
 	public int countProductAll();
 	
 	// 관리자 계정에서 전체 보기
-	public List<AdminProductDto> adminFindAll(int start);
+	public List<AdminProductDto> adminFindAll(@Param("start")int start , @Param("search") String search , @Param("searchType") String searchType);
 	// 관리자 계정 전체 보기 카운트
-	public int adminCountFindAll();
+	public int adminCountFindAll(@Param("search") String search , @Param("searchType") String searchType);
 	// 관리자 계쩡으로 상품 삭제
 	public int adminDeleteProduct(int pId);
 }

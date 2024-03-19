@@ -53,9 +53,9 @@ public interface ChatRoomRepository {
 	public int countChatRoomAll();
 	
 	// 관리자 채팅방 목록 전체 불러오기
-	public List<AdminChatRoomDto>  adminFindAllByProductName(@Param("start") int start , @Param("productName") String productName);
+	public List<AdminChatRoomDto>  adminFindAllByProductName(@Param("start") int start , @Param("search") String productName , @Param("searchType") String searchType);
 	// 관리자 채팅방 목록 전체 불러오기 카운트
-	public int countAdminFindAllByProductName(String productName);
+	public int countAdminFindAllByProductName(@Param("search") String productName , @Param("searchType") String searchType);
 	
 	// 관리자가 채팅방 삭제
 	public int deleteChatRoom(int id);

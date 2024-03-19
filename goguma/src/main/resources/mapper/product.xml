@@ -222,7 +222,18 @@
 		on p.p_id = h.p_id
 		left join user u
 		on u.u_id = h.u_id
-		LIMIT #{start} , 20
+		where 
+		<if test="searchType == 'productName'.toString()">
+			p.name
+		</if> 
+		<if test="searchType == 'hostName'.toString()">
+			host.name
+		</if> 
+		<if test="searchType == 'userName'.toString()">
+			u.name
+		</if>
+		like concat('%',#{search},'%')
+		LIMIT #{start} , 10
 	</select>
 
 	<select id="adminCountFindAll" resultType="int">
@@ -234,6 +245,17 @@
 		on p.p_id = h.p_id
 		left join user u
 		on u.u_id = h.u_id
+		where 
+		<if test="searchType == 'productName'.toString()">
+			p.name
+		</if> 
+		<if test="searchType == 'hostName'.toString()">
+			host.name
+		</if> 
+		<if test="searchType == 'userName'.toString()">
+			u.name
+		</if>
+		like concat('%',#{search},'%')
 	</select>
 
 	<select id="countProductAll" resultType="int">

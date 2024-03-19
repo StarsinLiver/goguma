@@ -159,8 +159,8 @@ public class ProductService {
 	public ResponsePageDTO adminFindAll(RequestPageDTO pageDTO) {
 		int start = (pageDTO.getPg() -1) * pageDTO.getSize();
 		
-		List<AdminProductDto> list = productRepository.adminFindAll(start);
-		int count = productRepository.adminCountFindAll();
+		List<AdminProductDto> list = productRepository.adminFindAll(start , pageDTO.getSearch() , pageDTO.getSearchType());
+		int count = productRepository.adminCountFindAll(pageDTO.getSearch() , pageDTO.getSearchType());
 		
 		return ResponsePageDTO.builder()
 				.requestPageDTO(pageDTO)

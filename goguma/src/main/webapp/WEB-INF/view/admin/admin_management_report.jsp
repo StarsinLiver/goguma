@@ -11,13 +11,35 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+
+.search-div form {
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search-div form>* {
+	margin-left: 10px;
+}
+
+.search-div input {
+	font-size: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.search-div select {
+	padding: 11px;
+}
 </style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>신고 내역</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -57,6 +79,16 @@
 	<div class="payment-container" style="margin-right: 20%;">
 		<h4 class="user-page-title">신고 내역</h4>
 		<div class="col-sm-12">
+			<div class="search-div">
+				<form action="/admin/report">
+					<select name="searchType">
+						<option value="id">신고 번호</option>
+						<option value="hostName">신고 대상</option>
+						<option value="userName">신고자</option>
+					</select> <input type="text" name="search" placeholder="상품 이름을 검색해주세요" />
+					<button type="submit" class="btn btn-warning btn-complete">검색</button>
+				</form>
+			</div>
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
@@ -66,7 +98,7 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>글 번호</th>
+								<th>신고 번호</th>
 								<th>신고자</th>
 								<th>신고 대상</th>
 								<th>신고일</th>
@@ -83,17 +115,16 @@
 							<!-- 실제 데이터 행 -->
 							<c:forEach var="report" items="${report}">
 								<tr id="dataRow">
-									<td id="id">1</td>
+									<td id="id">${report.id}</td>
 									<td id="pointName">${report.callName}</td>
 									<td id="hostId">${report.hostName}</td>
 									<td id="purchaseDate">${report.createAt}</td>
 									<td id="reason">${report.reason}</td>
 									<td id="refundYn">${report.deleteYn}</td>
 									<td>
-									<form action="/admin/update-report/${report.id}" method="post">
-										<input type="hidden" name="_method" value="put"/>
-											<button
-												class="btn btn-warning btn-complete"
+										<form action="/admin/update-report/${report.id}" method="post">
+											<input type="hidden" name="_method" value="put" />
+											<button class="btn btn-warning btn-complete"
 												onclick="if(!confirm('취소하시겠습니까??')){return false;}">취소하기</button>
 										</form>
 									</td>

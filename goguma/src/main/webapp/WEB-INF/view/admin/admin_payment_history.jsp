@@ -11,13 +11,35 @@
 	padding: 40px;
 	border-radius: 5px;
 }
+
+.search-div form {
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search-div form>* {
+	margin-left: 10px;
+}
+
+.search-div input {
+	font-size: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.search-div select {
+	padding: 11px;
+}
 </style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>결제 내역</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -57,6 +79,15 @@
 	<div class="payment-container" style="margin-right: 20%;">
 		<h4 class="user-page-title">결제 내역</h4>
 		<div class="col-sm-12">
+			<div class="search-div">
+				<form action="/admin/history">
+					<select name="searchType">
+						<option value="merchantId">결제 번호</option>
+						<option value="productName">상품명</option>
+					</select> <input type="text" name="search" placeholder="검색 .." />
+					<button type="submit" class="btn btn-warning btn-complete">검색</button>
+				</form>
+			</div>
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
@@ -68,7 +99,7 @@
 							<tr>
 								<th>결제 번호</th>
 								<th>구매일자</th>
-								<th>구매상품명</th>
+								<th>상품명</th>
 								<th>구매<br />여부
 								</th>
 								<th>환불 완료</th>
@@ -88,12 +119,11 @@
 									<td id="pointName">${history.mainEmojiName}</td>
 									<td id="refundYn">${history.confirmYn}</td>
 									<td id="refundYn">${history.cancelYn}</td>
-									<td>
-									<c:if test="${history.cancelYn == 'N'}">
-									<button id="refundButton" data-value="${history.merchantId}"
-											class="btn btn-warning btn-complete cancel-request">환불 하기</button>
-									</c:if>
-									</td>
+									<td><c:if test="${history.cancelYn == 'N'}">
+											<button id="refundButton" data-value="${history.merchantId}"
+												class="btn btn-warning btn-complete cancel-request">환불
+												하기</button>
+										</c:if></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -124,13 +154,10 @@
 				<!-- 이메일 변경 내용을 입력하는 폼 -->
 				<div style="display: flex; flex-direction: column;">
 					<div class="register-form">
-						<label for="password">이유를 적어주세요.</label> 
-						<br>
-						<br>
-						<textarea rows="12" cols="60" id="reasonText" ></textarea>
-						<br/>
-						<input type="hidden" id="hidMerchant" readonly="readonly"/>
-						<input type="hidden" id="amount" readonly="readonly"/>
+						<label for="password">이유를 적어주세요.</label> <br> <br>
+						<textarea rows="12" cols="60" id="reasonText"></textarea>
+						<br /> <input type="hidden" id="hidMerchant" readonly="readonly" />
+						<input type="hidden" id="amount" readonly="readonly" />
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -154,8 +181,7 @@
 		$('.cancel-request').click(function() {
 			var merchantId = $(this).data('value');
 
-
-	$('#modalReason').modal('show'); // 모달 창을 보여줌
+			$('#modalReason').modal('show'); // 모달 창을 보여줌
 
 			// AJAX 호출
 			$.ajax({
@@ -164,12 +190,12 @@
 				data : {
 					merchantId : merchantId
 				},
-				dataType: 'json',
+				dataType : 'json',
 				success : function(data) {
 					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
 					// $('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.merchantId); 
-					$('#amount').val(data.price); 
+					$('#hidMerchant').val(data.merchantId);
+					$('#amount').val(data.price);
 				},
 				error : function(xhr, status, error) {
 					// 에러 처리
@@ -179,21 +205,19 @@
 		});
 
 		$('#confirm').click(function() {
-			
-			
 
 			var merchantId = $('#hidMerchant').val();
 			var reason = $('#reasonText').val();
 			var amount = $('#amount').val();
-			
+
 			console.log('머천트 아이디 값: ' + merchantId);
 			//AJAX 호출
 			$.ajax({
 				type : 'POST',
 				url : '/admin/payment-cancel', // 컨트롤러 주소
 				data : {
-					merchantId : merchantId ,
-					reason : reason ,
+					merchantId : merchantId,
+					reason : reason,
 					amount : amount
 				},
 				dataType : "json",
@@ -203,15 +227,15 @@
 				error : function(xhr, status, error) {
 					// 에러 처리
 					console.log(xhr.status)
-					
-					if(xhr.status == 400) {
+
+					if (xhr.status == 400) {
 						alert("이유를 적어주세요.");
 					}
-					if(xhr.status == 404) {
+					if (xhr.status == 404) {
 						alert("거래내역을 찾을 수 없습니다.");
 					}
-					
-					if(xhr.status == 500) {
+
+					if (xhr.status == 500) {
 						alert("서버 에러가 발생하였습니다.");
 					}
 					window.location.reload();

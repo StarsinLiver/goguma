@@ -81,9 +81,9 @@
 		<h4 class="user-page-title">광고 관리</h4>
 		<div class="add-div">
 			<a href="/admin/banner/add" class="btn btn-warning btn-complete"
-				style="float: right;">등록하기</a>
+				style="float: right; margin-top: 20px;">등록하기</a>
 		</div>
-		<div class="search-div" style="clear: both;">
+		<div class="search-div">
 			<form action="/admin/banner">
 				<select name="searchType">
 					<option value="title">광고 제목</option>
@@ -111,7 +111,7 @@
 								<th>클릭 수</th>
 								<th>가격</th>
 								<th>타입(종류)</th>
-								<th>수정</th>ㄴ
+								<th>수정</th>
 							</tr>
 						</thead>
 						<tbody>
