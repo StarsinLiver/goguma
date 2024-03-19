@@ -70,11 +70,11 @@
 	
 	<!-- 등록된 상품 목록 -->
 	<select id="selectProductHostByUid" resultType="com.store.goguma.user.dto.my.ProductHostDTO">
-		SELECT *, `p_id` as `prodId`
-		FROM `product` 
-		WHERE `host_id`=#{uId}
+		SELECT *, p_id as prodId
+		FROM product
+		WHERE host_id=#{uId}
 		ORDER BY p_id DESC
-		LIMIT #{start},6
+		LIMIT #{start},10
 	</select>
 	
 	<!-- 등록된 상품 목록 갯수 -->
@@ -145,6 +145,8 @@
         SELECT COUNT(*) FROM `emoji_history`
         where `u_id`=#{uId} AND `cancel_yn` = "N"
     </select>
+	
+	
 	
 	<!-- 찜 목록 -->
 	<select id="selectWishListByUid" resultType="com.store.goguma.user.dto.my.WishProductDTO">

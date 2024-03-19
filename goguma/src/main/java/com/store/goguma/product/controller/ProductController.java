@@ -218,7 +218,7 @@ public class ProductController {
 	    if(dto.getPrice() == null || dto.getPrice() < 0) {
 	    	throw new BackPageRestfulException(Define.NO_VALID_PRICE, HttpStatus.BAD_REQUEST);
 	    }
-	    if(dto.getFile().getSize() == 0 ) {
+	    if(dto.getFile().get(0).getSize() == 0 ) {
 	    	throw new BackPageRestfulException(Define.NO_VALID_FILE, HttpStatus.BAD_REQUEST);
 	    }
 	    

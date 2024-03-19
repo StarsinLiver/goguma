@@ -211,7 +211,7 @@ h2 {
 			        <label for="fileInput" style="">썸네일</label>
 			        <img class="mt-5" id="profileImage" 
 			            style="border: 1px solid #ccc;height: 200px;" src="/assets/images/goguma_mascot.png">
-			        <input type="file" id="fileInput" name="file" style="display: none;" onchange="readURL(this);"  value="/assets/images/goguma_mascot.png" />
+			        <input type="file" id="fileInput" name="file" multiple="multiple" style="display: none;" onchange="readURL(this);"  value="/assets/images/goguma_mascot.png" />
 			    </div>
 			</div>	
 			<div class="register-form">

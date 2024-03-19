@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.entity.Product;
@@ -36,7 +37,6 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
 	@Autowired
 	private MyUserRepository myUserRepository;
 	
@@ -49,6 +49,7 @@ public class UserService {
 	}
 	
 	// 유저 정보 수정
+	@Transactional
 	public int modifyUser(ModifyUserDto dto) {
 		log.info("ModifyUserDto : "+dto);
 		
@@ -197,6 +198,7 @@ public class UserService {
 				.total(total)
 				.build();
 	}
+	
 	
 	// 프로필 사진 변경
 	public String uploadProfile(ModifyUserDto dto) {

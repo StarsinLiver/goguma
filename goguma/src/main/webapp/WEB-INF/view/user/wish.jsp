@@ -67,14 +67,15 @@
 								<div class="card-price">${wish.formatBalance()}</div>
 							</div>
 						</a>
-						<form method="post" action="/user/wish/delete" style="margin-top: 5px;">
-								<input type="hidden" name="pId" value="${wish.productId}">
-								<p style="text-align: right">
-									<button class="btn btn-danger btn-circle" type="submit">
-										<i class="fa fa-frown-o"></i> 찜해제
-									</button>
-								</p>
-							</form>
+					<form method="post" action="/product/deleteWishList"
+							style="margin-top: 5px;">
+							<input type="hidden" name="pId" value="${wish.productId}">
+							<p style="text-align: right">
+								<button class="btn btn-danger btn-circle" type="submit">
+									<i class="fa fa-frown-o"></i> 찜해제
+								</button>
+							</p>
+						</form>
 					</article>
 				</c:forEach>
 		

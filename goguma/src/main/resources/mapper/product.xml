@@ -199,36 +199,42 @@
 		resultType="com.store.goguma.admin.dto.AdminProductDto">
 		SELECT P.p_id as pId ,
 		p.name as productName ,
-		p.address as productAddress ,
+		p.address as
+		productAddress ,
 		p.price as price ,
 		p.host_id as hostId ,
-		p.file as productFile ,
+		p.file as
+		productFile ,
 		p.create_at as productCreateAt ,
-		p.delete_yn as productDeleteYn ,
+		p.delete_yn as
+		productDeleteYn ,
 		p.confirm_yn as confirmYn ,
 		host.name as hostName,
 		host.email as hostEmail ,
 		host.social as hostSocial ,
-		host.tel as hostTel ,
+		host.tel as
+		hostTel ,
 		host.zip as hostZip ,
 		host.role as hostRole ,
-		h.create_at as historyCreateAt,
+		h.create_at as
+		historyCreateAt,
 		u.u_id as userId ,
 		u.name as userName
 		FROM PRODUCT P
 		inner JOIN USER host
 		ON P.HOST_ID = host.U_ID
-		left join product_history h
+		left join product_history
+		h
 		on p.p_id = h.p_id
 		left join user u
 		on u.u_id = h.u_id
-		where 
+		where
 		<if test="searchType == 'productName'.toString()">
 			p.name
-		</if> 
+		</if>
 		<if test="searchType == 'hostName'.toString()">
 			host.name
-		</if> 
+		</if>
 		<if test="searchType == 'userName'.toString()">
 			u.name
 		</if>
@@ -241,18 +247,19 @@
 		SELECT count(*)
 		FROM PRODUCT P
 		inner JOIN USER host
-		ON P.HOST_ID = host.U_ID
+		ON P.HOST_ID =
+		host.U_ID
 		left join product_history h
 		on p.p_id = h.p_id
 		left join user u
 		on u.u_id = h.u_id
-		where 
+		where
 		<if test="searchType == 'productName'.toString()">
 			p.name
-		</if> 
+		</if>
 		<if test="searchType == 'hostName'.toString()">
 			host.name
-		</if> 
+		</if>
 		<if test="searchType == 'userName'.toString()">
 			u.name
 		</if>
@@ -264,18 +271,29 @@
 		product
 		where delete_yn = 'N'
 	</select>
-	
+
 	<delete id="adminDeleteProduct">
 		update product
-		set update_at = now() , delete_at = now() ,
+		set update_at = now() , delete_at =
+		now() ,
 		delete_yn = 'Y'
 		where p_id = #{pId}
 	</delete>
-	
+
 	<!-- 상품 등록 -->
 	<insert id="insertProduct">
-		INSERT INTO product 
-			(address,`name`,price,host_id, `description`, `file`,`main_category_id`,`sub_category_id`,`create_at`)
-			VALUES (#{address},#{name},#{price},#{hostId},#{description},#{file},1,2,NOW());
+		INSERT INTO product
+		(address,`name`,price,host_id,
+		`description`,
+		`file`,`main_category_id`,`sub_category_id`,`create_at`)
+		VALUES
+		(#{address},#{name},#{price},#{hostId},#{description},#{file},1,2,NOW());
 	</insert>
+
+	<update id="updateConfirmYn">
+		update product
+		set confirm_yn = 'Y'
+		WHERE p_id =
+		#{pId};
+	</update>
 </mapper>

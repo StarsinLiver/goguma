@@ -17,4 +17,14 @@ public class ProductHistoryService {
 	public int countProductHistoryAll() {
 		return historyRepository.countProductHistoryAll();
 	}
+	
+	/**
+	 * save
+	 * @param pId
+	 * @param userId
+	 * @return
+	 */
+	public int save(int pId , int userId) {
+		return historyRepository.save(pId, userId);
+	}
 }

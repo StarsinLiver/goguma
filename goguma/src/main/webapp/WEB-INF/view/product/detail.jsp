@@ -73,6 +73,12 @@
 				style="float: right; margin-top: -20px;">
 
 				<!-- 채팅 버튼 -->
+				<c:if test="${product.confirmYn == 'Y'}">
+					<button type="button" class="btn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							style="margin-right: 10px;"><h5><b>상품 판매가 완료되었습니다</b></h5></button>
+				</c:if>
+				<c:if test="${product.confirmYn == 'N'}">
 				<c:choose>
 					<c:when test="${product.hostId == principal.getUId()}">
 						<a class="btn btn-primary" href="/chat/room"
@@ -200,6 +206,7 @@
 						</form>
 					</c:otherwise>
 				</c:choose>
+				</c:if>
 			</div>
 		</h1>
 
