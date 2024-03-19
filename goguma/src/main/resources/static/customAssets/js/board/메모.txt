@@ -1,0 +1,35 @@
+<div class="cate-main-box">
+    <div class="cate-main-title">
+        <span class="main-title-text">메인 카테고리</span>
+    </div>
+    <div class="cate-sub-box">
+    
+    	<div class="cate-sub-title">
+            <span class="sub-title-text">서브 카테고리</span>
+        </div>
+        
+    </div>
+</div>
+
+const subObject = {
+	mainIndex : i,
+	subInnrHTML : "",
+	subTitle : ""
+};
+const mainList = new Array();
+const subList = new Array();
+
+
+const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+const mainTitleTexts = document.querySelectorAll(".main-title-text");
+
+const subCateTitles = document.querySelectorAll(".cate-sub-title");
+const subCateTexts = document.querySelectorAll(".sub-title-text");
+
+
+
+
+
+
+
+

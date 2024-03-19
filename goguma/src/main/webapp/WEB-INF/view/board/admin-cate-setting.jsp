@@ -19,7 +19,7 @@
         <div class="cate-content-box">
             <div class="left-box">
                 <div class="cate-button-box">
-                    <button type="button" class="add-cate-btn">카테고리 추가</button>
+                    <button type="button" class="add-cate-btn">메인 카테고리 추가</button>
                     <button type="button" class="add-sub-cate-btn">서브 카테고리 추가</button>
                     <button type="button" class="switch-cate-btn">전체 선택 해제</button>
                     <button type="button" class="delete-cate-btn">카테고리 삭제</button>
