@@ -27,7 +27,7 @@ public class ReportService {
 		Report report = Report.builder()
 				.hostId(dto.getHostId())
 				.callId(dto.getCallId())
-				.reson(dto.getReason())
+				.reason(dto.getReason())
 				.build();
 		
 		reportRepository.addReport(report);

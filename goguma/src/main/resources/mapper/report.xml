@@ -5,8 +5,8 @@
 <mapper namespace="com.store.goguma.repository.ReportRepository">
 
 	<insert id="addReport">
-		INSERT INTO report (reson, host_id, call_id) VALUES
-		(#{reson}, #{hostId}, #{callId})
+		INSERT INTO report (reason, host_id, call_id) VALUES
+		(#{reason}, #{hostId}, #{callId})
 	</insert>
 	
 	<select id="existsByHostIdAndCallId"

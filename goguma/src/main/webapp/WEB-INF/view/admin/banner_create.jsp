@@ -49,7 +49,7 @@ input[type="checkbox"] {
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>배너 수정</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -88,8 +88,9 @@ input[type="checkbox"] {
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	<div class="payment-container" style="width: 100%; height: 100%">
-		<h4 class="user-page-title">배너 생성 하기</h4>
-		<form action="">
+		<h4 class="user-page-title">배너 수정</h4>
+		<form action="/admin/banner/update/${banner.id}" method="post"
+			enctype="multipart/form-data">
 			<div class="col-sm-12">
 				<div class="card mb-12">
 					<div class="card-header text-white">
@@ -103,8 +104,8 @@ input[type="checkbox"] {
 									<th>배너 제목 입력</th>
 									<td>
 										<div class="form-floating mb-3">
-											<input type="email" class="form-control"
-												style="font-size: 2rem; padding: 0;">
+											<input type="text" class="form-control" name="title"
+												value="${banner.title}" style="font-size: 2rem; padding: 0;">
 										</div>
 									</td>
 								</tr>
@@ -112,47 +113,55 @@ input[type="checkbox"] {
 									<th>URL 입력</th>
 									<td>
 										<div class="form-floating mb-3">
-											<input type="email" class="form-control"
-												style="font-size: 2rem; padding: 0;">
+											<input type="text" class="form-control" name="url"
+												value="${banner.url}" style="font-size: 2rem; padding: 0;">
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th>광고주/업체명</th>
 									<td><div class="form-floating mb-3">
-											<input type="email" class="form-control"
+											<input type="text" class="form-control" name="client"
+												value="${banner.client}"
+												style="font-size: 2rem; padding: 0;">
+										</div></td>
+								</tr>
+								<tr>
+									<th>가격</th>
+									<td><div class="form-floating mb-3">
+											<input type="number" class="form-control" name="price"
+												value="${banner.price}" step="1000" min="0" value="0"
 												style="font-size: 2rem; padding: 0;">
 										</div></td>
 								</tr>
 								<tr>
 									<th>광고 표시 여부</th>
-									<td>
-										<div class="form-check-inline form-switch">
-											<input class="form-check-input" type="checkbox" role="switch"
-												id="flexSwitchCheckDefault"
-												style="margin-left: -17.5em; margin-top: -2px; width: 3em; height: 2rem;">
-											<label class="form-check-label" for="flexSwitchCheckDefault"
-												style="float: left;">광고 표시 여부</label>
-										</div>
-									</td>
+									
+									<td class="emoji--td"><select name="useYn"
+										value="${banner.useYn}">
+											<option value="Y">사용</option>
+											<option value="N">사용 안함</option>
+									</select></td>
+
 								</tr>
 								<tr>
-									<th>배너 이미지 선택</th>
+									<th>배너 이미지 선택 <br/>(미첨부시 원래 이미지가 들어갑니다.)</th>
 									<td>
 										<div class="mb-3" style="padding: 5px 0px 0px 0px;">
 											<input class="form-control" type="file" id="formFileMultiple"
-												multiple style="font-size: 1.5rem" onchange="readURL(this);">
-											<img src="" id="bannerImage" style="margin:2%; max-height: 200px; width:98%; max-width: 2000px  ">
+												name="file" style="font-size: 1.5rem" accept="image/gif, image/jpeg, image/png"
+												onchange="readURL(this);"> <img src=""
+												id="bannerImage"
+												style="margin: 2%; max-height: 200px; width: 98%; max-width: 2000px">
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th>배너 위치</th>
 									<td><select class="form-select"
-										aria-label="Default select example">
-											<option selected>사이트 메인 배너</option>
-											<option value="1">자유 게시판 Sidebar</option>
-											<option value="2">자유 게시판 메인 화면</option>
+										aria-label="Default select example" name="type">
+											<option selected value="MAIN">사이트 메인 배너</option>
+											<option value="FREE_BOARD">자유게시판</option>
 									</select></td>
 								</tr>
 							</thead>
@@ -181,15 +190,15 @@ input[type="checkbox"] {
 <!-- 푸터 -->
 <script>
 	function readURL(input) {
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('bannerImage').src = e.target.result;
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('bannerImage').src = "";
-	  }
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById('bannerImage').src = e.target.result;
+			};
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			document.getElementById('bannerImage').src = "";
+		}
 	}
 </script>
 <%@ include file="/WEB-INF/view/footer.jsp"%>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.store.goguma.cs.dto.NoticeRequestDto;
 import com.store.goguma.entity.Notice;
 import com.store.goguma.repository.NoticeRepository;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,9 +20,28 @@ public class NoticeService {
 	@Autowired
 	private NoticeRepository repository;
 
+	/**
+	 * 전체 공지 사항 가져오기
+	 * @return
+	 */
 	public List<com.store.goguma.entity.Notice> getNoticeList() {
 		return repository.getNoticeList();
 	}
+	
+	/**
+	 * 어드민 공지사항 가져오기
+	 * @param id
+	 * @return
+	 */
+	public ResponsePageDTO adminFindAll(RequestPageDTO dto) {
+		int start = (dto.getPg() - 1) * dto.getSize();
+		
+		List<Notice> list = repository.adminFindAll(start, dto.getSearch(), dto.getSearchType());
+		int count = repository.countAdminFindAll(dto.getSearch(), dto.getSearchType());
+		
+		return ResponsePageDTO.builder().requestPageDTO(dto).dtoList(list).total(count).build();
+	}
+	
 
 	public Notice getNoticeDetail(int id) {
 		return repository.getNoticeDetail(id);

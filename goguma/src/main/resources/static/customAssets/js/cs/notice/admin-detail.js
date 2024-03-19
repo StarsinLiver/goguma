@@ -45,7 +45,7 @@ deleteBtn.onclick = () => {
 			success : function(data){
 				if(data == true){
 					alert("삭제완료");
-					location.href = "/cs/notice/list/admin";
+					location.href = "/admin/notice";
 				}
 			},
 			error : function(){

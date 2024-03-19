@@ -7,12 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.store.goguma.admin.dto.AdminChatRoomDto;
+import com.store.goguma.admin.dto.AdminResponsePageDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomUpdateDto;
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
 import com.store.goguma.entity.ChatRoom;
+import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.ChatRoomRepository;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,5 +79,25 @@ public class ChatRoomService {
 	
 	public int countChatRoomAll() {
 		return chatRoomRepository.countChatRoomAll();
+	}
+	
+	// 모든 채팅방 가져오기
+	public AdminResponsePageDto<AdminChatRoomDto> adminFindAllByRoomName(RequestPageDTO request) {
+		int start = (request.getPg() -1) * request.getSize();
+		
+		List<AdminChatRoomDto> list = chatRoomRepository.adminFindAllByProductName(start , request.getSearch() ,request.getSearchType());
+		int count = chatRoomRepository.countAdminFindAllByProductName(request.getSearch() , request.getSearchType());
+		
+		return new AdminResponsePageDto<AdminChatRoomDto>(request , list , count);
+	}
+	
+	// 채팅방 삭제하기
+	public int deleteChatRoom(int id) {
+		return chatRoomRepository.deleteChatRoom(id);
+	}
+	
+	// 상품 채팅방 유저 목록
+	public List<User> chatProductUserList(int pId) {
+		return chatRoomRepository.selectByProductId(pId);
 	}
 }

@@ -28,12 +28,21 @@
 		resultType="com.store.goguma.admin.dto.EmojiHistoryDto">
 
 		select h.* , m.name as mainEmojiName from emoji_history h
-		join main_emoji m
+		join
+		main_emoji m
 		on m.id = h.main_emoji_id
-		where h.confirm_yn = 'Y'
+		where h.confirm_yn = 'Y' and
+		<if test="searchType == 'merchantId'.toString()">
+			h.merchant_id
+		</if>
+		<if test="searchType == 'productName'.toString()">
+			m.name
+		</if>
+		like concat('%',#{search},'%')
 		ORDER BY h.create_at
 		DESC
-		LIMIT #{start} , 10;
+		LIMIT #{start} ,
+		10;
 
 	</select>
 
@@ -41,8 +50,20 @@
 	<!-- 상품 환불 리스트 카운트 -->
 	<select id="countEmojiHistoryByCancleY">
 
-		select count(*) from emoji_history where confirm_yn =
-		'Y';
+		select count(*) from emoji_history h
+		join main_emoji m
+		on m.id =
+		h.main_emoji_id
+		where confirm_yn =
+		'Y'
+		and
+		<if test="searchType == 'merchantId'.toString()">
+			h.merchant_id
+		</if>
+		<if test="searchType == 'productName'.toString()">
+			m.name
+		</if>
+		like concat('%',#{search},'%')
 
 	</select>
 
@@ -105,8 +126,20 @@
 		on host.u_id = r.host_id
 		inner join
 		user c
-		on c.u_id = r.call_id
+		on c.u_id
+		= r.call_id
 		where r.delete_yn = 'N'
+		and
+		<if test="searchType == 'id'.toString()">
+			r.id
+		</if>
+		<if test="searchType == 'hostName'.toString()">
+			host.name
+		</if>
+		<if test="searchType == 'userName'.toString()">
+			c.name
+		</if>
+		like concat('%',#{search},'%')
 		ORDER BY r.id DESC
 		LIMIT
 		#{start},10
@@ -121,8 +154,19 @@
 		host.u_id = r.host_id
 		inner join user c
 		on c.u_id = r.call_id
-		where r.delete_yn = 'N'
-		;
+		where
+		r.delete_yn = 'N'
+				and
+		<if test="searchType == 'id'.toString()">
+			r.id
+		</if>
+		<if test="searchType == 'hostName'.toString()">
+			host.name
+		</if>
+		<if test="searchType == 'userName'.toString()">
+			c.name
+		</if>
+		like concat('%',#{search},'%')
 	</select>
 
 	<!-- 신고 사유 출력 -->

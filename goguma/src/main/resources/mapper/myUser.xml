@@ -4,7 +4,7 @@
 
 <mapper namespace="com.store.goguma.repository.MyUserRepository">
 
-	<!-- 유저 결제 내역 -->
+	<!-- 유저 이모티콘 결제 내역 -->
 	<select id="findEmojiHistoryByUser" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
 		SELECT me.id, me.`name`, me.`file` , eh.* 
 			FROM `emoji_history` AS eh
@@ -15,12 +15,13 @@
 		LIMIT #{start},10
 	</select>
 	
-	<!-- 유저 결제 내역 갯수 -->
+	<!-- 유저 이모티콘 결제 내역 갯수 -->
 	<select id="countEmojiHistoryByUser">
         SELECT COUNT(*) FROM `emoji_history`
         where `u_id`=#{uId}
     </select>
 	
+	<!-- 유저 이모티콘 상세 조회 -->
 	<select id="findEmojiHistoryBymerchantId" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
 		SELECT me.id, me.`name`, me.`file` , eh.* 
 			FROM `emoji_history` AS eh
@@ -29,18 +30,21 @@
 		where `merchant_id`=#{merchantId}
 	</select>
 	
+	<!-- 유저 이모티콘 환불 요청 -->
 	<update id="updateEmojiHistoryCancel">
 		update `emoji_history` set 
 			`cancel_amount`=`price`,
-			`cancel_yn`='Y', 
+			`cancel_reason`=#{reason},
 			`update_at`=NOW()
-		where `merchant_id`=#{merchantId}
-			and create_at &lt;= DATE_ADD(DATE(NOW()), INTERVAL 3 DAY)
+		where `merchant_id`=#{merchantId} 
+			and `u_id`=#{uId}
+			and create_at &lt;= DATE_ADD(DATE(NOW()), INTERVAL 3 DAY) <!-- 환불기준 3일까지 -->
 	</update>
 	
 	<!-- 중고거래 구매 내역 -->
 	<select id="myReadByproducthistory" resultType="com.store.goguma.user.dto.my.ProductHistoryDTO">
 		SELECT ph.*, 
+			p.p_id as `prodId`,
 			p.address AS productAddress, 
 			p.host_id AS productHostId,
 			p.main_category_id AS productMainCategoryId, 
@@ -64,6 +68,21 @@
         	where `u_id`=#{uId}
 	</select>
 	
+	<!-- 등록된 상품 목록 -->
+	<select id="selectProductHostByUid" resultType="com.store.goguma.user.dto.my.ProductHostDTO">
+		SELECT *, `p_id` as `prodId`
+		FROM `product` 
+		WHERE `host_id`=#{uId}
+		ORDER BY p_id DESC
+		LIMIT #{start},6
+	</select>
+	
+	<!-- 등록된 상품 목록 갯수 -->
+	<select id="countProductHostByUid">
+		SELECT COUNT(*) FROM `product` 
+		WHERE `host_id`=#{uId}
+	</select>
+	
 	<!-- 문의하기 내역 -->
 	<select id="findQnaByUid" resultType="com.store.goguma.user.dto.my.QnaUserDTO">
 		SELECT q.*,
@@ -72,7 +91,7 @@
 			FROM `qna` AS q
 			JOIN `user` AS cu ON q.u_id = cu.u_id <!-- 회원 정보 -->
 			LEFT JOIN `user` AS au ON q.admin_id = au.u_id <!-- 관리자 정보 -->
-		WHERE q.u_id =#{uId} and q.`delete_yn` = "N"
+		WHERE q.u_id =#{uId} and q.`delete_yn` = 'N'
 		<include refid="searchBox"/>
 		ORDER BY q.id DESC
 		LIMIT #{start},10
@@ -83,7 +102,7 @@
 	<!-- 문의하기 내역 갯수 -->
 	<select id="countQnaByUid">
 		SELECT COUNT(*) FROM `qna`
-        	where `u_id`=#{uId}
+        	where `u_id`=#{uId} and `delete_yn` = 'N'
         	<include refid="searchBox"/>
 	</select>
 	
@@ -112,19 +131,44 @@
 	
 	<!-- 유저 이모티콘 목록 -->
 	<select id="selectAllImoji" resultType="com.store.goguma.user.dto.my.UserEmojiDTO">
-		SELECT me.id, me.`name`, me.`file` , eh.* 
+		SELECT me.`name`, me.`file` , eh.* 
 			FROM `emoji_history` AS eh
 			JOIN `main_emoji` AS me 
 			ON eh.main_emoji_id = me.id
 		where `u_id`=#{uId} AND `cancel_yn` = "N"
 		ORDER BY me.id DESC
-		LIMIT #{start},10
+		LIMIT #{start},8
 	</select>
 	
-	<!-- 유저 결제 내역 갯수 -->
+	<!-- 유저 이모티콘 갯수 -->
 	<select id="countImoji">
         SELECT COUNT(*) FROM `emoji_history`
         where `u_id`=#{uId} AND `cancel_yn` = "N"
     </select>
 	
+	
+	
+	<!-- 찜 목록 -->
+	<select id="selectWishListByUid" resultType="com.store.goguma.user.dto.my.WishProductDTO">
+		SELECT 
+			w.id as `id`,
+			w.p_id as `productId`,
+			w.u_id as `uId`,
+			w.create_at as `createAt`,
+			p.address,  
+			p.`name`, 
+			p.price,  
+			p.`file` as `productFile`
+		FROM `wish_list` AS w
+			JOIN `product` AS p ON w.p_id = p.p_id
+		WHERE w.u_id=#{uId}
+		ORDER BY w.id DESC
+		LIMIT #{start},6
+	</select>
+	
+	<!-- 찜 목록 갯수 -->
+	<select id="countWishListByUid">
+		SELECT COUNT(*) FROM `wish_list`
+		WHERE `u_id`=#{uId}
+	</select>
 </mapper>
