@@ -262,7 +262,7 @@ public class AdminController {
 	public String Create_banner() {
 		
 		
-		return "admin/create_banner";
+		return "admin/banner_create";
 	}
 
 	
@@ -272,10 +272,18 @@ public class AdminController {
 	public String Modify_banner() {
 		
 		
-		return "admin/modify_banner";
+		return "admin/banner_modify";
+	}
+	
+	
+	// banner 리스트 페이지
+	@GetMapping("/list/banner")
+	public String List_banner() {
+		
+		
+		return "admin/banner_list";
 	}
 
-	
 	
 	
 	// free_board 생성 페이지
@@ -283,7 +291,7 @@ public class AdminController {
 	public String Create_freeBoard() {
 		
 		
-		return "admin/create_freeBoard";
+		return "admin/freeBoard_create";
 	}
 
 	
@@ -294,7 +302,7 @@ public class AdminController {
 	public String Modify_freeBoard() {
 		
 		
-		return "admin/modify_freeBoard";
+		return "admin/freeBoard_modify";
 	}
 	
 
