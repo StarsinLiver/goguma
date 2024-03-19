@@ -36,15 +36,6 @@ public class UserEmojiDTO {
 	private String file;
 	
 	
-	// 환불 여부
-	public String cancelResult() {
-		
-		if(cancelYn.equals("Y")) {
-			return "환불";
-		}
-		
-		return "대기";
-	}
 	
 	// 포메터 기능
 	public String formatBalance() {

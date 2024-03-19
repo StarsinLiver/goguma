@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.store.goguma.entity.Product;
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.EmojiHistoryRepository;
@@ -21,8 +22,10 @@ import com.store.goguma.user.dto.UserDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
+import com.store.goguma.user.dto.my.ProductHostDTO;
 import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
+import com.store.goguma.user.dto.my.WishProductDTO;
 import com.store.goguma.utils.Define;
 
 import lombok.extern.slf4j.Slf4j;
@@ -92,11 +95,18 @@ public class UserService {
 	}
 	
 	
-	
 	// 이모티콘 환불
-	public int cancelEmoji(String id) {
-		int result = myUserRepository.updateEmojiHistoryCancel(id);
-		return result;
+	public UserEmojiDTO cancelEmoji(String merchantid, int uId, String reason) {
+		// 환불 요청
+		int result = myUserRepository.updateEmojiHistoryCancel(merchantid, uId, reason);
+		// 기간 제한
+		if(result > 1) {
+			throw new BackPageRestfulException("기한이 지났습니다.", HttpStatus.BAD_REQUEST);
+		}
+		// 이모티콘 결제 정보 조회
+		UserEmojiDTO dto = myUserRepository.findEmojiHistoryBymerchantId(merchantid);
+		
+		return dto;
 	}
 	
 	// 구매 거래 내역
@@ -113,9 +123,25 @@ public class UserService {
 				.build();
 	}
 	
+	// 유저 상품 목록
+	public ResponsePageDTO productHostList(int uId, RequestPageDTO requestPageDTO){
+		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		log.info("start : "+start);
+		
+		List<ProductHostDTO> dto = myUserRepository.selectProductHostByUid(uId, start);
+		int total = myUserRepository.countProductHostByUid(uId);
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(requestPageDTO)
+				.dtoList(dto)
+				.total(total)
+				.build();
+	}
+	
 	// 내 문의하기 내역
 	public ResponsePageDTO qnaList(RequestPageDTO requestPageDTO,int uId){
 		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		
 		String search = requestPageDTO.getSearch();
 		String searchType = requestPageDTO.getSearchType();
 		
@@ -150,6 +176,20 @@ public class UserService {
 		
 		List<UserEmojiDTO> list = myUserRepository.selectAllImoji(uId, start);
 		int total = myUserRepository.countImoji(uId);
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(requestPageDTO)
+				.dtoList(list)
+				.total(total)
+				.build();
+	}
+	
+	// 찜 목록
+	public ResponsePageDTO wishList(RequestPageDTO requestPageDTO, int uId) {
+		int start = (requestPageDTO.getPg() - 1) * requestPageDTO.getSize();
+		
+		List<WishProductDTO> list = myUserRepository.selectWishListByUid(uId, start);
+		int total = myUserRepository.countWishListByUid(uId);
 		
 		return ResponsePageDTO.builder()
 				.requestPageDTO(requestPageDTO)

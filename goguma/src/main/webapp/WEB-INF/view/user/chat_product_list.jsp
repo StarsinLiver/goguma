@@ -82,12 +82,12 @@
 							<!-- 실제 데이터 행 -->
 							<c:forEach var="product" items="${pHistories}">
 							<tr id="dataRow">
-								<td id="id">${product.id}</td>
-								<td id="purchaseDate">${product.createAt}</td>
+								<td id="id"></td>
+								<td id="purchaseDate"></td>
 								<td id="pointName"><a href="/product/productDetail?pId=${product.prodId}">
-									${product.prodName}</a></td>
-								<td id="pointName">${product.formatBalance()}</td>
-								<td id="refundYn">${product.userName}</td>
+									</a></td>
+								<td id="pointName"></td>
+								<td id="refundYn"></td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -96,17 +96,10 @@
 					
 					
 					<div class="pagination">
-						<!-- 페이지 처리 -->
-						<c:if test="${start > 1}">
-						<a href="/user/product?pg=${start - 1}">&laquo;</a>
-					  	</c:if>
+						<a href="/user/product?pg=">&laquo;</a>
 					  	<!-- 페이지 번호 -->
-					  	<c:forEach var="i" begin="${start}" end="${end}">
-							<a href="/user/product?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
-						</c:forEach>
-					  	<c:if test="${end < last}">
-						<a href="/user/product?pg=${end + 1}">&raquo;</a>
-						</c:if>
+						<a href="/user/product?pg=" class=""></a>
+						<a href="/user/product?pg=">&raquo;</a>
 					</div>
 				</div>
 			</div>
