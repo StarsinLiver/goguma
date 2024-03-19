@@ -22,6 +22,27 @@ public class FreeboardController {
 		
 		return "/free_board/free-list";
 	}
+	//aside 테스트용
+	@GetMapping("/aside")
+	public String aside() {
+		
+		
+		return "free_board/free_board_aside";
+		
+	}
+	
+	//freeBoard_detail
+	@GetMapping("/detail")
+	public String Detail() {
+		
+		
+		return "free_board/free_board_detail";
+		
+	}
+	
+
+
+	
 	
 	@GetMapping("/card")
 	public String boardCard() {

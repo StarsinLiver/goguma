@@ -238,13 +238,6 @@ public class AdminController {
 		return "";
 	}
 	
-	// 팀장님 행복을 위한 플렉스 테스트
-	@GetMapping("/happy")
-	public String happysanha() {
-		
-		
-		return "user/happy_sanha";
-	}
 	
 	@PutMapping("/update-report/{id}")
 	public String updateReport(@PathVariable(value = "id") Integer id) {
@@ -262,5 +255,57 @@ public class AdminController {
 		
 		return "redirect:/admin/report";
 	}
+	
+
+	// banner 생성 페이지
+	@GetMapping("/create/banner")
+	public String Create_banner() {
+		
+		
+		return "admin/banner_create";
+	}
+
+	
+
+	// banner 관리 페이지
+	@GetMapping("/modify/banner")
+	public String Modify_banner() {
+		
+		
+		return "admin/banner_modify";
+	}
+	
+	
+	// banner 리스트 페이지
+	@GetMapping("/list/banner")
+	public String List_banner() {
+		
+		
+		return "admin/banner_list";
+	}
+
+	
+	
+	// free_board 생성 페이지
+	@GetMapping("/create/freeBoard")
+	public String Create_freeBoard() {
+		
+		
+		return "admin/freeBoard_create";
+	}
+
+	
+	
+	
+	// free_board 관리 페이지
+	@GetMapping("/modify/freeBoard")
+	public String Modify_freeBoard() {
+		
+		
+		return "admin/freeBoard_modify";
+	}
+	
+
+	
 
 }
