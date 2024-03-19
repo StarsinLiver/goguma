@@ -49,7 +49,7 @@ btn.onclick = () => {
 		success : function(data){
 			if(data == true){
 				alert("수정되었습니다.");
-				location.href = "/cs/notice/list/admin";
+				location.href = "/admin/notice";
 			}
 		},
 		error : function(){

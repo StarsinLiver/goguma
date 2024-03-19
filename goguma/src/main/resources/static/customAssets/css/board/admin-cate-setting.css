@@ -1,0 +1,154 @@
+.main-div{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.cate-content-box{
+    display: flex;
+
+}
+
+.left-box{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.cate-button-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.cate-button-box button{
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.up-down-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.up-down-box button{
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.cate-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.cate-main-box{
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.cate-main-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid black;
+    width: 200px;
+    cursor: pointer;
+}
+
+.cate-sub-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid black;
+    width: 200px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.cate-sub-box{
+    padding: 5px 0 5px 20px;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.save-button-box{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-button-box button{
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.right-box{
+    width: 500px;
+    margin-left: 50px;
+}
+
+.table{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+}
+
+.tr{
+    border-bottom: 1px solid black;
+}
+
+.th{
+    width: 200px;
+    padding: 20px;
+}
+
+.td{
+    padding: 20px 0 20px 20px;
+    width: 400px;
+}
+
+.board-style-box{
+    display: flex;
+}
+
+.row-count{
+    width: 60px;
+}
+
+.radio-box{
+	margin-right: 20px;
+}
+
+.hide-tr{
+	display: none;
+}
+
+
+

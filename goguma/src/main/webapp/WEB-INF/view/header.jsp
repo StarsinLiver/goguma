@@ -62,6 +62,7 @@
 <link rel="stylesheet" href="/customAssets/css/cs/faq/list.css">
 <link rel="stylesheet" href="/customAssets/css/about/about.css">
 <link rel="stylesheet" href="/customAssets/css/board/list.css">
+<link rel="stylesheet" href="/customAssets/css/board/admin-cate-setting.css">
 
 <!-- Custom CSS -->
 <script type="text/javascript"
@@ -127,10 +128,19 @@
 
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
+						<div class="dropdown-menu fade-down m-0">
+							<a href="/board/list" class="dropdown-item">리스트</a>
+							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
+							<a href="/" class="dropdown-item">ㅇㅇ</a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">채팅</a>
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/chat/room" class="dropdown-item">채팅하기</a>
-
 						</div>
 					</div>
 					<c:if test="${principal.role == 'USER'}">

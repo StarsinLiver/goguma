@@ -1,6 +1,9 @@
 package com.store.goguma.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.User;
 
@@ -17,4 +20,12 @@ public interface UserRepository {
 	public User findAllByuId(Integer uId);
 	
 	public int countUserAll();
+	
+	
+	// 관리자 유저 정보 전체 조회
+	public List<User> findAll(@Param("start") int start , @Param("name") String name);
+	// 관리자 유저 정보 전체 조회 카운트
+	public int countFindAll(String name);
+	
+	public int adminUpdateUserRole(@Param("uId") Integer uId, @Param("role") String role);
 }

@@ -4,28 +4,50 @@
 
 <mapper namespace="com.store.goguma.repository.UserRepository">
 
-	<select id="selectByEmail" resultType="com.store.goguma.entity.User">
-		select * from user where CONCAT(social, email) = #{userEmail}
+	<select id="selectByEmail"
+		resultType="com.store.goguma.entity.User">
+		select * from user where CONCAT(social, email) =
+		#{userEmail}
 	</select>
 
 	<update id="updateUser">
-		update `user` set 
+		update `user` set
 		<if test="#{zip} == null || #{tel} == null">
-		`zip`=#{zip}, 
-		`address`=#{address}, 
+			`zip`=#{zip},
+			`address`=#{address},
 		</if>
 		`tel`=#{tel},
 		`file`=#{file},
 		`update_at`=NOW()
-			where `social`=#{social} and `email`=#{email}
+		where `social`=#{social}
+		and `email`=#{email}
 	</update>
-	
-	
-	<select id="findAllByuId" resultType="com.store.goguma.entity.User">
+
+
+	<select id="findAllByuId"
+		resultType="com.store.goguma.entity.User">
 		select * from user where u_id = #{uId} AND delete_yn = 'N'
 	</select>
 
 	<select id="countUserAll" resultType="int">
-		select count(*) from user 
+		select count(*) from user
 	</select>
+
+	<select id="findAll" resultType="com.store.goguma.entity.User">
+		select * from user
+		where name
+		like CONCAT('%',#{name},'%')
+		limit #{start} , 20
+	</select>
+
+	<select id="countFindAll" resultType="int">
+		select count(*) from user
+		where name like CONCAT('%',#{name},'%')
+	</select>
+
+	<update id="adminUpdateUserRole">
+		update user
+		set role = #{role} , update_at = now()
+		where u_id = #{uId};
+	</update>
 </mapper>

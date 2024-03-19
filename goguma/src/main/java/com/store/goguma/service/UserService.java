@@ -280,4 +280,23 @@ public class UserService {
 	public int countUserAll() {
 		return userRepository.countUserAll();
 	}
+	
+	// 관리자 모든 유저 정보 조회
+	public ResponsePageDTO findAll(RequestPageDTO pageDTO) {
+		int start = (pageDTO.getPg() -1) * pageDTO.getSize();
+		List<User> list = userRepository.findAll(start, pageDTO.getSearch());
+		int count = userRepository.countFindAll(pageDTO.getSearch());
+		
+		
+		return ResponsePageDTO.builder()
+				.requestPageDTO(pageDTO)
+				.dtoList(list)
+				.total(count)
+				.build();
+	}
+	
+	// 관리자가 권한 수정
+	public int adminUpdateUserRole(int uId , String role) {
+		return userRepository.adminUpdateUserRole(uId, role);
+	}
 }
