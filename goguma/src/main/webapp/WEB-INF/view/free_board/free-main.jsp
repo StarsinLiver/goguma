@@ -117,7 +117,7 @@ h2 {
 				베스트 사진게시물<a href="/freeBoard/card" style="float: right;">더보기</a>
 			</h2>
 			<div class="row">
-				<c:forEach var="board" items="${boardList}" varStatus="loop">
+				<c:forEach var="board" items="${rDList}" varStatus="loop">
 					<c:if test="${loop.index < 4}">
 						<div class="col-md-6 mb-3">
 							<div class="card2" onmouseover="highlightCard(this)"
@@ -127,7 +127,7 @@ h2 {
 									style="height: 105px">
 									<div class="card-details">
 										<p>${board.title}</p>
-										<p>작성자닉네임</p>
+										<p>${board.goodCount}</p>
 									</div>
 								</a>
 							</div>

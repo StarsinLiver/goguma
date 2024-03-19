@@ -47,10 +47,14 @@
 	</select>
 
 	<!-- 게시글 조회수 증가 -->
-	<update id="plusFreeViews">
+	<update id="plusFreeView">
 		UPDATE free_board_view
 		SET view = view + 1
 		WHERE
 		free_board_id = #{freeBoardId}
 	</update>
+	
+	<insert id="addFreeView">
+		
+	</insert>
 </mapper>
