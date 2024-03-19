@@ -64,7 +64,8 @@ h2 {
 			</h2>
 			<!-- 리스트 테이블 -->
 			<input type="text" value="${type.listType}" id="listType"/>
-			<table class="table table-bordered" style="background: white;" data-value="${type.listType}">
+			<button style="display: none;" class="typeValue" id="typeValue" data-value="${type.listType}" ></button>
+			<table class="table table-bordered" style="background: white;" >
 				<thead>
 					<tr>
 
@@ -303,18 +304,19 @@ h2 {
 <script>
 $(document).ready(function(){
 	
-	const urlParam = new URL(location.href).searchParams;
-	const listType = document.getElementById("listType");
+	// parameta로 넘어오는 값 확인
+    var urlParam = new URL(location.href).searchParams;
+    const listType = document.getElementById("listType");
 	
-	const Type = listType.dataset.value;
+	// list Type
+	const typeValue2 = listType.value;
+	
+    console.log('type: ' + typeValue2);  // list Type 확인 
 	
 	
-	alert('urlParam'+ urlParam);  // cate1 cate2 값 	
-	alert('Type'+ Type);  // 
-		
-		
-		
-		
+    
+    
+    
 		
 	});
 

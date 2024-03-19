@@ -13,6 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class FreeBoardCateListDTO {
 	
+	//
 	
 	// board_main_cate
 	private BoardTypeDTO boardDto;
@@ -23,7 +24,7 @@ public class FreeBoardCateListDTO {
 	private Integer articleId; // 게시글 번호 free_board pk값 id 
 	private String title;
 	private String content;
-	private Integer uId;
+	private Integer uid;
 	private String file;
 	private String createAt;
 	private String updateAt;

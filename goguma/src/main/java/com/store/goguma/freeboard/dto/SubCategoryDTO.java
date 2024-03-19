@@ -12,7 +12,8 @@ import lombok.ToString;
 @ToString
 @Builder
 public class SubCategoryDTO {
-
+	
+	//필요 없을듯
 	// board_sub_cate
 	private Integer id;
 	private String name;

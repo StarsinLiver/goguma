@@ -13,6 +13,8 @@ import lombok.ToString;
 @Builder
 public class MainCategoryDTO {
 
+	//필요 없을듯
+	
 	private Integer id;
 	private String name;
 }

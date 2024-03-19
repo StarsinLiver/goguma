@@ -18,6 +18,22 @@ public class FreeBoardPageDTO {
 
     @Builder.Default
     private int size = 10;
-	
-	
+    
+    
+    // 검색 내용
+    private String search;
+    
+    // 검색 타입
+    private String searchType;
+    
+    // main cate1
+    
+    private int cate1;
+    
+    // cate2 id
+    private int cate2;
+ 
+    // List Type
+    private String listType;
+    
 }

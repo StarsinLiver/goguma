@@ -42,7 +42,7 @@ public class FreeboardController {
 	}
 	
 	// list타입 게시글 목록
-	@GetMapping("/list")
+	@GetMapping(value = "/list", params={"cate1","id"})
 	public String boardList(@RequestParam("cate1")int cate1, @RequestParam("id")int id, Model model) {
 		
 		// 값들어옴 확인했음 테스트 주소 http://localhost/freeBoard/list?cate1=1&cate2=1&name=잡담
