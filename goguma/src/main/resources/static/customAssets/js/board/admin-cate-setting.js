@@ -5,16 +5,80 @@ const categoryInnerBox = document.querySelector(".cate-box");
 const cateInput = document.querySelector(".cate-input");
 const switchCateBtn = document.querySelector(".switch-cate-btn");
 const hideTr = document.querySelector(".hide-tr");
-
+const upBtn = document.querySelector(".up-btn");
+const downBtn = document.querySelector(".down-btn");
 
 
 const mainList = new Array();
 const subList = new Array();
 
+function upDownBtnClick(){
+	upBtn.onclick = () => {
+		if(mainList.length != 0 && subList.length == 0){
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			let selectIndex = 999;
+			for(let i = 0; i < mainList.length; i++){
+				if(mainTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999 && selectIndex != 0){
+				[mainList[selectIndex - 1], mainList[selectIndex]] = [mainList[selectIndex], mainList[selectIndex - 1]];
+				console.log("메인2", mainList);
+				load();
+			}
+		}else if(mainList.length != 0 && subList.length != 0){
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
+			let selectIndex = 999;
+			for(let i = 0; i < subList.length; i++){
+				if(subTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999 && selectIndex != 0){
+				[subList[selectIndex - 1], subList[selectIndex]] = [subList[selectIndex], subList[selectIndex - 1]];
+				console.log("서브2", subList);
+				load();
+			}
+		}
+	}
+//----------------------------------------------------------------------------------------------------------------------------------------------
+	downBtn.onclick = () => {
+		if(mainList.length != 0 && subList.length == 0){
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			let selectIndex = 999;
+			for(let i = 0; i < mainList.length; i++){
+				if(mainTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999){
+				[mainList[selectIndex], mainList[selectIndex + 1]] = [mainList[selectIndex + 1], mainList[selectIndex]];
+				console.log("메인2", mainList);
+				load();
+			}
+		}else if(mainList.length != 0 && subList.length != 0){
+			const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
+			let selectIndex = 999;
+			for(let i = 0; i < subList.length; i++){
+				if(subTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999){
+				[subList[selectIndex], subList[selectIndex + 1]] = [subList[selectIndex + 1], subList[selectIndex]];
+				console.log("서브2", subList);
+				load();
+			}
+		}
+	}
+//----------------------------------------------------------------------------------------------------------------------------------------------
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------
 load();
 function load(){
-	console.log("메인", mainList);
-	console.log("서브", subList);
 	let mainInnr = "";
 	categoryInnerBox.innerHTML = "";
 	if(mainList != 0){
@@ -24,10 +88,10 @@ function load(){
 	}
 	categoryInnerBox.innerHTML = mainInnr;
 	const mains = document.querySelectorAll(".cate-main-box");
+	const mainTitles = document.querySelectorAll(".main-title-text");
 	for(let i = 0; i < mains.length; i++){
 		mains[i].id = i;
-		//mainList[i] = mains[i];
-		console.log(mains[i]);
+		mainTitles[i].textContent = mainList[i].mainTitle;
 	}
 	if(subList != 0){
 		const mains = document.querySelectorAll(".cate-main-box");
@@ -41,6 +105,12 @@ function load(){
 				}
 			}
 			subInnrBoxs[i].innerHTML = subInnr;
+			const subs = document.querySelectorAll(".cate-sub-title");
+			const subTitles = document.querySelectorAll(".sub-title-text");
+			for(let i = 0; i < subs.length; i++){
+				subs[i].id = i;
+				subTitles[i].textContent = subList[i].subTitle;
+			}
 		}
 	}
 	addSubCateBtnClick();
@@ -54,6 +124,9 @@ function load(){
 	const mainTitleTexts = document.querySelectorAll(".main-title-text");
 	const subTitleBoxs = document.querySelectorAll(".cate-sub-box");
 	changeMain(mainTitleBoxs, mainTitleTexts, subTitleBoxs);
+	
+	upDownBtnClick();
+	
 }
 
 function addSubCateBtnClick(){
@@ -119,7 +192,7 @@ function addMainCateBtnClick(){
 				            </div>`;
 			categoryInnerBox.innerHTML = innr;
 			const mainTitle = document.querySelectorAll(".main-title-text");
-			mainObject.mainIndex = mainTitle.length;
+			mainObject.mainIndex = mainTitle.length - 1;
 			mainObject.mainInnrHTML = pushHTML;
 			mainObject.mainTitle = mainTitle[mainTitle.length - 1].textContent;
 			mainList.push(mainObject);
@@ -230,7 +303,6 @@ switchCateBtn.onclick = () => {
 }
 
 deleteCateBtn.onclick = () => {
-	console.log("삭제버튼 클릭 sub:", subList.length);
 	if(categoryInnerBox.innerHTML == ""){
 		alert("삭제할 카테고리가 없습니다.");
 	}else{
@@ -270,11 +342,6 @@ deleteCateBtn.onclick = () => {
 	}// else
 }
 
-
-
-
-
-
 function borderBlack(boxs){
 	for(let v = 0; v < boxs.length; v++){
 		boxs[v].style.border = "1px solid black";
@@ -286,8 +353,8 @@ function titleChangeEvent(box, text, objList, v){
 		if(box.style.border == "1px solid red"){
 			text.textContent = cateInput.value;
 			objList[v].mainTitle = text.textContent;
-			console.log("변경:",objList);
 		}
+		console.log(objList);
 	}
 }
 
@@ -296,7 +363,6 @@ function subTitleChangeEvent(box, text, objList, v){
 		if(box.style.border == "1px solid red"){
 			text.textContent = cateInput.value;
 			objList[v].subTitle = text.textContent;
-			console.log("변경:",objList);
 		}
 	}
 }
