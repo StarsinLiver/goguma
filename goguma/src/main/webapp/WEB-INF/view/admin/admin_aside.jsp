@@ -160,13 +160,16 @@ nav.open ~ .overlay {
 			<li class="list"><a href="/admin/emoji" class="nav-link"> <i
 					class="bx bx-heart icon"></i> <span class="link">이모티콘 관리</span>
 			</a></li>
-			<li class="list"><a href="/admin/notice"
-				class="nav-link"> <i class="bx bx-bell icon"></i> <span
-					class="link">공지사항 관리</span>
+			<li class="list"><a href="/admin/notice" class="nav-link"> <i
+					class="bx bx-bell icon"></i> <span class="link">공지사항 관리</span>
 			</a></li>
 			<li class="list"><a href="/admin/qna" class="nav-link"> <i
 					class="bx bx-folder-open icon"></i> <span class="link">1 : 1
 						문의 관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/faq" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">
+						자주 묻는 질문 관리</span>
 			</a></li>
 
 			<li class="list"><a href="/admin/report" class="nav-link"> <i
@@ -186,12 +189,13 @@ nav.open ~ .overlay {
 					class="bx bx-folder-open icon"></i> <span class="link">채팅 로그
 						관리</span>
 			</a></li>
-			<li class="list"><a href="/admin/chat" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">자유
-						게시판 관리</span>
-			</a></li>
+
 			<li class="list"><a href="/admin/banner" class="nav-link"> <i
 					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
+			</a></li>
+						<li class="list"><a href="/admin/chat" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">자유
+						게시판 관리</span>
 			</a></li>
 		</ul>
 

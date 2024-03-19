@@ -3,6 +3,7 @@ package com.store.goguma.admin.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import com.store.goguma.admin.dto.AdminResponsePageDto;
 import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.Banner;
 import com.store.goguma.entity.EmojiHistory;
+import com.store.goguma.entity.Faq;
 import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
@@ -34,6 +36,7 @@ import com.store.goguma.service.ChatMessageService;
 import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiUploadService;
+import com.store.goguma.service.FaqService;
 import com.store.goguma.service.NoticeService;
 import com.store.goguma.service.ProductService;
 import com.store.goguma.service.QnaService;
@@ -67,6 +70,7 @@ public class AdminController {
 	private final BannerService bannerService;
 	private final EmojiUploadService fileService;
 	private final NoticeService noticeService;
+	private final FaqService faqService;
 
 	// 관리자 마이 페이지
 	// localhost://admin/modiUser
@@ -137,8 +141,8 @@ public class AdminController {
 		if (historyReqDTO.getSearch() == null) {
 			historyReqDTO.setSearch("");
 		}
-		
-		log.info("검색 : {}" , historyReqDTO);
+
+		log.info("검색 : {}", historyReqDTO);
 
 		ResponsePageDTO list = adminService.selectAllPayHistoryByY(historyReqDTO);
 
@@ -216,7 +220,7 @@ public class AdminController {
 	 * @return
 	 */
 	@GetMapping("/report")
-	public String managementReport(RequestPageDTO page , Model model) {
+	public String managementReport(RequestPageDTO page, Model model) {
 
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
@@ -254,8 +258,8 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-		
-		log.info("타입 : {}" , requestPageDTO.getSearchType());
+
+		log.info("타입 : {}", requestPageDTO.getSearchType());
 		if (requestPageDTO.getSearchType() == null) {
 			requestPageDTO.setSearchType("productName");
 		}
@@ -380,9 +384,9 @@ public class AdminController {
 		// 검색 기본 default 값
 		String search = request.getSearch() == null ? "" : request.getSearch();
 		request.setSearch(search);
-		String searchType = request.getSearchType() == null ? "productName"  : request.getSearchType();
+		String searchType = request.getSearchType() == null ? "productName" : request.getSearchType();
 		request.setSearchType(searchType);
-		log.info("검색 검색 : {}" , request.toString());
+		log.info("검색 검색 : {}", request.toString());
 		// 모든 채팅방 가져오기
 		AdminResponsePageDto<AdminChatRoomDto> res = chatRoomService.adminFindAllByRoomName(request);
 
@@ -434,7 +438,7 @@ public class AdminController {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
 
-		String search = req.getSearch() == null  ? "" : req.getSearch();
+		String search = req.getSearch() == null ? "" : req.getSearch();
 		String option = req.getSearchType() == null || req.getSearchType().equals("") ? "" : req.getSearchType();
 		req.setSearch(search);
 		req.setSearchType(option);
@@ -664,12 +668,10 @@ public class AdminController {
 
 		return "redirect:/admin/banner";
 	}
-	
-	
-	
-	
+
 	/**
 	 * 공지 관리
+	 * 
 	 * @return
 	 */
 	@GetMapping("/notice")
@@ -679,19 +681,18 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		if (req.getSearchType() == null) {
 			req.setSearchType("title");
 		}
 		if (req.getSearch() == null) {
 			req.setSearch("");
 		}
-		
-		log.info("로그 : {}"  , req);
-		
+
+		log.info("로그 : {}", req);
+
 		ResponsePageDTO res = noticeService.adminFindAll(req);
-		
-		
+
 		model.addAttribute("noticeList", res.getDtoList());
 		model.addAttribute("pg", res.getPg());
 		model.addAttribute("start", res.getStart());
@@ -699,4 +700,94 @@ public class AdminController {
 		model.addAttribute("last", res.getLast());
 		return "admin/admin_management_notice";
 	}
+
+	/**
+	 * 자주 묻는 질문 관리
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/faq")
+	public String faqAdminList(Model model) {
+		
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+
+		List<Faq> list =  faqService.getFaqList();
+		model.addAttribute("faqList" , list);
+		return "admin/admin_management_faq";
+	}
+	
+	/**
+	 * 자주 묻는 질문 업데이트 폼 이동
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/faq/{id}")
+	public String faqUpdateForm(@PathVariable(value = "id") Integer id,  Model model) {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+			
+		Faq faq = faqService.findById(id);
+		if(faq == null) {
+				throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		model.addAttribute("faq" , faq);
+		return "admin/admin_management_faq_update";
+	}
+	
+	/**
+	 * 자주 묻는 질문 수정
+	 * @param id
+	 * @param faq
+	 * @return
+	 */
+	@PutMapping("/faq/{id}")
+	public String faqUpdate(@PathVariable(value = "id") Integer id , Faq faq) {
+		
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		if (faq.getTitle() == null || faq.getTitle().isEmpty()) {
+			throw new BackPageRestfulException(Define.NO_VALID_TITLE, HttpStatus.BAD_REQUEST);
+		}
+		if (faq.getContent() == null || faq.getContent().isEmpty()) {
+			throw new BackPageRestfulException(Define.NO_VALID_CONTENT, HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		int result = faqService.update(faq);
+		if (result == 0) {
+			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return "redirect:/admin/faq";
+	}
+	
+	/**
+	 * 자주 묻는 질문 삭제
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/faq/{id}")
+	public String faqDelete(@PathVariable(value = "id") Integer id) {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		int result = faqService.deleteById(id);
+		if (result == 0) {
+			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return "redirect:/admin/faq";
+	}
+	
+	
 }
