@@ -4,36 +4,137 @@ const deleteCateBtn = document.querySelector(".delete-cate-btn");
 const categoryInnerBox = document.querySelector(".cate-box");
 const cateInput = document.querySelector(".cate-input");
 const switchCateBtn = document.querySelector(".switch-cate-btn");
-const hideTr = document.querySelector(".subCateTitleChange");
+const hideTr = document.querySelector(".hide-tr");
 
 
 
 const mainList = new Array();
 const subList = new Array();
 
-let innr = "";
-let borderCheck = 999;
-addSubCateBtn.onclick = () => {
-	borderCheck = 999;
-	if(categoryInnerBox.innerHTML == ""){
-		alert("메인 카테고리를 선택해주세요!");
-	}else{
-		const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
-		for(let i = 0; i < mainTitleBoxs.length; i++){
-			if(mainTitleBoxs[i].style.border == "1px solid red"){
-				borderCheck = i;
-			}
+load();
+function load(){
+	console.log("메인", mainList);
+	console.log("서브", subList);
+	let mainInnr = "";
+	categoryInnerBox.innerHTML = "";
+	if(mainList != 0){
+		for(let i = 0; i < mainList.length; i++){
+			mainInnr += mainList[i].mainInnrHTML;
 		}
-		if(borderCheck == 999){
+	}
+	categoryInnerBox.innerHTML = mainInnr;
+	const mains = document.querySelectorAll(".cate-main-box");
+	for(let i = 0; i < mains.length; i++){
+		mains[i].id = i;
+		//mainList[i] = mains[i];
+		console.log(mains[i]);
+	}
+	if(subList != 0){
+		const mains = document.querySelectorAll(".cate-main-box");
+		const subInnrBoxs = document.querySelectorAll(".cate-sub-box");
+		let subInnr = "";
+		for(let i = 0; i < mains.length; i++){
+			subInnr = "";
+			for(let k = 0; k < subList.length; k++){
+				if(mains[i].id == subList[k].mainIndex){
+					subInnr += subList[k].subInnrHTML;
+				}
+			}
+			subInnrBoxs[i].innerHTML = subInnr;
+		}
+	}
+	addSubCateBtnClick();
+	addMainCateBtnClick();
+	const subCateTitles = document.querySelectorAll(".cate-sub-title");
+	const subCateTexts = document.querySelectorAll(".sub-title-text");
+	const mainBoxs = document.querySelectorAll(".cate-main-title");
+	changeSub(subCateTitles, subCateTexts, mainBoxs);
+	
+	const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+	const mainTitleTexts = document.querySelectorAll(".main-title-text");
+	const subTitleBoxs = document.querySelectorAll(".cate-sub-box");
+	changeMain(mainTitleBoxs, mainTitleTexts, subTitleBoxs);
+}
+
+function addSubCateBtnClick(){
+	let borderCheck = 999;
+	addSubCateBtn.onclick = () => {
+		borderCheck = 999;
+		if(categoryInnerBox.innerHTML == ""){
 			alert("메인 카테고리를 선택해주세요!");
 		}else{
-			// 서브 카테고리 추가
-			const subCategoryInnerBox = document.querySelectorAll(".cate-sub-box");
-			subCateAddEvent(subCategoryInnerBox, borderCheck);
-			mainTitleBoxs[borderCheck].style.border = "1px solid red";
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			for(let i = 0; i < mainTitleBoxs.length; i++){
+				if(mainTitleBoxs[i].style.border == "1px solid red"){
+					borderCheck = i;
+				}
+			}
+			if(borderCheck == 999){
+				alert("메인 카테고리를 선택해주세요!");
+			}else{
+				// 서브 카테고리 추가
+				const subCategoryInnerBox = document.querySelectorAll(".cate-sub-box");
+				subCateAddEvent(subCategoryInnerBox, borderCheck);
+				mainTitleBoxs[borderCheck].style.border = "1px solid red";
+			}
 		}
 	}
 }
+
+function addMainCateBtnClick(){
+	addMainCateBtn.onclick = () => {
+		const mainObject = {
+			mainIndex : 999,
+			mainInnrHTML : "",
+			mainTitle : ""
+		};
+		borderCheck = 999;
+		if(categoryInnerBox.innerHTML == ""){
+			innr = categoryInnerBox.innerHTML;
+			innr += `<div class="cate-main-box" id="${mainList.length}">
+		                <div class="cate-main-title">
+		                    <span class="main-title-text">메인 카테고리</span>
+		                </div>
+		                <div class="cate-sub-box"></div>
+		            </div>`;
+			categoryInnerBox.innerHTML = innr;
+			const mainTitle = document.querySelectorAll(".main-title-text");
+			mainObject.mainIndex = 0;
+			mainObject.mainInnrHTML = categoryInnerBox.innerHTML;
+			mainObject.mainTitle = mainTitle[mainTitle.length - 1].textContent;
+			mainList.push(mainObject);
+		}else{
+			innr = categoryInnerBox.innerHTML;
+			innr += `<div class="cate-main-box" id="${mainList.length}">
+		                <div class="cate-main-title">
+		                    <span class="main-title-text">메인 카테고리</span>
+		                </div>
+		                <div class="cate-sub-box"></div>
+		            </div>`;
+		    let pushHTML = `<div class="cate-main-box" id="${mainList.length}">
+				                <div class="cate-main-title">
+				                    <span class="main-title-text">메인 카테고리</span>
+				                </div>
+				                <div class="cate-sub-box"></div>
+				            </div>`;
+			categoryInnerBox.innerHTML = innr;
+			const mainTitle = document.querySelectorAll(".main-title-text");
+			mainObject.mainIndex = mainTitle.length;
+			mainObject.mainInnrHTML = pushHTML;
+			mainObject.mainTitle = mainTitle[mainTitle.length - 1].textContent;
+			mainList.push(mainObject);
+		}
+		const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+		const mainTitleTexts = document.querySelectorAll(".main-title-text");
+		const subTitleBoxs = document.querySelectorAll(".cate-sub-box");
+		changeMain(mainTitleBoxs, mainTitleTexts, subTitleBoxs);
+		borderBlack(mainTitleBoxs);
+		mainTitleBoxs[mainTitleBoxs.length - 1].style.border = "1px solid red";
+		mainTitleBoxs[mainTitleBoxs.length - 1].click();
+	}
+}
+
+
 
 function subCateAddEvent(box, i){
 	const subObject = {
@@ -44,7 +145,7 @@ function subCateAddEvent(box, i){
 	let innr = "";
 	if(box[i].innerHTML == ""){
 		box[i].innerHTML = `
-			<div class="cate-sub-title">
+			<div class="cate-sub-title" id="${subList.length}">
                 <span class="sub-title-text">서브 카테고리</span>
             </div>
 		`;
@@ -53,32 +154,37 @@ function subCateAddEvent(box, i){
 		subObject.subTitle = subTitle[subTitle.length - 1].textContent;
 		subList.push(subObject);
 	}else{
+		const subObject = {
+			mainIndex : i,
+			subInnrHTML : "",
+			subTitle : ""
+		};
 		innr = box[i].innerHTML;
 		innr += `
-			<div class="cate-sub-title">
+			<div class="cate-sub-title" id="${subList.length}">
                 <span class="sub-title-text">서브 카테고리</span>
             </div>
 		`;
 		let pushHTML = `
-			<div class="cate-sub-title">
+			<div class="cate-sub-title" id="${subList.length}">
                 <span class="sub-title-text">서브 카테고리</span>
             </div>
 		`;
 		box[i].innerHTML = innr;
 		const subTitle = document.querySelectorAll(".sub-title-text");
-		subObject.subInnrHTML = box[i].innerHTML;
+		subObject.subInnrHTML = pushHTML;
 		subObject.subTitle = subTitle[subTitle.length - 1].textContent;
-		subList.push(pushHTML);
+		subList.push(subObject);
 	}
 	const subCateTitles = document.querySelectorAll(".cate-sub-title");
 	const subCateTexts = document.querySelectorAll(".sub-title-text");
 	const mainBoxs = document.querySelectorAll(".cate-main-title");
-	changeSub(subCateTitles, subCateTexts, mainBoxs, i);
+	changeSub(subCateTitles, subCateTexts, mainBoxs);
 	subCateTitles[subCateTitles.length - 1].style.border = "1px solid red";
 	subCateTitles[subCateTitles.length - 1].click();
 }
 
-function changeSub(boxs, texts, mainBoxs, index){
+function changeSub(boxs, texts, mainBoxs){
 	for(let i = 0; i < boxs.length; i++){
 		boxs[i].onclick = () => {
 			borderBlack(mainBoxs);
@@ -89,47 +195,10 @@ function changeSub(boxs, texts, mainBoxs, index){
 			}
 			boxs[i].style.border = "1px solid red";
 			cateInput.value = texts[i].textContent;
-			titleChangeEvent(boxs[i], texts[i]);
+			subTitleChangeEvent(boxs[i], texts[i], subList, i);
+			hideTr.style.display = "table-row";
 		}
 	}
-}
-//------------------------------------------------------------------------------------------------------------------------------------------------
-addMainCateBtn.onclick = () => {
-	borderCheck = 999;
-	if(categoryInnerBox.innerHTML == ""){
-		innr = categoryInnerBox.innerHTML;
-		innr += `<div class="cate-main-box" id="${mainList.length}">
-	                <div class="cate-main-title">
-	                    <span class="main-title-text">메인 카테고리</span>
-	                </div>
-	                <div class="cate-sub-box"></div>
-	            </div>`;
-		mainList.push(innr);
-		categoryInnerBox.innerHTML = innr;
-	}else{
-		innr = categoryInnerBox.innerHTML;
-		innr += `<div class="cate-main-box" id="${mainList.length}">
-	                <div class="cate-main-title">
-	                    <span class="main-title-text">메인 카테고리</span>
-	                </div>
-	                <div class="cate-sub-box"></div>
-	            </div>`;
-	    let pushHTML = `<div class="cate-main-box" id="${mainList.length}">
-			                <div class="cate-main-title">
-			                    <span class="main-title-text">메인 카테고리</span>
-			                </div>
-			                <div class="cate-sub-box"></div>
-			            </div>`;
-		mainList.push(pushHTML);
-		categoryInnerBox.innerHTML = innr;
-	}
-	const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
-	const mainTitleTexts = document.querySelectorAll(".main-title-text");
-	const subTitleBoxs = document.querySelectorAll(".cate-sub-box");
-	changeMain(mainTitleBoxs, mainTitleTexts, subTitleBoxs);
-	borderBlack(mainTitleBoxs);
-	mainTitleBoxs[mainTitleBoxs.length - 1].style.border = "1px solid red";
-	mainTitleBoxs[mainTitleBoxs.length - 1].click();
 }
 
 function changeMain(boxs, texts, subs){
@@ -138,13 +207,14 @@ function changeMain(boxs, texts, subs){
 			borderBlack(boxs);
 			boxs[i].style.border = "1px solid red";
 			cateInput.value = texts[i].textContent;
-			titleChangeEvent(boxs[i], texts[i]);
+			titleChangeEvent(boxs[i], texts[i], mainList, i);
 			for(let k = 0; k < subs.length; k++){
 				if(subs[k].innerHTML != ""){
 					const subTitleBoxs = subs[k].querySelectorAll(".cate-sub-title");
 					borderBlack(subTitleBoxs);
 				}
 			}
+			hideTr.style.display = "none";
 		}
 	}
 }
@@ -160,6 +230,7 @@ switchCateBtn.onclick = () => {
 }
 
 deleteCateBtn.onclick = () => {
+	console.log("삭제버튼 클릭 sub:", subList.length);
 	if(categoryInnerBox.innerHTML == ""){
 		alert("삭제할 카테고리가 없습니다.");
 	}else{
@@ -179,17 +250,22 @@ deleteCateBtn.onclick = () => {
 				}
 			}
 		}
-		console.log("삭제 메인", mainIndex);
-		console.log("삭제 서브", subIndex);
 		if(mainIndex == 999 && subIndex == 999){
 			alert("삭제할 카테고리를 선택해주세요!");
 			return;
 		}else if(mainIndex != 999 && subIndex == 999){
 			if(confirm("서브 카테고리도 함께 삭제 됩니다. 삭제하시겠습니까?")){
-				// 메인+서브 둘 다 삭제
+				for(let i = 0; i < subList.length; i++){
+					if(subList[i].mainIndex == mainIndex){
+						subList.splice(i, 1);
+					}
+				}
+				mainList.splice(mainIndex, 1);
+				load();
 			}
 		}else if(mainIndex != 999 && subIndex != 999){
-			// 서브 카테고리 삭제
+			subList.splice(subIndex, 1);
+			load();
 		}
 	}// else
 }
@@ -199,17 +275,28 @@ deleteCateBtn.onclick = () => {
 
 
 
-// 공통 함수----------------------------------------------------------------
 function borderBlack(boxs){
 	for(let v = 0; v < boxs.length; v++){
 		boxs[v].style.border = "1px solid black";
 	}
 }
 
-function titleChangeEvent(box, text){
+function titleChangeEvent(box, text, objList, v){
 	cateInput.onkeyup = () => {
 		if(box.style.border == "1px solid red"){
 			text.textContent = cateInput.value;
+			objList[v].mainTitle = text.textContent;
+			console.log("변경:",objList);
+		}
+	}
+}
+
+function subTitleChangeEvent(box, text, objList, v){
+	cateInput.onkeyup = () => {
+		if(box.style.border == "1px solid red"){
+			text.textContent = cateInput.value;
+			objList[v].subTitle = text.textContent;
+			console.log("변경:",objList);
 		}
 	}
 }
