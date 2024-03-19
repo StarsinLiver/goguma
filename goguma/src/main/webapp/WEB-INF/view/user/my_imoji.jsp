@@ -73,14 +73,16 @@
         <div class="emoji--body">
             <div class="emoji--content-box">
             	<c:forEach var="imoji" items="${imojiList}">
-            	<div class="emoji--item-box">
-                    <div class="emoji--img-box">
-                        <img src="/images/upload/emoji/${imoji.file}" alt="이모티콘">
-                    </div>
-                    <div class="emoji--item-title-box">
-                        <span class="name--text">${imoji.name}</span>
-                    </div>
-                </div>
+            	<a href="/emoji/detail/${imoji.mainEmojiId}">
+	            	<div class="emoji--item-box">
+	                    <div class="emoji--img-box">
+	                        <img src="/images/upload/emoji/${imoji.file}" alt="이모티콘">
+	                    </div>
+	                    <div class="emoji--item-title-box">
+	                        <span class="name--text">${imoji.name}</span>
+	                    </div>
+	                </div>
+                </a>
                 </c:forEach>
                 <c:if test="${empty imojiList}">
                 	<span>문의하기 내역이 존재하지 않습니다.</span>

@@ -101,7 +101,7 @@
 			    <tr class="qna--data">
 			      <td><input type="checkbox" name="checkbox" class="check" value="${qna.id}"/></td>
 			      <td>${qna.id}</td>
-			      <td><a href="#">${qna.title}</a></td>
+			      <td><a href="/user/myQna/view/${qna.id}">${qna.title}</a></td>
 			      <td>${qna.formatCreatedAt()}</td>
 			      <td class="reply">${qna.answerYn}</td>
 			    </tr>

@@ -68,14 +68,11 @@
 						<div class="card-price">${product.price}</div>
 					</div>
 				</a>
-					<div style="display: flex;justify-content: flex-end;">
-						<button type="button" class="btn btn-danger btn-complete" data-value="${product.prodId}">삭제</button>
-					</div>
 			</article>
 			</c:forEach>
 		</div>
 		<div style="display: flex;justify-content: flex-end;">
-			<a href="/cs/qna/write" class="btn btn-warning btn-complete">상품 등록</a>
+			<a href="/product/write" class="btn btn-warning btn-complete">상품 등록</a>
 		</div>
 		<div class="pagination">
 			<!-- 페이지 처리 -->

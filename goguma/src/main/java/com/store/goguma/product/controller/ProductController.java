@@ -2,7 +2,6 @@ package com.store.goguma.product.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
 import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
-import com.store.goguma.handler.exception.ReportException;
 import com.store.goguma.product.dto.ProductDTO;
 import com.store.goguma.product.dto.ProductUserDto;
+import com.store.goguma.product.dto.ProductWriteFormDTO;
 import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.ChatRoomNameService;
@@ -178,6 +177,38 @@ public class ProductController {
 	    model.addAttribute("user", userDTO);
 	    
 	    return "product/userProduct";
+	}	
+	
+	// http://localhost/product/register
+	// 상품 등록 페이지
+	@GetMapping("/write")
+	public String registerPage()  {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+
+	    if (user == null) {
+	    	throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus	.INTERNAL_SERVER_ERROR);
+	    }
+		
+	    return "product/product_register";
+	}	
+	
+	// 상품 등록
+	@PostMapping("/write")
+	public String productRegister(ProductWriteFormDTO dto)  {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+	    if (user == null) {
+	    	throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus	.INTERNAL_SERVER_ERROR);
+	    }
+	    int uId = user.getUId();
+	    
+	    
+	    log.info("등록"+dto);
+	    log.info("돈 타입 : ");
+		
+	    
+	    productService.writeProduct(dto, uId);
+		
+		return "redirect:/product/product-list";
 	}	
 	
 	/**

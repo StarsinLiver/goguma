@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.store.goguma.admin.dto.AdminQnaDto;
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.PaymentService;
+import com.store.goguma.service.QnaService;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
@@ -38,6 +41,8 @@ public class UserController {
 	private final HttpSession httpSession;
 	private final UserService userService;
 	private final PaymentService paymentService;
+	private final QnaService qnaService;
+	
 	
 	// 내 정보 조회 + 페이지
 	@GetMapping("/info")
@@ -257,6 +262,26 @@ public class UserController {
 		return "/user/my_qna";
 	}
 	
+	// 내 문의하기 상세
+	@GetMapping("/myQna/view/{qid}")
+	public String myViewPage(@PathVariable("qid") int qid,Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
+		AdminQnaDto adminQnaDto = qnaService.adminFindByQid(qid);
+		
+		log.info("상세 : "+adminQnaDto);
+		
+		model.addAttribute("detail", adminQnaDto);
+		
+		return "/user/my_qna_view";
+	}
+	
+	
 	// 문의 내역 삭제
 	@PutMapping("/myQna/delete")
 	@ResponseBody
@@ -316,6 +341,12 @@ public class UserController {
 		
 		
 		return "/user/wish";
+	}
+	
+	@GetMapping("/chat")
+	public String chatPage() {
+		
+		return "/user/chat_product_list";
 	}
 	
 	// 로그아웃

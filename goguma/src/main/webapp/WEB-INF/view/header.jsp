@@ -112,8 +112,11 @@
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="#"
-								class="dropdown-item">통합검색</a>
+								class="dropdown-item">통합검색</a> <a href="/product/write"
+								class="dropdown-item">상품 등록</a>
+								
 						</div>
+						
 					</div>
 
 					<div class="nav-item dropdown">

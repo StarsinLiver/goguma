@@ -44,6 +44,7 @@
 	<!-- 중고거래 구매 내역 -->
 	<select id="myReadByproducthistory" resultType="com.store.goguma.user.dto.my.ProductHistoryDTO">
 		SELECT ph.*, 
+			p.p_id as `prodId`,
 			p.address AS productAddress, 
 			p.host_id AS productHostId,
 			p.main_category_id AS productMainCategoryId, 
