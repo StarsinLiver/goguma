@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
 
 <style>
 /* Google Fonts - Poppins */
@@ -168,12 +167,16 @@ nav.open ~ .overlay {
 					<i class="bx bx-folder-open icon"></i> <span class="link">상품
 						관리</span>
 			</a></li>
-			<li class="list"><a href="/admin/banner" class="nav-link"> <i
+			<li class="list"><a href="/admin/create/banner" class="nav-link"> <i
 					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
 			</a></li>
-
 			<li class="list"><a href="/admin/chat" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">채팅 로그 관리</span>
+					class="bx bx-folder-open icon"></i> <span class="link">채팅 로그
+						관리</span>
+			</a></li>
+			<li class="list"><a href="/admin/modify/freeBoard"
+				class="nav-link"> <i class="bx bx-folder-open icon"></i> <span
+					class="link">자유 게시판 관리</span>
 			</a></li>
 		</ul>
 
@@ -198,6 +201,8 @@ menuBtn.addEventListener("click", () => {
 overlay.addEventListener("click", () => {
 navBar.classList.remove("open");
 });
+
+
 
 
 </script>
