@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.store.goguma.repository.FreeBoardRepository">
+
+	<select id="findAllFree">
+		select * from free_board where delete_yn = 'N'
+	</select>
+
+	<!--게시글 좋아요 개수 카운트 -->
+	<select id="countRecommendation">
+		select fb.id as free_board_id,
+		fb.title as free_board_title,
+		count(fr.free_board_id) as like_count
+		from free_board as fb
+		left join free_board_recommendation fr on fb.id = fr.free_board_id and
+		fr.good_yn = 'Y'
+		where fb.delete_yn = 'N'
+		group by fb.id, fb.title
+	</select>
+	
+	<!-- 게시글 좋아요 추가 -->
+	<insert id="addRecommendation">
+		insert into free_board_recommendation (`free_board_id`,`u_id`) values (#{freeBoardId},#{uId});
+	</insert>
+	
+	<!-- 게시글 좋아요 취소 -->
+	<update id="deleteRecommendation">
+		
+	</update>
+</mapper>

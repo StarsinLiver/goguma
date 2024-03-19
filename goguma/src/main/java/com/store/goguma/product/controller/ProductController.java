@@ -30,27 +30,22 @@ import com.store.goguma.user.dto.UserDTO;
 import com.store.goguma.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/product")
+@RequiredArgsConstructor
 public class ProductController {
 	
-	@Autowired
-	ProductService productService;
-	@Autowired
-	UserService userService;
-	@Autowired
-	ChatRoomService chatRoomService;
-	@Autowired
-	WishListService wishListService;
-	@Autowired
-	ChatRoomNameService chatRoomNameService;	
-	@Autowired
-	ReportService reportService;
-	@Autowired
-	HttpSession httpSession;
+	private final ProductService productService;
+	private final UserService userService;
+	private final ChatRoomService chatRoomService;
+	private final WishListService wishListService;
+	private final ChatRoomNameService chatRoomNameService;	
+	private final ReportService reportService;
+	private final HttpSession httpSession;
 	
 	// 상품 상세 페이지
 	// http://localhost/productDetail?pId=1
