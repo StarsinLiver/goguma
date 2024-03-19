@@ -67,6 +67,21 @@
         	where `u_id`=#{uId}
 	</select>
 	
+	<!-- 등록된 상품 목록 -->
+	<select id="selectProductHostByUid" resultType="com.store.goguma.user.dto.my.ProductHostDTO">
+		SELECT *, `p_id` as `prodId`
+		FROM `product` 
+		WHERE `host_id`=#{uId}
+		ORDER BY p_id DESC
+		LIMIT #{start},6
+	</select>
+	
+	<!-- 등록된 상품 목록 갯수 -->
+	<select id="countProductHostByUid">
+		SELECT COUNT(*) FROM `product` 
+		WHERE `host_id`=#{uId}
+	</select>
+	
 	<!-- 문의하기 내역 -->
 	<select id="findQnaByUid" resultType="com.store.goguma.user.dto.my.QnaUserDTO">
 		SELECT q.*,

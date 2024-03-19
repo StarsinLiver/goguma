@@ -134,7 +134,6 @@
 						</div>
 					</div>
 					<c:if test="${principal.role == 'USER'}">
-					
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>

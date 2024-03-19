@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/customAssets/css/user.css" />
 
 <style>
-.user-page .payment-container {
+.user-page .product-container {
 	width: 800px;
 	height: auto;
 	padding: 40px;
@@ -53,7 +53,7 @@
 	<%@ include file="/WEB-INF/view/user/myPageAside.jsp"%>
 	<!-- aside end -->
 	
-	<div class="payment-container">
+	<div class="product-container">
 		<h4 class="user-page-title">중고 거래 내역</h4>
 		
 		<div class="col-sm-12">

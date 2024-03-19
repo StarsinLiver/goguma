@@ -1,7 +1,5 @@
 package com.store.goguma.user.controller;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,34 +17,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.LoginRestfulException;
-import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.service.PaymentService;
 import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
-import com.store.goguma.user.dto.my.WishProductDTO;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 	
-	@Autowired
-	private HttpSession httpSession;
-	
-	// 유저 페이지
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	PaymentService paymentService;
+	private final HttpSession httpSession;
+	private final UserService userService;
+	private final PaymentService paymentService;
 	
 	// 내 정보 조회 + 페이지
 	@GetMapping("/info")
@@ -207,6 +197,32 @@ public class UserController {
 		return "/user/product_history";
 	}
 	
+	// 내 물품 목록 페이지
+	@GetMapping("/product/host")
+	public String productHostPage(RequestPageDTO pageDTO, Model model) {
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
+		
+		int uId = sessionUser.getUId();
+		
+		ResponsePageDTO response = userService.productHostList(uId, pageDTO);
+		
+		log.info("test : "+response.getDtoList());
+		
+		model.addAttribute("productList", response.getDtoList());
+		model.addAttribute("pg", response.getPg());
+		model.addAttribute("start", response.getStart());
+		model.addAttribute("end", response.getEnd());
+		model.addAttribute("last", response.getLast());
+		
+		
+		return "/user/product_host_history";
+	}
+	
 	// 내 게시글 페이지
 	@GetMapping("/board")
 	public String boardPage() {
@@ -252,7 +268,7 @@ public class UserController {
 		return result;
 	}
 	
-	// 이모티콘(상품) 목록 페이지
+	// 이모티콘 목록 페이지
 	@GetMapping("/imoji")
 	public String imojiPage(RequestPageDTO requestPageDTO,Model model) {
 		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");

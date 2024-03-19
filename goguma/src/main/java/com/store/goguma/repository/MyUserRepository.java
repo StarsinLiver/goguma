@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.store.goguma.entity.Product;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
+import com.store.goguma.user.dto.my.ProductHostDTO;
 import com.store.goguma.user.dto.my.QnaUserDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 import com.store.goguma.user.dto.my.WishProductDTO;
@@ -33,6 +35,13 @@ public interface MyUserRepository {
 	
 	// 구매 거래 내역 갯수
 	public int countProductHistoryByUser(Integer uId);
+	
+	// 유저 상품 목록
+	public List<ProductHostDTO> selectProductHostByUid(@Param("uId") Integer uId, 
+												@Param("start") Integer start); 
+	
+	// 유저 상품 목록 갯수
+	public int countProductHostByUid(Integer uId);
 	
 	// 내 문의하기 내역
 	public List<QnaUserDTO> findQnaByUid(@Param("uId") Integer uId, 
