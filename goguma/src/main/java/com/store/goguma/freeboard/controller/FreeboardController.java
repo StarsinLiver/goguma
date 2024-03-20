@@ -87,18 +87,6 @@ public class FreeboardController {
 	}
 	
 	
-	// 자유 게시판 상세 보기
-	@GetMapping("/detail")
-	public String Detail() {
-		
-		
-		return "free_board/free_board_detail";
-		
-	}
-	
-
-
-	
 	// 자유 게시판 카드 형식 글 목록
 	@GetMapping("/card")
 	public String boardCard() {
