@@ -16,7 +16,7 @@
 	width: calc(50% - 5px); /* 셀렉트 박스 폭 조절 */
 }
 
-h2 {
+h4 {
 	background-color: #f2f2f2;
 	padding: 10px;
 	margin-top: 20px;
@@ -101,249 +101,263 @@ h2 {
 <!-- 메인 컨텐츠 -->
 <!-- aside 시작 -->
 <div style="display: flex;">
-<div
-	style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
-	<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
-</div>
-<!-- aside 끝 -->
-<div class="container mt-4">
+	<div
+		style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
+		<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
+	</div>
+	<!-- aside 끝 -->
+	<div class="container mt-4">
 
-	<div class="row justify-content-center">
-		<section class="section nopad cac text-center" style="width: 67%;">
-			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
-		</section>
-		<div class="col-lg-4">
-			<h2>
-				베스트 사진게시물<a href="/freeBoard/card" style="float: right;">더보기</a>
-			</h2>
-			<div class="row">
-				<c:forEach var="board" items="${rDList}" varStatus="loop">
-					<c:if test="${loop.index < 4}">
-						<div class="col-md-6 mb-3">
-							<div class="card2" onmouseover="highlightCard(this)"
-								onmouseout="unhighlightCard(this)">
-								<a href="#"> <img src="/images/upload/${board.file}"
-									class="card2-img-top" alt="${board.title} 이미지"
-									style="height: 105px">
-									<div class="card-details">
-										<p>${board.title}</p>
-										<p>${board.goodCount}</p>
-									</div>
-								</a>
+		<div class="row justify-content-center">
+			<section class="section nopad cac text-center" style="width: 67%;">
+				<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
+			</section>
+			<div class="col-lg-4">
+				<h4>
+					베스트 사진게시물<a href="/freeBoard/card" style="float: right;">더보기</a>
+				</h4>
+				<div class="row">
+					<c:forEach var="board" items="${rDList}" varStatus="loop">
+						<c:if test="${loop.index < 4}">
+							<div class="col-md-6 mb-3">
+								<div class="card2" onmouseover="highlightCard(this)"
+									onmouseout="unhighlightCard(this)">
+									<a href="#"> <img src="/images/upload/${board.file}"
+										class="card2-img-top" alt="${board.title} 이미지"
+										style="height: 105px">
+										<div class="card-details">
+											<p>${board.title}</p>
+											<p>${board.goodCount}</p>
+										</div>
+									</a>
+								</div>
 							</div>
-						</div>
-					</c:if>
-				</c:forEach>
-			</div>
-		</div>
-
-		<!-- 리스트 형식의 글 목록 -->
-		<div class="col-lg-4">
-			<h2>
-				베스트 게시물<a href="/freeBoard/list" style="float: right;">더보기</a>
-			</h2>
-			<ul class="list-group">
-				<c:forEach var="board" items="${rDList}" varStatus="loop">
-					<c:if test="${loop.index < 6}">
-						<li class="list-group-item">
-							<td><a href="">${board.title}</a></td>
-							<td class="text-center">
-								<div class="cnt">
-									<span class="view board-img">626</span> <span
-										class="like board-img">${board.goodCount}</span>
-								</div>
-						</td>
-						</li>
-					</c:if>
-				</c:forEach>
-			</ul>
-		</div>
-
-		<div class="container mt-8">
-			<div class="row justify-content-center">
-				<div class="col-lg-3" style="width: 22%;">
-					<h2>카테고리</h2>
-					<div class="row">
-						<c:forEach var="board" items="${boardList}" varStatus="loop">
-							<c:if test="${loop.index < 2}">
-								<div class="col-md-6 mb-3">
-									<div class="card2" onmouseover="highlightCard(this)"
-										onmouseout="unhighlightCard(this)">
-										<a href="#"> <img src="/images/upload/${board.file}"
-											class="card2-img-top" alt="${board.title} 이미지"
-											style="height: 105px">
-											<div class="card-details">
-												<p>${board.title}</p>
-											</div>
-										</a>
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</div>
-					<ul class="list-group">
-						<c:forEach var="board" items="${rDList}" varStatus="loop">
-							<c:if test="${loop.index < 4}">
-								<li class="list-group-item">
-									<td><a href="">${board.title}</a></td>
-									<td class="text-center">
-										<div class="cnt">
-											<span class="view board-img">626</span> <span
-												class="like board-img">${board.goodCount}</span>
-										</div>
-								</td>
-								</li>
-							</c:if>
-						</c:forEach>
-					</ul>
-				</div>
-
-				<div class="col-lg-3" style="width: 22%;">
-					<h2>카테고리</h2>
-					<div class="row">
-						<c:forEach var="board" items="${boardList}" varStatus="loop">
-							<c:if test="${loop.index < 2}">
-								<div class="col-md-6 mb-3">
-									<div class="card2" onmouseover="highlightCard(this)"
-										onmouseout="unhighlightCard(this)">
-										<a href="#"> <img src="/images/upload/${board.file}"
-											class="card2-img-top" alt="${board.title} 이미지"
-											style="height: 105px">
-											<div class="card-details">
-												<p>${board.title}</p>
-											</div>
-										</a>
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</div>
-					<ul class="list-group">
-						<c:forEach var="board" items="${rDList}" varStatus="loop">
-							<c:if test="${loop.index < 4}">
-								<li class="list-group-item">
-									<td><a href="">${board.title}</a></td>
-									<td class="text-center">
-										<div class="cnt">
-											<span class="view board-img">626</span> <span
-												class="like board-img">${board.goodCount}</span>
-										</div>
-								</td>
-								</li>
-							</c:if>
-						</c:forEach>
-					</ul>
-				</div>
-
-				<div class="col-lg-3" style="width: 22%;">
-					<h2>카테고리</h2>
-					<div class="row">
-						<c:forEach var="board" items="${rDList}" varStatus="loop">
-							<c:if test="${loop.index < 2}">
-								<div class="col-md-6 mb-3">
-									<div class="card2" onmouseover="highlightCard(this)"
-										onmouseout="unhighlightCard(this)">
-										<a href="#"> <img src="/images/upload/${board.file}"
-											class="card2-img-top" alt="${board.title} 이미지"
-											style="height: 105px">
-											<div class="card-details">
-												<p>${board.title}</p>
-											</div>
-										</a>
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</div>
-					<ul class="list-group">
-						<c:forEach var="board" items="${rDList}" varStatus="loop">
-							<c:if test="${loop.index < 4}">
-								<li class="list-group-item">
-									<td><a href="">${board.title}</a></td>
-									<td class="text-center">
-										<div class="cnt">
-											<span class="view board-img">626</span> <span
-												class="like board-img">${board.goodCount}</span>
-										</div>
-								</td>
-								</li>
-							</c:if>
-						</c:forEach>
-					</ul>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-6" style="width: 66.66%;">
-			<div class="owl-screenshots owl-carousel owl-theme text-center">
-				<div class="owl-screen">
-					<div class="service-widget">
-						<div class="post-media entry wow fadeIn">
-							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-								class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-							<img src="/images/upload/#" alt=""
-								class="img-responsive img-rounded">
-							<div class="magnifier"></div>
+
+			<!-- 리스트 형식의 글 목록 -->
+			<div class="col-lg-4">
+				<h4>
+					베스트 게시물<a href="/freeBoard/list" style="float: right;">더보기</a>
+				</h4>
+				<ul class="list-group">
+					<c:forEach var="board" items="${rDList}" varStatus="loop">
+						<c:if test="${loop.index < 6}">
+							<li class="list-group-item">
+								<td><a href="">${board.title}</a></td>
+								<td class="text-center">
+									<div class="cnt">
+										<span class="view board-img">626</span> <span
+											class="like board-img">${board.goodCount}</span>
+									</div>
+							</td>
+							</li>
+						</c:if>
+					</c:forEach>
+				</ul>
+			</div>
+
+			<div class="container mt-8">
+				<div class="row justify-content-center">
+					<div class="col-lg-3" style="width: 22%;">
+						<h4>${category1.subCategoryName}</h4>
+						<div class="row">
+							<c:forEach var="category" items="${categoryList1}"
+								varStatus="loop">
+								<c:if test="${loop.index < 2}">
+									<div class="col-md-6 mb-3">
+										<div class="card2" onmouseover="highlightCard(this)"
+											onmouseout="unhighlightCard(this)">
+											<a href="#"> <img src="/images/upload/${category.file}"
+												class="card2-img-top" alt="${category.title} 이미지"
+												style="height: 105px">
+												<div class="card-details">
+													<p>${category.title}</p>
+												</div>
+											</a>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
-						<h3>이름</h3>
-						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
+						<ul class="list-group">
+							<c:forEach var="category" items="${categoryList1}"
+								varStatus="loop">
+								<c:if test="${loop.index < 4}">
+									<li class="list-group-item">
+										<td><a href="">${category.title}</a></td>
+										<td class="text-center">
+											<div class="cnt">
+												<span class="view board-img">626</span> <span
+													class="like board-img">${category.goodCount}</span>
+											</div>
+									</td>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+
+					</div>
+
+					<div class="col-lg-3" style="width: 22%;">
+						<h4>${category2.subCategoryName}</h4>
+						<div class="row">
+							<c:forEach var="category" items="${categoryList2}"
+								varStatus="loop">
+								<c:if test="${loop.index < 2}">
+									<div class="col-md-6 mb-3">
+										<div class="card2" onmouseover="highlightCard(this)"
+											onmouseout="unhighlightCard(this)">
+											<a href="#"> <img src="/images/upload/${category.file}"
+												class="card2-img-top" alt="${category.title} 이미지"
+												style="height: 105px">
+												<div class="card-details">
+													<p>${category.title}</p>
+												</div>
+											</a>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
+						<ul class="list-group">
+							<c:forEach var="category" items="${categoryList2}"
+								varStatus="loop">
+								<c:if test="${loop.index < 4}">
+									<li class="list-group-item">
+										<td><a href="">${category.title}</a></td>
+										<td class="text-center">
+											<div class="cnt">
+												<span class="view board-img">626</span> <span
+													class="like board-img">${category.goodCount}</span>
+											</div>
+									</td>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+
+					</div>
+
+					<div class="col-lg-3" style="width: 22%;">
+						<h4>${category3.subCategoryName}</h4>
+						<div class="row">
+							<c:forEach var="category" items="${categoryList3}"
+								varStatus="loop">
+								<c:if test="${loop.index < 2}">
+									<div class="col-md-6 mb-3">
+										<div class="card2" onmouseover="highlightCard(this)"
+											onmouseout="unhighlightCard(this)">
+											<a href="#"> <img src="/images/upload/${category.file}"
+												class="card2-img-top" alt="${category.title} 이미지"
+												style="height: 105px">
+												<div class="card-details">
+													<p>${category.title}</p>
+												</div>
+											</a>
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
+						<ul class="list-group">
+							<c:forEach var="category" items="${categoryList3}"
+								varStatus="loop">
+								<c:if test="${loop.index < 4}">
+									<li class="list-group-item">
+										<td><a href="">${category.title}</a></td>
+										<td class="text-center">
+											<div class="cnt">
+												<span class="view board-img">626</span> <span
+													class="like board-img">${category.goodCount}</span>
+											</div>
+									</td>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+
 					</div>
 				</div>
-				<div class="owl-screen">
-					<div class="service-widget">
-						<div class="post-media entry wow fadeIn">
-							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-								class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-							<img src="/images/upload/#" alt=""
-								class="img-responsive img-rounded">
-							<div class="magnifier"></div>
+			</div>
+			<div class="col-lg-6" style="width: 66.66%;">
+				<div class="owl-screenshots owl-carousel owl-theme text-center">
+					<div class="owl-screen">
+						<div class="service-widget">
+							<div class="post-media entry wow fadeIn">
+								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
+									class="hoverbutton global-radius"><i
+									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
+									class="img-responsive img-rounded">
+								<div class="magnifier"></div>
+							</div>
+							<h3>이름</h3>
+							<small><a href="/product/productDetail?pId=1">지금 올라온
+									글</a></small>
 						</div>
-						<h3>이름</h3>
-						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
-				</div>
-				<div class="owl-screen">
-					<div class="service-widget">
-						<div class="post-media entry wow fadeIn">
-							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-								class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-							<img src="/images/upload/#" alt=""
-								class="img-responsive img-rounded">
-							<div class="magnifier"></div>
+					<div class="owl-screen">
+						<div class="service-widget">
+							<div class="post-media entry wow fadeIn">
+								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
+									class="hoverbutton global-radius"><i
+									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
+									class="img-responsive img-rounded">
+								<div class="magnifier"></div>
+							</div>
+							<h3>이름</h3>
+							<small><a href="/product/productDetail?pId=1">지금 올라온
+									글</a></small>
 						</div>
-						<h3>이름</h3>
-						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
-				</div>
-				<div class="owl-screen">
-					<div class="service-widget">
-						<div class="post-media entry wow fadeIn">
-							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-								class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-							<img src="/images/upload/#" alt=""
-								class="img-responsive img-rounded">
-							<div class="magnifier"></div>
+					<div class="owl-screen">
+						<div class="service-widget">
+							<div class="post-media entry wow fadeIn">
+								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
+									class="hoverbutton global-radius"><i
+									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
+									class="img-responsive img-rounded">
+								<div class="magnifier"></div>
+							</div>
+							<h3>이름</h3>
+							<small><a href="/product/productDetail?pId=1">지금 올라온
+									글</a></small>
 						</div>
-						<h3>이름</h3>
-						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
 					</div>
-				</div>
-				<div class="owl-screen">
-					<div class="service-widget">
-						<div class="post-media entry wow fadeIn">
-							<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-								class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-							<img src="/images/upload/#" alt=""
-								class="img-responsive img-rounded">
-							<div class="magnifier"></div>
+					<div class="owl-screen">
+						<div class="service-widget">
+							<div class="post-media entry wow fadeIn">
+								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
+									class="hoverbutton global-radius"><i
+									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
+									class="img-responsive img-rounded">
+								<div class="magnifier"></div>
+							</div>
+							<h3>이름</h3>
+							<small><a href="/product/productDetail?pId=1">지금 올라온
+									글</a></small>
 						</div>
-						<h3>이름</h3>
-						<small><a href="/product/productDetail?pId=1">지금 올라온 글</a></small>
+					</div>
+					<div class="owl-screen">
+						<div class="service-widget">
+							<div class="post-media entry wow fadeIn">
+								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
+									class="hoverbutton global-radius"><i
+									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
+									class="img-responsive img-rounded">
+								<div class="magnifier"></div>
+							</div>
+							<h3>이름</h3>
+							<small><a href="/product/productDetail?pId=1">지금 올라온
+									글</a></small>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 <!-- 부트스트랩 자바스크립트 및 필수 자바스크립트 -->
 <script

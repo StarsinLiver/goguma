@@ -1,13 +1,16 @@
 package com.store.goguma.freeboard.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.service.FreeBoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,11 +29,19 @@ public class FreeboardController {
 		
 		List<FreeBoardDTO> boardList = freeBoardService.findAllFree();
 		List<FreeBoardDTO> recommendationList = freeBoardService.countRecommendation();
+		List<FreeBoardManyCategoryDto> categoryList = freeBoardService.mainFreeBoardCategory();
 		
-		log.debug("좋아요:" +recommendationList);
+		int count = 1;
+		for(FreeBoardManyCategoryDto i : categoryList) {
+			List<FreeBoardCountRecommendationByCateDto> list = freeBoardService.mainFreeBoard(i.getMainCategoryId(), i.getSubCategoryId());
+			log.info("cateogrygoogogogogogogoog " + count + " {}" , list);
+			model.addAttribute("categoryList" + count , list);
+			model.addAttribute("category" + count , i);
+			count++;
+		}
 		
-		model.addAttribute("boardList",boardList);
-		model.addAttribute("rDList",recommendationList);
+		model.addAttribute("boardList" , boardList);
+		model.addAttribute("rDList" , recommendationList);
 		
 		return "/free_board/free-main";
 	}
@@ -49,18 +60,6 @@ public class FreeboardController {
 		
 	}
 	
-	//freeBoard_detail
-	@GetMapping("/detail")
-	public String Detail() {
-		
-		
-		return "free_board/free_board_detail";
-		
-	}
-	
-
-
-	
 	
 	@GetMapping("/card")
 	public String boardCard() {
@@ -73,5 +72,6 @@ public class FreeboardController {
 		
 		return "/free_board/free-write";
 	}
+	
 	
 }
