@@ -33,8 +33,8 @@ function borderBlack(boxs){
 	}
 }
 
-
-
+const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+const subCateTitles = document.querySelectorAll(".cate-sub-title");
 
 
 
