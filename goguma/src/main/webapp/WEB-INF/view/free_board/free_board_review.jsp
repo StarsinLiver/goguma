@@ -51,6 +51,19 @@
 .reply_box3 {
 	margin-left: 60px; /* 대대댓글이 들여쓰기되도록 설정 */
 }
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
@@ -62,7 +75,7 @@
 			data-article-no="915289">
 			<div class="comment_count">
 				<div class="fl num_box">
-					전체 댓글 <em class="font_red"><span id="comment_total_915289">2</span></em>개
+					전체 댓글 <em class="font_red"><span id="comment-total">2</span></em>개
 					<div class="select_box array_latest">
 						<select name="selCommentSort">
 							<option value="D">등록순</option>
@@ -86,208 +99,14 @@
 			</div>
 			<div class="comment_box">
 				<ul class="cmt_list">
-					<li id="comment_li_6807114" class="ub-content">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all">
-								<p class="usertxt ub-word">딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li id="comment_li_6807114" class="ub-content reply_box">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all ">
-								<p class="usertxt ub-word">대댓글은 reply_box class 명을 단 태그가
-									오른쪽으로 padding을 줘서 구현했음 상위 li태그의 class에 reply_box를 주었음 댓글 대댓글 대대댓글을 위해 reply_box2,3,4 까지 작성해 두었음</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li id="comment_li_6807114" class="ub-content reply_box2">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all ">
-								<p class="usertxt ub-word">대댓글은 reply_box class 명을 단 태그가
-									오른쪽으로 padding을 줘서 구현했음 상위 li태그의 class에 reply_box를 주었음</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
-
-					<li id="comment_li_6807114" class="ub-content">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all">
-								<p class="usertxt ub-word">딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어
-									딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li id="comment_li_6807114" class="ub-content">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all">
-								<p class="usertxt ub-word">딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어
-									딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li id="comment_li_6807114" class="ub-content">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all">
-								<p class="usertxt ub-word">딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어
-									딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li id="comment_li_6807114" class="ub-content reply_box">
-						<div class="cmt_info clear" data-no="6807114" data-rcnt="1"
-							data-article-no="915289">
-							<div class="cmt_nickbox">
-								<div>
-									<img src="/customAssets/images/no_product.png"
-										style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-								</div>
-								<span class="gall_writer ub-writer" data-nick="ㅇㅇ" data-uid=""
-									data-ip="1.214"> <span class="nickname"><em
-										title="ㅇㅇ">ㅇㅇ</em><span class="ip">(1.214)</span></span>
-								</span>
-							</div>
-							<div class="clear cmt_txtbox btn_reply_write_all">
-								<p class="usertxt ub-word">딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어
-									딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면
-									좋겠어딴소리긴한데 쿄서트하면 회차별 1인2매로 제한했으면 좋겠어</p>
-							</div>
-							<div class="fr clear">
-								<span class="date_time">03.18 15:10:18</span>
-								<div class="cmt_mdf_del" data-type="cmt" re_no="6807114"
-									data-my="N" data-article-no="915289" data-pwd-pop="Y"
-									data-uid="">
-									<button type="button" class="btn_cmt_delete">삭제</button>
-								</div>
-							</div>
-						</div>
-					</li>
+					<!-- 댓글 리스트 -->
+					<li class="loader"></li>
 				</ul>
+				<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center">
+						<!-- 페이지네이션 -->
+					</ul>
+				</nav>
 				<div id="review-form" style="padding: 20px; box-sizing: border-box;">
 					<label for="review-content">댓글 입력</label>
 					<textarea id="review-content" name="content" 
@@ -309,7 +128,9 @@
 		
 	<script>
 		const contentTextArea = document.getElementById('review-content');
-		
+		const commentList = document.getElementsByClassName('cmt_list')[0];
+		const pageNavigation = document.getElementsByClassName('pagination')[0];
+		const commentTotal = document.getElementById('comment-total');
 	
 		// 이모티콘 불러오기
 		function imojiList(){
@@ -318,14 +139,10 @@
 			/*
 			$.ajax({    
 				type : 'get',               
-				url : '/user#',            
+				url : '/imoji/user',            
 				headers : {          
 					"Content-Type" : "application/json"    
 				},    
-				data : JSON.stringify({  
-					"id" : id,
-					"content" : content
-				}),    
 				success : function(result) {      
 					
 				},    
@@ -338,15 +155,12 @@
 		
 		// 댓글 전송
 		function review(){
-			
 			// 추후에 이모티콘 같이 전송
-			
 			const content = contentTextArea.value;
 			console.log(content);
 			
 			const postId = getParams();
 			console.log('현재 번호 : '+postId);
-			
 			
 			$.ajax({    
 				type : 'post',               
@@ -355,11 +169,20 @@
 					"Content-Type" : "application/json"    
 				},
 				data : JSON.stringify({  
-					"fId": postId,
+					"freeBoardId": postId,
 					"content" : content
 				}),    
 				success : function(result) {  
 					console.log(result);
+					
+					let comment = ''; // 동적 태그
+					const commentData = result; // 데이터
+					
+					// 태그 삽입
+					comment = createComment(commentData, comment);
+					
+					// 댓글 목록 맨 밑에 삽입
+					commentList.insertAdjacentHTML('beforeend', comment);
 					
 				},    
 				error : function(request, status, error) {     
@@ -371,20 +194,144 @@
 		// 현재 게시글 번호 가져오기
 		function getParams() {
 			let currentUrl = window.location.href;
+			let url = new URL(currentUrl);
+			let id = url.searchParams.get("id");
+			console.log('id 값 '+id);
 			
-			let matches = currentUrl.match(/\/freeBoard\/detail\/(\d+)/);
-			let postId = 0;
-			
-			if (matches && matches.length > 1) {
-				postId = matches[1];
-			} else {
-			    alert("게시글 번호를 가져올 수 없습니다.");
-			    return;
+			if(id == null){
+				alert("게시글 번호가 존재하지 않습니다.");
+				window.location.href = '/freeBoard/list';
 			}
-			return postId;
+			
+			return id;
 		}
 		
 		// 댓글 목록 출력
+		document.addEventListener("DOMContentLoaded", function() {
+			
+			const id = getParams();
+			const size = 10;
+			let reviewPage = 1;
+			
+			$.ajax({    
+				type : 'post',               
+				url : '/freeBoard/detail/review',            
+				headers : {          
+					"Content-Type" : "application/json"
+				},
+				data : JSON.stringify({  
+					"id": id,
+					"pg": reviewPage,
+					"size": size
+				}),
+				success : function(result) {  
+					console.log(result);
+					
+					if(result !== null){
+						tagList(result);
+						commentTotal.textContent = result.total;
+					}
+					
+				},
+				error : function(request, status, error) {     
+					console.log(error)    
+				}
+			
+			});
+			
+			
+		});
+		
+		// 동적 리스트 생성(댓글, 페이지네이션)
+		function tagList(result){
+			
+			// 동적 태그
+			let comment = ''; 
+			let pageNum = '';
+			
+			// 페이지네이션 변수
+			let last = result.last;
+			let pg = result.pg;
+			let end = result.end;
+			let start = result.start;
+			console.log('last : '+last);
+			
+			
+			// 댓글 목록
+			for(let i=0; i < result.dtoList.length; i++){
+				let commentData = result.dtoList[i];
+				comment = createComment(commentData, comment);
+			}
+			
+			// 화면에 보내기
+			commentList.innerHTML = comment;
+			
+			// 댓글 페이징 처리
+			
+			if(start > 1){
+				pageNum += '<li class="page-item"><span class="page-link" onclick="startPage('+start+')">이전</span></li>';
+			}
+			for(let j=start; j <= end; j++){
+				pageNum += '<li class="page-item"><span class="page-link" onclick="nextPage('+j+')">'+j+'</span></li>';
+			}
+			if(end < last){
+				pageNum += '<li class="page-item"><span class="page-link" onclick="endPage('+end+')">이후</span></li>';
+			}
+			
+			// 페이지네이션 화면에 내보내기
+			pageNavigation.innerHTML = pageNum;
+			
+		}
+		
+		// 댓글 등록 태그(등록, 목록)
+		function createComment(commentData, comment){
+			
+			comment += '<li id="comment_li_6807114" class="ub-content">';
+			comment +=	'<div class="cmt_info clear">';
+			comment +=	'<div class="cmt_nickbox">';
+			comment +=	'<div>';
+			comment +=	'<img src="/profile/'+ commentData.userFile +'"';
+			comment +=	'style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">';
+			comment +=		'</div>';
+			comment +=	'<span class="gall_writer ub-writer"';
+			comment +=	'data-ip="1.214"> <span class="nickname"><em';
+			comment	+=	'title="ㅇㅇ">'+ commentData.userName +'</em></span>';
+			comment	+=	'</span>';
+			comment	+=	'</div>';
+			comment	+=	'<div class="clear cmt_txtbox btn_reply_write_all">';
+			if(commentData.file !== null){
+				comment	+= '<img src="/images/upload/emoji/'+commentData.file+'" alt="" />';
+			}
+			comment	+=  '<p class="usertxt ub-word" style="margin-top: 10px;">'+commentData.content +'</p>';
+			comment	+=	'</div>';
+			comment	+=	'<div class="fr clear">';
+			comment	+=	'<span class="date_time">'+commentData.createAt+'</span>';
+			comment	+=	'<div class="cmt_mdf_del">';
+			comment	+=	'<button type="button" class="btn_cmt_delete">삭제</button>';
+			comment +=	'</div>';
+			comment +=	'</div>';
+			comment += '</div>';
+			comment +=	'</li>';
+			
+			return comment;
+		}
+		
+		// 페이지 넘기기
+		function nextPage(start){
+			
+			
+		}
+		
+		// 이전 10개 페이지 넘기기
+		function startPage(num){
+			
+		}
+		
+		// 이후 10개 페이지 넘기기
+		function endPage(end){
+			
+		}
+		
 	</script>
 </body>
 </html>

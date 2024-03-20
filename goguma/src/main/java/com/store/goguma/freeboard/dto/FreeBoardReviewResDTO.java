@@ -15,9 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class UserFreeBoardPageResDto {
-	
-	private int merchantId;
+public class FreeBoardReviewResDTO {
 	
 	private List<?> dtoList;
 	
@@ -25,10 +23,6 @@ public class UserFreeBoardPageResDto {
     private int size;
     private int total;
     
-    private String search;
-    private String searchType;
-    private Integer mainCategory;
-    private Integer subCategory;
     
     private int start, end;
     private int last;
@@ -36,16 +30,13 @@ public class UserFreeBoardPageResDto {
    
     
     @Builder
-    public UserFreeBoardPageResDto(UserFreeBoardPageReqDto requestPageDTO,List<?> dtoList, int total) {
+    public FreeBoardReviewResDTO(FreeBoardReviewReqDTO requestPageDTO,List<?> dtoList, int total) {
         this.pg  = requestPageDTO.getPg();
         this.total  = total;
         this.size = requestPageDTO.getSize();
 
         this.dtoList = dtoList;
         
-        this.search = requestPageDTO.getSearch();
-        this.searchType = requestPageDTO.getSearchType();
-
         this.end   = (int) (Math.ceil(this.pg / 10.0)) * 10;
         this.start = this.end - 9;
         this.last  = (int) (Math.ceil(total / (double) size));
