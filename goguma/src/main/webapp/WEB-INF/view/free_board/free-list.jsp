@@ -136,7 +136,7 @@ h2 {
 
 		$.ajax({
 			method : "GET",
-			url : "/freeBoard/listAll",
+			url : "/free-board/listAll",
 			data : {
 				cate1 : cate1,
 				id : id
@@ -206,7 +206,7 @@ h2 {
             
 	        $.ajax({
 				method : "GET",
-				url : "/freeBoard/listAll",
+				url : "/free-board/listAll",
 				data : {
 					cate1 : cate1,
 					id : id,
