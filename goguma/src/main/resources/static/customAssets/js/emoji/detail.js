@@ -25,47 +25,47 @@ let userInfo = getSession();
 
 load();
 
-function load(){
+function load() {
 	$.ajax({
-		type : "get",
-		url : "/emoji/api/detail/main/" + pageId,
-		async : false,
-		success : function(data){
-			if(data != ""){
+		type: "get",
+		url: "/emoji/api/detail/main/" + pageId,
+		async: false,
+		success: function(data) {
+			if (data != "") {
 				innerMain(data);
 				mainEmojiNum = data.id;
-			}else{
+			} else {
 				alert("실패");
 			}
 		},
-		error : function(){
+		error: function() {
 			alert("에러");
 		}
 	});
 	$.ajax({
-		type : "get",
-		url : "/emoji/api/detail/sub/" + pageId,
-		async : false,
-		success : function(data){
-			if(data != ""){
+		type: "get",
+		url: "/emoji/api/detail/sub/" + pageId,
+		async: false,
+		success: function(data) {
+			if (data != "") {
 				innerFun(data);
-			}else{
+			} else {
 				alert("실패");
 			}
 		},
-		error : function(){
+		error: function() {
 			alert("에러");
 		}
 	});
 }
 
-for(let i = 0; i < headMenus.length; i++){
+for (let i = 0; i < headMenus.length; i++) {
 	headMenus[i].onclick = () => {
 		location.href = "/emoji/list";
 	}
 }
 
-function innerMain(data){
+function innerMain(data) {
 	mainImg[0].src = "/images/upload/emoji/" + data.file;
 	mainImg[1].src = "/images/upload/emoji/" + data.file;
 	mainTitle1.textContent = data.name;
@@ -74,10 +74,10 @@ function innerMain(data){
 	mainPrice[1].textContent = data.price;
 }
 
-function innerFun(list){
+function innerFun(list) {
 	let innr = "";
-	if(list != ""){
-		for(let i = 0; i < list.length; i++){
+	if (list != "") {
+		for (let i = 0; i < list.length; i++) {
 			innr += `
 				<div class="emoji--detail--item-box">
                     <div class="emoji--detail--img-box">
@@ -91,13 +91,30 @@ function innerFun(list){
 }
 
 orderBtn.onclick = () => {
-	modalMain.style.display = "flex";
+	
+	// 구매 여부 확인
+	$.ajax({
+		url: "/emoji/api/valid/order",
+		method: "get",
+		data: { userId: userInfo.uid , mainEmojiId : mainEmojiNum },
+		success: function(data) {
+			console.log(data);
+			modalMain.style.display = "flex";
+		}, error: function(xhr) {
+			console.log(xhr);
+			if (xhr.status == 400) {
+				alert("이미 가지고 계신 이모티콘 입니다.");
+			}
+		}
+	})
+
+
 }
 
 agreeCheck.onchange = () => {
-	if(agreeCheck.checked == true){
+	if (agreeCheck.checked == true) {
 		orderBtn2.className = "emoji--order-btn2-on";
-	}else {
+	} else {
 		orderBtn2.className = "emoji--order-btn2";
 	}
 }
@@ -107,67 +124,67 @@ modalCloseBtn.onclick = () => {
 }
 
 orderBtn2.onclick = () => {
-	if(orderBtn2.className == "emoji--order-btn2-on" && agreeCheck.checked == true){
-		let merchantId = 'merchant_'+new Date().getTime();
+	if (orderBtn2.className == "emoji--order-btn2-on" && agreeCheck.checked == true) {
+		let merchantId = 'merchant_' + new Date().getTime();
 		requestPay(merchantId);
 		modalMain.style.display = "none";
 	}
 }
 
 function requestPay(merchantId) {
-	if(userInfo == ""){
+	if (userInfo == "") {
 		alert("로그인이 필요한 서비스 입니다.");
 		location.href = "/login";
-	}else{
+	} else {
 		IMP.request_pay({
-	      pg: "goguma",
-	      pay_method: "card",
-	      merchant_uid: merchantId,   // 주문번호
-	      name: mainTitle1.textContent,//상품이름
-	      amount: Number(mainPrice[0].textContent),//상품가격
-	      buyer_email: "bugger0330@naver.com",
-	      buyer_name: "강민",
-	      buyer_tel: "010-9046-7290",
-	      buyer_addr: "서울특별시 강남구 신사동",
-	      buyer_postcode: "01181"
-	    }, function (rsp) { // callback
-	      //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-	      if (rsp.success) {
-			  buyFun(merchantId);
-		  }else{
-			  alert("취소되었습니다.");
-			  location.href = "/emoji/detail/" + pageId;
-		  }
-	    });
+			pg: "goguma",
+			pay_method: "card",
+			merchant_uid: merchantId,   // 주문번호
+			name: mainTitle1.textContent,//상품이름
+			amount: Number(mainPrice[0].textContent),//상품가격
+			buyer_email: "bugger0330@naver.com",
+			buyer_name: "강민",
+			buyer_tel: "010-9046-7290",
+			buyer_addr: "서울특별시 강남구 신사동",
+			buyer_postcode: "01181"
+		}, function(rsp) { // callback
+			//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+			if (rsp.success) {
+				buyFun(merchantId);
+			} else {
+				alert("취소되었습니다.");
+				location.href = "/emoji/detail/" + pageId;
+			}
+		});
 	}
 }
 
-function buyFun(merchantId){
+function buyFun(merchantId) {
 
 	$.ajax({
-		type : "post",
-		url : "/emoji/api/order",
-		data : {
-			merchantId : merchantId,
-			mainEmojiId : mainEmojiNum,
-			price : Number(mainPrice[0].textContent),
-			uId : principalId.value,
-			bank : "KAKAO"
+		type: "post",
+		url: "/emoji/api/order",
+		data: {
+			merchantId: merchantId,
+			mainEmojiId: mainEmojiNum,
+			price: Number(mainPrice[0].textContent),
+			uId: principalId.value,
+			bank: "KAKAO"
 		},
-		success : function(data){
-			if(data == true){
+		success: function(data) {
+			if (data == true) {
 				alert("결제가 완료되었습니다.");
 				location.href = "/";
 			}
 		},
-		error : function(){
+		error: function() {
 			alert("에러");
 		}
 	});
 }
 
-agreeMain,agreeSub
-for(let i = 0; i < agreeMain.length; i++){
+agreeMain, agreeSub
+for (let i = 0; i < agreeMain.length; i++) {
 	agreeMain[i].onclick = () => {
 		agreeSub[i].style.display = "flex";
 	}

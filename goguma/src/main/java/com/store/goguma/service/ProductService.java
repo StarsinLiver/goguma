@@ -184,7 +184,12 @@ public class ProductService {
 	// 상품 등록
 	public int writeProduct(ProductWriteFormDTO dto, int uId) {
 		String address = dto.getAddr1() + " " + dto.getAddr2();
-		String file = uploadProfile(dto);
+		String file = "";
+		
+		for(MultipartFile i : dto.getFile()) {
+			file += uploadProfile(i) + ",";
+		}
+		file.substring(0 , file.length() - 1);
 		
 		Product productEntity = Product.builder()
 								.address(address)
@@ -201,10 +206,9 @@ public class ProductService {
 	}
 	
 	// 사진 등록
-	public String uploadProfile(ProductWriteFormDTO dto) {
+	public String uploadProfile(MultipartFile mf) {
 		
 		log.info("fileUpload...1");
-        MultipartFile mf = dto.getFile();
         log.info("fileUpload...2"+mf);
         
         if(!mf.isEmpty()){
@@ -241,6 +245,15 @@ public class ProductService {
         // 파일 첨부 안했을 경우
         return null;
 		
+	}
+	
+	/**
+	 * 상품 거래 완료
+	 * @param pId
+	 * @return
+	 */
+	public int updateConfirmYn(int pId) {
+		return productRepository.updateConfirmYn(pId);
 	}
 	
 }

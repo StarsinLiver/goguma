@@ -2,13 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.store.goguma.repository.ProductHistoryRepository">
+<mapper
+	namespace="com.store.goguma.repository.ProductHistoryRepository">
 
-	<select id="countProductHistoryAll"
-		resultType="int">
-		select count(*) from product_history where confirm_yn = 'Y';
+	<select id="countProductHistoryAll" resultType="int">
+		select count(*)
+		from product_history where confirm_yn = 'Y';
 	</select>
 
 
+	<insert id="save">
+		insert into product_history (p_id , u_id ,
+		confirm_yn)
+		values (#{pId} , #{userId} , 'Y');
+	</insert>
 
+	<select id="countTemperatureUser" resultType="int">
+		select count(*) from product_history
+		where u_id = #{userId} and confirm_yn = 'Y';
+	</select>
 </mapper>

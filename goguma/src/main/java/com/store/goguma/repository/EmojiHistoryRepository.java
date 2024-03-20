@@ -17,4 +17,7 @@ public interface EmojiHistoryRepository {
 	
 	// 이모지를 사용하고 있는 사람 카운트
 	public int countByMainEmojiId(int groupId);
+	
+	// 이모지를 가지고 있는지 판단.
+	public int countByUserId(@Param("userId")int userId , @Param("mainEmojiId") int mainEmojiId);
 }

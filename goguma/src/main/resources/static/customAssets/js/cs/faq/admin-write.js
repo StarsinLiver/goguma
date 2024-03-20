@@ -31,7 +31,7 @@ btn.onclick = () => {
 		success : function(data){
 			if(data == true){
 				alert("등록완료!");
-				location.href = "/cs/faq/list";
+				location.href = "/admin/faq";
 			}
 		},
 		error : function(){

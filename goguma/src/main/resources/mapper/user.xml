@@ -37,7 +37,7 @@
 		select * from user
 		where name
 		like CONCAT('%',#{name},'%')
-		limit #{start} , 20
+		limit #{start} , 10
 	</select>
 
 	<select id="countFindAll" resultType="int">

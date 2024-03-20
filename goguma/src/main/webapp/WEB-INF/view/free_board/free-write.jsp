@@ -10,8 +10,6 @@
 	rel="stylesheet">
 
 <style>
-/* 추가적인 CSS 스타일링은 여기에 추가할 수 있습니다. */
-/* 검색창 스타일링 */
 .form-control {
 	width: calc(30% - 5px); /* 검색창 폭 조절 */
 }
@@ -51,7 +49,6 @@ h2 {
 				<form class="row" action="/freeBoard/write" method="post">
 					<!-- 카테고리 테스트 -->
 					<input type="hidden" name="mainCategory" value="1" />
-					<input type="hidden" name="subCategory" value="1" />
 					<!-- 카테고리 선택 셀렉트 박스 -->
 					<div class="mb-3 col-md-5">
 						<label for="categorySelect" class="form-label">카테고리</label> <select

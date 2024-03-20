@@ -45,7 +45,7 @@
         </div>
     </div>
     
-    <div class="emoji--modal">
+    <div class="emoji--modal" style="z-index : 999;">
         <div class="emoji--sec1">
             <span>이모티콘 변경하기</span>
             <span class="emoji--close-btn">Ⅹ</span>

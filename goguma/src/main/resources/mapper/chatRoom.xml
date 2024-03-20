@@ -170,7 +170,7 @@
 		like CONCAT('%',#{search},'%')
 		order by p.create_at desc
 		LIMIT
-		#{start} , 12
+		#{start} , 10
 	</select>
 
 	<select id="countAdminFindAllByProductName" resultType="int">
@@ -220,5 +220,6 @@
 		INNER JOIN user u
 		ON u.u_id = c.u_id
 		WHERE c.p_id = #{pId}
+		and c.delete_yn = 'N'
 	</select>
 </mapper>

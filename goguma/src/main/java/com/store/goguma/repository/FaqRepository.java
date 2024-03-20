@@ -13,4 +13,7 @@ public interface FaqRepository {
 
 	public int faqWrite(Faq entity);
 
+	public Faq findById(int id);
+	public int update(Faq faq);
+	public int deleteById(int id);
 }

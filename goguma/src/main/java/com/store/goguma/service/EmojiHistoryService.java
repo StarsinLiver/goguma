@@ -36,4 +36,10 @@ public class EmojiHistoryService {
 	public int countByMainEmojiId(int groupId) {
 		return emojiHistoryRepository.countByMainEmojiId(groupId);
 	}
+	
+	
+	// 이모지를 가지고 있는지 유효성 검사
+	public int countByUserId(int userId , int mainEmojiId) {
+		return emojiHistoryRepository.countByUserId(userId , mainEmojiId);
+	}
 }
