@@ -9,6 +9,10 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
+	<select id="findByFreeId">
+		select * from free_board where delete_yn = 'N' and id = #{id}
+	</select>
+
 	<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
 		select fb.id as id,

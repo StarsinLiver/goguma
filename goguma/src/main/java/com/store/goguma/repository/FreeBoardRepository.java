@@ -28,6 +28,8 @@ public interface FreeBoardRepository {
 
 	// 게시글 많은 카테고리
 	public List<FreeBoardManyCategoryDto> manyFreeBoard();
+
+	public FreeBoard findByFreeId(Integer id);
 	
 
 	

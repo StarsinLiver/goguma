@@ -54,14 +54,14 @@
 				<div id="article-profile-right">
 					<dl id="temperature-wrap">
 						<dt>매너온도</dt>
-						<dd class="text-color-03">
+						<dd class="text-color-3">
 							100 <span>°C</span>
 						</dd>
 					</dl>
 					<div class="meters">
-						<div class="bar bar-color-03" style="width: 100%"></div>
+						<div class="bar bar-color-04" style="width: 100%"></div>
 					</div>
-					<div class="face face-03"></div>
+					<div class="face face-04"></div>
 				</div>
 			</div>
 		</a>

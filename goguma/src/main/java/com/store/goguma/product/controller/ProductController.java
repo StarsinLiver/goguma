@@ -2,7 +2,6 @@ package com.store.goguma.product.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
 import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
-import com.store.goguma.handler.exception.ReportException;
 import com.store.goguma.product.dto.ProductDTO;
 import com.store.goguma.product.dto.ProductUserDto;
 import com.store.goguma.product.dto.WishListDTO;

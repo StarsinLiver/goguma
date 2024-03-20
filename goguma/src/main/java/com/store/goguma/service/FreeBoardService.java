@@ -74,4 +74,20 @@ public class FreeBoardService {
 	public List<FreeBoardCountRecommendationByCateDto> mainFreeBoard(int mainCategoryId , int subCategoryId) {
 		return freeBoardRepository.countRecommendationByCate(mainCategoryId, subCategoryId);
 	}
+	
+	public FreeBoardDTO findByFreeId(Integer id) {
+		
+		FreeBoard freeBoard = freeBoardRepository.findByFreeId(id);
+		
+		FreeBoardDTO dto = FreeBoardDTO.builder().id(freeBoard.getId()).title(freeBoard.getTitle())
+				.content(freeBoard.getTitle()).uId(freeBoard.getUId()).file(freeBoard.getFile())
+				.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
+				.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
+				.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
+				.goodCount(freeBoard.getGoodCount()).build();
+		
+		return dto;
+		
+		
+	}
 }
