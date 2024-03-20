@@ -60,6 +60,8 @@ public class FreeBoardRestController {
 		}
 
 	}
+	
+	
 
 	@DeleteMapping("/delete")
 	public ResponseEntity<?> deleteBoard(@RequestBody Integer[] array) {
