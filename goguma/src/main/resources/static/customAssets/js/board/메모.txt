@@ -11,8 +11,16 @@
     </div>
 </div>
 
+
+const mainObject = {
+	mainIndex : 999,
+	mainInnrHTML : "",
+	mainTitle : "",
+	subObject : null
+};
 const subObject = {
 	mainIndex : i,
+	subIndex : 0,
 	subInnrHTML : "",
 	subTitle : ""
 };
@@ -36,9 +44,38 @@ function borderBlack(boxs){
 const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
 const subCateTitles = document.querySelectorAll(".cate-sub-title");
 
+=====================================================================================================================
 
 
-
+downBtn.onclick = () => {
+		if(mainList.length != 0 && subList.length == 0){
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			let selectIndex = 999;
+			for(let i = 0; i < mainList.length; i++){
+				if(mainTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999){
+				[mainList[selectIndex], mainList[selectIndex + 1]] = [mainList[selectIndex + 1], mainList[selectIndex]];
+				console.log("메인2", mainList);
+				load();
+			}
+		}else if(mainList.length != 0 && subList.length != 0){
+			const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
+			let selectIndex = 999;
+			for(let i = 0; i < subList.length; i++){
+				if(subTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999){
+				[subList[selectIndex], subList[selectIndex + 1]] = [subList[selectIndex + 1], subList[selectIndex]];
+				console.log("서브2", subList);
+				load();
+			}
+		}
+	}
 
 
 
