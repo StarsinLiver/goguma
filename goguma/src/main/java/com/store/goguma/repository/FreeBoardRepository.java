@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDTO;
+import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 
 
 @Mapper
@@ -20,9 +22,12 @@ public interface FreeBoardRepository {
 	// 좋아요 추가/삭제
 	public int addRecommendation(FreeBoard freeBoard);
 	public int deleteRecommendation(FreeBoard freeBoard);
-
-
 	
+	// 상세 조회
+	public FreeBoardDetailDTO selectByFid(Integer fId);
+	
+	// 등록 
+	public int insertFreeBoard(FreeBoardFormDTO dto);
 	
 	
 	
