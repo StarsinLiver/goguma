@@ -10,7 +10,7 @@
 	<div class="container py-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
-				<h3 class="display-5 text-white animated slideInDown">faq 등록</h3>
+				<h3 class="display-5 text-white animated slideInDown">자주 묻는 질문</h3>
 			</div>
 		</div>
 	</div>

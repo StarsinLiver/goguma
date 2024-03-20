@@ -27,6 +27,30 @@ public class FaqService {
 		return result != 0;
 	}
 	
-	
+	/**
+	 * 상세 조회
+	 * @param id
+	 * @return
+	 */
+	public Faq findById(int id) {
+		return repository.findById(id);
+	}
 
+	/**
+	 * 자주 묻는 질문 업데이트
+	 * @param faq
+	 * @return
+	 */
+	public int update(Faq faq) {
+		return repository.update(faq);
+	}
+	
+	/**
+	 * 자주 묻는 질문 삭제
+	 * @param id
+	 * @return
+	 */
+	public int deleteById(int id) {
+		return repository.deleteById(id);
+	}
 }

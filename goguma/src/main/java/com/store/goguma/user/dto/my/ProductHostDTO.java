@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductHostDTO {
 	
-	private Integer pId;
+	private Integer prodId;
 	private String address;
 	private String name;
 	private Integer price;

@@ -43,21 +43,6 @@
 		where free_board_id = #{freeBoardId} and u_id = #{uId}
 	</update>
 
-	<!-- 게시판 폰트, 배경 이미지 확인 -->
-	<select id="selectArticleType"
-		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
-		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
-		,s.id as subId , s.name ,
-		s.row_count, s.`number`, s.background,
-		s.font, s.list_type
-		FROM board_main_category AS m
-		JOIN
-		board_sub_category AS s
-		ON m.id = s.group_id where m.id = #{cate1} AND
-		s.group_id = #{cate1} AND s.id = #{id}
-	</select>
-
-
 	<!-- 게시글 조회수 확인 -->
 	<select id="getFreeView">
 		select view from free_board_view where free_board_id
@@ -76,6 +61,110 @@
 
 	</insert>
 
+
+	<select id="adminFindAll"
+		resultType="com.store.goguma.admin.dto.AdminFreeBoardDto">
+		select f.id as id ,
+		f.title as title ,
+		f.content as content ,
+		f.u_id as
+		userId ,
+		f.file as file ,
+		f.create_at as createAt ,
+		f.update_at as
+		updateAt ,
+		f.delete_at as deleteAt ,
+		f.delete_yn as deleteYn ,
+		f.main_category as mainCategoryId ,
+		m.name as mainCategoryName ,
+		f.sub_category as subCategoryId ,
+		s.name as subCategoryName ,
+		ifnull(count(r.good_yn) , 0) as goodCount ,
+		ifnull(v.view , 0) as
+		viewCount from free_board f
+		inner join board_main_category m
+		on
+		f.main_category = m.id
+		inner join board_sub_category s
+		on f.sub_category
+		= s.id
+		left join free_board_recommendation r
+		on r.free_board_id = f.id
+		and r.good_yn = 'Y'
+		left join free_board_view v
+		on v.free_board_id =
+		f.id
+		where delete_yn = 'N'
+		and
+		<if test="searchType == 'mainCateogryName'.toString()">
+			m.name
+		</if>
+
+		<if test="searchType == 'subCategoryName'.toString()">
+			s.name
+		</if>
+
+		<if test="searchType == 'title'.toString()">
+			f.title
+		</if>
+
+		<if test="searchType == 'content'.toString()">
+			f.content
+		</if>
+		like concat('%',#{search},'%')
+		group by f.id
+		order by f.id desc
+		limit #{start} , 10
+	</select>
+
+	<select id="countAdminFindAll" resultType="int">
+		select count(*) from
+		(
+		select f.* ,
+		ifnull(count(r.good_yn) , 0) as
+		goodCount ,
+		ifnull(v.view , 0) as viewCount from free_board f
+		inner join
+		board_main_category m
+		on f.main_category = m.id
+		inner join
+		board_sub_category s
+		on f.sub_category = s.id
+		left join
+		free_board_recommendation r
+		on r.free_board_id = f.id and r.good_yn =
+		'Y'
+		left join free_board_view v
+		on v.free_board_id = f.id
+		where delete_yn
+		= 'N'
+		and
+		<if test="searchType == 'mainCateogryName'.toString()">
+			m.name
+		</if>
+
+		<if test="searchType == 'subCategoryName'.toString()">
+			s.name
+		</if>
+
+		<if test="searchType == 'title'.toString()">
+			f.title
+		</if>
+
+		<if test="searchType == 'content'.toString()">
+			f.content
+		</if>
+		like concat('%',#{search},'%')
+		group by f.id
+		) as count ;
+	</select>
+
+	<update id="deleteById">
+		update free_board 
+		set delete_yn = 'Y' , delete_at = now()
+		where id = #{id}
+	</update>
+	
 	<!-- 게시글 전체 리스트 출력 -->
 	<select id="selectArticleAllBycateNid"
 		resultType="com.store.goguma.freeboard.dto.FreeBoardResDTO">
@@ -137,8 +226,6 @@
 
 
 	</select>
-
-
-
-
+	
+	
 </mapper>

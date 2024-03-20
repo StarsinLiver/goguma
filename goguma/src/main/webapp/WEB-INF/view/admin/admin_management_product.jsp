@@ -107,7 +107,8 @@
 								<th>등록일</th>
 								<th>거래완료</th>
 								<th>거래일</th>
-								<th>삭제 YN</th>
+								<th>삭제 여부</th>
+								<th>상세 정보</th>
 								<th>삭제하기</th>
 							</tr>
 						</thead>
@@ -124,6 +125,9 @@
 
 									<td id="">${product.formatHistoryCreateAt()}</td>
 									<td id="">${product.productDeleteYn}</td>
+									<td id="">
+										<c:if test="${product.productDeleteYn == 'N'}">
+									<a class="btn btn-success" href="/product/productDetail?pId=${product.getPId()}">상세 조회</a></c:if></td>
 
 									<td><c:if
 											test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">

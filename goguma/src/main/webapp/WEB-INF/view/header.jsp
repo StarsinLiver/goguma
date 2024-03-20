@@ -49,7 +49,7 @@
 <link rel="stylesheet" href="/customAssets/css/market.css" />
 <link rel="stylesheet" href="/customAssets/css/market2.css" />
 <link rel="stylesheet" href="/customAssets/css/userProduct.css" />
-<link rel="stylesheet" href="/customAssets/css/free.css" media="all" />
+<!-- <link rel="stylesheet" href="/customAssets/css/free.css" media="all" /> -->
 <link rel="stylesheet" href="/customAssets/css/emoji/list.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/refund.css">
@@ -140,8 +140,11 @@
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="#"
-								class="dropdown-item">통합검색</a>
+								class="dropdown-item">통합검색</a> <a href="/product/write"
+								class="dropdown-item">상품 등록</a>
+								
 						</div>
+						
 					</div>
 
 					<div class="nav-item dropdown">
@@ -158,7 +161,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/board/list" class="dropdown-item">리스트</a>
+							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
 							<a href="/" class="dropdown-item">ㅇㅇ</a>
 						</div>
@@ -172,7 +175,6 @@
 						</div>
 					</div>
 					<c:if test="${principal.role == 'USER'}">
-					
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>

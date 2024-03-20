@@ -1,0 +1,88 @@
+<div class="cate-main-box" id="${mainList.length}">
+    <div class="cate-main-title">
+        <span class="main-title-text">메인 카테고리</span>
+    </div>
+    <div class="cate-sub-box">
+    
+	    <div class="cate-sub-title" id="${subList.length}">
+	        <span class="sub-title-text">서브 카테고리</span>
+	    </div>
+    
+    </div>
+</div>
+
+
+const mainObject = {
+	mainIndex : 999,
+	mainInnrHTML : "",
+	mainTitle : "",
+	subObject : null
+};
+const subObject = {
+	mainIndex : i,
+	subIndex : 0,
+	subInnrHTML : "",
+	subTitle : ""
+};
+const mainList = new Array();
+const subList = new Array();
+
+
+const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+const mainTitleTexts = document.querySelectorAll(".main-title-text");
+
+const subCateTitles = document.querySelectorAll(".cate-sub-title");
+const subCateTexts = document.querySelectorAll(".sub-title-text");
+
+// 공통 함수----------------------------------------------------------------
+function borderBlack(boxs){
+	for(let v = 0; v < boxs.length; v++){
+		boxs[v].style.border = "1px solid black";
+	}
+}
+
+const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+const subCateTitles = document.querySelectorAll(".cate-sub-title");
+
+=====================================================================================================================
+
+
+downBtn.onclick = () => {
+		if(mainList.length != 0 && subList.length == 0){
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			let selectIndex = 999;
+			for(let i = 0; i < mainList.length; i++){
+				if(mainTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999){
+				[mainList[selectIndex], mainList[selectIndex + 1]] = [mainList[selectIndex + 1], mainList[selectIndex]];
+				console.log("메인2", mainList);
+				load();
+			}
+		}else if(mainList.length != 0 && subList.length != 0){
+			const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
+			let selectIndex = 999;
+			for(let i = 0; i < subList.length; i++){
+				if(subTitleBoxs[i].style.border == "1px solid red"){
+					selectIndex = i;
+				}
+			}
+			if(selectIndex != 999){
+				[subList[selectIndex], subList[selectIndex + 1]] = [subList[selectIndex + 1], subList[selectIndex]];
+				console.log("서브2", subList);
+				load();
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+

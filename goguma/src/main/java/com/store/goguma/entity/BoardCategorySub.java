@@ -1,12 +1,14 @@
 package com.store.goguma.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class BoardCategorySub {
 
 	private int id;

@@ -163,7 +163,6 @@ const makeCard = (content) => {
 	for (var i = 0; i < content.length; i++) {
 		
 		let file = content[i].file.split(",");
-		console.log(file);
 		div +=
 			`
 		<article class="card">
@@ -172,7 +171,8 @@ const makeCard = (content) => {
 					<img src="/images/upload/${file[0]}" />
 				</div>
 				<div class="card-desc">
-					<h2 class="card-title">${content[i].name}</h2>
+					<h2 class="card-title">${content[i].name} </h2>
+					${content[i].confirmYn == 'Y' ? '<h5 class="btn btn-danger">상품 판매가 완료되었습니다</h5>' : ''}
 					<div class="card-price">${content[i].price} 원</div>
 					<div class="card-region-name">${content[i].address}</div>
 					<div class="card-counts">

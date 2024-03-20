@@ -19,21 +19,12 @@
         <div class="cate-content-box">
             <div class="left-box">
                 <div class="cate-button-box">
-                    <button type="button" class="add-cate-btn">카테고리 추가</button>
+                    <button type="button" class="add-cate-btn">메인 카테고리 추가</button>
+                    <button type="button" class="add-sub-cate-btn">서브 카테고리 추가</button>
+                    <button type="button" class="switch-cate-btn">전체 선택 해제</button>
                     <button type="button" class="delete-cate-btn">카테고리 삭제</button>
                 </div>
-                <div class="cate-box">
-                    <div class="cate-main-box">
-                        <div class="cate-main-title">
-                            <span>메인 카테고리</span>
-                        </div>
-                        <div class="cate-sub-box">
-	                        <div class="cate-sub-title">
-	                            <span class="sub-title-text">서브 카테</span>
-	                        </div>
-                    	</div>
-                    </div>
-                </div>
+                <div class="cate-box"></div>
             </div>
             <div class="right-box">
                 <table class="table">
@@ -52,7 +43,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="tr">
+                    <tr class="tr hide-tr">
                         <th class="th">글보기</th>
                         <td class="td">
                             <div class="board-style-box">

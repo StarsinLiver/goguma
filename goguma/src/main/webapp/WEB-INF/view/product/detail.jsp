@@ -54,14 +54,14 @@
 				<div id="article-profile-right">
 					<dl id="temperature-wrap">
 						<dt>매너온도</dt>
-						<dd class="text-color-03">
-							100 <span>°C</span>
+						<dd class="text-color-0${color}">
+							${temperature} <span>°C</span>
 						</dd>
 					</dl>
 					<div class="meters">
-						<div class="bar bar-color-03" style="width: 100%"></div>
+						<div class="bar bar-color-0${color}" style="width: ${temperature}%"></div>
 					</div>
-					<div class="face face-03"></div>
+					<div class="face face-0${color}"></div>
 				</div>
 			</div>
 		</a>
@@ -73,6 +73,12 @@
 				style="float: right; margin-top: -20px;">
 
 				<!-- 채팅 버튼 -->
+				<c:if test="${product.confirmYn == 'Y'}">
+					<button type="button" class="btn btn-primary"
+							data-bs-toggle="modal" data-bs-target="#exampleModal"
+							style="margin-right: 10px;"><h5><b>상품 판매가 완료되었습니다</b></h5></button>
+				</c:if>
+				<c:if test="${product.confirmYn == 'N'}">
 				<c:choose>
 					<c:when test="${product.hostId == principal.getUId()}">
 						<a class="btn btn-primary" href="/chat/room"
@@ -158,13 +164,13 @@
 									<textarea class="form-control" id="additionalReason"
 										name="additionalReason" rows="3" style="resize: vertical;"
 										placeholder="신고 이유를 작성해주세요"></textarea>
-									<input type="hidden" id="resonInput" name="reason">
+									<input type="hidden" id="reasonInput" name="reason">
 									<div class="d-grid gap-2 d-md-flex justify-content-md-end"
 										style="margin-top: 8px;">
 										<button type="submit" class="btn btn-danger">신고</button>
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">취소</button>
-									</div>
+									</div>	
 								</form>
 							</div>
 						</div>
@@ -200,6 +206,7 @@
 						</form>
 					</c:otherwise>
 				</c:choose>
+				</c:if>
 			</div>
 		</h1>
 
@@ -223,7 +230,7 @@
 <section id="article-detail-hot-more">
 	<h3>인기중고</h3>
 	<div id="hot-more-link">
-		<a href="/#">더 구경하기</a>
+		<a href="/product/product-list">더 구경하기</a>
 	</div>
 	<!-- 찜 개수가 가장 많은 상품 6개 보여줄 예정 -->
 	<section class="cards-wrap">
@@ -266,6 +273,7 @@
 		const createAt = createAtElement.textContent.trim();
 		const createdAt = new Date(createAt.replace(/-/g, '/')); // '-'를 '/'로 대체하여 형식 변환
 		createAtElement.textContent = formatDate(createdAt);
+		displayTemplate();
 	});
 
 	function formatDate(createdAt) {
@@ -304,10 +312,10 @@
 	document.getElementById('reportModal').addEventListener('hidden.bs.modal', function () {
 	    resetModal();
 	});
-    // textarea에 작성된 내용도 reson으로 설정
+    // textarea에 작성된 내용도 reason으로 설정
     $("#additionalReason").on("input", function() {
         var additionalReason = $(this).val();
-        $("#resonInput").val(additionalReason);
+        $("#reasonInput").val(additionalReason);
     });
 </script>
 <script>

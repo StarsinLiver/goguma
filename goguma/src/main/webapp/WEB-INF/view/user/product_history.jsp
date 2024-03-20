@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/customAssets/css/user.css" />
 
 <style>
-.user-page .payment-container {
+.user-page .product-container {
 	width: 800px;
 	height: auto;
 	padding: 40px;
@@ -53,7 +53,7 @@
 	<%@ include file="/WEB-INF/view/user/myPageAside.jsp"%>
 	<!-- aside end -->
 	
-	<div class="payment-container">
+	<div class="product-container">
 		<h4 class="user-page-title">중고 거래 내역</h4>
 		
 		<div class="col-sm-12">
@@ -72,7 +72,6 @@
 								<th>상품명</th>
 								<th>금액</th>
 								<th>판매자</th>
-								<th>신고</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,11 +84,10 @@
 							<tr id="dataRow">
 								<td id="id">${product.id}</td>
 								<td id="purchaseDate">${product.createAt}</td>
-								<td id="pointName">${product.prodName}</td>
+								<td id="pointName"><a href="/product/productDetail?pId=${product.prodId}">
+									${product.prodName}</a></td>
 								<td id="pointName">${product.formatBalance()}</td>
 								<td id="refundYn">${product.userName}</td>
-								<td><button id="refundButton" data-value="${product.id}"
-									class="btn btn-danger btn-complete">신고</button></td>
 							</tr>
 							</c:forEach>
 						</tbody>

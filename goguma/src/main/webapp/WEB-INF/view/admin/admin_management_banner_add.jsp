@@ -94,7 +94,7 @@ input[type="checkbox"] {
 				<div class="card mb-12">
 					<div class="card-header text-white">
 						<!-- 카드 헤더 -->
-						<h3 class="card-title">제목 입력</h3>
+						<h3 class="card-title"></h3>
 					</div>
 					<div class="card-body">
 					

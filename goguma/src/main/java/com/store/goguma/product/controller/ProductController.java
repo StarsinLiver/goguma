@@ -2,7 +2,6 @@ package com.store.goguma.product.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
-import com.store.goguma.handler.exception.ReportException;
 import com.store.goguma.product.dto.ProductDTO;
 import com.store.goguma.product.dto.ProductUserDto;
+import com.store.goguma.product.dto.ProductWriteFormDTO;
 import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.ChatRoomNameService;
@@ -76,12 +76,16 @@ public class ProductController {
 		Integer wishlistCount = wishListService.getCountWishlist(pId);
 	    log.info("사용자 정보: {}", userDTO);
 	    
+	    int temperature = userService.getTemperatureUser(productDTO.getHostId());
+	    int color = userService.getTemperatureUserByScore(temperature);
 	    model.addAttribute("product", productDTO);
 	    model.addAttribute("productList", userProdList);    
 	    model.addAttribute("user", userDTO);
 	    model.addAttribute("prodWishlist", prodWishlist);
 	    model.addAttribute("isExistChatRoom", isExistChatRoom);
 	    model.addAttribute("wishlistCount", wishlistCount);
+	    model.addAttribute("temperature", temperature);
+	    model.addAttribute("color", color);
 	    
 	    return "/product/detail";
 	}
@@ -178,6 +182,55 @@ public class ProductController {
 	    model.addAttribute("user", userDTO);
 	    
 	    return "product/userProduct";
+	}	
+	
+	// http://localhost/product/register
+	// 상품 등록 페이지
+	@GetMapping("/write")
+	public String registerPage()  {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+
+	    if (user == null) {
+	    	throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus	.INTERNAL_SERVER_ERROR);
+	    }
+		
+	    return "product/product_register";
+	}	
+	
+	// 상품 등록
+	@PostMapping("/write")
+	public String productRegister(ProductWriteFormDTO dto)  {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+	    if (user == null) {
+	    	throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus	.INTERNAL_SERVER_ERROR);
+	    }
+	    int uId = user.getUId();
+	    
+	    
+	    log.info("등록"+dto);
+	    log.info("돈 타입 : ");
+	    
+	    if(dto.getName() == null || dto.getName().isEmpty()) 
+	    	throw new BackPageRestfulException(Define.NO_VALID_TITLE, HttpStatus.BAD_REQUEST);
+	    
+	    if(dto.getAddr1() == null || dto.getAddr1().isEmpty()) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_ADDRESS, HttpStatus.BAD_REQUEST);
+	    }
+	    if(dto.getAddr2() == null || dto.getAddr2().isEmpty()) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_ADDRESS, HttpStatus.BAD_REQUEST);
+	    }
+	    if(dto.getPrice() == null || dto.getPrice() < 0) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_PRICE, HttpStatus.BAD_REQUEST);
+	    }
+	    if(dto.getFile().get(0).getSize() == 0 ) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_FILE, HttpStatus.BAD_REQUEST);
+	    }
+	    
+		
+	    
+	    productService.writeProduct(dto, uId);
+		
+		return "redirect:/product/product-list";
 	}	
 	
 	/**

@@ -25,4 +25,11 @@ public class FreeBoardDTO {
 	private String deleteAt;
 	private String deleteYn;
 	private String goodCount;
+	private Integer mainCategory;
+	private Integer subCategory;
+	private Integer totalPosts;
+	
+	public int getUid() {
+		return this.uId;
+	}
 }

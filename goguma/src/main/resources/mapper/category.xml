@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.store.goguma.repository.CategoryRepository">
+
+	<insert id="cate1Save">
+		insert into board_main_category(name, main_index)
+		values(
+			#{name},
+			#{mainIndex}
+		);
+	</insert>
+
+	<insert id="cate2Save">
+		insert into board_sub_category(name, group_id)
+		values(
+			#{name},
+			#{groupId}
+		);
+	</insert>
+
+	<delete id="mainDelete">
+		delete from board_main_category;
+	</delete>
+
+	<delete id="subDelete">
+		delete from board_sub_category;
+	</delete>
+
+
+
+
+
+</mapper>

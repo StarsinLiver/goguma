@@ -9,6 +9,10 @@
 		width: 1000px;
 		height: auto;
 	}
+	
+	.my-imoji-container .emoji--item-box {
+		width: 150px;
+	}
 </style>
 
 
@@ -67,27 +71,88 @@
         
         </div>
         <div class="emoji--body">
-            <div class="emoji--content-box"></div>
+            <div class="emoji--content-box">
+            	<c:forEach var="imoji" items="${imojiList}">
+            	<a href="/emoji/detail/${imoji.mainEmojiId}">
+	            	<div class="emoji--item-box">
+	                    <div class="emoji--img-box">
+	                        <img src="/images/upload/emoji/${imoji.file}" alt="이모티콘">
+	                    </div>
+	                    <div class="emoji--item-title-box">
+	                        <span class="name--text">${imoji.name}</span>
+	                    </div>
+	                </div>
+                </a>
+                </c:forEach>
+                <c:if test="${empty imojiList}">
+                	<span>문의하기 내역이 존재하지 않습니다.</span>
+                </c:if>
+            </div>
             
-            <div class="pagination">
-				<!-- 페이지 처리 -->
-				<c:if test="${start > 1}">
-				<a href="/user/imoji?pg=${start - 1}">&laquo;</a>
-			  	</c:if>
-			  	<!-- 페이지 번호 -->
-			  	<c:forEach var="i" begin="${start}" end="${end}">
-					<a href="/user/imoji?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
-				</c:forEach>
-			  	<c:if test="${end < last}">
-				<a href="/user/imoji?pg=${end + 1}">&raquo;</a>
-				</c:if>
-			</div>
+            <c:if test="${start ne 0}">
+	            <div class="pagination">
+					<!-- 페이지 처리 -->
+					<c:if test="${start > 1}">
+					<a href="/user/imoji?pg=${start - 1}">&laquo;</a>
+				  	</c:if>
+				  	<!-- 페이지 번호 -->
+				  	<c:forEach var="i" begin="${start}" end="${end}">
+						<a href="/user/imoji?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+					</c:forEach>
+				  	<c:if test="${end < last}">
+					<a href="/user/imoji?pg=${end + 1}">&raquo;</a>
+					</c:if>
+				</div>
+			</c:if>
         </div>
     </div>
 				
 	</div>
 </div>
 <!-- 메인 종료 -->
+<script>
 
+	const names = document.querySelectorAll('.name--text');
+
+	names.forEach(function(name) {
+	    maskString(name);
+	});
+
+	// 긴제목 마스킹 처리
+	function maskString(name) {
+	    let textContent = name.textContent;
+	    
+	    if (textContent.length >= 6) {
+	        name.textContent = textContent.slice(0, 6) + '...';
+	    }
+	}
+	
+	// 페이지가 로드된 후 실행됨
+    window.onload = function() {
+        // 현재 URL 가져오기
+        let currentUrl = window.location.href;
+
+        let url = new URL(currentUrl);
+
+        // 추가할 파라미터
+        let size = url.searchParams.get('size');
+
+        // pagination 클래스를 가진 요소 찾기
+        let paginationLinks = document.querySelectorAll('.pagination a');
+
+        // 각 링크에 추가 파라미터 추가
+        paginationLinks.forEach(function(link) {
+            let linkUrl = new URL(link.href);
+
+            // 파라미터 추가
+            if (size) {
+                linkUrl.searchParams.append('size', size);
+            }
+
+            // 변경된 URL을 href 속성에 설정
+            link.href = linkUrl.href;
+        });
+    };
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
