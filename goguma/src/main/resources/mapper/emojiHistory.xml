@@ -40,4 +40,10 @@
 		and confirm_yn = 'Y'
 		and cancel_yn = 'N'
 	</select>
+	
+	<select id="countByUserId" resultType="int">
+		select count(*) from emoji_history
+		where u_id = #{userId} and main_emoji_id = #{mainEmojiId}
+		and cancel_yn  = 'N'
+	</select>
 </mapper>

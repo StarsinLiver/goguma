@@ -81,11 +81,12 @@
 		<h4 class="user-page-title">거래 상품 관리</h4>
 		<div class="col-sm-12">
 			<div class="search-div">
-				<form action="/admin/product">
+				<form action="/admin/freeboard">
 					<select name="searchType">
-						<option value="productName">제품 이름</option>
-						<option value="hostName">판매자</option>
-						<option value="userName">구매자</option>
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+						<option value="mainCateogryName">메인 카테고리 이름</option>
+						<option value="subCategoryName">서브 카테고리 이름</option>
 					</select> <input type="text" name="search" placeholder="검색..." />
 					<button type="submit" class="btn btn-warning btn-complete">검색</button>
 				</form>
@@ -99,47 +100,34 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th>제품 번호</th>
-								<th>제품 이름</th>
-								<th>판매자</th>
-								<th>구매자</th>
-								<th>상품 가격</th>
-								<th>등록일</th>
-								<th>거래완료</th>
-								<th>거래일</th>
-								<th>삭제 여부</th>
-								<th>상세 정보</th>
-								<th>삭제하기</th>
+								<th>게시판 번호</th>
+								<th>게시판 이름</th>
+								<th>작성일</th>
+								<th>메인 카테고리</th>
+								<th>서브 카테고리</th>
+								<th>추천 수</th>
+								<th>조회 수</th>
+								<th>조회 수</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${productList}" var="product">
+							<c:forEach items="${freeBoardList}" var="freeBoard">
 								<tr id="dataRow">
-									<td id="">${product.getPId()}</td>
-									<td id="">${product.productName}</td>
-									<td id="">${product.hostName}</td>
-									<td id="">${product.userName}</td>
-									<td id="">${product.price}</td>
-									<td id="">${product.formatProductCreateAt()}</td>
-									<td id="">${product.confirmYn}</td>
-
-									<td id="">${product.formatHistoryCreateAt()}</td>
-									<td id="">${product.productDeleteYn}</td>
+									<td id="">${freeBoard.id}</td>
+									<td id="">${freeBoard.title}</td>
+									<td id="">${freeBoard.formatCreateAt()}</td>
+									<td id="">${freeBoard.mainCategoryName}</td>
+									<td id="">${freeBoard.subCategoryName}</td>
+									<td id="">${freeBoard.goodCount}</td>
+									<td id="">${freeBoard.viewCount}</td>
 									<td id="">
-										<c:if test="${product.productDeleteYn == 'N'}">
-									<a class="btn btn-success" href="/product/productDetail?pId=${product.getPId()}">상세 조회</a></c:if></td>
-
-									<td><c:if
-											test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">
-											<form action="/admin/product/delete/${product.getPId()}"
-												method="post">
-												<input type="hidden" name="_method" value="delete" />
-												<button id="refundButton"
-													onclick="if(!confirm('삭제하시겠습니까?')) return false; "
-													class="btn btn-warning btn-complete cancel-request">삭제하기</button>
-											</form>
-										</c:if></td>
-
+										<form action="/admin/freeboard/delete/${freeBoard.id}"
+											method="post">
+											<input type="hidden" name="_method" value="delete" />
+											<button class="btn btn-danger"
+												onclick="if(!confirm('정말 삭제하시겠습니까?')) return false;">삭제</button>
+										</form>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.store.goguma.admin.dto.AdminFreeBoardDto;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.repository.FreeBoardRepository;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,4 +57,24 @@ public class FreeBoardService {
 		return recommendationDTOList;
 
 	}
+
+	// ----------- 산하
+	public ResponsePageDTO adminFindAll(RequestPageDTO pageDTO) {
+		int start = (pageDTO.getPg() -1) * pageDTO.getSize();
+		
+		List<AdminFreeBoardDto> list = freeBoardRepository.adminFindAll(start , pageDTO.getSearch() , pageDTO.getSearchType());
+		int count = freeBoardRepository.countAdminFindAll(pageDTO.getSearch() , pageDTO.getSearchType());
+		return ResponsePageDTO.builder()
+				.requestPageDTO(pageDTO)
+				.dtoList(list)
+				.total(count)
+				.build();
+	}
+	
+	public int deleteById(int id) {
+		return freeBoardRepository.deleteById(id);
+	}
+	// ----------- 산하
+	
+	
 }

@@ -97,7 +97,7 @@
 					</tr>
 					<c:if test="${not empty detail.answerContent}">
 					<tr class="qna-write-tr">
-						<th class="qna-write-th">답변하기</th>
+						<th class="qna-write-th">답변</th>
 						<td class="qna-write-td">
 							<textarea class="qna-write-textarea" readonly
 							name="answerContent">${detail.answerContent}</textarea>

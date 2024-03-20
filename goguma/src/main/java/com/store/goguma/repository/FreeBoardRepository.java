@@ -3,7 +3,9 @@ package com.store.goguma.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import com.store.goguma.admin.dto.AdminFreeBoardDto;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 
@@ -23,7 +25,13 @@ public interface FreeBoardRepository {
 
 
 	
+	//------------------- 산하
 	
+	// 게시물 전체 조회
+	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType);
+	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType);
+	public int deleteById(int id);
+	//------------------- 산하
 	
 	
 	

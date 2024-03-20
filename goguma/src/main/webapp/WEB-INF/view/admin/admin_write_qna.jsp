@@ -29,7 +29,7 @@
 			<tr class="qna-write-tr">
 				<th class="qna-write-th">제목</th>
 				<td class="qna-write-td"><input type="text" readonly="readonly"
-					class="qna-write-input" name="title" value="questionTitle">
+					class="qna-write-input" name="title" value="${qna.questionTitle}">
 				</td>
 			</tr>
 			<tr class="qna-write-tr">

@@ -211,7 +211,7 @@ h2 {
 			        <label for="fileInput" style="">썸네일</label>
 			        <img class="mt-5" id="profileImage" 
 			            style="border: 1px solid #ccc;height: 200px;" src="/assets/images/goguma_mascot.png">
-			        <input type="file" id="fileInput" name="file" style="display: none;" onchange="readURL(this);"  value="/assets/images/goguma_mascot.png" />
+			        <input type="file" id="fileInput" name="file" multiple="multiple" style="display: none;" onchange="readURL(this);"  value="/assets/images/goguma_mascot.png" />
 			    </div>
 			</div>	
 			<div class="register-form">
@@ -219,7 +219,7 @@ h2 {
 					id="name" placeholder="Enter name" /> 
 			</div>
 			<div class="register-form">
-				<label for="price">비용</label> <input type="number" name="price"
+				<label for="price">비용</label> <input type="number" name="price" min="0" value="0" step="1000"
 					id="price" placeholder="Enter price" /> 
 			</div>
 			<div class="register-form">

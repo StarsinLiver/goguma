@@ -96,7 +96,7 @@ input[type="checkbox"] {
 				<div class="card mb-12">
 					<div class="card-header text-white">
 						<!-- 카드 헤더 -->
-						<h3 class="card-title">제목 입력</h3>
+						<h3 class="card-title"></h3>
 					</div>
 					<div class="card-body">
 						<table class="table text-center">
@@ -179,8 +179,7 @@ input[type="checkbox"] {
 				</div>
 			</div>
 			<button type="submit" class="btn btn-warning"
-				style="margin: 5% 50%; font-weight: bolder; width: 12%; height: 50px; border-radius: 7%; font-size: large; background-color: #ffe0009c;">광고
-				생성</button>
+				style="margin: 5% 50%; font-weight: bolder; width: 12%; height: 50px; border-radius: 7%; font-size: large; background-color: #ffe0009c;">업데이트</button>
 		</form>
 	</div>
 </div>

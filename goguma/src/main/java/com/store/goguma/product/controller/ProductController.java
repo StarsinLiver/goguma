@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.product.dto.ProductDTO;
@@ -204,6 +205,23 @@ public class ProductController {
 	    
 	    log.info("등록"+dto);
 	    log.info("돈 타입 : ");
+	    
+	    if(dto.getName() == null || dto.getName().isEmpty()) 
+	    	throw new BackPageRestfulException(Define.NO_VALID_TITLE, HttpStatus.BAD_REQUEST);
+	    
+	    if(dto.getAddr1() == null || dto.getAddr1().isEmpty()) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_ADDRESS, HttpStatus.BAD_REQUEST);
+	    }
+	    if(dto.getAddr2() == null || dto.getAddr2().isEmpty()) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_ADDRESS, HttpStatus.BAD_REQUEST);
+	    }
+	    if(dto.getPrice() == null || dto.getPrice() < 0) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_PRICE, HttpStatus.BAD_REQUEST);
+	    }
+	    if(dto.getFile().get(0).getSize() == 0 ) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_FILE, HttpStatus.BAD_REQUEST);
+	    }
+	    
 		
 	    
 	    productService.writeProduct(dto, uId);

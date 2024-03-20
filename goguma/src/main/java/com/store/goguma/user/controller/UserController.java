@@ -21,6 +21,8 @@ import com.store.goguma.user.dto.my.ResponsePageDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Slf4j
 @Controller
@@ -292,5 +294,8 @@ public class UserController {
 		
 		return "main";
 	}
+	
+
+	
 	
 }

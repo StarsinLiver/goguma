@@ -10,7 +10,7 @@
 			결제 내역</a></li>
 		<li><a href="/user/product"><i class="bi bi-card-list"></i>&nbsp;
 			중고거래 내역</a></li>
-		<li><a href="/user/product/host?size=6"><i class="bi bi-basket2"></i>&nbsp;
+		<li><a href="/user/product/host?size=10"><i class="bi bi-basket2"></i>&nbsp;
 			내 물품 목록</a></li>
 		<li><a href="/user/board"><i class="bi bi-pen"></i>&nbsp;
 			내 게시글</a></li>
