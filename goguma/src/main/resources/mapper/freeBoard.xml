@@ -34,9 +34,6 @@
 		where fb.delete_yn = 'N'
 		group by fb.id, fb.title,
 		fb.content, fb.u_id, fb.file, fb.create_at,
-<<<<<<< HEAD
-		fb.update_at, fb.delete_at
-=======
 		fb.update_at, fb.delete_at,
 		fb.main_category, fb.sub_category
 		order by
@@ -96,7 +93,6 @@
 		ORDER BY
 		COUNT(fb.id) DESC
 		LIMIT 3
->>>>>>> byeongjun
 	</select>
 
 	<!-- 게시글 좋아요 추가 -->
@@ -127,6 +123,12 @@
 
 	<insert id="addFreeView">
 
+	</insert>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertFreeBoard">
+		insert into free_board (title,content,u_id,main_category,sub_category)
+			values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
 	</insert>
 
 

@@ -3,16 +3,22 @@ package com.store.goguma.freeboard.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
+import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.service.FreeBoardService;
+import com.store.goguma.user.dto.OauthDTO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FreeboardController {
 
 	private final FreeBoardService freeBoardService;
+	private final HttpSession httpSession;
 	
 	@GetMapping("/main")
 	public String boardMain( Model model) {
@@ -69,8 +76,33 @@ public class FreeboardController {
 	
 	@GetMapping("/write")
 	public String boardWrite() {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (user == null) {
+            throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+        }
 		
 		return "/free_board/free-write";
+	}
+	
+	// 게시글 등록
+	@PostMapping("/write")
+	public String write(FreeBoardFormDTO boardFormDTO) {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		int userId = user.getUId();
+		boardFormDTO.setUId(userId);
+		
+		freeBoardService.insert(boardFormDTO);
+		
+		
+		return "redirect:/free_board/list";
 	}
 	
 	

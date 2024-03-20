@@ -81,17 +81,21 @@ textarea {
 					<div class="row">
 						<div class="col-md-2 b-profile">
 							<div class="img" style="max-width: 380px; max-height: 130px;">
-								<img src="/customAssets/images/no_product.png" class="img-fluid"
-									style="width: 100%; height: 100px;">
+								<img
+									src="/profile/${board.userFile}"
+									class="img-fluid" style="width:100%; height: 100px;">
 							</div>
 						</div>
 						<div class="col-md-10">
 							<div class="b-title">
+								<h2>${board.title}</h2>
 								<h2>${freeBoard.title}</h2>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">
 									<div class="me-3">
+										<i class="bi bi-clock"></i>&nbsp; 
+										<span>${board.createAt}</span>
 										<i class="bi bi-clock"></i>&nbsp; <span>${freeBoard.createAt}</span>
 									</div>
 									<button type="button" class="btn btn-secondary"
@@ -152,10 +156,10 @@ textarea {
 								<div class="d-flex align-items-center">
 									<div class="me-3">
 										<i class="bi bi-hand-thumbs-up"></i> &nbsp;<span>추천수:
-											70</span>
+											${board.good}</span>
 									</div>
 									<div class="me-3">
-										<i class="bi bi-person"></i> &nbsp;<span>조회수: 70</span>
+										<i class="bi bi-person"></i> &nbsp;<span>조회수: ${board.view}</span>
 									</div>
 
 								</div>
@@ -168,6 +172,7 @@ textarea {
 			<br> <br> <br>
 			<!-- 게시글 시작 -->
 			<div style="width: 81%; margin: 0% 5%;">
+					${board.content}   
 				<a href="#">sssssss</a>
 				<p style="width: 100%;">${freeBoard.content}</p>
 			</div>

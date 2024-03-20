@@ -11,27 +11,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class FreeBoardDetailDTO {
+public class FreeBoardReviewDTO {
 	
 	private Integer id;
-	private String title;
-	private String content;
+	private Integer freeBoardId;
 	private Integer uId;
-	private String file;
+	private String content;
+	private Integer reviewGroup;
+	private Integer reviewParent;
 	private String createAt;
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
-	private Integer mainCategory;
-	private Integer subCategory;
+	private String file; // 댓글
 	
 	// user
-	private String userFile;
-	private String userName;
 	
-	// view
-	private Integer view;
-	
-	// recommendation
-	private Integer good;
 }
