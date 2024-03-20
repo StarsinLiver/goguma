@@ -21,9 +21,9 @@
 		content,
 		fb.u_id as uId,
 		fb.file as file,
-		fb.create_at as createdAt,
-		fb.update_at as updatedAt,
-		fb.delete_at as deletedAt,
+		fb.create_at as createAt,
+		fb.update_at as updateAt,
+		fb.delete_at as deleteAt,
 		fb.main_category as mainCategory,
 		fb.sub_category as subCategory,
 		count(fr.free_board_id) as goodCount
@@ -32,6 +32,31 @@
 		free_board_recommendation fr on fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
 		where fb.delete_yn = 'N'
+		group by fb.id
+		order by
+		goodCount desc
+	</select>
+	
+	<!-- 게시글 상세페이지 좋아요 개수 카운트 -->
+	<select id="detailCountRecommendation">
+		select fb.id as id,
+		fb.title as title,
+		fb.content as
+		content,
+		fb.u_id as uId,
+		fb.file as file,
+		fb.create_at as createAt,
+		fb.update_at as updateAt,
+		fb.delete_at as deleteAt,
+		fb.main_category as mainCategory,
+		fb.sub_category as subCategory,
+		count(fr.free_board_id) as goodCount
+		from free_board as fb
+		left join
+		free_board_recommendation fr on fb.id = fr.free_board_id and
+		fr.good_yn = 'Y'
+		where fb.delete_yn = 'N'
+		and fb.id = #{id}
 		group by fb.id
 		order by
 		goodCount desc
@@ -47,10 +72,9 @@
 		fb.u_id AS userId,
 		fb.file AS file,
 		fb.create_at AS createAt,
-		fb.update_at AS updatedAt,
-		fb.delete_at AS deletedAt,
-		fb.delete_yn as
-		deleteYn ,
+		fb.update_at AS updateAt,
+		fb.delete_at AS deleteAt,
+		fb.delete_yn as deleteYn ,
 		main_cat.id AS mainCategoryId,
 		sub_cat.id AS subCategoryId,
 		main_cat.name as mainCategoryName ,
@@ -103,36 +127,6 @@
 		COUNT(fb.id) DESC
 		LIMIT 3
 	</select>
-
-	<!-- 게시글 좋아요 추가 -->
-	<insert id="addRecommendation">
-		insert into free_board_recommendation
-		(`free_board_id`,`u_id`) values (#{freeBoardId},#{uId})
-	</insert>
-
-	<!-- 게시글 좋아요 취소 -->
-	<update id="deleteRecommendation">
-		update free_board_recommendation set delete_yn = 'N'
-		where free_board_id = #{freeBoardId} and u_id = #{uId}
-	</update>
-
-	<!-- 게시글 조회수 확인 -->
-	<select id="getFreeView">
-		select view from free_board_view where free_board_id
-		= #{freeBoardId}
-	</select>
-
-	<!-- 게시글 조회수 증가 -->
-	<update id="plusFreeView">
-		UPDATE free_board_view
-		SET view = view + 1
-		WHERE
-		free_board_id = #{freeBoardId}
-	</update>
-
-	<insert id="addFreeView">
-
-	</insert>
 
 
 	<select id="adminFindAll"

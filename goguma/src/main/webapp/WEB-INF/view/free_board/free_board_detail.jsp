@@ -81,22 +81,18 @@ textarea {
 					<div class="row">
 						<div class="col-md-2 b-profile">
 							<div class="img" style="max-width: 380px; max-height: 130px;">
-								<img
-									src="/profile/${board.userFile}"
-									class="img-fluid" style="width:100%; height: 100px;">
+								<img src="/profile/${boardCountRD.file}" class="img-fluid"
+									style="width: 100%; height: 100px;">
 							</div>
 						</div>
 						<div class="col-md-10">
 							<div class="b-title">
-								<h2>${board.title}</h2>
-								<h2>${freeBoard.title}</h2>
+								<h2>${boardCountRD.title}</h2>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">
 									<div class="me-3">
-										<i class="bi bi-clock"></i>&nbsp; 
-										<span>${board.createAt}</span>
-										<i class="bi bi-clock"></i>&nbsp; <span>${freeBoard.createAt}</span>
+										<i class="bi bi-clock"></i>&nbsp; <span>${boardCountRD.createAt}</span>
 									</div>
 									<!-- 신고 버튼 -->
 									<button type="button" class="btn btn-secondary"
@@ -114,8 +110,9 @@ textarea {
 												</div>
 												<div class="modal-body">
 													<form id="reportForm" action="addReport" method="post">
-														<input type="hidden" name="id" value="${freeBoard.id}">
-														<input type="hidden" name="hostId" value="${freeBoard.getUid()}">
+														<input type="hidden" name="id" value="${boardCountRD.id}">
+														<input type="hidden" name="hostId"
+															value="${boardCountRD.getUid()}">
 														<div class="dropdown">
 															<button class="btn btn-secondary dropdown-toggle"
 																type="button" id="dropdownMenuButton"
@@ -150,7 +147,6 @@ textarea {
 												</div>
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -158,10 +154,11 @@ textarea {
 								<div class="d-flex align-items-center">
 									<div class="me-3">
 										<i class="bi bi-hand-thumbs-up"></i> &nbsp;<span>추천수:
-											${board.goodCount}</span>
+											${boardCountRD.goodCount}</span>
 									</div>
 									<div class="me-3">
-										<i class="bi bi-person"></i> &nbsp;<span>조회수: ${board.view}</span>
+										<i class="bi bi-person"></i> &nbsp;<span>조회수:
+											${currentViews.view}</span>
 									</div>
 
 								</div>
@@ -174,14 +171,36 @@ textarea {
 			<br> <br> <br>
 			<!-- 게시글 시작 -->
 			<div style="width: 81%; margin: 0% 5%;">
-					${board.content}   
-				<a href="#">sssssss</a>
-				<p style="width: 100%;">${freeBoard.content}</p>
+				${board.content} <a href="#">sssssss</a>
+				<p style="width: 100%;">${boardCountRD.content}</p>
 			</div>
 			<br>
-			<button style="margin: 0 41.5%">
-				<i class='fab fa-gratipay' style='font-size: 48px; color: red;'></i>
-			</button>
+			<c:choose>
+				<c:when test="${recommendation}">
+					<form method="post" action="/freeBoard/deleteRecommendation">
+						<input type="hidden" name="id" value="${boardCountRD.id}">
+						<input type="hidden" name="uId" value="${boardCountRD.getUid()}">
+						<input type="hidden" name="freeBoardId" value="${boardCountRD.id}">
+						<button style="margin: 0 41.5%">
+							<i class='fab fa-gratipay' style='font-size: 48px; color: blue;'></i><span
+								style='font-size: 32px; color: blue;'>
+								${boardCountRD.goodCount}</span>
+						</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<form method="post" action="/freeBoard/addRecommendation">
+						<input type="hidden" name="id" value="${boardCountRD.id}">
+						<input type="hidden" name="uId" value="${boardCountRD.getUid()}">
+						<input type="hidden" name="freeBoardId" value="${boardCountRD.id}">
+						<button style="margin: 0 41.5%">
+							<i class='fab fa-gratipay' style='font-size: 48px; color: red;'></i><span
+								style='font-size: 32px; color: red;'>
+								${boardCountRD.goodCount}</span>
+						</button>
+					</form>
+				</c:otherwise>
+			</c:choose>
 			<!-- 게시글 끝 -->
 			<!-- 댓글 시작 -->
 			<div>

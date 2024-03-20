@@ -197,6 +197,19 @@ public class FreeBoardService {
 		
 		return dto;
 		
+	}
+	public FreeBoardDTO detailCountRecommendation(Integer id) {
+		
+		FreeBoard boardCountRD = freeBoardRepository.detailCountRecommendation(id);
+		
+		FreeBoardDTO dto = FreeBoardDTO.builder().id(boardCountRD.getId()).title(boardCountRD.getTitle())
+				.content(boardCountRD.getContent()).uId(boardCountRD.getUId()).file(boardCountRD.getFile())
+				.createAt(boardCountRD.getCreateAt()).updateAt(boardCountRD.getUpdateAt())
+				.deleteAt(boardCountRD.getDeleteAt()).deleteYn(boardCountRD.getDeleteYn())
+				.mainCategory(boardCountRD.getMainCategory()).subCategory(boardCountRD.getSubCategory())
+				.goodCount(boardCountRD.getGoodCount()).build();
+		
+		return dto;
 		
 	}
 	

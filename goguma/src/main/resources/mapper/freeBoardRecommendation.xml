@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.store.goguma.repository.FreeBoardRecommendationRepository">
+
+	<!-- 게시글 좋아요 추가 -->
+	<insert id="addRecommendation">
+		insert into free_board_recommendation
+		(`free_board_id`,`u_id`) values (#{freeBoardId},#{uId})
+	</insert>
+
+	<!-- 게시글 좋아요 취소 -->
+	<delete id="deleteRecommendation">
+		delete from free_board_recommendation
+		where u_id =
+		#{uId} and free_board_id = #{freeBoardId}
+	</delete>
+
+	<!-- 유저 기준 찜 여부 -->
+	<select id="findRecommendation" resultType="int">
+		SELECT count(*)
+		FROM
+		free_board_recommendation
+		WHERE free_board_id = #{freeBoardId} AND u_id
+		= #{uId}
+	</select>
+
+</mapper>
