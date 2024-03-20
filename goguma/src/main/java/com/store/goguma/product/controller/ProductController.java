@@ -76,12 +76,16 @@ public class ProductController {
 		Integer wishlistCount = wishListService.getCountWishlist(pId);
 	    log.info("사용자 정보: {}", userDTO);
 	    
+	    int temperature = userService.getTemperatureUser(productDTO.getHostId());
+	    int color = userService.getTemperatureUserByScore(temperature);
 	    model.addAttribute("product", productDTO);
 	    model.addAttribute("productList", userProdList);    
 	    model.addAttribute("user", userDTO);
 	    model.addAttribute("prodWishlist", prodWishlist);
 	    model.addAttribute("isExistChatRoom", isExistChatRoom);
 	    model.addAttribute("wishlistCount", wishlistCount);
+	    model.addAttribute("temperature", temperature);
+	    model.addAttribute("color", color);
 	    
 	    return "/product/detail";
 	}

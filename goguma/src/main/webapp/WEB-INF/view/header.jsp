@@ -133,7 +133,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/board/list" class="dropdown-item">리스트</a>
+							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
 							<a href="/" class="dropdown-item">ㅇㅇ</a>
 						</div>

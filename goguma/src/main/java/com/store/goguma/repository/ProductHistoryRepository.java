@@ -8,4 +8,6 @@ public interface ProductHistoryRepository {
 	public int countProductHistoryAll();
 	
 	public int save(@Param("pId") Integer pId , @Param("userId") Integer userId);
+	
+	public int countTemperatureUser(int userId);
 }

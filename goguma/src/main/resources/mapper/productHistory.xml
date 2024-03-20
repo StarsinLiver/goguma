@@ -16,4 +16,9 @@
 		confirm_yn)
 		values (#{pId} , #{userId} , 'Y');
 	</insert>
+
+	<select id="countTemperatureUser" resultType="int">
+		select count(*) from product_history
+		where u_id = #{userId} and confirm_yn = 'Y';
+	</select>
 </mapper>

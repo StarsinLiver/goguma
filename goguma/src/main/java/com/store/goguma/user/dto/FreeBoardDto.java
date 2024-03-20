@@ -1,5 +1,4 @@
-package com.store.goguma.entity;
-
+package com.store.goguma.user.dto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class FreeBoard {
+public class FreeBoardDto {
 	private Integer id;
 	private String title;
 	private String content;
@@ -29,6 +28,7 @@ public class FreeBoard {
 	private String goodCount;
 	private Integer mainCategory;
 	private Integer subCategory;
+	private String mainCategoryName;
 	
 	public String formatCreatedAt() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -41,5 +41,4 @@ public class FreeBoard {
 		}	
 		return dateFormat.format(date);
 	}
-
 }
