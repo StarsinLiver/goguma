@@ -39,7 +39,7 @@
 <div class="all-page-title"
 	style="background-image: url(/assets/images/pattern-4.png);">
 	<div class="container text-center">
-		<h1>상품 관리</h1>
+		<h1>관리자</h1>
 	</div>
 	<!--End Page-->
 </div>
@@ -78,7 +78,7 @@
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
 	<div class="payment-container" style="width: 70%; margin-right: 15%;">
-		<h4 class="user-page-title">거래 상품 관리</h4>
+		<h4 class="user-page-title">자유게시판 관리</h4>
 		<div class="col-sm-12">
 			<div class="search-div">
 				<form action="/admin/freeboard">
@@ -94,7 +94,7 @@
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">거래 상품 관리</h5>
+					<h5 class="card-title">자유게시판 관리</h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">

@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.admin.dto.AdminFreeBoardDto;
+import com.store.goguma.entity.BoardCategoryMain;
+import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
-import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.user.dto.FreeBoardDto;
 
 
 @Mapper
@@ -31,6 +33,14 @@ public interface FreeBoardRepository {
 	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType);
 	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType);
 	public int deleteById(int id);
+	
+	// 사용자 게시물 조회
+	public List<FreeBoardDto> findByUserId(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType , @Param("userId") int userId , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
+	public int countFindByUserId( @Param("search") String search , @Param("searchType") String searchType , @Param("userId") int userId , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
+	
+	// 메인 카테고리 가져오기
+	public List<BoardCategoryMain> findMainCategoryByUserId(int userId);
+	public List<BoardCategorySub> findSubCategoryByMainCateogry(@Param("userId") int userId , @Param("groupId") int groupId);
 	//------------------- 산하
 	
 	

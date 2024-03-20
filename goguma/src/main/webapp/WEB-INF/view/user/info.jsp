@@ -91,7 +91,7 @@
 			<div class="user-report" style="position: absolute;right: 40px;top: 230px;">
 				<p style="display: inline-block;">내 온도</p>
 				<div id="myProgress">
-				  <div id="myBar">0</div>
+				  <div id="myBar"></div>
 				</div>
 			</div>
 		</div>
@@ -143,7 +143,7 @@
 	    let width = 1;
 	    let id = setInterval(frame, 20);
 	    function frame() {
-	      if (width >= 100) {
+	      if (width >= 100 || width == ${temperature}) {
 	        clearInterval(id);
 	        i = 0;
 	      } else {
@@ -158,7 +158,7 @@
 	        if (width >= 40 && width <= 79) {
 	            color = "orange"; // width가 40에서 79 사이면 주황색
 	        } 
-	        if (width >= 30) {
+	        if (width <= 30) {
 	            color = "red"; // 그 외의 경우에는 빨간색
 	        }
 

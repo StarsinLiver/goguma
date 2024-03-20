@@ -6,9 +6,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.store.goguma.admin.dto.AdminFreeBoardDto;
+import com.store.goguma.entity.BoardCategoryMain;
+import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.UserFreeBoardPageReqDto;
+import com.store.goguma.freeboard.dto.UserFreeBoardPageResDto;
 import com.store.goguma.repository.FreeBoardRepository;
+import com.store.goguma.user.dto.FreeBoardDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 
@@ -59,6 +64,11 @@ public class FreeBoardService {
 	}
 
 	// ----------- 산하
+	/**
+	 * 관리자 에서 모든 게시물 검색
+	 * @param pageDTO
+	 * @return
+	 */
 	public ResponsePageDTO adminFindAll(RequestPageDTO pageDTO) {
 		int start = (pageDTO.getPg() -1) * pageDTO.getSize();
 		
@@ -71,8 +81,47 @@ public class FreeBoardService {
 				.build();
 	}
 	
+	/*
+	 * 게시물 삭제하기
+	 */
 	public int deleteById(int id) {
 		return freeBoardRepository.deleteById(id);
+	}
+	
+	/**
+	 * 유저의 게시물 가져오기
+	 * @param page
+	 * @param userId
+	 * @return
+	 */
+	public UserFreeBoardPageResDto findByUserId(UserFreeBoardPageReqDto page , int userId) {
+		int start = (page.getPg() -1) * page.getSize();
+		List<FreeBoardDto> list = freeBoardRepository.findByUserId(start, page.getSearch(), page.getSearchType(), userId, page.getMainCategory(), page.getSubCategory());
+		int count = freeBoardRepository.countFindByUserId(page.getSearch(), page.getSearchType(), userId, page.getMainCategory(), page.getSubCategory());
+		
+		return UserFreeBoardPageResDto.builder()
+				.requestPageDTO(page)
+				.dtoList(list)
+				.total(count)
+				.build();
+	}
+	/**
+	 * 유저의 메인 카테고리 검색
+	 * @param userId
+	 * @return
+	 */
+	public List<BoardCategoryMain> findMainCategoryByUserId(int userId) {
+		return freeBoardRepository.findMainCategoryByUserId(userId);
+	}
+	
+	/**
+	 * 유저가 작성한 글의 메인 카테고리에 맞는 서브 카테고리 찾기
+	 * @param userId
+	 * @param groupId
+	 * @return
+	 */
+	public List<BoardCategorySub> findSubCategoryByMainCateogry(int userId , int groupId) {
+		return freeBoardRepository.findSubCategoryByMainCateogry(userId, groupId);
 	}
 	// ----------- 산하
 	

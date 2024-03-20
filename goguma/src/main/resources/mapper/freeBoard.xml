@@ -114,7 +114,8 @@
 		like concat('%',#{search},'%')
 		group by f.id
 		order by f.id desc
-		limit #{start} , 10
+		limit
+		#{start} , 10
 	</select>
 
 	<select id="countAdminFindAll" resultType="int">
@@ -160,8 +161,71 @@
 	</select>
 
 	<update id="deleteById">
-		update free_board 
-		set delete_yn = 'Y' , delete_at = now()
+		update free_board
+		set delete_yn = 'Y' , delete_at =
+		now()
 		where id = #{id}
 	</update>
+
+	<select id="findByUserId"
+		resultType="com.store.goguma.user.dto.FreeBoardDto">
+		SELECT f.* , m.name as mainCategoryName FROM FREE_BOARD f
+		inner join
+		board_main_category m
+		on f.main_category = m.id
+		WHERE U_ID = #{userId}
+		<include refid="searchBox" />
+		<if test="mainCategory != 0">
+			and main_category = #{mainCategory} and sub_category =
+			#{subCategory}
+		</if>
+		order by f.id
+		limit #{start} , 10
+	</select>
+
+	<select id="countFindByUserId" resultType="int">
+		SELECT count(*) FROM FREE_BOARD f
+		inner join board_main_category m
+		on
+		f.main_category = m.id
+		WHERE U_ID =
+		#{userId}
+		<include refid="searchBox" />
+		<if test="mainCategory != 0">
+			and main_category = #{mainCategory} and sub_category =
+			#{subCategory}
+		</if>
+	</select>
+
+	<select id="findMainCategoryByUserId" resultType="com.store.goguma.entity.BoardCategoryMain">
+		select DISTINCT(m.id) , m.name from free_board f
+		inner join board_main_category m
+		on f.main_category = m.id
+		where u_id = #{userId};
+	</select>
+
+	<select id="findSubCategoryByMainCateogry" resultType="com.store.goguma.entity.BoardCategorySub">
+		select s.* from board_sub_category s
+		right join free_board f
+		on f.sub_category = s.id
+		where u_id = #{userId} and s.group_id = #{groupId}
+        group by s.id;
+	</select>
+	
+	<!-- 검색 쿼리 -->
+	<sql id="searchBox">
+		<choose>
+			<when test="searchType == 'titleOrContent'">
+				AND title LIKE CONCAT('%', #{search}, '%') OR content
+				LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'title'">
+				AND title LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'content'">
+				AND content LIKE CONCAT('%', #{search}, '%')
+			</when>
+		</choose>
+	</sql>
+
 </mapper>
