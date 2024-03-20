@@ -128,36 +128,6 @@
 		LIMIT 3
 	</select>
 
-	<!-- 게시글 좋아요 추가 -->
-	<insert id="addRecommendation">
-		insert into free_board_recommendation
-		(`free_board_id`,`u_id`) values (#{freeBoardId},#{uId})
-	</insert>
-
-	<!-- 게시글 좋아요 취소 -->
-	<update id="deleteRecommendation">
-		update free_board_recommendation set delete_yn = 'N'
-		where free_board_id = #{freeBoardId} and u_id = #{uId}
-	</update>
-
-	<!-- 게시글 조회수 확인 -->
-	<select id="getFreeView">
-		select view from free_board_view where free_board_id
-		= #{freeBoardId}
-	</select>
-
-	<!-- 게시글 조회수 증가 -->
-	<update id="plusFreeView">
-		UPDATE free_board_view
-		SET view = view + 1
-		WHERE
-		free_board_id = #{freeBoardId}
-	</update>
-
-	<insert id="addFreeView">
-
-	</insert>
-
 
 	<select id="adminFindAll"
 		resultType="com.store.goguma.admin.dto.AdminFreeBoardDto">

@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
-//import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
+import com.store.goguma.freeboard.dto.FreeBoardRecommendationDTO;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
-//import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
+import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.utils.Define;
@@ -39,7 +40,9 @@ public class FreeboardController {
 	private final HttpSession httpSession;
 	
 	@GetMapping("/main")
-	public String boardMain( Model model) {
+	public String boardMain( Model model, HttpSession session) {
+		
+		session.setAttribute("plusFreeView", true);
 		
 		List<FreeBoardDTO> boardList = freeBoardService.findAllFree();
 		List<FreeBoardDTO> recommendationList = freeBoardService.countRecommendation();
@@ -60,6 +63,7 @@ public class FreeboardController {
 		return "/free_board/free-main";
 	}
 	
+
 	@GetMapping("/list")
 	public String boardList() {
 		
