@@ -171,24 +171,14 @@
 		left join free_board_view v
 		on v.free_board_id =
 		f.id
-		where delete_yn = 'N'
-		and
-		<if test="searchType == 'mainCateogryName'.toString()">
-			m.name
+		where f.delete_yn = 'N'
+		<if test="mainCategory != 0">
+			and (f.main_category = #{mainCategory} and f.sub_category
+			=
+			#{subCategory})
 		</if>
-
-		<if test="searchType == 'subCategoryName'.toString()">
-			s.name
-		</if>
-
-		<if test="searchType == 'title'.toString()">
-			f.title
-		</if>
-
-		<if test="searchType == 'content'.toString()">
-			f.content
-		</if>
-		like concat('%',#{search},'%')
+		
+		<include refid="searchBox" />
 		group by f.id
 		order by f.id desc
 		limit
@@ -214,25 +204,13 @@
 		'Y'
 		left join free_board_view v
 		on v.free_board_id = f.id
-		where delete_yn
-		= 'N'
-		and
-		<if test="searchType == 'mainCateogryName'.toString()">
-			m.name
+		where f.delete_yn = 'N'
+		<if test="mainCategory != 0">
+			and (f.main_category = #{mainCategory} and f.sub_category
+			=
+			#{subCategory})
 		</if>
-
-		<if test="searchType == 'subCategoryName'.toString()">
-			s.name
-		</if>
-
-		<if test="searchType == 'title'.toString()">
-			f.title
-		</if>
-
-		<if test="searchType == 'content'.toString()">
-			f.content
-		</if>
-		like concat('%',#{search},'%')
+		<include refid="searchBox" />
 		group by f.id
 		) as count ;
 	</select>
@@ -320,21 +298,30 @@
 		</foreach>
 		)
 	</update>
-	
+
 	<!-- 게시글 등록 -->
-    <insert id="insertFreeBoard" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        insert into free_board (title,content,u_id,main_category,sub_category)
-            values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
-    </insert>
-    
-    <update id="updateFreeBoard">
-    	update free_board set title = #{title} , content = #{content} , main_category = #{mainCategory} , sub_category = #{subCategory} ,
-    	update_at = now()
-    	where id = #{id}
-    </update>
-    
-    <select id="findById" resultType="com.store.goguma.entity.FreeBoard">
-    	select * from free_board
-    	where id = #{id}
-    </select>
+	<insert id="insertFreeBoard" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+		insert into free_board
+		(title,content,u_id,main_category,sub_category ,
+		file)
+		values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory} ,
+		#{file});
+	</insert>
+
+	<update id="updateFreeBoard">
+		update free_board set title = #{title} , content =
+		#{content} ,
+		main_category = #{mainCategory} , sub_category =
+		#{subCategory} ,
+		file= #{file} ,
+		update_at = now()
+		where id = #{id}
+	</update>
+
+	<select id="findById"
+		resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board
+		where id = #{id}
+	</select>
 </mapper>

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,20 +16,22 @@ import com.store.goguma.repository.ChatMessageRepository;
 import com.store.goguma.user.dto.OauthDTO;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ChatMessageService {
 
-	@Autowired
-	ChatMessageRepository chatMessageRepository;
 
-	@Autowired
-	SimpMessageSendingOperations messagingTemplate;
+	private final ChatMessageRepository chatMessageRepository;
 
-	@Autowired
-	HttpSession httpSession;
+	
+	private final SimpMessageSendingOperations messagingTemplate;
+
+	
+	private final HttpSession httpSession;
 
 	List<ChatMessageDto> message = new ArrayList<>();
 
@@ -119,6 +120,7 @@ public class ChatMessageService {
 	}
 	
 	// 전체 저장
+	@Transactional
 	public boolean saveAll(List<ChatMessageDto> chatMessageDto) {
 		int result = chatMessageRepository.saveAll(message);
 		if(result == 0) {

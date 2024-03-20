@@ -3,7 +3,6 @@ package com.store.goguma.admin.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,27 +22,24 @@ import com.store.goguma.service.EmojiService;
 import com.store.goguma.service.EmojiUploadService;
 import com.store.goguma.service.PaymentService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @RestController
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminRestController {
 
-	@Autowired
-	AdminService adminService;
+	private final AdminService adminService;
 
-	@Autowired
-	PaymentService paymentService;
+	private final PaymentService paymentService;
 
-	@Autowired
-	EmojiUploadService emojiUploadService;
+	private final EmojiUploadService emojiUploadService;
 
-	@Autowired
-	EmojiHistoryService emojiHistoryService;
-	
-	@Autowired
-	EmojiService emojiService;
+	private final EmojiHistoryService emojiHistoryService;
+
+	private final EmojiService emojiService;
 
 	// admin emoji 수정하기 ajax
 	@PutMapping("/emoji/modify/{pageId}")
@@ -64,44 +60,42 @@ public class AdminRestController {
 		// 서브 이모지 전체 삭제
 		int result = 0;
 		result = emojiService.deleteSubEmojiByGroupId(pageId);
-		if(result == 0) {
+		if (result == 0) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		// 메인 이모지 변경
 		result = emojiService.updateMainEmoji(fileList.get(0), title, price, pageId);
-		if(result == 0) {
+		if (result == 0) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		// 서브 이모지 insert
 		for (int i = 1; i < fileList.size(); i++) {
-			Emoji emoji = Emoji.builder()
-					.file(fileList.get(i))
-					.name("emoji_" + pageId + "_" + i)
-					.groupId(pageId).build();
+			Emoji emoji = Emoji.builder().file(fileList.get(i)).name("emoji_" + pageId + "_" + i).groupId(pageId)
+					.build();
 			result = emojiService.subUpload(emoji);
-			if(result == 0) {
+			if (result == 0) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	// 이모지 삭제하기
 	@DeleteMapping("/emoji/delete/{pageId}")
 	public ResponseEntity<?> deleteEmoji(@PathVariable(value = "pageId") int groupId) {
 		try {
-			
+
 			// 이모지를 사용하고 있는 사람 확인
 			int count = emojiHistoryService.countByMainEmojiId(groupId);
-			if(count > 0) {
+			if (count > 0) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			
+
 			int result = 0;
 			// 메인 이모지 삭제
 			result = emojiService.deleteMainEmojiById(groupId);
-			if(result == 0) {
+			if (result == 0) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			// 서브 이미지 삭제 필요 없음

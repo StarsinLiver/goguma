@@ -807,12 +807,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-		
-		if(req.getSearch() == null) {
-			req.setSearch("");
-		}
-		if(req.getSearchType() == null) {
-			req.setSearchType("title");
+		if (req.getMainCategory() == null) {
+			req.setMainCategory(0);
+			req.setSubCategory(0);
 		}
 		
  		ResponsePageDTO res = freeBoardService.adminFindAll(req);

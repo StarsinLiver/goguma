@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.admin.dto.AdminProductDto;
@@ -25,14 +26,16 @@ import com.store.goguma.utils.Define;
 import com.store.goguma.utils.page.PageReq;
 import com.store.goguma.utils.page.PageRes;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ProductService {
 
-	@Autowired
-	ProductRepository productRepository;
+	
+	private final ProductRepository productRepository;
 	
 	// 모든 상품 리스트
 	public List<ProductDTO> findAllProduct() {
@@ -177,11 +180,13 @@ public class ProductService {
 	}
 	
 	// 관리자 계정에서 상품 삭제
+	@Transactional
 	public int adminDeleteProduct(int pId) {
 		return productRepository.adminDeleteProduct(pId);
 	}
 	
 	// 상품 등록
+	@Transactional
 	public int writeProduct(ProductWriteFormDTO dto, int uId) {
 		String address = dto.getAddr1() + " " + dto.getAddr2();
 		String file = "";
@@ -252,6 +257,7 @@ public class ProductService {
 	 * @param pId
 	 * @return
 	 */
+	@Transactional
 	public int updateConfirmYn(int pId) {
 		return productRepository.updateConfirmYn(pId);
 	}

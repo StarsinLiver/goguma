@@ -90,6 +90,7 @@ public class UserService {
 	}
 
 	// 이모티콘 환불
+	@Transactional
 	public UserEmojiDTO cancelEmoji(String merchantid, int uId, String reason) {
 		// 환불 요청
 		int result = myUserRepository.updateEmojiHistoryCancel(merchantid, uId, reason);
@@ -138,6 +139,7 @@ public class UserService {
 	}
 
 	// 문의하기 글 삭제
+	@Transactional
 	public int deleteQna(Integer[] qnaIds) {
 		int deletedCount = 0;
 
@@ -252,6 +254,7 @@ public class UserService {
 	}
 
 	// 관리자가 권한 수정
+	@Transactional
 	public int adminUpdateUserRole(int uId, String role) {
 		return userRepository.adminUpdateUserRole(uId, role);
 	}

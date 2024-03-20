@@ -54,7 +54,6 @@
 				<div id="article-profile-right">
 					<dl id="temperature-wrap">
 						<dt>매너온도</dt>
-<<<<<<< HEAD
 						<dd class="text-color-0${color}">
 							${temperature} <span>°C</span>
 						</dd>
@@ -63,16 +62,6 @@
 						<div class="bar bar-color-0${color}" style="width: ${temperature}%"></div>
 					</div>
 					<div class="face face-0${color}"></div>
-=======
-						<dd class="text-color-3">
-							100 <span>°C</span>
-						</dd>
-					</dl>
-					<div class="meters">
-						<div class="bar bar-color-04" style="width: 100%"></div>
-					</div>
-					<div class="face face-04"></div>
->>>>>>> byeongjun
 				</div>
 			</div>
 		</a>

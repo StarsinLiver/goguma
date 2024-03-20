@@ -2,6 +2,7 @@ package com.store.goguma.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.entity.WishList;
 import com.store.goguma.product.dto.WishListDTO;
@@ -16,6 +17,7 @@ public class WishListService {
     private WishListRepository wishListRepository;
 
     // 찜 추가
+    @Transactional
     public void addWishList(WishListDTO dto) {
     	
         WishList wishList = WishList.builder()
@@ -27,6 +29,7 @@ public class WishListService {
     }
     
     // 찜 삭제
+    @Transactional
     public void deleteWishList(WishListDTO dto) {
     	
         WishList wishList = WishList.builder()
