@@ -35,7 +35,6 @@
 		where fb.delete_yn = 'N'
 		group by fb.id, fb.title,
 		fb.content, fb.u_id, fb.file, fb.create_at,
-		fb.update_at, fb.delete_at
 		fb.update_at, fb.delete_at,
 		fb.main_category, fb.sub_category
 		order by

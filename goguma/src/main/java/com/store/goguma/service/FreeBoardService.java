@@ -11,6 +11,7 @@ import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageReqDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageResDto;
@@ -68,6 +69,12 @@ public class FreeBoardService {
 		}
 		return recommendationDTOList;
 
+	}
+
+	
+	// 게시글 등록
+	public int insert(FreeBoardFormDTO boardDTO) {
+		return freeBoardRepository.insertFreeBoard(boardDTO);
 	}
 
 
