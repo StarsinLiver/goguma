@@ -49,11 +49,14 @@ h2 {
 		</section>
 		<div class="col-lg-8">
 			<div class="row">
-				<form class="row">
+				<form class="row" action="/freeBoard/write" method="post">
+					<!-- 카테고리 테스트 -->
+					<input type="hidden" name="mainCategory" value="1" />
+					<input type="hidden" name="subCategory" value="1" />
 					<!-- 카테고리 선택 셀렉트 박스 -->
 					<div class="mb-3 col-md-5">
 						<label for="categorySelect" class="form-label">카테고리</label> <select
-							class="form-select" id="categorySelect" style="width: calc(30%);">
+							class="form-select" id="categorySelect" name="subCategory" style="width: calc(30%);">
 							<option value="1">카테고리 1</option>
 							<option value="2">카테고리 2</option>
 							<option value="3">카테고리 3</option>
@@ -63,13 +66,13 @@ h2 {
 					<!-- 제목 입력 폼 -->
 					<div class="mb-3 col-md-12">
 						<label for="titleInput" class="form-label">제목</label> <input
-							type="text" class="form-control" id="titleInput"
+							type="text" class="form-control" id="titleInput" name="title"
 							placeholder="제목을 입력하세요">
 					</div>
 					<!-- Summernote를 사용할 textarea 요소 -->
 					<div class="mb-3 col-md-12">
 						<label for="summernote" class="form-label">내용</label>
-						<textarea class="form-control" id="summernote"></textarea>
+						<textarea class="form-control" name="content" id="summernote"></textarea>
 					</div>
 					<!-- 글 작성 버튼 -->
 					<div class="col-12 text-end" style="margin: -20px 30px 10px 0;">

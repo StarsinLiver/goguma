@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDTO;
+import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.repository.FreeBoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -53,5 +55,15 @@ public class FreeBoardService {
 		}
 		return recommendationDTOList;
 
+	}
+	
+	// 게시글 상세 조회
+	public FreeBoardDetailDTO findById(Integer id) {
+		return freeBoardRepository.selectByFid(id);
+	}
+	
+	// 게시글 등록
+	public int insert(FreeBoardFormDTO boardDTO) {
+		return freeBoardRepository.insertFreeBoard(boardDTO);
 	}
 }

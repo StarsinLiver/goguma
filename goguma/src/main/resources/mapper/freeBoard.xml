@@ -57,4 +57,24 @@
 	<insert id="addFreeView">
 		
 	</insert>
+	
+	<select id="selectByFid" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailDTO">
+		SELECT fd.*,
+			u.`file` as `userFile`,
+			v.`view`,
+			r.good 
+		FROM free_board as fd
+			join `user` as u 
+				on fd.u_id = u.u_id
+			join free_board_view as v 
+				on fd.id = v.free_board_id
+			join free_board_recommendation as r 
+				on fd.id = r.free_board_id
+		where `id`=#{fId}
+	</select>
+	
+	<insert id="insertFreeBoard">
+		insert into free_board (title,content,u_id,main_category,sub_category)
+			values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
+	</insert>
 </mapper>
