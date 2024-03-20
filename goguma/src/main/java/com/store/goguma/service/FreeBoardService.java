@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class FreeBoardService {
 
-	final private FreeBoardRepository freeBoardRepository;
+	private final FreeBoardRepository freeBoardRepository;
 
 	// 게시글 리스트
 	public List<FreeBoardDTO> findAllFree() {
@@ -37,11 +37,11 @@ public class FreeBoardService {
 
 		for (FreeBoard freeBoard : freeBoardList) {
 			FreeBoardDTO freeBoardDTO = FreeBoardDTO.builder().id(freeBoard.getId()).title(freeBoard.getTitle())
-					.content(freeBoard.getTitle()).uId(freeBoard.getUId()).file(freeBoard.getFile())
+					.content(freeBoard.getContent()).uId(freeBoard.getUId()).file(freeBoard.getFile())
 					.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 					.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
-//					.mainCategory(freeBoard.getMainCategory())
-//					.subCategory(freeBoard.getSubCategory())
+					.mainCategory(freeBoard.getMainCategory())
+					.subCategory(freeBoard.getSubCategory())
 					.build();
 
 			freeBoardDTOList.add(freeBoardDTO);
@@ -58,10 +58,10 @@ public class FreeBoardService {
 
 		for (FreeBoard freeBoard : recommendation) {
 			FreeBoardDTO recommendationDTO = FreeBoardDTO.builder().id(freeBoard.getId()).title(freeBoard.getTitle())
-					.content(freeBoard.getTitle()).uId(freeBoard.getUId()).file(freeBoard.getFile())
+					.content(freeBoard.getContent()).uId(freeBoard.getUId()).file(freeBoard.getFile())
 					.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 					.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
-//					.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
+					.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
 					.goodCount(freeBoard.getGoodCount()).build();
 
 			recommendationDTOList.add(recommendationDTO);
@@ -155,10 +155,10 @@ public class FreeBoardService {
 		FreeBoard freeBoard = freeBoardRepository.findByFreeId(id);
 		
 		FreeBoardDTO dto = FreeBoardDTO.builder().id(freeBoard.getId()).title(freeBoard.getTitle())
-				.content(freeBoard.getTitle()).uId(freeBoard.getUId()).file(freeBoard.getFile())
+				.content(freeBoard.getContent()).uId(freeBoard.getUId()).file(freeBoard.getFile())
 				.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 				.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
-//				.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
+				.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
 				.goodCount(freeBoard.getGoodCount()).build();
 		
 		return dto;

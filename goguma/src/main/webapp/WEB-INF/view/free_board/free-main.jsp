@@ -122,7 +122,7 @@ h4 {
 							<div class="col-md-6 mb-3">
 								<div class="card2" onmouseover="highlightCard(this)"
 									onmouseout="unhighlightCard(this)">
-									<a href="#"> <img src="/images/upload/${board.file}"
+									<a href="/freeBoard/detail?id=${board.id}"> <img src="/images/upload/${board.file}"
 										class="card2-img-top" alt="${board.title} 이미지"
 										style="height: 105px">
 										<div class="card-details">
@@ -146,7 +146,7 @@ h4 {
 					<c:forEach var="board" items="${rDList}" varStatus="loop">
 						<c:if test="${loop.index < 6}">
 							<li class="list-group-item">
-								<td><a href="">${board.title}</a></td>
+								<td><a href="/freeBoard/detail?id=${board.id}">${board.title}</a></td>
 								<td class="text-center">
 									<div class="cnt">
 										<span class="view board-img">626</span> <span
@@ -170,7 +170,7 @@ h4 {
 									<div class="col-md-6 mb-3">
 										<div class="card2" onmouseover="highlightCard(this)"
 											onmouseout="unhighlightCard(this)">
-											<a href="#"> <img src="/images/upload/${category.file}"
+											<a href="/freeBoard/detail?id=${category.id}"> <img src="/images/upload/${category.file}"
 												class="card2-img-top" alt="${category.title} 이미지"
 												style="height: 105px">
 												<div class="card-details">
@@ -187,7 +187,7 @@ h4 {
 								varStatus="loop">
 								<c:if test="${loop.index < 4}">
 									<li class="list-group-item">
-										<td><a href="">${category.title}</a></td>
+										<td><a href="/freeBoard/detail?id=${category.id}">${category.title}</a></td>
 										<td class="text-center">
 											<div class="cnt">
 												<span class="view board-img">626</span> <span
@@ -210,7 +210,7 @@ h4 {
 									<div class="col-md-6 mb-3">
 										<div class="card2" onmouseover="highlightCard(this)"
 											onmouseout="unhighlightCard(this)">
-											<a href="#"> <img src="/images/upload/${category.file}"
+											<a href="/freeBoard/detail?id=${category.id}"> <img src="/images/upload/${category.file}"
 												class="card2-img-top" alt="${category.title} 이미지"
 												style="height: 105px">
 												<div class="card-details">
@@ -227,7 +227,7 @@ h4 {
 								varStatus="loop">
 								<c:if test="${loop.index < 4}">
 									<li class="list-group-item">
-										<td><a href="">${category.title}</a></td>
+										<td><a href="/freeBoard/detail?id=${category.id}">${category.title}</a></td>
 										<td class="text-center">
 											<div class="cnt">
 												<span class="view board-img">626</span> <span
@@ -250,7 +250,7 @@ h4 {
 									<div class="col-md-6 mb-3">
 										<div class="card2" onmouseover="highlightCard(this)"
 											onmouseout="unhighlightCard(this)">
-											<a href="#"> <img src="/images/upload/${category.file}"
+											<a href="/freeBoard/detail?id=${category.id}"> <img src="/images/upload/${category.file}"
 												class="card2-img-top" alt="${category.title} 이미지"
 												style="height: 105px">
 												<div class="card-details">
@@ -267,7 +267,7 @@ h4 {
 								varStatus="loop">
 								<c:if test="${loop.index < 4}">
 									<li class="list-group-item">
-										<td><a href="">${category.title}</a></td>
+										<td><a href="/freeBoard/detail?id=${category.id}">${category.title}</a></td>
 										<td class="text-center">
 											<div class="cnt">
 												<span class="view board-img">626</span> <span

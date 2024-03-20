@@ -9,7 +9,7 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
-	<select id="findByFreeId">
+	<select id="findByFreeId" resultType="com.store.goguma.entity.FreeBoard">
 		select * from free_board where delete_yn = 'N' and id = #{id}
 	</select>
 
@@ -19,25 +19,22 @@
 		fb.title as title,
 		fb.content as
 		content,
-		fb.u_id as u_id,
+		fb.u_id as uId,
 		fb.file as file,
-		fb.create_at as created_at,
-		fb.update_at as updated_at,
-		fb.delete_at as deleted_at,
-		fb.main_category as main_category,
-		fb.sub_category as sub_category,
-		count(fr.free_board_id) as good_count
+		fb.create_at as createdAt,
+		fb.update_at as updatedAt,
+		fb.delete_at as deletedAt,
+		fb.main_category as mainCategory,
+		fb.sub_category as subCategory,
+		count(fr.free_board_id) as goodCount
 		from free_board as fb
 		left join
 		free_board_recommendation fr on fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
 		where fb.delete_yn = 'N'
-		group by fb.id, fb.title,
-		fb.content, fb.u_id, fb.file, fb.create_at,
-		fb.update_at, fb.delete_at
-		fb.main_category, fb.sub_category
+		group by fb.id
 		order by
-		good_count desc
+		goodCount desc
 	</select>
 
 	<!-- 카테고리별 좋아요 많은 순서 -->

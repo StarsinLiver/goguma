@@ -98,6 +98,7 @@ textarea {
 										<span>${board.createAt}</span>
 										<i class="bi bi-clock"></i>&nbsp; <span>${freeBoard.createAt}</span>
 									</div>
+									<!-- 신고 버튼 -->
 									<button type="button" class="btn btn-secondary"
 										id="reportButton" data-bs-toggle="modal"
 										data-bs-target="#reportModal">신고</button>
@@ -113,7 +114,8 @@ textarea {
 												</div>
 												<div class="modal-body">
 													<form id="reportForm" action="addReport" method="post">
-														<input type="hidden" name="pId" value="${freeBoard.id}">
+														<input type="hidden" name="id" value="${freeBoard.id}">
+														<input type="hidden" name="hostId" value="${freeBoard.getUid()}">
 														<div class="dropdown">
 															<button class="btn btn-secondary dropdown-toggle"
 																type="button" id="dropdownMenuButton"
@@ -137,7 +139,7 @@ textarea {
 														<textarea class="form-control" id="additionalReason"
 															name="additionalReason" rows="3"
 															style="resize: vertical;" placeholder="신고 이유를 작성해주세요"></textarea>
-														<input type="hidden" id="resonInput" name="reason">
+														<input type="hidden" id="reasonInput" name="reason">
 														<div class="d-grid gap-2 d-md-flex justify-content-md-end"
 															style="margin-top: 8px;">
 															<button type="submit" class="btn btn-danger">신고</button>
@@ -156,7 +158,7 @@ textarea {
 								<div class="d-flex align-items-center">
 									<div class="me-3">
 										<i class="bi bi-hand-thumbs-up"></i> &nbsp;<span>추천수:
-											${board.good}</span>
+											${board.goodCount}</span>
 									</div>
 									<div class="me-3">
 										<i class="bi bi-person"></i> &nbsp;<span>조회수: ${board.view}</span>
@@ -223,10 +225,10 @@ textarea {
 	document.getElementById('reportModal').addEventListener('hidden.bs.modal', function () {
 	    resetModal();
 	});
-    // textarea에 작성된 내용도 reson으로 설정
+    // textarea에 작성된 내용도 reason으로 설정
     $("#additionalReason").on("input", function() {
         var additionalReason = $(this).val();
-        $("#resonInput").val(additionalReason);
+        $("#reasonInput").val(additionalReason);
     });
 </script>
 <script>
