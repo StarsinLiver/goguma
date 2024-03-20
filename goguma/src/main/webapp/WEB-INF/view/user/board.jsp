@@ -120,7 +120,7 @@
 						<td>${board.id}</td>
 						<td><a href="/freeBoard/detail?id=${board.id}">${board.title}</a></td>
 						<td>${board.formatCreatedAt()}</td>
-						<td><a class="btn btn-warning btn-complete" href="#">수정</a></td>
+						<td><a class="btn btn-warning btn-complete" href="/freeBoard/write/update/${board.id}">수정</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -133,7 +133,7 @@
 			<div>
 				<button id="delete-board" onclick="deleteFun()"
 					class="btn btn-warning btn-complete">삭제</button>
-				<a href="/cs/board/write" class="btn btn-warning btn-complete">작성하기</a>
+				<a href="/freeBoard/write" class="btn btn-warning btn-complete">작성하기</a>
 			</div>
 		</div>
 		<div class="pagination">

@@ -90,7 +90,7 @@ function onclickMainCategory(id) {
 	
 	// 위의 메인값에 대한 소분류 값 들고오기
 	$.ajax({
-		url : "/free-board/subcategory/" + id ,
+		url : "/free-board/user/subcategory/" + id ,
 		method : "get" ,
 		success : function(data) {
 			displaySubCategory.innerHTML = `<option value="">소분류</option>`

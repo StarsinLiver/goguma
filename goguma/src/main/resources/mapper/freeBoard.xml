@@ -320,4 +320,21 @@
 		</foreach>
 		)
 	</update>
+	
+	<!-- 게시글 등록 -->
+    <insert id="insertFreeBoard" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into free_board (title,content,u_id,main_category,sub_category)
+            values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
+    </insert>
+    
+    <update id="updateFreeBoard">
+    	update free_board set title = #{title} , content = #{content} , main_category = #{mainCategory} , sub_category = #{subCategory} ,
+    	update_at = now()
+    	where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="com.store.goguma.entity.FreeBoard">
+    	select * from free_board
+    	where id = #{id}
+    </select>
 </mapper>
