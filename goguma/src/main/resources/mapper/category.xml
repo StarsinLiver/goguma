@@ -28,7 +28,13 @@
 		delete from board_sub_category;
 	</delete>
 
+	<select id="getMainList" resultType="com.store.goguma.entity.BoardCategoryMain">
+		select * from board_main_category;
+	</select>
 
+	<select id="getSubList" resultType="com.store.goguma.entity.BoardCategorySub">
+		select * from board_sub_category;
+	</select>
 
 
 

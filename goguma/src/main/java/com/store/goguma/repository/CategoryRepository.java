@@ -1,5 +1,7 @@
 package com.store.goguma.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.store.goguma.entity.BoardCategoryMain;
@@ -15,5 +17,9 @@ public interface CategoryRepository {
 	public int mainDelete();
 
 	public int subDelete();
+
+	public List<BoardCategoryMain> getMainList();
+
+	public List<BoardCategorySub> getSubList();
 
 }

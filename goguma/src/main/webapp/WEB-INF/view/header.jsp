@@ -135,7 +135,7 @@
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
-							<a href="/" class="dropdown-item">ㅇㅇ</a>
+							<a href="/board/cate-setting2" class="dropdown-item">카테고리 수정2</a>
 						</div>
 					</div>
 
