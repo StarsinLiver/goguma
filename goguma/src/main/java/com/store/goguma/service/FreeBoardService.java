@@ -3,6 +3,7 @@ package com.store.goguma.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.store.goguma.admin.dto.AdminFreeBoardDto;
@@ -15,10 +16,13 @@ import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageReqDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageResDto;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.FreeBoardRepository;
+import com.store.goguma.repository.FreeBoardViewRepository;
 import com.store.goguma.user.dto.FreeBoardDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.utils.Define;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class FreeBoardService {
 
-	final private FreeBoardRepository freeBoardRepository;
+	 private final FreeBoardRepository freeBoardRepository;
+	private final FreeBoardViewRepository freeBoardViewRepository;
 
 	// 게시글 리스트
 	public List<FreeBoardDTO> findAllFree() {
@@ -74,7 +79,16 @@ public class FreeBoardService {
 	
 	// 게시글 등록
 	public int insert(FreeBoardFormDTO boardDTO) {
-		return freeBoardRepository.insertFreeBoard(boardDTO);
+		int result = freeBoardRepository.insertFreeBoard(boardDTO);
+		
+		if(result == 0) {
+			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		result = freeBoardViewRepository.save(boardDTO.getId());
+		
+		
+		return result;
 	}
 
 
@@ -139,6 +153,8 @@ public class FreeBoardService {
 		return freeBoardRepository.findSubCategoryByMainCateogry(userId, groupId);
 	}
 	
+	
+	
 	/**
 	 * 전체 삭제
 	 * @param list
@@ -146,6 +162,15 @@ public class FreeBoardService {
 	 */
 	public int deleteBoardById(List<Integer> list) {
 		return freeBoardRepository.deleteBoardById(list);
+	}
+	
+	/**
+	 * 상세 조회
+	 * @param id
+	 * @return
+	 */
+	public FreeBoard findById(int id) {
+		return freeBoardRepository.findById(id);
 	}
 	// ----------- 산하
 	
@@ -173,6 +198,15 @@ public class FreeBoardService {
 		return dto;
 		
 		
+	}
+	
+	/**
+	 * 게시글 수정
+	 * @param dto
+	 * @return
+	 */
+	public int updateFreeBoard(FreeBoardFormDTO dto) {
+		return freeBoardRepository.updateFreeBoard(dto);
 	}
 
 }

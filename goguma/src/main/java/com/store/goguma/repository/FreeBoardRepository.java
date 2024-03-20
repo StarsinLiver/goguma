@@ -55,6 +55,9 @@ public interface FreeBoardRepository {
 	public List<BoardCategorySub> findSubCategoryByMainCateogry(@Param("userId") int userId , @Param("groupId") int groupId);
 	
 	public int deleteBoardById (@Param("boardList") List<Integer> boardList);
+	
+	public FreeBoard findById(int id);
+	public int updateFreeBoard(FreeBoardFormDTO dto);
 	//------------------- 산하
 	
 	

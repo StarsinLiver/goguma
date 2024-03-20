@@ -39,6 +39,8 @@ h2 {
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<input type="hidden" id="main--cateogry--id" value="${board.mainCategory}"/>
+	<input type="hidden" id="sub--cateogry--id" value="${board.subCategory}"/>
 <div class="container mt-4">
 	<div class="row justify-content-center">
 		<section class="section nopad cac text-center" style="width: 67%;">
@@ -46,7 +48,10 @@ h2 {
 		</section>
 		<div class="col-lg-8">
 			<div class="row">
-				<form class="row" action="/freeBoard/write" method="post">
+				<form class="row" action="/freeBoard/write/update" method="post">
+				<input type="hidden" name="_method" value="put"/>
+				<input type="hidden" name="id" value="${board.id}"/>
+				
 					<!-- 카테고리 선택 셀렉트 박스 -->
 					<div class="mb-3 col-md-5">
 						<label for="categorySelect" class="form-label">메인 카테고리</label> <select
@@ -63,17 +68,17 @@ h2 {
 					<!-- 제목 입력 폼 -->
 					<div class="mb-3 col-md-12">
 						<label for="titleInput" class="form-label">제목</label> <input
-							type="text" class="form-control" id="titleInput" name="title"
+							type="text" class="form-control" id="titleInput" name="title" value="${board.title}"
 							placeholder="제목을 입력하세요">
 					</div>
 					<!-- Summernote를 사용할 textarea 요소 -->
 					<div class="mb-3 col-md-12">
 						<label for="summernote" class="form-label">내용</label>
-						<textarea class="form-control" name="content" id="summernote"></textarea>
+						<textarea class="form-control" name="content" id="summernote" >${board.content}</textarea>
 					</div>
 					<!-- 글 작성 버튼 -->
 					<div class="col-12 text-end" style="margin: -20px 30px 10px 0;">
-						<button type="submit" class="btn btn-primary">글 작성</button>
+						<button type="submit" class="btn btn-primary">수정하기</button>
 						<button type="button" class="btn btn-secondary ms-2">취소</button>
 					</div>
 				</form>
@@ -83,7 +88,7 @@ h2 {
 </div>
 
 <!-- Summernote 초기화 스크립트 -->
-<script src="/customAssets/js/free-board/free_write.js"></script>
+<script src="/customAssets/js/free-board/free_write_update.js"></script>
 <!-- include Summernote CSS -->
 <script src="/assets/js/summernote-ko-KR.js"></script>
 <script
