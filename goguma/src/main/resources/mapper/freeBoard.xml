@@ -124,6 +124,12 @@
 	<insert id="addFreeView">
 
 	</insert>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertFreeBoard">
+		insert into free_board (title,content,u_id,main_category,sub_category)
+			values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
+	</insert>
 
 
 	<select id="adminFindAll"

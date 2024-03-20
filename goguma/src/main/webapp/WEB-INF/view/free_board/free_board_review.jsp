@@ -56,7 +56,7 @@
 <body>
 	<div class="view_comment" id="focus_cmt"
 		style="padding: 5%; width: 90%;">
-		<h2 class="blind">댓글 영역</h2>
+		<h2 class="blind">댓글</h2>
 		<div id="comment_wrap_915289" class="comment_wrap show"
 			data-article-lv="10" data-sort-type="" data-comment-cnt="0"
 			data-article-no="915289">
@@ -287,47 +287,104 @@
 							</div>
 						</div>
 					</li>
-					<!-- <li>
-						<div class="reply show">
-							<div class="reply_box">
-								<ul class="reply_list" id="reply_list_6807114">
-									<li id="reply_li_6807117" class="ub-content">
-										<div class="reply_info clear" data-no="6807117">
-											<div class="cmt_nickbox">
-												<div>
-													<img src="/customAssets/images/no_product.png"
-														style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">
-												</div>
-												<span class="gall_writer ub-writer" data-nick="쿄갤러1"
-													data-uid="" data-ip="118.235"> <span
-													class="nickname"><em title="쿄갤러1">쿄갤러<em
-															class="nomem_nicknum">1</em></em><span class="ip">(118.235)</span></span>
-												</span>
-											</div>
-											<div class="clear cmt_txtbox">
-												<p class="usertxt ub-word">이거 존나 찬성임 매크로나 업자들이 최대한 표
-													안가져가도록ㅠㅠ</p>
-											</div>
-											<div class="fr clear">
-												<span class="date_time">03.18 15:14:32</span>
-												<div class="cmt_mdf_del" data-type="rep" re_no="6807117"
-													data-my="N" data-article-no="915289" data-pwd-pop="Y"
-													data-uid="">
-													<button type="button" class="btn_cmt_delete">삭제</button>
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</li> -->
 				</ul>
+				<div id="review-form" style="padding: 20px; box-sizing: border-box;">
+					<label for="review-content">댓글 입력</label>
+					<textarea id="review-content" name="content" 
+						style="resize: none; border: 1px solid #ccc;"></textarea>
+					<div style="display: flex; justify-content: space-between; align-items: stretch;">
+						<button type="button" class="btn btn-warning" onclick="imojiList()">이모티콘</button>
+						<button type="button" class="btn btn-primary" onclick="review()">등록</button>
+					</div>
+					<div class="main-imoji-list" style="border: 1px soild black; width: 50%;">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Bootstrap JS (optional) -->
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+		
+	<script>
+		const contentTextArea = document.getElementById('review-content');
+		
+	
+		// 이모티콘 불러오기
+		function imojiList(){
+			alert('내 이모티콘!');
+			
+			/*
+			$.ajax({    
+				type : 'get',               
+				url : '/user#',            
+				headers : {          
+					"Content-Type" : "application/json"    
+				},    
+				data : JSON.stringify({  
+					"id" : id,
+					"content" : content
+				}),    
+				success : function(result) {      
+					
+				},    
+				error : function(request, status, error) {     
+					console.log(error)    
+				}});
+			*/
+			
+		}
+		
+		// 댓글 전송
+		function review(){
+			
+			// 추후에 이모티콘 같이 전송
+			
+			const content = contentTextArea.value;
+			console.log(content);
+			
+			const postId = getParams();
+			console.log('현재 번호 : '+postId);
+			
+			
+			$.ajax({    
+				type : 'post',               
+				url : '/freeBoard/review',
+				headers : {          
+					"Content-Type" : "application/json"    
+				},
+				data : JSON.stringify({  
+					"fId": postId,
+					"content" : content
+				}),    
+				success : function(result) {  
+					console.log(result);
+					
+				},    
+				error : function(request, status, error) {     
+					console.log(error)    
+				}});
+			
+		}
+		
+		// 현재 게시글 번호 가져오기
+		function getParams() {
+			let currentUrl = window.location.href;
+			
+			let matches = currentUrl.match(/\/freeBoard\/detail\/(\d+)/);
+			let postId = 0;
+			
+			if (matches && matches.length > 1) {
+				postId = matches[1];
+			} else {
+			    alert("게시글 번호를 가져올 수 없습니다.");
+			    return;
+			}
+			return postId;
+		}
+		
+		// 댓글 목록 출력
+	</script>
 </body>
 </html>

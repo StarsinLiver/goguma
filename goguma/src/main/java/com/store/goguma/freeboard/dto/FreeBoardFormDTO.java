@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class FreeBoardDetailDTO {
+public class FreeBoardFormDTO {
 	
 	private Integer id;
 	private String title;
@@ -24,14 +24,4 @@ public class FreeBoardDetailDTO {
 	private String deleteYn;
 	private Integer mainCategory;
 	private Integer subCategory;
-	
-	// user
-	private String userFile;
-	private String userName;
-	
-	// view
-	private Integer view;
-	
-	// recommendation
-	private Integer good;
 }
