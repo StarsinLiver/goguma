@@ -63,7 +63,8 @@
 	</select>
 
 	<!-- 카테고리별 좋아요 많은 순서 -->
-	<select id="countRecommendationByCate" resultType="com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto">
+	<select id="countRecommendationByCate"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto">
 		SELECT
 		fb.id AS id,
 		fb.title AS title,
@@ -81,14 +82,18 @@
 		ifnull(COUNT(fr.free_board_id), 0) AS goodCount
 		FROM
 		free_board AS fb
-		LEFT JOIN free_board_recommendation AS fr ON fb.id = fr.free_board_id AND
+		LEFT JOIN free_board_recommendation AS fr ON fb.id = fr.free_board_id
+		AND
 		fr.good_yn = 'Y'
-		INNER JOIN board_sub_category AS sub_cat ON fb.sub_category = sub_cat.id
-		INNER JOIN board_main_category AS main_cat ON sub_cat.group_id =
+		INNER JOIN board_sub_category AS sub_cat ON
+		fb.sub_category = sub_cat.id
+		INNER JOIN board_main_category AS main_cat
+		ON sub_cat.group_id =
 		main_cat.id
 		WHERE
 		fb.delete_yn = 'N'
-		AND main_cat.id = #{mainCategoryId}
+		AND main_cat.id
+		= #{mainCategoryId}
 		AND sub_cat.id = #{subCategoryId}
 		GROUP BY
 		fb.id
@@ -97,19 +102,25 @@
 	</select>
 
 	<!-- 게시글 많은 카테고리 3개 -->
-	<select id="manyFreeBoard" resultType="com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto">
+	<select id="manyFreeBoard"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto">
 		SELECT
 		main_cat.id AS mainCategoryId,
-		sub_cat.id AS subCategoryId,
+		sub_cat.id AS
+		subCategoryId,
 		sub_cat.name as subCategoryName
 		FROM
-		board_main_category AS main_cat
+		board_main_category
+		AS main_cat
 		INNER JOIN
-		board_sub_category AS sub_cat ON main_cat.id = sub_cat.group_id
+		board_sub_category AS sub_cat ON main_cat.id =
+		sub_cat.group_id
 		LEFT
-		JOIN free_board AS fb ON sub_cat.id = fb.sub_category AND
+		JOIN free_board AS fb ON sub_cat.id =
+		fb.sub_category AND
 		main_cat.id =
-		fb.main_category AND fb.delete_yn = 'N'
+		fb.main_category AND fb.delete_yn =
+		'N'
 		GROUP BY
 		main_cat.id, sub_cat.id
 		ORDER BY
@@ -145,12 +156,6 @@
 
 	<insert id="addFreeView">
 
-	</insert>
-	
-	<!-- 게시글 등록 -->
-	<insert id="insertFreeBoard">
-		insert into free_board (title,content,u_id,main_category,sub_category)
-			values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
 	</insert>
 
 
@@ -266,11 +271,13 @@
 		board_main_category m
 		on f.main_category = m.id
 		WHERE U_ID = #{userId}
-		<include refid="searchBox" />
 		<if test="mainCategory != 0">
-			and main_category = #{mainCategory} and sub_category =
+			and f.main_category = #{mainCategory} and f.sub_category =
 			#{subCategory}
 		</if>
+		and f.delete_yn = 'N'
+		<include refid="searchBox" />
+
 		order by f.id
 		limit #{start} , 10
 	</select>
@@ -282,35 +289,39 @@
 		f.main_category = m.id
 		WHERE U_ID =
 		#{userId}
-		<include refid="searchBox" />
 		<if test="mainCategory != 0">
-			and main_category = #{mainCategory} and sub_category =
-			#{subCategory}
+			and (f.main_category = #{mainCategory} and f.sub_category
+			=
+			#{subCategory})
 		</if>
+		and f.delete_yn = 'N'
+		<include refid="searchBox" />
 	</select>
 
-	<select id="findMainCategoryByUserId" resultType="com.store.goguma.entity.BoardCategoryMain">
+	<select id="findMainCategoryByUserId"
+		resultType="com.store.goguma.entity.BoardCategoryMain">
 		select DISTINCT(m.id) , m.name from free_board f
-		inner join board_main_category m
+		inner join
+		board_main_category m
 		on f.main_category = m.id
-		where u_id = #{userId};
+		where u_id = #{userId}
+		and f.delete_yn = 'N'
 	</select>
 
-	<select id="findSubCategoryByMainCateogry" resultType="com.store.goguma.entity.BoardCategorySub">
+	<select id="findSubCategoryByMainCateogry"
+		resultType="com.store.goguma.entity.BoardCategorySub">
 		select s.* from board_sub_category s
 		right join free_board f
 		on f.sub_category = s.id
-		where u_id = #{userId} and s.group_id = #{groupId}
-        group by s.id;
+		where u_id = #{userId} and s.group_id =
+		#{groupId}
+		and f.delete_yn = 'N'
+		group by s.id;
 	</select>
-	
+
 	<!-- 검색 쿼리 -->
 	<sql id="searchBox">
 		<choose>
-			<when test="searchType == 'titleOrContent'">
-				AND title LIKE CONCAT('%', #{search}, '%') OR content
-				LIKE CONCAT('%', #{search}, '%')
-			</when>
 			<when test="searchType == 'title'">
 				AND title LIKE CONCAT('%', #{search}, '%')
 			</when>
@@ -320,4 +331,30 @@
 		</choose>
 	</sql>
 
+	<update id="deleteBoardById" parameterType="java.util.List">
+		update free_board
+		set delete_yn = 'Y' , delete_at = now()
+		where id in (
+		<foreach collection="boardList" item="list" separator=",">
+			#{list}
+		</foreach>
+		)
+	</update>
+	
+	<!-- 게시글 등록 -->
+    <insert id="insertFreeBoard" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into free_board (title,content,u_id,main_category,sub_category)
+            values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory});
+    </insert>
+    
+    <update id="updateFreeBoard">
+    	update free_board set title = #{title} , content = #{content} , main_category = #{mainCategory} , sub_category = #{subCategory} ,
+    	update_at = now()
+    	where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="com.store.goguma.entity.FreeBoard">
+    	select * from free_board
+    	where id = #{id}
+    </select>
 </mapper>

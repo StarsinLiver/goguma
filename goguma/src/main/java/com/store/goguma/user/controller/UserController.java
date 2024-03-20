@@ -205,12 +205,14 @@ public class UserController {
 			request.setMainCategory(0);
 			request.setSubCategory(0);
 		}
+		
+		log.info("request : {}" , request);
 		// 게시물 정보 가져오기
 		UserFreeBoardPageResDto response = freeBoardService.findByUserId(request, sessionUser.getUId());
 		// 메인 카테고리 정보 가져오기
 		List<BoardCategoryMain> mainCategoryList = freeBoardService.findMainCategoryByUserId(sessionUser.getUId());
 		
-
+		log.info("board : {}" ,response.getDtoList());
 		model.addAttribute("boardList", response.getDtoList());
 		model.addAttribute("mainCategoryList", mainCategoryList);
 		model.addAttribute("pg", response.getPg());
