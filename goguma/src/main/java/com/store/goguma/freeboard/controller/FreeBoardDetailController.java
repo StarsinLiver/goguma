@@ -36,11 +36,13 @@ public class FreeBoardDetailController {
 	@GetMapping("/detail")
 	public String Detail(@RequestParam(value = "id") Integer id, Model model) {
 		
-		FreeBoardDTO freeBoardDTO = freeBoardService.findByFreeId(id);
+		//FreeBoardDTO freeBoardDTO = freeBoardService.findByFreeId(id);
+		FreeBoardDTO boardCountRDDTO = freeBoardService.detailCountRecommendation(id);
 		
-		log.info("hgoianhgboiarehnoarehla : " + freeBoardDTO);
+		log.info("hgoianhgboiarehnoarehla : " + boardCountRDDTO);
 		
-		model.addAttribute("freeBoard",freeBoardDTO);
+		//model.addAttribute("freeBoard",freeBoardDTO);
+		model.addAttribute("boardCountRD",boardCountRDDTO);
 		
 		return "free_board/free_board_detail";
 		

@@ -36,6 +36,7 @@ public interface FreeBoardRepository {
 	public List<FreeBoardManyCategoryDto> manyFreeBoard();
 
 	public FreeBoard findByFreeId(Integer id);
+	public FreeBoard detailCountRecommendation(Integer id);
 	
 
 	
