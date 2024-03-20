@@ -82,19 +82,19 @@ textarea {
 						<div class="col-md-2 b-profile">
 							<div class="img" style="max-width: 380px; max-height: 130px;">
 								<img
-									src="/customAssets/images/no_product.png"
+									src="/profile/${board.userFile}"
 									class="img-fluid" style="width:100%; height: 100px;">
 							</div>
 						</div>
 						<div class="col-md-10">
 							<div class="b-title">
-								<h2>슈 이름이 도구입니다만</h2>
+								<h2>${board.title}</h2>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">
 									<div class="me-3">
-										<i class="bi bi-clock"></i>&nbsp; <span>2024.03.18
-											15:19</span>
+										<i class="bi bi-clock"></i>&nbsp; 
+										<span>${board.createAt}</span>
 									</div>
 									<button type="button" class="btn btn-secondary">
 										Report</button>
@@ -104,10 +104,10 @@ textarea {
 								<div class="d-flex align-items-center">
 									<div class="me-3">
 										<i class="bi bi-hand-thumbs-up"></i> &nbsp;<span>추천수:
-											70</span>
+											${board.good}</span>
 									</div>
 									<div class="me-3">
-										<i class="bi bi-person"></i> &nbsp;<span>조회수: 70</span>
+										<i class="bi bi-person"></i> &nbsp;<span>조회수: ${board.view}</span>
 									</div>
 
 								</div>
@@ -120,19 +120,7 @@ textarea {
 			<br> <br> <br>
 			<!-- 게시글 시작 -->
 			<div style="width: 81%; margin: 0% 5%;">
-			<a href="#">sssssss</a>
-				<p style="width: 100%;">
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					   
-				</p>
+					${board.content}   
 			</div>
 			<br> <button style="margin: 0 41.5%"><i class='fab fa-gratipay' style='font-size:48px;color:red; '></i></button>
 			<!-- 게시글 끝 -->

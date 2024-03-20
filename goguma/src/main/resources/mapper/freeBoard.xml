@@ -61,14 +61,15 @@
 	<select id="selectByFid" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailDTO">
 		SELECT fd.*,
 			u.`file` as `userFile`,
+			u.`name` as `userName`,
 			v.`view`,
-			r.good 
+			COUNT(r.good_yn) as `good`
 		FROM free_board as fd
 			join `user` as u 
 				on fd.u_id = u.u_id
 			join free_board_view as v 
 				on fd.id = v.free_board_id
-			join free_board_recommendation as r 
+			LEFT join free_board_recommendation as r 
 				on fd.id = r.free_board_id
 		where `id`=#{fId}
 	</select>

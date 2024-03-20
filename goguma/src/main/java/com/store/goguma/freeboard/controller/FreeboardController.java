@@ -105,18 +105,20 @@ public class FreeboardController {
 		freeBoardService.insert(boardFormDTO);
 		
 		
-		return "redirect:/free_board/free-main";
+		return "redirect:/free_board/list";
 	}
 	
-	//freeBoard_detail
+	// 게시글 상세
 	@GetMapping("/detail/{fId}")
 	public String DetailFid(@PathVariable("fId") int fId, Model model) {
+		log.info("fid : "+fId);
 		
 		FreeBoardDetailDTO board = freeBoardService.findById(fId);
-		
+		log.info("게시글 : "+board);
 		model.addAttribute("board", board);
 		
 		return "free_board/free_board_detail";
 		
 	}
+	
 }
