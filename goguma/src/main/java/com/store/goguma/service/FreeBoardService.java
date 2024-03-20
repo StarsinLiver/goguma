@@ -9,6 +9,9 @@ import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCateListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardListDTO;
+import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
+import com.store.goguma.freeboard.dto.FreeBoardResDTO;
 import com.store.goguma.repository.FreeBoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ public class FreeBoardService {
 	
 	
 	final private FreeBoardRepository freeBoardRepository;
+
 
 	// 게시글 리스트
 	public List<FreeBoardDTO> findAllFree() {
@@ -64,7 +68,26 @@ public class FreeBoardService {
 		return freeBoardRepository.selectArticleType(cate1, id); 
 	}
 
-	public void selectArticleAllBycate(int cate1, int cate2) {
-		freeBoardRepository.selectArticleAllBycate(cate1, cate2);
+	public FreeBoardListDTO selectArticleAllBycateNid(FreeBoardPageDTO page) {
+		
+		// 리스트 총량 확인
+		int total = freeBoardRepository.countListTotal(page);
+		
+		log.info("프로보드 리스트 서비스단 total: " + total);
+		
+		int start = (page.getPg() - 1) * page.getSize();
+		
+		page.setStart(start);
+		
+		// 리스트 데이터 확인
+		List<FreeBoardResDTO> dtoList = freeBoardRepository.selectArticleAllBycateNid(page);
+		
+		
+		
+		
+		log.info("프로보드 리스트 서비스단 dtoList: " + dtoList);
+		log.info("프로보드 리스트 서비스단 dtoList: " + dtoList.toString());
+		
+		 return FreeBoardListDTO.builder().pageReqDTO(page).dtoList(dtoList).total(total).build();
 	}
 }

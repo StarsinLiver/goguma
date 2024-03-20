@@ -19,6 +19,8 @@ public class FreeBoardPageDTO {
     @Builder.Default
     private int size = 10;
     
+    // start값 임시 저장
+    private int start;
     
     // 검색 내용
     private String search;
@@ -31,9 +33,7 @@ public class FreeBoardPageDTO {
     private int cate1;
     
     // cate2 id
-    private int cate2;
+    private int id;
  
-    // List Type
-    private String listType;
     
 }

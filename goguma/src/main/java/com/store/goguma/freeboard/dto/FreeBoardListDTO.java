@@ -2,16 +2,13 @@ package com.store.goguma.freeboard.dto;
 
 import java.util.List;
 
-import com.store.goguma.admin.dto.PageReqDTO;
-import com.store.goguma.report.dto.ReportDTO;
-
 import lombok.Builder;
+import lombok.Data;
 
+@Data
 public class FreeBoardListDTO {
 	
-	private int merchantId;
-	
-	private List<FreeBoardDTO> dtoList;
+	private List<?> dtoList;
 	
     private int pg;
     private int size;
@@ -22,7 +19,7 @@ public class FreeBoardListDTO {
     private boolean prev, next;
     
     @Builder
-    public FreeBoardListDTO(PageReqDTO pageReqDTO,List<FreeBoardDTO> dtoList, int total) {
+    public FreeBoardListDTO(FreeBoardPageDTO pageReqDTO,List<?> dtoList, int total) {
         this.pg  = pageReqDTO.getPg();
         this.total  = total;
         this.size = pageReqDTO.getSize();

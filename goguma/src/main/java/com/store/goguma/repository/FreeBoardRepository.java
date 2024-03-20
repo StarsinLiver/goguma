@@ -9,6 +9,9 @@ import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCateListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardListDTO;
+import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
+import com.store.goguma.freeboard.dto.FreeBoardResDTO;
 
 
 @Mapper
@@ -29,7 +32,10 @@ public interface FreeBoardRepository {
 	public BoardTypeDTO selectArticleType(@Param("cate1") int cate1, @Param("id") int id);
 
 	// 카테고리에 따른 리스트 조회 - y
-	public void selectArticleAllBycate(@Param("cate1") int cate1, @Param("cate2") int cate2);
+	public List<FreeBoardResDTO> selectArticleAllBycateNid(FreeBoardPageDTO page);
+
+	// 리스트 페이지 total값
+	public int countListTotal(FreeBoardPageDTO page);
 
 
 	
