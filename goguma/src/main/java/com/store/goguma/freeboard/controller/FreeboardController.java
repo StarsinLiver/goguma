@@ -1,7 +1,6 @@
 package com.store.goguma.freeboard.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
+//import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
+//import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.service.FreeBoardService;
 
 import lombok.RequiredArgsConstructor;

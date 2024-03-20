@@ -60,6 +60,7 @@
   	function deleteFun() {
   		const checked = document.querySelectorAll('input[name="checkbox"]:checked');
   		let boardIds = [];
+  		console.log(boardIds);
   		
   		// 체크박스 값 넣기
   		checked.forEach(function(item) {
@@ -67,15 +68,15 @@
   	    });
   		
   		$.ajax({
-		    type: 'put',
-		    url: '/user/board/delete',
-		    dataType: 'json',
+		    type: 'delete',
+		    url: '/free-board/delete',
+		    // dataType: 'json',
 		    data: JSON.stringify(boardIds),
 		    contentType: 'application/json',
 		    async : false,
 		    success: function(result) {
-		    	
-		    	location.reload();
+		    	console.log(result);
+		    	window.location.reload();
 		    },
 		    error: function(request, status, error) {
 		        console.log(error);

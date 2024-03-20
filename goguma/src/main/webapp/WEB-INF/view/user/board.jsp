@@ -96,11 +96,8 @@
 				<!-- 소분류 -->
 				<select name="subCategory" id="sub--category">
 					<option value="">소분류</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
 				</select> 
 				<select name="searchType">
-					<option value="titleOrContent">제목+내용</option>
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 				</select> <input type="text" name="search" placeholder="검색..." />
@@ -114,14 +111,16 @@
 					<th>번호</th>
 					<th>제목</th>
 					<th>작성일</th>
+					<th>수정</th>
 				</tr>
 				<c:forEach var="board" items="${boardList}">
 					<tr class="board--data">
 						<td><input type="checkbox" name="checkbox" class="check"
 							value="${board.id}" /></td>
 						<td>${board.id}</td>
-						<td><a href="/user/board/view/${board.id}">${board.title}</a></td>
+						<td><a href="/freeBoard/detail?id=${board.id}">${board.title}</a></td>
 						<td>${board.formatCreatedAt()}</td>
+						<td><a class="btn btn-warning btn-complete" href="#">수정</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -131,11 +130,10 @@
 				onchange="selectAll(this)" id="allChack" />&nbsp; <span>모두
 					선택</span>
 			</label>
-
 			<div>
 				<button id="delete-board" onclick="deleteFun()"
 					class="btn btn-warning btn-complete">삭제</button>
-				<a href="/cs/board/write" class="btn btn-warning btn-complete">문의하기</a>
+				<a href="/cs/board/write" class="btn btn-warning btn-complete">작성하기</a>
 			</div>
 		</div>
 		<div class="pagination">

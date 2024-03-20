@@ -131,6 +131,15 @@ public class FreeBoardService {
 	public List<BoardCategorySub> findSubCategoryByMainCateogry(int userId , int groupId) {
 		return freeBoardRepository.findSubCategoryByMainCateogry(userId, groupId);
 	}
+	
+	/**
+	 * 전체 삭제
+	 * @param list
+	 * @return
+	 */
+	public int deleteBoardById(List<Integer> list) {
+		return freeBoardRepository.deleteBoardById(list);
+	}
 	// ----------- 산하
 	
 
