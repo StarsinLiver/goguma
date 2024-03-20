@@ -2,8 +2,8 @@ package com.store.goguma.service;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -33,7 +33,7 @@ public class ChatMessageService {
 	
 	private final HttpSession httpSession;
 
-	List<ChatMessageDto> message = new ArrayList<>();
+	List<ChatMessageDto> message = new LinkedList<>();
 
 	final int SIZE = 10;
 
