@@ -230,7 +230,7 @@ function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 						return;
 					}else{
 						if(deleteCategoryApiFun(mainBoxs[deleteCheck].id, "main")){
-							mainBoxs[deleteCheck].remove();
+							mainBoxs[deleteCheck].parentElement.remove();
 							alert("삭제되었습니다.");
 						}
 					}

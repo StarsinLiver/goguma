@@ -4,6 +4,42 @@
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
 
+<style>
+table{
+	width: 700px;
+}
+
+th {
+	border-right: 1px solid #dee2e6;
+	width: 30%;
+	padding: none;
+	height: 30%;
+	vertical-align: middle;
+}
+
+thead {
+	height: 50px
+}
+
+select {
+	height: 100%;
+}
+
+label{
+
+vertical-align: middle;
+}
+.form-select {
+	font-size: 1.5rem;
+}
+.form-check-input{
+    margin-top: 1em;
+
+}
+input[type="checkbox"]{
+vertical-align: middle;
+}
+</style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="container-fluid bg-warning py-5 mb-5 page-header">
@@ -27,34 +63,58 @@
                 <div class="cate-box"></div>
             </div>
             <div class="right-box">
+                <!-- ========================================== -->
                 <table class="table">
-                    <tr class="tr">
-                        <th class="th">카테고리명</th>
-                        <td class="td">
-                            <input type="text" class="cate-input">
-                        </td>
-                    </tr>
-                    <tr class="tr hide-tr">
-                        <th class="th">글보기</th>
-                        <td class="td">
-                            <div class="board-style-box">
-                                <div class="radio-box">
-                                    <span>총 게시물 수</span>
-                                    <input type="number" class="row-count" value="10">
-                                    <span>개</span>
-                                </div>
-                                <div class="radio-box">
-                                	<input type="radio" class="board-check-btn" name="radio">
-                                    <span>게시판 형식</span>
-                                </div>
-                                <div class="radio-box">
-                                	<input type="radio" class="board-check-btn" name="radio">
-                                    <span>카드 형식</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+					<tr>
+						<th>게시판 이름 입력</th>
+						<td>
+							<input type="text" class="cate-input">
+						</td>
+					</tr>
+					<tr>
+						<th>폰트 선택</th>
+						<td>
+							<div class="radio-all-box">
+								<div class="radio-box">
+									<input type="radio" name="font">
+									<span>폰트1</span>
+								</div>
+								<div class="radio-box">
+									<input type="radio" name="font">
+									<span>폰트2</span>
+								</div>
+								<div class="radio-box">
+									<input type="radio" name="font">
+									<span>폰트3</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>배치 형식</th>
+						<td>
+							<div class="radio-all-box">
+								<div class="radio-box">
+									<input type="radio" name="type">
+									<span>형식</span>
+								</div>
+								<div class="radio-box">
+									<input type="radio" name="type">
+									<span>형식</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>배경 이미지 선택</th>
+						<td>
+							<div class="mb-3" style="padding:5px 0px 0px 0px;">
+							  <input class="form-control" type="file" id="formFileMultiple" multiple style="font-size: 1.5rem">
+							</div>
+						</td>
+					</tr>
+				</table>
+                <!-- ========================================== -->
             </div>
         </div>
         <div class="save-button-box">

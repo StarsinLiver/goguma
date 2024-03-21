@@ -134,10 +134,8 @@
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
-<<<<<<< HEAD
 							<a href="/board/cate-setting2" class="dropdown-item">카테고리 수정2</a>
-=======
->>>>>>> a3d10ad731fb61a229416db60d2dc93b346bfbca
+							<a href="/board/cate-modify" class="dropdown-item">카테고리 수정3</a>
 						</div>
 					</div>
 
