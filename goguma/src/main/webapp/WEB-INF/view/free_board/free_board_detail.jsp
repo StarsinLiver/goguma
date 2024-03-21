@@ -81,7 +81,7 @@ textarea {
 					<div class="row">
 						<div class="col-md-2 b-profile">
 							<div class="img" style="max-width: 380px; max-height: 130px;">
-								<img src="/profile/${boardCountRD.file}" class="img-fluid"
+								<img src="/profile/${boardCountRD.userFile}" class="img-fluid"
 									style="width: 100%; height: 100px;">
 							</div>
 						</div>
