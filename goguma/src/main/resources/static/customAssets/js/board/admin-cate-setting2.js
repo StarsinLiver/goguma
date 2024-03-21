@@ -63,17 +63,42 @@ function subInnerFun(boxs, data){
 			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
 			const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
 			switchCateBtnClick(boxs[i], mainTitleBoxs, subTitleBoxs);
+		}
+	}
+}
+
+function switchCateBtnClick(innerBox, mainBoxs, subBoxs){
+	switchCateBtn.onclick = () => {
+		cateInput.value = "";
+		if(innerBox.innerHTML != ""){
+			borderBlack(mainBoxs);
+			if(subBoxs != ""){
+				borderBlack(subBoxs);
 			}
+		}
 	}
 }
 
 function mainClickEvent(){
 	const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
 	const mainTitleTexts = document.querySelectorAll(".main-title-text");
+	const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
 	for(let i = 0; i < mainTitleBoxs.length; i++){
 		mainTitleBoxs[i].onclick = () => {
 			borderBlack(mainTitleBoxs);
 			mainTitleBoxs[i].style.border = "1px solid red";
+			//서브 카테고리 있는지 체크하고 있으면 black
+			let flag = 0;
+			for(let k = 0; k < subInnerBoxs.length; k++){
+				if(subInnerBoxs[k].innerHTML != ""){
+					flag++;
+				}
+			}
+			if(flag != 0){
+				const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
+				borderBlack(subTitleBoxs);
+			}
+			
 			cateInput.value = mainTitleTexts[i].textContent;
 			titleChangeEvent(mainTitleBoxs[i], mainTitleTexts[i]);
 			deleteCateBtnClick(innerBody, mainTitleBoxs, "");
@@ -91,7 +116,6 @@ function subClickEvent(){
 			borderBlack(subTitleBoxs);
 			subTitleBoxs[i].style.border = "1px solid red";
 			let mainTitleBox = subTitleBoxs[i].parentElement.parentElement.querySelector(".cate-main-title");
-			console.log(mainTitleBox);
 			mainTitleBox.style.border = "1px solid red";
 			
 			cateInput.value = subTitleTexts[i].textContent;
@@ -104,18 +128,6 @@ function subClickEvent(){
 			}
 			if(deleteCheck != 999){
 				deleteCateBtnClick(innerBody, mainTitleBoxs, subTitleBoxs[i]);
-			}
-		}
-	}
-}
-
-function switchCateBtnClick(innerBox, mainBoxs, subBoxs){
-	switchCateBtn.onclick = () => {
-		cateInput.value = "";
-		if(innerBox.innerHTML != ""){
-			borderBlack(mainBoxs);
-			if(subBoxs != ""){
-				borderBlack(subBoxs);
 			}
 		}
 	}
@@ -200,22 +212,18 @@ function newBorderRed(boxs){
 
 function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 	deleteCateBtn.onclick = () => {
-		console.log("1111111111");
 		if(innerBody.innerHTML != ""){
 			if(subBoxs == ""){
-				console.log("22222222222");
 				let deleteCheck = 999;
 				for(let i = 0; i < mainBoxs.length; i++){
 					if(mainBoxs[i].style.border == "1px solid red"){
 						deleteCheck = i;
 					}
 				}
-				console.log("체크벊로", deleteCheck);
 				if(deleteCheck == 999){
 					alert("삭제 할 카테고리를 선택해주세요!111111");
 					return;
 				}else{
-					//subInnerBoxs[deleteCheck].replaceChildren();
 					const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
 					if(subInnerBoxs[deleteCheck].innerHTML != ""){
 						alert("서브 카테고리를 먼저 삭제해주세요!");
@@ -228,21 +236,25 @@ function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 					}
 				}
 			}else{
-				console.log("333333333");
-				//for(let i = 0; i < subBoxs.length; i++){
-				//	if(subBoxs[i].style.border == "1px solid red"){
-				//		deleteCheck = i;
-				//	}
-				//}
 				if(subBoxs.style.border != "1px solid red"){
 					alert("삭제 할 카테고리를 선택해주세요!2222");
 					return;
 				}else{
-					// div 삭제
-					const subTitleText = subBoxs.querySelector(".sub-title-text");
-					if(deleteCategoryApiFun(subTitleText.id, "sub")){
-						subBoxs.remove();
-						alert("삭제되었습니다.");
+					if(subBoxs.parentElement.querySelectorAll(".cate-sub-title").length == 1){
+						const subTitleText = subBoxs.querySelector(".sub-title-text");
+						if(deleteCategoryApiFun(subTitleText.id, "sub")){
+							const mainDiv = subBoxs.parentElement;
+							mainDiv.replaceChildren();
+							//mainDiv.remove();
+							alert("삭제되었습니다.");
+						}
+					}else{
+						console.log("2222222걸림??");
+						const subTitleText = subBoxs.querySelector(".sub-title-text");
+						if(deleteCategoryApiFun(subTitleText.id, "sub")){
+							subBoxs.remove();
+							alert("삭제되었습니다.");
+						}
 					}
 				}
 			}
@@ -251,26 +263,28 @@ function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 }
 
 function deleteCategoryApiFun(id, checkTitle){
-	console.log("api delete id:", id);
 	let flag = false;
-	$.ajax({
-		type : "delete",
-		url : "/board/api/remove",
-		async : false,
-		data : {
-			id : id,
-			checkTitle : checkTitle
-		},
-		success : function(data){
-			if(data == true){
-				flag = true;
+	if(id == 999){
+		return true;
+	}else{
+		$.ajax({
+			type : "delete",
+			url : "/board/api/remove",
+			async : false,
+			data : {
+				id : id,
+				checkTitle : checkTitle
+			},
+			success : function(data){
+				if(data == true){
+					flag = true;
+				}
+			},
+			error : function(){
+				alert("에러");
 			}
-		},
-		error : function(){
-			alert("에러");
-		}
-	});
-	console.log("api delete  ", flag);
+		});
+	}
 	return flag;
 }
 
@@ -356,7 +370,6 @@ finalSaveBtn.onclick = () => {
 		}
 	});
 }
-
 
 
 
