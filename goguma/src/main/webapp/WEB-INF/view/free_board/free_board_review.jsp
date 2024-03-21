@@ -208,10 +208,16 @@
 		
 		// 댓글 목록 출력
 		document.addEventListener("DOMContentLoaded", function() {
-			
+			// 상세 페이지에 들어왔을 시점
+			reviewList(1);
+		});
+		
+		// 페이지 리스트
+		function reviewList(pg){
 			const id = getParams();
 			const size = 10;
-			let reviewPage = 1;
+			
+			console.log('현재 댓글 페이지 : '+pg);
 			
 			$.ajax({    
 				type : 'post',               
@@ -221,7 +227,7 @@
 				},
 				data : JSON.stringify({  
 					"id": id,
-					"pg": reviewPage,
+					"pg": pg,
 					"size": size
 				}),
 				success : function(result) {  
@@ -238,9 +244,8 @@
 				}
 			
 			});
-			
-			
-		});
+		}
+		
 		
 		// 동적 리스트 생성(댓글, 페이지네이션)
 		function tagList(result){
@@ -254,7 +259,6 @@
 			let pg = result.pg;
 			let end = result.end;
 			let start = result.start;
-			console.log('last : '+last);
 			
 			
 			// 댓글 목록
@@ -267,15 +271,14 @@
 			commentList.innerHTML = comment;
 			
 			// 댓글 페이징 처리
-			
 			if(start > 1){
-				pageNum += '<li class="page-item"><span class="page-link" onclick="startPage('+start+')">이전</span></li>';
+				pageNum += '<li class="page-item"><span class="page-link" onclick="startPage('+start+')">&laquo;</span></li>';
 			}
 			for(let j=start; j <= end; j++){
 				pageNum += '<li class="page-item"><span class="page-link" onclick="nextPage('+j+')">'+j+'</span></li>';
 			}
 			if(end < last){
-				pageNum += '<li class="page-item"><span class="page-link" onclick="endPage('+end+')">이후</span></li>';
+				pageNum += '<li class="page-item"><span class="page-link" onclick="endPage('+end+')">&raquo;</span></li>';
 			}
 			
 			// 페이지네이션 화면에 내보내기
@@ -316,20 +319,32 @@
 			return comment;
 		}
 		
-		// 페이지 넘기기
-		function nextPage(start){
+		// 이전 10개 페이지 넘기기
+		function startPage(start){
 			
+			start -= 1;
+			reviewPage = start;
+			
+			console.log("start : "+start);
+			reviewList(start);
 			
 		}
 		
-		// 이전 10개 페이지 넘기기
-		function startPage(num){
+		// 페이지 넘기기
+		function nextPage(num){
+			console.log("num : "+num);
 			
+			reviewList(num);
 		}
 		
 		// 이후 10개 페이지 넘기기
 		function endPage(end){
 			
+			end += 1;
+			reviewPage = end;
+			
+			console.log("end : "+end);
+			reviewList(end);
 		}
 		
 	</script>

@@ -42,7 +42,7 @@ public class ReviewService {
 	
 	// 게시글 댓글 전체 조회
 	public FreeBoardReviewResDTO findReviewListByBoardId(FreeBoardReviewReqDTO dto) {
-		int start = dto.getPg() * dto.getSize();
+		int start = (dto.getPg() - 1) * dto.getSize();
 		int size = dto.getSize();
 		int boardId = dto.getId();
 		

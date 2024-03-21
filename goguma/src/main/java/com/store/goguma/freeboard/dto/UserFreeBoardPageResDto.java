@@ -19,7 +19,7 @@ public class UserFreeBoardPageResDto {
 	
 	private int merchantId;
 	
-	private List<?> dtoList;
+	private List<FreeBoardDto> dtoList;
 	
     private int pg;
     private int size;
@@ -36,7 +36,7 @@ public class UserFreeBoardPageResDto {
    
     
     @Builder
-    public UserFreeBoardPageResDto(UserFreeBoardPageReqDto requestPageDTO,List<?> dtoList, int total) {
+    public UserFreeBoardPageResDto(UserFreeBoardPageReqDto requestPageDTO,List<FreeBoardDto> dtoList, int total) {
         this.pg  = requestPageDTO.getPg();
         this.total  = total;
         this.size = requestPageDTO.getSize();
