@@ -10,4 +10,6 @@
 		select * from board_sub_category
 		where group_id = #{groupId}
 	</select>
+	
+	
 </mapper>

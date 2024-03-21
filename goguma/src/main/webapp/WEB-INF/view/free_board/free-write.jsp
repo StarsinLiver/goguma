@@ -46,19 +46,21 @@ h2 {
 		</section>
 		<div class="col-lg-8">
 			<div class="row">
-				<form class="row" action="/freeBoard/write" method="post">
-					<!-- 카테고리 테스트 -->
-					<input type="hidden" name="mainCategory" value="1" />
+				<form class="row" action="/freeBoard/write" method="post" enctype="multipart/form-data">
 					<!-- 카테고리 선택 셀렉트 박스 -->
 					<div class="mb-3 col-md-5">
-						<label for="categorySelect" class="form-label">카테고리</label> <select
-							class="form-select" id="categorySelect" name="subCategory" style="width: calc(30%);">
-							<option value="1">카테고리 1</option>
-							<option value="2">카테고리 2</option>
-							<option value="3">카테고리 3</option>
+						<label for="categorySelect" class="form-label">메인 카테고리</label> <select
+							class="form-select"  name="mainCategory" id="main--category" onchange="onclickMain(this.value)"
+							style="width: calc(30%);">
+							<!-- 여기에 다른 카테고리 옵션을 추가할 수 있습니다 -->
+						</select>
+						<label for="categorySelect" class="form-label">서브 카테고리</label> <select
+							class="form-select"  name="subCategory" id="sub--category"
+							style="width: calc(30%);">
 							<!-- 여기에 다른 카테고리 옵션을 추가할 수 있습니다 -->
 						</select>
 					</div>
+					
 					<!-- 제목 입력 폼 -->
 					<div class="mb-3 col-md-12">
 						<label for="titleInput" class="form-label">제목</label> <input
@@ -70,11 +72,17 @@ h2 {
 						<label for="summernote" class="form-label">내용</label>
 						<textarea class="form-control" name="content" id="summernote"></textarea>
 					</div>
+					<!-- 파일등록 -->
+					<div class="mb-3 col-md-12">
+						<label for="summernote" class="form-label">메인 이미지</label>
+						<input type="file" name="multipartFile"/>
+					</div>
 					<!-- 글 작성 버튼 -->
 					<div class="col-12 text-end" style="margin: -20px 30px 10px 0;">
 						<button type="submit" class="btn btn-primary">글 작성</button>
 						<button type="button" class="btn btn-secondary ms-2">취소</button>
 					</div>
+					
 				</form>
 			</div>
 		</div>
@@ -82,27 +90,9 @@ h2 {
 </div>
 
 <!-- Summernote 초기화 스크립트 -->
-<script>
-
-	$('#summernote').summernote(
-			{
-				placeholder : '내용을 입력해주세요.',
-				tabsize : 2,
-				height : 120,
-				focus: true,
-				lang: 'ko-KR',
-				toolbar : [ [ 'style', [ 'style' ] ],
-						[ 'font', [ 'bold', 'underline', 'clear' ] ],
-						[ 'color', [ 'color' ] ],
-						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-						[ 'table', [ 'table' ] ],
-						[ 'insert', [ 'link', 'picture', 'video' ] ],
-						[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
-						
-			});
-	
-</script>
+<script src="/customAssets/js/free-board/free_write.js"></script>
 <!-- include Summernote CSS -->
 <script src="/assets/js/summernote-ko-KR.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <%@ include file="/WEB-INF/view/footer.jsp"%>

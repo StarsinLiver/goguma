@@ -148,7 +148,7 @@
 					<!-- 모달 -->
 					<c:if test="${product.confirmYn == 'N'}">
 						<button class="btn btn-warning btn-confirm"
-							onclick="openChatList()" data-value="${product.prodId}">결제
+							onclick="openChatList(${product.prodId})" data-value="${product.prodId}">결제
 							완료</button>
 					</c:if>
 				</article>

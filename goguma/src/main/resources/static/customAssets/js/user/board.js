@@ -60,6 +60,10 @@
   	function deleteFun() {
   		const checked = document.querySelectorAll('input[name="checkbox"]:checked');
   		let boardIds = [];
+  		console.log(boardIds);
+  		
+  		if(!confirm('정말 삭제하시겠습니까? ')) 
+  			return false;
   		
   		// 체크박스 값 넣기
   		checked.forEach(function(item) {
@@ -67,15 +71,15 @@
   	    });
   		
   		$.ajax({
-		    type: 'put',
-		    url: '/user/board/delete',
-		    dataType: 'json',
+		    type: 'delete',
+		    url: '/free-board/delete',
+		    // dataType: 'json',
 		    data: JSON.stringify(boardIds),
 		    contentType: 'application/json',
 		    async : false,
 		    success: function(result) {
-		    	
-		    	location.reload();
+		    	console.log(result);
+		    	window.location.reload();
 		    },
 		    error: function(request, status, error) {
 		        console.log(error);
@@ -89,7 +93,7 @@ function onclickMainCategory(id) {
 	
 	// 위의 메인값에 대한 소분류 값 들고오기
 	$.ajax({
-		url : "/free-board/subcategory/" + id ,
+		url : "/free-board/user/subcategory/" + id ,
 		method : "get" ,
 		success : function(data) {
 			displaySubCategory.innerHTML = `<option value="">소분류</option>`

@@ -36,14 +36,15 @@ public interface FreeBoardRepository {
 	public List<FreeBoardManyCategoryDto> manyFreeBoard();
 
 	public FreeBoard findByFreeId(Integer id);
+	public FreeBoard detailCountRecommendation(Integer id);
 	
 
 	
 	//------------------- 산하
 	
 	// 게시물 전체 조회
-	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType);
-	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType);
+	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
+	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
 	public int deleteById(int id);
 	
 	// 사용자 게시물 조회
@@ -53,6 +54,11 @@ public interface FreeBoardRepository {
 	// 메인 카테고리 가져오기
 	public List<BoardCategoryMain> findMainCategoryByUserId(int userId);
 	public List<BoardCategorySub> findSubCategoryByMainCateogry(@Param("userId") int userId , @Param("groupId") int groupId);
+	
+	public int deleteBoardById (@Param("boardList") List<Integer> boardList);
+	
+	public FreeBoard findById(int id);
+	public int updateFreeBoard(FreeBoardFormDTO dto);
 	//------------------- 산하
 	
 	

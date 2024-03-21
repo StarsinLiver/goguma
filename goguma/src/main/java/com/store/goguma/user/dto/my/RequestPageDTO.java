@@ -23,4 +23,8 @@ public class RequestPageDTO {
     // 검색 타입
     private String searchType;
     
+    // 대분류
+    private Integer mainCategory;
+    // 소분류
+    private Integer subCategory;
 }
