@@ -1,6 +1,7 @@
 package com.store.goguma.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.entity.FreeBoardRecommendation;
 import com.store.goguma.freeboard.dto.FreeBoardRecommendationDTO;
@@ -14,6 +15,7 @@ public class FreeBoardRecommendationService {
 
 	private final FreeBoardRecommendationRepository freeBoardRecommendationRepository;
 	
+	@Transactional
 	public void addRecommendation(FreeBoardRecommendationDTO dto) {
 		
 		FreeBoardRecommendation fbRecommendation = FreeBoardRecommendation.builder()
@@ -24,6 +26,7 @@ public class FreeBoardRecommendationService {
 		freeBoardRecommendationRepository.addRecommendation(fbRecommendation);
 	}
 	
+	@Transactional
 	public void deleteRecommendation(FreeBoardRecommendationDTO dto) {
 		
 		FreeBoardRecommendation fbRecommendation = FreeBoardRecommendation.builder()
