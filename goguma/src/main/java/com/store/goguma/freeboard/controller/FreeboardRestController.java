@@ -155,6 +155,7 @@ public class FreeboardRestController {
 		
 		FreeBoardListDTO result = freeBoardService.selectArticleAllBycateNid(page);
 		
+		
 		log.info("relust 값 확인 하기: "+ result.toString());
 		
 		return result;	

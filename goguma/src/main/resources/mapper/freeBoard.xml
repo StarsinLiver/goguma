@@ -201,9 +201,12 @@
 			</when>
 		</choose>
 		ORDER BY b.id DESC
+		<if test="listType == 'LIST'.toString()">
 		LIMIT #{start}, 10;
-
-
+		</if>
+		<if test="listType == 'CARD'.toString()">
+		LIMIT #{start}, 12;
+		</if>
 
 	</select>
 
