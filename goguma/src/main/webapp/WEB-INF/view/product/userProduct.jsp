@@ -7,14 +7,12 @@
 <section id="content">
 	<section id="user-profile">
 		<h2 id="nickname">
-			${user.name} <span id="region_name">${user.address}</span>
+			${user.name} 
 		</h2>
 		<ul id="profile-detail">
-			<li class="profile-detail-title">${user.description}<span
-				class="profile-detail-count"></span>
-			</li>
-			<li class="profile-detail-title">${user.zip}<span
-				class="profile-detail-count"></span>
+			<li class="profile-detail-title">${user.description}
+			</li> <br>
+			<li class="profile-detail-title">${user.email}
 			</li>
 		</ul>
 		<div id="profile-image">
