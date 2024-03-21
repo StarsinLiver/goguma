@@ -42,6 +42,9 @@ public interface EmojiRepository {
 	public int emojiOrder(EmojiHistory entity);
 
 	public List<MainEmoji> getEmojiMainListHome();
+	
+	public List<MainEmoji> findEmojiDetailMainContainSearch(@Param("search")String search , @Param("start") Integer start , @Param("size") Integer size);
+	public int countFindEmojiDetailMainContainSearch(String search);
 
 	public List<MainEmoji> emojiSearch(String title);
 
