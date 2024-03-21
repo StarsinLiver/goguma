@@ -22,6 +22,7 @@ import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
+import com.store.goguma.user.dto.UserProfileDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
@@ -43,6 +44,7 @@ public class UserService {
 	private final MyUserRepository myUserRepository;
 	private final ProductHistoryRepository productHistoryRepository;
 	private final ReportRepository reportRepository;
+	
 
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
@@ -290,5 +292,9 @@ public class UserService {
 			return 6;
 		}
 		return 1;
+	}
+	
+	public UserProfileDto findProfileById(int userId) {
+		return userRepository.findProfileById(userId);
 	}
 }

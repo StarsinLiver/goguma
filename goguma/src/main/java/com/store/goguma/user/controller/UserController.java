@@ -1,10 +1,6 @@
 package com.store.goguma.user.controller;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,16 +19,15 @@ import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.service.QnaService;
 import com.store.goguma.service.UserService;
-import com.store.goguma.user.dto.FreeBoardDto;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
+import com.store.goguma.user.dto.UserProfileDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -59,8 +54,9 @@ public class UserController {
 		log.info("내 정보 : " + dto);
 		log.info("이메일 : " + email);
 
-		User userEntity = userService.readByuser(dto);
-
+//		User userEntity = userService.readByuser(dto);
+		
+		UserProfileDto userEntity = userService.findProfileById(dto.getUId());
 		log.info("userEntity : " + userEntity);
 		int temperature = userService.getTemperatureUser(dto.getUId());
 

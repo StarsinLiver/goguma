@@ -50,4 +50,19 @@
 		set role = #{role} , update_at = now()
 		where u_id = #{uId};
 	</update>
+
+	<select id="findProfileById" resultType="com.store.goguma.user.dto.UserProfileDto">
+		select u.* , ifnull(count(p.p_id), 0) as countProduct
+		,ifnull(count(q.id), 0) as countQna, ifnull(count(w.u_id), 0) countWishList from user u
+		left join product p
+		on p.host_id = u.u_id
+		left join qna q
+		on q.u_id = u.u_id
+		left join wish_list w
+		on w.u_id = u.u_id
+		where
+		u.u_id = #{userId} and
+		p.delete_yn = 'N'
+		group by u.u_id
+	</select>
 </mapper>
