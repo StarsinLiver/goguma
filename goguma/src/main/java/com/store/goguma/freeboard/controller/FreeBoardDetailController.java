@@ -89,7 +89,7 @@ public class FreeBoardDetailController {
 	    	throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus	.INTERNAL_SERVER_ERROR);
 	    }
 	    
-	    dto.setHostId(hostId);
+	    dto.setHostId(hostId);	
 	    dto.setCallId(user.getUId());
 
 	    reportService.addReport(dto);

@@ -16,9 +16,13 @@
 	</div>
 </div>
 <!-- Header End -->
-    <div class="emoji--main-div">
-    	
-        <table class="emoji--table">
+    <div class="emoji--main-div" style="flex-direction: row;">
+    		<div>
+		<!-- aside -->
+		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
+		<!-- aside end -->
+	</div>
+        <table class="emoji--table" style="margin: 0 10% 0 10%;">
             <tr class="emoji--table">
                 <th class="emoji--th" colspan="2">이모티콘 업로드</th>
             </tr>
