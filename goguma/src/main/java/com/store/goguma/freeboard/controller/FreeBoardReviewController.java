@@ -30,7 +30,7 @@ public class FreeBoardReviewController {
 	// 댓글 입력
 	@PostMapping("/review")
 	@ResponseBody
-	public FreeBoardReviewDTO reviewInsert(@RequestBody FreeBoardReviewDTO dto) {
+	public int reviewInsert(@RequestBody FreeBoardReviewDTO dto) {
 		log.info("reviewInsert : "+dto);
 		
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
@@ -45,10 +45,9 @@ public class FreeBoardReviewController {
 		dto.setUId(userId);
 		
 		// 최근 댓글 조회
-		FreeBoardReviewDTO newReview = reviewService.createReview(dto);
-		log.info("newReview : "+newReview);
+		reviewService.createReview(dto);
 		
-		return newReview;
+		return 0;
 	}
 	
 	// 현재 게시물 댓글 조회
@@ -58,8 +57,28 @@ public class FreeBoardReviewController {
 		log.info("dto"+dto);
 		
 		FreeBoardReviewResDTO boardPageResDto = reviewService.findReviewListByBoardId(dto);
-		log.info("현재 게시물 댓글 전체 : "+boardPageResDto);
 		
 		return boardPageResDto;
+	}
+	
+	
+	// 답글 등록
+	@PostMapping("/review/sub")
+	@ResponseBody
+	public int subReviewInsert(@RequestBody FreeBoardReviewDTO dto) {
+		log.info("답글 : "+dto);
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		
+		// 회원, 비회원 검증
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		int userId = user.getUId();
+		dto.setUId(userId);
+		
+		reviewService.createReview(dto);
+		
+		return 0;
 	}
 }
