@@ -46,7 +46,7 @@ h2 {
 		</section>
 		<div class="col-lg-8">
 			<div class="row">
-				<form class="row" action="/freeBoard/write" method="post">
+				<form class="row" action="/freeBoard/write" method="post" enctype="multipart/form-data">
 					<!-- 카테고리 선택 셀렉트 박스 -->
 					<div class="mb-3 col-md-5">
 						<label for="categorySelect" class="form-label">메인 카테고리</label> <select
@@ -60,6 +60,7 @@ h2 {
 							<!-- 여기에 다른 카테고리 옵션을 추가할 수 있습니다 -->
 						</select>
 					</div>
+					
 					<!-- 제목 입력 폼 -->
 					<div class="mb-3 col-md-12">
 						<label for="titleInput" class="form-label">제목</label> <input
@@ -71,11 +72,17 @@ h2 {
 						<label for="summernote" class="form-label">내용</label>
 						<textarea class="form-control" name="content" id="summernote"></textarea>
 					</div>
+					<!-- 파일등록 -->
+					<div class="mb-3 col-md-12">
+						<label for="summernote" class="form-label">메인 이미지</label>
+						<input type="file" name="multipartFile"/>
+					</div>
 					<!-- 글 작성 버튼 -->
 					<div class="col-12 text-end" style="margin: -20px 30px 10px 0;">
 						<button type="submit" class="btn btn-primary">글 작성</button>
 						<button type="button" class="btn btn-secondary ms-2">취소</button>
 					</div>
+					
 				</form>
 			</div>
 		</div>

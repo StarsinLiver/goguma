@@ -34,15 +34,6 @@
                             <input type="text" class="cate-input">
                         </td>
                     </tr>
-                    <tr class="tr">
-                        <th class="th">카테고리 수정</th>
-                        <td class="td">
-                            <div class="up-down-box">
-                                <button type="button" class="cate-modify-btn">수정</button>
-                                <button type="button" class="cate-delete-btn">삭제</button>
-                            </div>
-                        </td>
-                    </tr>
                     <tr class="tr hide-tr">
                         <th class="th">글보기</th>
                         <td class="td">

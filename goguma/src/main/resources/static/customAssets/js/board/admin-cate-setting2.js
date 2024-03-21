@@ -5,10 +5,8 @@ const switchCateBtn = document.querySelector(".switch-cate-btn");
 const cateInput = document.querySelector(".cate-input");
 const finalSaveBtn = document.querySelector(".save-cate-btn");
 
-const modifyBtn = document.querySelector(".cate-modify-btn");
-const deleteBtn = document.querySelector(".cate-delete-btn");
-
 const innerBody = document.querySelector(".cate-box");
+
 
 load();
 function load(){
@@ -28,34 +26,44 @@ function load(){
 
 function innerFun(data){
 	let innr = "";
-	for(let i = 0; i < data.length; i++){
+	if(data != ""){
+		for(let i = 0; i < data.length; i++){
 		innr += `
-			<div class="cate-main-box" id="${data[i].index}">
-			    <div class="cate-main-title">
+			<div class="cate-main-box">
+			    <div class="cate-main-title" id="${data[i].index}">
 			        <span class="main-title-text">${data[i].name}</span>
 			    </div>
 			    <div class="cate-sub-box"></div>
 			</div>
 		`;
+		}
+		innerBody.innerHTML = innr;
+		const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+		const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
+		subInnerFun(subInnerBoxs, data);
+		mainClickEvent();
+		subClickEvent();
+		addSubCateBtnClick(mainTitleBoxs, subInnerBoxs);
 	}
-	innerBody.innerHTML = innr;
-	const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
-	subInnerFun(subInnerBoxs, data);
-	mainClickEvent();
-	subClickEvent();
+	addMainCateBtnClick(innerBody);
 }
 
 function subInnerFun(boxs, data){
 	for(let i = 0; i < data.length; i++){
 		let innr = "";
-		for(let k = 0; k < data[i].subList.length; k++){
-			innr += `
-				<div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
-			        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
-			    </div>
-			`;
-		}
-		boxs[i].innerHTML = innr;
+		if(data[i].subList != null){
+			for(let k = 0; k < data[i].subList.length; k++){
+				innr += `
+					<div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
+				        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
+				    </div>
+				`;
+			}
+			boxs[i].innerHTML = innr;
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
+			switchCateBtnClick(boxs[i], mainTitleBoxs, subTitleBoxs);
+			}
 	}
 }
 
@@ -68,6 +76,7 @@ function mainClickEvent(){
 			mainTitleBoxs[i].style.border = "1px solid red";
 			cateInput.value = mainTitleTexts[i].textContent;
 			titleChangeEvent(mainTitleBoxs[i], mainTitleTexts[i]);
+			deleteCateBtnClick(innerBody, mainTitleBoxs, "");
 		}
 	}
 }
@@ -87,6 +96,27 @@ function subClickEvent(){
 			
 			cateInput.value = subTitleTexts[i].textContent;
 			titleChangeEvent(subTitleBoxs[i], subTitleTexts[i]);
+			let deleteCheck = 999;
+			for(let k = 0; k < mainTitleBoxs.length; k++){
+				if(mainTitleBoxs[k].style.border == "1px solid red"){
+					deleteCheck = k;
+				}
+			}
+			if(deleteCheck != 999){
+				deleteCateBtnClick(innerBody, mainTitleBoxs, subTitleBoxs[i]);
+			}
+		}
+	}
+}
+
+function switchCateBtnClick(innerBox, mainBoxs, subBoxs){
+	switchCateBtn.onclick = () => {
+		cateInput.value = "";
+		if(innerBox.innerHTML != ""){
+			borderBlack(mainBoxs);
+			if(subBoxs != ""){
+				borderBlack(subBoxs);
+			}
 		}
 	}
 }
@@ -104,6 +134,173 @@ function titleChangeEvent(box, text){
 		}
 	}
 }
+
+//=======================================================================================================================================================================
+
+function addMainCateBtnClick(innerBody){
+	addMainCateBtn.onclick = () => {
+		addMainCategory(innerBody);
+		const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+		const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
+		addSubCateBtnClick(mainTitleBoxs, subInnerBoxs);
+		switchCateBtnClick(innerBody, mainTitleBoxs, "");
+		//deleteCateBtnClick(innerBody, mainTitleBoxs, "");
+	}
+}
+
+function addSubCateBtnClick(mainTitleBoxs, subInnerBoxs){
+	addSubCateBtn.onclick = () => {
+		let mainClickCheck = 999;
+		for(let i = 0; i < mainTitleBoxs.length; i++){
+			if(mainTitleBoxs[i].style.border == "1px solid red"){
+				mainClickCheck = i;
+			}
+		}
+		if(mainClickCheck == 999){
+			alert("메인 카테고리를 선택해주세요!");
+			return;
+		}else{
+			addSubCategory(subInnerBoxs[mainClickCheck]);
+		}
+	}
+}
+
+function addMainCategory(innerBody){
+	let innr = innerBody.innerHTML;
+	innr += `
+		<div class="cate-main-box">
+		    <div class="cate-main-title" id="999">
+		        <span class="main-title-text">메인 카테고리</span>
+		    </div>
+		    <div class="cate-sub-box"></div>
+		</div>
+	`;
+	innerBody.innerHTML = innr;
+	mainClickEvent();
+	const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+	newBorderRed(mainTitleBoxs);
+}
+
+function addSubCategory(innerBody, mainId){
+	let innr = innerBody.innerHTML;
+	innr += `
+		<div class="cate-sub-title" id="${mainId}">
+	        <span class="sub-title-text" id="999">서브 카테고리</span>
+	    </div>
+	`;
+	innerBody.innerHTML = innr;
+	mainClickEvent();
+	subClickEvent();
+}
+
+function newBorderRed(boxs){
+	borderBlack(boxs);
+	boxs[boxs.length - 1].style.border = "1px solid red";
+}
+
+function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
+	deleteCateBtn.onclick = () => {
+		console.log("1111111111");
+		if(innerBody.innerHTML != ""){
+			if(subBoxs == ""){
+				console.log("22222222222");
+				let deleteCheck = 999;
+				for(let i = 0; i < mainBoxs.length; i++){
+					if(mainBoxs[i].style.border == "1px solid red"){
+						deleteCheck = i;
+					}
+				}
+				console.log("체크벊로", deleteCheck);
+				if(deleteCheck == 999){
+					alert("삭제 할 카테고리를 선택해주세요!111111");
+					return;
+				}else{
+					//subInnerBoxs[deleteCheck].replaceChildren();
+					const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
+					if(subInnerBoxs[deleteCheck].innerHTML != ""){
+						alert("서브 카테고리를 먼저 삭제해주세요!");
+						return;
+					}else{
+						if(deleteCategoryApiFun(mainBoxs[deleteCheck].id, "main")){
+							mainBoxs[deleteCheck].remove();
+							alert("삭제되었습니다.");
+						}
+					}
+				}
+			}else{
+				console.log("333333333");
+				//for(let i = 0; i < subBoxs.length; i++){
+				//	if(subBoxs[i].style.border == "1px solid red"){
+				//		deleteCheck = i;
+				//	}
+				//}
+				if(subBoxs.style.border != "1px solid red"){
+					alert("삭제 할 카테고리를 선택해주세요!2222");
+					return;
+				}else{
+					// div 삭제
+					const subTitleText = subBoxs.querySelector(".sub-title-text");
+					if(deleteCategoryApiFun(subTitleText.id, "sub")){
+						subBoxs.remove();
+						alert("삭제되었습니다.");
+					}
+				}
+			}
+		}
+	}
+}
+
+function deleteCategoryApiFun(id, checkTitle){
+	console.log("api delete id:", id);
+	let flag = false;
+	$.ajax({
+		type : "delete",
+		url : "/board/api/remove",
+		async : false,
+		data : {
+			id : id,
+			checkTitle : checkTitle
+		},
+		success : function(data){
+			if(data == true){
+				flag = true;
+			}
+		},
+		error : function(){
+			alert("에러");
+		}
+	});
+	console.log("api delete  ", flag);
+	return flag;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //=======================================================================================================================================================================
 finalSaveBtn.onclick = () => {

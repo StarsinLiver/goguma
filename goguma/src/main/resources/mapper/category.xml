@@ -28,6 +28,8 @@
 		delete from board_sub_category;
 	</delete>
 
+	<!-- ================================================================================= -->
+
 	<select id="getMainList" resultType="com.store.goguma.entity.BoardCategoryMain">
 		select * from board_main_category;
 	</select>
@@ -36,6 +38,12 @@
 		select * from board_sub_category;
 	</select>
 
+	<delete id="mainCategoryRemove">
+		delete from board_main_category where id = #{id};
+	</delete>
 
+	<delete id="subCategoryRemove">
+		delete from board_sub_category where id = #{id};
+	</delete>
 
 </mapper>

@@ -80,9 +80,9 @@
 				</thead>
 				<tbody>
 				    <tr>
-				      <td>10</td>
-				      <td>3</td>
-				      <td>12</td>
+				      <td>${user.countProduct}</td>
+				      <td>${user.countQna}</td>
+				      <td>${user.countWishList}</td>
 				    </tr>
 			    </tbody>
 			</table>

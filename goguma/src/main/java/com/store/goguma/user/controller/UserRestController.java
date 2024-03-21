@@ -101,9 +101,10 @@ public class UserRestController {
 			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 
 			if (user == null) {
-				return new ResponseEntity(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-
+			
+			log.info("받는 pid : {}" , pId);
 			List<User> list = chatRoomService.chatProductUserList(pId);
 
 			if (list.isEmpty()) {

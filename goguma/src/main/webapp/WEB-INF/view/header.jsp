@@ -111,8 +111,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="#"
-								class="dropdown-item">통합검색</a> <a href="/product/write"
+							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="/product/write"
 								class="dropdown-item">상품 등록</a>
 								
 						</div>
@@ -135,7 +134,10 @@
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
+<<<<<<< HEAD
 							<a href="/board/cate-setting2" class="dropdown-item">카테고리 수정2</a>
+=======
+>>>>>>> a3d10ad731fb61a229416db60d2dc93b346bfbca
 						</div>
 					</div>
 
@@ -151,8 +153,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a> <a
-								href="/user/product" class="dropdown-item">채팅 내역</a> <a href="#"
+							<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a><a href="/user/product"
 								class="dropdown-item">거래 내역</a> <a href="/user/info"
 								class="dropdown-item">내 정보</a>
 						</div>

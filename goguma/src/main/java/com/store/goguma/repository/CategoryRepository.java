@@ -22,4 +22,9 @@ public interface CategoryRepository {
 
 	public List<BoardCategorySub> getSubList();
 
+
+	public int mainCategoryRemove(int id);
+
+	public int subCategoryRemove(int id);
+
 }

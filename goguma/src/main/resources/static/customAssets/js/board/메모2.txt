@@ -1,5 +1,5 @@
-<div class="cate-main-box" id="${data[i].index}">
-    <div class="cate-main-title">
+<div class="cate-main-box">
+    <div class="cate-main-title" id="${data[i].index}">
         <span class="main-title-text">${data[i].name}</span>
     </div>
     <div class="cate-sub-box">
@@ -18,3 +18,43 @@ const mainTitleTexts = document.querySelectorAll(".main-title-text");
 
 const subCateTitles = document.querySelectorAll(".cate-sub-title");
 const subCateTexts = document.querySelectorAll(".sub-title-text");
+
+function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
+	deleteCateBtn.onclick = () => {
+		console.log("1111111111");
+		if(innerBody.innerHTML != ""){
+			if(subBoxs == ""){
+			
+			}else{
+				console.log("333333333");
+				let deleteCheck = 999;
+				for(let i = 0; i < subBoxs.length; i++){
+					if(subBoxs[i].style.border == "1px solid red"){
+						deleteCheck = i;
+					}
+				}
+				if(deleteCheck == 999){
+					alert("삭제 할 카테고리를 선택해주세요!");
+					return;
+				}else{
+					// div 삭제
+					const subTitleTexts = subBoxs[deleteCheck].querySelectorAll(".sub-title-text");
+					if(deleteCategoryApiFun(subBoxs[deleteCheck].id, "sub")){
+						subBoxs[deleteCheck].remove();
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

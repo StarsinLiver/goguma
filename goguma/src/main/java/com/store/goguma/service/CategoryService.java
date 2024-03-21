@@ -72,6 +72,18 @@ public class CategoryService {
 		}
 		return mainResp;
 	}
+
+	public boolean categoryRemove(int id, String checkTitle) {
+		int checkFlag = 0;
+		if(checkTitle != null && checkTitle != "") {
+			if(checkTitle.equals("main")) {
+				checkFlag = repository.mainCategoryRemove(id);
+			}else {
+				checkFlag = repository.subCategoryRemove(id);
+			}
+		}
+		return checkFlag != 0;
+	}
 	
 	
 	

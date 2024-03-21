@@ -2,7 +2,6 @@ package com.store.goguma.cs.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,45 +17,45 @@ import com.store.goguma.entity.Notice;
 import com.store.goguma.service.NoticeService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/cs/api")
+@RequiredArgsConstructor
 public class NoticeController {
-	
-	@Autowired
-	private NoticeService service;
-	
-	@Autowired
-	HttpSession httpSession;
+
+	private final NoticeService service;
+
+	private final HttpSession httpSession;
 
 	@GetMapping("/notice/list")
-	public ResponseEntity<?> getNoticeList(){
+	public ResponseEntity<?> getNoticeList() {
 		List<com.store.goguma.entity.Notice> list = service.getNoticeList();
 		return new ResponseEntity<List<com.store.goguma.entity.Notice>>(list, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/notice/detail/{id}")
-	public ResponseEntity<?> getNoticeDetail(@PathVariable int id){
+	public ResponseEntity<?> getNoticeDetail(@PathVariable int id) {
 		Notice notice = service.getNoticeDetail(id);
 		return new ResponseEntity<Notice>(notice, HttpStatus.OK);
 	}
-	
-	@PostMapping("/notice/write")// 공지사항 등록(관리자쪽으로 이동해야함)
-	public ResponseEntity<?> getNoticeWrite(NoticeRequestDto dto){
+
+	@PostMapping("/notice/write") // 공지사항 등록(관리자쪽으로 이동해야함)
+	public ResponseEntity<?> getNoticeWrite(NoticeRequestDto dto) {
 		boolean result = service.getNoticeWrite(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/notice/update")
-	public ResponseEntity<?> noticeUpdate(NoticeRequestDto dto){
+	public ResponseEntity<?> noticeUpdate(NoticeRequestDto dto) {
 		boolean result = service.noticeUpdate(dto);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/notice/delete/{id}")
-	public ResponseEntity<?> noticeDelete(@PathVariable int id){
+	public ResponseEntity<?> noticeDelete(@PathVariable int id) {
 		boolean result = service.noticeDelete(id);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
-	
+
 }
