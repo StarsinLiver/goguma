@@ -116,7 +116,9 @@ h2 {
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function() {
+
+
+$(document).ready(function() {
 
 		// parameta로 넘어오는 값 확인
 		var urlParam = new URL(location.href).searchParams;
@@ -167,6 +169,12 @@ h2 {
 					    // 생성된 HTML을 테이블의 tbody에 추가
 					    $('table tbody').html(html);
 						
+					    var comment = '';
+					    
+					    
+					    
+					    
+					    
 						
 					} else if (typeValue == "CARD") {
 						alert("데이터 ㅈㄴ 널임 열받음");
@@ -257,7 +265,6 @@ h2 {
 
 			})// ajax end
 
-	        
 		
 		})// search end
 	});
