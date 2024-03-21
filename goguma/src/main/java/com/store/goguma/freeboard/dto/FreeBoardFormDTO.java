@@ -1,5 +1,7 @@
 package com.store.goguma.freeboard.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,4 +26,6 @@ public class FreeBoardFormDTO {
 	private String deleteYn;
 	private Integer mainCategory;
 	private Integer subCategory;
+	private MultipartFile multipartFile;
+	
 }

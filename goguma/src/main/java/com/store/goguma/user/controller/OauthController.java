@@ -1,6 +1,5 @@
 package com.store.goguma.user.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,21 +22,19 @@ import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.OauthResisterDTO;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @RequestMapping("/oauth")
 @Controller
+@RequiredArgsConstructor
 public class OauthController {
 
-	@Autowired
-	private HttpSession httpSession;
+	private final HttpSession httpSession;
 
-	@Autowired
-	private OauthService oauthService;
-	
+	private final OauthService oauthService;
 
-	
 	// localhost://oauth/register
 	// 최초 로그인 추가정보 페이지
 	@GetMapping("/register")
@@ -45,7 +42,6 @@ public class OauthController {
 
 		return "login/oauthRegister";
 	}
-
 
 	/*
 	 * @RequestMapping("/user") 때문에 /user 가 달려있다. 카카오 디벨로퍼에서 redirect key 를 줄바꿈으로
@@ -105,56 +101,49 @@ public class OauthController {
 		 * 현재 로그인시 signUpFormDto와
 		 */
 
-		
 		KakaoProfile kakaoProfile = response2.getBody();
 
 		OauthResisterDTO dto = OauthResisterDTO.builder().email(kakaoProfile.getKakao_account().getEmail())
 				.name(kakaoProfile.getProperties().getNickname()).social("kakao_").build();
 
 		// 최초 사용자 판단 여부 -- 사용자 username 존재 여부 확인
-				// 로컬의 유저네임과 카카오의 유저네임이 동일 할 수 있음(문제 발생)
-		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(),dto.getSocial());
-	
-		
-		
+		// 로컬의 유저네임과 카카오의 유저네임이 동일 할 수 있음(문제 발생)
+		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(), dto.getSocial());
+
 		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
 		if (oldUser != null) {
-			
-			
+
 			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
-			if(oldUser.getDeleteyn().equals("Y")) {
-				
+			if (oldUser.getDeleteyn().equals("Y")) {
+
 				log.info("올드유저 notnull 진입후  deleteY값 탔음:!!!!");
-				
-				
+
 				return "redirect:/login";
-				
-			}else {
-			
+
+			} else {
+
 				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
-				
+
 				httpSession.setAttribute("principal", oldUser);
 
 				int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
 
 				// 변경된 세션의 유효 시간을 설정합니다.
 				httpSession.setMaxInactiveInterval(secondsInAWeek);
-				
+
 				return "main";
 			}
 		} else {
 
 			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			
+
 			httpSession.setAttribute("principal", dto);
 
 			return "redirect:/oauth/register";
 		}
 
-
 	}
-	
-	
+
 	// 구글 로그인
 	@GetMapping("/google-callback")
 	public String googleCallback(@RequestParam("code") String accessCode) {
@@ -189,45 +178,40 @@ public class OauthController {
 
 		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
 		if (oldUser != null) {
-			
-			
+
 			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
-			if(oldUser.getDeleteyn().equals("Y")) {
-				
+			if (oldUser.getDeleteyn().equals("Y")) {
+
 				log.info("올드유저 notnull 진입후  deleteY값 탔음:!!!!");
-				
-				
+
 				return "redirect:/login";
-				
-			}else {
-			
+
+			} else {
+
 				log.info("올드유저 notnull 진입후  delete N값 타서 세션에 저장!!!!:!!!!");
-				
-				
+
 				httpSession.setAttribute("principal", oldUser);
 
 				int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
 
 				// 변경된 세션의 유효 시간을 설정합니다.
 				httpSession.setMaxInactiveInterval(secondsInAWeek);
-				
+
 				return "main";
 			}
 		} else {
 
 			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			
+
 			dto.setUId(0);
 			log.info("올드유저 null 진입:!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@" + dto.toString());
-			
+
 			httpSession.setAttribute("principal", dto);
 
 			return "redirect:/oauth/register";
 		}
 
-
 	}
-	
 
 	// 네이버 로그인
 	@GetMapping("/naver-callback")
@@ -258,50 +242,39 @@ public class OauthController {
 				naverInfo, NaverProfile.class);
 
 		NaverProfile naverProfile = response2.getBody();
-		
-		OauthResisterDTO dto = OauthResisterDTO.builder()
-				.name(naverProfile.getResponse().getName())
-				.email(naverProfile.getResponse().getEmail())
-				.social("naver_").build();
-		
+
+		OauthResisterDTO dto = OauthResisterDTO.builder().name(naverProfile.getResponse().getName())
+				.email(naverProfile.getResponse().getEmail()).social("naver_").build();
+
 		OauthDTO oldUser = oauthService.readUserByUserEmail(dto.getEmail(), dto.getSocial());
-		
-		
-	
+
 		// delete_yn 값이 Y가 아닌 계정에 대해 최초 로그인 검증
 		if (oldUser != null) {
-			
-			
+
 			// 최초 로그인 검증을 위해 select한 계정에 대한 delete_yn 값 검증
-			if(oldUser.getDeleteyn().equals("Y")) {
-				
+			if (oldUser.getDeleteyn().equals("Y")) {
+
 				return "redirect:/login";
-				
-			}else {
-			
-				
+
+			} else {
+
 				httpSession.setAttribute("principal", oldUser);
 
-				
 				int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
 
 				// 변경된 세션의 유효 시간을 설정합니다.
 				httpSession.setMaxInactiveInterval(secondsInAWeek);
-				
-				
-				
+
 				return "main";
 			}
 		} else {
 
 			httpSession.setAttribute("principal", dto);
-			
+
 			return "redirect:/oauth/register";
 		}
 
-
 	}
-	
 
 	// 최초 로그인 추가정보 프로세스
 	@PostMapping("/register")
@@ -320,13 +293,11 @@ public class OauthController {
 
 		httpSession.setAttribute("principal", oldUser);
 
-		
 		int secondsInAWeek = 7 * 24 * 60 * 60; // 1주일의 초 단위 시간
 
 		// 변경된 세션의 유효 시간을 설정합니다.
 		httpSession.setMaxInactiveInterval(secondsInAWeek);
-		
-		
+
 		return "redirect:/";
 	}
 

@@ -3,6 +3,7 @@ package com.store.goguma.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.entity.Banner;
 import com.store.goguma.repository.BannerRepository;
@@ -50,6 +51,7 @@ public class BannerService {
 	 * @param banner
 	 * @return
 	 */
+	@Transactional
 	public int insert(Banner banner) {
 		return bannerRepository.insert(banner);
 	}
@@ -59,6 +61,7 @@ public class BannerService {
 	 * @param banner
 	 * @return
 	 */
+	@Transactional
 	public int update(Banner banner) {
 		return bannerRepository.update(banner);
 	}
@@ -68,6 +71,7 @@ public class BannerService {
 	 * @param id
 	 * @return
 	 */
+	@Transactional
 	public int delete(int id) {
 		return bannerRepository.delete(id);
 	}

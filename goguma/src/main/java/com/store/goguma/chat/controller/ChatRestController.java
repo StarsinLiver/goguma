@@ -2,7 +2,6 @@ package com.store.goguma.chat.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -29,24 +28,22 @@ import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.utils.ChatType;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
 @RequestMapping("/chat")
+@RequiredArgsConstructor
 public class ChatRestController {
 
-	@Autowired
-	ChatMessageService chatMessageService;
+	private final ChatMessageService chatMessageService;
 
-	@Autowired
-	ChatRoomService chatRoomService;
+	private final ChatRoomService chatRoomService;
 
-	@Autowired
-	EmojiUploadService emojiUploadService;
+	private final EmojiUploadService emojiUploadService;
 
-	@Autowired
-	HttpSession httpSession;
+	private final HttpSession httpSession;
 
 	/**
 	 * 방 번호에 대한 모든 채팅 가져오기
@@ -77,7 +74,7 @@ public class ChatRestController {
 	@GetMapping("/user/room")
 	public ResponseEntity<?> findAllUserRoom() {
 		try {
-			
+
 			// 만약 유저가 로그인이 되어 잇지 않다면
 			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 			if (user == null) {
@@ -108,9 +105,10 @@ public class ChatRestController {
 					.emoji(chatMessage.getEmoji()).roomId(chatMessage.getRoomId()).uId(chatMessage.getUserId())
 					.chatMessageType(chatMessage.getChatMessageType()).build();
 
-			OauthDTO user = OauthDTO.builder().uId(chatMessage.getUserId()).name(chatMessage.getUserName()).file(chatMessage.getFile()).build();
-					
-			boolean result = chatMessageService.save(chatMessage2 , user);
+			OauthDTO user = OauthDTO.builder().uId(chatMessage.getUserId()).name(chatMessage.getUserName())
+					.file(chatMessage.getFile()).build();
+
+			boolean result = chatMessageService.save(chatMessage2, user);
 			if (result) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -137,7 +135,7 @@ public class ChatRestController {
 			ChatMessage chatMessage = ChatMessage.builder().roomId(roomId).uId(user.getUId()).text(text).file(path)
 					.chatMessageType(ChatType.IMAGE).build();
 
-			boolean result = chatMessageService.save(chatMessage , user);
+			boolean result = chatMessageService.save(chatMessage, user);
 			if (result) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
