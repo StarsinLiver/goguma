@@ -221,7 +221,7 @@
 		u.u_id as userId ,
 		u.name as userName
 		FROM PRODUCT P
-		inner JOIN USER host
+		inner JOIN user host
 		ON P.HOST_ID = host.U_ID
 		left join product_history
 		h

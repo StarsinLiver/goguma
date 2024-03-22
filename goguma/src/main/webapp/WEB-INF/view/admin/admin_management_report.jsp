@@ -85,12 +85,7 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-<<<<<<< HEAD
-	<div class="payment-container"
-		style="margin-right: 2%; max-width: 75%; width: 2500px;">
-=======
 	<div class="payment-container" style="margin-right: 10%;">
->>>>>>> ef8476590699b6c5691b0702f1ee853903f31d04
 		<h4 class="user-page-title">신고 내역</h4>
 		<div class="col-sm-12">
 			<div class="search-div">

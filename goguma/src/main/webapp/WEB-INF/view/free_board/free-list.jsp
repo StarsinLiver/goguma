@@ -143,7 +143,7 @@ h2 {
 	</div>
 	<!-- aside 끝 -->
 	<div class="row justify-content-center" style="width: 2500px;">
-	<!-- 배너 출력 start -->
+		<!-- 배너 출력 start -->
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px">
 		  <div class="carousel-indicators">
 		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
