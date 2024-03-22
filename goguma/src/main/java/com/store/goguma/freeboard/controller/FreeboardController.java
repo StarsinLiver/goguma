@@ -223,4 +223,12 @@ public class FreeboardController {
 
 		return "redirect:/user/board";
 	}
+	
+	@GetMapping("/asideTest")
+	public String test() {
+		
+		
+		return "/free_board/asideTest";
+	}
+	
 }
