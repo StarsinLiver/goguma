@@ -82,15 +82,15 @@
 		<div class="col-sm-12">
 			<div class="search-div">
 				<form action="/admin/freeboard">
-				<p>대분류</p>
-					<select class="form-select" name="mainCategory" id="main--category"
-						onchange="onclickMain(this.value)" style="width: calc(30%);">
+				
+					<select  name="mainCategory" id="main--category"
+						onchange="onclickMain(this.value)" >
 						<!-- 여기에 다른 카테고리 옵션을 추가할 수 있습니다 -->
 					</select>
 					<!-- 소분류 -->
-					<p>소분류</p>
-					<select class="form-select" name="subCategory" id="sub--category"
-						style="width: calc(30%);">
+					
+					<select name="subCategory" id="sub--category"
+						>
 						<!-- 여기에 다른 카테고리 옵션을 추가할 수 있습니다 -->
 					</select> <select name="searchType">
 						<option value="title" selected>제목</option>
