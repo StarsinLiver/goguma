@@ -43,7 +43,7 @@ h2 {
 	<!-- aside 시작 -->
 	<div
 		style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
-		<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
+		
 	</div>
 	<!-- aside 끝 -->
 	<div class="row justify-content-center" style="    margin: 0 10%;">
