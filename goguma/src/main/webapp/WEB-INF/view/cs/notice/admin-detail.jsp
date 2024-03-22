@@ -17,6 +17,7 @@
 </div>
 <!-- Header End -->
     <div class="notice-detail-main-div">
+    <h2 class="notice-detail-h2">공지사항 수정</h2>
         <table class="notice-detail-table">
             <tr class="notice-detail-tr">
                 <th class="notice-detail-th">제목</th>
