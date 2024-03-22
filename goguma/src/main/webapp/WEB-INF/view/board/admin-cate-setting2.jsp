@@ -71,45 +71,45 @@ vertical-align: middle;
 							<input type="text" class="cate-input">
 						</td>
 					</tr>
-					<tr>
+					<tr class="hide-tr">
 						<th>폰트 선택</th>
 						<td>
 							<div class="radio-all-box">
 								<div class="radio-box">
-									<input type="radio" name="font" class="font-select-radio">
-									<span>폰트1</span>
+									<input type="radio" value="Dongle" name="font" class="font-select-radio" checked>
+									<span>Dongle 폰트</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" name="font" class="font-select-radio">
-									<span>폰트2</span>
+									<input type="radio" value="Gamja Flower" name="font" class="font-select-radio">
+									<span>Gamja Flower 폰트</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" name="font" class="font-select-radio">
+									<input type="radio" value="" name="font" class="font-select-radio">
 									<span>폰트3</span>
 								</div>
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<tr class="hide-tr">
 						<th>배치 형식</th>
 						<td>
 							<div class="radio-all-box">
 								<div class="radio-box">
-									<input type="radio" name="type" class="type-select-radio">
-									<span>형식</span>
+									<input type="radio" value="LIST" name="type" class="type-select-radio" checked>
+									<span>리스트 형식</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" name="type" class="type-select-radio">
-									<span>형식</span>
+									<input type="radio" value="CARD" name="type" class="type-select-radio">
+									<span>카드 형식</span>
 								</div>
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<tr class="hide-tr">
 						<th>배경 이미지 선택</th>
 						<td>
 							<div class="mb-3" style="padding:5px 0px 0px 0px;">
-							  <input class="form-control" type="file" id="formFileMultiple" style="font-size: 1.5rem">
+							  <input class="form-control" type="file" id="formFile" style="font-size: 1.5rem" accept="image/gif, image/jpeg, image/png">
 							</div>
 						</td>
 					</tr>

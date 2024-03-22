@@ -10,21 +10,17 @@ import com.store.goguma.entity.BoardCategorySub;
 @Mapper
 public interface CategoryRepository {
 
-	public int cate1Save(BoardCategoryMain entity);
-
-	public int cate2Save(BoardCategorySub entity);
-
-	public int mainDelete();
-
-	public int subDelete();
-
-	public List<BoardCategoryMain> getMainList();
-
-	public List<BoardCategorySub> getSubList();
+	public List<BoardCategoryMain> getMainList();//수정해야함
+	public List<BoardCategorySub> getSubList();//수정해야함
 
 
 	public int mainCategoryRemove(int id);
-
 	public int subCategoryRemove(int id);
+	
+	public int mainCategoryModify(BoardCategoryMain entity);
+	public int mainCategoryCreate(BoardCategoryMain entity);
+	public int subCategoryModify(BoardCategorySub entity);
+	public int subCategoryCreate(BoardCategorySub entity);
+	public int getMainIndex();
 
 }

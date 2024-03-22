@@ -4,8 +4,15 @@ const deleteCateBtn = document.querySelector(".delete-cate-btn");
 const switchCateBtn = document.querySelector(".switch-cate-btn");
 const cateInput = document.querySelector(".cate-input");
 const finalSaveBtn = document.querySelector(".save-cate-btn");
-
 const innerBody = document.querySelector(".cate-box");
+const hideTables = document.querySelectorAll(".hide-tr");
+const fontRadios = document.querySelectorAll(".font-select-radio");
+const typeRadios = document.querySelectorAll(".type-select-radio");
+const fileInput = document.querySelector("#formFile");
+
+let subFlag = false;
+let fileValue = "";
+const formData = new FormData();
 
 
 load();
@@ -14,9 +21,7 @@ function load(){
 		type : "get",
 		url : "/board/api/list",
 		success : function(data){
-			if(data != ""){
-				innerFun(data);
-			}
+			innerFun(data);
 		},
 		error : function(){
 			alert("에러");
@@ -28,14 +33,15 @@ function innerFun(data){
 	let innr = "";
 	if(data != ""){
 		for(let i = 0; i < data.length; i++){
-		innr += `
-			<div class="cate-main-box">
-			    <div class="cate-main-title" id="${data[i].index}">
-			        <span class="main-title-text">${data[i].name}</span>
-			    </div>
-			    <div class="cate-sub-box"></div>
-			</div>
-		`;
+			innr += `
+				<div class="cate-main-box">
+				    <div class="cate-main-title" id="${data[i].index}">
+				        <span class="main-title-text">${data[i].name}</span>
+				        <input type="hidden" value="1" class="main-hidden">
+				    </div>
+				    <div class="cate-sub-box"></div>
+				</div>
+			`;
 		}
 		innerBody.innerHTML = innr;
 		const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
@@ -46,6 +52,7 @@ function innerFun(data){
 		addSubCateBtnClick(mainTitleBoxs, subInnerBoxs);
 	}
 	addMainCateBtnClick(innerBody);
+	finalSaveBtnClick(innerBody);
 }
 
 function subInnerFun(boxs, data){
@@ -56,6 +63,7 @@ function subInnerFun(boxs, data){
 				innr += `
 					<div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
 				        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
+				        <input type="hidden" value="1" class="sub-hidden">
 				    </div>
 				`;
 			}
@@ -85,9 +93,17 @@ function mainClickEvent(){
 	const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
 	for(let i = 0; i < mainTitleBoxs.length; i++){
 		mainTitleBoxs[i].onclick = () => {
+			if(subFlag == true){
+				if(confirm("저장하지 않으면 설정한 데이터가 삭제됩니다. 저장하시겠습니까?")){
+					return;
+				}
+			}
+			fontRadios[0].checked = true;
+			typeRadios[0].checked = true;
+			fileInput.value = "";
+			subFlag = false;
 			borderBlack(mainTitleBoxs);
 			mainTitleBoxs[i].style.border = "1px solid red";
-			//서브 카테고리 있는지 체크하고 있으면 black
 			let flag = 0;
 			for(let k = 0; k < subInnerBoxs.length; k++){
 				if(subInnerBoxs[k].innerHTML != ""){
@@ -98,9 +114,10 @@ function mainClickEvent(){
 				const subTitleBoxs = document.querySelectorAll(".cate-sub-title");
 				borderBlack(subTitleBoxs);
 			}
-			
+			tableDisplayOption(false);
 			cateInput.value = mainTitleTexts[i].textContent;
-			titleChangeEvent(mainTitleBoxs[i], mainTitleTexts[i]);
+			const mainHiddenInputs = document.querySelectorAll(".main-hidden");
+			titleChangeEvent(mainTitleBoxs[i], mainTitleTexts[i], mainHiddenInputs[i], "main");
 			deleteCateBtnClick(innerBody, mainTitleBoxs, "");
 		}
 	}
@@ -112,14 +129,24 @@ function subClickEvent(){
 	const subTitleTexts = document.querySelectorAll(".sub-title-text");
 	for(let i = 0; i < subTitleBoxs.length; i++){
 		subTitleBoxs[i].onclick = () => {
+			if(subFlag == true){
+				if(confirm("저장하지 않으면 설정한 데이터가 삭제됩니다. 저장하시겠습니까?")){
+					return;
+				}
+			}
+			fontRadios[0].checked = true;
+			typeRadios[0].checked = true;
+			fileInput.value = "";
+			subFlag = false;
 			borderBlack(mainTitleBoxs);
 			borderBlack(subTitleBoxs);
 			subTitleBoxs[i].style.border = "1px solid red";
 			let mainTitleBox = subTitleBoxs[i].parentElement.parentElement.querySelector(".cate-main-title");
 			mainTitleBox.style.border = "1px solid red";
-			
+			tableDisplayOption(true);
 			cateInput.value = subTitleTexts[i].textContent;
-			titleChangeEvent(subTitleBoxs[i], subTitleTexts[i]);
+			const subHiddenInputs = document.querySelectorAll(".sub-hidden");
+			titleChangeEvent(subTitleBoxs[i], subTitleTexts[i], subHiddenInputs[i], "sub");
 			let deleteCheck = 999;
 			for(let k = 0; k < mainTitleBoxs.length; k++){
 				if(mainTitleBoxs[k].style.border == "1px solid red"){
@@ -129,6 +156,64 @@ function subClickEvent(){
 			if(deleteCheck != 999){
 				deleteCateBtnClick(innerBody, mainTitleBoxs, subTitleBoxs[i]);
 			}
+			subOnChangeEvent(subHiddenInputs[i]);
+		}
+	}
+}
+
+function subOnChangeEvent(hidden){
+	radioOnchange(fontRadios, hidden);
+	radioOnchange(typeRadios, hidden);
+	fileOnchange(fileInput, hidden);
+}
+
+function radioOnchange(list, hidden){
+	for(let i = 0; i < list.length; i++){
+		list[i].onchange = () => {
+			subFlag = true;
+			if(hidden.value == 1){
+				hidden.value = 5;
+			}else if(hidden.value == 3){
+				hidden.value = 4;
+			}else if(hidden.value == 2){
+				hidden.value = 5;
+			}
+		}
+	}
+}
+
+function fileOnchange(input, hidden){
+	input.onchange = (event) => {
+		if(event.target.files[0].size > 5242880){ // 5 mb 까지만 가능
+			alert("첨부파일은 5mb 이하만 가능합니다.");
+			input.value = "";
+			return;
+		}
+		subFlag = true;
+		if(hidden.value == 1){
+			hidden.value = 5;
+		}else if(hidden.value == 3){
+			hidden.value = 4;
+		}else if(hidden.value == 2){
+			hidden.value = 5;
+		}
+		const reader = new FileReader();
+        
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = () => {
+        	fileValue = event.target.files[0];
+        }
+	}
+}
+
+function tableDisplayOption(flag){
+	if(flag == true){
+		for(let k = 0; k < hideTables.length; k++){
+			hideTables[k].style.display = "table-row";
+		}
+	}else{
+		for(let k = 0; k < hideTables.length; k++){
+			hideTables[k].style.display = "none";
 		}
 	}
 }
@@ -139,15 +224,23 @@ function borderBlack(list){
 	}
 }
 
-function titleChangeEvent(box, text){
+function titleChangeEvent(box, text, hidden, flag){
 	cateInput.onkeyup = () => {
 		if(box.style.border == "1px solid red"){
 			text.textContent = cateInput.value;
+			if(flag == "main"){
+				if(hidden.value == 1){
+					hidden.value = 2;
+				}
+			}else{
+				if(hidden.value == 1){
+					hidden.value = 2;
+				}
+			}
+			
 		}
 	}
 }
-
-//=======================================================================================================================================================================
 
 function addMainCateBtnClick(innerBody){
 	addMainCateBtn.onclick = () => {
@@ -156,7 +249,6 @@ function addMainCateBtnClick(innerBody){
 		const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
 		addSubCateBtnClick(mainTitleBoxs, subInnerBoxs);
 		switchCateBtnClick(innerBody, mainTitleBoxs, "");
-		//deleteCateBtnClick(innerBody, mainTitleBoxs, "");
 	}
 }
 
@@ -183,6 +275,7 @@ function addMainCategory(innerBody){
 		<div class="cate-main-box">
 		    <div class="cate-main-title" id="999">
 		        <span class="main-title-text">메인 카테고리</span>
+		        <input type="hidden" value="3" class="main-hidden">
 		    </div>
 		    <div class="cate-sub-box"></div>
 		</div>
@@ -196,8 +289,9 @@ function addMainCategory(innerBody){
 function addSubCategory(innerBody, mainId){
 	let innr = innerBody.innerHTML;
 	innr += `
-		<div class="cate-sub-title" id="${mainId}">
+		<div class="cate-sub-title" id="999">
 	        <span class="sub-title-text" id="999">서브 카테고리</span>
+	        <input type="hidden" value="3" class="sub-hidden">
 	    </div>
 	`;
 	innerBody.innerHTML = innr;
@@ -221,7 +315,7 @@ function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 					}
 				}
 				if(deleteCheck == 999){
-					alert("삭제 할 카테고리를 선택해주세요!111111");
+					alert("삭제 할 카테고리를 선택해주세요!");
 					return;
 				}else{
 					const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
@@ -237,7 +331,7 @@ function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 				}
 			}else{
 				if(subBoxs.style.border != "1px solid red"){
-					alert("삭제 할 카테고리를 선택해주세요!2222");
+					alert("삭제 할 카테고리를 선택해주세요!");
 					return;
 				}else{
 					if(subBoxs.parentElement.querySelectorAll(".cate-sub-title").length == 1){
@@ -245,11 +339,9 @@ function deleteCateBtnClick(innerBody, mainBoxs, subBoxs){
 						if(deleteCategoryApiFun(subTitleText.id, "sub")){
 							const mainDiv = subBoxs.parentElement;
 							mainDiv.replaceChildren();
-							//mainDiv.remove();
 							alert("삭제되었습니다.");
 						}
 					}else{
-						console.log("2222222걸림??");
 						const subTitleText = subBoxs.querySelector(".sub-title-text");
 						if(deleteCategoryApiFun(subTitleText.id, "sub")){
 							subBoxs.remove();
@@ -288,89 +380,98 @@ function deleteCategoryApiFun(id, checkTitle){
 	return flag;
 }
 
-finalSaveBtn.onclick = () => {
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//=======================================================================================================================================================================
-finalSaveBtn.onclick = () => {
-	const mainTitles = document.querySelectorAll(".main-title-text");
-	const subBoxs = document.querySelectorAll(".cate-sub-box");
-	
-	const finalMainArray = new Array();
-	for(let i = 0; i < mainTitles.length; i++){
-		let mainObj = {
-			index : null,
-			name : "",
-			subList : null
-		};
-		mainObj.name = mainTitles[i].textContent;
-		mainObj.index = i;
-		const finalSubArray = new Array();
-		if(subBoxs[i].innerHTML != ""){
-			const subTitles = subBoxs[i].querySelectorAll(".sub-title-text");
-		
-			for(let k = 0; k < subTitles.length; k++){
-				let subObj = {
-					index : null,
-					mainIndex : null,
-					name : ""
-				};
-				subObj.name = subTitles[k].textContent;
-				subObj.index = k;
-				subObj.mainIndex = i;
-				finalSubArray.push(subObj);
-			}// for(let k
-			mainObj.subList = finalSubArray;
-			finalMainArray.push(mainObj);
-		}else{
-			finalMainArray.push(mainObj);
-		}
-	}// for(let i
-	console.log("최종", finalMainArray);
-	let formData = new FormData();
-    formData.append("cateList", new Blob([JSON.stringify(finalMainArray)], {type: "application/json"}));
-	$.ajax({
-		type : "post",
-		url : "/board/api/category/add",
-		contentType : false,
-		processData: false,
-		data : formData,
-		success : function(data){
-			if(data == true){
-				alert("등록완료!");
+function finalSaveBtnClick(innerBody){
+	finalSaveBtn.onclick = () => {
+		//if(fileValue == ""){
+		//	alert("이미지 파일을 첨부해주세요!");
+		//	return;
+		//}
+		let fontResult = "";
+		let typeResult = "";
+		for(let i = 0; i < fontRadios.length; i++){
+			if(fontRadios[i].checked == true){
+				fontResult = fontRadios[i].value;
 			}
-		},
-		error : function(){
-			alert("에러");
 		}
-	});
+		for(let i = 0; i < typeRadios.length; i++){
+			if(typeRadios[i].checked == true){
+				typeResult = typeRadios[i].value;
+			}
+		}
+		if(innerBody.innerHTML != ""){
+			const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
+			const mainTitleTexts = document.querySelectorAll(".main-title-text");
+			const subInnerBoxs = document.querySelectorAll(".cate-sub-box");
+			const mainHiddenInputs = document.querySelectorAll(".main-hidden");
+			const subCateTexts = document.querySelectorAll(".sub-title-text");
+			for(let i = 0; i < mainTitleTexts.length; i++){
+				if(mainTitleTexts[i].textContent == ""){
+					alert("메인 카테고리 이름을 적어주세요!");
+					return;
+				}
+			}
+			for(let i = 0; i < subCateTexts.length; i++){
+				if(subCateTexts[i].textContent == ""){
+					alert("서브 카테고리 이름을 적어주세요!");
+					return;
+				}
+			}
+			
+			let mainCateList = new Array();
+			
+			for(let i = 0; i < mainTitleBoxs.length; i++){
+				const mainObject = {
+					id : mainTitleBoxs[i].id,
+					name : mainTitleTexts[i].textContent,
+					flag : mainHiddenInputs[i].value,
+					subList : null
+				}
+				if(subInnerBoxs[i].innerHTML != ""){
+					let subCateList = new Array();
+					const subCateTitles = subInnerBoxs[i].querySelectorAll(".cate-sub-title");
+					const subCateTexts = subInnerBoxs[i].querySelectorAll(".sub-title-text");
+					const subHiddenInputs = subInnerBoxs[i].querySelectorAll(".sub-hidden");
+					for(let k = 0; k < subCateTitles.length; k++){
+						const subObject = {
+							id : subCateTexts[k].id,
+							groupId : subCateTitles[k].id,
+							name : subCateTexts[k].textContent,
+							font : "",
+							listType : "",
+							flag : subHiddenInputs[k].value
+						}
+						if(subHiddenInputs[k].value == 4 || subHiddenInputs[k].value == 5){
+							subObject.font = fontResult;
+							subObject.listType = typeResult;
+						}
+						subCateList.push(subObject);
+					}
+					mainObject.subList = subCateList;
+				}
+				mainCateList.push(mainObject);
+			}
+				console.log("최종", mainCateList);
+			formData.append("mainCateList", new Blob([JSON.stringify(mainCateList)], {type: "application/json"}));
+			formData.append("file", fileValue);
+			$.ajax({
+				type : "post",
+				url : "/board/api/category/add",
+				encType : "multipart/form-data",
+				processData : false,
+				contentType : false,
+				data : formData,
+				success : function(data){
+					if(data == true){
+						alert("저장되었습니다!");
+						//location.href = "/board/cate-setting2";
+					}
+				},
+				error : function(){
+					alert("에러");
+				}
+			});
+		}
+	}
 }
 
 

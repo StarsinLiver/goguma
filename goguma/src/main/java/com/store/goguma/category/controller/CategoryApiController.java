@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.category.dto.CategoryRequestDto;
 import com.store.goguma.category.dto.CategoryResponseDto;
@@ -25,18 +26,18 @@ public class CategoryApiController {
 	private final CategoryService service;
 	
 	@PostMapping("/category/add")
-	public ResponseEntity<?> addCate(@RequestPart(value = "cateList") List<CategoryRequestDto> cateList){
-		//boolean result = service.addCate(cateList);
-		for(int i = 0; i < cateList.size(); i++) {
-			System.out.println(cateList.get(i));
-		}
-		boolean result = true;
+	public ResponseEntity<?> addCategory(@RequestPart(value = "mainCateList") List<CategoryRequestDto> dtos,
+			@RequestPart(value = "file", required = false) MultipartFile file){
+		boolean result = service.addCategory(dtos, file);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
 	
 	@GetMapping("/list")
 	public ResponseEntity<?> getList(){
 		List<CategoryResponseDto> list = service.getList();
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
 		return new ResponseEntity<List<CategoryResponseDto>>(list, HttpStatus.OK);
 	}
 	

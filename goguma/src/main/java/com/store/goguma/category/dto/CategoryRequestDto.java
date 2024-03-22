@@ -14,13 +14,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class CategoryRequestDto {
 
-	private int index;
+	private int id;
 	private String name;
-	private List<sub1> subList;
+	private int flag;
+	private List<SubCateObject> subList;
 	
 	public BoardCategoryMain toEntity() {
 		return BoardCategoryMain.builder()
-				.mainIndex(index)
+				.id(id)
 				.name(name)
 				.build();
 	}
@@ -28,15 +29,23 @@ public class CategoryRequestDto {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Data
-	public static class sub1{
-		private int index;
-		private int mainIndex;
+	public static class SubCateObject{
+		private int id;
+		private int groupId;
 		private String name;
+		private String font;
+		private String listType;
+		private int flag;
 		
 		public BoardCategorySub toEntity() {
 			return BoardCategorySub.builder()
-					.groupId(mainIndex)
+					.id(id)
+					.groupId(groupId)
 					.name(name)
+					.font("")
+					.background("")
+					.file("")
+					.listType("")
 					.build();
 		}
 	}
