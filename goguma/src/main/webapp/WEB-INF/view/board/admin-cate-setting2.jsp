@@ -84,8 +84,8 @@ vertical-align: middle;
 									<span>Gamja Flower 폰트</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" value="" name="font" class="font-select-radio">
-									<span>폰트3</span>
+									<input type="radio" value="Sunflower" name="font" class="font-select-radio">
+									<span>Sunflower 폰트</span>
 								</div>
 							</div>
 						</td>
