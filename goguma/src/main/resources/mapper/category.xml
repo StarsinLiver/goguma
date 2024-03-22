@@ -4,63 +4,32 @@
 
 <mapper namespace="com.store.goguma.repository.CategoryRepository">
 
-	<update id="subCategoryModify">
-		update board_sub_category set
-			name = #{name},
-			font = #{font},
-			background = #{background},
-			file = #{file},
-			list_type = #{listType}
-		where id = #{id};
-	</update>
-
-	<insert id="subCategoryCreate">
-		insert into board_sub_category(name, group_id, background, font, list_type, file)
+	<insert id="cate1Save">
+		insert into board_main_category(name, main_index)
 		values(
 			#{name},
-			#{groupId},
-			#{background},
-			#{font},
-			#{listType},
-			#{file}
+			#{mainIndex}
 		);
 	</insert>
 
-	<update id="mainCategoryModify">
-		update board_main_category set
-			name = #{name}
-		where id = #{id};
-	</update>
-
-	<insert id="mainCategoryCreate">
-		insert into board_main_category(name)
+	<insert id="cate2Save">
+		insert into board_sub_category(name, group_id)
 		values(
-			#{name}
+			#{name},
+			#{groupId}
 		);
 	</insert>
-	
-	<select id="getMainIndex">
-		select max(id) from board_main_category;
-	</select>
-	
-	
-	
-	
 
-	<select id="getMainList" resultType="com.store.goguma.entity.BoardCategoryMain">
-		select * from board_main_category;
-	</select>
-
-	<select id="getSubList" resultType="com.store.goguma.entity.BoardCategorySub">
-		select * from board_sub_category;
-	</select>
-
-	<delete id="mainCategoryRemove">
-		delete from board_main_category where id = #{id};
+	<delete id="mainDelete">
+		delete from board_main_category;
 	</delete>
 
-	<delete id="subCategoryRemove">
-		delete from board_sub_category where id = #{id};
+	<delete id="subDelete">
+		delete from board_sub_category;
 	</delete>
+
+
+
+
 
 </mapper>
