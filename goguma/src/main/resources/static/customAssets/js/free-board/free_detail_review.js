@@ -7,8 +7,21 @@ const commentList = document.getElementsByClassName('cmt_list')[0];
 const pageNavigation = document.getElementsByClassName('pagination')[0];
 const commentTotal = document.getElementById('comment-total');
 const deleteSubForm = document.getElementById('delete-sub-form');
-const mainImojiList = document.getElementById('comment-main-imoji'); // 댓글 이미지
-let reviewPg = 0;
+const mainImojiList = document.getElementById('comment-main-imoji'); // 메인 이모티콘
+const subEmojiList = document.getElementById('comment-sub-imoji'); // 이모티콘 서브
+const displayClickEmoji = document.getElementById('display-click-emoji'); // 이모지를 display
+let reviewPg = 0; // 현재 페이지 번호
+
+let emojiFile = ""; // 유저가 선택한 이모지
+
+let dataEmoji;
+
+// 댓글 목록 출력
+document.addEventListener("DOMContentLoaded", function() {
+	// 상세 페이지에 들어왔을 시점
+	reviewPg = 1;
+	reviewList(reviewPg);
+});
 
 // 이모티콘 불러오기
 function imojiList(){
@@ -21,35 +34,50 @@ function imojiList(){
 			"Content-Type" : "application/json"    
 		},    
 		success : function(result) {      
-			console.log(result);
 			
-			let mainImoji = '';
+			// 전체 list 객체 담기
+			dataEmoji = result;
 			
-			// 메인 이모티콘 배열
-			for (let i = 0; i < result.length; i++) {
-		        let file = result[i].file;
-		        let main = result[i].id;
-		        
-		        console.log(file);
-		        console.log(main);
-		        
-		        mainImoji += '<img src="/images/upload/emoji/' + file + '" onclick="subImoji(' + main + ')" alt="이모티콘"/>';
-		    }
-			console.log(mainImoji);
+			// 메인 이모티콘 뿌리기
+			for(var i = 0; i < result.length; i++) {
+				mainImojiList.innerHTML += `<img src="/images/upload/emoji/${result[i].mainEmoji.file}" onclick="displaySubEmoji(${i})"/>`
+			// 	subEmojiList.innerHTML += displaySubEmoji(result[i].subEmoji);
+			}
 			
-			mainImojiList.insertAdjacentHTML('afterbegin', mainImoji);
 		},    
 		error : function(request, status, error) {     
 			console.log(error)    
 		}});
 		
+		
 	
 }
 
-// 자식 이모티콘 불러오기
-function subImoji(main) {
-	console.log(main);
+// subEmoji To display 
+const displaySubEmoji = (index) => {
 	
+	let data = dataEmoji[index].subEmoji;	
+	
+	let display = "";
+	for(var i = 0; i < data.length; i++) {
+		display +=  `<img src="/images/upload/emoji/${data[i].file}" onclick="onclickEmoji('${data[i].file}')"/>`
+	}
+	
+	
+	subEmojiList.innerHTML = display;
+	//	return display;
+}
+
+
+
+// 이모지를 클릭했을 시 발생하는 이벤트
+const onclickEmoji = (file) => {
+	
+	emojiFile = file;
+	console.log(emojiFile);
+	
+	// 화면에 뿌려주는 이벤트
+	displayClickEmoji.innerHTML = `<img src="/images/upload/emoji/${emojiFile}"/>`
 }
 
 // 댓글 전송
@@ -70,16 +98,26 @@ function review(){
 		},
 		data : JSON.stringify({  
 			"freeBoardId": postId,
-			"content" : content
+			"content" : content ,
+			"file" : emojiFile
 		}),    
 		success : function(result) {  
-			console.log(reviewPg);
+			console.log(" 현재 페이지 : "+reviewPg);
 			reviewList(reviewPg);
 		},    
 		error : function(request, status, error) {     
 			console.log(error);
 		}});
 	
+	
+	
+}
+
+const clearReview = () => {
+	const content = contentTextArea.value;
+	emojiFile = "";
+	content = "";
+	// display.none
 }
 
 // 현재 게시글 번호 가져오기
@@ -96,12 +134,6 @@ function getParams() {
 	
 	return id;
 }
-
-// 댓글 목록 출력
-document.addEventListener("DOMContentLoaded", function() {
-	// 상세 페이지에 들어왔을 시점
-	reviewList(1);
-});
 
 // 페이지 리스트
 function reviewList(pg){
@@ -140,7 +172,6 @@ function reviewList(pg){
 
 // 동적 리스트 생성(댓글, 페이지네이션)
 function tagList(result){
-	
 	// 동적 태그
 	let comment = ''; 
 	let pageNum = '';
@@ -177,7 +208,7 @@ function tagList(result){
 	
 }
 
-// 댓글 등록 태그(등록, 목록)
+// 댓글 등록 태그
 function createComment(commentData, comment){
 	
 	if(commentData.reviewGroup !== null){

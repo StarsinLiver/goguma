@@ -127,10 +127,17 @@
 					<textarea id="review-content" name="content" 
 						style="resize: none; border: 1px solid #ccc;"></textarea>
 					<div style="display: flex; justify-content: space-between; align-items: stretch;">
+					
 						<button type="button" class="btn btn-warning" onclick="imojiList()">이모티콘</button>
 						<button type="button" class="btn btn-primary" onclick="review()">등록</button>
+						<div id="display-click-emoji"></div>
 					</div>
-					<div class="main-imoji-list" id="comment-main-imoji">
+					<div>
+						<div class="main-imoji-list" id="comment-main-imoji">
+						</div>
+						
+						<div class="sub-imoji-list" id="comment-sub-imoji">
+						</div>
 					</div>
 				</div>
 			</div>
