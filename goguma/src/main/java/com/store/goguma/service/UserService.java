@@ -5,16 +5,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.store.goguma.entity.Product;
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.BackPageRestfulException;
-import com.store.goguma.repository.EmojiHistoryRepository;
 import com.store.goguma.repository.MyUserRepository;
 import com.store.goguma.repository.ProductHistoryRepository;
 import com.store.goguma.repository.ReportRepository;
@@ -22,14 +19,16 @@ import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
-import com.store.goguma.user.dto.my.RequestPageDTO;
-import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.user.dto.UserProfileDto;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
 import com.store.goguma.user.dto.my.ProductHostDTO;
 import com.store.goguma.user.dto.my.QnaUserDTO;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 import com.store.goguma.user.dto.my.WishProductDTO;
 import com.store.goguma.utils.Define;
+import com.store.goguma.utils.UserRole;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +42,7 @@ public class UserService {
 	private final MyUserRepository myUserRepository;
 	private final ProductHistoryRepository productHistoryRepository;
 	private final ReportRepository reportRepository;
+	
 
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
@@ -90,6 +90,7 @@ public class UserService {
 	}
 
 	// 이모티콘 환불
+	@Transactional
 	public UserEmojiDTO cancelEmoji(String merchantid, int uId, String reason) {
 		// 환불 요청
 		int result = myUserRepository.updateEmojiHistoryCancel(merchantid, uId, reason);
@@ -138,6 +139,7 @@ public class UserService {
 	}
 
 	// 문의하기 글 삭제
+	@Transactional
 	public int deleteQna(Integer[] qnaIds) {
 		int deletedCount = 0;
 
@@ -252,7 +254,8 @@ public class UserService {
 	}
 
 	// 관리자가 권한 수정
-	public int adminUpdateUserRole(int uId, String role) {
+	@Transactional
+	public int adminUpdateUserRole(int uId, UserRole role) {
 		return userRepository.adminUpdateUserRole(uId, role);
 	}
 
@@ -287,5 +290,23 @@ public class UserService {
 			return 6;
 		}
 		return 1;
+	}
+	
+	/**
+	 * 유저 정보 상세 조회
+	 * @param userId
+	 * @return
+	 */
+	public UserProfileDto findProfileById(int userId) {
+		return userRepository.findProfileById(userId);
+	}
+	
+	/**
+	 * 유저 정보 삭제
+	 * @param userId
+	 * @return
+	 */
+	public int deleteUser(int userId) {
+		return userRepository.deleteUser(userId);
 	}
 }

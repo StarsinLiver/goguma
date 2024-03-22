@@ -23,8 +23,9 @@ public class FreeBoardReviewDTO {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
-	private String file; // 댓글
+	private String file; // 이모티콘
 	
 	// user
-	
+	private String userName;
+	private String userFile;
 }

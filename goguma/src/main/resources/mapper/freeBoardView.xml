@@ -10,6 +10,20 @@
 		insert into free_board_view
 		values (#{boardId} , 0)
 	</insert>
-	
-	
+
+	<!-- 게시글 조회수 확인 -->
+	<select id="getFreeView">
+		select free_board_id as freeBoardId, view
+		from
+		free_board_view
+		where free_board_id = #{freeBoardId}
+	</select>
+
+	<!-- 게시글 조회수 증가 -->
+	<update id="plusFreeView">
+		UPDATE free_board_view
+		SET view = view + 1
+		WHERE free_board_id = #{freeBoardId}	
+	</update>
+
 </mapper>

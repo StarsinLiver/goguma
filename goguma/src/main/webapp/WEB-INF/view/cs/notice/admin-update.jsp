@@ -17,7 +17,12 @@
 </div>
 <!-- Header End -->
     <div class="cs-notice--main-div">
-        <table class="cs-notice--table">
+    	<div>
+		<!-- aside -->
+		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
+		<!-- aside end -->
+	</div>
+        <table class="cs-notice--table" style="margin: 0 10% 0 10%;">
             <tr class="cs-notice--tr">
                 <th class="cs-notice--th">제목</th>
                 <td class="cs-notice--td">

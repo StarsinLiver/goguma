@@ -633,7 +633,7 @@
 /* line 233, app/assets/stylesheets/home/articles/flea_market.css.scss */
 #article-description #article-title {
   margin-top: 16px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: -0.6px;
@@ -1194,4 +1194,79 @@
 /* line 594, app/assets/stylesheets/home/articles/flea_market.css.scss */
 body.global #article-description {
   border-bottom: none;
+}
+
+.chat-button {
+	border: 1px solid red;
+	float: inline-end;
+	margin-right: 5px;
+}
+
+.darken-on-hover:hover {
+	filter: brightness(85%);
+}
+
+.heart-icon .fa {
+	font-size: 26px;
+	transition: all 0.3s ease;
+}
+
+.heart-icon .fa:hover {
+	color: #6c757d;
+}
+
+.heart-icon .fa-heart-o:hover {
+	color: red;
+	transform: scale(1.4);
+}
+
+.heart-message {
+	display: none;
+	position: absolute;
+	top: -15px;
+	right: -64px;
+	padding: 5px;
+	color: #dc3545;
+	border-radius: 5px;
+	z-index: 1;
+	width: 100px;
+}
+
+.heart-icon {
+	position: relative;
+}
+
+.chat-button {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.chat-btn {
+	background: none;
+	border: none;
+	font-size: 16px;
+	color: #007bff;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.chat-btn:hover {
+	color: #0056b3;
+	font-size: large;
+	background: none;
+}
+
+.report {
+	margin-right: 12px;
+	background: none;
+	font-size: 16px;
+	color: red;
+	transition: all 0.3s ease;
+}
+
+.report:hover {
+	color: red;
+	font-size: large;
+	background: none;
 }

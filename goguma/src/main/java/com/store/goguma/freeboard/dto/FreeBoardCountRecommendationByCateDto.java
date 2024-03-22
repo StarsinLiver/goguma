@@ -17,4 +17,5 @@ public class FreeBoardCountRecommendationByCateDto {
 	private String mainCategoryName;
 	private String subCategoryName;
 	private Integer goodCount;
+	private Integer view;
 }

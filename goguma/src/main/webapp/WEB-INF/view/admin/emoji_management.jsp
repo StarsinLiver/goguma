@@ -17,39 +17,43 @@
 </div>
 <!-- Header End -->
 <div style="display: flex; margin: 15% 5%;">
-	<div >
+	<div>
 		<!-- aside -->
 		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 		<!-- aside end -->
 	</div>
 	<div class="emoji--main-div">
-	<div class="emoji--head-menu-box">
-			<div class="emoji--head-menu">
-				<span class="emoji--head-menu-title">홈</span>		
-				
+		<div class="emoji--head-menu-box">
+			<div class="emoji--head-menu" style="width: 120px;">
+				<span class="emoji--head-menu-title">이모티콘</span>
+
 			</div>
-				<!--  <div class="emoji--head-menu">
+
+			<!--  <div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">인기</span>
 			</div>
 			<div class="emoji--head-menu">
 				<span class="emoji--head-menu-title">신규</span>
 			</div>-->
-			
+
+		</div>
+		<div class="emoji-search-box">
+			<input type="text" class="emoji-search-input">
+			<button type="button" class="emoji-search-btn" onclick="onclickSearch()">검색</button>
 		</div>
 		<div class="emoji--body">
 			<div class="emoji--content-box"></div>
-			
+
 			<div class="emoji--page-box">
-				<div class="emoji--arrow-box">
+				<div class="emoji--arrow-box" onclick="onclickArray('prev')">
 					<span>◀</span>
 				</div>
 				<div class="emoji--num-box">
-					<span class="emoji--num">1</span>
+					<!-- <span class="emoji--num">1</span>  -->
 				</div>
-				<div class="emoji--arrow-box">
+				<div class="emoji--arrow-box" onclick="onclickArray('next')">
 					<span>▶</span>
 				</div>
-				
 			</div>
 		</div>
 	</div>

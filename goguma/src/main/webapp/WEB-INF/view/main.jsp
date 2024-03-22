@@ -67,7 +67,7 @@
 				<h2 style="margin-right: auto;">
 					<i class="fa-solid fa-flag me-3"></i>공지사항
 				</h2>
-				<a href="/cs/notice/list" class="btn btn-warning">공지사항 바로가기</a>
+				<a href="/cs/notice/list" class="btn btn-warning btn-complete">공지사항 바로가기</a>
 				<!-- 공지사항 바로가기 버튼 -->
 			</div>
 

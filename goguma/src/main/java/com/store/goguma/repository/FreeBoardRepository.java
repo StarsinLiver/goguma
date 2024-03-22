@@ -11,6 +11,8 @@ import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
+import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDto;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
@@ -23,6 +25,9 @@ public interface FreeBoardRepository {
 
 	// 게시글 조회
 	public List<FreeBoard> findAllFree();
+	
+	// 생성 일자로 8개 조회
+	public List<FreeBoard> findOrderByCreateAtLimitEight();
 	
 	// 좋아요 개수 카운트
 	public List<FreeBoard> countRecommendation();
@@ -48,14 +53,15 @@ public interface FreeBoardRepository {
 	public int countListTotal(FreeBoardPageDTO page);
 
 	public FreeBoard findByFreeId(Integer id);
+	public FreeBoardDetailDto detailCountRecommendation(Integer id);
 	
 
 	
 	//------------------- 산하
 	
 	// 게시물 전체 조회
-	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType);
-	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType);
+	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
+	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
 	public int deleteById(int id);
 	
 	// 사용자 게시물 조회
@@ -73,5 +79,7 @@ public interface FreeBoardRepository {
 	//------------------- 산하
 	
 	
-	
+
+	// 게시글 상세 조회 + 저 사진, 유저 이름
+	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id);	
 }

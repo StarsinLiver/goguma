@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div id="support" class="section db"></div>
+<div id="support" class="section db" ></div>
 <!-- end section -->
 
 <svg id="clouds1" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@
         </path>
     </svg>
 
-<footer class="footer">
+<footer class="footer" >
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-sm-4 col-xs-12">

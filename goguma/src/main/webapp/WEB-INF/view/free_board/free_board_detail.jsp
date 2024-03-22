@@ -121,22 +121,19 @@ textarea {
 					<div class="row">
 						<div class="col-md-2 b-profile">
 							<div class="img" style="max-width: 380px; max-height: 130px;">
-								<img
-									src="/profile/${board.userFile}"
-									class="img-fluid" style="width:100%; height: 100px;">
+								<img src="/profile/${boardCountRD.userFile}" class="img-fluid"
+									style="width: 100%; height: 100px;">
 							</div>
 						</div>
 						<div class="col-md-10">
 							<div class="b-title">
-								<h2>${board.title}</h2>
-								<h2>${freeBoard.title}</h2>
+								<h2>${boardCountRD.title}</h2>
+								<h5>${boardCountRD.userName}</h5>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">
 									<div class="me-3">
-										<i class="bi bi-clock"></i>&nbsp; 
-										<span>${board.createAt}</span>
-										<i class="bi bi-clock"></i>&nbsp; <span>${freeBoard.createAt}</span>
+										<i class="bi bi-clock"></i>&nbsp; <span>${boardCountRD.createAt}</span>
 									</div>
 									<!-- 신고 버튼 -->
 									<button type="button" class="btn btn-secondary"
@@ -154,8 +151,9 @@ textarea {
 												</div>
 												<div class="modal-body">
 													<form id="reportForm" action="addReport" method="post">
-														<input type="hidden" name="id" value="${freeBoard.id}">
-														<input type="hidden" name="hostId" value="${freeBoard.getUid()}">
+														<input type="hidden" name="id" value="${boardCountRD.id}">
+														<input type="hidden" name="hostId"
+															value="${boardCountRD.getUid()}">
 														<div class="dropdown">
 															<button class="btn btn-secondary dropdown-toggle"
 																type="button" id="dropdownMenuButton"
@@ -190,7 +188,6 @@ textarea {
 												</div>
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -198,10 +195,11 @@ textarea {
 								<div class="d-flex align-items-center">
 									<div class="me-3">
 										<i class="bi bi-hand-thumbs-up"></i> &nbsp;<span>추천수:
-											${board.goodCount}</span>
+											${boardCountRD.goodCount}</span>
 									</div>
 									<div class="me-3">
-										<i class="bi bi-person"></i> &nbsp;<span>조회수: ${board.view}</span>
+										<i class="bi bi-person"></i> &nbsp;<span>조회수:
+											${currentViews.view}</span>
 									</div>
 
 								</div>
@@ -214,14 +212,36 @@ textarea {
 			<br> <br> <br>
 			<!-- 게시글 시작 -->
 			<div style="width: 81%; margin: 0% 5%;">
-					${board.content}   
-				<a href="#">sssssss</a>
-				<p style="width: 100%;">${freeBoard.content}</p>
+				${board.content} <a href="#">sssssss</a>
+				<p style="width: 100%;">${boardCountRD.content}</p>
 			</div>
 			<br>
-			<button style="margin: 0 41.5%">
-				<i class='fab fa-gratipay' style='font-size: 48px; color: red;'></i>
-			</button>
+			<c:choose>
+				<c:when test="${recommendation}">
+					<form method="post" action="/freeBoard/deleteRecommendation">
+						<input type="hidden" name="id" value="${boardCountRD.id}">
+						<input type="hidden" name="uId" value="${boardCountRD.getUid()}">
+						<input type="hidden" name="freeBoardId" value="${boardCountRD.id}">
+						<button style="margin: 0 41.5%">
+							<i class='fab fa-gratipay' style='font-size: 48px; color: blue;'></i><span
+								style='font-size: 32px; color: blue;'>
+								${boardCountRD.goodCount}</span>
+						</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<form method="post" action="/freeBoard/addRecommendation">
+						<input type="hidden" name="id" value="${boardCountRD.id}" >
+						<input type="hidden" name="uId" value="${boardCountRD.getUid()}">
+						<input type="hidden" name="freeBoardId" value="${boardCountRD.id}">
+						<button style="margin: 0 41.5%">
+							<i class='fab fa-gratipay' style='font-size: 48px; color: red;'></i><span
+								style='font-size: 32px; color: red;'>
+								${boardCountRD.goodCount}</span>
+						</button>
+					</form>
+				</c:otherwise>
+			</c:choose>
 			<!-- 게시글 끝 -->
 			<!-- 댓글 시작 -->
 			<div>
@@ -483,42 +503,11 @@ textarea {
 </body>
 <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/customAssets/js/free-board/free_board_detail.js"></script>
+
 <script>
-	function autoResize(textarea) {
-		textarea.style.height = 'auto'; // 일단 자동 높이로 설정
-		textarea.style.height = (textarea.scrollHeight + 2) + 'px'; // 스크롤 높이에 2px를 더해줌
-	}
-</script>
-<script>
-	// 드롭다운 메뉴 항목을 클릭했을 때 호출되는 함수
-	document.querySelectorAll('.dropdown-item').forEach(item => {
-	    item.addEventListener('click', event => {
-	        const selectedReason = event.target.getAttribute('data-value');
-	        document.getElementById('selectedReason').innerText = selectedReason;
-	    });
-	});
-	// 모달이 닫힐 때 초기화하는 함수
-	function resetModal() {
-	    document.getElementById('selectedReason').innerText = '';
-	    document.getElementById('additionalReason').value = '';
-	}
-	document.getElementById('reportModal').addEventListener('hidden.bs.modal', function () {
-	    resetModal();
-	});
-    // textarea에 작성된 내용도 reason으로 설정
-    $("#additionalReason").on("input", function() {
-        var additionalReason = $(this).val();
-        $("#reasonInput").val(additionalReason);
-    });
-</script>
-<script>
-    // 모달 닫힐 때 입력 필드 초기화
-    $('#exampleModal').on('hidden.bs.modal', function () {
-        // 입력 필드 초기화
-        $('#exampleModal input[name="name"]').val('');
-        $('#exampleModal input[name="pId"]').val('');
-        $('#exampleModal input[name="hostId"]').val('');
-    });
+	
 </script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
