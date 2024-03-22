@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div id="support" class="section db" style="z-index: 1;" ></div>
+<div id="support" class="section db" ></div>
 <!-- end section -->
 
 <svg id="clouds1" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
