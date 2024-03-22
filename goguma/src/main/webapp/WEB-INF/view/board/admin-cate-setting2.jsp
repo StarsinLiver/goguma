@@ -76,15 +76,15 @@ vertical-align: middle;
 						<td>
 							<div class="radio-all-box">
 								<div class="radio-box">
-									<input type="radio" name="font">
+									<input type="radio" name="font" class="font-select-radio">
 									<span>폰트1</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" name="font">
+									<input type="radio" name="font" class="font-select-radio">
 									<span>폰트2</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" name="font">
+									<input type="radio" name="font" class="font-select-radio">
 									<span>폰트3</span>
 								</div>
 							</div>
@@ -95,11 +95,11 @@ vertical-align: middle;
 						<td>
 							<div class="radio-all-box">
 								<div class="radio-box">
-									<input type="radio" name="type">
+									<input type="radio" name="type" class="type-select-radio">
 									<span>형식</span>
 								</div>
 								<div class="radio-box">
-									<input type="radio" name="type">
+									<input type="radio" name="type" class="type-select-radio">
 									<span>형식</span>
 								</div>
 							</div>
@@ -109,7 +109,7 @@ vertical-align: middle;
 						<th>배경 이미지 선택</th>
 						<td>
 							<div class="mb-3" style="padding:5px 0px 0px 0px;">
-							  <input class="form-control" type="file" id="formFileMultiple" multiple style="font-size: 1.5rem">
+							  <input class="form-control" type="file" id="formFileMultiple" style="font-size: 1.5rem">
 							</div>
 						</td>
 					</tr>

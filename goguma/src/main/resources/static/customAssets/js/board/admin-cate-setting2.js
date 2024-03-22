@@ -288,7 +288,9 @@ function deleteCategoryApiFun(id, checkTitle){
 	return flag;
 }
 
-
+finalSaveBtn.onclick = () => {
+	
+}
 
 
 
