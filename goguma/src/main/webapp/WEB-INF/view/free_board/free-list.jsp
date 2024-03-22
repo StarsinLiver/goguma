@@ -216,10 +216,165 @@ h2 {
 	</div>
 </div>
 <!-- 부트스트랩 자바스크립트 및 필수 자바스크립트 -->
+<<<<<<< HEAD
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+
+		// parameta로 넘어오는 값 확인
+		var urlParam = new URL(location.href).searchParams;
+		const listType = document.getElementById("listType");
+
+		// 각 쿼리 매개변수를 분리하여 가져오기
+		var cate1 = urlParam.get('cate1');
+		var id = urlParam.get('id');
+
+		// list Type
+		const typeValue = listType.value;
+
+		console.log('url값: ' + urlParam); // url로 넘어오는 쿼리 스트링 cate1, id값 추출 
+		console.log('type: ' + typeValue); // list Type 확인
+		console.log('cate1: ' + cate1); // url로 넘어오는 쿼리 스트링 cate1값 파싱
+		console.log('id: ' + id); // url로 넘어오는 쿼리 스트링 id값 파싱
+
+		$.ajax({
+			method : "GET",
+			url : "/free-board/listAll",
+			data : {
+				cate1 : cate1,
+				id : id
+			},
+			success : function(data) {
+				alert("석세스 왔고 리스트 타입 확인: " + typeValue);
+
+
+				if (data != null) {
+					if (typeValue == "LIST") {
+						
+						console.log("데이터 확인: 리스트로 탔음");
+						console.log("데이터 확인: " + data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
+
+					    // 데이터를 받아서 처리
+					    var html = '';
+					    for (var i = 0; i < data.dtoList.length; i++) {
+					        var board = data.dtoList[i];
+					        html += '<tr>';
+					        html += '<td><a href="">' + board.title + '<span class="badge bg-secondary">[0]</span></a></td>';
+					        html += '<td><a href="/product/userProduct?uId=' + board.uId + '"><span class="hu_nick_txt">'+board.name+'</span></a></td>';
+					        html += '<td><span class="w_date">' + board.createAt + '</span></td>';
+					        html += '<td class="text-center">'+board.view+'</td>'; 
+					        html += '<td class="text-center"><span class="badge bg-primary">'+board.count +'</span></td>';
+					        html += '</tr>';
+					    }
+					    
+					    // 생성된 HTML을 테이블의 tbody에 추가
+					    $('table tbody').html(html);
+						
+						
+					} else if (typeValue == "CARD") {
+						alert("데이터 ㅈㄴ 널임 열받음");
+						//innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
+
+					}
+				} else {
+					innerBody.innerHTML = `<h1>작성된 게시물이 없습니다.</h1>`;
+				}
+			},
+			error : function() {
+				alert("에러");
+			}
+
+		});// ajax end
+
+		
+		// 검색시 타입 감지 및 확인
+	    $("#searchType").change(function() {
+            var selectedValue = $(this).val(); // 선택된 값 가져오기
+            console.log("Selected value: " + selectedValue); // 콘솔에 출력
+            $("#selectedValue").text("Selected value: " + selectedValue); // 선택된 값 표시
+        });
+		
+		
+		
+		
+		$("button[type='submit']").click(function(event) {
+	        event.preventDefault();
+		
+	        var searchType = $(".selectOption").val();
+            var searchKeyword = $(".search").val();
+	        
+            console.log('서치 타입: '+searchType);
+            console.log('서치 내용: '+searchKeyword);
+            
+            
+	        $.ajax({
+				method : "GET",
+				url : "/free-board/listAll",
+				data : {
+					cate1 : cate1,
+					id : id,
+					search: searchKeyword,
+					searchType: searchType
+					
+					
+				},
+				success : function(data) {
+					alert("석세스 왔고 리스트 타입 확인: " + typeValue);
+
+
+					if (data != null) {
+						if (typeValue == "LIST") {
+							
+							console.log("데이터 확인: 리스트로 탔음");
+							console.log("데이터 확인: " + data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
+
+						    // 데이터를 받아서 처리
+						    var html = '';
+						    for (var i = 0; i < data.dtoList.length; i++) {
+						        var board = data.dtoList[i];
+						        html += '<tr>';
+						        html += '<td><a href="">' + board.title + '<span class="badge bg-secondary">[0]</span></a></td>';
+						        html += '<td><a href="/product/userProduct?uId=' + board.uId + '"><span class="hu_nick_txt">'+board.name+'</span></a></td>';
+						        html += '<td><span class="w_date">' + board.createAt + '</span></td>';
+						        html += '<td class="text-center">'+board.view+'</td>'; 
+						        html += '<td class="text-center"><span class="badge bg-primary">'+board.count +'</span></td>';
+						        html += '</tr>';
+						    }
+						    
+						    // 생성된 HTML을 테이블의 tbody에 추가
+						    $('table tbody').html(html);
+							
+							
+						} else if (typeValue == "CARD") {
+							alert("데이터 ㅈㄴ 널임 열받음");
+							//innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
+
+						}
+					} else {
+						//innerBody.innerHTML = `<h1>작성된 게시물이 없습니다.</h1>`;
+					}
+				},
+				error : function() {
+					alert("에러");
+				}
+
+			})// ajax end
+
+	        
+		
+		})// search end
+	});
+</script>
+
+=======
 <script	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 	
 <script src="/customAssets/js/free-board/free_list.js"></script>
+>>>>>>> dev
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
