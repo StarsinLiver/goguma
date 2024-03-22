@@ -73,7 +73,25 @@
 
 	<select id="getEmojiDetailMain"
 		resultType="com.store.goguma.entity.MainEmoji">
-		select * from main_emoji where id = #{id} and delete_yn = 'N';
+		select * from main_emoji where id = #{id} and delete_yn =
+		'N';
+	</select>
+
+	<select id="findEmojiDetailMainContainSearch"
+		resultType="com.store.goguma.entity.MainEmoji">
+		select * from main_emoji where delete_yn = 'N' and name
+		like concat('%',#{search},'%')
+		order
+		by id
+		desc
+		LIMIT #{start} , #{size}
+	</select>
+
+	<select id="countFindEmojiDetailMainContainSearch"
+		resultType="int">
+		select COUNT(*) from main_emoji where delete_yn = 'N' and
+		name
+		like concat('%',#{search},'%')
 	</select>
 
 	<insert id="emojiOrder">

@@ -60,4 +60,13 @@
 		set delete_at = now() , delete_yn = 'Y'
 		where id = #{id}
 	</update>
+	
+	
+	<select id="findByAll"
+		resultType="com.store.goguma.entity.Banner">
+		select * from banner
+		where delete_yn = 'N'
+	</select>
+	
+	
 </mapper>

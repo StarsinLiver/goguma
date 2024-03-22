@@ -1,31 +1,26 @@
 package com.store.goguma.freeboard.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
 import com.store.goguma.freeboard.dto.FreeBoardRecommendationDTO;
 import com.store.goguma.freeboard.dto.FreeBoardViewDTO;
 import com.store.goguma.handler.exception.LoginRestfulException;
-import com.store.goguma.product.dto.WishListDTO;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.FreeBoardRecommendationService;
 import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.service.FreeBoardViewService;
 import com.store.goguma.service.ReportService;
 import com.store.goguma.user.dto.OauthDTO;
-import com.store.goguma.user.dto.UserDTO;
 import com.store.goguma.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
-
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,12 +60,8 @@ public class FreeBoardDetailController {
 		
 		// 상품 조회수 가져오기
 		FreeBoardViewDTO currentViews = freeBoardViewService.getFreeView(id);
-		FreeBoardDTO boardCountRDDTO = freeBoardService.detailCountRecommendation(id);
-		
-		log.info("hgoianhgboiarehnoarehla : " + boardCountRDDTO);
-		log.info("hgoianhgboiarehnoarehla23131 : " + currentViews);
-		log.info("ghbaoihioarhlohjlajha219u0jooago : " + plusFreeView);
-		log.info("id????????? : " + id);
+		// FreeBoardDTO boardCountRDDTO = freeBoardService.detailCountRecommendation(id);
+		FreeBoardDetailAndUserDTO boardCountRDDTO = freeBoardService.findByFreeIdJoinUser(id);
 		
 		model.addAttribute("boardCountRD",boardCountRDDTO);
 		model.addAttribute("currentViews",currentViews);

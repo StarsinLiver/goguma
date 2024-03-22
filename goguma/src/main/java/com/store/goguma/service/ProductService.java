@@ -262,4 +262,21 @@ public class ProductService {
 		return productRepository.updateConfirmYn(pId);
 	}
 	
+	/**
+	 * 상품 상세 조회
+	 * @param pId
+	 * @return
+	 */
+	public Product findById(int pId) {
+		return productRepository.findById(pId);
+	}
+	
+	/**
+	 * 상품 수정
+	 * @param product
+	 * @return
+	 */
+	public int updateProduct(Product product) {
+		return productRepository.updateProduct(product);
+	}
 }

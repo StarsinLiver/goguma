@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.User;
 import com.store.goguma.user.dto.UserProfileDto;
+import com.store.goguma.utils.UserRole;
 
 @Mapper
 public interface UserRepository {
@@ -28,7 +29,10 @@ public interface UserRepository {
 	// 관리자 유저 정보 전체 조회 카운트
 	public int countFindAll(String name);
 	
-	public int adminUpdateUserRole(@Param("uId") Integer uId, @Param("role") String role);
+	public int adminUpdateUserRole(@Param("uId") Integer uId, @Param("role") UserRole role);
 	
 	public UserProfileDto findProfileById(int userId);
+	
+	// 유저 정보 삭제
+	public int deleteUser(int userId);
 }

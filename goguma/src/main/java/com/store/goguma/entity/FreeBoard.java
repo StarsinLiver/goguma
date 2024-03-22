@@ -27,6 +27,7 @@ public class FreeBoard {
 	private String deleteAt;
 	private String deleteYn;
 	private String goodCount;
+	private Integer view;
 	private Integer mainCategory;
 	private Integer subCategory;
 	

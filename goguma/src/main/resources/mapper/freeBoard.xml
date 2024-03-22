@@ -9,10 +9,29 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
-	<select id="findByFreeId" resultType="com.store.goguma.entity.FreeBoard">
-		select * from free_board where delete_yn = 'N' and id = #{id}
+	<select id="findByFreeId"
+		resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board where delete_yn = 'N' and id =
+		#{id}
+	</select>
+	
+	<!-- 상세 조회 + 유저정보 -->
+	<select id="findByFreeIdJoinUser" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO">
+		SELECT fd.*,
+			u.`file` as `userFile`,
+			u.`name` as `userName`
+		FROM free_board as fd
+			join `user` as u 
+				on fd.u_id = u.u_id
+		where fd.`id`=#{id}
 	</select>
 
+	<select id="findOrderByCreateAtLimitEight"
+		resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board where delete_yn = 'N' order by create_at desc limit
+		8;
+	</select>
+	
 	<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
 		select fb.id as id,
@@ -24,21 +43,27 @@
 		fb.create_at as createAt,
 		fb.update_at as updateAt,
 		fb.delete_at as deleteAt,
-		fb.main_category as mainCategory,
+		fb.main_category as
+		mainCategory,
 		fb.sub_category as subCategory,
-		count(fr.free_board_id) as goodCount
+        v.view as view ,
+		count(fr.free_board_id) as
+		goodCount
 		from free_board as fb
 		left join
-		free_board_recommendation fr on fb.id = fr.free_board_id and
+		free_board_recommendation fr on
+		fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
+        left join free_board_view v
+        on fb.id = v.free_board_id
 		where fb.delete_yn = 'N'
 		group by fb.id
 		order by
-		goodCount desc
+		goodCount desc;
 	</select>
-	
+
 	<!-- 게시글 상세페이지 좋아요 개수 카운트 -->
-	<select id="detailCountRecommendation">
+	<select id="detailCountRecommendation" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailDto">
 		select fb.id as id,
 		fb.title as title,
 		fb.content as
@@ -48,13 +73,20 @@
 		fb.create_at as createAt,
 		fb.update_at as updateAt,
 		fb.delete_at as deleteAt,
-		fb.main_category as mainCategory,
+		fb.main_category as
+		mainCategory,
 		fb.sub_category as subCategory,
-		count(fr.free_board_id) as goodCount
+		count(fr.free_board_id) as
+		goodCount ,
+		u.name as userName ,
+		u.file as userFile
 		from free_board as fb
 		left join
-		free_board_recommendation fr on fb.id = fr.free_board_id and
+		free_board_recommendation fr on
+		fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
+		left join user u
+		on u.u_id = fb.u_id
 		where fb.delete_yn = 'N'
 		and fb.id = #{id}
 		group by fb.id
@@ -74,12 +106,14 @@
 		fb.create_at AS createAt,
 		fb.update_at AS updateAt,
 		fb.delete_at AS deleteAt,
-		fb.delete_yn as deleteYn ,
+		fb.delete_yn as
+		deleteYn ,
 		main_cat.id AS mainCategoryId,
 		sub_cat.id AS subCategoryId,
 		main_cat.name as mainCategoryName ,
 		sub_cat.name as subCategoryName ,
-		ifnull(COUNT(fr.free_board_id), 0) AS goodCount
+		ifnull(COUNT(fr.free_board_id), 0) AS goodCount ,
+		v.view as view
 		FROM
 		free_board AS fb
 		LEFT JOIN free_board_recommendation AS fr ON fb.id = fr.free_board_id
@@ -90,6 +124,8 @@
 		INNER JOIN board_main_category AS main_cat
 		ON sub_cat.group_id =
 		main_cat.id
+		left join free_board_view v
+		on fb.id = v.free_board_id
 		WHERE
 		fb.delete_yn = 'N'
 		AND main_cat.id
@@ -167,7 +203,7 @@
 			=
 			#{subCategory})
 		</if>
-		
+
 		<include refid="searchBox" />
 		group by f.id
 		order by f.id desc
@@ -194,7 +230,8 @@
 		'Y'
 		left join free_board_view v
 		on v.free_board_id = f.id
-		where f.delete_yn = 'N'
+		where
+		f.delete_yn = 'N'
 		<if test="mainCategory != 0">
 			and (f.main_category = #{mainCategory} and f.sub_category
 			=
@@ -314,4 +351,81 @@
 		select * from free_board
 		where id = #{id}
 	</select>
+	
+	<!-- 게시글 전체 리스트 출력 -->
+	<select id="selectArticleAllBycateNid"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardResDTO">
+
+
+		SELECT b.*, u.*,
+		COALESCE(rec.count, 0) AS count,
+		v.view
+		FROM free_board
+		AS b
+		JOIN user AS u ON b.u_id = u.u_id
+		LEFT JOIN (
+		SELECT free_board_id,
+		COUNT(*) AS count
+		FROM free_board_recommendation
+		WHERE good_yn = 'Y'
+		GROUP BY free_board_id
+		) AS rec ON b.id = rec.free_board_id
+		LEFT JOIN
+		free_board_view AS v ON v.free_board_id = b.id
+		WHERE b.main_category =
+		#{cate1}
+		AND b.sub_category = #{id}
+		AND b.delete_yn = 'N'
+		<choose>
+			<when test="searchType == 'title'">
+				AND title LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'content'">
+				AND content LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'author'">
+				AND name LIKE CONCAT('%', #{search}, '%')
+			</when>
+		</choose>
+		ORDER BY b.id DESC
+		<if test="listType == 'LIST'.toString()">
+		LIMIT #{start}, 10;
+		</if>
+		<if test="listType == 'CARD'.toString()">
+		LIMIT #{start}, 12;
+		</if>
+	</select>
+
+	<!-- 게시글 카운트 확인 -->
+	<select id="countListTotal">
+
+		SELECT count(*) FROM free_board WHERE main_category = #{cate1} AND
+		sub_category = #{id} AND
+		delete_yn = 'N'
+		<if test="searchType == 'title'">
+			AND title like CONCAT('%',#{search},'%')
+		</if>
+		<if test="searchType == 'content'.toString()">
+			AND content like CONCAT('%',#{search},'%')
+		</if>
+		<if test="searchType == 'author'.toString()">
+			AND u_id like CONCAT('%',#{search},'%')
+		</if>
+
+	</select>
+	
+	<!-- 게시판 폰트, 배경 이미지 확인 -->
+	<select id="selectArticleType"
+		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
+		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
+		,s.id as subId , s.name ,
+		s.row_count, s.`number`, s.background,
+		s.font, s.list_type
+		FROM board_main_category AS m
+		JOIN
+		board_sub_category AS s
+		ON m.id = s.group_id where m.id = #{cate1} AND
+		s.group_id = #{cate1} AND s.id = #{id}
+	</select>
+	
 </mapper>

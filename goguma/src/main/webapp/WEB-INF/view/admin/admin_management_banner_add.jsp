@@ -151,7 +151,8 @@ input[type="checkbox"] {
 									<td><select class="form-select"
 										aria-label="Default select example" name="type">
 											<option selected value="MAIN">사이트 메인 배너</option>
-											<option value="FREE_BOARD">자유게시판</option>
+											<option value="FREEBOARD">자유게시판</option>
+											<option value="LIST">자유게시판 리스트</option>
 									</select></td>
 								</tr>
 								

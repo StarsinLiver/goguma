@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.store.goguma.entity.Banner;
 import com.store.goguma.entity.Notice;
+import com.store.goguma.main.dto.BannerDTO;
 import com.store.goguma.product.dto.ProductSearchDto;
+import com.store.goguma.service.BannerService;
 import com.store.goguma.service.ChatRoomService;
 import com.store.goguma.service.NoticeService;
 import com.store.goguma.service.ProductHistoryService;
@@ -35,6 +39,8 @@ public class MainController {
 
 	private final ChatRoomService chatRoomService;
 
+	private final BannerService bannerService;
+	
 	@GetMapping("/")
 	public String mainForm(Model model) {
 		// 공지 사항
@@ -74,4 +80,18 @@ public class MainController {
 
 		return "redirect:/";
 	}
+	
+	
+	// 배너 전용 컨트롤러
+	@GetMapping("/banner")
+	@ResponseBody
+	public List<Banner> bannerProc() {
+		
+		List<Banner> result = bannerService.findByAll();
+		
+		log.info("배너 컨트롤러 로그: "+result);
+		
+		return result;
+	}
+	
 }

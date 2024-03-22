@@ -11,10 +11,16 @@ import com.store.goguma.admin.dto.AdminFreeBoardDto;
 import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
+import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDto;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
+import com.store.goguma.freeboard.dto.FreeBoardListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
+import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
+import com.store.goguma.freeboard.dto.FreeBoardResDTO;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageReqDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageResDto;
 import com.store.goguma.handler.exception.BackPageRestfulException;
@@ -32,9 +38,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class FreeBoardService {
+	
+	
+	final private FreeBoardRepository freeBoardRepository;
 
 	private final FreeBoardViewRepository freeBoardViewRepository;
-	private final FreeBoardRepository freeBoardRepository;
+
 
 	// 게시글 리스트
 	public List<FreeBoardDTO> findAllFree() {
@@ -56,6 +65,11 @@ public class FreeBoardService {
 		return freeBoardDTOList;
 
 	}
+	
+	// 생성일자 순서 8개
+	public List<FreeBoard> findOrderByCreateAtLimitEight() {
+		return freeBoardRepository.findOrderByCreateAtLimitEight();
+	}
 
 	// 좋아요 많은 순서
 	public List<FreeBoardDTO> countRecommendation() {
@@ -68,7 +82,7 @@ public class FreeBoardService {
 					.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 					.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
 					.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
-					.goodCount(freeBoard.getGoodCount()).build();
+					.goodCount(freeBoard.getGoodCount()).view(freeBoard.getView()).build();
 
 			recommendationDTOList.add(recommendationDTO);
 
@@ -77,6 +91,36 @@ public class FreeBoardService {
 
 	}
 
+	public BoardTypeDTO selectArticleType(int cate1, int id) {
+
+		
+		return freeBoardRepository.selectArticleType(cate1, id); 
+	}
+	
+	
+	// 리스트 데이터 검색 및 출력
+	public FreeBoardListDTO selectArticleAllBycateNid(FreeBoardPageDTO page) {
+		
+		// 리스트 총량 확인
+		int total = freeBoardRepository.countListTotal(page);
+		
+		log.info("프로보드 리스트 서비스단 total: " + total);
+		
+		int start = (page.getPg() - 1) * page.getSize();
+		
+		page.setStart(start);
+		
+		// 리스트 데이터 확인
+		List<FreeBoardResDTO> dtoList = freeBoardRepository.selectArticleAllBycateNid(page);
+		
+		
+		
+		
+		log.info("프로보드 리스트 서비스단 dtoList: " + dtoList);
+		log.info("프로보드 리스트 서비스단 dtoList: " + dtoList.toString());
+		
+		 return FreeBoardListDTO.builder().pageReqDTO(page).dtoList(dtoList).total(total).build();
+	}
 	
 	// 게시글 등록
 	@Transactional
@@ -197,21 +241,25 @@ public class FreeBoardService {
 				.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 				.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
 				.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
-				.goodCount(freeBoard.getGoodCount()).build();
+				.goodCount(freeBoard.getGoodCount())
+				.build();
 		
 		return dto;
 		
 	}
 	public FreeBoardDTO detailCountRecommendation(Integer id) {
 		
-		FreeBoard boardCountRD = freeBoardRepository.detailCountRecommendation(id);
+		FreeBoardDetailDto boardCountRD = freeBoardRepository.detailCountRecommendation(id);
 		
 		FreeBoardDTO dto = FreeBoardDTO.builder().id(boardCountRD.getId()).title(boardCountRD.getTitle())
 				.content(boardCountRD.getContent()).uId(boardCountRD.getUId()).file(boardCountRD.getFile())
 				.createAt(boardCountRD.getCreateAt()).updateAt(boardCountRD.getUpdateAt())
 				.deleteAt(boardCountRD.getDeleteAt()).deleteYn(boardCountRD.getDeleteYn())
 				.mainCategory(boardCountRD.getMainCategory()).subCategory(boardCountRD.getSubCategory())
-				.goodCount(boardCountRD.getGoodCount()).build();
+				.goodCount(boardCountRD.getGoodCount())
+				.userFile(boardCountRD.getUserFile())
+				.userName(boardCountRD.getUserName())
+				.build();
 		
 		return dto;
 		
@@ -227,4 +275,8 @@ public class FreeBoardService {
 		return freeBoardRepository.updateFreeBoard(dto);
 	}
 
+	// 게시글 상세 조회 + 유저
+	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id) {
+		return freeBoardRepository.findByFreeIdJoinUser(id);
+	}
 }

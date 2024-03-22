@@ -9,10 +9,14 @@ import com.store.goguma.admin.dto.AdminFreeBoardDto;
 import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
-import com.store.goguma.freeboard.dto.FreeBoardDTO;
-import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
+import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
+import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDto;
+import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
+import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
+import com.store.goguma.freeboard.dto.FreeBoardResDTO;
 import com.store.goguma.user.dto.FreeBoardDto;
 
 
@@ -21,6 +25,9 @@ public interface FreeBoardRepository {
 
 	// 게시글 조회
 	public List<FreeBoard> findAllFree();
+	
+	// 생성 일자로 8개 조회
+	public List<FreeBoard> findOrderByCreateAtLimitEight();
 	
 	// 좋아요 개수 카운트
 	public List<FreeBoard> countRecommendation();
@@ -35,8 +42,18 @@ public interface FreeBoardRepository {
 	// 게시글 많은 카테고리
 	public List<FreeBoardManyCategoryDto> manyFreeBoard();
 
+	
+	// 리스트 타입 조회 - y
+	public BoardTypeDTO selectArticleType(@Param("cate1") int cate1, @Param("id") int id);
+
+	// 카테고리에 따른 리스트 조회 - y
+	public List<FreeBoardResDTO> selectArticleAllBycateNid(FreeBoardPageDTO page);
+
+	// 리스트 페이지 total값
+	public int countListTotal(FreeBoardPageDTO page);
+
 	public FreeBoard findByFreeId(Integer id);
-	public FreeBoard detailCountRecommendation(Integer id);
+	public FreeBoardDetailDto detailCountRecommendation(Integer id);
 	
 
 	
@@ -62,6 +79,7 @@ public interface FreeBoardRepository {
 	//------------------- 산하
 	
 	
-	
-	
+
+	// 게시글 상세 조회 + 저 사진, 유저 이름
+	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id);	
 }

@@ -88,7 +88,7 @@
 		<div class="card mb-3">
 			<div class="card-header text-white">
 				<!-- 카드 헤더 -->
-				<h5 class="card-title">자주 묻는 질문 관리</h5>
+				<h5 class="card-title" style="height: 24px"></h5>
 			</div>
 
 			<div class="card-body">
@@ -99,8 +99,6 @@
 							<th>제목</th>
 							<th>작성자 번호</th>
 							<th>작성일</th>
-							<th>삭제일</th>
-							<th>삭제 여부</th>
 							<th>수정</th>
 							<th>삭제</th>
 						</tr>
@@ -112,14 +110,12 @@
 								<td id="">${faq.title}</td>
 								<td id="">${faq.getUId()}</td>
 								<td id="">${faq.createAt}</td>
-								<td id="">${faq.deleteAt}</td>
-								<td id="">${faq.deleteYn}</td>
 								<td id=""><a href="/admin/faq/${faq.id}"
-									class="btn btn-success">상세조회</a></td>
+									class="btn btn-warning btn-complete">상세조회</a></td>
 								<td id="">
 									<form action="/admin/faq/${faq.id}" method="post">
 										<input type="hidden" name="_method" value="delete" />
-										<button class="btn btn-danger" onclick="if(!confirm('정말 삭제하시겠습니까??')) return false">삭제</button>
+										<button class="btn btn-warning btn-complete" style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;" onclick="if(!confirm('정말 삭제하시겠습니까??')) return false">삭제</button>
 									</form>
 								</td>
 							</tr>

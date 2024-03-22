@@ -2,18 +2,17 @@ package com.store.goguma.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.store.goguma.admin.dto.AdminReportDTO;
 import com.store.goguma.admin.dto.EmojiHistoryDto;
 import com.store.goguma.admin.dto.EmojiModifyDTO;
-import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.EmojiHistory;
+import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.repository.AdminRepository;
+import com.store.goguma.repository.EmojiRepository;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
@@ -29,6 +28,8 @@ public class AdminService {
 	private final AdminRepository repository;
 
 	private final EmojiUploadService emojiService;
+	
+	private final EmojiRepository emojiRepository;
 
 	// adminUser 업데이트
 	public void modifyAdminByEmail(OauthDTO dto) {
@@ -97,4 +98,17 @@ public class AdminService {
 
 	}
 
+	/**
+	 * 이모티콘 리스트 가져오기
+	 * @param search
+	 * @return
+	 */
+	public List<MainEmoji> findEmojiDetailMainContainSearch(String search , int page , int size) {
+		int start = page * size;
+		return emojiRepository.findEmojiDetailMainContainSearch(search , start ,size);
+	}
+	
+	public int countFindEmojiDetailMainContainSearch(String search) {
+		return emojiRepository.countFindEmojiDetailMainContainSearch(search);
+	}
 }

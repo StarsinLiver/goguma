@@ -61,8 +61,13 @@
 		left join wish_list w
 		on w.u_id = u.u_id
 		where
-		u.u_id = #{userId} and
-		p.delete_yn = 'N'
+		u.u_id = #{userId}
 		group by u.u_id
 	</select>
+	
+	<update id="deleteUser">
+		update user 
+		set delete_yn = 'Y' , delete_at = now()
+		where u_id = #{userId}
+	</update>
 </mapper>

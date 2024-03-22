@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.goguma.entity.FreeBoard;
+import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
@@ -34,8 +36,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class FreeboardController {
 
+	
 	private final FreeBoardService freeBoardService;
 	private final HttpSession httpSession;
+	
+	// 자유 게시판 메인화면
 	private final EmojiUploadService fileService;
 
 	@GetMapping("/main")
@@ -43,25 +48,55 @@ public class FreeboardController {
 		
 		session.setAttribute("plusFreeView", true);
 		List<FreeBoardDTO> boardList = freeBoardService.findAllFree();
+		// 베스트 게시물
 		List<FreeBoardDTO> recommendationList = freeBoardService.countRecommendation();
+		// 카테고리 리스트
 		List<FreeBoardManyCategoryDto> categoryList = freeBoardService.mainFreeBoardCategory();
 
 		int count = 1;
 		for (FreeBoardManyCategoryDto i : categoryList) {
-			List<FreeBoardCountRecommendationByCateDto> list = freeBoardService.mainFreeBoard(i.getMainCategoryId(),
+			List<FreeBoardCountRecommendationByCateDto> list = freeBoardService.mainFreeBoard(i.getMainCategoryId(), // 수정
 					i.getSubCategoryId());
-			log.info("cateogrygoogogogogogogoog " + count + " {}", list);
 			model.addAttribute("categoryList" + count, list);
 			model.addAttribute("category" + count, i);
 			count++;
 		}
+		
+		// 최신글
+		List<FreeBoard> listCreateAt = freeBoardService.findOrderByCreateAtLimitEight();
+		log.info("list : {}" , listCreateAt);
 
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("rDList", recommendationList);
+		model.addAttribute("listCreateAt", listCreateAt);
 
 		return "/free_board/free-main";
 	}
-
+	
+	// list타입 게시글 목록
+	@GetMapping(value = "/list", params={"cate1","id"})
+	public String boardList(@RequestParam("cate1")int cate1, @RequestParam("id")int id, Model model) {
+		
+		// 값들어옴 확인했음 테스트 주소 http://localhost/freeBoard/list?cate1=1&cate2=1&name=잡담
+		log.info("cate1 "+cate1);
+		
+		
+		// 게시판 형식 일단 게시판 형식부터 ㄱ
+		BoardTypeDTO listType = freeBoardService.selectArticleType(cate1, id);
+		
+		log.info("프리보드 리스트 컨트롤러 리스트 타입 값 확인"+listType.toString());
+		
+		// 게시판 목록  페이징 하삼
+		//freeBoardService.selectArticleAllBycate(cate1, cate2);
+		
+		model.addAttribute("type", listType);
+		
+		
+		return "/free_board/free-list";
+	}
+	
+	
+	// 자유 게시판 카드 형식 글 목록
 
 	@GetMapping("/list")
 	public String boardList() {
@@ -82,6 +117,8 @@ public class FreeboardController {
 
 		return "/free_board/free-card";
 	}
+	
+	// 자유 게시판 글 작성
 
 	@GetMapping("/write")
 	public String boardWrite() {
@@ -186,4 +223,12 @@ public class FreeboardController {
 
 		return "redirect:/user/board";
 	}
+	
+	@GetMapping("/asideTest")
+	public String test() {
+		
+		
+		return "/free_board/asideTest";
+	}
+	
 }

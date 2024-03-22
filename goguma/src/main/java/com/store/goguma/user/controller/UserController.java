@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.User;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageReqDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageResDto;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.service.QnaService;
@@ -24,6 +26,7 @@ import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserProfileDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.utils.Define;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +64,7 @@ public class UserController {
 		int temperature = userService.getTemperatureUser(dto.getUId());
 
 		log.info("유저의 온도 : {}", temperature);
+		log.info("유저 : {}"  , userEntity);
 
 		model.addAttribute("user", userEntity);
 		model.addAttribute("temperature", temperature);
@@ -308,6 +312,24 @@ public class UserController {
 		model.addAttribute("last", response.getLast());
 
 		return "/user/wish";
+	}
+	
+	@DeleteMapping("/delete/{uId}")
+	public String deleteUser(@PathVariable(value = "uId") Integer uId) {
+		
+		OauthDTO sessionUser = (OauthDTO) httpSession.getAttribute("principal");
+
+		// 회원, 비회원 검증
+		if (sessionUser == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		
+		int result = userService.deleteUser(uId);
+		if(result == 0) {
+			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return "redirect:/user/logout";
 	}
 
 	// 로그아웃

@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.BoardCategorySub;
+import com.store.goguma.freeboard.dto.FreeBoardListDTO;
+import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
 import com.store.goguma.service.BoardService;
 import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.user.dto.OauthDTO;
 
+import ch.qos.logback.core.model.Model;
 import edu.emory.mathcs.backport.java.util.Arrays;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/free-board")
-public class FreeBoardRestController {
+public class FreeboardRestController {
 
 	private final BoardService boardService;
 	private final FreeBoardService freeBoardService;
@@ -139,5 +143,24 @@ public class FreeBoardRestController {
 		}
 
 	}
+	
+	// 자유 게시판 리스트 컨트롤러
+	@GetMapping("/listAll")
+	@ResponseBody
+	public FreeBoardListDTO BoardList(FreeBoardPageDTO page, Model model){
+
+		
+		log.info("리스트 컨트롤러 들오는지 확인 해보기 위해 쓰는 로그 ");
+		log.info("page dto 확인: "+ page.toString());
+		
+		
+		FreeBoardListDTO result = freeBoardService.selectArticleAllBycateNid(page);
+		
+		
+		log.info("relust 값 확인 하기: "+ result.toString());
+		
+		return result;	
+	}  
+	
 
 }
