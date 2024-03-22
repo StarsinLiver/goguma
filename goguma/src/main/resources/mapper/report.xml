@@ -13,7 +13,7 @@
 		resultType="java.lang.Boolean">
 		SELECT EXISTS (SELECT 1 FROM report WHERE host_id =
 		#{hostId} AND call_id =
-		#{callId})
+		#{callId} and delete_yn = "N")
 	</select>
 
 	<update id="update">

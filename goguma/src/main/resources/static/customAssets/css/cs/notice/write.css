@@ -3,7 +3,7 @@
     margin: 50px auto;
     padding: 10px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -32,3 +32,15 @@
     padding: 10px;
 }
 
+.cs-notice--input {
+    width: 400px;
+}
+
+.cs-notice--textarea {
+    width: 400px;
+    height: 200px;
+}
+
+.qna-write-h2{
+	margin-bottom : 20px;
+}

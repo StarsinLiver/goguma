@@ -35,7 +35,8 @@
 		update `emoji_history` set 
 			`cancel_amount`=`price`,
 			`cancel_reason`=#{reason},
-			`update_at`=NOW()
+			`update_at`=NOW() ,
+			`cancel_yn` = 'Y'
 		where `merchant_id`=#{merchantId} 
 			and `u_id`=#{uId}
 			and create_at &lt;= DATE_ADD(DATE(NOW()), INTERVAL 3 DAY) <!-- 환불기준 3일까지 -->

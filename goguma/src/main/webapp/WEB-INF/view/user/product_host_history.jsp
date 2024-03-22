@@ -134,11 +134,12 @@
 					<a class="card-link"
 						href="/product/productDetail?pId=${product.prodId}">
 						<div class="card-photo">
-<c:forTokens items="${product.file}" delims="," var="token" varStatus="loop">
-    <c:if test="${loop.index == 0}">
-        <img src="/images/upload/${token}">
-    </c:if>
-</c:forTokens>
+							<c:forTokens items="${product.file}" delims="," var="token"
+								varStatus="loop">
+								<c:if test="${loop.index == 0}">
+									<img src="/images/upload/${token}">
+								</c:if>
+							</c:forTokens>
 						</div>
 						<div class="card-desc">
 							<h2 class="card-title">${product.name}</h2>
@@ -148,8 +149,14 @@
 					<!-- 모달 -->
 					<c:if test="${product.confirmYn == 'N'}">
 						<button class="btn btn-warning btn-confirm"
-							onclick="openChatList(${product.prodId})" data-value="${product.prodId}">결제
-							완료</button>
+							onclick="openChatList(${product.prodId})"
+							data-value="${product.prodId}">결제</button>
+						<a class="btn btn-success btn-confirm" href="/product/write/update/${product.prodId}">수정</a>
+						<form action="/product/delete/${product.prodId}"
+							method="post">
+							<input type="hidden" name="_method" value="delete" />
+							<button class="btn btn-danger btn-confirm">삭제</button>
+						</form>
 					</c:if>
 				</article>
 			</c:forEach>

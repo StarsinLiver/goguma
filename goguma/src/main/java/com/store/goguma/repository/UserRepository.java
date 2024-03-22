@@ -31,4 +31,7 @@ public interface UserRepository {
 	public int adminUpdateUserRole(@Param("uId") Integer uId, @Param("role") String role);
 	
 	public UserProfileDto findProfileById(int userId);
+	
+	// 유저 정보 삭제
+	public int deleteUser(int userId);
 }
