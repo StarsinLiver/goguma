@@ -124,7 +124,6 @@
 				</div>
 
 				<!-- 신고 버튼 -->
-
 				<c:if test="${product.hostId != principal.getUId()}">
 					<button type="button" class="btn btn-danger" data-bs-toggle="modal"
 						data-bs-target="#reportModal" style="margin-right: 10px;">신고하기</button>
@@ -215,7 +214,7 @@
 			<time id="createAt">${product.createAt}</time>
 		</p>
 		<p id="article-price" property="schema:price" content="1000.0"
-			style="font-size: 18px; font-weight: bold">가격 ${product.price} 원
+			style="font-size: 18px; font-weight: bold">가격 ${product.formatNumber(product.price)} 원
 		</p>
 		<div property="schema:description" id="article-detail">
 			<p>${product.description}</p>

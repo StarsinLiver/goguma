@@ -44,4 +44,6 @@ public class UserEmojiDTO {
  		String formaterNumber = df.format(price);
  		return formaterNumber+"원";
  	}
+	
+	
 }

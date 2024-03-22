@@ -101,6 +101,7 @@
 								<th>결제 번호</th>
 								<th>구매일자</th>
 								<th>상품명</th>
+								<th>결제 금액</th>
 								<th>구매여부</th>
 								<th>환불 완료</th>
 								<th>환불 신청</th>
@@ -117,13 +118,14 @@
 									<td id="id">${history.merchantId}</td>
 									<td id="purchaseDate">${history.createAt}</td>
 									<td id="pointName">${history.mainEmojiName}</td>
+									<td id="price">${history.formatPrice()}</td>
 									<td id="refundStatus" style="color: blue;"><c:choose>
 											<c:when test="${history.confirmYn == 'Y'}">
 												<span style="color: blue;">구매완료</span>
 											</c:when>
 											<c:otherwise>
-                    처리중
-                </c:otherwise>
+                   									 처리중
+               								 </c:otherwise>
 										</c:choose></td>
 									<td id="refundStatus" style="color: blue;"><c:choose>
 											<c:when test="${history.cancelYn == 'Y'}">
@@ -177,7 +179,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning btn-complete"
-						id="confirm" data-dismiss="modal"style="width: 100%; margin-right: 5px;">승인</button>
+						id="confirm" data-dismiss="modal"
+						style="width: 100%; margin-right: 5px;">승인</button>
 					<button type="button" class="btn btn-link" id="cancel"
 						aria-label="Close" style="position: absolute; top: 0; right: 0;">
 						<i class="bi bi-x" style="font-size: 24px;"></i>
