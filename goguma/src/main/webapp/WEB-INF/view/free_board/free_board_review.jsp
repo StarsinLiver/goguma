@@ -65,6 +65,20 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.main-imoji-list {
+	display: block;
+	border: 1px solid black; 
+	width: 200px; 
+	height: 70px;
+	overflow-x: auto;
+  	white-space: nowrap;
+}
+
+.main-imoji-list img {
+	width: 70px;
+	height: 100%;
+}
 </style>
 </head>
 <body>
@@ -116,7 +130,7 @@
 						<button type="button" class="btn btn-warning" onclick="imojiList()">이모티콘</button>
 						<button type="button" class="btn btn-primary" onclick="review()">등록</button>
 					</div>
-					<div class="main-imoji-list" style="border: 1px soild black; width: 50%;">
+					<div class="main-imoji-list" id="comment-main-imoji">
 					</div>
 				</div>
 			</div>

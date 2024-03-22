@@ -1,5 +1,5 @@
 /**
- * 
+ * 댓글
  */
 
 const contentTextArea = document.getElementById('review-content');
@@ -7,25 +7,48 @@ const commentList = document.getElementsByClassName('cmt_list')[0];
 const pageNavigation = document.getElementsByClassName('pagination')[0];
 const commentTotal = document.getElementById('comment-total');
 const deleteSubForm = document.getElementById('delete-sub-form');
+const mainImojiList = document.getElementById('comment-main-imoji'); // 댓글 이미지
+let reviewPg = 0;
 
 // 이모티콘 불러오기
 function imojiList(){
-	alert('내 이모티콘!');
 	
-	/*
+	
 	$.ajax({    
-		type : 'get',               
-		url : '/imoji/user',            
+		type : 'post',               
+		url : '/freeBoard/imoji',            
 		headers : {          
 			"Content-Type" : "application/json"    
 		},    
 		success : function(result) {      
+			console.log(result);
 			
+			let mainImoji = '';
+			
+			// 메인 이모티콘 배열
+			for (let i = 0; i < result.length; i++) {
+		        let file = result[i].file;
+		        let main = result[i].id;
+		        
+		        console.log(file);
+		        console.log(main);
+		        
+		        mainImoji += '<img src="/images/upload/emoji/' + file + '" onclick="subImoji(' + main + ')" alt="이모티콘"/>';
+		    }
+			console.log(mainImoji);
+			
+			mainImojiList.insertAdjacentHTML('afterbegin', mainImoji);
 		},    
 		error : function(request, status, error) {     
 			console.log(error)    
 		}});
-	*/
+		
+	
+}
+
+// 자식 이모티콘 불러오기
+function subImoji(main) {
+	console.log(main);
 	
 }
 
@@ -50,9 +73,8 @@ function review(){
 			"content" : content
 		}),    
 		success : function(result) {  
-						
-			reviewList(1);
-			
+			console.log(reviewPg);
+			reviewList(reviewPg);
 		},    
 		error : function(request, status, error) {     
 			console.log(error);
@@ -197,23 +219,24 @@ function createComment(commentData, comment){
 // 이전 10개 페이지 넘기기
 function startPage(start){
 	start -= 1;
-	reviewPage = start;
-	console.log("start : "+start);
-	reviewList(start);
+	reviewPg = start;
+	console.log("start : "+reviewPg);
+	reviewList(reviewPg);
 }
 
 // 페이지 넘기기
 function nextPage(num){
-	console.log("num : "+num);
-	reviewList(num);
+	reviewPg = num;
+	console.log("num : "+reviewPg);
+	reviewList(reviewPg);
 }
 
 // 이후 10개 페이지 넘기기
 function endPage(end){
 	end += 1;
-	reviewPage = end;
-	console.log("end : "+end);
-	reviewList(end);
+	reviewPg = end;
+	console.log("end : "+reviewPg);
+	reviewList(reviewPg);
 }
 
 // 답글 폼 생성
@@ -235,7 +258,7 @@ function subComment(number){
 							'<button type="button" class="btn btn-primary" onclick="subCommentForm()">등록</button>'+
 							'</div>'+
 						'</div>'+
-						'<div class="main-imoji-list" style="border: 1px soild black; width: 50%;">'+
+						'<div class="main-imoji-list">'+
 						'</div>'+
 					'</div>';
 					
@@ -288,8 +311,8 @@ function subCommentForm(){
 			"reviewGroup":groupNumber
 		}),    
 		success : function(result) {  
-			
-			reviewList(1);
+			console.log(reviewPg);
+			reviewList(reviewPg);
 			
 		},    
 		error : function(request, status, error) {     
