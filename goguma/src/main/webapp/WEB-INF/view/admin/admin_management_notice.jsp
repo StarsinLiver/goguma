@@ -108,9 +108,8 @@
 								<th>제목</th>
 								<!-- <th>작성자 번호</th>  -->
 								<th>작성일</th>
-								<th>삭제일</th>
-								<th>삭제 여부</th>
 								<th>상세 조회</th>
+								<th>삭제 하기</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -120,9 +119,7 @@
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.title}</a></td>
 									<!-- <td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.getUId()}</a></td> -->
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.createAt}</a></td>
-									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.deleteAt}</a></td>
-									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.deleteYn}</a></td>
-									<td id=""><a href="/cs/notice/detail/admin/${notice.id}"  class="btn btn-success">상세조회</a></td>
+									<td id=""><a href="/cs/notice/detail/admin/${notice.id}"  class="btn btn-warning btn-complete">상세조회</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
