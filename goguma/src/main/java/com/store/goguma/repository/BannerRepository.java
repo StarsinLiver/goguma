@@ -25,4 +25,7 @@ public interface BannerRepository {
 	
 	// 배너 삭제
 	public int delete(int id);
+	
+	// 배너 삭제
+	public List<Banner> findByAll();
 }

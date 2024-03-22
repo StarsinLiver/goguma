@@ -144,6 +144,7 @@ public class FreeboardRestController {
 
 	}
 	
+	// 자유 게시판 리스트 컨트롤러
 	@GetMapping("/listAll")
 	@ResponseBody
 	public FreeBoardListDTO BoardList(FreeBoardPageDTO page, Model model){

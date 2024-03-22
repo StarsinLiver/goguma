@@ -2,18 +2,18 @@ package com.store.goguma.freeboard.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.store.goguma.emoji.dto.EmojiListDTO;
 import com.store.goguma.emoji.dto.EmojiListMainAndSubDto;
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
@@ -135,15 +135,58 @@ public class FreeBoardReviewController {
 						.mainEmoji(i).subEmoji(list).build();
 				mainAndSub.add(dto);
 			}
-			
-			// EmojiListDTO listDTO = EmojiListDTO.builder().emojiList(emojiList).MainList(mainEmojiList).build();
 
 			return mainAndSub;
 		} catch (Exception e) {
-
 			log.info(e.getMessage());
 			return null;
 		}
+	}
+	
+	// 내 메인 이모티콘 목록
+	@DeleteMapping("/review/delete/{id}")
+	@ResponseBody
+	public ResponseEntity<?> deleteReview(@PathVariable("id") int id) {
+		log.info("삭제될 아이디 값 : "+id);
+		try {
+			
+		
+		// 유효성 검증
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+
+		// 회원, 비회원 검증
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+	
+		// 개별 조회
+		FreeBoardReviewDTO dto = reviewService.selectReviewById(id);
+		if(dto == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		log.info("dto : {}" , dto);
+		// 삭제 함수
+		int result = 0;
+		if(dto.getReviewGroup() == null) {
+			// 그룹 전체 삭제
+			result = reviewService.deleteUpdateReviewByGroupId(id);
+			result = reviewService.deleteUpdateReviewById(id);
+		} else {
+			// 리뷰 하나만 삭제
+			result = reviewService.deleteUpdateReviewById(id);
+		}
+		
+		if(result == 0) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+		}catch (Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 
 }
