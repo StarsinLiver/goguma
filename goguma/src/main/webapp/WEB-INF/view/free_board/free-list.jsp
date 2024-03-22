@@ -200,9 +200,6 @@ h2 {
 	
 <script>
 
-
-$(document).ready(function() {
-
 // parameta로 넘어오는 값 확인
 var urlParam = new URL(location.href).searchParams;
 var listType = document.getElementById("listType");
@@ -219,38 +216,6 @@ const typeValue = listType.value;
 // 이전 10개 페이지 넘기기
 function startPage(start) {
 
-				if (data != null) {
-					if (typeValue == "LIST") {
-						
-						console.log("데이터 확인: 리스트로 탔음");
-						console.log("데이터 확인: " + data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
-
-					    // 데이터를 받아서 처리
-					    var html = '';
-					    for (var i = 0; i < data.dtoList.length; i++) {
-					        var board = data.dtoList[i];
-					        html += '<tr>';
-					        html += '<td><a href="">' + board.title + '<span class="badge bg-secondary">[0]</span></a></td>';
-					        html += '<td><a href="/product/userProduct?uId=' + board.uId + '"><span class="hu_nick_txt">'+board.name+'</span></a></td>';
-					        html += '<td><span class="w_date">' + board.createAt + '</span></td>';
-					        html += '<td class="text-center">'+board.view+'</td>'; 
-					        html += '<td class="text-center"><span class="badge bg-primary">'+board.count +'</span></td>';
-					        html += '</tr>';
-					    }
-					    
-					    // 생성된 HTML을 테이블의 tbody에 추가
-					    $('table tbody').html(html);
-						
-					    var comment = '';
-					    
-					    
-					    
-					    
-					    
-						
-					} else if (typeValue == "CARD") {
-						alert("데이터 ㅈㄴ 널임 열받음");
-						//innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
 	start -= 1;
 	reviewPage = start;
 
@@ -661,9 +626,6 @@ $("button[type='submit']")
 				})// search end
 
 
-		
-		})// search end
-	});
 </script>
 
 
