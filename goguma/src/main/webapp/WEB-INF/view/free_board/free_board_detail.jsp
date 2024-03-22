@@ -128,6 +128,7 @@ textarea {
 						<div class="col-md-10">
 							<div class="b-title">
 								<h2>${boardCountRD.title}</h2>
+								<h5>${boardCountRD.userName}</h5>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">

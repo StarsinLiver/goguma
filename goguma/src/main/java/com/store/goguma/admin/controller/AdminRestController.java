@@ -18,13 +18,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.AdminService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiService;
 import com.store.goguma.service.EmojiUploadService;
 import com.store.goguma.service.PaymentService;
+import com.store.goguma.service.UserService;
 import com.store.goguma.user.dto.OauthDTO;
+import com.store.goguma.utils.Define;
+import com.store.goguma.utils.UserRole;
 import com.store.goguma.utils.page.PageRes;
 
 import jakarta.servlet.http.HttpSession;
@@ -48,6 +52,8 @@ public class AdminRestController {
 	private final EmojiService emojiService;
 
 	private final HttpSession httpSession;
+	
+	private final UserService userService;
 
 	// admin emoji 수정하기 ajax
 	@PutMapping("/emoji/modify/{pageId}")
@@ -161,19 +167,56 @@ public class AdminRestController {
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "size", defaultValue = "20") Integer size) {
 
+		try {
 
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+			if (user == null) {
+				throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+			}
+
+			List<MainEmoji> list = adminService.findEmojiDetailMainContainSearch(search, page, size);
+			int count = adminService.countFindEmojiDetailMainContainSearch(search);
+			PageRes<MainEmoji> pageRes = new PageRes<>(list, page, count, size);
+			System.out.println("리스트 수 : " + list.size());
+
+			return new ResponseEntity<PageRes<MainEmoji>>(pageRes, HttpStatus.OK);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		List<MainEmoji> list = adminService.findEmojiDetailMainContainSearch(search , page , size);
-		int count = adminService.countFindEmojiDetailMainContainSearch(search);
-		PageRes<MainEmoji> pageRes = new PageRes<>(list , page , count , size);
-		System.out.println("리스트 수 : " + list.size());
-
-		return new ResponseEntity<PageRes<MainEmoji>>(pageRes, HttpStatus.OK);
-
 	}
 
+	// 마스터 권한 양도
+	@PutMapping("/authority-master")
+	public ResponseEntity<?> changeMasterAuthority(@RequestParam(value = "userId") int userId) {
+		try {
+
+			log.info("userId : {}", userId);
+
+			OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+			if (user == null) {
+				return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+			}
+			
+			
+			
+			// 해당 유저 권한 교체하기
+			int result = userService.adminUpdateUserRole(userId, UserRole.MASTER);
+			if (result == 0) {
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			// 마스터 권한을 admin 으로 강등
+			int result2 = userService.adminUpdateUserRole(user.getUId(), UserRole.ADMIN);
+			if (result2 == 0) {
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

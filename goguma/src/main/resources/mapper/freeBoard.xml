@@ -9,8 +9,10 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
-	<select id="findByFreeId" resultType="com.store.goguma.entity.FreeBoard">
-		select * from free_board where delete_yn = 'N' and id = #{id}
+	<select id="findByFreeId"
+		resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board where delete_yn = 'N' and id =
+		#{id}
 	</select>
 	
 	<!-- 상세 조회 + 유저정보 -->
@@ -24,6 +26,12 @@
 		where fd.`id`=#{id}
 	</select>
 
+	<select id="findOrderByCreateAtLimitEight"
+		resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board where delete_yn = 'N' order by create_at desc limit
+		8;
+	</select>
+	
 	<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
 		select fb.id as id,
@@ -35,21 +43,27 @@
 		fb.create_at as createAt,
 		fb.update_at as updateAt,
 		fb.delete_at as deleteAt,
-		fb.main_category as mainCategory,
+		fb.main_category as
+		mainCategory,
 		fb.sub_category as subCategory,
-		count(fr.free_board_id) as goodCount
+        v.view as view ,
+		count(fr.free_board_id) as
+		goodCount
 		from free_board as fb
 		left join
-		free_board_recommendation fr on fb.id = fr.free_board_id and
+		free_board_recommendation fr on
+		fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
+        left join free_board_view v
+        on fb.id = v.free_board_id
 		where fb.delete_yn = 'N'
 		group by fb.id
 		order by
-		goodCount desc
+		goodCount desc;
 	</select>
-	
+
 	<!-- 게시글 상세페이지 좋아요 개수 카운트 -->
-	<select id="detailCountRecommendation">
+	<select id="detailCountRecommendation" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailDto">
 		select fb.id as id,
 		fb.title as title,
 		fb.content as
@@ -59,13 +73,20 @@
 		fb.create_at as createAt,
 		fb.update_at as updateAt,
 		fb.delete_at as deleteAt,
-		fb.main_category as mainCategory,
+		fb.main_category as
+		mainCategory,
 		fb.sub_category as subCategory,
-		count(fr.free_board_id) as goodCount
+		count(fr.free_board_id) as
+		goodCount ,
+		u.name as userName ,
+		u.file as userFile
 		from free_board as fb
 		left join
-		free_board_recommendation fr on fb.id = fr.free_board_id and
+		free_board_recommendation fr on
+		fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
+		left join user u
+		on u.u_id = fb.u_id
 		where fb.delete_yn = 'N'
 		and fb.id = #{id}
 		group by fb.id
@@ -85,12 +106,14 @@
 		fb.create_at AS createAt,
 		fb.update_at AS updateAt,
 		fb.delete_at AS deleteAt,
-		fb.delete_yn as deleteYn ,
+		fb.delete_yn as
+		deleteYn ,
 		main_cat.id AS mainCategoryId,
 		sub_cat.id AS subCategoryId,
 		main_cat.name as mainCategoryName ,
 		sub_cat.name as subCategoryName ,
-		ifnull(COUNT(fr.free_board_id), 0) AS goodCount
+		ifnull(COUNT(fr.free_board_id), 0) AS goodCount ,
+		v.view as view
 		FROM
 		free_board AS fb
 		LEFT JOIN free_board_recommendation AS fr ON fb.id = fr.free_board_id
@@ -101,6 +124,8 @@
 		INNER JOIN board_main_category AS main_cat
 		ON sub_cat.group_id =
 		main_cat.id
+		left join free_board_view v
+		on fb.id = v.free_board_id
 		WHERE
 		fb.delete_yn = 'N'
 		AND main_cat.id
@@ -178,7 +203,7 @@
 			=
 			#{subCategory})
 		</if>
-		
+
 		<include refid="searchBox" />
 		group by f.id
 		order by f.id desc
@@ -205,7 +230,8 @@
 		'Y'
 		left join free_board_view v
 		on v.free_board_id = f.id
-		where f.delete_yn = 'N'
+		where
+		f.delete_yn = 'N'
 		<if test="mainCategory != 0">
 			and (f.main_category = #{mainCategory} and f.sub_category
 			=

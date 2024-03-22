@@ -107,6 +107,9 @@
 								<th>삭제일</th>
 								<th>권한</th>
 								<th>권한 수정</th>
+								<c:if test="${principal.role == 'MASTER'}">
+									<th>권한 양도</th>
+								</c:if>
 							</tr>
 						</thead>
 						<tbody>
@@ -125,14 +128,14 @@
 									<td id="">${user.createAt}</td>
 									<td id="">${user.deleteAt}</td>
 									<td id="">${user.role}</td>
-
-									<td><c:if test="${user.deleteAt == null}">
+									<td><c:if
+											test="${user.deleteAt == null && principal.role == 'MASTER'}">
 											<form action="/admin/user/role-management/${user.getUId()}"
 												method="post">
 												<input type="hidden" name="_method" value="PUT" /> <input
 													type="hidden" name="role"
 													value="${user.role == 'ADMIN'? 'USER' : 'ADMIN'}" />
-												<c:if test="${user.getUId() != principal.getUId()}">
+												<c:if test="${user.getUId() != principal.getUId() && user.role != 'MASTER'}">
 													<button id="refundButton"
 														onclick="if(!confirm('${user.role} 을 ${user.role == 'ADMIN'? 'USER' : 'ADMIN'} 으로 바꾸시겠습니까?')) return false; "
 														class="btn btn-warning btn-complete cancel-request">권한
@@ -140,11 +143,18 @@
 												</c:if>
 											</form>
 										</c:if></td>
+									<c:if test="${principal.role == 'MASTER'}">
+										<td><c:if test="${user.getUId() != principal.getUId() && user.role == 'ADMIN'}">
+												<button id="refundButton"
+													onclick="onclickMasterAutorityChange(${user.getUId()})"
+													class="btn btn-warning btn-complete cancel-request">권한
+													양도</button>
+											</c:if></td>
 
+									</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
-
 					</table>
 					<div class="pagination">
 						<!-- 페이지 처리 -->
@@ -166,95 +176,5 @@
 	</div>
 </div>
 
-
-<!-- 이메일 변경 내용을 입력하는 폼 -->
-<!-- <div class="modal fade" id="modalReason" tabindex="-1" role="dialog"
-	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-
-				<div style="display: flex; flex-direction: column;">
-					<div class="register-form">
-						<label for="password">Confirm Password</label> <br> <br>
-						<textarea rows="12" cols="12" id="reasonText" readonly="readonly"
-							style="border: none"></textarea>
-						<input type="" id="hidMerchant">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" id="confirm"
-						data-dismiss="modal">승인</button>
-					<button type="button" class="btn btn-secondary" id="cancel"
-						data-dismiss="modal">닫기</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</div> -->
-<!-- 메인 종료 -->
-<!-- 승인 모달 -->
-
-<!-- 승인 모달 end -->
-<!-- 푸터 -->
-<script>
-	$(document).ready(function() {
-		$('.cancel-request').click(function() {
-			var merchantId = $(this).data('value');
-
-			$('#modalReason').modal('show'); // 모달 창을 보여줌
-
-			// AJAX 호출
-			$.ajax({
-				type : 'POST',
-				url : '/admin/payment-reason', // 컨트롤러 주소
-				data : {
-					merchantId : merchantId
-				},
-				dataType : 'json',
-				success : function(data) {
-					// 성공적으로 데이터를 받아왔을 때 모달 창의 텍스트 업데이트
-					$('#reasonText').val(data.cancelReason); // 예시로 받아온 데이터를 재확인 비밀번호 필드에 넣음
-					$('#hidMerchant').val(data.merchantId);
-				},
-				error : function(xhr, status, error) {
-					// 에러 처리
-					console.error(xhr.responseText);
-				}
-			});
-		});
-
-		$('#confirm').click(function() {
-
-			var merchantId = $('#hidMerchant').val();
-
-			console.log('머천트 아이디 값: ' + merchantId);
-			//AJAX 호출
-			$.ajax({
-				type : 'POST',
-				url : '/admin/payment-confirm', // 컨트롤러 주소
-				data : {
-					merchantId : merchantId
-				},
-				success : function(data) {
-
-					window.location.href = '/admin/history';
-				},
-				error : function(xhr, status, error) {
-					// 에러 처리
-					console.error(xhr.responseText);
-				}
-
-			})
-
-		})
-
-		// "닫기" 버튼 클릭 시
-		$('#cancel').click(function() {
-			// 모달 닫기
-			$('#modalReason').modal('hide');
-		});
-	});
-</script>
+<script src="/customAssets/js/admin/user_role.js"></script>
 <%@ include file="/WEB-INF/view/footer.jsp"%>

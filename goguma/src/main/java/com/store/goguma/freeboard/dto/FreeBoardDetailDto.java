@@ -3,19 +3,20 @@ package com.store.goguma.freeboard.dto;
 import lombok.Data;
 
 @Data
-public class FreeBoardCountRecommendationByCateDto {
+public class FreeBoardDetailDto {
 	private Integer id;
 	private String title;
-	private Integer userId;
+	private String content;
+	private Integer uId;
 	private String file;
 	private String createAt;
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
-	private Integer mainCateogryId;
-	private Integer subCategoryId;
-	private String mainCategoryName;
-	private String subCategoryName;
-	private Integer goodCount;
+	private String goodCount;
 	private Integer view;
+	private Integer mainCategory;
+	private Integer subCategory;
+	private String userName;
+	private String userFile;
 }
