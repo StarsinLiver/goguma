@@ -211,10 +211,10 @@ h2 {
 <section class="module">
 	<div class="container"
 		style="background: #fff; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); width: 550px; margin-top: 5%; margin-bottom: 5%">
-			<h2 style="margin-top: 10px;">Register With Us</h2>
+			<h2 style="margin-top: 10px;">개인 정보 수정</h2>
 			<form action="/admin/modify" id="form" class="form" method="post" >
 			<div class="register-form">
-				<label for="Address">Address</label> <input type="text" name="zip"
+				<label for="Address">주소</label> <input type="text" name="zip"
 					id="zip" placeholder="Enter Adress" onclick="zipcode()" readonly />
 				<span class="msgZip"></span>
 				<div>
@@ -227,7 +227,7 @@ h2 {
 				</div>
 			</div>
 			<div class="register-form">
-				<label for="usertel">tel</label> <input type="text" name="tel"
+				<label for="usertel">전화번호</label> <input type="text" name="tel"
 					id="tel" placeholder="Enter tel" /> <span class="msgTel"> - 포함
 					13자리를 입력하세요.</span>
 				</td>

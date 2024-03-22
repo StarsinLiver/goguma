@@ -36,12 +36,16 @@
 	margin: 10px;
 	background-color: gray;
 	color: white;
-	padding: 20px;
+	padding: 10px;
 }
 
 .admin-notice-delete-btn{
 	margin: 10px;
 	background-color: gray;
 	color: white;
-	padding: 20px;
+	padding: 10px;
+}
+
+.notice-detail-h2{
+	margin-bottom : 20px;
 }
