@@ -36,6 +36,15 @@ public class ReviewService {
 		return result;
 	}
 	
+	/**
+	 * 개별 조회
+	 * @param id
+	 * @return
+	 */
+	public FreeBoardReviewDTO selectReviewById (int id) {
+		return reviewRepository.selectReviewById(id);
+	}
+	
 	// 게시글 댓글 전체 조회
 	public FreeBoardReviewResDTO findReviewListByBoardId(FreeBoardReviewReqDTO dto) {
 		int start = (dto.getPg() - 1) * dto.getSize();
@@ -50,5 +59,15 @@ public class ReviewService {
 					.dtoList(dtoList)
 					.total(total)
 					.build();
+	}
+	
+	// 개별 하나만 삭제
+	public int deleteUpdateReviewById(int id) {
+		return reviewRepository.deleteUpdateReviewById(id);
+	}
+	
+	// 그룹 전체 삭제
+	public int deleteUpdateReviewByGroupId(int groupId) {
+		return reviewRepository.deleteUpdateReviewByGroupId(groupId);
 	}
 }

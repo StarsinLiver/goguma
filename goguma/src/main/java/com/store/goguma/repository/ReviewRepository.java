@@ -25,4 +25,7 @@ public interface ReviewRepository {
 	
 	// 현재 게시글 댓글 갯수
 	public int countAllReviewByBoardId(Integer boardId);
+	
+	public int deleteUpdateReviewById(int id);
+	public int deleteUpdateReviewByGroupId(int groupId);
 }
