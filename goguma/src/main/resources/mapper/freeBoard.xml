@@ -19,10 +19,13 @@
 	<select id="findByFreeIdJoinUser" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO">
 		SELECT fd.*,
 			u.`file` as `userFile`,
-			u.`name` as `userName`
+			u.`name` as `userName`,
+			ifnull(count(*) , 0) as goodCount
 		FROM free_board as fd
 			join `user` as u 
 				on fd.u_id = u.u_id
+				left join `free_board_recommendation` fr
+				on fr.free_board_id = fd.id and good_yn = 'Y'
 		where fd.`id`=#{id}
 	</select>
 

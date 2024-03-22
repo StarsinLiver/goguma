@@ -160,7 +160,6 @@ textarea {
 										<i class="bi bi-person"></i> &nbsp;<span>조회수:
 											${currentViews.view}</span>
 									</div>
-
 								</div>
 							</div>
 						</div>
