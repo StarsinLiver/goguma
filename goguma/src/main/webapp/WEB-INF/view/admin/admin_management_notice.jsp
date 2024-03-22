@@ -106,7 +106,7 @@
 							<tr>
 								<th>공지 번호</th>
 								<th>제목</th>
-								<th>작성자 번호</th>
+								<!-- <th>작성자 번호</th>  -->
 								<th>작성일</th>
 								<th>삭제일</th>
 								<th>삭제 여부</th>
@@ -118,7 +118,7 @@
 								<tr id="dataRow">
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.id}</a></td>
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.title}</a></td>
-									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.getUId()}</a></td>
+									<!-- <td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.getUId()}</a></td> -->
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.createAt}</a></td>
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.deleteAt}</a></td>
 									<td id=""><a href="/cs/notice/detail/admin/${notice.id}">${notice.deleteYn}</a></td>

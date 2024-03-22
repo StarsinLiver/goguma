@@ -294,7 +294,21 @@ public class UserService {
 		return 1;
 	}
 	
+	/**
+	 * 유저 정보 상세 조회
+	 * @param userId
+	 * @return
+	 */
 	public UserProfileDto findProfileById(int userId) {
 		return userRepository.findProfileById(userId);
+	}
+	
+	/**
+	 * 유저 정보 삭제
+	 * @param userId
+	 * @return
+	 */
+	public int deleteUser(int userId) {
+		return userRepository.deleteUser(userId);
 	}
 }

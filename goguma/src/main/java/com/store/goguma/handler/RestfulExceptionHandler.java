@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.ChatRoomException;
 import com.store.goguma.handler.exception.LoginRestfulException;
+import com.store.goguma.handler.exception.RedirectException;
 import com.store.goguma.handler.exception.ReportException;
 
 
@@ -62,5 +63,4 @@ public class RestfulExceptionHandler {
 		sb.append("</script>");
 		return sb.toString();
 	}
-	
 }
