@@ -235,7 +235,7 @@ $.ajax({
 						}
 
 						// 생성된 HTML을 테이블의 tbody에 추가
-						$('nav ul').html(paging); 
+						$('.pagingPos').html(paging); 
 
 					}
 				} else if(1 > data.total) {
@@ -367,7 +367,7 @@ $(document).ready(function() {
 							}
 
 							// 생성된 HTML을 테이블의 tbody에 추가
-							$('nav ul').html(paging);
+							$('.pagingPos').html(paging);
 
 						} else if (typeValue == "CARD") {
 							
@@ -422,7 +422,7 @@ $(document).ready(function() {
 							}
 
 							// 생성된 HTML을 테이블의 tbody에 추가
-							$('nav ul').html(paging); 
+							$('.pagingPos').html(paging); 
 							
 							
 						}
@@ -435,7 +435,91 @@ $(document).ready(function() {
 					alert("에러");
 				}
 
-			});// ajax end
+			});// list ajax end
+			
+			// banner ajax start
+				$.ajax({
+				method : "GET",
+				url : "/banner",
+				success : function(data) {
+					
+					console.log('data확인 배너 리스트 석세스: ' + data ); // 
+					console.log('data확인 배너 리스트 석세스: ' + data.length ); // 배열 길이 찍힘
+					console.log('data확인 배너 리스트 석세스: ' + data.length/3 ); 
+					// 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
+					
+					
+					btn = "";
+							
+					// banner 버튼 생성 for문
+					for (var i = 0; i < data.length; i++) {
+						
+					var board = data[i];
+					var type = data[i].type;
+					console.log('로그 확인 데이터 타입으로다가: ' + type);
+					
+					if(type == 'MAIN'){
+						   // 첫 번째 버튼에만 active 클래스 추가
+						   var isActive = i === 0 ? ' active' : '';
+        				   btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+        					
+					}else if(type == 'LIST'){
+					       // 첫 번째 버튼에만 active 클래스 추가
+						   var isActive = i === 0 ? ' active' : '';
+        				   btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+        
+						
+					}else if(type == 'FREEBOARD'){
+						   // 첫 번째 버튼에만 active 클래스 추가
+						   var isActive = i === 0 ? ' active' : '';
+				           btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+						
+						}
+					}; // banner btn 포문 end
+					
+					$('.carousel-indicators').html(btn);
+					
+					
+					img = "";
+					
+					for (var i = 0; i < data.length; i++) {
+						
+					var board = data[i];
+					var type = data[i].type;
+					
+					if(type == 'MAIN'){
+						  img += '<div class="carousel-item active">';
+		      			  img += '<a href="#"><img src="/images/upload/bg1.jpg" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
+		    			  img += '</div>';
+        					
+					}else if(type == 'LIST'){
+					       // 첫 번째 버튼에만 active 클래스 추가
+						   var isActive = i === 0 ? ' active' : '';
+        				   btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+        
+						
+					}else if(type == 'FREEBOARD'){
+						   // 첫 번째 버튼에만 active 클래스 추가
+						   var isActive = i === 0 ? ' active' : '';
+				           btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+						
+						}
+					
+					}; // banner img 포문 end
+					
+					$('.carousel-inner').html(img);
+					
+					
+					},error: function(){
+						
+						
+					}
+			});// banner ajax end
+			
+			
+			
+			
+			
 });
 
 
@@ -546,7 +630,7 @@ $("button[type='submit']")
 											}
 
 											// 생성된 HTML을 테이블의 tbody에 추가
-											$('nav ul').html(paging);
+											$('.pagingPos').html(paging);
 
 											
 											
@@ -601,7 +685,7 @@ $("button[type='submit']")
 												}
 
 												// 생성된 HTML을 테이블의 tbody에 추가
-												$('nav ul').html(paging); 
+												$('.pagingPos').html(paging); 
 												
 												
 											}

@@ -192,7 +192,7 @@ h2 {
 			<div class="d-flex justify-content-between mt-3 align-items-center">
 				<!-- 페이징 버튼 -->
 				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center">
+					<ul class="pagination justify-content-center pagingPos">
 						<!-- 여기서 부터 페이징 생성 예정 -->
 
 

@@ -17,4 +17,14 @@ public class CategoryPageController {
 	public String cateSetting() {
 		return "board/admin-cate-setting";
 	}
+	
+	@GetMapping("/cate-setting2")
+	public String cateSetting2() {
+		return "board/admin-cate-setting2";
+	}
+	
+	@GetMapping("/cate-modify")
+	public String cateSetting3() {
+		return "board/freeBoard_modify";
+	}
 }
