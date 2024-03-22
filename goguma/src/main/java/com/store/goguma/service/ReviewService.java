@@ -25,7 +25,7 @@ public class ReviewService {
 	
 	// 댓글 등록
 	@Transactional
-	public FreeBoardReviewDTO createReview(FreeBoardReviewDTO dto) {
+	public int createReview(FreeBoardReviewDTO dto) {
 		int result = reviewRepository.insertReview(dto);
 		
 		// 댓글 생성 여부
@@ -33,11 +33,7 @@ public class ReviewService {
 			throw new BackPageRestfulException("댓글이 정상적으로 생성되지 않았습니다.", HttpStatus.BAD_REQUEST);
 		}
 		
-		// 가장 최근에 작성된 내 댓글 조회
-		int uId = dto.getUId();
-		FreeBoardReviewDTO review = reviewRepository.selectReviewByUidLast(uId);
-		
-		return review;
+		return result;
 	}
 	
 	// 게시글 댓글 전체 조회

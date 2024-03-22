@@ -11,6 +11,7 @@ import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.BoardTypeDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
+import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
@@ -74,5 +75,7 @@ public interface FreeBoardRepository {
 	//------------------- 산하
 	
 	
-	
+
+	// 게시글 상세 조회 + 저 사진, 유저 이름
+	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id);	
 }
