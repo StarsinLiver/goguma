@@ -1,5 +1,6 @@
 package com.store.goguma.admin.dto;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,5 +51,11 @@ public class AdminProductDto {
 		}
 
 		return result;
+	}
+	
+	public String formatNumber (int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedNumber = decimalFormat.format(number);
+        return formattedNumber;
 	}
 }

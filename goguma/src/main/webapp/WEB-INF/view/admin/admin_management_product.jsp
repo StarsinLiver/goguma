@@ -118,7 +118,7 @@
 									<td id="">${product.productName}</td>
 									<td id="">${product.hostName}</td>
 									<td id="">${product.userName}</td>
-									<td id="">${product.price}</td>
+									<td id="">${product.formatNumber(product.price)}</td>
 									<td id="">${product.formatProductCreateAt()}</td>
 									<td id=""><c:choose>
 											<c:when test="${product.confirmYn eq 'Y'}">

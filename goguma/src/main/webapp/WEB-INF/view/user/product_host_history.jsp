@@ -143,7 +143,7 @@
 						</div>
 						<div class="card-desc">
 							<h2 class="card-title">${product.name}</h2>
-							<div class="card-price">${product.price}</div>
+							<div class="card-price">${product.formatBalance()} 원</div>
 						</div>
 					</a>
 					<!-- 모달 -->

@@ -219,7 +219,7 @@ h2 {
 					style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
 					src="/profile/${user.file}">
 					<label for="file">profile</label>
-					<input type="file" name="file" id="file-input" onchange="readURL(this);"/>
+					<input type="file" name="file" id="file-input" onchange="readURL(this);" accept="jpg,png,jpeg"/>
 					<span>사진 크기 권장 사이즈 128px,용량 최대 250KB</span>
 				</div>
 				<label for="Address">Address</label> <input type="text" name="zip"

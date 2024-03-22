@@ -134,6 +134,7 @@
 								<th>제품코드</th>
 								<th>구매일자</th>
 								<th>구매상품명</th>
+								<th>결제 금액</th>
 								<th>환불여부</th>
 								<th>상세 정보</th>
 							</tr>
@@ -149,6 +150,7 @@
 								<td id="id">${history.mainEmojiId}</td>
 								<td class="purchaseDate">${history.createAt}</td>
 								<td id="pointName">${history.name}</td>
+								<td id="pointName">${history.formatBalance()}</td>
 								<td class="refundYn">${history.cancelYn}</td>
 								<td>
 									<button id="refundButton" data-value="${history.merchantId}" 
