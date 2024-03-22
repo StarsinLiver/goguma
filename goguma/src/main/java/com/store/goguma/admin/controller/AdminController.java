@@ -186,25 +186,7 @@ public class AdminController {
 		return "admin/emoji_management";
 	}
 
-	// 이모지 리스트 출력, 페이징
-	@GetMapping("/emoji/{num}")
-	public ResponseEntity<?> managementEmoji(@PathVariable int num) {
 
-		log.info("이모지 num 밸류 타긴하니??? ");
-		log.info("이모지 num 밸류 확인: " + num);
-
-		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
-		if (user == null) {
-			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
-		}
-
-		List<MainEmoji> list = emojiUploadService.getEmojiMainList(num);
-
-		System.out.println("리스트 수 : " + list.size());
-
-		return new ResponseEntity<List<MainEmoji>>(list, HttpStatus.OK);
-
-	}
 
 	// admin emoji detail 페이지
 	@GetMapping("/emoji/detail/{id}")
@@ -807,12 +789,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-		
-		if(req.getSearch() == null) {
-			req.setSearch("");
-		}
-		if(req.getSearchType() == null) {
-			req.setSearchType("title");
+		if (req.getMainCategory() == null) {
+			req.setMainCategory(0);
+			req.setSubCategory(0);
 		}
 		
  		ResponsePageDTO res = freeBoardService.adminFindAll(req);

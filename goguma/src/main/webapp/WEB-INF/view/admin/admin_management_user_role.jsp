@@ -112,8 +112,10 @@
 						<tbody>
 							<c:forEach items="${userList}" var="user">
 								<tr id="dataRow">
-									<td id=""><a href="/product/userProduct?uId=${user.getUId()}">${user.getUId()}</a></td>
-									<td id=""><a href="/product/userProduct?uId=${user.getUId()}">${user.name}</a></td>
+									<td id=""><a
+										href="/product/userProduct?uId=${user.getUId()}">${user.getUId()}</a></td>
+									<td id=""><a
+										href="/product/userProduct?uId=${user.getUId()}">${user.name}</a></td>
 									<td id="">${user.email}</td>
 									<td id="">${user.social}</td>
 									<td id="">${user.tel}</td>
@@ -130,10 +132,12 @@
 												<input type="hidden" name="_method" value="PUT" /> <input
 													type="hidden" name="role"
 													value="${user.role == 'ADMIN'? 'USER' : 'ADMIN'}" />
-												<button id="refundButton"
-													onclick="if(!confirm('${user.role} 을 ${user.role == 'ADMIN'? 'USER' : 'ADMIN'} 으로 바꾸시겠습니까?')) return false; "
-													class="btn btn-warning btn-complete cancel-request">권한
-													수정</button>
+												<c:if test="${user.getUId() != principal.getUId()}">
+													<button id="refundButton"
+														onclick="if(!confirm('${user.role} 을 ${user.role == 'ADMIN'? 'USER' : 'ADMIN'} 으로 바꾸시겠습니까?')) return false; "
+														class="btn btn-warning btn-complete cancel-request">권한
+														수정</button>
+												</c:if>
 											</form>
 										</c:if></td>
 

@@ -46,4 +46,10 @@ public interface ProductRepository {
 	
 	// 상품 거래 완료
 	public int updateConfirmYn(int pId);
+	
+	// 상품 상세 조회
+	public Product findById(int id);
+	
+	// 상품 수정
+	public int updateProduct(Product product);
 }

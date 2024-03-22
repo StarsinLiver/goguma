@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.cs.dto.FaqRequestDto;
 import com.store.goguma.entity.Faq;
@@ -21,7 +22,7 @@ public class FaqService {
 	public List<Faq> getFaqList() {
 		return repository.getFaqList();
 	}
-
+	@Transactional
 	public boolean faqWrite(FaqRequestDto dto) {
 		int result = repository.faqWrite(dto.toEntity());
 		return result != 0;
@@ -41,6 +42,7 @@ public class FaqService {
 	 * @param faq
 	 * @return
 	 */
+	@Transactional
 	public int update(Faq faq) {
 		return repository.update(faq);
 	}
@@ -50,6 +52,7 @@ public class FaqService {
 	 * @param id
 	 * @return
 	 */
+	@Transactional
 	public int deleteById(int id) {
 		return repository.deleteById(id);
 	}

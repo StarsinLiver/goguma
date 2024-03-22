@@ -3,16 +3,13 @@ package com.store.goguma.chat.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
@@ -32,30 +29,26 @@ import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.utils.ChatType;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/chat")
+@RequiredArgsConstructor
 public class ChatController {
 
-	@Autowired
-	ChatMessageService chatMessageService;
+	private final ChatMessageService chatMessageService;
 
-	@Autowired
-	ChatRoomService chatRoomService;
+	private final ChatRoomService chatRoomService;
 
-	@Autowired
-	ChatRoomNameService chatRoomNameService;
+	private final ChatRoomNameService chatRoomNameService;
 
-	@Autowired
-	EmojiHistoryService emojiHistoryService;
+	private final EmojiHistoryService emojiHistoryService;
 
-	@Autowired
-	EmojiService emojiService;
+	private final EmojiService emojiService;
 
-	@Autowired
-	HttpSession httpSession;
+	private final HttpSession httpSession;
 
 	/**
 	 * 채팅 타입 지정하기
@@ -96,7 +89,7 @@ public class ChatController {
 			mainEmojiList.forEach((e) -> mainListToInt.add(e.getId()));
 			emojiList = emojiService.findByGroupId(mainListToInt);
 		}
-		
+
 		log.info(emojiList.toString());
 
 		model.addAttribute("chatRoomList", chatRoomList);
@@ -132,23 +125,23 @@ public class ChatController {
 		if (dto.getRoomName() == null || dto.getRoomName().isEmpty()) {
 			throw new BackPageRestfulException(com.store.goguma.utils.Define.ENTER_ROOM_NAME, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		// 방 이름이 있는지 확인
 		boolean isExist = chatRoomNameService.isExistRoomName(user.getUId(), dto.getRoomId());
-		System.out.println("방 이름이 있나요? : " +isExist);
+		System.out.println("방 이름이 있나요? : " + isExist);
 		// 방 이름 업데이트
-		if(isExist) {
+		if (isExist) {
 			int result = chatRoomNameService.updateRoomName(user.getUId(), dto.getRoomId(), dto.getRoomName());
 			if (result == 0) {
 				throw new BackPageRestfulException(com.store.goguma.utils.Define.INTERVAL_SERVER_ERROR,
 						HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
-		
-		if(isExist == false) {
+
+		if (isExist == false) {
 			chatRoomNameService.save(user.getUId(), dto.getRoomId(), dto.getRoomName());
 		}
-		
+
 		return "redirect:/chat/room";
 	}
 
@@ -160,7 +153,6 @@ public class ChatController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-
 
 		// 채팅방 나가기 - exit = 'Y'
 //		ChatRoomUpdateDto chatRoomUpdateDto = chatRoomService.findByRoomId(roomId, user.getUId());
@@ -185,7 +177,7 @@ public class ChatController {
 		ChatMessage message = ChatMessage.builder().uId(user.getUId()).text(user.getName() + "님께서 방에서 나가셨습니다.")
 				.roomId(roomId).chatMessageType(ChatType.LEAVE).build();
 
-		chatMessageService.save(message , user);
+		chatMessageService.save(message, user);
 		return "redirect:/chat/room";
 	}
 }

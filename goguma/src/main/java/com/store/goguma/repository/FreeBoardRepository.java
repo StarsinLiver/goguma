@@ -48,14 +48,15 @@ public interface FreeBoardRepository {
 	public int countListTotal(FreeBoardPageDTO page);
 
 	public FreeBoard findByFreeId(Integer id);
+	public FreeBoard detailCountRecommendation(Integer id);
 	
 
 	
 	//------------------- 산하
 	
 	// 게시물 전체 조회
-	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType);
-	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType);
+	public List<AdminFreeBoardDto> adminFindAll(@Param("start") int start , @Param("search") String search , @Param("searchType") String searchType , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
+	public int countAdminFindAll(@Param("search") String search , @Param("searchType") String searchType , @Param("mainCategory") int mainCateogry , @Param("subCategory") int subCategory);
 	public int deleteById(int id);
 	
 	// 사용자 게시물 조회

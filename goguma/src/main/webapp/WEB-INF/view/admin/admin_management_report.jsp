@@ -6,7 +6,7 @@
 
 <style>
 .user-page .payment-container {
-	width: 800px;
+	width: 70%;
 	height: auto;
 	padding: 40px;
 	border-radius: 5px;
@@ -33,7 +33,16 @@
 .search-div select {
 	padding: 11px;
 }
+
+.reason-column {
+	
+}
 </style>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- 메인 시작 -->
 <!-- Header Start -->
 <div class="all-page-title"
@@ -76,8 +85,12 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
+<<<<<<< HEAD
 	<div class="payment-container"
 		style="margin-right: 2%; max-width: 75%; width: 2500px;">
+=======
+	<div class="payment-container" style="margin-right: 10%;">
+>>>>>>> ef8476590699b6c5691b0702f1ee853903f31d04
 		<h4 class="user-page-title">신고 내역</h4>
 		<div class="col-sm-12">
 			<div class="search-div">
@@ -91,10 +104,7 @@
 				</form>
 			</div>
 			<div class="card mb-3">
-				<div class="card-header text-white">
-					<!-- 카드 헤더 -->
-					<h5 class="card-title">신고 내역</h5>
-				</div>
+				<div class="card-header text-white" style="height: 40px;"></div>
 				<div class="card-body">
 					<table class="table text-center">
 						<thead>
@@ -104,7 +114,7 @@
 								<th>신고 대상</th>
 								<th>신고일</th>
 								<th>신고 이유</th>
-								<th>삭제 여부</th>
+								<th>상세보기</th>
 								<th>신고 취소</th>
 							</tr>
 						</thead>
@@ -120,8 +130,11 @@
 									<td id="pointName">${report.callName}</td>
 									<td id="hostId">${report.hostName}</td>
 									<td id="purchaseDate">${report.createAt}</td>
-									<td id="reason">${report.reason}</td>
-									<td id="refundYn">${report.deleteYn}</td>
+									<td id="reason"
+										style="max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${report.reason}</td>
+									<td><button type="button"
+											class="btn btn-warning btn-complete" data-toggle="modal"
+											data-target="#reportModal${report.id}">상세보기</button></td>
 									<td>
 										<form action="/admin/update-report/${report.id}" method="post">
 											<input type="hidden" name="_method" value="put" />
@@ -129,7 +142,29 @@
 												onclick="if(!confirm('취소하시겠습니까??')){return false;}">취소하기</button>
 										</form>
 									</td>
+
 								</tr>
+								<!-- 상세보기 모달 -->
+								<div class="modal fade" id="reportModal${report.id}"
+									tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
+									aria-hidden="true">
+									 <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 700px;">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="reportModalLabel">신고 이유</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body"style="max-width: 700px; max-height: 500px; overflow-y: auto; text-overflow: ellipsis;">${report.reason}</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">닫기</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</c:forEach>
 						</tbody>
 					</table>

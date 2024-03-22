@@ -16,23 +16,30 @@
 	</div>
 </div>
 <!-- Header End -->
-    <div class="qna-write-main-div">
-        <table class="qna-write-table">
-            <tr class="qna-write-tr">
-                <th class="qna-write-th">제목</th>
-                <td class="qna-write-td">
-                    <input type="text" class="qna-write-input">
-                </td>
-            </tr>
-            <tr class="qna-write-tr">
-                <th class="qna-write-th">내용</th>
-                <td class="qna-write-td">
-                    <textarea class="qna-write-textarea"></textarea>
-                </td>
-            </tr>
-        </table>
-        <button type="button" class="qna-write-insert-btn">faq등록</button>
-    </div>
+<div class="qna-write-main-div" style="flex-direction: row;">
+	<div>
+		<!-- aside -->
+		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
+		<!-- aside end -->
+	</div>
+	<table class="qna-write-table" style="margin: 0 10% 0 10%;">
+		<tr class="qna-write-tr">
+			<th class="qna-write-th">제목</th>
+			<td class="qna-write-td"><input type="text"
+				class="qna-write-input"></td>
+		</tr>
+		<tr class="qna-write-tr">
+			<th class="qna-write-th">내용</th>
+			<td class="qna-write-td"><textarea class="qna-write-textarea"></textarea>
+			</td>
+		</tr>
+		<tr class="">
+			<td class="">
+				<button type="button" class="qna-write-insert-btn">faq등록</button>
+			</td>
+		</tr>
+	</table>
+</div>
 <script src="/customAssets/js/cs/faq/admin-write.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

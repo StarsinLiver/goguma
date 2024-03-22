@@ -17,6 +17,7 @@
 </div>
 <!-- Header End -->
 <div class="qna-write-main-div">
+	<h2 class="qna-write-h2">FAQ 수정하기</h2>
 	<form action="/admin/faq/${faq.id}" method="post">
 		<input type="hidden" name="_method" value="put" />
 

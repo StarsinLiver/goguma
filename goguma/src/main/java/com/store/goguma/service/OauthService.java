@@ -1,7 +1,7 @@
 package com.store.goguma.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.entity.OauthUserEntity;
 import com.store.goguma.entity.User;
@@ -9,14 +9,16 @@ import com.store.goguma.repository.OauthRepository;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.OauthResisterDTO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
+@RequiredArgsConstructor
 public class OauthService {
 
-	@Autowired
-	private OauthRepository oauthRepository;
+	
+	private final OauthRepository oauthRepository;
 
 	public OauthDTO readUserByUserEmail(String email, String oauth) {
 
@@ -30,7 +32,7 @@ public class OauthService {
 
 		return dto;
 	}
-
+	@Transactional
 	public int createUser(OauthResisterDTO dto) {
 
 		OauthUserEntity userEntity = OauthUserEntity.builder().email(dto.getEmail()).name(dto.getName())

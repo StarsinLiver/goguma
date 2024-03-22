@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.admin.dto.AdminFreeBoardDto;
 import com.store.goguma.entity.BoardCategoryMain;
@@ -115,6 +116,7 @@ public class FreeBoardService {
 	}
 	
 	// 게시글 등록
+	@Transactional
 	public int insert(FreeBoardFormDTO boardDTO) {
 		int result = freeBoardRepository.insertFreeBoard(boardDTO);
 		
@@ -138,8 +140,8 @@ public class FreeBoardService {
 	public ResponsePageDTO adminFindAll(RequestPageDTO pageDTO) {
 		int start = (pageDTO.getPg() -1) * pageDTO.getSize();
 		
-		List<AdminFreeBoardDto> list = freeBoardRepository.adminFindAll(start , pageDTO.getSearch() , pageDTO.getSearchType());
-		int count = freeBoardRepository.countAdminFindAll(pageDTO.getSearch() , pageDTO.getSearchType());
+		List<AdminFreeBoardDto> list = freeBoardRepository.adminFindAll(start , pageDTO.getSearch() , pageDTO.getSearchType() , pageDTO.getMainCategory() , pageDTO.getSubCategory());
+		int count = freeBoardRepository.countAdminFindAll(pageDTO.getSearch() , pageDTO.getSearchType() , pageDTO.getMainCategory() , pageDTO.getSubCategory());
 		return ResponsePageDTO.builder()
 				.requestPageDTO(pageDTO)
 				.dtoList(list)
@@ -150,6 +152,7 @@ public class FreeBoardService {
 	/*
 	 * 게시물 삭제하기
 	 */
+	@Transactional
 	public int deleteById(int id) {
 		return freeBoardRepository.deleteById(id);
 	}
@@ -197,6 +200,7 @@ public class FreeBoardService {
 	 * @param list
 	 * @return
 	 */
+	@Transactional
 	public int deleteBoardById(List<Integer> list) {
 		return freeBoardRepository.deleteBoardById(list);
 	}
@@ -234,6 +238,19 @@ public class FreeBoardService {
 		
 		return dto;
 		
+	}
+	public FreeBoardDTO detailCountRecommendation(Integer id) {
+		
+		FreeBoard boardCountRD = freeBoardRepository.detailCountRecommendation(id);
+		
+		FreeBoardDTO dto = FreeBoardDTO.builder().id(boardCountRD.getId()).title(boardCountRD.getTitle())
+				.content(boardCountRD.getContent()).uId(boardCountRD.getUId()).file(boardCountRD.getFile())
+				.createAt(boardCountRD.getCreateAt()).updateAt(boardCountRD.getUpdateAt())
+				.deleteAt(boardCountRD.getDeleteAt()).deleteYn(boardCountRD.getDeleteYn())
+				.mainCategory(boardCountRD.getMainCategory()).subCategory(boardCountRD.getSubCategory())
+				.goodCount(boardCountRD.getGoodCount()).build();
+		
+		return dto;
 		
 	}
 	
@@ -242,6 +259,7 @@ public class FreeBoardService {
 	 * @param dto
 	 * @return
 	 */
+	@Transactional
 	public int updateFreeBoard(FreeBoardFormDTO dto) {
 		return freeBoardRepository.updateFreeBoard(dto);
 	}

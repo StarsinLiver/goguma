@@ -35,7 +35,8 @@
 		update `emoji_history` set 
 			`cancel_amount`=`price`,
 			`cancel_reason`=#{reason},
-			`update_at`=NOW()
+			`update_at`=NOW() ,
+			`cancel_yn` = 'Y'
 		where `merchant_id`=#{merchantId} 
 			and `u_id`=#{uId}
 			and create_at &lt;= DATE_ADD(DATE(NOW()), INTERVAL 3 DAY) <!-- 환불기준 3일까지 -->
@@ -56,7 +57,7 @@
 		FROM `product_history` AS ph
 			JOIN  `product` AS p ON ph.p_id = p.p_id
 			JOIN `user` AS u ON p.host_id = u.u_id
-		WHERE ph.`u_id`=#{uId}
+		WHERE ph.`u_id`=#{uId} or p.host_id = #{uId}
 		ORDER BY ph.id DESC
 		LIMIT #{start},10
 	</select>
@@ -65,7 +66,7 @@
 	<select id="countProductHistoryByUser">
 		SELECT COUNT(*) FROM `product_history` as ph
 		JOIN  `product` AS p ON ph.p_id = p.p_id
-        	where `u_id`=#{uId}
+        	where `u_id`=#{uId} or p.host_id = #{uId}
 	</select>
 	
 	<!-- 등록된 상품 목록 -->

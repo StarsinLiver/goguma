@@ -22,6 +22,7 @@ import com.store.goguma.repository.UserRepository;
 import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
+import com.store.goguma.user.dto.UserProfileDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
@@ -43,6 +44,7 @@ public class UserService {
 	private final MyUserRepository myUserRepository;
 	private final ProductHistoryRepository productHistoryRepository;
 	private final ReportRepository reportRepository;
+	
 
 	// 유저 정보 조회
 	public User readByuser(OauthDTO dto) {
@@ -90,6 +92,7 @@ public class UserService {
 	}
 
 	// 이모티콘 환불
+	@Transactional
 	public UserEmojiDTO cancelEmoji(String merchantid, int uId, String reason) {
 		// 환불 요청
 		int result = myUserRepository.updateEmojiHistoryCancel(merchantid, uId, reason);
@@ -138,6 +141,7 @@ public class UserService {
 	}
 
 	// 문의하기 글 삭제
+	@Transactional
 	public int deleteQna(Integer[] qnaIds) {
 		int deletedCount = 0;
 
@@ -252,6 +256,7 @@ public class UserService {
 	}
 
 	// 관리자가 권한 수정
+	@Transactional
 	public int adminUpdateUserRole(int uId, String role) {
 		return userRepository.adminUpdateUserRole(uId, role);
 	}
@@ -287,5 +292,23 @@ public class UserService {
 			return 6;
 		}
 		return 1;
+	}
+	
+	/**
+	 * 유저 정보 상세 조회
+	 * @param userId
+	 * @return
+	 */
+	public UserProfileDto findProfileById(int userId) {
+		return userRepository.findProfileById(userId);
+	}
+	
+	/**
+	 * 유저 정보 삭제
+	 * @param userId
+	 * @return
+	 */
+	public int deleteUser(int userId) {
+		return userRepository.deleteUser(userId);
 	}
 }

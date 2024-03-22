@@ -296,4 +296,17 @@
 		WHERE p_id =
 		#{pId};
 	</update>
+	
+	<select id="findById" resultType="com.store.goguma.entity.Product">
+		select * from product
+		where p_id = #{id}
+		and delete_yn = 'N'
+	</select>
+	
+	<update id="updateProduct">
+		update product
+		set name = #{name} , price = #{price} , address = #{address} , description = #{description} , file=#{file},
+		update_at = now()
+		where p_id = #{pId}
+	</update>
 </mapper>

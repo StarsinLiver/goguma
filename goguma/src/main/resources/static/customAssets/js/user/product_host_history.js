@@ -5,10 +5,7 @@ const btn = document.getElementsByClassName("btn-confirm")[0];
 let user = getSession();
 
 // 챗 리스트 생성
-function openChatList() {
-	let pid = btn.dataset.value;
-	console.log(pid);
-
+function openChatList(pid) {
 
 	$.ajax({
 		type: 'get',
@@ -38,6 +35,7 @@ function deleteClose() {
 // 상품 구매자 목록 화면에 뿌리기
 function displayUserList(result, pid) {
 	let tr = document.querySelector("#user--list");
+	tr.innerHTML = "";
 	for (let i = 0; i < result.length; i++) {
 		tr.innerHTML += `<tr><td>${result[i].name}</td>
     			<td><button type="button" class="btn btn-warning" onclick="selectedUser(${result[i].uid} , ${pid})">거래 완료</button></td>

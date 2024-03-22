@@ -99,8 +99,6 @@
 							<th>제목</th>
 							<th>작성자 번호</th>
 							<th>작성일</th>
-							<th>삭제일</th>
-							<th>삭제 여부</th>
 							<th>수정</th>
 							<th>삭제</th>
 						</tr>
@@ -112,8 +110,6 @@
 								<td id="">${faq.title}</td>
 								<td id="">${faq.getUId()}</td>
 								<td id="">${faq.createAt}</td>
-								<td id="">${faq.deleteAt}</td>
-								<td id="">${faq.deleteYn}</td>
 								<td id=""><a href="/admin/faq/${faq.id}"
 									class="btn btn-success">상세조회</a></td>
 								<td id="">

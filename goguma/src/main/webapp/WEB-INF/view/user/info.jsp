@@ -6,32 +6,36 @@
 
 
 <style>
-	#myProgress {
-	  width: 450px;
-	  background-color: #e9ecef;
-	}
-	
+#myProgress {
+	width: 450px;
+	background-color: #e9ecef;
+}
 
-	#myBar {
-	  width: 10%;
-	  height: 30px;
-	  text-align: center; 
-	  line-height: 30px;
-	  color: white;
-	}
+#myBar {
+	width: 10%;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: white;
+}
 </style>
 
 <!-- 메인 시작 -->
 <!-- Header Start -->
-<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
-        <div class="container text-center">
-            <h1>마이페이지</h1>
-        </div>
-        <!--End Page-->
-    </div><!-- end section -->
+<div class="all-page-title"
+	style="background-image: url(/assets/images/pattern-4.png);">
+	<div class="container text-center">
+		<h1>마이페이지</h1>
+	</div>
+	<!--End Page-->
+</div>
+<!-- end section -->
 
-    <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 85 100" preserveAspectRatio="none">
-        <path d="M-5 100 Q 0 20 5 100 Z
+<svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
+	version="1.1" width="100%" height="100" viewBox="0 0 85 100"
+	preserveAspectRatio="none">
+        <path
+		d="M-5 100 Q 0 20 5 100 Z
             M0 100 Q 5 0 10 100
             M5 100 Q 10 30 15 100
             M10 100 Q 15 10 20 100
@@ -61,74 +65,84 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/user/myPageAside.jsp"%>
 	<!-- aside end -->
-	
+
 	<div class="info-container">
 		<h4 class="user-page-title">내 정보</h4>
 		<div class="top-info">
-			
+
 			<img class="rounded-circle mt-5" id="profileImage"
-				style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border:1px solid #ccc;"
-				src="/profile/${user.file}" onerror="this.src='/assets/images/goguma_mascot.png'">
-				
+				style="border-radius: 50%; overflow: hidden; width: 180px; height: 180px; border: 1px solid #ccc;"
+				src="/profile/${user.file}"
+				onerror="this.src='/assets/images/goguma_mascot.png'">
+
 			<table class="table-count">
 				<thead>
 					<tr>
-					  <th>게시글 수</th>
-					  <th>문의 수</th>
-					  <th>찜 갯수</th>
+						<th>상품 수</th>
+						<th>문의 수</th>
+						<th>찜 갯수</th>
 					</tr>
 				</thead>
 				<tbody>
-				    <tr>
-				      <td>10</td>
-				      <td>3</td>
-				      <td>12</td>
-				    </tr>
-			    </tbody>
+					<tr>
+						<td>${user.countProduct}</td>
+						<td>${user.countQna}</td>
+						<td>${user.countWishList}</td>
+					</tr>
+				</tbody>
 			</table>
-			
+
 			<!-- 내 평판 -->
-			<div class="user-report" style="position: absolute;right: 40px;top: 230px;">
+			<div class="user-report"
+				style="position: absolute; right: 40px; top: 230px;">
 				<p style="display: inline-block;">내 온도</p>
 				<div id="myProgress">
-				  <div id="myBar"></div>
+					<div id="myBar"></div>
 				</div>
 			</div>
 		</div>
 		<table class="table table-hover">
-		  <thead>
-		    <tr>
-		      <th scope="row" colspan="2">내 정보</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <th scope="row">이메일</th>
-		      <td>${user.email}</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">휴대폰</th>
-		      <td>${user.tel}</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">우편번호</th>
-		      <td>${user.zip}</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">주소</th>
-		      <td>${user.address}</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">가입일자</th>
-		      <td>${user.createAt}</td>
-		    </tr>
-		  </tbody>
+			<thead>
+				<tr>
+					<th scope="row" colspan="2">내 정보</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">이메일</th>
+					<td>${user.email}</td>
+				</tr>
+				<tr>
+					<th scope="row">휴대폰</th>
+					<td>${user.tel}</td>
+				</tr>
+				<tr>
+					<th scope="row">우편번호</th>
+					<td>${user.zip}</td>
+				</tr>
+				<tr>
+					<th scope="row">주소</th>
+					<td>${user.address}</td>
+				</tr>
+				<tr>
+					<th scope="row">가입일자</th>
+					<td>${user.createAt}</td>
+				</tr>
+			</tbody>
 		</table>
-		<p style="color: #939393;font-size: 12px;">※ 정보 수정은 프로필 사진, 휴대폰 번호, 주소만 가능합니다.</p>
-		
+		<p style="color: #939393; font-size: 12px;">※ 정보 수정은 프로필 사진, 휴대폰
+			번호, 주소만 가능합니다.</p>
+
 		<div class="links">
 			<!-- <a href="#" class="btn btn-danger">탈퇴하기</a> -->
-			<a href="/user/modify" class="btn btn-warning btn-complete"><i class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
+			<a href="/user/modify" class="btn btn-warning btn-complete"><i
+				class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
+			<form action="/user/delete/${user.getUId()}" class="mt-2" method="post">
+			<input type="hidden" name="_method" value="delete"/>
+				<button  class="btn btn-danger btn-complete" onclick="if(!confirm('정말로 탈퇴하시겠습니까?')) return false;">
+					<i class="bi bi-gear-fill"></i>&nbsp;탈퇴하기
+				</button>
+			</form>
 		</div>
 	</div>
 </div>

@@ -3,10 +3,10 @@ package com.store.goguma.admin.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,33 +17,37 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.entity.Emoji;
+import com.store.goguma.entity.MainEmoji;
+import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.AdminService;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiService;
 import com.store.goguma.service.EmojiUploadService;
 import com.store.goguma.service.PaymentService;
+import com.store.goguma.user.dto.OauthDTO;
+import com.store.goguma.utils.page.PageRes;
 
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @RestController
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminRestController {
 
-	@Autowired
-	AdminService adminService;
+	private final AdminService adminService;
 
-	@Autowired
-	PaymentService paymentService;
+	private final PaymentService paymentService;
 
-	@Autowired
-	EmojiUploadService emojiUploadService;
+	private final EmojiUploadService emojiUploadService;
 
-	@Autowired
-	EmojiHistoryService emojiHistoryService;
-	
-	@Autowired
-	EmojiService emojiService;
+	private final EmojiHistoryService emojiHistoryService;
+
+	private final EmojiService emojiService;
+
+	private final HttpSession httpSession;
 
 	// admin emoji 수정하기 ajax
 	@PutMapping("/emoji/modify/{pageId}")
@@ -64,44 +68,42 @@ public class AdminRestController {
 		// 서브 이모지 전체 삭제
 		int result = 0;
 		result = emojiService.deleteSubEmojiByGroupId(pageId);
-		if(result == 0) {
+		if (result == 0) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		// 메인 이모지 변경
 		result = emojiService.updateMainEmoji(fileList.get(0), title, price, pageId);
-		if(result == 0) {
+		if (result == 0) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		// 서브 이모지 insert
 		for (int i = 1; i < fileList.size(); i++) {
-			Emoji emoji = Emoji.builder()
-					.file(fileList.get(i))
-					.name("emoji_" + pageId + "_" + i)
-					.groupId(pageId).build();
+			Emoji emoji = Emoji.builder().file(fileList.get(i)).name("emoji_" + pageId + "_" + i).groupId(pageId)
+					.build();
 			result = emojiService.subUpload(emoji);
-			if(result == 0) {
+			if (result == 0) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	// 이모지 삭제하기
 	@DeleteMapping("/emoji/delete/{pageId}")
 	public ResponseEntity<?> deleteEmoji(@PathVariable(value = "pageId") int groupId) {
 		try {
-			
+
 			// 이모지를 사용하고 있는 사람 확인
 			int count = emojiHistoryService.countByMainEmojiId(groupId);
-			if(count > 0) {
+			if (count > 0) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			
+
 			int result = 0;
 			// 메인 이모지 삭제
 			result = emojiService.deleteMainEmojiById(groupId);
-			if(result == 0) {
+			if (result == 0) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			// 서브 이미지 삭제 필요 없음
@@ -150,6 +152,28 @@ public class AdminRestController {
 			log.info(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	// 이모지 리스트 출력, 페이징
+	@GetMapping("/emoji/{num}")
+	public ResponseEntity<?> managementEmoji(@PathVariable int num,
+			@RequestParam(value = "search", defaultValue = "") String search,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "20") Integer size) {
+
+
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+
+		List<MainEmoji> list = adminService.findEmojiDetailMainContainSearch(search , page , size);
+		int count = adminService.countFindEmojiDetailMainContainSearch(search);
+		PageRes<MainEmoji> pageRes = new PageRes<>(list , page , count , size);
+		System.out.println("리스트 수 : " + list.size());
+
+		return new ResponseEntity<PageRes<MainEmoji>>(pageRes, HttpStatus.OK);
+
 	}
 
 }
