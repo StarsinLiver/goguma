@@ -121,10 +121,10 @@
 							<!-- 실제 데이터 행 -->
 							<c:forEach var="report" items="${report}">
 								<tr id="dataRow">
-									<td id="id">${report.id}</td>
-									<td id="pointName">${report.callName}</td>
-									<td id="hostId">${report.hostName}</td>
-									<td id="purchaseDate">${report.createAt}</td>
+										<td id="id">${report.id}</td>
+										<td id="pointName">${report.callName}</td>
+										<td id="hostId">${report.hostName}</td>
+										<td id="purchaseDate">${report.createAt}</td>
 									<td id="reason"
 										style="max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${report.reason}</td>
 									<td><button type="button"
@@ -133,7 +133,7 @@
 									<td>
 										<form action="/admin/update-report/${report.id}" method="post">
 											<input type="hidden" name="_method" value="put" />
-											<button class="btn btn-warning btn-complete"
+											<button class="btn btn-warning btn-complete" style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;"
 												onclick="if(!confirm('취소하시겠습니까??')){return false;}">취소하기</button>
 										</form>
 									</td>
@@ -152,11 +152,8 @@
 													<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
-											<div class="modal-body"style="max-width: 700px; max-height: 500px; overflow-y: auto; text-overflow: ellipsis;">${report.reason}</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">닫기</button>
-											</div>
+											<div class="modal-body"style="width: 700px; height: 500px; overflow-y: auto; text-overflow: ellipsis;">${report.reason}</div>
+
 										</div>
 									</div>
 								</div>
