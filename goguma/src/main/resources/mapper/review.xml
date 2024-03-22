@@ -3,60 +3,80 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.store.goguma.repository.ReviewRepository">
-	
+
 	<!-- 댓글 등록 -->
 	<insert id="insertReview">
-		INSERT INTO `review` (`free_board_id`,`u_id`,`content`,`review_group`,`review_parent`,`file`)
-			VALUES(#{freeBoardId},#{uId},#{content},#{reviewGroup},#{reviewParent},#{file});
+		INSERT INTO `review`
+		(`free_board_id`,`u_id`,`content`,`review_group`,`review_parent`,`file`)
+		VALUES(#{freeBoardId},#{uId},#{content},#{reviewGroup},#{reviewParent},#{file});
 	</insert>
-	
-	
+
+
 	<!-- 개별 조회 -->
-	<select id="selectReviewById" resultType="com.store.goguma.freeboard.dto.FreeBoardReviewDTO">
+	<select id="selectReviewById"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardReviewDTO">
 		SELECT r.*,
-			u.`name` AS userName,
-			u.`file` AS userFile
+		u.`name` AS userName,
+		u.`file` AS userFile
 		FROM `review` AS r
 		JOIN `user` AS u
-			ON r.u_id = u.u_id
+		ON r.u_id = u.u_id
 		WHERE id=#{id}
 	</select>
-	
+
 	<!-- 가장 최근에 쓴 댓글 조회 -->
-	<select id="selectReviewByUidLast" resultType="com.store.goguma.freeboard.dto.FreeBoardReviewDTO">
+	<select id="selectReviewByUidLast"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardReviewDTO">
 		SELECT r.*,
-			u.`name` AS userName,
-			u.`file` AS userFile
+		u.`name` AS userName,
+		u.`file` AS userFile
 		FROM `review` AS r
 		JOIN `user` AS u
-			ON r.u_id = u.u_id
+		ON r.u_id = u.u_id
 		WHERE r.u_id=#{uId}
 		ORDER BY r.`id` DESC
 		LIMIT 1
 	</select>
-	
+
 	<!-- 현재 게시글 댓글 전체 조회 -->
-	<select id="selectAllReviewByBoardId" resultType="com.store.goguma.freeboard.dto.FreeBoardReviewDTO">
+	<select id="selectAllReviewByBoardId"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardReviewDTO">
 		SELECT r.*,
-			u.`name` AS userName,
-			u.`file` AS userFile
+		u.`u_id` AS userId,
+		u.`name` AS userName,
+		u.`file` AS userFile
 		FROM `review` AS r
 		JOIN `user` AS u
-			ON r.u_id = u.u_id
+		ON r.u_id = u.u_id
 		WHERE free_board_id=#{freeBoardId}
-			ORDER BY
-			CASE 
-			    WHEN r.review_group IS NULL THEN r.`id`
-			    ELSE r.review_group
-			  END ASC
+		and r.delete_yn = 'N'
+		ORDER BY
+		CASE
+		WHEN r.review_group IS NULL THEN r.`id`
+		ELSE r.review_group
+		END ASC
 		LIMIT #{start},#{size}
 	</select>
-	
+
 	<!-- 현재 게시글 댓글 갯수 -->
 	<select id="countAllReviewByBoardId">
 		SELECT COUNT(*)
 		FROM `review`
-		WHERE free_board_id=#{freeBoardId}
+		WHERE
+		free_board_id=#{freeBoardId}
 	</select>
-	
+
+	<!-- 댓글 하나만 삭제 -->
+	<update id="deleteUpdateReviewById">
+		UPDATE review
+		SET delete_at = NOW() , delete_yn = 'Y'
+		WHERE id = #{id}
+	</update>
+
+	<update id="deleteUpdateReviewByGroupId">
+		UPDATE review
+		SET delete_at = NOW() , delete_yn = 'Y'
+		WHERE review_group = #{groupId}
+	</update>
+
 </mapper>

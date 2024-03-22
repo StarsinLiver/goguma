@@ -1,7 +1,6 @@
 /**
  * 댓글
  */
-
 const contentTextArea = document.getElementById('review-content');
 const commentList = document.getElementsByClassName('cmt_list')[0];
 const pageNavigation = document.getElementsByClassName('pagination')[0];
@@ -11,11 +10,20 @@ const mainImojiList = document.getElementById('comment-main-imoji'); // 메인 �
 const subEmojiList = document.getElementById('comment-sub-imoji'); // 이모티콘 서브
 const displayClickEmoji = document.getElementById('display-click-emoji'); // 이모지를 display
 let reviewPg = 0; // 현재 페이지 번호
-let last = 0; //
+let last = 0; // 마지막 페이지
 
-let emojiFile = ""; // 유저가 선택한 이모지
+let emojiFile = ""; // 유저가 선택한 이모지 중요 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+// 이모지 데이터
 let dataEmoji;
+
+// 이모지 review 와 comment
+const COMMENT = "COMMENT";
+const REVIEW = "REVIEW";
+
+
+// 회원, 비회원 여부
+const user = getSession();
 
 // 댓글 목록 출력
 document.addEventListener("DOMContentLoaded", function() {
@@ -25,8 +33,17 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // 이모티콘 불러오기
+imojiList();
 function imojiList(){
 	
+	// 비회원 막기
+	if(user === '' || user === null){
+		console.log('유저 검사');
+		if(confirm('로그인이 되지 않으셨습니다. 로그인하시겠습니까?')){
+			window.location.href = '/login';
+		}
+		return;
+	}
 	
 	$.ajax({    
 		type : 'post',               
@@ -35,54 +52,116 @@ function imojiList(){
 			"Content-Type" : "application/json"    
 		},    
 		success : function(result) {      
-			
 			// 전체 list 객체 담기
 			dataEmoji = result;
-			
-			// 메인 이모티콘 뿌리기
-			for(var i = 0; i < result.length; i++) {
-				mainImojiList.innerHTML += `<img src="/images/upload/emoji/${result[i].mainEmoji.file}" onclick="displaySubEmoji(${i})"/>`
-			// 	subEmojiList.innerHTML += displaySubEmoji(result[i].subEmoji);
-			}
-			
 		},    
 		error : function(request, status, error) {     
 			console.log(error)    
 		}});
-		
-		
 	
+}
+
+const forMainImg = (type) => {
+	// 메인 이모지 div
+let mainEmojiList = "";
+			// 메인 이모티콘 뿌리기
+			for(var i = 0; i < dataEmoji.length; i++) {
+				mainEmojiList += divEmojiImg(dataEmoji[i].mainEmoji.file, i , type);
+			}
+			return mainEmojiList;
+}
+
+const divEmojiImg = (img , index , type) => {
+	console.log(img , index);
+	let div = `<img src="/images/upload/emoji/${img}" onclick="onclickReviewSubEmoji(${index} , '${type}')"/>`;
+	return div;
 }
 
 // subEmoji To display 
-const displaySubEmoji = (index) => {
+const displaySubEmoji = (index , type) => {
 	
 	let data = dataEmoji[index].subEmoji;	
-	
 	let display = "";
 	for(var i = 0; i < data.length; i++) {
-		display +=  `<img src="/images/upload/emoji/${data[i].file}" onclick="onclickEmoji('${data[i].file}')"/>`
-	}
-	
-	
-	subEmojiList.innerHTML = display;
-	//	return display;
+		display +=  `<img src="/images/upload/emoji/${data[i].file}" onclick="onclickEmoji('${data[i].file}', '${type}')"/>`
+	}	
+	return display;
 }
 
+// 리뷰 답글의 메인 이모지 button 클릭창
+const onclickReviewMainEmoji = () => {
+	mainImojiList.innerHTML = forMainImg(REVIEW);
+	
+	clearEmoji(COMMENT);
+} 
 
+// 코멘트의 메인 이모지 button 클릭창
+const onclickCommentMainEmoji = () => {
+	const reviewMainEmoji = document.getElementById('review-main-imoji'); // 이모티콘 메인
+	reviewMainEmoji.innerHTML = forMainImg(COMMENT);
+	
+	clearEmoji(REVIEW);
+}
+
+const clearEmoji = (type) => {
+	if(type == REVIEW) {
+	// 클릭시 리뷰의 창 전체 닫기
+	mainImojiList.innerHTML = "";
+	subEmojiList.innerHTML = "";
+	displayClickEmoji.innerHTML = "";
+	} else if (type == COMMENT) {
+	const reviewMainEmoji = document.getElementById('review-main-imoji'); // 이모티콘 메인
+	const reviewSubEmoji = document.getElementById('review-sub-imoji'); // 이모티콘 서브
+	const displayClickEmojiComment = document.getElementById('display-click-emoji-comment');
+	// 클릭시 코멘트의 창 전체 닫기
+	reviewMainEmoji.innerHTML = "";
+	reviewSubEmoji.innerHTML = "";
+	displayClickEmojiComment.innerHTML = "";
+	}
+}
+
+// 리뷰 , 코멘트의 서브 이모지 
+const onclickReviewSubEmoji = (index , type) => {
+	let sub = displaySubEmoji(index , type);
+	if(type == REVIEW) {
+		// 리뷰에 서브 넣기
+		subEmojiList.innerHTML = sub;
+		
+	} else if(type == COMMENT) {
+		// 코멘트에 서브 넣기
+		const reviewSubEmoji = document.getElementById('review-sub-imoji'); // 이모티콘 서브
+		reviewSubEmoji.innerHTML = sub;
+	}
+}
 
 // 이모지를 클릭했을 시 발생하는 이벤트
-const onclickEmoji = (file) => {
-	
+const onclickEmoji = (file , type) => {
+	const display = document.getElementById('display-click-emoji-comment');
 	emojiFile = file;
 	console.log(emojiFile);
 	
 	// 화면에 뿌려주는 이벤트
-	displayClickEmoji.innerHTML = `<img src="/images/upload/emoji/${emojiFile}"/>`
+	if(type == REVIEW) {
+		displayClickEmoji.innerHTML = `<img src="/images/upload/emoji/${emojiFile}"/>`
+	} else if (type == COMMENT) {
+		display.innerHTML =  `<img src="/images/upload/emoji/${emojiFile}"/>`
+	}
 }
 
 // 댓글 전송
 function review(){
+	
+	clearEmoji(REVIEW);
+	contentTextArea.innerText = "";
+	
+	// 비회원 막기
+	if(user === '' || user === null){
+		console.log('유저 검사');
+		if(confirm('로그인이 되지 않으셨습니다. 로그인하시겠습니까?')){
+			window.location.href = '/login';
+		}
+		return;
+	}
 	
 	// 추후에 이모티콘 같이 전송
 	const content = contentTextArea.value;
@@ -103,8 +182,10 @@ function review(){
 			"file" : emojiFile
 		}),    
 		success : function(result) {  
-			console.log(" 현재 페이지 : "+reviewPg);
+			console.log(" 마지막 페이지 : "+last);
+			reviewPg = last;
 			reviewList(reviewPg);
+			contentTextArea.value = '';
 		},    
 		error : function(request, status, error) {     
 			console.log(error);
@@ -114,6 +195,7 @@ function review(){
 	
 }
 
+// 답글 등록 후 답글 등록 폼 제거
 const clearReview = () => {
 	const content = contentTextArea.value;
 	emojiFile = "";
@@ -182,11 +264,12 @@ function tagList(result){
 	let end = result.end;
 	let start = result.start;
 	
-	
+	console.log(result);
 	// 댓글 목록
 	for(let i=0; i < result.dtoList.length; i++){
 		let commentData = result.dtoList[i];
 		comment = createComment(commentData, comment);
+		
 	}
 	
 	// 화면에 보내기
@@ -215,7 +298,8 @@ function tagList(result){
 
 // 댓글 등록 태그
 function createComment(commentData, comment){
-	
+		console.log("user " , user);
+
 	if(commentData.reviewGroup !== null){
 		comment += '<li id="comment_li" data-no="'+commentData.id +'" ';
 		comment += 'data-group="'+commentData.reviewGroup+'" class="ub-content reply_box">';
@@ -225,12 +309,11 @@ function createComment(commentData, comment){
 	comment +=	'<div class="cmt_info clear">';
 	comment +=	'<div class="cmt_nickbox">';
 	comment +=	'<div>';
-	comment +=	'<img src="/profile/'+ commentData.userFile +'"';
+	comment +=	'<img src="/profile/'+ commentData.userFile +'" onerror="noProfile(this)" ';
 	comment +=	'style="border-radius: 50%; overflow: hidden; width: 40px; height: 40px; border: 1px solid #ccc;">';
 	comment +=		'</div>';
 	comment +=	'<span class="gall_writer ub-writer"';
-	comment +=	'data-ip="1.214"> <span class="nickname"><em';
-	comment	+=	'title="ㅇㅇ">'+ commentData.userName +'</em></span>';
+	comment +=	'data-ip="1.214"> <span class="nickname"><em>'+ commentData.userName +'</em></span>';
 	comment	+=	'</span>';
 	comment	+=	'</div>';
 	comment	+=	'<div class="clear cmt_txtbox btn_reply_write_all">';
@@ -242,14 +325,36 @@ function createComment(commentData, comment){
 	comment	+=	'<div class="fr clear">';
 	comment	+=	'<span class="date_time">'+commentData.createAt+'</span>';
 	comment	+=	'<div class="cmt_mdf_del">';
-	comment	+=	'<button type="button" class="btn_cmt_delete btn btn-warning">삭제</button>';
+	if(user.uid == commentData.uid){
+	  comment	+=	`<button type="button" class="btn_cmt_delete btn btn-warning" onclick="deleteComment(${commentData.id})">삭제</button>`;
+	}
+	if(commentData.reviewGroup === null){
 	comment	+=	'<button type="button" onclick="subComment('+commentData.id+')" class="btn_cmt_sub btn btn-warning">답글</button>';
+	}
 	comment +=	'</div>';
 	comment +=	'</div>';
 	comment += '</div>';
 	comment +=	'</li>';
 	
 	return comment;
+}
+
+function deleteComment (id) {
+	
+	console.log("삭제 아이디 : " , id);
+	
+	$.ajax({
+		url : `/freeBoard/review/delete/${id}` ,
+		type : "delete" ,
+		success : function(data) {
+			console.log(data);
+		}
+		, error : function (xhr) {
+			console.log(xhr);
+		}
+		
+	})
+	
 }
 
 // 이전 10개 페이지 넘기기
@@ -277,6 +382,15 @@ function endPage(end){
 
 // 답글 폼 생성
 function subComment(number){
+	
+	// 비회원 막기
+	if(user === '' || user === null){
+		if(confirm('로그인이 되지 않으셨습니다. 로그인하시겠습니까?')){
+			window.location.href = '/login';
+		}
+		return;
+	}
+	
 	const subCommentForm = document.getElementById('review-sub-form');
 	
 	console.log("부모 번호 : "+number);
@@ -288,13 +402,16 @@ function subComment(number){
 						'<textarea id="sub-review-content" name="content" '+
 							'style="resize: none; border: 1px solid #ccc;"></textarea>'+
 						'<div style="display: flex; justify-content: space-between; align-items: stretch;">'+
-							'<button type="button" class="btn btn-warning" onclick="imojiList()">이모티콘</button>'+
+							'<button type="button" class="btn btn-warning" onclick="onclickCommentMainEmoji()">이모티콘</button>'+
+							`<div id="display-click-emoji-comment"></div>` +
 							'<div>'+
 							'<button type="button" class="btn btn-danger" onclick="deleteTag()">닫기</button>'+
 							'<button type="button" class="btn btn-primary" onclick="subCommentForm()">등록</button>'+
 							'</div>'+
 						'</div>'+
-						'<div class="main-imoji-list">'+
+						'<div class="main-imoji-list" id="review-main-imoji">'+
+						'</div>'+
+						'<div class="sub-imoji-list" id="review-sub-imoji">'+
 						'</div>'+
 					'</div>';
 					
@@ -305,6 +422,7 @@ function subComment(number){
 	    // 새로운 댓글 입력 폼을 해당 댓글 아래에 추가
 	    targetLi.insertAdjacentHTML('afterend', commentForm);
 	
+
 	} else {
 		alert('이미 답글 등록 란이 열려있습니다.');
 	}
@@ -321,9 +439,17 @@ function deleteTag() {
 
 // 답글 등록
 function subCommentForm(){
+	
+	// 비회원 막기
+	if(user === '' || user === null){
+		if(confirm('로그인이 되지 않으셨습니다. 로그인하시겠습니까?')){
+			window.location.href = '/login';
+		}
+		return;
+	}
+	
 	const subContent = document.getElementById('sub-review-content');
 	
-	// 추후에 이모티콘 같이 전송
 	const content = subContent.value;
 	console.log(content);
 	
@@ -344,7 +470,8 @@ function subCommentForm(){
 		data : JSON.stringify({  
 			"freeBoardId": postId,
 			"content" : content,
-			"reviewGroup":groupNumber
+			"reviewGroup":groupNumber ,
+			"file" : emojiFile
 		}),    
 		success : function(result) {  
 			console.log(reviewPg);
@@ -354,4 +481,9 @@ function subCommentForm(){
 		error : function(request, status, error) {     
 			console.log(error);
 		}});
+}
+
+// 프로필이 없는 사용자 사진
+function noProfile(image) {
+	image.src='/assets/images/goguma_mascot.png';
 }

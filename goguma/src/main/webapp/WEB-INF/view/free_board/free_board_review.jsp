@@ -107,10 +107,12 @@
 					<textarea id="review-content" name="content" 
 						style="resize: none; border: 1px solid #ccc;"></textarea>
 					<div style="display: flex; justify-content: space-between; align-items: stretch;">
-					
-						<button type="button" class="btn btn-warning" onclick="imojiList()">이모티콘</button>
+						<p>
+							<button type="button" class="btn btn-warning" onclick="onclickReviewMainEmoji()">이모티콘</button>
+							<div id="display-click-emoji"></div>
+						</p>
 						<button type="button" class="btn btn-primary" onclick="review()">등록</button>
-						<div id="display-click-emoji"></div>
+						
 					</div>
 					<div>
 						<div class="main-imoji-list" id="comment-main-imoji">
@@ -127,7 +129,8 @@
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		
-		
+	<!-- Custom JS -->
+	<script src="/customAssets/js/session.js"></script>
 	<script src="/customAssets/js/free-board/free_detail_review.js"></script>
 </body>
 </html>
