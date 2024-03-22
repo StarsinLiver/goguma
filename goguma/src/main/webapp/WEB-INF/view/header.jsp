@@ -96,6 +96,8 @@
 <link rel="stylesheet"
 	href="/customAssets/css/board/admin-cate-setting.css">
 
+<link rel="stylesheet"
+	href="/customAssets/css/all/font.css"/>
 <!-- Custom CSS -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5275edbfc405960aad1f6f12211cdd04"></script>
