@@ -25,7 +25,7 @@
 <!-- Header Start -->
 <div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png); background-color: #b93474e6;">
         <div class="container text-center">
-            <h1>마이페이지</h1>
+            <h1>관리자 페이지</h1>
         </div>
         <!--End Page-->
     </div><!-- end section -->
@@ -94,6 +94,12 @@
 		<div class="links">
 			<!-- <a href="#" class="btn btn-danger">탈퇴하기</a> -->
 			<a href="/admin/modify" class="btn btn-warning btn-complete"><i class="bi bi-gear-fill"></i>&nbsp;수정하기</a>
+			<form action="/user/delete/${user.getUId()}" class="mt-2" method="post">
+			<input type="hidden" name="_method" value="delete"/>
+				<button  class="btn btn-danger btn-complete" onclick="if(!confirm('정말로 탈퇴하시겠습니까?')) return false;">
+					<i class="bi bi-gear-fill"></i>&nbsp;탈퇴하기
+				</button>
+			</form>
 		</div>
 	</div>
 </div>

@@ -13,19 +13,22 @@ import com.store.goguma.chat.dto.chatRoom.ChatRoomDto;
 import com.store.goguma.chat.dto.chatRoom.ChatRoomUpdateDto;
 import com.store.goguma.chat.dto.chatRoom.SaveRoomDTO;
 import com.store.goguma.entity.ChatRoom;
+import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.ChatRoomRepository;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ChatRoomService {
 
-	@Autowired
-	ChatRoomRepository chatRoomRepository;
+	
+	private final ChatRoomRepository chatRoomRepository;
 	
 	// 유저에 포함되어 있는 모든 방 찾기
 	public List<ChatRoomDto> findAllByUserId(int userId) {
@@ -35,6 +38,7 @@ public class ChatRoomService {
 
 	
 	// 채팅방 개설
+	@Transactional
     public int saveRoom(SaveRoomDTO dto) {
 
         ChatRoom chatRoom = ChatRoom.builder()
@@ -91,7 +95,13 @@ public class ChatRoomService {
 	}
 	
 	// 채팅방 삭제하기
+	@Transactional
 	public int deleteChatRoom(int id) {
 		return chatRoomRepository.deleteChatRoom(id);
+	}
+	
+	// 상품 채팅방 유저 목록
+	public List<User> chatProductUserList(int pId) {
+		return chatRoomRepository.selectByProductId(pId);
 	}
 }

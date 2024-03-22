@@ -20,7 +20,7 @@ public class FreeBoardPageDTO {
     private int size = 10;
     
     // start값 임시 저장
-    private int start;
+    private int start = 0;
     
     // 검색 내용
     private String search;
@@ -35,5 +35,7 @@ public class FreeBoardPageDTO {
     // cate2 id
     private int id;
  
+    // listType
+    private String listType;
     
 }

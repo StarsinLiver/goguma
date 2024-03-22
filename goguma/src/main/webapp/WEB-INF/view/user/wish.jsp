@@ -5,23 +5,28 @@
 <link rel="stylesheet" href="/customAssets/css/user.css" />
 
 <style>
-	.wish-container {
-		width: 750px;
-		height: auto;
-	}
+.wish-container {
+	width: 750px;
+	height: auto;
+}
 </style>
 
 <!-- 메인 시작 -->
 <!-- Header Start -->
-<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
-        <div class="container text-center">
-            <h1>마이페이지</h1>
-        </div>
-        <!--End Page-->
-    </div><!-- end section -->
+<div class="all-page-title"
+	style="background-image: url(/assets/images/pattern-4.png);">
+	<div class="container text-center">
+		<h1>마이페이지</h1>
+	</div>
+	<!--End Page-->
+</div>
+<!-- end section -->
 
-    <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 85 100" preserveAspectRatio="none">
-        <path d="M-5 100 Q 0 20 5 100 Z
+<svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
+	version="1.1" width="100%" height="100" viewBox="0 0 85 100"
+	preserveAspectRatio="none">
+        <path
+		d="M-5 100 Q 0 20 5 100 Z
             M0 100 Q 5 0 10 100
             M5 100 Q 10 30 15 100
             M10 100 Q 15 10 20 100
@@ -50,121 +55,89 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/user/myPageAside.jsp"%>
 	<!-- aside end -->
-	
+
 	<div class="wish-container">
 		<h4 class="user-page-title">찜 목록</h4>
-		
-		<!-- 시작 -->
 
-	<section id="article-detail-hot-more">
+		<!-- 시작 -->
 		<section class="cards-wrap">
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
+			<c:forEach var="wish" items="${wishList}">
+				<article class="card">
+					<a class="card-link ga-click"
+						href="/product/productDetail?pId=${wish.productId}">
+						<div class="card-photo">
+							<c:forTokens items="${wish.productFile}"  delims="," var="file" varStatus="loop">
+							<c:if test="${loop.first}">
+									<img alt="이미지" src="/images/upload/${file}">
+								</c:if>
+							</c:forTokens>
 						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
+
+						<div class="card-desc">
+							<h2 class="card-title">${wish.name}</h2>
+							<div class="card-price">${wish.formatBalance()}</div>
 						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
-			<article class="card">
-				<a class="card-link ga-click" href="/#">
-					<div class="card-photo">
-						<img alt="" src="" />
-					</div>
-					<div class="card-desc">
-						<h2 class="card-title">제목</h2>
-						<div class="card-price">6,000원</div>
-						<div class="card-region-name">부산</div>
-						<div class="card-counts">
-							<span>관심 0 </span> ∙ <span>채팅 0 </span>
-						</div>
-					</div>
-				</a>
-			</article>
+					</a>
+					<form method="post" action="/product/deleteWishList"
+						style="margin-top: 5px;">
+						<input type="hidden" name="pId" value="${wish.productId}">
+						<p style="text-align: right">
+							<button class="btn btn-danger btn-circle" type="submit">
+								<i class="fa fa-frown-o"></i> 찜해제
+							</button>
+						</p>
+					</form>
+				</article>
+			</c:forEach>
+
 		</section>
-		
+
 		<div class="pagination">
-		  <a href="#">&laquo;</a>
-		  <a href="#">1</a>
-		  <a class="active" href="#">2</a>
-		  <a href="#">3</a>
-		  <a href="#">4</a>
-		  <a href="#">5</a>
-		  <a href="#">&raquo;</a>
+			<!-- 페이지 처리 -->
+			<c:if test="${start > 1}">
+				<a href="/user/wish?pg=${start - 1}">&laquo;</a>
+			</c:if>
+			<!-- 페이지 번호 -->
+			<c:forEach var="i" begin="${start}" end="${end}">
+				<a href="/user/wish?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+			</c:forEach>
+			<c:if test="${end < last}">
+				<a href="/user/wish?pg=${end + 1}">&raquo;</a>
+			</c:if>
 		</div>
-	</section>
-	<!-- 메인 섹션 종료 -->
-		
+		</section>
+		<!-- 메인 섹션 종료 -->
+
 	</div>
 </div>
 <!-- 메인 종료 -->
+<script>
+	// 페이지가 로드된 후 실행됨
+	window.onload = function() {
+		// 현재 URL 가져오기
+		let currentUrl = window.location.href;
 
+		let url = new URL(currentUrl);
+
+		// 추가할 파라미터
+		let size = url.searchParams.get('size');
+
+		// pagination 클래스를 가진 요소 찾기
+		let paginationLinks = document.querySelectorAll('.pagination a');
+
+		// 각 링크에 추가 파라미터 추가
+		paginationLinks.forEach(function(link) {
+			let linkUrl = new URL(link.href);
+
+			// 파라미터 추가
+			if (size) {
+				linkUrl.searchParams.append('size', size);
+			}
+
+			// 변경된 URL을 href 속성에 설정
+			link.href = linkUrl.href;
+		});
+	};
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

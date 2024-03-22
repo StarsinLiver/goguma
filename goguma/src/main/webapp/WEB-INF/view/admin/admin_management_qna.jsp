@@ -117,10 +117,17 @@
 									<td id="">${qna.id}</td>
 									<td id="">${qna.questionTitle}</td>
 									<td id="">${qna.userName}</td>
-									
+
 									<td id="">${qna.formatDate()}</td>
 									<td id="">${qna.optionName}</td>
-									<td id="">${qna.answerYn}</td>
+									<td id=""><c:choose>
+											<c:when test="${qna.answerYn eq 'Y'}">
+												<span style="color: blue;">답변완료</span>
+											</c:when>
+											<c:otherwise>
+                        확인중
+                    </c:otherwise>
+										</c:choose></td>
 									<td id="">${qna.deleteYn}</td>
 
 									<td id=""><a href="/admin/qna/${qna.id}"

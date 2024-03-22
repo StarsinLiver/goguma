@@ -1264,7 +1264,6 @@ body.global footer .social-links a {
   font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.6px;
-  margin-bottom: 10px;
   vertical-align: middle;
   margin-left: 80px;
 }
@@ -1281,7 +1280,6 @@ body.global footer .social-links a {
 /* line 87, app/assets/stylesheets/home/users/show.css.scss */
 #user-profile #profile-detail {
   list-style-type: none;
-  margin: 10px 0;
   margin-left: 80px;
 }
 

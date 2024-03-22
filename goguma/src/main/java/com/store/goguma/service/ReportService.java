@@ -1,21 +1,25 @@
 package com.store.goguma.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.entity.Report;
 import com.store.goguma.handler.exception.ReportException;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.repository.ReportRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ReportService {
 
-	@Autowired
-	private ReportRepository reportRepository;
+
+	private final ReportRepository reportRepository;
 	
 	// 상품 페이지 - 유저 신고하기
+	@Transactional
 	public void addReport(ReportDTO dto) {
 		
         // 호스트 ID와 유저 ID를 사용하여 이미 신고한 경우인지 확인
@@ -38,6 +42,7 @@ public class ReportService {
 	 * @param id
 	 * @return
 	 */
+	@Transactional
 	public int update(int id) {
 		return reportRepository.update(id);
 	}

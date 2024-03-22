@@ -2,7 +2,7 @@
     width: 90%;
     margin: 50px auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: clumn;
     justify-content: center;
     align-items: center;
 

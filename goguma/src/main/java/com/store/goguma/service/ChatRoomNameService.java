@@ -1,6 +1,5 @@
 package com.store.goguma.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,15 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.ChatRoomNameRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-
+@RequiredArgsConstructor
 public class ChatRoomNameService {
 
-	@Autowired
-	ChatRoomNameRepository chatRoomNameRepository;
+	
+	private final ChatRoomNameRepository chatRoomNameRepository;
 
 	// 방 이름 바꾸기
 	@Transactional

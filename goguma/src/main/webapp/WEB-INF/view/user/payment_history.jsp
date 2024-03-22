@@ -61,10 +61,20 @@
 .my-modal-content tr {
 	border-bottom: 1px solid #ccc;
 }
+.my-modal-content textarea {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	max-height: 177px;
+}
 .user-page .emoji-name {
 	margin-left: 20px;
     font-size: 20px;
     font-weight: 700;
+}
+
+.complete {
+	color: green;
 }
 </style>
 
@@ -139,7 +149,7 @@
 								<td id="id">${history.mainEmojiId}</td>
 								<td class="purchaseDate">${history.createAt}</td>
 								<td id="pointName">${history.name}</td>
-								<td class="refundYn">${history.cancelResult()}</td>
+								<td class="refundYn">${history.cancelYn}</td>
 								<td>
 									<button id="refundButton" data-value="${history.merchantId}" 
 										class="btn btn-warning btn-complete cancel-request">상세</button>
@@ -197,6 +207,8 @@
 	    			<td class="emoji-history-bank"></td>
 	    		</tr>
 	    	</table>
+	    	<label>환불 사유 : </label>
+	    	<textarea id="cancel-text"></textarea>
 	    	<button type="button" style="float: right;" 
 	    		class="btn btn-warning btn-complete req-text">등록</button>
 	    </article>
@@ -226,7 +238,10 @@
 		        const name = result.name;
 		        const date = result.createAt;
 		        const cancelYn = result.cancelYn;
+		        let reason = result.cancelReason;
 		        const file = result.file;
+		        
+		        console.log(reason);
 		        
 		        $('.emoji-id').text(id);
 				$('.emoji-price').text(price+'원');
@@ -237,10 +252,16 @@
 				$('#imoji-img').attr('src', '/images/upload/emoji/'+file);
 				
 				// 환불 여부
-				if(cancelYn === 'Y'){
-					$('.req-text').hide();
+				if (reason !== null) {
+				    $('.req-text').hide();
+				    $('#cancel-text').replaceWith(function () {
+				        return $('<p>', { id: 'cancel-text', text: reason });
+				    });
 				} else {
-					$('.req-text').show();
+				    $('.req-text').show();
+				    $('#cancel-text').replaceWith(function () {
+				        return $('<textarea>', { id: 'cancel-text', text: '' });
+				    });
 				}
 				
 		    },
@@ -249,16 +270,14 @@
 		    }
 		});
 		
-		
-		
-		
+		// 모달창 보여주기
 		modal.css("display", "block");
 	});
 	
 	// 환불 등록
 	$('.req-text').click(function(){
 		const id = $('.emoji-id').text();
-		alert("아이디 : "+id);
+		const content = $('#cancel-text').val();
 		
 		$.ajax({    
 			type : 'put',               
@@ -267,10 +286,10 @@
 				"Content-Type" : "application/json"    
 			},    
 			data : JSON.stringify({  
-				"id" : id
+				"id" : id,
+				"content" : content
 			}),    
 			success : function(result) {       
-				console.log(result);
 				alert('환불되었습니다.');
 				location.reload();
 				modal.css("display", "none");
@@ -285,8 +304,23 @@
 	$(".close").on("click", function() {
 	  modal.css("display", "none");
 	});
+	
+	
+	// 환불여부
+	document.addEventListener("DOMContentLoaded", function() {
+	    const replyElements = document.querySelectorAll('.refundYn');
+	    
+	    replyElements.forEach(function(replyElement) {
+	        if (replyElement.textContent.trim() === 'N') {
+	            replyElement.textContent = '대기';
+	        } else if (replyElement.textContent.trim() === 'Y') {
+	            replyElement.textContent = '환불 완료';
+	            replyElement.classList.add('complete');
+	        }
+	    });
+	});
+	
 </script>
-
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

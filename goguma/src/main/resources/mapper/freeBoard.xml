@@ -9,73 +9,323 @@
 		select * from free_board where delete_yn = 'N'
 	</select>
 
+	<select id="findByFreeId" resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board where delete_yn = 'N' and id = #{id}
+	</select>
+	
+	<!-- 상세 조회 + 유저정보 -->
+	<select id="findByFreeIdJoinUser" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO">
+		SELECT fd.*,
+			u.`file` as `userFile`,
+			u.`name` as `userName`
+		FROM free_board as fd
+			join `user` as u 
+				on fd.u_id = u.u_id
+		where fd.`id`=#{id}
+	</select>
+
 	<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
 		select fb.id as id,
 		fb.title as title,
 		fb.content as
 		content,
-		fb.u_id as u_id,
+		fb.u_id as uId,
 		fb.file as file,
-		fb.create_at as created_at,
-		fb.update_at as updated_at,
-		fb.delete_at as deleted_at,
-		count(fr.free_board_id) as good_count
+		fb.create_at as createAt,
+		fb.update_at as updateAt,
+		fb.delete_at as deleteAt,
+		fb.main_category as mainCategory,
+		fb.sub_category as subCategory,
+		count(fr.free_board_id) as goodCount
 		from free_board as fb
 		left join
 		free_board_recommendation fr on fb.id = fr.free_board_id and
 		fr.good_yn = 'Y'
 		where fb.delete_yn = 'N'
-		group by fb.id, fb.title,
-		fb.content, fb.u_id, fb.file, fb.create_at,
-		fb.update_at, fb.delete_at
+		group by fb.id
+		order by
+		goodCount desc
+	</select>
+	
+	<!-- 게시글 상세페이지 좋아요 개수 카운트 -->
+	<select id="detailCountRecommendation">
+		select fb.id as id,
+		fb.title as title,
+		fb.content as
+		content,
+		fb.u_id as uId,
+		fb.file as file,
+		fb.create_at as createAt,
+		fb.update_at as updateAt,
+		fb.delete_at as deleteAt,
+		fb.main_category as mainCategory,
+		fb.sub_category as subCategory,
+		count(fr.free_board_id) as goodCount
+		from free_board as fb
+		left join
+		free_board_recommendation fr on fb.id = fr.free_board_id and
+		fr.good_yn = 'Y'
+		where fb.delete_yn = 'N'
+		and fb.id = #{id}
+		group by fb.id
+		order by
+		goodCount desc
 	</select>
 
-	<!-- 게시글 좋아요 추가 -->
-	<insert id="addRecommendation">
-		insert into free_board_recommendation
-		(`free_board_id`,`u_id`) values (#{freeBoardId},#{uId})
-	</insert>
-
-	<!-- 게시글 좋아요 취소 -->
-	<update id="deleteRecommendation">
-		update free_board_recommendation set delete_yn = 'N'
-		where free_board_id = #{freeBoardId} and u_id = #{uId}
-	</update>
-
-	<!-- 게시판 폰트, 배경 이미지 확인 -->
-	<select id="selectArticleType"
-		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
-		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
-		,s.id as subId , s.name ,
-		s.row_count, s.`number`, s.background,
-		s.font, s.list_type
-		FROM board_main_category AS m
-		JOIN
-		board_sub_category AS s
-		ON m.id = s.group_id where m.id = #{cate1} AND
-		s.group_id = #{cate1} AND s.id = #{id}
-	</select>
-
-
-	<!-- 게시글 조회수 확인 -->
-	<select id="getFreeView">
-		select view from free_board_view where free_board_id
-		= #{freeBoardId}
-	</select>
-
-	<!-- 게시글 조회수 증가 -->
-	<update id="plusFreeView">
-		UPDATE free_board_view
-		SET view = view + 1
+	<!-- 카테고리별 좋아요 많은 순서 -->
+	<select id="countRecommendationByCate"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto">
+		SELECT
+		fb.id AS id,
+		fb.title AS title,
+		fb.content AS content,
+		fb.u_id AS userId,
+		fb.file AS file,
+		fb.create_at AS createAt,
+		fb.update_at AS updateAt,
+		fb.delete_at AS deleteAt,
+		fb.delete_yn as deleteYn ,
+		main_cat.id AS mainCategoryId,
+		sub_cat.id AS subCategoryId,
+		main_cat.name as mainCategoryName ,
+		sub_cat.name as subCategoryName ,
+		ifnull(COUNT(fr.free_board_id), 0) AS goodCount
+		FROM
+		free_board AS fb
+		LEFT JOIN free_board_recommendation AS fr ON fb.id = fr.free_board_id
+		AND
+		fr.good_yn = 'Y'
+		INNER JOIN board_sub_category AS sub_cat ON
+		fb.sub_category = sub_cat.id
+		INNER JOIN board_main_category AS main_cat
+		ON sub_cat.group_id =
+		main_cat.id
 		WHERE
-		free_board_id = #{freeBoardId}
+		fb.delete_yn = 'N'
+		AND main_cat.id
+		= #{mainCategoryId}
+		AND sub_cat.id = #{subCategoryId}
+		GROUP BY
+		fb.id
+		ORDER BY
+		goodCount DESC
+	</select>
+
+	<!-- 게시글 많은 카테고리 3개 -->
+	<select id="manyFreeBoard"
+		resultType="com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto">
+		SELECT
+		main_cat.id AS mainCategoryId,
+		sub_cat.id AS
+		subCategoryId,
+		sub_cat.name as subCategoryName
+		FROM
+		board_main_category
+		AS main_cat
+		INNER JOIN
+		board_sub_category AS sub_cat ON main_cat.id =
+		sub_cat.group_id
+		LEFT
+		JOIN free_board AS fb ON sub_cat.id =
+		fb.sub_category AND
+		main_cat.id =
+		fb.main_category AND fb.delete_yn =
+		'N'
+		GROUP BY
+		main_cat.id, sub_cat.id
+		ORDER BY
+		COUNT(fb.id) DESC
+		LIMIT 3
+	</select>
+
+
+	<select id="adminFindAll"
+		resultType="com.store.goguma.admin.dto.AdminFreeBoardDto">
+		select f.id as id ,
+		f.title as title ,
+		f.content as content ,
+		f.u_id as
+		userId ,
+		f.file as file ,
+		f.create_at as createAt ,
+		f.update_at as
+		updateAt ,
+		f.delete_at as deleteAt ,
+		f.delete_yn as deleteYn ,
+		f.main_category as mainCategoryId ,
+		m.name as mainCategoryName ,
+		f.sub_category as subCategoryId ,
+		s.name as subCategoryName ,
+		ifnull(count(r.good_yn) , 0) as goodCount ,
+		ifnull(v.view , 0) as
+		viewCount from free_board f
+		inner join board_main_category m
+		on
+		f.main_category = m.id
+		inner join board_sub_category s
+		on f.sub_category
+		= s.id
+		left join free_board_recommendation r
+		on r.free_board_id = f.id
+		and r.good_yn = 'Y'
+		left join free_board_view v
+		on v.free_board_id =
+		f.id
+		where f.delete_yn = 'N'
+		<if test="mainCategory != 0">
+			and (f.main_category = #{mainCategory} and f.sub_category
+			=
+			#{subCategory})
+		</if>
+		
+		<include refid="searchBox" />
+		group by f.id
+		order by f.id desc
+		limit
+		#{start} , 10
+	</select>
+
+	<select id="countAdminFindAll" resultType="int">
+		select count(*) from
+		(
+		select f.* ,
+		ifnull(count(r.good_yn) , 0) as
+		goodCount ,
+		ifnull(v.view , 0) as viewCount from free_board f
+		inner join
+		board_main_category m
+		on f.main_category = m.id
+		inner join
+		board_sub_category s
+		on f.sub_category = s.id
+		left join
+		free_board_recommendation r
+		on r.free_board_id = f.id and r.good_yn =
+		'Y'
+		left join free_board_view v
+		on v.free_board_id = f.id
+		where f.delete_yn = 'N'
+		<if test="mainCategory != 0">
+			and (f.main_category = #{mainCategory} and f.sub_category
+			=
+			#{subCategory})
+		</if>
+		<include refid="searchBox" />
+		group by f.id
+		) as count ;
+	</select>
+
+	<update id="deleteById">
+		update free_board
+		set delete_yn = 'Y' , delete_at =
+		now()
+		where id = #{id}
 	</update>
 
-	<insert id="addFreeView">
+	<select id="findByUserId"
+		resultType="com.store.goguma.user.dto.FreeBoardDto">
+		SELECT f.* , m.name as mainCategoryName FROM FREE_BOARD f
+		inner join
+		board_main_category m
+		on f.main_category = m.id
+		WHERE U_ID = #{userId}
+		<if test="mainCategory != 0">
+			and f.main_category = #{mainCategory} and f.sub_category =
+			#{subCategory}
+		</if>
+		and f.delete_yn = 'N'
+		<include refid="searchBox" />
 
+		order by f.id
+		limit #{start} , 10
+	</select>
+
+	<select id="countFindByUserId" resultType="int">
+		SELECT count(*) FROM FREE_BOARD f
+		inner join board_main_category m
+		on
+		f.main_category = m.id
+		WHERE U_ID =
+		#{userId}
+		<if test="mainCategory != 0">
+			and (f.main_category = #{mainCategory} and f.sub_category
+			=
+			#{subCategory})
+		</if>
+		and f.delete_yn = 'N'
+		<include refid="searchBox" />
+	</select>
+
+	<select id="findMainCategoryByUserId"
+		resultType="com.store.goguma.entity.BoardCategoryMain">
+		select DISTINCT(m.id) , m.name from free_board f
+		inner join
+		board_main_category m
+		on f.main_category = m.id
+		where u_id = #{userId}
+		and f.delete_yn = 'N'
+	</select>
+
+	<select id="findSubCategoryByMainCateogry"
+		resultType="com.store.goguma.entity.BoardCategorySub">
+		select s.* from board_sub_category s
+		right join free_board f
+		on f.sub_category = s.id
+		where u_id = #{userId} and s.group_id =
+		#{groupId}
+		and f.delete_yn = 'N'
+		group by s.id;
+	</select>
+
+	<!-- 검색 쿼리 -->
+	<sql id="searchBox">
+		<choose>
+			<when test="searchType == 'title'">
+				AND title LIKE CONCAT('%', #{search}, '%')
+			</when>
+			<when test="searchType == 'content'">
+				AND content LIKE CONCAT('%', #{search}, '%')
+			</when>
+		</choose>
+	</sql>
+
+	<update id="deleteBoardById" parameterType="java.util.List">
+		update free_board
+		set delete_yn = 'Y' , delete_at = now()
+		where id in (
+		<foreach collection="boardList" item="list" separator=",">
+			#{list}
+		</foreach>
+		)
+	</update>
+
+	<!-- 게시글 등록 -->
+	<insert id="insertFreeBoard" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+		insert into free_board
+		(title,content,u_id,main_category,sub_category ,
+		file)
+		values(#{title},#{content},#{uId}, #{mainCategory},#{subCategory} ,
+		#{file});
 	</insert>
 
+	<update id="updateFreeBoard">
+		update free_board set title = #{title} , content =
+		#{content} ,
+		main_category = #{mainCategory} , sub_category =
+		#{subCategory} ,
+		file= #{file} ,
+		update_at = now()
+		where id = #{id}
+	</update>
+
+	<select id="findById"
+		resultType="com.store.goguma.entity.FreeBoard">
+		select * from free_board
+		where id = #{id}
+	</select>
+	
 	<!-- 게시글 전체 리스트 출력 -->
 	<select id="selectArticleAllBycateNid"
 		resultType="com.store.goguma.freeboard.dto.FreeBoardResDTO">
@@ -108,14 +358,16 @@
 				AND content LIKE CONCAT('%', #{search}, '%')
 			</when>
 			<when test="searchType == 'author'">
-				AND u_id LIKE CONCAT('%', #{search}, '%')
+				AND name LIKE CONCAT('%', #{search}, '%')
 			</when>
 		</choose>
 		ORDER BY b.id DESC
+		<if test="listType == 'LIST'.toString()">
 		LIMIT #{start}, 10;
-
-
-
+		</if>
+		<if test="listType == 'CARD'.toString()">
+		LIMIT #{start}, 12;
+		</if>
 	</select>
 
 	<!-- 게시글 카운트 확인 -->
@@ -134,11 +386,20 @@
 			AND u_id like CONCAT('%',#{search},'%')
 		</if>
 
-
-
 	</select>
-
-
-
-
+	
+	<!-- 게시판 폰트, 배경 이미지 확인 -->
+	<select id="selectArticleType"
+		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
+		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
+		,s.id as subId , s.name ,
+		s.row_count, s.`number`, s.background,
+		s.font, s.list_type
+		FROM board_main_category AS m
+		JOIN
+		board_sub_category AS s
+		ON m.id = s.group_id where m.id = #{cate1} AND
+		s.group_id = #{cate1} AND s.id = #{id}
+	</select>
+	
 </mapper>

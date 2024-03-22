@@ -1,31 +1,41 @@
 package com.store.goguma.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.store.goguma.admin.dto.AdminProductDto;
 import com.store.goguma.entity.Product;
 import com.store.goguma.product.dto.ProductDTO;
 import com.store.goguma.product.dto.ProductSearchDto;
 import com.store.goguma.product.dto.ProductUserDto;
+import com.store.goguma.product.dto.ProductWriteFormDTO;
 import com.store.goguma.repository.ProductRepository;
+import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.utils.Define;
 import com.store.goguma.utils.page.PageReq;
 import com.store.goguma.utils.page.PageRes;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ProductService {
 
-	@Autowired
-	ProductRepository productRepository;
+	
+	private final ProductRepository productRepository;
 	
 	// 모든 상품 리스트
 	public List<ProductDTO> findAllProduct() {
@@ -170,7 +180,103 @@ public class ProductService {
 	}
 	
 	// 관리자 계정에서 상품 삭제
+	@Transactional
 	public int adminDeleteProduct(int pId) {
 		return productRepository.adminDeleteProduct(pId);
+	}
+	
+	// 상품 등록
+	@Transactional
+	public int writeProduct(ProductWriteFormDTO dto, int uId) {
+		String address = dto.getAddr1() + " " + dto.getAddr2();
+		String file = "";
+		
+		for(MultipartFile i : dto.getFile()) {
+			file += uploadProfile(i) + ",";
+		}
+		file.substring(0 , file.length() - 1);
+		
+		Product productEntity = Product.builder()
+								.address(address)
+								.name(dto.getName())
+								.price(dto.getPrice())
+								.hostId(uId)
+								.file(file)
+								.description(dto.getDescription())
+								.mainCategoryId(dto.getMainCategoryId())
+								.subCategoryId(dto.getSubCategoryId())
+								.build();
+		
+		return productRepository.insertProduct(productEntity);
+	}
+	
+	// 사진 등록
+	public String uploadProfile(MultipartFile mf) {
+		
+		log.info("fileUpload...1");
+        log.info("fileUpload...2"+mf);
+        
+        if(!mf.isEmpty()){
+        	
+            // 파일 첨부 했을 경우
+            String path = new File(Define.UPLOAD_FILE_DERECTORY).getAbsolutePath();
+            log.info("fileUpload...3"+path);
+            File directory = new File(Define.UPLOAD_FILE_DERECTORY);
+            
+            // 디렉토리가 존재하지 않으면 생성
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            
+            // 이름 중복처리
+            String oName = mf.getOriginalFilename();
+            String ext = oName.substring(oName.lastIndexOf("."));
+            String sName = UUID.randomUUID().toString()+ext;
+
+            log.info("fileUpload...4"+oName);
+
+            try {
+                log.info("fileUpload...5");
+                
+                // 파일 등록
+                mf.transferTo(new File(path, sName));
+            } catch (IOException e) {
+                throw new RuntimeException("사진 등록에 실패했습니다.");
+            }
+
+            return sName;
+
+        }
+        // 파일 첨부 안했을 경우
+        return null;
+		
+	}
+	
+	/**
+	 * 상품 거래 완료
+	 * @param pId
+	 * @return
+	 */
+	@Transactional
+	public int updateConfirmYn(int pId) {
+		return productRepository.updateConfirmYn(pId);
+	}
+	
+	/**
+	 * 상품 상세 조회
+	 * @param pId
+	 * @return
+	 */
+	public Product findById(int pId) {
+		return productRepository.findById(pId);
+	}
+	
+	/**
+	 * 상품 수정
+	 * @param product
+	 * @return
+	 */
+	public int updateProduct(Product product) {
+		return productRepository.updateProduct(product);
 	}
 }

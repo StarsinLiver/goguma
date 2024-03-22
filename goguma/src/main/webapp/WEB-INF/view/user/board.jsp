@@ -4,17 +4,54 @@
 <%@ include file="/WEB-INF/view/header.jsp"%>
 <link rel="stylesheet" href="/customAssets/css/user.css" />
 
+<style>
+.my-board-container .reply.complete {
+	color: #1ece3c;
+}
+
+.my-board-container .reply {
+	font-weight: bold;
+}
+
+.search-div form {
+	display: flex;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.search-div form>* {
+	margin-left: 10px;
+}
+
+.search-div input {
+	font-size: 16px;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+.search-div select {
+	padding: 11px;
+}
+</style>
+
 <!-- 메인 시작 -->
 <!-- Header Start -->
-<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
-        <div class="container text-center">
-            <h1>마이페이지</h1>
-        </div>
-        <!--End Page-->
-    </div><!-- end section -->
+<div class="all-page-title"
+	style="background-image: url(/assets/images/pattern-4.png);">
+	<div class="container text-center">
+		<h1>마이페이지</h1>
+	</div>
+	<!--End Page-->
+</div>
+<!-- end section -->
 
-    <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 85 100" preserveAspectRatio="none">
-        <path d="M-5 100 Q 0 20 5 100 Z
+<svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
+	version="1.1" width="100%" height="100" viewBox="0 0 85 100"
+	preserveAspectRatio="none">
+        <path
+		d="M-5 100 Q 0 20 5 100 Z
             M0 100 Q 5 0 10 100
             M5 100 Q 10 30 15 100
             M10 100 Q 15 10 20 100
@@ -43,59 +80,78 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/user/myPageAside.jsp"%>
 	<!-- aside end -->
-	
-	<div class="board-container">
-		<h4 class="user-page-title">내 게시글</h4>
-		
-		<section id="result">
-	<div class="result-container">
-		<div id="local-wrap" class="articles-wrap">
-			<article class="story-article" data-next-page="2">
-				<a class="story-article-link" href="/#">
-					<div class="article-photo">
-						<img alt="" src="" />
-					</div>
-					<p class="story-article-content">자유게시판 제목</p>
-					<p class="article-region-name">자유 게이판 내용 @!!@!@!@!@!@!@!@!@</p>
-				</a>
-			</article>
-			<hr class="article-hr-border" />
-			<hr class="mobile-article-hr-border" />
-			<article class="story-article" data-next-page="2">
-				<a class="story-article-link" href="/#">
-					<div class="article-photo">
-						<img alt="" src="" />
-					</div>
-					<p class="story-article-content">자유게시판 제목</p>
-					<p class="article-region-name">자유 게이판 내용 @!!@!@!@!@!@!@!@!@</p>
-				</a>
-			</article>
-			<hr class="article-hr-border" />
-			<hr class="mobile-article-hr-border" />
-			<article class="story-article" data-next-page="2">
-				<a class="story-article-link" href="/#">
-					<div class="article-photo">
-						<img alt="" src="" />
-					</div>
-					<p class="story-article-content">자유게시판 제목</p>
-					<p class="article-region-name">자유 게이판 내용 @!!@!@!@!@!@!@!@!@</p>
-				</a>
-			</article>
-			<hr class="article-hr-border" />
-			<hr class="mobile-article-hr-border" />
 
+	<div class="my-board-container">
+		<h4 class="user-page-title">자유게시판 (나의 작성 목록)</h4>
+
+		<div class="search-div">
+			<form action="/user/board">
+				<!-- 대분류 -->
+				<select name="mainCategory" onchange="onclickMainCategory(this.value)">
+					<option value="">대분류</option>
+					<c:forEach items="${mainCategoryList}" var="category" >
+						<option value="${category.id}" >${category.name}</option>
+					</c:forEach>
+				</select>
+				<!-- 소분류 -->
+				<select name="subCategory" id="sub--category">
+					<option value="">소분류</option>
+				</select> 
+				<select name="searchType">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+				</select> <input type="text" name="search" placeholder="검색..." />
+				<button type="submit" class="btn btn-warning btn-complete">검색</button>
+			</form>
 		</div>
-		<div class="more-btn">
-			<span class="more-text">더보기</span>
-			<div class="more-loading">
-				<div class="loader"></div>
+		<table class="table table-hover">
+			<tbody>
+				<tr class="board-title">
+					<th></th>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성일</th>
+					<th>수정</th>
+				</tr>
+				<c:forEach var="board" items="${boardList}">
+					<tr class="board--data">
+						<td><input type="checkbox" name="checkbox" class="check"
+							value="${board.id}" /></td>
+						<td>${board.id}</td>
+						<td><a href="/freeBoard/detail?id=${board.id}">${board.title}</a></td>
+						<td>${board.formatCreatedAt()}</td>
+						<td><a class="btn btn-warning btn-complete" href="/freeBoard/write/update/${board.id}">수정</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div class="board-utils">
+			<label> <input type="checkbox" name="allChack"
+				onchange="selectAll(this)" id="allChack" />&nbsp; <span>모두
+					선택</span>
+			</label>
+			<div>
+				<button id="delete-board" onclick="deleteFun()"
+					class="btn btn-warning btn-complete">삭제</button>
+				<a href="/freeBoard/write" class="btn btn-warning btn-complete">작성하기</a>
 			</div>
 		</div>
-	</div>
-</section>
+		<div class="pagination">
+			<!-- 페이지 처리 -->
+			<c:if test="${start > 1}">
+				<a href="/user/board?pg=${start - 1}">&laquo;</a>
+			</c:if>
+			<!-- 페이지 번호 -->
+			<c:forEach var="i" begin="${start}" end="${end}">
+				<a href="/user/board?pg=${i}" class="${pg == i ? 'active':''}">${i}</a>
+			</c:forEach>
+			<c:if test="${end < last}">
+				<a href="/user/board?pg=${end + 1}">&raquo;</a>
+			</c:if>
+		</div>
 	</div>
 </div>
 <!-- 메인 종료 -->
-
+<script src="/customAssets/js/user/board.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

@@ -40,4 +40,16 @@ public interface ProductRepository {
 	public int adminCountFindAll(@Param("search") String search , @Param("searchType") String searchType);
 	// 관리자 계쩡으로 상품 삭제
 	public int adminDeleteProduct(int pId);
+	
+	// 상품 등록
+	public int insertProduct(Product product);
+	
+	// 상품 거래 완료
+	public int updateConfirmYn(int pId);
+	
+	// 상품 상세 조회
+	public Product findById(int id);
+	
+	// 상품 수정
+	public int updateProduct(Product product);
 }

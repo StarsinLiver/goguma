@@ -15,4 +15,6 @@ public interface ReportRepository {
 	
 	// 관리자가 신고 취소를 했을 때
 	public int update(int id);
+	
+	public int countTemperatureUser(int userId);
 }

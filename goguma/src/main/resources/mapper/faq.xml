@@ -5,7 +5,7 @@
 <mapper namespace="com.store.goguma.repository.FaqRepository">
 
 	<select id="getFaqList" resultType="com.store.goguma.entity.Faq">
-		select * from faq;
+		select * from faq where delete_yn = 'N'
 	</select>
 	
 	<insert id="faqWrite">
@@ -18,4 +18,20 @@
 		);
 	</insert>
 
+	<select id="findById" resultType="com.store.goguma.entity.Faq">
+		select * from faq
+		where id = #{id}
+	</select>
+	
+	<update id="update">
+		update faq
+		set title = #{title} , content = #{content} , update_at = now()
+		where id = #{id}
+	</update>
+	
+	<update id="deleteById">
+		update faq
+		set delete_yn = 'Y' , delete_at = now()
+		where id = #{id}
+	</update>
 </mapper>

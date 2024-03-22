@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.store.goguma.admin.dto.AdminAnswerDto;
 import com.store.goguma.admin.dto.AdminQnaDto;
@@ -22,7 +23,7 @@ public class QnaService {
 
 
 	private final QnaRepository repository;
-
+	@Transactional
 	public boolean qnaUserWrite(QnaRequestDto dto) {
 		int result = repository.qnaUserWrite(dto.toEntity());
 		return result != 0;
@@ -44,11 +45,13 @@ public class QnaService {
 	}
 	
 	// qna 답변
+	@Transactional
 	public int adminAnswerQna(AdminAnswerDto adminQnaDto) {
 		return repository.adminAnswerQna(adminQnaDto);
 	}
 	
 	// qna 삭제
+	@Transactional
 	public int adminDeleteQna(int id) {
 		return repository.adminDeleteQna(id);
 	}

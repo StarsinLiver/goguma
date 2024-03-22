@@ -41,8 +41,8 @@ textarea {
 	background-color: #f8f8f8;
 	font-size: 16px;
 	resize: none;
-    overflow: hidden; /* 스크롤바를 보이지 않도록 함 */
-    border: none; /* 테두리 스타일 설정 */
+	overflow: hidden; /* 스크롤바를 보이지 않도록 함 */
+	border: none; /* 테두리 스타일 설정 */
 }
 
 .b-view-title {
@@ -121,33 +121,84 @@ textarea {
 					<div class="row">
 						<div class="col-md-2 b-profile">
 							<div class="img" style="max-width: 380px; max-height: 130px;">
-								<img
-									src="/customAssets/images/no_product.png"
-									class="img-fluid" style="width:100%; height: 100px;">
+								<img src="/profile/${boardCountRD.userFile}" class="img-fluid"
+									style="width: 100%; height: 100px;">
 							</div>
 						</div>
 						<div class="col-md-10">
 							<div class="b-title">
-								<h2>슈 이름이 도구입니다만</h2>
+								<h2>${boardCountRD.title}</h2>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">
 									<div class="me-3">
-										<i class="bi bi-clock"></i>&nbsp; <span>2024.03.18
-											15:19</span>
+										<i class="bi bi-clock"></i>&nbsp; <span>${boardCountRD.createAt}</span>
 									</div>
-									<button type="button" class="btn btn-secondary">
-										Report</button>
+									<!-- 신고 버튼 -->
+									<button type="button" class="btn btn-secondary"
+										id="reportButton" data-bs-toggle="modal"
+										data-bs-target="#reportModal">신고</button>
+									<div class="modal fade" id="reportModal" tabindex="-1"
+										aria-labelledby="reportModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header bg-danger text-white">
+													<h5 class="modal-title" id="reportModalLabel"
+														style="font-weight: bold; font-size: 1.25rem;">신고하기</h5>
+													<button type="button" class="btn-close btn-close-white"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form id="reportForm" action="addReport" method="post">
+														<input type="hidden" name="id" value="${boardCountRD.id}">
+														<input type="hidden" name="hostId"
+															value="${boardCountRD.getUid()}">
+														<div class="dropdown">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton"
+																data-bs-toggle="dropdown" aria-expanded="false"
+																style="width: 200px; height: 25px; margin-bottom: 10px; background-color: tomato;">신고
+																이유 선택</button>
+															<ul class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton">
+																<li><a class="dropdown-item" href="#"
+																	data-value="사기/광고성 상품">사기/광고성 상품</a></li>
+																<li><a class="dropdown-item" href="#"
+																	data-value="그냥 맘에 안듬">그냥 맘에 안듬</a></li>
+																<li><a class="dropdown-item" href="#"
+																	data-value="욕설/비속어">욕설/비속어</a></li>
+																<li><a class="dropdown-item" href="#"
+																	data-value="기타">기타</a></li>
+															</ul>
+														</div>
+														<div id="selectedReason"
+															style="font-weight: bold; color: red; margin-bottom: 10px;"></div>
+														<textarea class="form-control" id="additionalReason"
+															name="additionalReason" rows="3"
+															style="resize: vertical;" placeholder="신고 이유를 작성해주세요"></textarea>
+														<input type="hidden" id="reasonInput" name="reason">
+														<div class="d-grid gap-2 d-md-flex justify-content-md-end"
+															style="margin-top: 8px;">
+															<button type="submit" class="btn btn-danger">신고</button>
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">취소</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6 b-user-info mt-3" style="margin-left: -0.8%">
 								<div class="d-flex align-items-center">
 									<div class="me-3">
 										<i class="bi bi-hand-thumbs-up"></i> &nbsp;<span>추천수:
-											70</span>
+											${boardCountRD.goodCount}</span>
 									</div>
 									<div class="me-3">
-										<i class="bi bi-person"></i> &nbsp;<span>조회수: 70</span>
+										<i class="bi bi-person"></i> &nbsp;<span>조회수:
+											${currentViews.view}</span>
 									</div>
 
 								</div>
@@ -160,21 +211,36 @@ textarea {
 			<br> <br> <br>
 			<!-- 게시글 시작 -->
 			<div style="width: 81%; margin: 0% 5%;">
-			<a href="#">sssssss</a>
-				<p style="width: 100%;">
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 텍스트 내용 <br>
-					   
-				</p>
+				${board.content} <a href="#">sssssss</a>
+				<p style="width: 100%;">${boardCountRD.content}</p>
 			</div>
-			<br> <button style="margin: 0 41.5%"><i class='fab fa-gratipay' style='font-size:48px;color:red; '></i></button>
+			<br>
+			<c:choose>
+				<c:when test="${recommendation}">
+					<form method="post" action="/freeBoard/deleteRecommendation">
+						<input type="hidden" name="id" value="${boardCountRD.id}">
+						<input type="hidden" name="uId" value="${boardCountRD.getUid()}">
+						<input type="hidden" name="freeBoardId" value="${boardCountRD.id}">
+						<button style="margin: 0 41.5%">
+							<i class='fab fa-gratipay' style='font-size: 48px; color: blue;'></i><span
+								style='font-size: 32px; color: blue;'>
+								${boardCountRD.goodCount}</span>
+						</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<form method="post" action="/freeBoard/addRecommendation">
+						<input type="hidden" name="id" value="${boardCountRD.id}" >
+						<input type="hidden" name="uId" value="${boardCountRD.getUid()}">
+						<input type="hidden" name="freeBoardId" value="${boardCountRD.id}">
+						<button style="margin: 0 41.5%">
+							<i class='fab fa-gratipay' style='font-size: 48px; color: red;'></i><span
+								style='font-size: 32px; color: red;'>
+								${boardCountRD.goodCount}</span>
+						</button>
+					</form>
+				</c:otherwise>
+			</c:choose>
 			<!-- 게시글 끝 -->
 			<!-- 댓글 시작 -->
 			<div>
@@ -436,11 +502,11 @@ textarea {
 </body>
 <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/customAssets/js/free-board/free_board_detail.js"></script>
+
 <script>
-function autoResize(textarea) {
-  textarea.style.height = 'auto'; // 일단 자동 높이로 설정
-  textarea.style.height = (textarea.scrollHeight + 2) + 'px'; // 스크롤 높이에 2px를 더해줌
-}
+	
 </script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

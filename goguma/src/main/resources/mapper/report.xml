@@ -8,16 +8,23 @@
 		INSERT INTO report (reason, host_id, call_id) VALUES
 		(#{reason}, #{hostId}, #{callId})
 	</insert>
-	
+
 	<select id="existsByHostIdAndCallId"
 		resultType="java.lang.Boolean">
-		SELECT EXISTS (SELECT 1 FROM report WHERE host_id = #{hostId} AND call_id =
-		#{callId})
+		SELECT EXISTS (SELECT 1 FROM report WHERE host_id =
+		#{hostId} AND call_id =
+		#{callId} and delete_yn = "N")
 	</select>
-	
+
 	<update id="update">
 		update report
-		set delete_yn = 'Y' , delete_at = now() , update_at = now()
+		set delete_yn = 'Y' , delete_at = now()
+		, update_at = now()
 		where id = #{id}
 	</update>
+
+	<select id="countTemperatureUser" resultType="int">
+		select count(*) from report
+		where host_id = #{userId} and delete_yn = 'N'
+	</select>
 </mapper>

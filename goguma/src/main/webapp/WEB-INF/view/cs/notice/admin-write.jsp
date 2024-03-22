@@ -3,6 +3,7 @@
 
 <!-- 헤더 -->
 <%@ include file="/WEB-INF/view/header.jsp"%>
+<link rel="stylesheet" href="/customAssets/css/user.css" />
 
 <!-- 메인 시작 -->
 <!-- Header Start -->
@@ -22,7 +23,7 @@
 		<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 		<!-- aside end -->
 	</div>
-	<table class="cs-notice--table" style=" margin: 126px;">
+	<table class="cs-notice--table" style="margin: 0 10% 0 10%;">
 		<tr class="cs-notice--tr">
 			<th class="cs-notice--th">제목</th>
 			<td class="cs-notice--td"><input type="text"
@@ -39,7 +40,7 @@
 			</th>
 		</tr>
 	</table>
-</div>
+</div>	
 <script src="/customAssets/js/cs/notice/admin-write.js"></script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>
