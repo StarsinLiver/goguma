@@ -21,10 +21,13 @@ public class FreeBoardDTO {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
+	private Integer view;
 	private String goodCount;
 	private Integer mainCategory;
 	private Integer subCategory;
 	private Integer totalPosts;
+	private String userName;
+	private String userFile;
 	
 	public int getUid() {
 		return this.uId;

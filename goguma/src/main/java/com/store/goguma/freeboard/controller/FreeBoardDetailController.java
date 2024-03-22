@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDto;
 import com.store.goguma.freeboard.dto.FreeBoardRecommendationDTO;
 import com.store.goguma.freeboard.dto.FreeBoardViewDTO;
 import com.store.goguma.handler.exception.LoginRestfulException;
@@ -66,11 +67,6 @@ public class FreeBoardDetailController {
 		// 상품 조회수 가져오기
 		FreeBoardViewDTO currentViews = freeBoardViewService.getFreeView(id);
 		FreeBoardDTO boardCountRDDTO = freeBoardService.detailCountRecommendation(id);
-		
-		log.info("hgoianhgboiarehnoarehla : " + boardCountRDDTO);
-		log.info("hgoianhgboiarehnoarehla23131 : " + currentViews);
-		log.info("ghbaoihioarhlohjlajha219u0jooago : " + plusFreeView);
-		log.info("id????????? : " + id);
 		
 		model.addAttribute("boardCountRD",boardCountRDDTO);
 		model.addAttribute("currentViews",currentViews);

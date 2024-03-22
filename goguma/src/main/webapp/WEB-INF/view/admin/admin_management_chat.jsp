@@ -121,7 +121,7 @@
 											<img src="/images/upload/${chatMessage.file}"/>
 										</c:if>
 										<c:if test="${chatMessage.chatMessageType == 'EMOJI'}">
-											<img src="/images/upload/emoji/${chatMessage.file}"/>
+											<img src="/images/upload/emoji/${chatMessage.emoji}"/>
 										</c:if>
 										<p>${chatMessage.createAt}</p>
 										<br/>

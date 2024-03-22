@@ -13,6 +13,7 @@ import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
+import com.store.goguma.freeboard.dto.FreeBoardDetailDto;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.freeboard.dto.UserFreeBoardPageReqDto;
@@ -56,6 +57,11 @@ public class FreeBoardService {
 		return freeBoardDTOList;
 
 	}
+	
+	// 생성일자 순서 8개
+	public List<FreeBoard> findOrderByCreateAtLimitEight() {
+		return freeBoardRepository.findOrderByCreateAtLimitEight();
+	}
 
 	// 좋아요 많은 순서
 	public List<FreeBoardDTO> countRecommendation() {
@@ -68,7 +74,7 @@ public class FreeBoardService {
 					.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 					.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
 					.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
-					.goodCount(freeBoard.getGoodCount()).build();
+					.goodCount(freeBoard.getGoodCount()).view(freeBoard.getView()).build();
 
 			recommendationDTOList.add(recommendationDTO);
 
@@ -197,21 +203,25 @@ public class FreeBoardService {
 				.createAt(freeBoard.getCreateAt()).updateAt(freeBoard.getUpdateAt())
 				.deleteAt(freeBoard.getDeleteAt()).deleteYn(freeBoard.getDeleteYn())
 				.mainCategory(freeBoard.getMainCategory()).subCategory(freeBoard.getSubCategory())
-				.goodCount(freeBoard.getGoodCount()).build();
+				.goodCount(freeBoard.getGoodCount())
+				.build();
 		
 		return dto;
 		
 	}
 	public FreeBoardDTO detailCountRecommendation(Integer id) {
 		
-		FreeBoard boardCountRD = freeBoardRepository.detailCountRecommendation(id);
+		FreeBoardDetailDto boardCountRD = freeBoardRepository.detailCountRecommendation(id);
 		
 		FreeBoardDTO dto = FreeBoardDTO.builder().id(boardCountRD.getId()).title(boardCountRD.getTitle())
 				.content(boardCountRD.getContent()).uId(boardCountRD.getUId()).file(boardCountRD.getFile())
 				.createAt(boardCountRD.getCreateAt()).updateAt(boardCountRD.getUpdateAt())
 				.deleteAt(boardCountRD.getDeleteAt()).deleteYn(boardCountRD.getDeleteYn())
 				.mainCategory(boardCountRD.getMainCategory()).subCategory(boardCountRD.getSubCategory())
-				.goodCount(boardCountRD.getGoodCount()).build();
+				.goodCount(boardCountRD.getGoodCount())
+				.userFile(boardCountRD.getUserFile())
+				.userName(boardCountRD.getUserName())
+				.build();
 		
 		return dto;
 		

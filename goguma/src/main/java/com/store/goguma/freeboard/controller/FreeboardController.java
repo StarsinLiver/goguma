@@ -43,21 +43,27 @@ public class FreeboardController {
 		
 		session.setAttribute("plusFreeView", true);
 		List<FreeBoardDTO> boardList = freeBoardService.findAllFree();
+		// 베스트 게시물
 		List<FreeBoardDTO> recommendationList = freeBoardService.countRecommendation();
+		// 카테고리 리스트
 		List<FreeBoardManyCategoryDto> categoryList = freeBoardService.mainFreeBoardCategory();
 
 		int count = 1;
 		for (FreeBoardManyCategoryDto i : categoryList) {
-			List<FreeBoardCountRecommendationByCateDto> list = freeBoardService.mainFreeBoard(i.getMainCategoryId(),
+			List<FreeBoardCountRecommendationByCateDto> list = freeBoardService.mainFreeBoard(i.getMainCategoryId(), // 수정
 					i.getSubCategoryId());
-			log.info("cateogrygoogogogogogogoog " + count + " {}", list);
 			model.addAttribute("categoryList" + count, list);
 			model.addAttribute("category" + count, i);
 			count++;
 		}
+		
+		// 최신글
+		List<FreeBoard> listCreateAt = freeBoardService.findOrderByCreateAtLimitEight();
+		log.info("list : {}" , listCreateAt);
 
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("rDList", recommendationList);
+		model.addAttribute("listCreateAt", listCreateAt);
 
 		return "/free_board/free-main";
 	}

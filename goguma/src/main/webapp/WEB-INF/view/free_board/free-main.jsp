@@ -149,7 +149,7 @@ h4 {
 								<td><a href="/freeBoard/detail?id=${board.id}">${board.title}</a></td>
 								<td class="text-center">
 									<div class="cnt">
-										<span class="view board-img">626</span> <span
+										<span class="view board-img">${board.view}</span> <span
 											class="like board-img">${board.goodCount}</span>
 									</div>
 							</td>
@@ -190,7 +190,7 @@ h4 {
 										<td><a href="/freeBoard/detail?id=${category.id}">${category.title}</a></td>
 										<td class="text-center">
 											<div class="cnt">
-												<span class="view board-img">626</span> <span
+												<span class="view board-img">${category.view}</span> <span
 													class="like board-img">${category.goodCount}</span>
 											</div>
 									</td>
@@ -284,76 +284,21 @@ h4 {
 			</div>
 			<div class="col-lg-6" style="width: 66.66%;">
 				<div class="owl-screenshots owl-carousel owl-theme text-center">
+				<c:forEach items="${listCreateAt}" var="list">
 					<div class="owl-screen">
 						<div class="service-widget">
 							<div class="post-media entry wow fadeIn">
-								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
+								<a href="/images/upload/${list.file}" data-rel="prettyPhoto[gal]"
 									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
+									class="flaticon-unlink"></i></a> <img src="/images/upload/${list.file}" alt=""
 									class="img-responsive img-rounded">
 								<div class="magnifier"></div>
 							</div>
-							<h3>이름</h3>
-							<small><a href="/product/productDetail?pId=1">지금 올라온
-									글</a></small>
+							
+							<small><a href="/freeBoard/detail?id=${list.id}">${list.title}</a></small>
 						</div>
 					</div>
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
-									class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-							<h3>이름</h3>
-							<small><a href="/product/productDetail?pId=1">지금 올라온
-									글</a></small>
-						</div>
-					</div>
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
-									class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-							<h3>이름</h3>
-							<small><a href="/product/productDetail?pId=1">지금 올라온
-									글</a></small>
-						</div>
-					</div>
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
-									class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-							<h3>이름</h3>
-							<small><a href="/product/productDetail?pId=1">지금 올라온
-									글</a></small>
-						</div>
-					</div>
-					<div class="owl-screen">
-						<div class="service-widget">
-							<div class="post-media entry wow fadeIn">
-								<a href="/images/upload/#" data-rel="prettyPhoto[gal]"
-									class="hoverbutton global-radius"><i
-									class="flaticon-unlink"></i></a> <img src="/images/upload/#" alt=""
-									class="img-responsive img-rounded">
-								<div class="magnifier"></div>
-							</div>
-							<h3>이름</h3>
-							<small><a href="/product/productDetail?pId=1">지금 올라온
-									글</a></small>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
