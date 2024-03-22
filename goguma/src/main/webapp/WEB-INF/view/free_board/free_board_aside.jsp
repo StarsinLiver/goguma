@@ -170,9 +170,6 @@ nav ul li a span.rotate {
         </li>
       </ul>
     </nav>
-    <div class="content">
-      <div class="header">Sidebar Dropdown Using HTML CSS & JavaScript.</div>
-    </div>
     <script>
     $(document).ready(function() {
     	  $(".btn").toggleClass("click");

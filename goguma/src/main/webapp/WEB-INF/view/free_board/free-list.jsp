@@ -143,7 +143,7 @@ h2 {
 	</div>
 	<!-- aside 끝 -->
 	<div class="row justify-content-center" style="width: 2500px;">
-		<!-- 배너 출력 start -->
+	<!-- 배너 출력 start -->
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px">
 		  <div class="carousel-indicators">
 		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -192,7 +192,7 @@ h2 {
 			<div class="d-flex justify-content-between mt-3 align-items-center">
 				<!-- 페이징 버튼 -->
 				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center pagingPos">
+					<ul class="pagination justify-content-center">
 						<!-- 여기서 부터 페이징 생성 예정 -->
 
 
@@ -216,10 +216,14 @@ h2 {
 	</div>
 </div>
 <!-- 부트스트랩 자바스크립트 및 필수 자바스크립트 -->
-<script	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+	
 	
 <script src="/customAssets/js/free-board/free_list.js"></script>
+
 
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

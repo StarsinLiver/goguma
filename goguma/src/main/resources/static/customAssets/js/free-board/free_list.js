@@ -16,6 +16,7 @@ const typeValue = listType.value;
 
 
 
+
 // 이전 10개 페이지 넘기기
 function startPage(start) {
 
@@ -408,6 +409,7 @@ $(document).ready(function() {
 										+ data.start
 										+ ')">이전</span></li>';
 							}
+							console.log('우리집에서 바로 자고 낼 아무것도 안할거임')
 							for (let i = data.start; i <= data.end; i++) {
 								paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
 										+ i
@@ -428,16 +430,15 @@ $(document).ready(function() {
 						}
 					} else if(1 > data.total) {
 						alert("검색된 데이터가 존재하지 않습니다.");
-						//innerBody.innerHTML = `<h1>작성된 게시물이 없습니다.</h1>`;
 					}
 				},
 				error : function() {
 					alert("에러");
 				}
 
-			});// list ajax end
-			
-			// banner ajax start
+			});/* list ajax end*/
+		/*	
+			 banner ajax start
 				$.ajax({
 				method : "GET",
 				url : "/banner",
@@ -515,7 +516,7 @@ $(document).ready(function() {
 						
 					}
 			});// banner ajax end
-			
+			*/
 			
 			
 			
