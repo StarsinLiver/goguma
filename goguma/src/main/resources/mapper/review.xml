@@ -48,8 +48,7 @@
 			CASE 
 			    WHEN r.review_group IS NULL THEN r.`id`
 			    ELSE r.review_group
-			  END DESC,
-				r.`id` DESC
+			  END ASC
 		LIMIT #{start},#{size}
 	</select>
 	

@@ -52,19 +52,6 @@
 .reply_box3 {
 	margin-left: 60px; /* 대대댓글이 들여쓰기되도록 설정 */
 }
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 
 .main-imoji-list {
 	display: block;
@@ -92,12 +79,6 @@
 				<div class="fl num_box">
 					전체 댓글 <em class="font_red"><span id="comment-total">2</span></em>개
 					<div class="select_box array_latest">
-						<select name="selCommentSort">
-							<option value="D">등록순</option>
-							<option value="N">최신순</option>
-							<option value="R">답글수</option>
-						</select>
-
 						<ul class="option_box" id="commentSortLayer_915289"
 							data-no="915289" style="left: -1px; top: 19px; display: none">
 							<!--<li class="comment_sort" data-sort="I">등록순</li>-->
@@ -115,7 +96,6 @@
 			<div class="comment_box">
 				<ul class="cmt_list">
 					<!-- 댓글 리스트 -->
-					<li class="loader"></li>
 				</ul>
 				<nav aria-label="Page navigation">
 					<ul class="pagination justify-content-center">

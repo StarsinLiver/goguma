@@ -11,6 +11,7 @@ const mainImojiList = document.getElementById('comment-main-imoji'); // 메인 �
 const subEmojiList = document.getElementById('comment-sub-imoji'); // 이모티콘 서브
 const displayClickEmoji = document.getElementById('display-click-emoji'); // 이모지를 display
 let reviewPg = 0; // 현재 페이지 번호
+let last = 0; //
 
 let emojiFile = ""; // 유저가 선택한 이모지
 
@@ -177,8 +178,7 @@ function tagList(result){
 	let pageNum = '';
 	
 	// 페이지네이션 변수
-	let last = result.last;
-	let pg = result.pg;
+	last = result.last;
 	let end = result.end;
 	let start = result.start;
 	
@@ -197,7 +197,12 @@ function tagList(result){
 		pageNum += '<li class="page-item"><span class="page-link" onclick="startPage('+start+')">&laquo;</span></li>';
 	}
 	for(let j=start; j <= end; j++){
-		pageNum += '<li class="page-item"><span class="page-link" onclick="nextPage('+j+')">'+j+'</span></li>';
+		// 현재 페이지
+		if(j == reviewPg){
+			pageNum += '<li class="page-item active"><span class="page-link">'+j+'</span></li>';
+		}else {
+			pageNum += '<li class="page-item"><span class="page-link" onclick="nextPage('+j+')">'+j+'</span></li>';
+		}
 	}
 	if(end < last){
 		pageNum += '<li class="page-item"><span class="page-link" onclick="endPage('+end+')">&raquo;</span></li>';
