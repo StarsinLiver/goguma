@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class BoardCategoryMain {
 
 	private int id;
+	private int mainIndex;
 	private String name;
 }

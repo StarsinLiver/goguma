@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 public class BoardCategorySub {
 
 	private int id;
-	private int groupId;
 	private String name;
+	private int groupId;
+	private int number;
 	private int rowCount;
 	private String background;
 	private String font;
 	private String listType;
-	private String file;
 }
