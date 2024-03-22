@@ -11,20 +11,29 @@
 <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
 <style>
 * {
   margin: 0;
   padding: 0;
   user-select: none;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.btnham {
+.btn {
+  position: absolute;
   top: 15px;
   left: 45px;
   height: 45px;
   width: 45px;
   text-align: center;
+  background: #1b1b1b;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: left 0.4s ease;
 }
 .btn.click {
   left: 260px;
@@ -58,6 +67,7 @@
   letter-spacing: 1px;
 }
 nav ul {
+  background: #1b1b1b;
   height: 100%;
   width: 100%;
   list-style: none;
@@ -147,37 +157,47 @@ nav ul li a span.rotate {
 </style>
 </head>
   <body>
-    <div class="btn btnham">
+    <div class="btn">
       <span class="fas fa-bars"></span>
     </div>
-    <nav class="sidebar" style="    z-index: 2;">
-      <div class="text">MENUE</div>
+    <nav class="sidebar">
+      <div class="text">Sidebar Dropdown</div>
       <ul>
         <li class="active"><a href="#">Dashboard</a></li>
         <li>
-        <!-- 1차 카테고리 위치 -->
           <a href="#" class="feat-btn"
             >Features
             <span class="fas fa-caret-down first"></span>
           </a>
-          <!-- 1차 카테고리 위치  end-->
-          <!--  2차 카테고리 시작 -->
           <ul class="feat-show">
             <li><a href="#">Pages</a></li>
             <li><a href="#">Elements</a></li>
           </ul>
-          <!--  2차 카테고리 end -->
         </li>
+        <li>
+          <a href="#" class="serv-btn"
+            >Services
+            <span class="fas fa-caret-down second"></span>
+          </a>
+          <ul class="serv-show">
+            <li><a href="#">App Design</a></li>
+            <li><a href="#">Web Design</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">Shortcuts</a></li>
+        <li><a href="#">Feedback</a></li>
       </ul>
     </nav>
     <div class="content">
       <div class="header">Sidebar Dropdown Using HTML CSS & JavaScript.</div>
     </div>
     <script>
-    $(document).ready(function() {
-    	  $(".btn").toggleClass("click");
-    	  $(".sidebar").toggleClass("show");
-    	});
+      $(".btn").click(function () {
+        $(this).toggleClass("click");
+        $(".sidebar").toggleClass("show");
+      });
       $(".feat-btn").click(function () {
         $("nav ul .feat-show").toggleClass("show");
         $("nav ul .first").toggleClass("rotate");
