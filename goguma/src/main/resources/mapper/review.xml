@@ -44,6 +44,12 @@
 		JOIN `user` AS u
 			ON r.u_id = u.u_id
 		WHERE free_board_id=#{freeBoardId}
+			ORDER BY
+			CASE 
+			    WHEN r.review_group IS NULL THEN r.`id`
+			    ELSE r.review_group
+			  END DESC,
+				r.`id` DESC
 		LIMIT #{start},#{size}
 	</select>
 	

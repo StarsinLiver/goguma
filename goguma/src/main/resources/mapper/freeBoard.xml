@@ -12,6 +12,17 @@
 	<select id="findByFreeId" resultType="com.store.goguma.entity.FreeBoard">
 		select * from free_board where delete_yn = 'N' and id = #{id}
 	</select>
+	
+	<!-- 상세 조회 + 유저정보 -->
+	<select id="findByFreeIdJoinUser" resultType="com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO">
+		SELECT fd.*,
+			u.`file` as `userFile`,
+			u.`name` as `userName`
+		FROM free_board as fd
+			join `user` as u 
+				on fd.u_id = u.u_id
+		where fd.`id`=#{id}
+	</select>
 
 	<!--게시글 좋아요 개수 카운트 -->
 	<select id="countRecommendation">
