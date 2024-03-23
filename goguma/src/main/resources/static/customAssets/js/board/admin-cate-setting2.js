@@ -473,17 +473,3 @@ function finalSaveBtnClick(innerBody){
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

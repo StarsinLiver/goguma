@@ -1,16 +1,16 @@
 .main-div{
-    width: 90%;
+    width: 100%;
     margin: 50px auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     padding: 10px;
 }
 
 .cate-content-box{
-    display: flex;
+    display: row;
+    margin : 0 10% 0 10%;
 
 }
 
@@ -20,6 +20,7 @@
     flex-direction: column;
     border: 1px solid black;
     padding: 20px;
+    margin-bottom : 30px;
 }
 
 .cate-button-box{

@@ -67,7 +67,9 @@
 				<h2 style="margin-right: auto;">
 					<i class="fa-solid fa-flag me-3"></i>공지사항
 				</h2>
-				<a href="/cs/notice/list" class="btn btn-warning btn-complete">공지사항 바로가기</a>
+				<a href="/cs/notice/list" class="btn btn-warning btn-complete"
+					style="width: 10%; padding: 10px; font-size: small; font-weight: bold;">공지사항
+					바로가기</a>
 				<!-- 공지사항 바로가기 버튼 -->
 			</div>
 
@@ -169,9 +171,9 @@
 					<small>최신글</small>
 					<h3>중고거래</h3>
 					<p class="lead">
-						"고구마"<br /> 사용자들이 중고 제품을 사고 팔 수 있는 온라인 플랫폼입니다. 다양한 상품 카테고리와 편리한 거래
-						시스템을 통해 사용자들은 안전하고 신속하게 거래를 진행할 수 있습니다. 저렴한 가격과 환경 보호를 위한 재활용 문화를
-						지원합니다.
+						" 고구마"<br /> 사용자들이 중고 제품을 사고 팔 수 있는 온라인 플랫폼입니다. 다양한 상품 카테고리와 편리한
+						거래 시스템을 통해 사용자들은 안전하고 신속하게 거래를 진행할 수 있습니다. 저렴한 가격과 환경 보호를 위한 재활용
+						문화를 지원합니다.
 					</p>
 				</div>
 				<!-- end title -->
@@ -197,8 +199,8 @@
 
 								<h3>${product.name}</h3>
 								<small><a
-									href="/product/productDetail?pId=${product.getPId()}">< 상품 보러
-										가기 ></a></small>
+									href="/product/productDetail?pId=${product.getPId()}">< 상품
+										보러 가기 ></a></small>
 							</div>
 							<!-- end service -->
 						</div>

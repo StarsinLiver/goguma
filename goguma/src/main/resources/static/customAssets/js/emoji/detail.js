@@ -204,13 +204,16 @@ function buyFun(merchantId) {
 	});
 }
 
-agreeMain, agreeSub
 for (let i = 0; i < agreeMain.length; i++) {
-	agreeMain[i].onclick = () => {
-		agreeSub[i].style.display = "flex";
-	}
+    agreeMain[i].addEventListener('click', function() {
+        const subBox = agreeSub[i];
+        if (subBox.style.display === "flex") {
+            subBox.style.display = "none";
+        } else {
+            subBox.style.display = "flex";
+        }
+    });
 }
-
 
 
 
