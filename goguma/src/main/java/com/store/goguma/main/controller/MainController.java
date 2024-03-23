@@ -43,8 +43,12 @@ public class MainController {
 
 	private final BannerService bannerService;
 	
+	private final HttpSession session;
+	
 	@GetMapping("/")
 	public String mainForm(Model model) {
+		
+		session.setAttribute("plusFreeView", true);
 		// 공지 사항
 		List<Notice> noticeList = noticeService.findLimitEightFromMain();
 		// 상품 limit 여덟개 제한

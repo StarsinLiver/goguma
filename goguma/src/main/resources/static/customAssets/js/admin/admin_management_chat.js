@@ -52,11 +52,8 @@ const subscribe = (roomId) => {
 stompClient.subscribe(`/sub/chat/${roomId}`, (message) => {
     let body = JSON.parse(message.body);
     let img = jsonImage(body);
-	console.log("roomid" , body.roomId);
 	var room = document.querySelector(`#chatRoom${body.roomId}`)
 	var res = addMessage(body , img);
-	
-	console.log(res);
 //	room.innerHTML += res;
 	// "beforeend" 위치에 새로운 HTML을 추가합니다.
 room.insertAdjacentHTML('beforeend', res);

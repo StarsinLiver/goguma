@@ -81,7 +81,7 @@ public class ChatController {
 		log.info(mainEmojiList.toString());
 		// 자식 이모티콘
 		List<Emoji> emojiList = new ArrayList<>();
-
+		log.info("채팅방 : {}" , chatRoomList);
 		// 메인 이모지의 기본키 ( id ) 배열 만들기 + 자식 이모티콘 찾기
 		List<Integer> mainListToInt = new ArrayList<>();
 		// mainEmojiList 리스트를 반복하면서 각 요소의 ID를 mainListToInt 리스트에 추가

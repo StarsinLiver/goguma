@@ -17,15 +17,27 @@ btn.onclick = () => {
 		alert("로그인이 필요한 서비스 입니다.");
 		location.href = "/";
 	}else if(title.value == ""){
-		alert("제목을 입력해주세요!");
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "제목을 입력해 주세요!",
+		});
 		title.focus();
 		return;
 	}else if(content.value == ""){
-		alert("내용을 입력해주세요!");
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "내용을 입력해 주세요!",
+		});
 		content.focus();
 		return;
 	}else if(optionFlag == 0){
-		alert("문의하실 분류를 선택해주세요!");
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "문의하실 분류를 선택해주세요!",
+		});
 		return;
 	}
 	$.ajax({
@@ -44,7 +56,11 @@ btn.onclick = () => {
 			}
 		},
 		error : function(){
-			alert("에러");
+			Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "서버 에러가 발생하였습니다!",
+		});
 		}
 	});
 }

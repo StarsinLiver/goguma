@@ -27,7 +27,9 @@
 		c.create_at AS createAt,
 		hu.name AS
 		hostName,
+		hu.file as hostFile ,
 		u.name AS userName ,
+		u.file as userFile ,
 		rm.u_id as u_id ,
 		rm.room_id as roomId,
 		rm.room_name as roomName

@@ -10,29 +10,33 @@ let num = 0;
 let listData = "";
 load(num);
 
-function load(num){
+function load(num) {
 	headMenus[num].className = "emoji--head-menu-on";
 	headMenusBorder[num].className = "emoji--head-menu-title-on";
 	$.ajax({
-		type : "get",
-		url : "/emoji/api/list/" + num,
-		async : false,
-		success : function(data){
-			if(data != ""){
+		type: "get",
+		url: "/emoji/api/list/" + num,
+		async: false,
+		success: function(data) {
+			if (data != "") {
 				innerFun(data);
-			}else{
+			} else {
 				innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
 			}
 		},
-		error : function(){
-			alert("에러");
+		error: function() {
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 }
 
-for(let i = 0; i < headMenus.length; i++){
+for (let i = 0; i < headMenus.length; i++) {
 	headMenus[i].onclick = () => {
-		for(let k = 0; k < headMenus.length; k++){
+		for (let k = 0; k < headMenus.length; k++) {
 			headMenus[k].className = "emoji--head-menu";
 			headMenusBorder[k].className = "emoji--head-menu-title";
 		}
@@ -42,11 +46,11 @@ for(let i = 0; i < headMenus.length; i++){
 	}
 }
 
-function innerFun(list){
+function innerFun(list) {
 	let innr = "";
 	innerBody.textContent = "";
-	if(list != ""){
-		for(let i = 0; i < list.length; i++){
+	if (list != "") {
+		for (let i = 0; i < list.length; i++) {
 			innr += `
 				<div class="emoji--item-box" id="${list[i].id}">
                     <div class="emoji--img-box">
@@ -64,8 +68,8 @@ function innerFun(list){
 	}
 }
 
-function detailPaging(detail){
-	for(let i = 0; i < detail.length; i++){
+function detailPaging(detail) {
+	for (let i = 0; i < detail.length; i++) {
 		detail[i].onclick = () => {
 			location.href = "/emoji/detail/" + detail[i].id;
 		}
@@ -73,35 +77,39 @@ function detailPaging(detail){
 }
 
 searchBtn.onclick = () => {
-	if(searchInput.value == ""){
-		alert("검색어를 입력해주세요!");
+	if (searchInput.value == "") {
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "검색어를 입력해주세요!",
+		});
 		searchInput.focus();
 		return;
 	}
 	let str = searchInput.value;
 	let pattern = /^[a-zA-Zㄱ-힣0-9|s]*$/;
-	
+
 	if (str.match(pattern)) {
-	    if (str.match(pattern).length > 0) {
+		if (str.match(pattern).length > 0) {
 			$.ajax({
-				type : "get",
-				url : "/emoji/api/search",
-				data : {
-					title : searchInput.value
+				type: "get",
+				url: "/emoji/api/search",
+				data: {
+					title: searchInput.value
 				},
-				success : function(data){
-					if(data != ""){
+				success: function(data) {
+					if (data != "") {
 						innerFun(data);
-					}else{
+					} else {
 						innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
 					}
 				},
-				error : function(){
+				error: function() {
 					alert("에러");
 				}
 			});
-	    }
-	}else{
+		}
+	} else {
 		innerBody.innerHTML = `<h1>상품이 없습니다.</h1>`;
 	}
 }

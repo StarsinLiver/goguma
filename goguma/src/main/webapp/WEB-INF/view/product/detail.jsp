@@ -34,7 +34,7 @@
 			<div class="space-between">
 				<div style="display: flex">
 					<div id="article-profile-image">
-						<img alt="이름" src="/images/upload/${user.file}" />
+						<img alt="이름" src="/profile/${user.file}" />
 					</div>
 					<div id="article-profile-left">
 						<div id="nickname">${user.name}</div>
@@ -245,7 +245,7 @@
 						</div>
 						<div class="card-desc">
 							<h2 class="card-title">${list.name}</h2>
-							<div class="card-price">${list.price}원</div>
+							<div class="card-price">${list.formatNumber(list.price)}원</div>
 							<div class="card-region-name">${list.address}</div>
 							<div class="card-counts">
 								<span>관심 ${list.countWishList} </span> ∙ <span>채팅

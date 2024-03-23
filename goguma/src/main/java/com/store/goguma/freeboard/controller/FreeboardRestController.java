@@ -50,7 +50,7 @@ public class FreeboardRestController {
 
 			// 모든 메인 카테고리 찾기
 			List<BoardCategoryMain> list = boardService.findAll();
-
+			log.info("메인 카테고리 : {}" , list);
 			if (list.isEmpty() == false) {
 				return new ResponseEntity<>(list, HttpStatus.OK);
 			}

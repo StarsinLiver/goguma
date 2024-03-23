@@ -101,13 +101,13 @@ public class ChatRestController {
 	public ResponseEntity<?> sendMessage(@Payload ChatMessageReqDto chatMessage) {
 		try {
 
-			ChatMessage chatMessage2 = ChatMessage.builder().text(chatMessage.getText()).emoji(chatMessage.getEmoji())
+			ChatMessage chatMessage2 = ChatMessage.builder().text(chatMessage.getText()).file(chatMessage.getFile())
 					.emoji(chatMessage.getEmoji()).roomId(chatMessage.getRoomId()).uId(chatMessage.getUserId())
 					.chatMessageType(chatMessage.getChatMessageType()).build();
 
 			OauthDTO user = OauthDTO.builder().uId(chatMessage.getUserId()).name(chatMessage.getUserName())
-					.file(chatMessage.getFile()).build();
-
+					.file(chatMessage.getUserFile()).build();
+			
 			boolean result = chatMessageService.save(chatMessage2, user);
 			if (result) {
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

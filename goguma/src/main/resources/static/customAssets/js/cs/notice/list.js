@@ -2,24 +2,28 @@ const tbody = document.querySelector(".notice--tbody");
 
 
 load();
-function load(){
+function load() {
 	$.ajax({
-		type : "get",
-		url : "/cs/api/notice/list",
-		success : function(data){
-			if(data != ""){
+		type: "get",
+		url: "/cs/api/notice/list",
+		success: function(data) {
+			if (data != "") {
 				innerFun(data);
 			}
 		},
-		error : function(){
-			alert("error!!");
+		error: function() {
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 }
 
-function innerFun(data){
+function innerFun(data) {
 	let innr = "";
-	for(let i = 0; i < data.length; i++){
+	for (let i = 0; i < data.length; i++) {
 		let day = data[i].createAt.split(" ")[0];
 		innr += `
 			<tr class="notice--tr href-num" id="${data[i].id}">
@@ -34,8 +38,8 @@ function innerFun(data){
 	pageFun(pages);
 }
 
-function pageFun(id){
-	for(let i = 0; i < id.length; i++){
+function pageFun(id) {
+	for (let i = 0; i < id.length; i++) {
 		id[i].onclick = () => {
 			location.href = "/cs/notice/detail/" + id[i].id;
 		}
