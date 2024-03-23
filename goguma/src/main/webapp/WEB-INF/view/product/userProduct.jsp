@@ -18,7 +18,7 @@
 		<div id="profile-image">
 			<img alt="소확행"
 				src="/images/upload/${user.file}" />
-		</div>
+		</div>				
 	</section>
 	<div id="user-records-detail">
 		<section id="user-filter">

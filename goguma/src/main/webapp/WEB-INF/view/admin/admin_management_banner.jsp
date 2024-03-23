@@ -122,7 +122,7 @@
 									<td id="">${banner.client}</td>
 									<td id="">${banner.useYn}</td>
 									<td id="">${banner.viewCtn}</td>
-									<td id="">${banner.price}</td>
+									<td id="">${banner.formatNumber(banner.price)}</td>
 									<td id="">${banner.type}</td>
 									<td id=""><a href="/admin/banner/update/${banner.id}"
 										class="btn btn-success">수정</a></td>

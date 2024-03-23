@@ -195,7 +195,8 @@ public class UserService {
 
 			// 파일 크기 검사
 			if (mf.getSize() > Define.MAX_PROFILE_FILE_SIZE) {
-				throw new RuntimeException("사진 용량이 250KB를 초과하였습니다.");
+//				throw new RuntimeException("사진 용량이 250KB를 초과하였습니다.");
+				throw new BackPageRestfulException("사진 용량이 250KB를 초과하였습니다." ,HttpStatus.BAD_REQUEST);
 			}
 
 			// 이름 중복처리

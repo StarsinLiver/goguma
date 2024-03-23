@@ -17,11 +17,18 @@ const agreeSub = document.querySelectorAll(".agree-sub-box");
 
 const principalId = document.querySelector("#principal");
 
-
+let amount = 0;
 let pageId = location.pathname.split("/")[3];
 IMP.init('imp37413392');
 let mainEmojiNum = 0;
 let userInfo = getSession();
+
+
+// 단위 포맷
+const formatNumber = (number) => {
+	const formattedNumber = number.toLocaleString('en-US', { style: 'decimal' });
+	return formattedNumber;
+}
 
 load();
 
@@ -65,13 +72,15 @@ for (let i = 0; i < headMenus.length; i++) {
 	}
 }
 
+
 function innerMain(data) {
 	mainImg[0].src = "/images/upload/emoji/" + data.file;
 	mainImg[1].src = "/images/upload/emoji/" + data.file;
 	mainTitle1.textContent = data.name;
 	mainTitle2.textContent = data.name;
-	mainPrice[0].textContent = data.price;
-	mainPrice[1].textContent = data.price;
+	mainPrice[0].textContent = formatNumber(data.price);
+	mainPrice[1].textContent = formatNumber(data.price);
+	amount = data.price;
 }
 
 function innerFun(list) {
@@ -141,7 +150,7 @@ function requestPay(merchantId) {
 			pay_method: "card",
 			merchant_uid: merchantId,   // 주문번호
 			name: mainTitle1.textContent,//상품이름
-			amount: Number(mainPrice[0].textContent),//상품가격
+			amount: Number(amount),//상품가격
 			buyer_email: "bugger0330@naver.com",
 			buyer_name: "강민",
 			buyer_tel: "010-9046-7290",
@@ -167,7 +176,7 @@ function buyFun(merchantId) {
 		data: {
 			merchantId: merchantId,
 			mainEmojiId: mainEmojiNum,
-			price: Number(mainPrice[0].textContent),
+			price: Number(amount),
 			uId: principalId.value,
 			bank: "KAKAO"
 		},
@@ -189,9 +198,6 @@ for (let i = 0; i < agreeMain.length; i++) {
 		agreeSub[i].style.display = "flex";
 	}
 }
-
-
-
 
 
 

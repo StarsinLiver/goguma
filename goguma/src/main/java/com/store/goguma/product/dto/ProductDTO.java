@@ -1,5 +1,7 @@
 package com.store.goguma.product.dto;
 
+import java.text.DecimalFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,5 +33,11 @@ public class ProductDTO {
 
 	public int getThisPid() {
 		return this.pId;
+	}
+	
+	public String formatNumber (int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedNumber = decimalFormat.format(number);
+        return formattedNumber;
 	}
 }

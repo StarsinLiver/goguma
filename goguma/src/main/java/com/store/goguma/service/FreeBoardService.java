@@ -96,8 +96,7 @@ public class FreeBoardService {
 		
 		return freeBoardRepository.selectArticleType(cate1, id); 
 	}
-	
-	
+
 	// 리스트 데이터 검색 및 출력
 	public FreeBoardListDTO selectArticleAllBycateNid(FreeBoardPageDTO page) {
 		

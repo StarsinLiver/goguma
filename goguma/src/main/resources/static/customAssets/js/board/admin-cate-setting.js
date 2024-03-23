@@ -44,7 +44,8 @@ function upDownBtnClick(){
 				}
 			}
 			if(selectIndex != 999 && selectIndex != 0){
-				[mainList[mainCheck].subObject[selectIndex - 1], mainList[mainCheck].subObject[selectIndex]] = [mainList[mainCheck].subObject[selectIndex], mainList[mainCheck].subObject[selectIndex - 1]];
+				[mainList[mainCheck].subObject[selectIndex - 1], mainList[mainCheck].subObject[selectIndex]] = 
+				[mainList[mainCheck].subObject[selectIndex], mainList[mainCheck].subObject[selectIndex - 1]];
 				console.log("바꿈", mainList[mainCheck].subObject);
 				load();
 			}
@@ -102,6 +103,16 @@ function load(){
 	if(mainList != 0){
 		for(let i = 0; i < mainList.length; i++){
 			mainInnr += mainList[i].mainInnrHTML;
+			/*
+			mainInnr += `
+				<div class="cate-main-box" id="">
+	                <div class="cate-main-title">
+	                    <span class="main-title-text">${mainList[i].mainTitle}</span>
+	                </div>
+	                <div class="cate-sub-box"></div>
+	            </div>
+			`;
+			 */
 		}
 	}
 	categoryInnerBox.innerHTML = mainInnr;
@@ -173,7 +184,7 @@ function load(){
 	const subTitleBoxs = document.querySelectorAll(".cate-sub-box");
 	changeMain(mainTitleBoxs, mainTitleTexts, subTitleBoxs);
 	
-	upDownBtnClick();
+	//upDownBtnClick();// 업다운
 	
 }
 
