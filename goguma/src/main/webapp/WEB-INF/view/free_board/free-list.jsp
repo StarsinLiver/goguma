@@ -26,7 +26,6 @@ h2 {
 /* background 적용 css */
 .mt-4 {
 	margin-top: -0.5rem !important;
-	/* background-image: url("/images/upload/bg1.jpg"); */
 	background-image: url("/images/upload/${type.backGround}");
 	background-size: cover; /* 이미지를 요소에 맞게 조절 */
 	background-repeat: no-repeat; /* 이미지 반복을 하지 않음 */
@@ -145,21 +144,12 @@ h2 {
 	<div class="row justify-content-center" style="width: 2500px;">
 	<!-- 배너 출력 start -->
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px">
-		  <div class="carousel-indicators">
-		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			<!--  광고 하단 버튼 생성 위치 -->
+		  <div class="carousel-indicators btn">
 		  </div>
+		  <!-- 광고 이미지 생성 위치 -->
 		  <div class="carousel-inner">
-		    <div class="carousel-item active">
-		      <a href="#"><img src="/images/upload/bg1.jpg" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>
-		    </div>
-		    <div class="carousel-item">
-		      <a href="#"><img src="/images/upload/bg2.jpg" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>
-		    </div>
-		    <div class="carousel-item">
-		      <a href="#"><img src="/images/upload/bg3.jpg" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>
-		    </div>
+		   
 		  </div>
 		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -192,7 +182,7 @@ h2 {
 			<div class="d-flex justify-content-between mt-3 align-items-center">
 				<!-- 페이징 버튼 -->
 				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center">
+					<ul class="pagination justify-content-center pagingPos">
 						<!-- 여기서 부터 페이징 생성 예정 -->
 
 
