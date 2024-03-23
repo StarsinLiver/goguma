@@ -110,6 +110,8 @@ public class UserController {
 		log.info("social : " + social);
 		log.info("이메일 : " + email);
 
+		
+		
 		dto.setEmail(email);
 		dto.setSocial(social);
 

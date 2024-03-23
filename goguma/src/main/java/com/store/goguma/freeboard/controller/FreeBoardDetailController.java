@@ -63,6 +63,7 @@ public class FreeBoardDetailController {
 		// FreeBoardDTO boardCountRDDTO = freeBoardService.detailCountRecommendation(id);
 		FreeBoardDetailAndUserDTO boardCountRDDTO = freeBoardService.findByFreeIdJoinUser(id);
 		
+		log.info("detail {}" , boardCountRDDTO);
 		model.addAttribute("boardCountRD",boardCountRDDTO);
 		model.addAttribute("currentViews",currentViews);
 		model.addAttribute("recommendation",FBRecommendation);
