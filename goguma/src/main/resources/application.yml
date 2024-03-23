@@ -14,23 +14,23 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/goguma?serverTimeZone=Asia/Seoul
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: root
-#    password: asd1234
-#  devtools:
-#    restart:
-#      enabled: true
-
   datasource:
-    url: jdbc:mysql://13.211.47.78/goguma?serverTimeZone=Asia/Seoul
+    url: jdbc:mysql://localhost:3307/goguma?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: Sa1953vb!
+    password: asd1234
   devtools:
     restart:
       enabled: true
+
+#  datasource:
+#    url: jdbc:mysql://13.211.47.78/goguma?serverTimeZone=Asia/Seoul
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: Sa1953vb!
+#  devtools:
+#    restart:
+#      enabled: true
 
 
 #  sql:

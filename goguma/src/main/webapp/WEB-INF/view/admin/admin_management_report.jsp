@@ -122,8 +122,8 @@
 							<c:forEach var="report" items="${report}">
 								<tr id="dataRow">
 										<td id="id">${report.id}</td>
-										<td id="pointName">${report.callName}</td>
-										<td id="hostId">${report.hostName}</td>
+										<td id="pointName"><a href="/product/userProduct?uId=${report.callId}">${report.callName}</a></td>
+										<td id="hostId"><a href="/product/userProduct?uId=${report.hostId}">${report.hostName}</a></td>
 										<td id="purchaseDate">${report.createAt}</td>
 									<td id="reason"
 										style="max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${report.reason}</td>

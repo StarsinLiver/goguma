@@ -85,7 +85,7 @@
                 </a>
                 </c:forEach>
                 <c:if test="${empty imojiList}">
-                	<span>문의하기 내역이 존재하지 않습니다.</span>
+                	<span>이모티콘이 존재하지 않습니다.</span>
                 </c:if>
             </div>
             

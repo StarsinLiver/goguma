@@ -197,6 +197,10 @@ public class ProductController {
 			throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+		int result = userService.getTemperatureUser(user.getUId());
+		if (result <= 0) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 		return "product/product_register";
 	}
 
@@ -207,11 +211,10 @@ public class ProductController {
 		if (user == null) {
 			throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		int uId = user.getUId();
-
-		log.info("등록" + dto);
-		log.info("돈 타입 : ");
-
+		int result = userService.getTemperatureUser(user.getUId());
+		if (result <= 0) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 		if (dto.getName() == null || dto.getName().isEmpty())
 			throw new BackPageRestfulException(Define.NO_VALID_TITLE, HttpStatus.BAD_REQUEST);
 
@@ -224,20 +227,21 @@ public class ProductController {
 		if (dto.getPrice() == null || dto.getPrice() < 0) {
 			throw new BackPageRestfulException(Define.NO_VALID_PRICE, HttpStatus.BAD_REQUEST);
 		}
-		if(dto.getDescription() == null || dto.getDescription().isEmpty()) {
+		if (dto.getDescription() == null || dto.getDescription().isEmpty()) {
 			throw new BackPageRestfulException(Define.NO_VALID_DESCRIPTION, HttpStatus.BAD_REQUEST);
 		}
 		if (dto.getFile().get(0).getSize() == 0) {
 			throw new BackPageRestfulException(Define.NO_VALID_FILE, HttpStatus.BAD_REQUEST);
 		}
 
-		productService.writeProduct(dto, uId);
+		productService.writeProduct(dto, user.getUId());
 
 		return "redirect:/product/product-list";
 	}
 
 	/**
 	 * 상품 수정 폼 이동
+	 * 
 	 * @param id
 	 * @param model
 	 * @return
@@ -255,19 +259,19 @@ public class ProductController {
 		if (product == null) {
 			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		log.info("상품 수정 폼 : {}" , product);
+
+		log.info("상품 수정 폼 : {}", product);
 		model.addAttribute("product", product);
 		return "product/product_update";
 	}
-	
+
 	@PutMapping("/write/update")
 	public String productUpdate(ProductWriteFormDTO dto) {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		if (dto.getName() == null || dto.getName().isEmpty())
 			throw new BackPageRestfulException(Define.NO_VALID_TITLE, HttpStatus.BAD_REQUEST);
 
@@ -280,48 +284,48 @@ public class ProductController {
 		if (dto.getPrice() == null || dto.getPrice() < 0) {
 			throw new BackPageRestfulException(Define.NO_VALID_PRICE, HttpStatus.BAD_REQUEST);
 		}
-		if(dto.getDescription() == null || dto.getDescription().isEmpty()) {
+		if (dto.getDescription() == null || dto.getDescription().isEmpty()) {
 			throw new BackPageRestfulException(Define.NO_VALID_DESCRIPTION, HttpStatus.BAD_REQUEST);
 		}
 		Product entity = productService.findById(dto.getPId());
-		
+
 		if (dto.getFile().get(0).getSize() != 0) {
 			String filePath = "";
 			// 등록 작업
-			for(MultipartFile i : dto.getFile()) {
+			for (MultipartFile i : dto.getFile()) {
 				String convertFile = fileService.uploadFileProcess(i);
 				filePath += convertFile + ",";
 			}
 			// 위의 작업이 끝났다면
-			filePath.substring(0 , filePath.length() - 2);
+			filePath.substring(0, filePath.length() - 2);
 			entity.setFile(filePath);
-		} 
-		
+		}
+
 		entity.setName(dto.getName());
 		entity.setAddress(dto.getAddr1() + " " + dto.getAddr2());
 		entity.setPrice(dto.getPrice());
 		entity.setDescription(dto.getDescription());
-		
+
 		int result = productService.updateProduct(entity);
-		if(result == 0) {
+		if (result == 0) {
 			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		return "redirect:/product/product-list";
 	}
-	
+
 	@DeleteMapping("/delete/{pId}")
 	public String deleteProduct(@PathVariable(value = "pId") Integer pId) {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(Define.ENTER_YOUR_LOGIN, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		int result = productService.adminDeleteProduct(pId);
-		if(result == 0) {
+		if (result == 0) {
 			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 		return "redirect:/product/product-list";
 	}
 
