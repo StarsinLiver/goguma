@@ -6,7 +6,7 @@
 
 <style>
 .user-page .payment-container {
-	width: 800px;
+	width: 70%;
 	height: auto;
 	padding: 40px;
 	border-radius: 5px;
@@ -76,7 +76,8 @@
 	<!-- aside -->
 	<%@ include file="/WEB-INF/view/admin/admin_aside.jsp"%>
 	<!-- aside end -->
-	<div class="payment-container" style="margin-right: 20%;">
+	<div class="payment-container" style="margin-right: 10%;">
+
 		<h4 class="user-page-title">결제 내역</h4>
 		<div class="col-sm-12">
 			<div class="search-div">
@@ -91,7 +92,7 @@
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title">이모티콘 구매</h5>
+					<h5 class="card-title" style="height: 24px;"></h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">
@@ -100,8 +101,8 @@
 								<th>결제 번호</th>
 								<th>구매일자</th>
 								<th>상품명</th>
-								<th>구매<br />여부
-								</th>
+								<th>결제 금액</th>
+								<th>구매여부</th>
 								<th>환불 완료</th>
 								<th>환불 신청</th>
 							</tr>
@@ -117,8 +118,23 @@
 									<td id="id">${history.merchantId}</td>
 									<td id="purchaseDate">${history.createAt}</td>
 									<td id="pointName">${history.mainEmojiName}</td>
-									<td id="refundYn">${history.confirmYn}</td>
-									<td id="refundYn">${history.cancelYn}</td>
+									<td id="price">${history.formatPrice()}</td>
+									<td id="refundStatus" style="color: blue;"><c:choose>
+											<c:when test="${history.confirmYn == 'Y'}">
+												<span style="color: blue;">구매완료</span>
+											</c:when>
+											<c:otherwise>
+                   									 처리중
+               								 </c:otherwise>
+										</c:choose></td>
+									<td id="refundStatus" style="color: blue;"><c:choose>
+											<c:when test="${history.cancelYn == 'Y'}">
+												<span style="color: blue;">환불완료</span>
+											</c:when>
+											<c:otherwise>
+												<span style="color: black;">처리중</span>
+											</c:otherwise>
+										</c:choose></td>
 									<td><c:if test="${history.cancelYn == 'N'}">
 											<button id="refundButton" data-value="${history.merchantId}"
 												class="btn btn-warning btn-complete cancel-request">환불
@@ -126,6 +142,7 @@
 										</c:if></td>
 								</tr>
 							</c:forEach>
+
 						</tbody>
 					</table>
 					<div class="pagination">
@@ -149,25 +166,27 @@
 <div class="modal fade" id="modalReason" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
+		<div class="modal-content" style="margin-right: 30px;">
 			<div class="modal-body">
 				<!-- 이메일 변경 내용을 입력하는 폼 -->
 				<div style="display: flex; flex-direction: column;">
 					<div class="register-form">
-						<label for="password">이유를 적어주세요.</label> <br> <br>
+						<label for="password">환불 사유를 작성해주세요</label> <br> <br>
 						<textarea rows="12" cols="60" id="reasonText"></textarea>
 						<br /> <input type="hidden" id="hidMerchant" readonly="readonly" />
 						<input type="hidden" id="amount" readonly="readonly" />
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" id="confirm"
-						data-dismiss="modal">승인</button>
-					<button type="button" class="btn btn-secondary" id="cancel"
-						data-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-warning btn-complete"
+						id="confirm" data-dismiss="modal"
+						style="width: 100%; margin-right: 5px;">승인</button>
+					<button type="button" class="btn btn-link" id="cancel"
+						aria-label="Close" style="position: absolute; top: 0; right: 0;">
+						<i class="bi bi-x" style="font-size: 24px;"></i>
+					</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

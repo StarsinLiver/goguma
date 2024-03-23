@@ -1,10 +1,13 @@
 package com.store.goguma.freeboard.dto;
 
+import java.security.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 
 @Data
 @AllArgsConstructor
@@ -21,10 +24,13 @@ public class FreeBoardDTO {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
+	private Integer view;
 	private String goodCount;
 	private Integer mainCategory;
 	private Integer subCategory;
 	private Integer totalPosts;
+	private String userName;
+	private String userFile;
 	
 	public int getUid() {
 		return this.uId;

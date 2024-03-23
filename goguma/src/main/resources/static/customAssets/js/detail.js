@@ -5913,3 +5913,59 @@ $(document).ready(function() {
         $("body").css("overflow", "scroll")
     })
 });
+
+    // 모달 닫힐 때 입력 필드 초기화
+    $('#exampleModal').on('hidden.bs.modal', function () {
+        // 입력 필드 초기화
+        $('#exampleModal input[name="name"]').val('');
+        $('#exampleModal input[name="pId"]').val('');
+        $('#exampleModal input[name="hostId"]').val('');
+    });
+	// 드롭다운 메뉴 항목을 클릭했을 때 호출되는 함수
+	document.querySelectorAll('.dropdown-item').forEach(item => {
+	    item.addEventListener('click', event => {
+	        const selectedReason = event.target.getAttribute('data-value');
+	        document.getElementById('selectedReason').innerText = selectedReason;
+	    });
+	});
+	// 모달이 닫힐 때 초기화하는 함수
+	function resetModal() {
+	    document.getElementById('selectedReason').innerText = '';
+	    document.getElementById('additionalReason').value = '';
+	}
+	document.getElementById('reportModal').addEventListener('hidden.bs.modal', function () {
+	    resetModal();
+	});
+    // textarea에 작성된 내용도 reason으로 설정
+    $("#additionalReason").on("input", function() {
+        var additionalReason = $(this).val();
+        $("#reasonInput").val(additionalReason);
+    });
+    	// 페이지 로딩 후 실행되는 함수
+	document.addEventListener("DOMContentLoaded", function() {
+		const createAtElement = document.getElementById('createAt');
+		const createAt = createAtElement.textContent.trim();
+		const createdAt = new Date(createAt.replace(/-/g, '/')); // '-'를 '/'로 대체하여 형식 변환
+		createAtElement.textContent = formatDate(createdAt);
+		displayTemplate();
+	});
+
+	function formatDate(createdAt) {
+		const now = new Date();
+		const diffInMs = now - createdAt;
+		const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+		console.log(diffInMs);
+		console.log(diffInHours);
+		console.log(now);
+		console.log(createAt);
+		if (diffInHours < 1) {
+			return "방금 전";
+		} else if (diffInHours < 24) {
+			return diffInHours + "시간 전";
+		} else if (diffInHours < 24 * 7) {
+			const diffInDays = Math.floor(diffInHours / 24);
+			return diffInDays + "일 전";
+		} else {
+			return createdAt.toLocaleDateString(); // 7일을 넘어가면 그냥 날짜를 반환
+		}
+	}

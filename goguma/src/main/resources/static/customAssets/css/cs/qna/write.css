@@ -53,11 +53,15 @@
 }
 
 .qna-write-insert-btn{
+	width: 100%;
     padding: 10px;
-    background-color: gray;
-    color: white;
+    background-color: #ffca2c;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 30px;
     border: none;
     border-radius: 10px;
+    font-weight: bold;
+}
+.qna-write-insert-btn:hover{
+	color:white;
 }

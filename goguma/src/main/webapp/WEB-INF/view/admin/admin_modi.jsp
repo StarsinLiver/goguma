@@ -171,18 +171,43 @@ h2 {
 	background: #F9FAFC;
 	color: #666;
 }
+
+.btn-complete {
+	background-color: #ffc107; 
+	color: #fff;
+	border: none;
+	border-radius: 10px; 
+	padding: 20px;
+	width: 250px;
+	display: block; 
+	font-size: 14px;
+	transition: color 0.3s, font-size 0.3s; 
+	margin: auto;
+	display: block;
+	border-radius: 10px;
+	color : #000;
+}
+
+.btn-complete:hover {
+	color: #FFF;
+}
 </style>
 
 <!-- Header Start -->
-<div class="all-page-title" style="background-image:url(/assets/images/pattern-4.png);">
-        <div class="container text-center">
-            <h1>마이페이지</h1>
-        </div>
-        <!--End Page-->
-    </div><!-- end section -->
+<div class="all-page-title"
+	style="background-image: url(/assets/images/pattern-4.png);">
+	<div class="container text-center">
+		<h1>마이페이지</h1>
+	</div>
+	<!--End Page-->
+</div>
+<!-- end section -->
 
-    <svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 85 100" preserveAspectRatio="none">
-        <path d="M-5 100 Q 0 20 5 100 Z
+<svg id="clouds" class="hidden-xs" xmlns="http://www.w3.org/2000/svg"
+	version="1.1" width="100%" height="100" viewBox="0 0 85 100"
+	preserveAspectRatio="none">
+        <path
+		d="M-5 100 Q 0 20 5 100 Z
             M0 100 Q 5 0 10 100
             M5 100 Q 10 30 15 100
             M10 100 Q 15 10 20 100
@@ -210,9 +235,9 @@ h2 {
 <!--   회원가입 폼 시작 -->
 <section class="module">
 	<div class="container"
-		style="background: #fff; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); width: 550px; margin-top: 5%; margin-bottom: 5%">
-			<h2 style="margin-top: 10px;">개인 정보 수정</h2>
-			<form action="/admin/modify" id="form" class="form" method="post" >
+		style="background: #fff; border-radius: 5px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); width: 550px; margin-top: 2%; margin-bottom: 5%"><br><br>
+		<h2>개인 정보 수정</h2>
+		<form action="/admin/modify" id="form" class="form" method="post">
 			<div class="register-form">
 				<label for="Address">주소</label> <input type="text" name="zip"
 					id="zip" placeholder="Enter Adress" onclick="zipcode()" readonly />
@@ -228,24 +253,22 @@ h2 {
 			</div>
 			<div class="register-form">
 				<label for="usertel">전화번호</label> <input type="text" name="tel"
-					id="tel" placeholder="Enter tel" /> <span class="msgTel"> - 포함
-					13자리를 입력하세요.</span>
+					id="tel" placeholder="Enter tel" /> <span class="msgTel"> -
+					포함 13자리를 입력하세요.</span>
 				</td>
 			</div>
-			<br> 
-			<br> 
-			<br> 
-			<br>
-			<!-- TODO: 버튼에 좌우 마진 잡혀 있어서 그런지 크기가 안커짐 나중에 수정 요망 -->
-			<button type="submit" class="btn btn-warning" id="socialRegister"
-				name="socialRegister"
-				style="margin: auto; display: block; width:250px; padding: 20px; border-radius: 10px;">수정하기</button>
+			<br> <br> <br> <br>
+			<button class="btn btn-warning btn-complete" id="socialRegister"
+				name="socialRegister" style="">
+				<i class="bi bi-gear-fill"></i>&nbsp;수정하기
+			</button>
 		</form>
 	</div>
 </section>
 <!-- 회원가입 폼 종료 -->
 <!-- 메인 종료 -->
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/customAssets/js/oauth/zipcode.js"></script>
 
 <!-- 푸터 -->

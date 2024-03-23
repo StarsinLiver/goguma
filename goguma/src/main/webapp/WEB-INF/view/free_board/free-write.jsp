@@ -39,8 +39,14 @@ h2 {
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<div class="container mt-4">
-	<div class="row justify-content-center">
+<div class="container mt-4" style="display: flex; max-width: 100%; width: 2500px">
+	<!-- aside 시작 -->
+	<div
+		style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
+		
+	</div>
+	<!-- aside 끝 -->
+	<div class="row justify-content-center" style="    margin: 0 10%;">
 		<section class="section nopad cac text-center" style="width: 67%;">
 			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
 		</section>

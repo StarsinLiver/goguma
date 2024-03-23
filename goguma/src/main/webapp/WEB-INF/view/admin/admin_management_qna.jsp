@@ -106,8 +106,7 @@
 								<th>등록일</th>
 								<th>종류</th>
 								<th>답변 여부</th>
-								<th>삭제 YN</th>
-								<th>상세 조회</th>
+								<th>답변 하기</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
@@ -128,16 +127,15 @@
                         확인중
                     </c:otherwise>
 										</c:choose></td>
-									<td id="">${qna.deleteYn}</td>
 
 									<td id=""><a href="/admin/qna/${qna.id}"
-										class="btn btn-success">상세 조회</a></td>
+										class="btn btn-warning btn-complete">답변 하기</a></td>
 									<td id="">
 										<form action="/admin/qna/delete/${qna.id}" method="post">
 											<input type="hidden" name="_method" value="delete" />
 											<c:if test="${qna.deleteYn == 'N'}">
 												<button onclick="if(!confirm('정말 삭제하시겠습니까?')) return false;"
-													class="btn btn-danger">삭제하기</button>
+													class="btn btn-warning btn-complete" style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;">삭제하기</button>
 											</c:if>
 										</form>
 									</td>

@@ -5,16 +5,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.store.goguma.entity.Product;
 import com.store.goguma.entity.User;
 import com.store.goguma.handler.exception.BackPageRestfulException;
-import com.store.goguma.repository.EmojiHistoryRepository;
 import com.store.goguma.repository.MyUserRepository;
 import com.store.goguma.repository.ProductHistoryRepository;
 import com.store.goguma.repository.ReportRepository;
@@ -23,14 +20,15 @@ import com.store.goguma.user.dto.ModifyUserDto;
 import com.store.goguma.user.dto.OauthDTO;
 import com.store.goguma.user.dto.UserDTO;
 import com.store.goguma.user.dto.UserProfileDto;
-import com.store.goguma.user.dto.my.RequestPageDTO;
-import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.ProductHistoryDTO;
 import com.store.goguma.user.dto.my.ProductHostDTO;
 import com.store.goguma.user.dto.my.QnaUserDTO;
+import com.store.goguma.user.dto.my.RequestPageDTO;
+import com.store.goguma.user.dto.my.ResponsePageDTO;
 import com.store.goguma.user.dto.my.UserEmojiDTO;
 import com.store.goguma.user.dto.my.WishProductDTO;
 import com.store.goguma.utils.Define;
+import com.store.goguma.utils.UserRole;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -197,7 +195,8 @@ public class UserService {
 
 			// 파일 크기 검사
 			if (mf.getSize() > Define.MAX_PROFILE_FILE_SIZE) {
-				throw new RuntimeException("사진 용량이 250KB를 초과하였습니다.");
+//				throw new RuntimeException("사진 용량이 250KB를 초과하였습니다.");
+				throw new BackPageRestfulException("사진 용량이 250KB를 초과하였습니다." ,HttpStatus.BAD_REQUEST);
 			}
 
 			// 이름 중복처리
@@ -257,7 +256,7 @@ public class UserService {
 
 	// 관리자가 권한 수정
 	@Transactional
-	public int adminUpdateUserRole(int uId, String role) {
+	public int adminUpdateUserRole(int uId, UserRole role) {
 		return userRepository.adminUpdateUserRole(uId, role);
 	}
 

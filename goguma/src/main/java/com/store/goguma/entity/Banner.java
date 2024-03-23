@@ -1,5 +1,7 @@
 package com.store.goguma.entity;
 
+import java.text.DecimalFormat;
+
 import com.store.goguma.utils.BannerType;
 
 import lombok.AllArgsConstructor;
@@ -27,4 +29,10 @@ public class Banner {
 	private String updateAt;
 	private String deleteAt;
 	private String deleteYn;
+	
+	public String formatNumber (int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedNumber = decimalFormat.format(number);
+        return formattedNumber;
+	}
 }

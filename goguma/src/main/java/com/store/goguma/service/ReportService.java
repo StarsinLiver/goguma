@@ -21,7 +21,6 @@ public class ReportService {
 	// 상품 페이지 - 유저 신고하기
 	@Transactional
 	public void addReport(ReportDTO dto) {
-		
         // 호스트 ID와 유저 ID를 사용하여 이미 신고한 경우인지 확인
         boolean alreadyReported = reportRepository.existsByHostIdAndCallId(dto.getHostId(), dto.getCallId());
         if (alreadyReported) {

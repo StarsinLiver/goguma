@@ -43,6 +43,9 @@ public class BannerService {
 	 * @return
 	 */
 	public Banner findById(int id) {
+		
+		
+		
 		return bannerRepository.findById(id);
 	}
 	
@@ -74,5 +77,15 @@ public class BannerService {
 	@Transactional
 	public int delete(int id) {
 		return bannerRepository.delete(id);
+	}
+	
+	/**
+	 * 배너 전체 출력
+	 * @param id
+	 * @return
+	 */
+	@Transactional
+	public List<Banner> findByAll() {
+		return bannerRepository.findByAll();
 	}
 }

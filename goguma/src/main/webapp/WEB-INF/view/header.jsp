@@ -53,7 +53,8 @@
 <link rel="stylesheet" href="/customAssets/css/emoji/list.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/upload.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/refund.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <link rel="stylesheet" href="/customAssets/css/emoji/detail.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/list.css">
 <link rel="stylesheet" href="/customAssets/css/cs/notice/detail.css">
@@ -63,7 +64,40 @@
 <link rel="stylesheet" href="/customAssets/css/about/about.css">
 <link rel="stylesheet" href="/customAssets/css/board/list.css">
 <link rel="stylesheet" href="/customAssets/css/board/admin-cate-setting.css">
+<!-- font-family -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<!-- ex 
+.sunflower-light {
+  font-family: "Sunflower", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+} 
+-->
+<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Stylish&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<!-- 
+.dongle-regular {
+  font-family: "Dongle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+ -->
+ <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Stylish&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+ <!-- 
+ .gamja-flower-regular {
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+  -->
+ 
+<!-- font-family end -->
+<link rel="stylesheet"
+	href="/customAssets/css/board/admin-cate-setting.css">
 
+<link rel="stylesheet"
+	href="/customAssets/css/all/font.css"/>
 <!-- Custom CSS -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5275edbfc405960aad1f6f12211cdd04"></script>
@@ -80,15 +114,17 @@
 <!-- bootstrap script -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
-<!-- 토스티파이 -->	
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
+<!-- 토스티파이 -->
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script src="/customAssets/js/session.js"></script>
 </head>
 <body class="seo_version" style="background: #fff">
 	<c:if test="${principal != null}">
-		<input type="hidden" value="${principal.getUId()}" id="principal"/>
+		<input type="hidden" value="${principal.getUId()}" id="principal" />
 	</c:if>
 	<header class="header header_style_01">
 		<!-- nav 부분 navbar 가 안먹음 -->
@@ -104,25 +140,25 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav ms-auto p-4 p-lg-0">
-					<a href="/" class="nav-item nav-link active">Home</a> 
+					<a href="/" class="nav-item nav-link active">Home</a>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/product/product-list" class="dropdown-item">리스트</a> <a href="/product/write"
-								class="dropdown-item">상품 등록</a>
-							<a href="/chat/room" class="dropdown-item">채팅하기</a>
+							<a href="/product/product-list" class="dropdown-item">리스트</a> <a
+								href="/product/write" class="dropdown-item">상품 등록</a> <a
+								href="/chat/room" class="dropdown-item">채팅하기</a>
 						</div>
-						
+
 					</div>
 
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a href="/cs/qna/write"
-								class="dropdown-item">문의하기</a> <a href="/cs/faq/list" class="dropdown-item">자주
-								묻는 질문</a>
+							<a href="/cs/notice/list" class="dropdown-item">공지사항</a> <a
+								href="/cs/qna/write" class="dropdown-item">문의하기</a> <a
+								href="/cs/faq/list" class="dropdown-item">자주 묻는 질문</a>
 						</div>
 					</div>
 
@@ -130,32 +166,35 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
+													<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
+							<a href="/board/cate-setting2" class="dropdown-item">카테고리 수정2</a>
+							<a href="/board/cate-modify" class="dropdown-item">카테고리 수정3</a>
 						</div>
 					</div>
-<a href="/emoji/list"
-						class="nav-item nav-link">이모티콘</a> <a href="/about"
-						class="nav-item nav-link">회사 소개</a>
+					<a href="/emoji/list" class="nav-item nav-link">이모티콘</a> <a
+						href="/about" class="nav-item nav-link">회사 소개</a>
 					<c:if test="${principal.role == 'USER'}">
-					<div class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
-						<div class="dropdown-menu fade-down m-0">
-							<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a><a href="/user/product"
-								class="dropdown-item">거래 내역</a> <a href="/user/info"
-								class="dropdown-item">내 정보</a>
+						<div class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle"
+								data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
+							<div class="dropdown-menu fade-down m-0">
+								<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a><a
+									href="/user/product" class="dropdown-item">거래 내역</a> <a
+									href="/user/info" class="dropdown-item">내 정보</a>
+							</div>
 						</div>
-					</div>
 					</c:if>
 					<!-- 이부분은 로그인 되었을 경우에만 표시되게 설정 -->
 				</div>
 				<!-- 이부분은 관리자계정으로 로그인시 표시되게 설정해야함 -->
 			</div>
-			<c:if test="${principal.role == 'ADMIN'}">
-							<a href="/admin/user"
-						class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">관리자 페이지<i
-						class="fa fa-arrow-right ms-3"></i></a>
+			<c:if
+				test="${principal.role == 'ADMIN' || principal.role == 'MASTER'}">
+				<a href="/admin/user"
+					class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">관리자
+					페이지<i class="fa fa-arrow-right ms-3"></i>
+				</a>
 			</c:if>
 			<!-- 이부분은 로그인하였을 경우 로그아웃 버튼으로, 로그인하지 않았을 경우 로그인/회원가입 버튼으로 -->
 			<c:choose>
