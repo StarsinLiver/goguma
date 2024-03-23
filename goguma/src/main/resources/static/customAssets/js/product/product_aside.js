@@ -37,7 +37,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			makePaging(res.number, res.totalPages, res.startPage, res.endPage);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-			alert("통신 실패.")
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버에러가 발생하였습니다!",
+			});
 		}
 	}); // ajax 완료
 
@@ -82,16 +86,13 @@ function checkSelected() {
 	});
 
 	if (lowPrice > highPrice || lowPrice < 0 || highPrice < 0) {
-		alert("가격이 잘못 되었습니다.");
+		Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "가격이 잘못되었습니다!",
+			});
 		return;
 	}
-
-	// 결과
-	console.log("선택된 항목: " + selectedItems.join(","));
-	console.log("제목 검색 ", search);
-	console.log("주소 검색 ", searchAddress);
-	console.log("낮은 가격 ", lowPrice);
-	console.log("높은 가격 ", highPrice);
 
 	find(selectedItems, search, searchAddress, lowPrice, highPrice, currentPageIndex, null)
 }
@@ -151,17 +152,21 @@ const find = (selectedItems, search, searchAddress, lowPrice, highPrice, page, s
 			makePaging(res.number, res.totalPages, res.startPage, res.endPage);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-			alert("통신 실패.")
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버에러가 발생하였습니다!",
+			});
 		}
 	}); // ajax 완료
 }
 
 // 카드 만들기
 const makeCard = (content) => {
-	
+
 	let div = "";
 	for (var i = 0; i < content.length; i++) {
-		
+
 		let file = content[i].file.split(",");
 		div +=
 			`

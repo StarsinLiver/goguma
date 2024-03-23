@@ -10,7 +10,11 @@ function load(){
 			}
 		},
 		error : function(){
-			alert("에러");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 }

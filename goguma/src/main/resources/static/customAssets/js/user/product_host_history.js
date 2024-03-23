@@ -65,7 +65,11 @@ const selectedUser = (userId , pid) => {
 			window.location.reload();
 		}, error: function(xhr) {
 			if(xhr.status == 500) {
-				alert("서버 에러가 발생하였습니다.");
+				Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버에러가 발생하였습니다!",
+			});
 			}
 			window.location.reload();
 		}

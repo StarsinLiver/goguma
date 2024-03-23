@@ -37,12 +37,14 @@ function load() {
 			if (data != "") {
 				innerMain(data);
 				mainEmojiNum = data.id;
-			} else {
-				console.log("로드 디테일 실패");
 			}
 		},
 		error: function() {
-			console.log("로드 디테일 에러");
+			Swal.fire({
+				icon: "error",
+				title: "에러...",
+				text: "서버 에러가 발생한것 같습니다!",
+			});
 		}
 	});
 	$.ajax({
@@ -52,12 +54,14 @@ function load() {
 		success: function(data) {
 			if (data != "") {
 				innerFun(data);
-			} else {
-				console.log("로드 디테일 서브 실패");
 			}
 		},
 		error: function() {
-			console.log("로드 디테일 서브 에러");
+			Swal.fire({
+				icon: "error",
+				title: "에러...",
+				text: "서버 에러가 발생한것 같습니다!",
+			});
 		}
 	});
 }
@@ -97,7 +101,12 @@ function readURL(input) {
 	// array 에 담기
 	for (let i = 0; i < input.files.length; i++) {
 		if (input.files[i].size > 5242880) { // 5 mb 까지만 가능
-			alert("첨부파일은 5mb 이하만 가능합니다.");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "첨부파일은 5mb 이하만 가능합니다.",
+			});
+
 			input.value = "";
 			return;
 		}
@@ -186,26 +195,50 @@ function emojiModify() {
 			window.location.reload();
 		},
 		error: function(xhr) {
-			alert("서버 에러가 발생하였습니다.");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 }
 
 deleteButton.onclick = () => {
 
-	if (!confirm('삭제하시면 복구할 수 없습니다. \n 정말로 삭제하시겠습니까??')) { return false; }
-	
-	$.ajax({
-		type: 'delete',
-		url: '/admin/emoji/delete/' + pageId,
-		success: function(data) {
-			location.href = "/admin/emoji";
-		},
-		error: function(xhr) {
-			if(xhr.status == 400) 
-				alert("이미 이용자가 사용하고 있습니다.")
-			if(xhr.status == 500) 
-				alert("서버 에러가 발생하였습니다.");
+	Swal.fire({
+		title: "삭제하시면 복구하실 수 없습니다.",
+		text: "정말로 삭제하시겠습니까?",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "네, 삭제할래요"
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				type: 'delete',
+				url: '/admin/emoji/delete/' + pageId,
+				success: function(data) {
+					location.href = "/admin/emoji";
+				},
+				error: function(xhr) {
+					if (xhr.status == 400)
+						Swal.fire({
+							icon: "error",
+							title: "Oops...",
+							text: "이미 이용자가 사용하고 있습니다.",
+						});
+					if (xhr.status == 500)
+						Swal.fire({
+							icon: "error",
+							title: "Oops...",
+							text: "서버 에러가 발생하였습니다.",
+						});
+				}
+			});
 		}
 	});
+
+
 }

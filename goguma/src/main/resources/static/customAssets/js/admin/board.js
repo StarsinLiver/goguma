@@ -40,11 +40,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Your code to run when the document is ready goes here
     
     $.ajax({
-		url : "/free-board/maincategory" ,
+		url : "http://localhost/free-board/maincategory" ,
 		type: "get" ,
 		success : function(data) {
-			console.log(data);
-			
 			// 초기값 지정
 			let options = displayCategory(data);
 			displayMainCategory.innerHTML = options;
@@ -81,15 +79,12 @@ const displayCategory = (data) => {
 	for(var i = 0; i < data.length; i++) {
 		option += `<option value="${data[i].id}">${data[i].name}</option>`;
 	}
-	
-	console.log("메인 옵션" , option);
+
 	return option;
 }
 
 // 메인 카테고리를 클릭하였을 때
 const onclickMain = (main) => {
-	console.log(main);
-	
 	$.ajax({
 		url : "/free-board/subcategory/" + main,
 		type : "get" ,

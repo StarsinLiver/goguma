@@ -17,7 +17,7 @@
 		</ul>
 		<div id="profile-image">
 			<img alt="소확행"
-				src="/images/upload/${user.file}" />
+				src="/profile/${user.file}" />
 		</div>				
 	</section>
 	<div id="user-records-detail">
@@ -50,7 +50,7 @@
 							</div>
 							<div class="card-desc">
 								<h2 class="card-title">${product.name}</h2>
-								<div class="card-price ">${product.price}원</div>
+								<div class="card-price ">${product.formatNumber(product.price)}원</div>
 								<div class="card-region-name">${product.address}</div>
 								<div class="card-counts">
 									<span>관심 ${product.countWishList} </span> ∙ <span>채팅 ${product.countChatRoom} </span>

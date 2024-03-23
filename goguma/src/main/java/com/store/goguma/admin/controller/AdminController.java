@@ -794,7 +794,7 @@ public class AdminController {
 			req.setMainCategory(0);
 			req.setSubCategory(0);
 		}
-		
+		log.info("왜 시발 안되 : {}" , req);
  		ResponsePageDTO res = freeBoardService.adminFindAll(req);
 		
 		model.addAttribute("freeBoardList", res.getDtoList());

@@ -29,7 +29,7 @@ function startPage(start) {
 
 // 페이지 넘기기
 function nextPage(num) {
-	console.log("num : " + num);
+	//console.log("num : " + num);
 
 	pagingFnc(num);
 }
@@ -40,7 +40,7 @@ function endPage(end) {
 	end += 1;
 	reviewPage = end;
 
-	console.log("end : " + end);
+	//console.log("end : " + end);
 	pagingFnc(end);
 }
 
@@ -69,7 +69,7 @@ $(".selectOption").change(
 $(".search").change(
 	
 		function() {
-		var searchKeyword = $(this).val(); // 선택된 값 가져오기
+		var sear//console.log $(this).val(); // 선택된 값 가져오기
 		console.log("Selected value22222: "
 				+ searchKeyword); // 콘솔에 출력
 		$("#searchKeyword").text(

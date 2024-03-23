@@ -41,12 +41,14 @@ function load() {
 			if (data != "") {
 				innerMain(data);
 				mainEmojiNum = data.id;
-			} else {
-				alert("실패");
 			}
 		},
 		error: function() {
-			alert("에러");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 	$.ajax({
@@ -56,12 +58,14 @@ function load() {
 		success: function(data) {
 			if (data != "") {
 				innerFun(data);
-			} else {
-				alert("실패");
 			}
 		},
 		error: function() {
-			alert("에러");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 }
@@ -100,19 +104,23 @@ function innerFun(list) {
 }
 
 orderBtn.onclick = () => {
-	
+
 	// 구매 여부 확인
 	$.ajax({
 		url: "/emoji/api/valid/order",
 		method: "get",
-		data: { userId: userInfo.uid , mainEmojiId : mainEmojiNum },
+		data: { userId: userInfo.uid, mainEmojiId: mainEmojiNum },
 		success: function(data) {
 			console.log(data);
 			modalMain.style.display = "flex";
 		}, error: function(xhr) {
 			console.log(xhr);
 			if (xhr.status == 400) {
-				alert("이미 가지고 계신 이모티콘 입니다.");
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "이미 가지고 계신 이모티콘 입니다!",
+				});
 			}
 		}
 	})
@@ -187,7 +195,11 @@ function buyFun(merchantId) {
 			}
 		},
 		error: function() {
-			alert("에러");
+			Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "서버 에러가 발생하였습니다!",
+		});
 		}
 	});
 }

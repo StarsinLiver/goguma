@@ -121,6 +121,7 @@
 	src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script src="/customAssets/js/session.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="seo_version" style="background: #fff">
 	<c:if test="${principal != null}">

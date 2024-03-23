@@ -23,7 +23,9 @@ public class ChatRoomDto {
 	private Integer userId;
 	private Integer hostId;
 	private String hostName;
+	private String hostFile;
 	private String userName;
+	private String userFile;
 	private Timestamp createAt;
 	
 	
