@@ -130,7 +130,7 @@ input[type="checkbox"] {
 									<th>가격</th>
 									<td><div class="form-floating mb-3">
 											<input type="number" class="form-control" name="price"
-												step="1000" min="0" value="0"
+												step="10" min="0" value="0"
 												style="font-size: 2rem; padding: 0;">
 										</div></td>
 								</tr>

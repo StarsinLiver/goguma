@@ -130,7 +130,7 @@
 									</a>
 								</div>
 								<div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-									<a class="position-relative d-block overflow-hidden" href="#">
+									<a class="position-relative d-block overflow-hidden" href="/freeBoard/main">
 										<img class="img-fluid" src="/assets/images/cat-3.png" alt="">
 										<div
 											class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"

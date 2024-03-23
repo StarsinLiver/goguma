@@ -167,8 +167,8 @@ nav.open ~ .overlay {
 						문의 관리</span>
 			</a></li>
 			<li class="list"><a href="/admin/faq" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">
-						자주 묻는 질문 관리</span>
+					class="bx bx-folder-open icon"></i> <span class="link"> 자주
+						묻는 질문 관리</span>
 			</a></li>
 
 			<li class="list"><a href="/admin/report" class="nav-link"> <i
@@ -192,13 +192,14 @@ nav.open ~ .overlay {
 					class="bx bx-folder-open icon"></i> <span class="link">광고 관리</span>
 
 			</a></li>
-						<li class="list"><a href="/admin/freeboard" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">자유
+			<li class="list"><a href="/admin/freeboard" class="nav-link">
+					<i class="bx bx-folder-open icon"></i> <span class="link">자유
 						게시판 관리</span>
 			</a></li>
-			</a></li>
-						<li class="list"><a href="/board/cate-setting2" class="nav-link"> <i
-					class="bx bx-folder-open icon"></i> <span class="link">카테고리 관리</span>
+
+			<li class="list"><a href="/admin/cate-setting2" class="nav-link">
+					<i class="bx bx-folder-open icon"></i> <span class="link">카테고리
+						관리</span>
 			</a></li>
 		</ul>
 

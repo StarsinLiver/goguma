@@ -266,7 +266,7 @@
 		and f.delete_yn = 'N'
 		<include refid="searchBox" />
 
-		order by f.id
+		order by f.id desc
 		limit #{start} , 10
 	</select>
 
