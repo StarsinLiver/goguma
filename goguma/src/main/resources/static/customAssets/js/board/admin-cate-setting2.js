@@ -94,9 +94,9 @@ function mainClickEvent(){
 	for(let i = 0; i < mainTitleBoxs.length; i++){
 		mainTitleBoxs[i].onclick = () => {
 			if(subFlag == true){
-				if(confirm("저장하지 않으면 설정한 데이터가 삭제됩니다. 저장하시겠습니까?")){
-					return;
-				}
+				//if(confirm("저장하지 않으면 설정한 데이터가 삭제됩니다. 저장하시겠습니까?")){
+				//	return;
+				//}
 			}
 			fontRadios[0].checked = true;
 			typeRadios[0].checked = true;
@@ -130,9 +130,9 @@ function subClickEvent(){
 	for(let i = 0; i < subTitleBoxs.length; i++){
 		subTitleBoxs[i].onclick = () => {
 			if(subFlag == true){
-				if(confirm("저장하지 않으면 설정한 데이터가 삭제됩니다. 저장하시겠습니까?")){
-					return;
-				}
+				//if(confirm("저장하지 않으면 설정한 데이터가 삭제됩니다. 저장하시겠습니까?")){
+				//	return;
+				//}
 			}
 			fontRadios[0].checked = true;
 			typeRadios[0].checked = true;
