@@ -196,6 +196,10 @@ nav.open ~ .overlay {
 					class="bx bx-folder-open icon"></i> <span class="link">자유
 						게시판 관리</span>
 			</a></li>
+			</a></li>
+						<li class="list"><a href="/board/cate-setting2" class="nav-link"> <i
+					class="bx bx-folder-open icon"></i> <span class="link">카테고리 관리</span>
+			</a></li>
 		</ul>
 
 
