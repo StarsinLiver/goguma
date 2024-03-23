@@ -437,47 +437,50 @@ $(document).ready(function() {
 
 			});/* list ajax end*/
 		
+		 var type = "FREEBOARD";
+		
 			// banner ajax start
 		$.ajax({
-    method: "GET",
-    url: "/banner",
-    data:{
-		type: FREEBOARD,
-	},
-    success: function(data) {
-        console.log('data확인 배너 리스트 석세스: ' + data); //
-        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
-        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
-        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
-
-        var btn = "";
-        var img = "";
-
-        // banner 버튼 생성 for문
-        for (var i = 0; i < data.length; i++) {
-            var board = data[i];
-            var type = data[i].type;
-            console.log('로그 확인 데이터 타입으로다가: ' + type);
-
-            if (type == 'FREEBOARD') {
-                // 첫 번째 버튼에만 active 클래스 추가
-                var isActive = i === 0 ? ' active' : '';
-                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
-
-                // 이미지 추가
-                img += '<div class="carousel-item' + isActive + '">';
-                img += '<a href="' + board.url + '"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
-                img += '</div>';
-            }
-        }
-
-        $('.carousel-indicators').html(btn);
-        $('.carousel-inner').html(img);
-    },
-    error: function() {
-        // 에러 처리
-    }
-});
+				    method: "GET",
+				    url: "/banner",
+				    data:{
+						type: type,
+					},
+				    success: function(data) {
+				        console.log('data확인 배너 리스트 석세스: ' + data); //
+				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
+				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
+				        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
+				
+				        var btn = "";
+				        var img = "";
+				       
+				
+				        // banner 버튼 생성 for문
+				        for (var i = 0; i < data.length; i++) {
+				            var board = data[i];
+				            var type = data[i].type;
+				            console.log('로그 확인 데이터 타입으로다가: ' + type);
+				
+				            if (type == 'FREEBOARD') {
+				                // 첫 번째 버튼에만 active 클래스 추가
+				                var isActive = i === 0 ? ' active' : '';
+				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+				
+				                // 이미지 추가
+				                img += '<div class="carousel-item' + isActive + '">';
+				                img += '<a href="' + board.url + '"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
+				                img += '</div>';
+				            }
+				        }
+				
+				        $('.carousel-indicators').html(btn);
+				        $('.carousel-inner').html(img);
+				    },
+				    error: function() {
+				        // 에러 처리
+				    }
+				});
 			
 			
 			
