@@ -52,4 +52,9 @@ public class Define {
     
     public static final int DEFAULT_TEMPERATURE_SCORE = 50;
     public static final int FIVE = 5;
+    
+    public static final String ADMIN = "ADMIN";
+    public static final String MASTER = "MASTER";
+    public static final String USER = "USER";
+    
 }
