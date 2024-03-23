@@ -273,26 +273,7 @@ h2 {
 				</div>
 			</div>
 			<!-- 리스트 형식의 글 목록 -->
-			<div class="col-lg-4">
-				<h4>
-					베스트 게시물<a href="/freeBoard/list" style="float: right;">더보기</a>
-				</h4>
-				<ul class="list-group">
-					<c:forEach var="board" items="${rDList}" varStatus="loop">
-						<c:if test="${loop.index < 6}">
-							<li class="list-group-item">
-								<td><a href="/freeBoard/detail?id=${board.id}">${board.title}</a></td>
-								<td class="text-center">
-									<div class="cnt">
-										<span class="view board-img">${board.view}</span> <span
-											class="like board-img">${board.goodCount}</span>
-									</div>
-							</td>
-							</li>
-						</c:if>
-					</c:forEach>
-				</ul>
-			</div>
+			
 
 			<div class="container mt-8">
 				<div class="row justify-content-center">
@@ -417,7 +398,7 @@ h2 {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6" style="width: 66.66%;">
+			<div class="col-lg-6" style="width: 75%;  margin-left: 14%;;">
 				<div class="owl-screenshots owl-carousel owl-theme text-center">
 				<c:forEach items="${listCreateAt}" var="list">
 					<div class="owl-screen">

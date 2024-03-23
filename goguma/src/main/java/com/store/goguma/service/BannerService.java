@@ -81,11 +81,11 @@ public class BannerService {
 	
 	/**
 	 * 배너 전체 출력
-	 * @param id
+	 * @param type 
 	 * @return
 	 */
 	@Transactional
-	public List<Banner> findByAll() {
-		return bannerRepository.findByAll();
+	public List<Banner> findByAll(String type) {
+		return bannerRepository.findByAll(type);
 	}
 }

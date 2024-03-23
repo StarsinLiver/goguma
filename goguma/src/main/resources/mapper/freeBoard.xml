@@ -422,7 +422,7 @@
 		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
 		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
 		,s.id as subId , s.name ,
-		s.row_count, s.`number`, s.background,
+		s.row_count, s.background,
 		s.font, s.list_type
 		FROM board_main_category AS m
 		JOIN

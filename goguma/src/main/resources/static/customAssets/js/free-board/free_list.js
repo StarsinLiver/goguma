@@ -266,7 +266,7 @@ $(document).ready(function() {
 	console.log('cate1: ' + cate1); // url로 넘어오는 쿼리 스트링 cate1값 파싱
 	console.log('id: ' + id); // url로 넘어오는 쿼리 스트링 id값 파싱
 	
-	
+	localStorage.clear();
 
 	$.ajax({
 				method : "GET",
@@ -409,7 +409,6 @@ $(document).ready(function() {
 										+ data.start
 										+ ')">이전</span></li>';
 							}
-							console.log('우리집에서 바로 자고 낼 아무것도 안할거임')
 							for (let i = data.start; i <= data.end; i++) {
 								paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
 										+ i
@@ -442,6 +441,9 @@ $(document).ready(function() {
 		$.ajax({
     method: "GET",
     url: "/banner",
+    data:{
+		type: FREEBOARD,
+	},
     success: function(data) {
         console.log('data확인 배너 리스트 석세스: ' + data); //
         console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
@@ -515,11 +517,7 @@ $("button[type='submit']")
 									if (data != null) {
 										if (typeValue == "LIST") {
 
-											console
-													.log("데이터 확인: 리스트로 탔음");
-											console
-													.log("데이터 확인: "
-															+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
+											console.log("데이터 확인: "+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
 
 															// 데이터를 받아서 처리
 															var html = '';

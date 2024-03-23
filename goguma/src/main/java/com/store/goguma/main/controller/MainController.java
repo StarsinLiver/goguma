@@ -85,9 +85,12 @@ public class MainController {
 	// 배너 전용 컨트롤러
 	@GetMapping("/banner")
 	@ResponseBody
-	public List<Banner> bannerProc() {
+	public List<Banner> bannerProc(String type) {
 		
-		List<Banner> result = bannerService.findByAll();
+		log.info("컨트롤러 타고들어오는 배너 타입 확인 : "+type);
+		
+		
+		List<Banner> result = bannerService.findByAll(type);
 		
 		log.info("배너 컨트롤러 로그: "+result);
 		

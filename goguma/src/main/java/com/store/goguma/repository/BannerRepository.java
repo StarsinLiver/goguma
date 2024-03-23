@@ -27,5 +27,5 @@ public interface BannerRepository {
 	public int delete(int id);
 	
 	// 배너 삭제
-	public List<Banner> findByAll();
+	public List<Banner> findByAll(String type);
 }
