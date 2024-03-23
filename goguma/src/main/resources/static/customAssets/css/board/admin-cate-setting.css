@@ -1,31 +1,30 @@
 .main-div{
     width: 100%;
-    margin: 50px auto;
+    margin: 0px auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 50px;
+    background-color: buttonhighlight;
 }
 
 .cate-content-box{
-    display: row;
+    display: flex;
     margin : 0 10% 0 10%;
-
+	
 }
 
 .left-box{
-    width: 700px;
+    width: 300px;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
     padding: 20px;
     margin-bottom : 30px;
 }
 
 .cate-button-box{
     display: flex;
-    justify-content: space-between;
     padding: 10px;
 }
 
@@ -74,6 +73,8 @@
     border: 1px solid black;
     width: 200px;
     cursor: pointer;
+    background: white;
+    font-weight: 700;
 }
 
 .cate-sub-title{
@@ -85,6 +86,7 @@
     width: 200px;
     margin-bottom: 5px;
     cursor: pointer;
+    background: white;
 }
 
 .cate-sub-box{
@@ -111,7 +113,7 @@
 }
 
 .right-box{
-    width: 500px;
+    width: 800px;
     margin-left: 50px;
 }
 
@@ -121,18 +123,17 @@
     border-collapse: collapse;
 }
 
-.tr{
-    border-bottom: 1px solid black;
-}
-
 .th{
-    width: 200px;
-    padding: 20px;
+    border-right: 1px solid #dee2e6;
+	width: 30%;
+	padding: 20px;
+	height: 30%;
+	vertical-align: middle;
+	text-align: center;
 }
 
 .td{
-    padding: 20px 0 20px 20px;
-    width: 400px;
+    padding: 20px;
 }
 
 .board-style-box{
@@ -151,5 +152,21 @@
 	display: none;
 }
 
+.cate-title-area{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+	border: 1px solid black;
+	padding: 10px;
+}
 
+.cate-title-area span{
+	font-size: 25px;
+}
 
+.cate-input{
+	width: 100%;
+	background-color: buttonhighlight;
+	border: none;
+}

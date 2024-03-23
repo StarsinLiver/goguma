@@ -9,14 +9,6 @@ table{
 	width: 700px;
 }
 
-th {
-	border-right: 1px solid #dee2e6;
-	width: 30%;
-	padding: none;
-	height: 30%;
-	vertical-align: middle;
-}
-
 thead {
 	height: 50px
 }
@@ -42,7 +34,7 @@ vertical-align: middle;
 </style>
 <!-- 메인 시작 -->
 <!-- Header Start -->
-<div class="container-fluid bg-warning py-5 mb-5 page-header">
+<div class="container-fluid bg-warning py-5 page-header">
 	<div class="container py-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
@@ -54,26 +46,23 @@ vertical-align: middle;
     <div class="main-div">
         <div class="cate-content-box">
             <div class="left-box">
-                <div class="cate-button-box">
-                    <button type="button" class="add-cate-btn">메인 카테고리 추가</button>
-                    <button type="button" class="add-sub-cate-btn">서브 카테고리 추가</button>
-                    <button type="button" class="switch-cate-btn">전체 선택 해제</button>
-                    <button type="button" class="delete-cate-btn">카테고리 삭제</button>
-                </div>
+            	<div class="cate-title-area">
+            		<span>카테고리 미리보기</span>
+            	</div>
                 <div class="cate-box"></div>
             </div>
             <div class="right-box">
                 <!-- ========================================== -->
                 <table class="table">
-					<tr>
-						<th>게시판 이름 입력</th>
-						<td>
+					<tr class="tr">
+						<th class="th">게시판 이름 입력</th>
+						<td class="td">
 							<input type="text" class="cate-input">
 						</td>
 					</tr>
-					<tr class="hide-tr">
-						<th>폰트 선택</th>
-						<td>
+					<tr class="hide-tr tr">
+						<th class="th">폰트 선택</th>
+						<td class="td">
 							<div class="radio-all-box">
 								<div class="radio-box">
 									<input type="radio" value="Dongle" name="font" class="font-select-radio" checked>
@@ -90,9 +79,9 @@ vertical-align: middle;
 							</div>
 						</td>
 					</tr>
-					<tr class="hide-tr">
-						<th>배치 형식</th>
-						<td>
+					<tr class="hide-tr tr">
+						<th class="th">배치 형식</th>
+						<td class="td">
 							<div class="radio-all-box">
 								<div class="radio-box">
 									<input type="radio" value="LIST" name="type" class="type-select-radio" checked>
@@ -105,13 +94,23 @@ vertical-align: middle;
 							</div>
 						</td>
 					</tr>
-					<tr class="hide-tr">
-						<th>배경 이미지 선택</th>
-						<td>
+					<tr class="hide-tr tr">
+						<th class="th">배경 이미지 선택</th>
+						<td class="td">
 							<div class="mb-3" style="padding:5px 0px 0px 0px;">
 							  <input class="form-control" type="file" id="formFile" style="font-size: 1.5rem" accept="image/gif, image/jpeg, image/png">
 							</div>
 						</td>
+					</tr>
+					<tr class="tr">
+						<td colspan="2"  class="td">
+							<div class="cate-button-box">
+			                    <button type="button" class="add-cate-btn">메인 카테고리 추가</button>
+			                    <button type="button" class="add-sub-cate-btn">서브 카테고리 추가</button>
+			                    <button type="button" class="switch-cate-btn">전체 선택 해제</button>
+			                    <button type="button" class="delete-cate-btn">카테고리 삭제</button>
+			                </div>
+						</th>
 					</tr>
 				</table>
                 <!-- ========================================== -->
