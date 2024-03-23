@@ -45,7 +45,6 @@ public class FreeboardController {
 
 	@GetMapping("/main")
 	public String boardMain( Model model, HttpSession session) {
-		
 		session.setAttribute("plusFreeView", true);
 		List<FreeBoardDTO> boardList = freeBoardService.findAllFree();
 		// 베스트 게시물
