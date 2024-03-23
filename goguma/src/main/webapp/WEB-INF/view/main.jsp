@@ -161,9 +161,27 @@
 		</div>
 		<!-- end section -->
 
-		<section class="section nopad cac text-center">
-			<a href="#"><h3>아마도 광고 들어갈 예정</h3></a>
-		</section>
+			
+				<!-- 배너 출력 start -->
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px;  margin-left: 23%;">
+			<!--  광고 하단 버튼 생성 위치 -->
+		  <div class="carousel-indicators btn" style="left: 0px">
+		  </div>
+		  <!-- 광고 이미지 생성 위치 -->
+		  <div class="carousel-inner" style="width: 2000px">
+		   
+		  </div>
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>
+		<!-- 배너 출력 end -->
+
 
 		<div id="case" class="section wb">
 			<div class="container">
@@ -255,5 +273,55 @@
 	</div>
 </div>
 <script src="/customAssets/js/chat_aside.js"></script>
+<script>
+$(document).ready(function(){
+	
+	var type = "FREEBOARD"
+	
+		// banner ajax start
+		$.ajax({
+				    method: "GET",
+				    url: "/banner",
+				    data:{
+						type: type,
+					},
+				    success: function(data) {
+				        console.log('data확인 배너 리스트 석세스: ' + data); //
+				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
+				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
+				        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
+				
+				        var btn = "";
+				        var img = "";
+				       
+				
+				        // banner 버튼 생성 for문
+				        for (var i = 0; i < data.length; i++) {
+				            var board = data[i];
+				            var type = data[i].type;
+				            console.log('로그 확인 데이터 타입으로다가: ' + type);
+				
+				            if (type == 'FREEBOARD') {
+				                // 첫 번째 버튼에만 active 클래스 추가
+				                var isActive = i === 0 ? ' active' : '';
+				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + i + '"></button>';
+				
+				                // 이미지 추가
+				                img += '<div class="carousel-item' + isActive + '">';
+				                img += '<a href="' + board.url + '"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
+				                img += '</div>';
+				            }
+				        }
+				
+				        $('.carousel-indicators').html(btn);
+				        $('.carousel-inner').html(img);
+				    },
+				    error: function() {
+				        // 에러 처리
+				    }
+				});
+});	
+
+</script>
 <!-- 푸터 -->
 <%@ include file="/WEB-INF/view/footer.jsp"%>

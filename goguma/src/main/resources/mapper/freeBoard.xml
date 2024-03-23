@@ -431,4 +431,15 @@
 		s.group_id = #{cate1} AND s.id = #{id}
 	</select>
 	
+	
+	<!-- sidebar 카테고리 출력 -->
+	<select id="selectSideCateAll" resultType="com.store.goguma.freeboard.dto.CategoryDTO">
+		
+		SELECT m.id, m.name, s.id as subId, s.name as subName, s.group_id as groupId , s.row_count as rowCount 
+		FROM board_main_category as m join board_sub_category as s
+		on m.id = s.group_id; 
+	
+	</select>
+	
+	
 </mapper>

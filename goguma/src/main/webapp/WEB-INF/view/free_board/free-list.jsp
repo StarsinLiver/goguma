@@ -145,7 +145,7 @@ h2 {
 	<!-- 배너 출력 start -->
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px">
 			<!--  광고 하단 버튼 생성 위치 -->
-		  <div class="carousel-indicators btn">
+		  <div class="carousel-indicators btn" style="left: 0px">
 		  </div>
 		  <!-- 광고 이미지 생성 위치 -->
 		  <div class="carousel-inner">

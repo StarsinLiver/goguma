@@ -9,6 +9,7 @@ import com.store.goguma.entity.Banner;
 import com.store.goguma.repository.BannerRepository;
 import com.store.goguma.user.dto.my.RequestPageDTO;
 import com.store.goguma.user.dto.my.ResponsePageDTO;
+import com.store.goguma.utils.BannerType;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +86,7 @@ public class BannerService {
 	 * @return
 	 */
 	@Transactional
-	public List<Banner> findByAll(String type) {
+	public List<Banner> findByAll(BannerType type) {
 		return bannerRepository.findByAll(type);
 	}
 }

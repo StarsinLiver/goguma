@@ -56,9 +56,8 @@ $(".selectOption").change(
 		var searchType = $(this).val(); // 선택된 값 가져오기
 		console.log("Selected value11111: "
 				+ searchType); // 콘솔에 출력
-		$("#searchType").text(
-				"Selected value111111111111111: "
-						+ searchType); // 선택된 값 표시
+				
+	
 						
         // 로컬 스토리지에 저장
         localStorage.setItem("searchType", searchType);
@@ -70,15 +69,14 @@ $(".selectOption").change(
 $(".search").change(
 	
 		function() {
-		var sear//console.log $(this).val(); // 선택된 값 가져오기
+		var search =  $(this).val();
+		console.log('서치된 값 확인 키워드임: '+ $(this).val()); // 선택된 값 가져오기
 		console.log("Selected value22222: "
 				+ searchKeyword); // 콘솔에 출력
-		$("#searchKeyword").text(
-				"Selected value22222222222: "
-						+ searchKeyword); // 선택된 값 표시
+	
 						
         // 로컬 스토리지에 저장
-        localStorage.setItem("searchKeyword", searchKeyword);
+        localStorage.setItem("searchKeyword", search);
 				
 						
 });
@@ -437,7 +435,7 @@ $(document).ready(function() {
 
 			});/* list ajax end*/
 		
-		 var type = "FREEBOARD";
+		 var type = "LIST";
 		
 			// banner ajax start
 		$.ajax({
@@ -462,10 +460,10 @@ $(document).ready(function() {
 				            var type = data[i].type;
 				            console.log('로그 확인 데이터 타입으로다가: ' + type);
 				
-				            if (type == 'FREEBOARD') {
+				            if (type == 'LIST') {
 				                // 첫 번째 버튼에만 active 클래스 추가
 				                var isActive = i === 0 ? ' active' : '';
-				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
+				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + i + '"></button>';
 				
 				                // 이미지 추가
 				                img += '<div class="carousel-item' + isActive + '">';
@@ -494,10 +492,8 @@ $("button[type='submit']")
 				function(event) {
 					event.preventDefault();
 
-					var searchType = $(".selectOption")
-							.val();
-					var searchKeyword = $(".search")
-							.val();
+					var searchType = $(".selectOption").val();
+					var searchKeyword = $(".search").val();
 
 					console.log('서치 타입: ' + searchType);
 					console.log('서치 내용: '

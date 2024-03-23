@@ -10,10 +10,12 @@ import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.BoardTypeDTO;
+import com.store.goguma.freeboard.dto.CategoryDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDetailDto;
 import com.store.goguma.freeboard.dto.FreeBoardFormDTO;
+import com.store.goguma.freeboard.dto.FreeBoardListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardManyCategoryDto;
 import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
 import com.store.goguma.freeboard.dto.FreeBoardResDTO;
@@ -81,5 +83,8 @@ public interface FreeBoardRepository {
 	
 
 	// 게시글 상세 조회 + 저 사진, 유저 이름
-	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id);	
+	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id);
+
+	// 자유게시판 카테고리 생성 
+	public List<CategoryDTO> selectSideCateAll();	
 }
