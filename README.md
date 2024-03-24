@@ -4,8 +4,8 @@
 <br/>
 
 # 1️⃣ 프로젝트 구조
-- com.store.goguma
-- 각각 기능별 [관리자 , 유저 , 자유게시판 ...]로 구분
+#### com.store.goguma
+#### 각각 기능별 [관리자 , 유저 , 자유게시판 ...]로 구분
 
 <details>
   <summary> 프로젝트 구조 보기</summary>
