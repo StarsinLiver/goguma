@@ -194,7 +194,7 @@ $.ajax({
 						html +=	'<div class="col-md-3">';
 						html +=	'<div class="card2">';
 						html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
-								+'"> <img src="/assets/images/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
+								+'"> <img src="/images/upload/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
 						html +=	'<div class="txt-wrap">';
 						html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment">[1]</span></a>';
 						html +=	'<div class="user">';
@@ -381,7 +381,7 @@ $(document).ready(function() {
 							html +=	'<div class="col-md-3">';
 							html +=	'<div class="card2">';
 							html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
-									+'"> <img src="/assets/images/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
+									+'"> <img src="/images/upload/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
 							html +=	'<div class="txt-wrap">';
 							html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment">[1]</span></a>';
 							html +=	'<div class="user">';
@@ -604,7 +604,7 @@ $("button[type='submit']")
 												html +=	'<div class="col-md-3">';
 												html +=	'<div class="card2">';
 												html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
-														+'"> <img src="/assets/images/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
+														+'"> <img src="/images/upload/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
 												html +=	'<div class="txt-wrap">';
 												html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment">[1]</span></a>';
 												html +=	'<div class="user">';

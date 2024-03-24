@@ -170,7 +170,7 @@ textarea {
 			<br> <br> <br>
 			<!-- 게시글 시작 -->
 			<div style="width: 81%; margin: 0% 5%;">
-				${board.content} <a href="#">sssssss</a>
+				${board.content}
 				<p style="width: 100%;">${boardCountRD.content}</p>
 			</div>
 			<br>

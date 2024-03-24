@@ -423,7 +423,7 @@
 		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
 		,s.id as subId , s.name ,
 		s.row_count, s.background,
-		s.font, s.list_type
+		s.font, s.list_type as listType
 		FROM board_main_category AS m
 		JOIN
 		board_sub_category AS s
