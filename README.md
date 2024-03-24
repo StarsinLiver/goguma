@@ -677,12 +677,13 @@
 
 # 2️⃣ 프로젝트 개요
 
-- 채팅 기반 중고 거래 사이트
+## 🍠 고구마 이름의 유래
+- 
 
 <br/>
 <br/>
 
-# 🍠 역할 분담
+## 🍠 역할 분담
 장소 공유 및 예약 관리서비스 플랫폼<br><br>
 
 |Name|이산하 [ 팀장 ]|강민|정영재|이지민|김병준|
@@ -696,7 +697,7 @@
 <br/>
 <br/>
 
-# 📚기술스택
+## 📚기술스택
 <div class= "container">
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=OpenJDK&logoColor=white">
