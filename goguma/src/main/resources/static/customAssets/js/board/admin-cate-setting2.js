@@ -463,7 +463,7 @@ function finalSaveBtnClick(innerBody){
 				success : function(data){
 					if(data == true){
 						alert("저장되었습니다!");
-						//location.href = "/board/cate-setting2";
+						window.location.reload();
 					}
 				},
 				error : function(){
