@@ -720,7 +720,7 @@
 <img src="https://img.shields.io/badge/bootstrap-ba55d3?style=for-the-badge&logo=bootstrap&logoColor=black">
 </div>
 
-###  🕵️‍♂️Front_End
+###  🕵️‍♂️ Front_End
 <details>
 <summary> FrontEnd</summary>
 <div markdown="1">
@@ -745,7 +745,7 @@
 </div>
 </details>
 
-###  🕵️‍♂️Back_End
+###  🕵️‍♂️ Back_End
 <details>
 <summary>BackEnd</summary>
 <div markdown="1">
@@ -764,7 +764,7 @@
 
 </details>
 
-### :herb:개발 툴
+### :herb: 개발 툴
 <details>
 <summary>개발 툴</summary>
 
@@ -772,7 +772,7 @@
 - Mysql v8..46 
 </details>
 
-### :octocat:협력 툴
+### :octocat: 협력 툴
 <details>
 <summary>협력 툴</summary>
 
@@ -780,7 +780,7 @@
 - discord 
 </details>
 
-### 📡API
+### 📡 API
 <details>
 <summary>API</summary> 
 <div markdown="1">
