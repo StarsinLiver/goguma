@@ -19,6 +19,7 @@ import com.store.goguma.service.NoticeService;
 import com.store.goguma.service.ProductHistoryService;
 import com.store.goguma.service.ProductService;
 import com.store.goguma.service.UserService;
+import com.store.goguma.utils.BannerType;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -91,7 +92,7 @@ public class MainController {
 	// 배너 전용 컨트롤러
 	@GetMapping("/banner")
 	@ResponseBody
-	public List<Banner> bannerProc(@RequestParam("type") String type) {
+	public List<Banner> bannerProc(@RequestParam("type") BannerType type) {
 		
 		log.info("컨트롤러 타고들어오는 배너 타입 확인 : "+type);
 		

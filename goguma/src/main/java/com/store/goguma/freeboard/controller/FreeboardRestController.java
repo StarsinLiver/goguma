@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.BoardCategorySub;
+import com.store.goguma.freeboard.dto.CategoryDTO;
 import com.store.goguma.freeboard.dto.FreeBoardListDTO;
 import com.store.goguma.freeboard.dto.FreeBoardPageDTO;
 import com.store.goguma.service.BoardService;
@@ -158,6 +159,21 @@ public class FreeboardRestController {
 		
 		
 		log.info("relust 값 확인 하기: "+ result.toString());
+		
+		return result;	
+	}  
+	
+	// 자유 게시판 카테고리 생성
+	@GetMapping("/category")
+	@ResponseBody
+	public List<CategoryDTO> CategoryProc(){
+		
+		
+		
+		List<CategoryDTO> result = freeBoardService.selectSideCateAll();
+		
+		log.info("카테고리 컨트롤러 리절트값 확인: " + result);
+		
 		
 		return result;	
 	}  

@@ -1,0 +1,70 @@
+/**
+ * 
+ */
+
+$(document).ready(function() {
+    $(".btn").toggleClass("click");
+    $(".sidebar").toggleClass("show");
+
+    // Ajax 요청
+    $.ajax({
+        method: "GET",
+        url: "/free-board/category",
+        success: function(data) {
+            console.log('카테고리 석세스 콘솔 id 확인: ' + data[0].id);
+            console.log('카테고리 석세스 콘솔 id 확인: ' + data[0].subId);
+
+            var cate = "";
+
+            // 중복되지 않는 id 값을 추출
+            var uniqueIds = [...new Set(data.map(item => item.id))];
+
+            // 중복되지 않는 id에 대한 하위 항목을 그룹화하여 아코디언으로 생성
+            uniqueIds.forEach(id => {
+                cate += '<li>';
+                cate += '<a href="#" class="feat-btn">' + data.find(item => item.id === id).name + '<span class="fas fa-caret-down first"></span></a>'; // 1차 카테고리
+                cate += '<ul class="feat-show">'; // 2차 카테고리 시작
+
+                data.filter(item => item.id === id).forEach(subItem => {
+                    cate += '<li><a href="/freeBoard/list?cate1=1&id=1">' + subItem.subName + '</a></li>'; // 2차 카테고리
+                });
+
+                cate += '</ul>'; // 2차 카테고리 종료
+                cate += '</li>'; // 1차 카테고리 종료
+            });
+
+            // HTML에 추가
+            $('.categiry').html(cate);
+
+            // 각각의 .feat-btn 요소에 대한 클릭 이벤트 핸들러를 등록합니다.
+            $(".feat-btn").off("click").on("click", function() {
+                $(this).next(".feat-show").slideToggle();
+                $(this).find(".fas").toggleClass("fa-caret-down fa-caret-up");
+
+                // 현재 클릭된 .feat-btn을 제외한 다른 .feat-btn의 .feat-show를 닫습니다.
+                $(".feat-btn").not(this).next(".feat-show").slideUp();
+                $(".feat-btn").not(this).find(".fas").removeClass("fa-caret-up").addClass("fa-caret-down");
+            });
+        },
+        error: function() {
+            console.log('카테고리 펄스 에러 쓋~~~');
+        }
+    });
+});
+
+
+
+
+
+
+$(".feat-btn").click(function() {
+	$("nav ul .feat-show").toggleClass("show");
+	$("nav ul .first").toggleClass("rotate");
+});
+$(".serv-btn").click(function() {
+	$("nav ul .serv-show").toggleClass("show1");
+	$("nav ul .second").toggleClass("rotate");
+});
+$("nav ul li").click(function() {
+	$(this).addClass("active").siblings().removeClass("active");
+});
