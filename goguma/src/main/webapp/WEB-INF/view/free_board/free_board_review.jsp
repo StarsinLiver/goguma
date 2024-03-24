@@ -52,20 +52,41 @@
 .reply_box3 {
 	margin-left: 60px; /* 대대댓글이 들여쓰기되도록 설정 */
 }
-
+.review-list-imoji {
+	width: 100px;
+	height: 100px;
+}
+.imoji-tab {
+	display: none;
+	padding: 10px;
+    border: 1px solid black;
+}
+/* 메인 이모티콘 목록 */
 .main-imoji-list {
 	display: block;
 	border: 1px solid black; 
-	width: 200px; 
+	width: 400px; 
 	height: 70px;
 	overflow-x: auto;
   	white-space: nowrap;
 }
-
 .main-imoji-list img {
 	width: 70px;
 	height: 100%;
 }
+
+/* 서브 이모티콘 목록 */
+.sub-imoji-list {
+	width: 400px;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid black;
+}
+.sub-imoji-list img {
+	width: 70px;
+	height: 70px;
+}
+
 </style>
 </head>
 <body>
@@ -107,19 +128,17 @@
 					<textarea id="review-content" name="content" 
 						style="resize: none; border: 1px solid #ccc;"></textarea>
 					<div style="display: flex; justify-content: space-between; align-items: stretch;">
-						<p>
-							<button type="button" class="btn btn-warning" onclick="onclickReviewMainEmoji()">이모티콘</button>
-							<div id="display-click-emoji"></div>
-						</p>
-						<button type="button" class="btn btn-primary" onclick="review()">등록</button>
+						<button type="button" class="btn btn-warning" onclick="onclickReviewMainEmoji()">이모티콘</button>
 						
+						<button type="button" class="btn btn-primary" onclick="review()">등록</button>
 					</div>
-					<div>
+					<div class="imoji-tab" id="comment-tab">
 						<div class="main-imoji-list" id="comment-main-imoji">
 						</div>
 						
 						<div class="sub-imoji-list" id="comment-sub-imoji">
 						</div>
+						<div id="display-click-emoji"></div>
 					</div>
 				</div>
 			</div>

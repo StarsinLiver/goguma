@@ -162,7 +162,6 @@ public class FreeboardRestController {
 		
 		return result;	
 	}  
-	
 	// 자유 게시판 카테고리 생성
 	@GetMapping("/category")
 	@ResponseBody

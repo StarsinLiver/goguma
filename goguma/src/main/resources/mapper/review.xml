@@ -63,7 +63,8 @@
 		SELECT COUNT(*)
 		FROM `review`
 		WHERE
-		free_board_id=#{freeBoardId}
+		free_board_id=#{freeBoardId} 
+			and delete_yn = 'N'
 	</select>
 
 	<!-- 댓글 하나만 삭제 -->
