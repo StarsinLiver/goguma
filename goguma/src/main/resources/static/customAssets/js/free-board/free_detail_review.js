@@ -9,8 +9,9 @@ const deleteSubForm = document.getElementById('delete-sub-form');
 const mainImojiList = document.getElementById('comment-main-imoji'); // 메인 이모티콘
 const subEmojiList = document.getElementById('comment-sub-imoji'); // 이모티콘 서브
 const displayClickEmoji = document.getElementById('display-click-emoji'); // 이모지를 display
+const commentTab = document.getElementById('comment-tab'); // 이모티콘 탭
 let reviewPg = 0; // 현재 페이지 번호
-let last = 0; // 마지막 페이지
+let last = 1; // 마지막 페이지
 
 let emojiFile = ""; // 유저가 선택한 이모지 중요 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -36,14 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
 imojiList();
 function imojiList(){
 	
-	// 비회원 막기
-	if(user === '' || user === null){
-		console.log('유저 검사');
-		if(confirm('로그인이 되지 않으셨습니다. 로그인하시겠습니까?')){
-			window.location.href = '/login';
-		}
-		return;
-	}
 	
 	$.ajax({    
 		type : 'post',               
@@ -88,16 +81,30 @@ const displaySubEmoji = (index , type) => {
 	return display;
 }
 
-// 리뷰 답글의 메인 이모지 button 클릭창
+// 리뷰 답글의 메인 이모지 button 클릭창(댓글)
 const onclickReviewMainEmoji = () => {
+	const reviewTab = document.getElementById('review-tab'); // 답글 이모티콘 창
+	
+	commentTab.style.display = 'inline-block';
+	
+	if(reviewTab){
+		reviewTab.style.display = 'none';
+	}
+	
 	mainImojiList.innerHTML = forMainImg(REVIEW);
 	
 	clearEmoji(COMMENT);
 } 
 
-// 코멘트의 메인 이모지 button 클릭창
+// 코멘트의 메인 이모지 button 클릭창(답글)
 const onclickCommentMainEmoji = () => {
+	const reviewTab = document.getElementById('review-tab'); // 답글 이모티콘 창
 	const reviewMainEmoji = document.getElementById('review-main-imoji'); // 이모티콘 메인
+	
+	reviewTab.style.display = 'inline-block';
+	commentTab.style.display = 'none';
+	emojiFile = '';
+	
 	reviewMainEmoji.innerHTML = forMainImg(COMMENT);
 	
 	clearEmoji(REVIEW);
@@ -184,8 +191,13 @@ function review(){
 		success : function(result) {  
 			console.log(" 마지막 페이지 : "+last);
 			reviewPg = last;
+			console.log("값 : "+reviewPg);
+			if(reviewPg <= 0){ // 첫 등록시
+				reviewPg = 1;
+			}
 			reviewList(reviewPg);
 			contentTextArea.value = '';
+			emojiFile = '';
 		},    
 		error : function(request, status, error) {     
 			console.log(error);
@@ -317,8 +329,8 @@ function createComment(commentData, comment){
 	comment	+=	'</span>';
 	comment	+=	'</div>';
 	comment	+=	'<div class="clear cmt_txtbox btn_reply_write_all">';
-	if(commentData.file !== null){
-		comment	+= '<img src="/images/upload/emoji/'+commentData.file+'" alt="" />';
+	if(commentData.file !== null && commentData.file !== ''){
+		comment	+= '<img src="/images/upload/emoji/'+commentData.file+'" class="review-list-imoji" alt="" />';
 	}
 	comment	+=  '<p class="usertxt ub-word" style="margin-top: 10px;">'+commentData.content +'</p>';
 	comment	+=	'</div>';
@@ -339,6 +351,7 @@ function createComment(commentData, comment){
 	return comment;
 }
 
+// 댓글 삭제
 function deleteComment (id) {
 	
 	console.log("삭제 아이디 : " , id);
@@ -348,6 +361,8 @@ function deleteComment (id) {
 		type : "delete" ,
 		success : function(data) {
 			console.log(data);
+			reviewList(reviewPg);
+			
 		}
 		, error : function (xhr) {
 			console.log(xhr);
@@ -403,15 +418,17 @@ function subComment(number){
 							'style="resize: none; border: 1px solid #ccc;"></textarea>'+
 						'<div style="display: flex; justify-content: space-between; align-items: stretch;">'+
 							'<button type="button" class="btn btn-warning" onclick="onclickCommentMainEmoji()">이모티콘</button>'+
-							`<div id="display-click-emoji-comment"></div>` +
 							'<div>'+
-							'<button type="button" class="btn btn-danger" onclick="deleteTag()">닫기</button>'+
-							'<button type="button" class="btn btn-primary" onclick="subCommentForm()">등록</button>'+
+								'<button type="button" class="btn btn-danger" onclick="deleteTag()">닫기</button>'+
+								'<button type="button" class="btn btn-primary" onclick="subCommentForm()">등록</button>'+
 							'</div>'+
 						'</div>'+
-						'<div class="main-imoji-list" id="review-main-imoji">'+
-						'</div>'+
-						'<div class="sub-imoji-list" id="review-sub-imoji">'+
+						'<div class="imoji-tab" id="review-tab">'+
+							'<div class="main-imoji-list" id="review-main-imoji">'+
+							'</div>'+
+							'<div class="sub-imoji-list" id="review-sub-imoji">'+
+							'</div>'+
+							'<div id="display-click-emoji-comment"></div>' +
 						'</div>'+
 					'</div>';
 					
@@ -476,6 +493,7 @@ function subCommentForm(){
 		success : function(result) {  
 			console.log(reviewPg);
 			reviewList(reviewPg);
+			emojiFile = '';
 			
 		},    
 		error : function(request, status, error) {     

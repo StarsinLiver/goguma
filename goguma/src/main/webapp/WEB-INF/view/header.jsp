@@ -176,7 +176,7 @@
 						href="/about" class="nav-item nav-link">회사 소개</a>
 					<c:if test="${principal.role == 'USER'}">
 						<div class="nav-item dropdown">
-							<a href="#" class="nav-link dropdown-toggle"
+							<a href="#" class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login"
 								data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
 							<div class="dropdown-menu fade-down m-0">
 								<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a><a

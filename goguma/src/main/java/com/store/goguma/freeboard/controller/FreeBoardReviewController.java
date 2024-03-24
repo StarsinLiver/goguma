@@ -73,7 +73,7 @@ public class FreeBoardReviewController {
 		log.info("dto" + dto);
 
 		FreeBoardReviewResDTO boardPageResDto = reviewService.findReviewListByBoardId(dto);
-
+		log.info("현재 : "+boardPageResDto);	
 		return boardPageResDto;
 	}
 
