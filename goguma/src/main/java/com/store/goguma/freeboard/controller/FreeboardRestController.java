@@ -1,5 +1,6 @@
 package com.store.goguma.freeboard.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,6 @@ import com.store.goguma.service.FreeBoardService;
 import com.store.goguma.user.dto.OauthDTO;
 
 import ch.qos.logback.core.model.Model;
-import edu.emory.mathcs.backport.java.util.Arrays;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -151,7 +151,7 @@ nav ul li a span.rotate {
       <span class="fas fa-bars"></span>
     </div>
     <nav class="sidebar" style=" z-index: 2;">
-      <div class="text">MENUE</div>
+      <div class="text">카테고리</div>
       <ul class="categiry">
         <!-- <li class="active"><a href="#">Dashboard</a></li>
         <li>

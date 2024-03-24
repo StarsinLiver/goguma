@@ -137,7 +137,7 @@
 							<c:forTokens items="${product.file}" delims="," var="token"
 								varStatus="loop">
 								<c:if test="${loop.index == 0}">
-									<img src="/images/upload/${token}">
+									<img src="/images/upload/${token}" style="width : 100%; height : 100%;">
 								</c:if>
 							</c:forTokens>
 						</div>

@@ -36,7 +36,7 @@ dependencies {
 	implementation 'net.nurigo:javaSDK:2.2'
 	
 	// 챗gpt
-    implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'
+    //implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'
 	
 	// jstl
 	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'

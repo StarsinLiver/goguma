@@ -63,11 +63,14 @@
 <link rel="stylesheet" href="/customAssets/css/cs/faq/list.css">
 <link rel="stylesheet" href="/customAssets/css/about/about.css">
 <link rel="stylesheet" href="/customAssets/css/board/list.css">
-<link rel="stylesheet" href="/customAssets/css/board/admin-cate-setting.css">
+<link rel="stylesheet"
+	href="/customAssets/css/board/admin-cate-setting.css">
 <!-- font-family -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <!-- ex 
 .sunflower-light {
   font-family: "Sunflower", sans-serif;
@@ -75,7 +78,9 @@
   font-style: normal;
 } 
 -->
-<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Stylish&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Dongle&family=Stylish&family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
 <!-- 
 .dongle-regular {
   font-family: "Dongle", sans-serif;
@@ -83,21 +88,22 @@
   font-style: normal;
 }
  -->
- <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Stylish&family=Sunflower:wght@300&display=swap" rel="stylesheet">
- <!-- 
+<link
+	href="https://fonts.googleapis.com/css2?family=Dongle&family=Gamja+Flower&family=Stylish&family=Sunflower:wght@300&display=swap"
+	rel="stylesheet">
+<!-- 
  .gamja-flower-regular {
   font-family: "Gamja Flower", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
   -->
- 
+
 <!-- font-family end -->
 <link rel="stylesheet"
 	href="/customAssets/css/board/admin-cate-setting.css">
 
-<link rel="stylesheet"
-	href="/customAssets/css/all/font.css"/>
+<link rel="stylesheet" href="/customAssets/css/all/font.css" />
 <!-- Custom CSS -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5275edbfc405960aad1f6f12211cdd04"></script>
@@ -140,7 +146,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<div class="navbar-nav ms-auto p-4 p-lg-0">
+				<div class="navbar-nav ms-auto p-4 p-lg-0" style="float: right;">
 					<a href="/" class="nav-item nav-link active">Home</a>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
@@ -148,11 +154,19 @@
 						<div class="dropdown-menu fade-down m-0">
 							<a href="/product/product-list" class="dropdown-item">리스트</a> <a
 								href="/product/write" class="dropdown-item">상품 등록</a> <a
-								href="/chat/room" class="dropdown-item">채팅하기</a>
+								href="/chat/room" class="dropdown-item">채팅하기</a> <a
+								href="/emoji/list" class="dropdown-item">이모티콘 상점</a>
 						</div>
 
 					</div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
+						<div class="dropdown-menu fade-down m-0">
+							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 
+						</div>
+					</div>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</a>
@@ -163,26 +177,13 @@
 						</div>
 					</div>
 
-					<div class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
-						<div class="dropdown-menu fade-down m-0">
-													<a href="/freeBoard/main" class="dropdown-item">리스트</a>
 
-						</div>
-					</div>
-					<a href="/emoji/list" class="nav-item nav-link">이모티콘</a> <a
-						href="/about" class="nav-item nav-link">회사 소개</a>
+					<a href="/about" class="nav-item nav-link">회사 소개</a>
 					<c:if test="${principal.role == 'USER'}">
-						<div class="nav-item dropdown">
-							<a href="#" class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login"
-								data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
-							<div class="dropdown-menu fade-down m-0">
-								<a href="/user/imoji" class="dropdown-item">이모티콘 목록</a><a
-									href="/user/product" class="dropdown-item">거래 내역</a> <a
-									href="/user/info" class="dropdown-item">내 정보</a>
-							</div>
-						</div>
+						<a href="/user/info"
+							class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">마이페이지<i
+							class="fa fa-arrow-right ms-3"></i></a>
+
 					</c:if>
 					<!-- 이부분은 로그인 되었을 경우에만 표시되게 설정 -->
 				</div>

@@ -305,7 +305,7 @@ h4 {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6" style="width: 75%;  margin-left: 14%;;">
+			<div class="col-lg-6" style="width: 75%; ">
 				<div class="owl-screenshots owl-carousel owl-theme text-center">
 				<c:forEach items="${listCreateAt}" var="list">
 					<div class="owl-screen">

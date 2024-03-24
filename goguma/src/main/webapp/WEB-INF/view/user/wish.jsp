@@ -68,7 +68,7 @@
 						<div class="card-photo">
 							<c:forTokens items="${wish.productFile}"  delims="," var="file" varStatus="loop">
 							<c:if test="${loop.first}">
-									<img alt="이미지" src="/images/upload/${file}">
+									<img alt="이미지" src="/images/upload/${file}" style="width : 100% ; height : 100%;">
 								</c:if>
 							</c:forTokens>
 						</div>

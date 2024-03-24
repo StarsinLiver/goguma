@@ -118,10 +118,10 @@
 										<p>${chatMessage.userName}&nbsp;:&nbsp;${chatMessage.text}</p>
 										
 										<c:if test="${chatMessage.chatMessageType == 'IMAGE'}">
-											<img src="/images/upload/${chatMessage.file}"/>
+											<img src="/images/upload/${chatMessage.file}" style="width : 200px ; height : 100px;"/>
 										</c:if>
 										<c:if test="${chatMessage.chatMessageType == 'EMOJI'}">
-											<img src="/images/upload/emoji/${chatMessage.emoji}"/>
+											<img src="/images/upload/emoji/${chatMessage.emoji}" style="width : 200px ; height : 100px;"/>
 										</c:if>
 										<p>${chatMessage.createAt}</p>
 										<br/>
