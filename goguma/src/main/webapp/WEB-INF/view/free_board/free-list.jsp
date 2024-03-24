@@ -129,6 +129,20 @@ h2 {
     flex-wrap: wrap;
 
 }
+.page-item {
+width: 39px;
+
+}
+
+.btn-write{
+    width: 100px;
+font-size:x-large;
+
+}
+
+.page-link{
+       width: 50px;
+}
 
 /* 폰트 적용을 위한 css end */
 </style>
@@ -166,7 +180,7 @@ h2 {
 				게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float: right;">메인으로</a>
 			</h2>
 			<!-- 리스트 테이블 -->
-			<input type="text" value="${type.listType}" id="listType" />
+			<input type="hidden" value="${type.listType}" id="listType" />
 			<button style="display: none;" class="typeValue" id="typeValue"
 				data-value="${type.listType}"></button>
 				
@@ -189,7 +203,7 @@ h2 {
 					</ul>
 				</nav>
 				<!-- 글 작성 버튼 -->
-				<a class="btn btn-outline-secondary" href="/freeBoard/write">글쓰기</a>
+				<a class="btn btn-outline-secondary btn-write" href="/freeBoard/write">글쓰기</a>
 			</div>
 			<!-- 검색창 -->
 			<form class="d-flex justify-content-center mt-3">

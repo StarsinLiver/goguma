@@ -99,6 +99,9 @@ h4 {
 	padding: 10px;
 	text-align: center;
 }
+
+
+
 </style>
 
 <!-- 메인 컨텐츠 -->
@@ -133,7 +136,7 @@ h4 {
 		<!-- 배너 출력 end -->
 		<div class="col-lg-4">
 			<h2>
-				베스트 사진게시물<a href="/freeBoard/card" style="float: right;">더보기</a>
+				베스트 사진게시물
 			</h2>
 			<div class="row">
 				<c:forEach var="board" items="${rDList}" varStatus="loop">
@@ -159,7 +162,7 @@ h4 {
 		<!-- 리스트 형식의 글 목록 -->
 		<div class="col-lg-4">
 			<h2>
-				베스트 게시물<a href="/freeBoard/list" style="float: right;">더보기</a>
+				베스트 게시물
 			</h2>
 			<ul class="list-group">
 				<c:forEach var="board" items="${rDList}" varStatus="loop">
