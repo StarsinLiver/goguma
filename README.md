@@ -764,7 +764,7 @@
 
 </details>
 
-### 개발 툴
+### 🕵️‍♂️개발 툴
 <details>
 <summary>개발 툴</summary>
 
@@ -772,7 +772,7 @@
 - Mysql v8..46 
 </details>
 
-### 협력 툴
+### :octocat:협력 툴
 <details>
 <summary>협력 툴</summary>
 
