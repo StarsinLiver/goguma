@@ -11,18 +11,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class SubCategoryDTO {
+public class CategoryDTO {
+
+	//메인 카테고리
 	
-	//필요 없을듯
-	// board_sub_cate
 	private Integer id;
 	private String name;
-	private Integer group_id;
-	private Integer number;
-	private Integer row_count;
-	private String background;
-	private String font;
-	private String list_type;
 	
-	
+	// board_sub_cate
+	private Integer subId;
+	private String subName;
+	private Integer groupId;
+	private Integer rowCount;
 }

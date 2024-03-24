@@ -49,7 +49,7 @@ function imojiList(){
 			dataEmoji = result;
 		},    
 		error : function(request, status, error) {     
-			console.log(error)    
+			//console.log(error)    
 		}});
 	
 }
@@ -65,7 +65,6 @@ let mainEmojiList = "";
 }
 
 const divEmojiImg = (img , index , type) => {
-	console.log(img , index);
 	let div = `<img src="/images/upload/emoji/${img}" onclick="onclickReviewSubEmoji(${index} , '${type}')"/>`;
 	return div;
 }
@@ -145,7 +144,6 @@ const onclickReviewSubEmoji = (index , type) => {
 const onclickEmoji = (file , type) => {
 	const display = document.getElementById('display-click-emoji-comment');
 	emojiFile = file;
-	console.log(emojiFile);
 	
 	// 화면에 뿌려주는 이벤트
 	if(type == REVIEW) {
@@ -163,7 +161,6 @@ function review(){
 	
 	// 비회원 막기
 	if(user === '' || user === null){
-		console.log('유저 검사');
 		if(confirm('로그인이 되지 않으셨습니다. 로그인하시겠습니까?')){
 			window.location.href = '/login';
 		}
@@ -172,10 +169,8 @@ function review(){
 	
 	// 추후에 이모티콘 같이 전송
 	const content = contentTextArea.value;
-	console.log(content);
 	
 	const postId = getParams();
-	console.log('현재 번호 : '+postId);
 	
 	$.ajax({    
 		type : 'post',               
@@ -189,7 +184,6 @@ function review(){
 			"file" : emojiFile
 		}),    
 		success : function(result) {  
-			console.log(" 마지막 페이지 : "+last);
 			reviewPg = last;
 			console.log("값 : "+reviewPg);
 			if(reviewPg <= 0){ // 첫 등록시
@@ -220,7 +214,6 @@ function getParams() {
 	let currentUrl = window.location.href;
 	let url = new URL(currentUrl);
 	let id = url.searchParams.get("id");
-	console.log('id 값 '+id);
 	
 	if(id == null){
 		alert("게시글 번호가 존재하지 않습니다.");
@@ -234,9 +227,7 @@ function getParams() {
 function reviewList(pg){
 	const id = getParams();
 	const size = 10;
-	
-	console.log('현재 댓글 페이지 : '+pg);
-	
+
 	$.ajax({    
 		type : 'post',               
 		url : '/freeBoard/detail/review',            
@@ -249,7 +240,6 @@ function reviewList(pg){
 			"size": size
 		}),
 		success : function(result) {  
-			console.log(result);
 			
 			if(result !== null){
 				tagList(result);
@@ -276,7 +266,6 @@ function tagList(result){
 	let end = result.end;
 	let start = result.start;
 	
-	console.log(result);
 	// 댓글 목록
 	for(let i=0; i < result.dtoList.length; i++){
 		let commentData = result.dtoList[i];
@@ -310,8 +299,6 @@ function tagList(result){
 
 // 댓글 등록 태그
 function createComment(commentData, comment){
-		console.log("user " , user);
-
 	if(commentData.reviewGroup !== null){
 		comment += '<li id="comment_li" data-no="'+commentData.id +'" ';
 		comment += 'data-group="'+commentData.reviewGroup+'" class="ub-content reply_box">';
@@ -353,9 +340,7 @@ function createComment(commentData, comment){
 
 // 댓글 삭제
 function deleteComment (id) {
-	
-	console.log("삭제 아이디 : " , id);
-	
+
 	$.ajax({
 		url : `/freeBoard/review/delete/${id}` ,
 		type : "delete" ,
@@ -376,14 +361,14 @@ function deleteComment (id) {
 function startPage(start){
 	start -= 1;
 	reviewPg = start;
-	console.log("start : "+reviewPg);
+	//console.log("start : "+reviewPg);
 	reviewList(reviewPg);
 }
 
 // 페이지 넘기기
 function nextPage(num){
 	reviewPg = num;
-	console.log("num : "+reviewPg);
+	//console.log("num : "+reviewPg);
 	reviewList(reviewPg);
 }
 
@@ -391,7 +376,7 @@ function nextPage(num){
 function endPage(end){
 	end += 1;
 	reviewPg = end;
-	console.log("end : "+reviewPg);
+	//console.log("end : "+reviewPg);
 	reviewList(reviewPg);
 }
 
@@ -408,7 +393,7 @@ function subComment(number){
 	
 	const subCommentForm = document.getElementById('review-sub-form');
 	
-	console.log("부모 번호 : "+number);
+	//console.log("부모 번호 : "+number);
 	
 	if(!subCommentForm){
 	
@@ -468,15 +453,15 @@ function subCommentForm(){
 	const subContent = document.getElementById('sub-review-content');
 	
 	const content = subContent.value;
-	console.log(content);
+	//console.log(content);
 	
 	const postId = getParams();
-	console.log('현재 번호 : '+postId);
+	//console.log('현재 번호 : '+postId);
 	
 	const element = document.getElementById("review-sub-form");
 	const groupNumber = element.dataset.group;
 	
-	console.log("data-group 속성 값:", groupNumber);
+	//console.log("data-group 속성 값:", groupNumber);
 	
 	$.ajax({    
 		type : 'post',               
@@ -491,7 +476,7 @@ function subCommentForm(){
 			"file" : emojiFile
 		}),    
 		success : function(result) {  
-			console.log(reviewPg);
+			//console.log(reviewPg);
 			reviewList(reviewPg);
 			emojiFile = '';
 			

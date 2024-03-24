@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.maven.doxia.logging.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,9 +23,11 @@ import com.store.goguma.repository.CategoryRepository;
 import com.store.goguma.utils.Define;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryService {
 
 	private final CategoryRepository repository;
@@ -32,6 +35,8 @@ public class CategoryService {
 	@Transactional
 	public boolean addCategory(List<CategoryRequestDto> dtos, MultipartFile file) {
 		Map<String, String> map = backgroundFileUpload(file);
+		log.info("dtos : {} " , dtos);
+		log.info("addCategory : map  : {} " , map);
 		for(int i = 0; i < dtos.size(); i++) {
 			if(dtos.get(i).getFlag() == 1) {
 				subCatoryAdd(dtos.get(i).getSubList(), map, 999);
@@ -56,6 +61,10 @@ public class CategoryService {
 	//=======================================================================================================================================================
 	@Transactional
 	public void subCatoryAdd(List<SubCateObject> list, Map<String, String> map, int mainIndex) {// 전부 서브카테고리
+		
+		log.info("map : {}" , map);
+		log.info("list : {}" , list);
+		log.info("mainIndex : {}" , mainIndex);
 		for(int k = 0; k < list.size(); k++) {
 			if(list.get(k).getFlag() == 2) {// 기존 수정
 				int result = repository.subCategoryModify(list.get(k).toEntity());

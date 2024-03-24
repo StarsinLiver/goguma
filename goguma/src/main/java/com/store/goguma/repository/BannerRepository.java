@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.store.goguma.entity.Banner;
+import com.store.goguma.utils.BannerType;
 
 @Mapper
 public interface BannerRepository {
@@ -27,5 +28,5 @@ public interface BannerRepository {
 	public int delete(int id);
 	
 	// 배너 삭제
-	public List<Banner> findByAll();
+	public List<Banner> findByAll(BannerType type);
 }

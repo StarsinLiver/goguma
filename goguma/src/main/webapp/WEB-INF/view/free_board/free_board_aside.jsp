@@ -150,45 +150,28 @@ nav ul li a span.rotate {
     <div class="btn btnham">
       <span class="fas fa-bars"></span>
     </div>
-    <nav class="sidebar" style="    z-index: 2;">
+    <nav class="sidebar" style=" z-index: 2;">
       <div class="text">MENUE</div>
-      <ul>
-        <li class="active"><a href="#">Dashboard</a></li>
+      <ul class="categiry">
+        <!-- <li class="active"><a href="#">Dashboard</a></li>
         <li>
-        <!-- 1차 카테고리 위치 -->
+        1차 카테고리 위치
           <a href="#" class="feat-btn"
             >Features
             <span class="fas fa-caret-down first"></span>
           </a>
-          <!-- 1차 카테고리 위치  end-->
-          <!--  2차 카테고리 시작 -->
+          1차 카테고리 위치  end
+           2차 카테고리 시작
           <ul class="feat-show">
             <li><a href="#">Pages</a></li>
             <li><a href="#">Elements</a></li>
           </ul>
-          <!--  2차 카테고리 end -->
-        </li>
+           2차 카테고리 end
+        </li> -->
       </ul>
     </nav>
-    <div class="content">
-      <div class="header">Sidebar Dropdown Using HTML CSS & JavaScript.</div>
-    </div>
-    <script>
-    $(document).ready(function() {
-    	  $(".btn").toggleClass("click");
-    	  $(".sidebar").toggleClass("show");
-    	});
-      $(".feat-btn").click(function () {
-        $("nav ul .feat-show").toggleClass("show");
-        $("nav ul .first").toggleClass("rotate");
-      });
-      $(".serv-btn").click(function () {
-        $("nav ul .serv-show").toggleClass("show1");
-        $("nav ul .second").toggleClass("rotate");
-      });
-      $("nav ul li").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-      });
+    <script src="/customAssets/js/free-board/free_board_sidebar.js">
+   
     </script>
   </body>
 </html>

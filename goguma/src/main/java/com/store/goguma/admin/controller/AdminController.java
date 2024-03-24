@@ -794,7 +794,7 @@ public class AdminController {
 			req.setMainCategory(0);
 			req.setSubCategory(0);
 		}
-		
+		log.info("왜 시발 안되 : {}" , req);
  		ResponsePageDTO res = freeBoardService.adminFindAll(req);
 		
 		model.addAttribute("freeBoardList", res.getDtoList());
@@ -838,4 +838,9 @@ public class AdminController {
 		return "admin/freeBoard_modify";
 	}
 
+	// 카테고리 설정
+	@GetMapping("/cate-setting2")
+	public String cateSetting2() {
+		return "board/admin-cate-setting2";
+	}
 }

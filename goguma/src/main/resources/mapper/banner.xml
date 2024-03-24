@@ -65,7 +65,7 @@
 	<select id="findByAll"
 		resultType="com.store.goguma.entity.Banner">
 		select * from banner
-		where delete_yn = 'N'
+		where delete_yn = 'N' AND type = #{type}
 	</select>
 	
 	

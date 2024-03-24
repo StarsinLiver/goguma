@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.store.goguma.entity.Banner;
@@ -17,6 +19,7 @@ import com.store.goguma.service.NoticeService;
 import com.store.goguma.service.ProductHistoryService;
 import com.store.goguma.service.ProductService;
 import com.store.goguma.service.UserService;
+import com.store.goguma.utils.BannerType;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -41,8 +44,12 @@ public class MainController {
 
 	private final BannerService bannerService;
 	
+	private final HttpSession session;
+	
 	@GetMapping("/")
 	public String mainForm(Model model) {
+		
+		session.setAttribute("plusFreeView", true);
 		// 공지 사항
 		List<Notice> noticeList = noticeService.findLimitEightFromMain();
 		// 상품 limit 여덟개 제한
@@ -85,9 +92,12 @@ public class MainController {
 	// 배너 전용 컨트롤러
 	@GetMapping("/banner")
 	@ResponseBody
-	public List<Banner> bannerProc() {
+	public List<Banner> bannerProc(@RequestParam("type") BannerType type) {
 		
-		List<Banner> result = bannerService.findByAll();
+		log.info("컨트롤러 타고들어오는 배너 타입 확인 : "+type);
+		
+		
+		List<Banner> result = bannerService.findByAll(type);
 		
 		log.info("배너 컨트롤러 로그: "+result);
 		

@@ -118,9 +118,16 @@
 												onclick="chatListItemsFunc(${list.roomId})">
 												<div class="chat_people">
 													<div class="chat_img">
+													<c:if test="${principal.getUId() == list.hostId}">
 														<img
-															src="https://ptetutorials.com/images/user-profile.png"
+															src="/profile/${list.userFile}"
 															alt="sunil">
+													</c:if>
+													<c:if test="${principal.getUId() == list.userId}">
+													<img
+															src="/profile/${list.hostFile}"
+															alt="sunil">
+													</c:if>
 													</div>
 													<div class="chat_ib">
 														<h5>

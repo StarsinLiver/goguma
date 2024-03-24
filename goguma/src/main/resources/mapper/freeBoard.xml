@@ -20,7 +20,7 @@
 		SELECT fd.*,
 			u.`file` as `userFile`,
 			u.`name` as `userName`,
-			ifnull(count(*) , 0) as goodCount
+			ifnull(count(fr.id) , 0) as goodCount
 		FROM free_board as fd
 			join `user` as u 
 				on fd.u_id = u.u_id
@@ -266,7 +266,7 @@
 		and f.delete_yn = 'N'
 		<include refid="searchBox" />
 
-		order by f.id
+		order by f.id desc
 		limit #{start} , 10
 	</select>
 
@@ -422,7 +422,7 @@
 		resultType="com.store.goguma.freeboard.dto.BoardTypeDTO">
 		SELECT COALESCE(m.id, s.group_id) AS id, m.name AS mname
 		,s.id as subId , s.name ,
-		s.row_count, s.`number`, s.background,
+		s.row_count, s.background,
 		s.font, s.list_type
 		FROM board_main_category AS m
 		JOIN
@@ -430,5 +430,16 @@
 		ON m.id = s.group_id where m.id = #{cate1} AND
 		s.group_id = #{cate1} AND s.id = #{id}
 	</select>
+	
+	
+	<!-- sidebar 카테고리 출력 -->
+	<select id="selectSideCateAll" resultType="com.store.goguma.freeboard.dto.CategoryDTO">
+		
+		SELECT m.id, m.name, s.id as subId, s.name as subName, s.group_id as groupId , s.row_count as rowCount 
+		FROM board_main_category as m join board_sub_category as s
+		on m.id = s.group_id; 
+	
+	</select>
+	
 	
 </mapper>

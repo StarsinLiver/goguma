@@ -16,6 +16,7 @@ const typeValue = listType.value;
 
 
 
+
 // 이전 10개 페이지 넘기기
 function startPage(start) {
 
@@ -29,7 +30,7 @@ function startPage(start) {
 
 // 페이지 넘기기
 function nextPage(num) {
-	console.log("num : " + num);
+	//console.log("num : " + num);
 
 	pagingFnc(num);
 }
@@ -40,7 +41,7 @@ function endPage(end) {
 	end += 1;
 	reviewPage = end;
 
-	console.log("end : " + end);
+	//console.log("end : " + end);
 	pagingFnc(end);
 }
 
@@ -55,9 +56,8 @@ $(".selectOption").change(
 		var searchType = $(this).val(); // 선택된 값 가져오기
 		console.log("Selected value11111: "
 				+ searchType); // 콘솔에 출력
-		$("#searchType").text(
-				"Selected value111111111111111: "
-						+ searchType); // 선택된 값 표시
+				
+	
 						
         // 로컬 스토리지에 저장
         localStorage.setItem("searchType", searchType);
@@ -69,15 +69,14 @@ $(".selectOption").change(
 $(".search").change(
 	
 		function() {
-		var searchKeyword = $(this).val(); // 선택된 값 가져오기
+		var search =  $(this).val();
+		console.log('서치된 값 확인 키워드임: '+ $(this).val()); // 선택된 값 가져오기
 		console.log("Selected value22222: "
 				+ searchKeyword); // 콘솔에 출력
-		$("#searchKeyword").text(
-				"Selected value22222222222: "
-						+ searchKeyword); // 선택된 값 표시
+	
 						
         // 로컬 스토리지에 저장
-        localStorage.setItem("searchKeyword", searchKeyword);
+        localStorage.setItem("searchKeyword", search);
 				
 						
 });
@@ -265,7 +264,7 @@ $(document).ready(function() {
 	console.log('cate1: ' + cate1); // url로 넘어오는 쿼리 스트링 cate1값 파싱
 	console.log('id: ' + id); // url로 넘어오는 쿼리 스트링 id값 파싱
 	
-	
+	localStorage.clear();
 
 	$.ajax({
 				method : "GET",
@@ -428,93 +427,58 @@ $(document).ready(function() {
 						}
 					} else if(1 > data.total) {
 						alert("검색된 데이터가 존재하지 않습니다.");
-						//innerBody.innerHTML = `<h1>작성된 게시물이 없습니다.</h1>`;
 					}
 				},
 				error : function() {
 					alert("에러");
 				}
 
-			});// list ajax end
-			
+			});/* list ajax end*/
+		
+		 var type = "LIST";
+		
 			// banner ajax start
-				$.ajax({
-				method : "GET",
-				url : "/banner",
-				success : function(data) {
-					
-					console.log('data확인 배너 리스트 석세스: ' + data ); // 
-					console.log('data확인 배너 리스트 석세스: ' + data.length ); // 배열 길이 찍힘
-					console.log('data확인 배너 리스트 석세스: ' + data.length/3 ); 
-					// 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
-					
-					
-					btn = "";
-							
-					// banner 버튼 생성 for문
-					for (var i = 0; i < data.length; i++) {
-						
-					var board = data[i];
-					var type = data[i].type;
-					console.log('로그 확인 데이터 타입으로다가: ' + type);
-					
-					if(type == 'MAIN'){
-						   // 첫 번째 버튼에만 active 클래스 추가
-						   var isActive = i === 0 ? ' active' : '';
-        				   btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
-        					
-					}else if(type == 'LIST'){
-					       // 첫 번째 버튼에만 active 클래스 추가
-						   var isActive = i === 0 ? ' active' : '';
-        				   btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
-        
-						
-					}else if(type == 'FREEBOARD'){
-						   // 첫 번째 버튼에만 active 클래스 추가
-						   var isActive = i === 0 ? ' active' : '';
-				           btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
-						
-						}
-					}; // banner btn 포문 end
-					
-					$('.carousel-indicators').html(btn);
-					
-					
-					img = "";
-					
-					for (var i = 0; i < data.length; i++) {
-						
-					var board = data[i];
-					var type = data[i].type;
-					
-					if(type == 'MAIN'){
-						  img += '<div class="carousel-item active">';
-		      			  img += '<a href="#"><img src="/images/upload/bg1.jpg" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
-		    			  img += '</div>';
-        					
-					}else if(type == 'LIST'){
-					       // 첫 번째 버튼에만 active 클래스 추가
-						   var isActive = i === 0 ? ' active' : '';
-        				   btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
-        
-						
-					}else if(type == 'FREEBOARD'){
-						   // 첫 번째 버튼에만 active 클래스 추가
-						   var isActive = i === 0 ? ' active' : '';
-				           btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + (i + 1) + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + (i + 1) + '"></button>';
-						
-						}
-					
-					}; // banner img 포문 end
-					
-					$('.carousel-inner').html(img);
-					
-					
-					},error: function(){
-						
-						
-					}
-			});// banner ajax end
+		$.ajax({
+				    method: "GET",
+				    url: "/banner",
+				    data:{
+						type: type,
+					},
+				    success: function(data) {
+				        console.log('data확인 배너 리스트 석세스: ' + data); //
+				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
+				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
+				        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
+				
+				        var btn = "";
+				        var img = "";
+				       
+				
+				        // banner 버튼 생성 for문
+				        for (var i = 0; i < data.length; i++) {
+				            var board = data[i];
+				            var type = data[i].type;
+				            console.log('로그 확인 데이터 타입으로다가: ' + type);
+				
+				            if (type == 'LIST') {
+				                // 첫 번째 버튼에만 active 클래스 추가
+				                var isActive = i === 0 ? ' active' : '';
+				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + i + '"></button>';
+				
+				                // 이미지 추가
+				                img += '<div class="carousel-item' + isActive + '">';
+				                img += '<a href="' + board.url + '"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
+				                img += '</div>';
+				            }
+				        }
+				
+				        $('.carousel-indicators').html(btn);
+				        $('.carousel-inner').html(img);
+				    },
+				    error: function() {
+				        // 에러 처리
+				    }
+				});
 			
 			
 			
@@ -528,10 +492,8 @@ $("button[type='submit']")
 				function(event) {
 					event.preventDefault();
 
-					var searchType = $(".selectOption")
-							.val();
-					var searchKeyword = $(".search")
-							.val();
+					var searchType = $(".selectOption").val();
+					var searchKeyword = $(".search").val();
 
 					console.log('서치 타입: ' + searchType);
 					console.log('서치 내용: '
@@ -554,11 +516,7 @@ $("button[type='submit']")
 									if (data != null) {
 										if (typeValue == "LIST") {
 
-											console
-													.log("데이터 확인: 리스트로 탔음");
-											console
-													.log("데이터 확인: "
-															+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
+											console.log("데이터 확인: "+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
 
 															// 데이터를 받아서 처리
 															var html = '';

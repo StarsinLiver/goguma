@@ -10,11 +10,19 @@ if(userInfo == "" || userInfo.role == "USER" || userInfo.role == ""){
 
 btn.onclick = () => {
 	if(title.value == ""){
-		alert("제목을 입력해주세요!");
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "제목을 입력해 주세요!",
+		});
 		title.focus();
 		return;
 	}else if(content.value == ""){
-		alert("내용을 입력해주세요!");
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "내용을 입력해 주세요!",
+		});
 		content.focus();
 		return;
 	}
@@ -33,7 +41,11 @@ btn.onclick = () => {
 			}
 		},
 		error : function(){
-			alert("error!!");
+			Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "서버 에러가 발생하였습니다!",
+		});
 		}
 	});
 }

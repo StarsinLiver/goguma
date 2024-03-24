@@ -12,6 +12,7 @@ import com.store.goguma.entity.BoardCategoryMain;
 import com.store.goguma.entity.BoardCategorySub;
 import com.store.goguma.entity.FreeBoard;
 import com.store.goguma.freeboard.dto.BoardTypeDTO;
+import com.store.goguma.freeboard.dto.CategoryDTO;
 import com.store.goguma.freeboard.dto.FreeBoardCountRecommendationByCateDto;
 import com.store.goguma.freeboard.dto.FreeBoardDTO;
 import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
@@ -277,5 +278,14 @@ public class FreeBoardService {
 	// 게시글 상세 조회 + 유저
 	public FreeBoardDetailAndUserDTO findByFreeIdJoinUser(Integer id) {
 		return freeBoardRepository.findByFreeIdJoinUser(id);
+	}
+
+	
+	// 자유 게시판 카테고리 생성
+	public List<CategoryDTO> selectSideCateAll() {
+		
+		
+		
+		return freeBoardRepository.selectSideCateAll();
 	}
 }

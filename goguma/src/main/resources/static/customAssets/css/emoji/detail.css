@@ -1,294 +1,294 @@
-.emoji--main-div{
-    width: 90%;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: clumn;
-    justify-content: center;
-    align-items: center;
-
+.emoji--main-div {
+	width: 70%;
+	margin: 50px auto;
+	display: flex;
+	flex-direction: clumn;
+	justify-content: center;
+	align-items: center;
 }
 
-.emoji--head-menu-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 50px;
+.emoji--head-menu-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	margin-bottom: 50px;
 }
 
-.emoji--head-menu{
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    cursor: pointer;
-}
-.emoji--head-menu:hover{
-    border-bottom: 2px solid black;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    cursor: pointer;
+.emoji--head-menu {
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	cursor: pointer;
 }
 
-.emoji--head-menu-title{
-    font-size: 25px;
-    cursor: pointer;
+.emoji--head-menu:hover {
+	border-bottom: 2px solid black;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	cursor: pointer;
+}
+
+.emoji--head-menu-title {
+	font-size: 25px;
+	cursor: pointer;
 }
 /* on 처리 */
-.emoji--head-menu-on{
-    border-bottom: 2px solid black;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    cursor: pointer;
+.emoji--head-menu-on {
+	border-bottom: 2px solid black;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	cursor: pointer;
 }
 
-.emoji--head-menu-title-on{
-    font-size: 25px;
-    font-weight: 800;
-    
+.emoji--head-menu-title-on {
+	font-size: 25px;
+	font-weight: 800;
 }
 /* on 처리 */
-.emoji--body{
-    width: 100%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.emoji--body {
+	width: 100%;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.emoji--content-box{
-    display: flex;
-    align-items: center;
-    flex-flow:row wrap;
-    padding: 10px;
+.emoji--content-box {
+	display: flex;
+	align-items: center;
+	flex-flow: row wrap;
+	padding: 10px;
 }
 
-.emoji--detail--item-box{
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
+.emoji--detail--item-box {
+	width: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
 }
 
-.emoji--detail--img-box img{
-    width: 150px;
+.emoji--detail--img-box img {
+	width: 150px;
 }
 
-.emoji--img-box img{
-    width: 100%;
-    
+.emoji--img-box img {
+	width: 100%;
 }
 
-.emoji--item-title-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.emoji--item-title-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 /* ---------------------------------------------------- */
-
-.content-main{
-    display: flex;
-    justify-content: space-around;
-    width: 1000px;
+.content-main {
+	display: flex;
+	justify-content: space-around;
+	width: 1000px;
 }
 
-.emoji--detail--main-img-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
+.emoji--detail--main-img-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
 }
 
-.emoji--detail--main-img-box img{
-    width: 100%;
+.emoji--detail--main-img-box img {
+	width: 100%;
 }
 
-.main-title-box{
-    display: flex;
-    flex-direction: column;
+.main-title-box {
+	display: flex;
+	flex-direction: column;
 }
 
-.price-box{
-    margin: 30px 0;
-    color: red;
-    font-size: 20px;
+.price-box {
+	margin: 30px 0;
+	color: red;
+	font-size: 20px;
 }
 
-.e-price{
+.e-price {
 	font-size: 40px;
 }
 
-.e-title{
+.e-title {
 	font-size: 40px;
 	font-weight: 700;
 }
 
-.e-title2{
+.e-title2 {
 	font-size: 20px;
 	font-weight: 700;
 }
 
+/* ---------------------------------------------------- */
+.emoji--modal {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	position: fixed;
+	top: 100px;
+	left: 1000px;
+	width: 400px;
+	border: 1px solid black;
+	background-color: white;
+}
+
+.emoji--sec1 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.emoji--close-btn {
+	cursor: pointer;
+}
+
+.emoji--sec2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.emoji--sec2-title-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.emoji--sec2-title {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.emoji--sec2-img-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.emoji--sec2-img-box img {
+	width: 150px;
+}
+
+.emoji--sec3 {
+	width: 100%;
+	height: 5px;
+	background-color: antiquewhite;
+	margin: 40px 0;
+}
+
+.emoji--sec4 {
+	display: flex;
+	margin-bottom: 20px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.emoji--agree-check {
+	width: 30px;
+	margin-right: 10px;
+}
+
+.emoji--sec5 {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.emoji--sec5 span {
+	margin-bottom: 5px;
+}
+
+.emoji--order-btn {
+	width: 100%;
+	padding: 20px;
+	border: none;
+	border-radius: 10px;
+	color: black;
+	background-color: yellow;
+	font-size: 25px;
+	cursor: pointer;
+}
+
+.emoji--order-btn2 {
+	width: 100%;
+	padding: 20px;
+	border: none;
+	border-radius: 10px;
+	color: gray;
+	font-size: 25px;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.04);
+}
+
+.emoji--order-btn2-on {
+	width: 100%;
+	padding: 20px;
+	border: none;
+	border-radius: 10px;
+	color: black;
+	background-color: yellow;
+	font-size: 25px;
+	cursor: pointer;
+}
 
 /* ---------------------------------------------------- */
-
-.emoji--modal{
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: fixed;
-    top: 100px;
-    left: 1000px;
-    width: 400px;
-    border: 1px solid black;
-    background-color: white;
+.agree-box {
+	border-bottom: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
-.emoji--sec1{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-    font-size: 20px;
-    font-weight: 700;
+.agree-main-box {
+	padding: 10px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
 }
 
-.emoji--close-btn{
-    cursor: pointer;
-}
-
-.emoji--sec2{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.emoji--sec2-title-box{
-    display: flex;
-    flex-direction: column;
-}
-
-.emoji--sec2-title{
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.emoji--sec2-img-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.emoji--sec2-img-box img{
-    width: 150px;
-}
-
-.emoji--sec3{
-    width: 100%;
-    height: 5px;
-    background-color: antiquewhite;
-    margin: 40px 0;
-}
-.emoji--sec4{
-    display: flex;
-    margin-bottom: 20px;
-    width: 100%;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.emoji--agree-check{
-    width: 30px;
-    margin-right: 10px;
-}
-
-.emoji--sec5{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.emoji--sec5 span{
-    margin-bottom: 5px;
-}
-
-.emoji--order-btn{
-    width: 100%;
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    color: black;
-    background-color: yellow;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.emoji--order-btn2{
-    width: 100%;
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    color: gray;
-    font-size: 25px;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.04);
-}
-
-.emoji--order-btn2-on{
-    width: 100%;
-    padding: 20px;
-    border: none;
-    border-radius: 10px;
-    color: black;
-    background-color: yellow;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-/* ---------------------------------------------------- */
-
-.agree-box{
-    border-bottom: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.agree-main-box{
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.agree-main-box span{
+.agree-main-box span {
 	font-size: 25px;
 }
 
-.agree-sub-box{
-    display: none;
-    flex-direction: column;
-    padding: 0px 20px;
+.agree-sub-box {
+	display: none;
+	flex-direction: column;
+	padding: 0px 20px;
 }
 
-.agree-txt{
-    margin: 10px 0;
-    color: gray;
-    font-size: 20px;
+.agree-txt {
+	margin: 10px 0;
+	color: gray;
+	font-size: 20px;
+	transition: opacity 0.3s ease;
+}
+
+.agree-sub-box.active .agree-txt {
+	opacity: 1;
 }

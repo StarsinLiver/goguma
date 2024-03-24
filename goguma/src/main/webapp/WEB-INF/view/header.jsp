@@ -121,6 +121,7 @@
 	src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script src="/customAssets/js/session.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="seo_version" style="background: #fff">
 	<c:if test="${principal != null}">
@@ -167,9 +168,7 @@
 							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
 						<div class="dropdown-menu fade-down m-0">
 													<a href="/freeBoard/main" class="dropdown-item">리스트</a>
-							<a href="/board/cate-setting" class="dropdown-item">카테고리 수정</a>
-							<a href="/board/cate-setting2" class="dropdown-item">카테고리 수정2</a>
-							<a href="/board/cate-modify" class="dropdown-item">카테고리 수정3</a>
+
 						</div>
 					</div>
 					<a href="/emoji/list" class="nav-item nav-link">이모티콘</a> <a

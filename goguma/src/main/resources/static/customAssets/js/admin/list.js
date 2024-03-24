@@ -14,7 +14,6 @@ function load(num){
 	
 	headMenus[num].className = "emoji--head-menu-on";
 	headMenusBorder[num].className = "emoji--head-menu-title-on";
-	console.log('페이지 로드 에이젝스 시작');
 	$.ajax({
 		type : "get",
 		url : "/admin/emoji/" + num + `?search=${search}&page=${page}`,
@@ -24,12 +23,14 @@ function load(num){
 				totalPages = data.totalPages;
 				innerFun(data.content);
 				displayPageNumber(data.number , data.totalPages);
-			}else{
-				console.log("실패");
 			}
 		},
 		error : function(){
-			alert("에러");
+			Swal.fire({
+				icon: "error",
+				title: "에러...",
+				text: "서버 에러가 발생한것 같습니다!",
+			});
 		}
 	});
 }
@@ -48,9 +49,6 @@ for(let i = 0; i < headMenus.length; i++){
 
 // 화면에 출력
 function innerFun(list){
-	
-	console.log('이너펑션 시작 리스트 데이터 확인: ' + list);
-		
 	let innr = "";
 	innerBody.textContent = "";
 	if(list != ""){
