@@ -863,6 +863,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 찜 목록 확인
 </details>
 
+<br/>
+
 #### 관리자 (MASTER , ADMIN)
 <details>
   <summary> 기능 보기</summary>
@@ -879,6 +881,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 자유게시판 관리 [카테고리 관리]
 </details>
 
+<br/>
+
 #### 중고 거래
 <details>
   <summary> 기능 보기</summary>
@@ -890,6 +894,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 이모티콘
 </details>
 
+<br/>
+
 #### 자유 게시판
 <details>
   <summary> 기능 보기</summary>
@@ -898,6 +904,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 좋아요
 - 댓글 등록
 </details>
+
+<br/>
 
 #### 고객 센터
 <details>
