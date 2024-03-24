@@ -83,6 +83,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		OauthDTO updateUser = adminService.selectAdminByUid(user.getUId());
 
@@ -135,6 +138,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		log.info("history로 들어오는 pagedto" + page);
 		if (historyReqDTO.getSearchType() == null) {
@@ -181,6 +187,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		log.info("여기는 거치니?");
 
@@ -192,6 +201,14 @@ public class AdminController {
 	// admin emoji detail 페이지
 	@GetMapping("/emoji/detail/{id}")
 	public String detail() {
+		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
+		if (user == null) {
+			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
+		
 		return "admin/emoji_detail";
 	}
 
@@ -209,6 +226,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 		if (page.getSearchType() == null) {
 			page.setSearchType("id");
@@ -242,6 +262,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		log.info("타입 : {}", requestPageDTO.getSearchType());
 		if (requestPageDTO.getSearchType() == null) {
@@ -274,6 +297,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		int result = productService.adminDeleteProduct(pId);
 		if (result == 0) {
@@ -298,6 +324,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		// 만약 검색어가 null 일 경우
 		String search = (requestPageDTO.getSearch() == null) ? "" : requestPageDTO.getSearch();
@@ -318,6 +347,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 
 		log.info("유저 role : {}", role);
@@ -343,6 +375,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		int result = reportService.update(id);
 
@@ -365,7 +400,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 		// 검색 기본 default 값
 		String search = request.getSearch() == null ? "" : request.getSearch();
 		request.setSearch(search);
@@ -403,6 +440,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		// 채팅방 삭제
 		int result = chatRoomService.deleteChatRoom(id);
@@ -421,6 +461,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 
 		String search = req.getSearch() == null ? "" : req.getSearch();
@@ -452,6 +495,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		AdminQnaDto adminQnaDto = qnaService.adminFindByQid(qid);
 
@@ -473,7 +519,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 		if (dto.getAnswerContent() == null || dto.getAnswerContent().isEmpty()) {
 			throw new BackPageRestfulException(Define.NO_VALID_CONTENT, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -500,6 +548,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		int result = qnaService.adminDeleteQna(id);
 		if (result == 0) {
@@ -521,6 +572,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 
 		if (req.getSearchType() == null) {
@@ -552,6 +606,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		return "admin/admin_management_banner_add";
 	}
@@ -567,6 +624,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 
 		// 유효성 검사
@@ -607,6 +667,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		Banner banner = bannerService.findById(id);
 
@@ -620,6 +683,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 		Banner entity = bannerService.findById(id);
 		// 유효성 검사
@@ -675,6 +741,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		if (req.getSearchType() == null) {
 			req.setSearchType("title");
@@ -707,6 +776,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 
 		List<Faq> list =  faqService.getFaqList();
 		model.addAttribute("faqList" , list);
@@ -723,6 +795,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 			
 		Faq faq = faqService.findById(id);
@@ -746,6 +821,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 		
 		if (faq.getTitle() == null || faq.getTitle().isEmpty()) {
@@ -775,6 +853,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 		
 		int result = faqService.deleteById(id);
 		if (result == 0) {
@@ -789,6 +870,9 @@ public class AdminController {
 		OauthDTO user = (OauthDTO) httpSession.getAttribute("principal");
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
+		}
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
 		}
 		if (req.getMainCategory() == null) {
 			req.setMainCategory(0);
@@ -811,7 +895,9 @@ public class AdminController {
 		if (user == null) {
 			throw new LoginRestfulException(com.store.goguma.utils.Define.ENTER_YOUR_LOGIN, HttpStatus.BAD_REQUEST);
 		}
-		
+		if (user.getRole().equals(Define.USER)) {
+			throw new BackPageRestfulException(Define.NO_VALID_ACCESS, HttpStatus.BAD_REQUEST);
+		}
 		int result = freeBoardService.deleteById(id);
 		if(result == 0) {
 			throw new BackPageRestfulException(Define.INTERVAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);

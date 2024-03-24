@@ -26,7 +26,7 @@ $(document).ready(function() {
                 cate += '<ul class="feat-show">'; // 2차 카테고리 시작
 
                 data.filter(item => item.id === id).forEach(subItem => {
-                    cate += '<li><a href="/freeBoard/list?cate1=1&id=1">' + subItem.subName + '</a></li>'; // 2차 카테고리
+                    cate += `<li><a href="/freeBoard/list?cate1=${id}&id=${subItem.subId}">` + subItem.subName + '</a></li>'; // 2차 카테고리
                 });
 
                 cate += '</ul>'; // 2차 카테고리 종료

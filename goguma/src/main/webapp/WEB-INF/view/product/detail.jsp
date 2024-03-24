@@ -64,7 +64,7 @@
 				style="float: right; margin-top: -20px;">
 
 				<!-- 채팅 버튼 -->
-				<div style="position: absolute; right: 0; bottom: -170px;">
+				<div style="">
 					<c:if test="${product.confirmYn == 'Y'}">
 						<button type="button" class="btn chat-btn" data-bs-toggle="modal"
 							data-bs-target="#exampleModal" style="margin-right: 10px;">

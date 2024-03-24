@@ -201,7 +201,6 @@ function pagingFnc(page) {
 							html +=	'</a>';
 							html +=	'</div>';
 							html +=	'</div>';
-						
 						}
 						
 						// 생성된 HTML을 테이블의 tbody에 추가
