@@ -815,7 +815,7 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 # 5️⃣ 주요 기능
 
 
-#### 유저
+#### 유저 (USER)
 <details>
   <summary> 기능 보기</summary>
 
@@ -829,7 +829,7 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 찜 목록 확인
 </details>
 
-#### 관리자
+#### 관리자 (MASTER , ADMIN)
 <details>
   <summary> 기능 보기</summary>
 
