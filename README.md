@@ -764,7 +764,7 @@
 
 </details>
 
-### 🕵️‍♂️개발 툴
+### :herb:개발 툴
 <details>
 <summary>개발 툴</summary>
 
