@@ -16,6 +16,7 @@
 	</div>
 </div>
 <!-- Header End -->
+	<div>
     <div class="qna-write-main-div">
         <table class="qna-write-table">
             <tr class="qna-write-tr">
@@ -42,6 +43,7 @@
             </tr>
         </table>
         <button type="button" class="qna-write-insert-btn">문의하기</button>
+        </div>
     </div>
 <script src="/customAssets/js/cs/qna/write.js"></script>
 <!-- 푸터 -->
