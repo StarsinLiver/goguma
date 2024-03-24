@@ -33,7 +33,7 @@ dependencies {
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	
 	// https://mvnrepository.com/artifact/net.nurigo/javaSDK
-	// implementation 'net.nurigo:javaSDK:2.2'
+	implementation 'net.nurigo:javaSDK:2.2'
 	
 	// 챗gpt
     //implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'

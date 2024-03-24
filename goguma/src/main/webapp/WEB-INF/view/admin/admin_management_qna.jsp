@@ -135,7 +135,8 @@
 											<input type="hidden" name="_method" value="delete" />
 											<c:if test="${qna.deleteYn == 'N'}">
 												<button onclick="if(!confirm('정말 삭제하시겠습니까?')) return false;"
-													class="btn btn-warning btn-complete" style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;">삭제하기</button>
+													class="btn btn-warning btn-complete"
+													style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;">삭제하기</button>
 											</c:if>
 										</form>
 									</td>

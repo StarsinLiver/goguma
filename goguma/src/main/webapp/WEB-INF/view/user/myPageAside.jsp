@@ -6,7 +6,7 @@
 	<ul>
 		<li><a href="/user/info"><i class="bi bi-person"></i>&nbsp;
 			내 정보</a></li>
-		<li><a href="/user/payment"><i class="bi bi-cash-coin"></i>&nbsp;
+		<li><a href="/user/payment"><i class="bi bi-card-list"></i>&nbsp;
 			결제 내역</a></li>
 		<li><a href="/user/product"><i class="bi bi-card-list"></i>&nbsp;
 			중고거래 내역</a></li>
