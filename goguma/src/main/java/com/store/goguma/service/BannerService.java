@@ -89,4 +89,9 @@ public class BannerService {
 	public List<Banner> findByAll(BannerType type) {
 		return bannerRepository.findByAll(type);
 	}
+
+	public void PlusBannerViewCount(int id) {
+
+		bannerRepository.plusBannerViewCount(id);
+	}
 }

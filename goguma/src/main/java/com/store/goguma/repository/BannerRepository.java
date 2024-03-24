@@ -29,4 +29,7 @@ public interface BannerRepository {
 	
 	// 배너 삭제
 	public List<Banner> findByAll(BannerType type);
+	
+	// 배너 뷰카운트 증가
+	public void plusBannerViewCount(Integer id);
 }

@@ -23,7 +23,6 @@ function startPage(start) {
 	start -= 1;
 	reviewPage = start;
 
-	console.log("start : " + start);
 	pagingFnc(start);
 
 }
@@ -54,9 +53,6 @@ $(".selectOption").change(
 	
 		function() {
 		var searchType = $(this).val(); // 선택된 값 가져오기
-		console.log("Selected value11111: "
-				+ searchType); // 콘솔에 출력
-				
 	
 						
         // 로컬 스토리지에 저장
@@ -70,9 +66,6 @@ $(".search").change(
 	
 		function() {
 		var search =  $(this).val();
-		console.log('서치된 값 확인 키워드임: '+ $(this).val()); // 선택된 값 가져오기
-		console.log("Selected value22222: "
-				+ searchKeyword); // 콘솔에 출력
 	
 						
         // 로컬 스토리지에 저장
@@ -82,29 +75,13 @@ $(".search").change(
 });
 
 
-// 페이지 넘어 갈때 사용할 요청
-
+// 페이지징시에 사용할 ajax
 function pagingFnc(page) {
-	
-	
-	console.log('페이지 펑션으로 들어오는 page: '+ page);
-	console.log('페이지 펑션으로 들어오는 searchKeyword: '+ searchKeyword);
-	console.log('페이지 펑션으로 들어오는 searchType: '+ searchType);
-	console.log('페이지 펑션으로 들어오는 로컬 스토리지 searchKeyword: '+ localStorage.getItem("searchKeyword"));
-	console.log('페이지 펑션으로 들어오는 로컬 스토리지 searchType: '+ localStorage.getItem("searchType"));
-
-	
-
-	
 	
 	searchKeyword = localStorage.getItem("searchKeyword");
 	searchType = localStorage.getItem("searchType");
 	
-	
-	console.log('페이지 펑션으로 들어오는 searchKeyword 로컬 스토리지에서 들고옴: '+ searchKeyword);
-	console.log('페이지 펑션으로 들어오는 searchType 로컬 스토리지에서 들고옴: '+ searchType);
-	
-$.ajax({
+	$.ajax({
 			method : "GET",
 			url : "/free-board/listAll",
 			data : {
@@ -118,23 +95,10 @@ $.ajax({
 			},
 			success : function(data) {
 
-				console.log('페이지 이동시 값 1: '+ cate1);
-				console.log('페이지 이동시 값 2: '+ id);
-				console.log('페이지 이동시 값 3: '+ page);
-				console.log('페이지 이동시 값 4: '+ searchKeyword);
-				console.log('페이지 이동시 값 5: '+ searchType);
-				console.log('페이지 이동시 값 5: '+ typeValue);
 				
 				if (data != null) {
 					if (typeValue == "LIST") {
 
-						console.log("데이터 확인: 리스트로 탔음");
-						console.log("데이터 확인: " + data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
-						console.log("데이터 확인: start: " + data.start);
-						console.log("데이터 확인: total: " + data.total);
-						console.log("데이터 확인: last: " + data.last);
-						console.log("데이터 확인: size: " + data.size);
-						console.log("데이터 확인: pg: " + data.pg);
 
 						// 데이터를 받아서 처리
 						var html = '';
@@ -167,7 +131,7 @@ $.ajax({
 									+ board.id
 									+ '">'
 									+ board.title
-									+ '<span class="badge bg-secondary">[0]</span></a></td>';
+									+ '<span class="badge bg-secondary"></span></a></td>';
 							html += '<td><a href=""><span class="hu_nick_txt">'
 									+ board.name + '</span></a></td>';
 							html += '<td><span class="w_date">'
@@ -182,6 +146,36 @@ $.ajax({
 						// 생성된 HTML을 테이블의 tbody에 추가
 						$('.listType').html(html);
 
+						
+						var paging = '';
+
+						if (data.start > 1) {
+							paging += '<li class="page-item"><span class="page-link" onclick="startPage('
+									+ data.start
+									+ ')">이전</span></li>';
+						}
+						for (let i = data.start; i <= data.end; i++) {
+							paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
+									+ i
+									+ ')">'
+									+ i
+									+ '</span></li>';
+						}
+						if (data.end < data.last) {
+							paging += '<li class="page-item"><span class="page-link" onclick="endPage('
+									+ data.end
+									+ ')">이후</span></li>';
+						}
+
+						// 생성된 HTML을 테이블의 tbody에 추가
+						$('.pagingPos').html(paging); 
+
+
+
+
+
+
+
 					} else if (typeValue == "CARD") {
 						
 						html = "";
@@ -191,22 +185,22 @@ $.ajax({
 						var board = data.dtoList[i];
 						
 						
-						html +=	'<div class="col-md-3">';
-						html +=	'<div class="card2">';
-						html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
-								+'"> <img src="/assets/images/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
-						html +=	'<div class="txt-wrap">';
-						html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment">[1]</span></a>';
-						html +=	'<div class="user">';
-						html += '<span class="layerNickName" onclick="" style="">'+ board.name +'</span>';
-						html +=	'</div>';
-						html +=	'<div class="cnt">';
-						html +=	'<span class="view board-img">626</span> <span class="like board-img">1</span>';
-						html +=	'</div>';
-						html +=	'</div>';
-						html +=	'</a>';
-						html +=	'</div>';
-						html +=	'</div>';
+							html +=	'<div class="col-md-3">';
+							html +=	'<div class="card2">';
+							html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
+									+'"> <img src="/images/upload/'+board.file +'" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
+							html +=	'<div class="txt-wrap">';
+							html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment"></span></a>';
+							html +=	'<div class="user">';
+							html += '<span class="layerNickName" onclick="" style="">'+ board.name +'</span>';
+							html +=	'</div>';
+							html +=	'<div class="cnt">';
+							html +=	'<span class="view board-img">'+board.view+'</span> <span class="like board-img">'+board.count+'</span>';
+							html +=	'</div>';
+							html +=	'</div>';
+							html +=	'</a>';
+							html +=	'</div>';
+							html +=	'</div>';
 						
 						}
 						
@@ -258,12 +252,6 @@ $.ajax({
 $(document).ready(function() {
 
 					
-
-	console.log('url값: ' + urlParam); // url로 넘어오는 쿼리 스트링 cate1, id값 추출 
-	console.log('type: ' + typeValue); // list Type 확인
-	console.log('cate1: ' + cate1); // url로 넘어오는 쿼리 스트링 cate1값 파싱
-	console.log('id: ' + id); // url로 넘어오는 쿼리 스트링 id값 파싱
-	
 	localStorage.clear();
 
 	$.ajax({
@@ -326,7 +314,7 @@ $(document).ready(function() {
 										+ board.id
 										+ '">'
 										+ board.title
-										+ '<span class="badge bg-secondary">[0]</span></a></td>';
+										+ '<span class="badge bg-secondary"></span></a></td>';
 								html += '<td><a href=""><span class="hu_nick_txt">'
 										+ board.name
 										+ '</span></a></td>';
@@ -381,14 +369,14 @@ $(document).ready(function() {
 							html +=	'<div class="col-md-3">';
 							html +=	'<div class="card2">';
 							html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
-									+'"> <img src="/assets/images/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
+									+'"> <img src="/images/upload/'+board.file +'" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
 							html +=	'<div class="txt-wrap">';
-							html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment">[1]</span></a>';
+							html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment"></span></a>';
 							html +=	'<div class="user">';
 							html += '<span class="layerNickName" onclick="" style="">'+ board.name +'</span>';
 							html +=	'</div>';
 							html +=	'<div class="cnt">';
-							html +=	'<span class="view board-img">626</span> <span class="like board-img">1</span>';
+							html +=	'<span class="view board-img">'+board.view+'</span> <span class="like board-img">'+board.count+'</span>';
 							html +=	'</div>';
 							html +=	'</div>';
 							html +=	'</a>';
@@ -438,18 +426,14 @@ $(document).ready(function() {
 		 var type = "LIST";
 		
 			// banner ajax start
-		$.ajax({
+		 $.ajax({
 				    method: "GET",
 				    url: "/banner",
 				    data:{
 						type: type,
 					},
 				    success: function(data) {
-				        console.log('data확인 배너 리스트 석세스: ' + data); //
-				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
-				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
-				        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
-				
+
 				        var btn = "";
 				        var img = "";
 				       
@@ -458,7 +442,9 @@ $(document).ready(function() {
 				        for (var i = 0; i < data.length; i++) {
 				            var board = data[i];
 				            var type = data[i].type;
+				            var id = data[i].id;
 				            console.log('로그 확인 데이터 타입으로다가: ' + type);
+				            console.log('로그 확인 데이터 id로다가!!!!!!!!!!!!: ' + id);
 				
 				            if (type == 'LIST') {
 				                // 첫 번째 버튼에만 active 클래스 추가
@@ -467,8 +453,9 @@ $(document).ready(function() {
 				
 				                // 이미지 추가
 				                img += '<div class="carousel-item' + isActive + '">';
-				                img += '<a href="' + board.url + '"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
+				                img += '<a href="' + board.url + '"class="bannerTag"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
 				                img += '</div>';
+				               	img += '<input type="hidden" class="bannerId" value="'+id+'" />';
 				            }
 				        }
 				
@@ -478,15 +465,12 @@ $(document).ready(function() {
 				    error: function() {
 				        // 에러 처리
 				    }
-				});
-			
-			
-			
-			
+				}); //banner ajax종료
 			
 });
 
 
+// 검색 버튼 클릭시 데이터 전송 ajax
 $("button[type='submit']")
 		.click(
 				function(event) {
@@ -516,7 +500,6 @@ $("button[type='submit']")
 									if (data != null) {
 										if (typeValue == "LIST") {
 
-											console.log("데이터 확인: "+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
 
 															// 데이터를 받아서 처리
 															var html = '';
@@ -546,7 +529,7 @@ $("button[type='submit']")
 														+ board.id
 														+ '">'
 														+ board.title
-														+ '<span class="badge bg-secondary">[0]</span></a></td>';
+														+ '<span class="badge bg-secondary"></span></a></td>';
 												html += '<td><a href=""><span class="hu_nick_txt">'
 														+ board.name
 														+ '</span></a></td>';
@@ -595,7 +578,7 @@ $("button[type='submit']")
 											
 
 										} else if (typeValue == "CARD") {
-											alert("데이터 ㅈㄴ 널임 열받음");
+											
 											html = "";
 											
 											for (var i = 0; i < data.dtoList.length; i++) {
@@ -604,14 +587,14 @@ $("button[type='submit']")
 												html +=	'<div class="col-md-3">';
 												html +=	'<div class="card2">';
 												html +=	'<a class="cardA" href="/freeBoard/detail?id='+ board.id 
-														+'"> <img src="/assets/images/'+board.ufile +'cat-1.png" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
+														+'"> <img src="/images/upload/'+board.file +'" class="card2-img-top" alt="이미지 1" style="height: 182px;">';
 												html +=	'<div class="txt-wrap">';
-												html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment">[1]</span></a>';
+												html +=	'<a href="/freeBoard/detail?id='+  board.id  +'" class="subject-link tit">'+ board.title +'<span data-opinion-bbs-comeidx="2775" data-opinion-bbs-uid="92831" data-opinion-bbs-opi="1" class="con-comment"></span></a>';
 												html +=	'<div class="user">';
 												html += '<span class="layerNickName" onclick="" style="">'+ board.name +'</span>';
 												html +=	'</div>';
 												html +=	'<div class="cnt">';
-												html +=	'<span class="view board-img">626</span> <span class="like board-img">1</span>';
+												html +=	'<span class="view board-img">'+board.view+'</span> <span class="like board-img">'+board.count+'</span>';
 												html +=	'</div>';
 												html +=	'</div>';
 												html +=	'</a>';
@@ -660,3 +643,25 @@ $("button[type='submit']")
 
 				})// search end
 
+
+//배너 뷰카운트 증가
+$(document).on("click", ".bannerTag", function() {
+    var bannerId = $('.bannerId').val();  // 해당 배너의 ID를 가져옴
+    alert('배너 아이디 캣치' + bannerId);
+
+    $.ajax({
+        method: "PUT",
+        url: "/banner/viewCount",
+        data: {
+            id: bannerId
+        },
+        success: function(data) {
+            // AJAX 요청 성공 시 동작
+             alert('아작스 성공');
+        },
+        error: function() {
+            // AJAX 요청 실패 시 동작
+             alert('아작스 실패~~~');
+        }
+    });
+});

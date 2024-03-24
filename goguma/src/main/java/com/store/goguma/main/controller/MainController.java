@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -89,7 +90,7 @@ public class MainController {
 	}
 	
 	
-	// 배너 전용 컨트롤러
+	// 배너 출력 컨트롤러
 	@GetMapping("/banner")
 	@ResponseBody
 	public List<Banner> bannerProc(@RequestParam("type") BannerType type) {
@@ -102,6 +103,21 @@ public class MainController {
 		log.info("배너 컨트롤러 로그: "+result);
 		
 		return result;
+	}
+	
+	
+	// 배너 카운트 증가 컨트롤러
+	@PutMapping("/banner/viewCount")
+	@ResponseBody
+	public void PlusBannerViewCount(@RequestParam("id") int id) {
+		
+		log.info("컨트롤러 타고들어오는 배너 들어오는지 확인 : ");
+		log.info("컨트롤러 타고들어오는 배너 id 확인 : "+ id);
+		
+		
+		bannerService.PlusBannerViewCount(id);
+		
+		
 	}
 	
 }

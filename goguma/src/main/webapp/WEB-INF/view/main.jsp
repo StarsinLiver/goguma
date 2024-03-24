@@ -299,6 +299,8 @@ $(document).ready(function(){
 				        for (var i = 0; i < data.length; i++) {
 				            var board = data[i];
 				            var type = data[i].type;
+				            var id = data[i].id;
+				            
 				            console.log('로그 확인 데이터 타입으로다가: ' + type);
 				
 				            if (type == 'FREEBOARD') {
@@ -308,8 +310,9 @@ $(document).ready(function(){
 				
 				                // 이미지 추가
 				                img += '<div class="carousel-item' + isActive + '">';
-				                img += '<a href="' + board.url + '"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
+				                img += '<a href="' + board.url + '"class="bannerTag"><img src="/images/upload/' + board.file + '" class="d-block w-100" alt="..." style="max-height: 200px; max-width: 1000px"></a>';
 				                img += '</div>';
+				            	img += '<input type="hidden" class="bannerId" value="'+id+'" />';
 				            }
 				        }
 				
@@ -321,6 +324,30 @@ $(document).ready(function(){
 				    }
 				});
 });	
+
+
+// 배너 뷰카운트 증가
+
+$(document).on("click", ".bannerTag", function() {
+    var bannerId = $('.bannerId').val();  // 해당 배너의 ID를 가져옴
+    alert('배너 아이디 캣치' + bannerId);
+
+    $.ajax({
+        method: "PUT",
+        url: "/banner/viewCount",
+        data: {
+            id: bannerId
+        },
+        success: function(data) {
+            // AJAX 요청 성공 시 동작
+             alert('아작스 성공');
+        },
+        error: function() {
+            // AJAX 요청 실패 시 동작
+             alert('아작스 실패~~~');
+        }
+    });
+});
 
 </script>
 <!-- 푸터 -->
