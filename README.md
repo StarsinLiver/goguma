@@ -759,9 +759,25 @@
 - Apache Tomcat : v10.0
 - net.nurigo:javaSDK : v2.2
 - starter-websocket
-- lombok
+- lombok : v1.18.32
 </div>
 
+</details>
+
+### 개발 툴
+<details>
+<summary>개발 툴</summary>
+
+- eclipse [sts4]
+- Mysql v8..46 
+</details>
+
+### 협력 툴
+<details>
+<summary>협력 툴</summary>
+
+- github
+- discord 
 </details>
 
 ### 📡API
