@@ -120,15 +120,20 @@
 	<select id="selecReportAll"
 		resultType="com.store.goguma.report.dto.ReportDTO">
 
-		select r.* , host.name as hostName , c.name as callName
+		select r.* , host.name as hostName , c.name as callName ,
+		host.email as
+		hostEmail ,
+		c.email as callEmail
 		from report r
 		inner join user host
-		on host.u_id = r.host_id
+		on
+		host.u_id = r.host_id
 		inner join
 		user c
 		on c.u_id
 		= r.call_id
-		where r.delete_yn = 'N'
+		where
+		r.delete_yn = 'N'
 		and
 		<if test="searchType == 'id'.toString()">
 			r.id
@@ -138,6 +143,12 @@
 		</if>
 		<if test="searchType == 'userName'.toString()">
 			c.name
+		</if>
+		<if test="searchType == 'hostEmail'.toString()">
+			host.email
+		</if>
+		<if test="searchType == 'callEmail'.toString()">
+			c.email
 		</if>
 		like concat('%',#{search},'%')
 		ORDER BY r.id DESC
@@ -151,12 +162,13 @@
 		select count(*) from report r
 		inner join user host
 		on
-		host.u_id = r.host_id
+		host.u_id =
+		r.host_id
 		inner join user c
 		on c.u_id = r.call_id
 		where
 		r.delete_yn = 'N'
-				and
+		and
 		<if test="searchType == 'id'.toString()">
 			r.id
 		</if>
@@ -165,6 +177,12 @@
 		</if>
 		<if test="searchType == 'userName'.toString()">
 			c.name
+		</if>
+		<if test="searchType == 'hostEmail'.toString()">
+			host.email
+		</if>
+		<if test="searchType == 'callEmail'.toString()">
+			c.email
 		</if>
 		like concat('%',#{search},'%')
 	</select>

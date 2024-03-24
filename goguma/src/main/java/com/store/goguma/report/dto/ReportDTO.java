@@ -24,4 +24,6 @@ public class ReportDTO {
 	private Integer pId;
 	private String hostName;
 	private String callName;
+	private String hostEmail;
+	private String callEmail;
 }

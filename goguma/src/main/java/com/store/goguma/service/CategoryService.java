@@ -131,8 +131,8 @@ public class CategoryService {
                 } catch (IllegalStateException | IOException e) {
                     e.printStackTrace();
                 }
-                map.put("background", file.getOriginalFilename());
-                map.put("file", fileName);
+                map.put("background", fileName);
+                map.put("file", file.getOriginalFilename());
                 return map;
             }
         }

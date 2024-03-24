@@ -92,8 +92,10 @@
 				<form action="/admin/report">
 					<select name="searchType">
 						<option value="id">신고 번호</option>
-						<option value="hostName">신고 대상</option>
-						<option value="userName">신고자</option>
+						<option value="hostName">신고 대상 이름</option>
+						<option value="userName">신고자 이름</option>
+						<option value="hostEmail">신고 대상 이메일</option>
+						<option value="callEmail">신고자 이메일</option>
 					</select> <input type="text" name="search" placeholder="상품 이름을 검색해주세요" />
 					<button type="submit" class="btn btn-warning btn-complete">검색</button>
 				</form>
@@ -122,8 +124,8 @@
 							<c:forEach var="report" items="${report}">
 								<tr id="dataRow">
 										<td id="id">${report.id}</td>
-										<td id="pointName"><a href="/product/userProduct?uId=${report.callId}">${report.callName}</a></td>
-										<td id="hostId"><a href="/product/userProduct?uId=${report.hostId}">${report.hostName}</a></td>
+										<td id="pointName"><a href="/product/userProduct?uId=${report.callId}">${report.callName}(${report.hostEmail})</a></td>
+										<td id="hostId"><a href="/product/userProduct?uId=${report.hostId}">${report.hostName}(${report.callEmail})</a></td>
 										<td id="purchaseDate">${report.createAt}</td>
 									<td id="reason"
 										style="max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${report.reason}</td>
