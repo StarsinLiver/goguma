@@ -677,18 +677,17 @@
 
 # 2️⃣ 프로젝트 개요
 
-- 편의와 취미를 공유할 수 있는 장소에 대한 예약 및 일정을 공유하여 함께 즐길 수 있도록 사이트를 구성
-- 실제 운영중인 공간대여 서비스 플랫폼을 벤치 마킹 (아워플레이스, 스페이스 클라우드 등)
+## 🍠 고구마 이름의 유래
+- 
 
 <br/>
 <br/>
 
-# 🍠 역할 분담
-장소 공유 및 예약 관리서비스 플랫폼<br><br>
+## 🍠 역할 분담
 
-|Name|이산하|강민|정영재|이지민|김병준|
+|Name|이산하 [ 팀장 ]|강민|정영재|이지민|김병준|
 |---|---|---|---|---|---|
-|**position**|팀장/채팅/상품 (전체조회)/메인|고객센터/이모티콘/자유게시판 (카테고리)|관리자/자유게시판 (리스트,배너)|유저 , 자유게시판 (리뷰)|상품/자유게시판 (상세조회)|
+|**position**|채팅 , 상품 , 메인|고객센터 , 이모티콘 , 자유게시판 (카테고리)|관리자 , 자유게시판 (리스트,배너)|유저 , 자유게시판 (리뷰)|상품 , 자유게시판 (상세조회)|
 
 
 - 프로젝트 기간: 총 11일 (03/11 ~ 03/25)
@@ -697,7 +696,7 @@
 <br/>
 <br/>
 
-# 📚기술스택
+## 📚기술스택
 <div class= "container">
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=OpenJDK&logoColor=white">
@@ -815,7 +814,7 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 # 5️⃣ 주요 기능
 
 
-#### 유저
+#### 유저 (USER)
 <details>
   <summary> 기능 보기</summary>
 
@@ -829,7 +828,7 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 찜 목록 확인
 </details>
 
-#### 관리자
+#### 관리자 (MASTER , ADMIN)
 <details>
   <summary> 기능 보기</summary>
 
