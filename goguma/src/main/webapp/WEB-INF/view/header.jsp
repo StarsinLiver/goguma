@@ -147,7 +147,6 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav ms-auto p-4 p-lg-0" style="float: right;">
-					<a href="/" class="nav-item nav-link active">Home</a>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
@@ -176,9 +175,6 @@
 								href="/cs/faq/list" class="dropdown-item">자주 묻는 질문</a>
 						</div>
 					</div>
-
-
-					<a href="/about" class="nav-item nav-link">회사 소개</a>
 					<c:if test="${principal.role == 'USER'}">
 						<a href="/user/info"
 							class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">마이페이지<i
