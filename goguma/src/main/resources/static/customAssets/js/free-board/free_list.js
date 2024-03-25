@@ -284,21 +284,8 @@ $(document).ready(function() {
 				success : function(data) {
 
 					if (data != null) {
-						if (typeValue == "LIST") {
 
-							console.log("데이터 확인: 리스트로 탔음");
-							console.log("데이터 확인: "
-									+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
-							console.log("데이터 확인: start: "
-									+ data.start);
-							console.log("데이터 확인: total: "
-									+ data.total);
-							console.log("데이터 확인: last: "
-									+ data.last);
-							console.log("데이터 확인: size: "
-									+ data.size);
-							console.log("데이터 확인: pg: "
-									+ data.pg);
+						if (typeValue == "LIST") {
 
 							// 데이터를 받아서 처리
 							var html = '';
@@ -326,6 +313,7 @@ $(document).ready(function() {
 							
 							for (var i = 0; i < data.dtoList.length; i++) {
 								var board = data.dtoList[i];
+								
 								html += '<tr>';
 								html += '<td><a href="/freeBoard/detail?id='
 										+ board.id
@@ -460,8 +448,8 @@ $(document).ready(function() {
 				            var board = data[i];
 				            var type = data[i].type;
 				            var id = data[i].id;
-				            console.log('로그 확인 데이터 타입으로다가: ' + type);
-				            console.log('로그 확인 데이터 id로다가!!!!!!!!!!!!: ' + id);
+				            //console.log('로그 확인 데이터 타입으로다가: ' + type);
+				            //console.log('로그 확인 데이터 id로다가!!!!!!!!!!!!: ' + id);
 				
 				            if (type == 'LIST') {
 				                // 첫 번째 버튼에만 active 클래스 추가
@@ -672,7 +660,7 @@ $(document).on("click", ".bannerTag", function() {
         },
         success: function(data) {
             // AJAX 요청 성공 시 동작
-            console.log('배너 뷰카운트 증가');
+//            console.log('배너 뷰카운트 증가');
         },
         error: function() {
             // AJAX 요청 실패 시 동작

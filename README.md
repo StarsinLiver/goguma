@@ -696,9 +696,17 @@
 
 |Name|[ 팀장 ] <br/> 이산하|강민|정영재|이지민|김병준|
 |---|---|---|---|---|---|
-|**position**|채팅 , 상품 , 메인|고객센터 , 이모티콘 , 자유게시판 (카테고리)|관리자 , 자유게시판 (리스트,배너)|유저 , 자유게시판 (리뷰)|상품 , 자유게시판 (상세조회)|
+|**position**|채팅 , 상품 , 관리자 , 메인|고객센터 , 이모티콘 , 자유게시판 (카테고리)|관리자 , 자유게시판 (리스트,배너)|유저 , 자유게시판 (리뷰)|상품 , 자유게시판 (상세조회)|
 
 ### 프로젝트 기간: 총 11일 (03/11 ~ 03/25)
+
+<br/>
+<br/>
+
+## 🍠 일정 관리
+### 노션을 활용하여 기능별로 일정 관리
+![image](https://github.com/StarsinLiver/goguma/assets/141594965/2b241785-0fcc-48d5-8910-a6e5fcb48b1e)
+
 
 <br/>
 <br/>
@@ -718,6 +726,8 @@
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
 <img src="https://img.shields.io/badge/bootstrap-ba55d3?style=for-the-badge&logo=bootstrap&logoColor=black">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/socketJS-F56640?style=for-the-badge&logo=socketdotio&logoColor=white">
 </div>
 
 ###  🕵️‍♂️ Front_End
@@ -732,6 +742,7 @@
 - HTML5
 - CSS3
 - JavaScript : v1.16.1
+- jquery : v3.7.1
 - sockjs-client : v1.5.2
 - stomp.js : v2.3.3
 - perfect-scrollbar : v1.5.2
@@ -741,6 +752,7 @@
 - owl.carousel : v2.1.0
 - retina : v2.1.0
 - daum map : v2
+- summernote : 0.8.18
 
 </div>
 </details>
@@ -772,7 +784,7 @@
 <details>
 <summary>개발 툴</summary>
 
-- eclipse [sts4]
+- eclipse [sts4] : v4.22.0
 - Mysql v8..46 
 </details>
 
@@ -783,6 +795,7 @@
 <summary>협력 툴</summary>
 
 - github
+- gitbash
 - discord 
 </details>
 
