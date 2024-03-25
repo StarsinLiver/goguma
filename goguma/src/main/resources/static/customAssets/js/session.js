@@ -12,7 +12,7 @@ function getSession(){
 			}
 		},
 		error : function(){
-			alert("에러");
+			console.log("에러");
 		}
 	});
 	return userData;

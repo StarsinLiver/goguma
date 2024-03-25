@@ -34,10 +34,6 @@ vertical-align: middle;
 
 
 
-
-
-
-
 * {
   margin: 0;
   padding: 0;
@@ -94,7 +90,7 @@ nav ul li {
 nav ul li:last-child {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-nav ul li a {
+nav ul li div {
   position: relative;
   color: white;
   text-decoration: none;
@@ -105,12 +101,12 @@ nav ul li a {
   width: 100%;
   border-left: 3px solid transparent;
 }
-nav ul li.active a {
+nav ul li.active div {
   color: cyan;
   background: #1e1e1e;
   border-left-color: cyan;
 }
-nav ul li a:hover {
+nav ul li div:hover {
   background: #1e1e1e;
 }
 nav ul ul {
@@ -127,17 +123,17 @@ nav ul ul li {
   line-height: 42px;
   border-top: none;
 }
-nav ul ul li a {
+nav ul ul li div {
   font-size: 17px;
   color: #e6e6e6;
   padding-left: 80px;
 }
-nav ul li.active ul li a {
+nav ul li.active ul li div {
   color: white;
   border-left-color: transparent;
 }
 
-nav ul li a span {
+nav ul li div span {
   position: absolute;
   top: 50%;
   right: 20px;
@@ -145,7 +141,7 @@ nav ul li a span {
   font-size: 22px;
   transition: transform 0.4s;
 }
-nav ul li a span.rotate {
+nav ul li div span.rotate {
   transform: translateY(-50%) rotate(-180deg);
 }
 .content {
@@ -186,10 +182,9 @@ nav ul li a span.rotate {
                 <div class="cate-box"></div>
             </div>
             <div class="right-box">
-                <!-- ========================================== -->
                 <table class="table">
 					<tr class="tr">
-						<th class="th">게시판 이름 입력</th>
+						<th class="th">게시판 이름</th>
 						<td class="td">
 							<input type="text" class="cate-input">
 						</td>
@@ -200,15 +195,15 @@ nav ul li a span.rotate {
 							<div class="radio-all-box">
 								<div class="radio-box">
 									<input type="radio" value="Dongle" name="font" class="font-select-radio" checked>
-									<span>Dongle 폰트</span>
+									<span class="font-span">Dongle 폰트</span>
 								</div>
 								<div class="radio-box">
 									<input type="radio" value="Gamja Flower" name="font" class="font-select-radio">
-									<span>Gamja Flower 폰트</span>
+									<span class="font-span">Gamja Flower 폰트</span>
 								</div>
 								<div class="radio-box">
 									<input type="radio" value="Sunflower" name="font" class="font-select-radio">
-									<span>Sunflower 폰트</span>
+									<span class="font-span">Sunflower 폰트</span>
 								</div>
 							</div>
 						</td>
@@ -219,11 +214,11 @@ nav ul li a span.rotate {
 							<div class="radio-all-box">
 								<div class="radio-box">
 									<input type="radio" value="LIST" name="type" class="type-select-radio" checked>
-									<span>리스트 형식</span>
+									<span class="type-span">리스트 형식</span>
 								</div>
 								<div class="radio-box">
 									<input type="radio" value="CARD" name="type" class="type-select-radio">
-									<span>카드 형식</span>
+									<span class="type-span">카드 형식</span>
 								</div>
 							</div>
 						</td>
@@ -244,7 +239,7 @@ nav ul li a span.rotate {
 			                    <button type="button" class="switch-cate-btn">전체 선택 해제</button>
 			                    <button type="button" class="delete-cate-btn">카테고리 삭제</button>
 			                </div>
-						</th>
+						</td>
 					</tr>
 				</table>
                 <div class="save-button-box">

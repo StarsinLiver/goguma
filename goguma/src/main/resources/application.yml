@@ -21,7 +21,8 @@ spring:
     password: asd1234
   devtools:
     restart:
-      enabled: true
+      enabled: false
+
 
 #  sql:
 #    init: # 초기 sql 파일 읽기

@@ -150,6 +150,7 @@
 
 .radio-box{
 	margin-right: 20px;
+	cursor: pointer;
 }
 
 .hide-tr{
