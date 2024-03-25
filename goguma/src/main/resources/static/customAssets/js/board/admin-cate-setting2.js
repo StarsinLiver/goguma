@@ -33,14 +33,24 @@ function innerFun(data){
 	let innr = "";
 	if(data != ""){
 		for(let i = 0; i < data.length; i++){
+			//innr += `
+			//	<div class="cate-main-box">
+			//	    <div class="cate-main-title" id="${data[i].index}">
+			//	        <span class="main-title-text">${data[i].name}</span>
+			//	        <input type="hidden" value="1" class="main-hidden">
+			//	    </div>
+			//	    <div class="cate-sub-box"></div>
+			//	</div>
+			//`;
 			innr += `
-				<div class="cate-main-box">
-				    <div class="cate-main-title" id="${data[i].index}">
-				        <span class="main-title-text">${data[i].name}</span>
-				        <input type="hidden" value="1" class="main-hidden">
-				    </div>
-				    <div class="cate-sub-box"></div>
-				</div>
+				<li class="cate-main-box">
+			      <a href="#" class="feat-btn cate-main-title" id="${data[i].index}">
+			        <span class="main-title-text">${data[i].name}</span>
+			      	<span class="fas fa-caret-down first"></span>
+			      	<input type="hidden" value="1" class="main-hidden">
+			      </a>
+			      <ul class="feat-show cate-sub-box"></ul>
+		      	</li>
 			`;
 		}
 		innerBody.innerHTML = innr;
@@ -60,11 +70,17 @@ function subInnerFun(boxs, data){
 		let innr = "";
 		if(data[i].subList != null){
 			for(let k = 0; k < data[i].subList.length; k++){
+				//innr += `
+				//	<div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
+				//        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
+				//        <input type="hidden" value="1" class="sub-hidden">
+				//    </div>
+				//`;
 				innr += `
-					<div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
-				        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
-				        <input type="hidden" value="1" class="sub-hidden">
-				    </div>
+					<li class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
+			      	  <a href="#" class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</a>
+					  <input type="hidden" value="1" class="sub-hidden">
+			      	</li>
 				`;
 			}
 			boxs[i].innerHTML = innr;
@@ -271,14 +287,24 @@ function addSubCateBtnClick(mainTitleBoxs, subInnerBoxs){
 
 function addMainCategory(innerBody){
 	let innr = innerBody.innerHTML;
+	//innr += `
+	//	<div class="cate-main-box">
+	//	    <div class="cate-main-title" id="999">
+	//	        <span class="main-title-text">메인 카테고리</span>
+	//	        <input type="hidden" value="3" class="main-hidden">
+	//	    </div>
+	//	    <div class="cate-sub-box"></div>
+	//	</div>
+	//`;
 	innr += `
-		<div class="cate-main-box">
-		    <div class="cate-main-title" id="999">
-		        <span class="main-title-text">메인 카테고리</span>
-		        <input type="hidden" value="3" class="main-hidden">
-		    </div>
-		    <div class="cate-sub-box"></div>
-		</div>
+		<li class="cate-main-box">
+		  <a href="#" class="feat-btn cate-main-title" id="999">
+		    <span class="main-title-text">메인 카테고리</span>
+		  	<span class="fas fa-caret-down first"></span>
+		  	<input type="hidden" value="3" class="main-hidden">
+		  </a>
+		  <ul class="feat-show cate-sub-box"></ul>
+		</li>
 	`;
 	innerBody.innerHTML = innr;
 	mainClickEvent();
@@ -288,11 +314,17 @@ function addMainCategory(innerBody){
 
 function addSubCategory(innerBody, mainId){
 	let innr = innerBody.innerHTML;
+	//innr += `
+	//	<div class="cate-sub-title" id="999">
+	//        <span class="sub-title-text" id="999">서브 카테고리</span>
+	//        <input type="hidden" value="3" class="sub-hidden">
+	//    </div>
+	//`;
 	innr += `
-		<div class="cate-sub-title" id="999">
-	        <span class="sub-title-text" id="999">서브 카테고리</span>
-	        <input type="hidden" value="3" class="sub-hidden">
-	    </div>
+		<li class="cate-sub-title" id="999">
+		  <a href="#" class="sub-title-text" id="999">서브 카테고리</a>
+		  <input type="hidden" value="3" class="sub-hidden">
+		</li>
 	`;
 	innerBody.innerHTML = innr;
 	mainClickEvent();
