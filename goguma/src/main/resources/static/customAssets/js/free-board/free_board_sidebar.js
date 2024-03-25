@@ -24,7 +24,7 @@ $(document).ready(function() {
                 cate += '<ul class="feat-show">'; // 2차 카테고리 시작
 
                 data.filter(item => item.id === id).forEach(subItem => {
-                    cate += `<li><a href="/freeBoard/list?cate1=${id}&id=${subItem.subId}">` + subItem.subName + '</a></li>'; // 2차 카테고리
+                    cate += `<li><a href="/freeBoard/list?cate1=${id}&id=${subItem.subId}" >` + subItem.subName + '</a></li>'; // 2차 카테고리
                 });
 
                 cate += '</ul>'; // 2차 카테고리 종료
@@ -45,13 +45,14 @@ $(document).ready(function() {
             });
             
              // 현재 카테고리에 해당하는 data.name 값을 출력
-	         var currentCategoryName = ""; // 현재 카테고리 이름을 저장할 변수 선언
+	         
 	         // 여기에 현재 카테고리에 해당하는 data.name 값을 가져오는 코드를 작성합니다.
 	         // 예를 들어, 첫 번째 요소의 이름을 가져오려면:
 	         if (data.length > 0) {
-	             currentCategoryName = data[0].name;
-	             var categoryName = $(currentCategoryName).data('name');
-	             document.getElementById("cateName").innerText = categoryName;
+				 const urlParams = new URL(location.href).searchParams;
+				const subId = urlParams.get('id');
+	         
+	             document.getElementById("cateName").innerText = data[subId - 1].subName;
 	         }
 	        
 	        
@@ -62,8 +63,6 @@ $(document).ready(function() {
         }
     });
 });
-
-
 
 
 

@@ -12,10 +12,8 @@
 
 	<update id="updateUser">
 		update `user` set
-		<if test="#{zip} == null || #{tel} == null">
-			`zip`=#{zip},
-			`address`=#{address},
-		</if>
+		`zip`=#{zip},
+		`address`=#{address},
 		`tel`=#{tel},
 		`file`=#{file},
 		`update_at`=NOW()
