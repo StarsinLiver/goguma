@@ -254,7 +254,7 @@
 
 	<select id="findByUserId"
 		resultType="com.store.goguma.user.dto.FreeBoardDto">
-		SELECT f.* , m.name as mainCategoryName FROM FREE_BOARD f
+		SELECT f.* , m.name as mainCategoryName FROM free_board f
 		inner join
 		board_main_category m
 		on f.main_category = m.id
@@ -271,7 +271,7 @@
 	</select>
 
 	<select id="countFindByUserId" resultType="int">
-		SELECT count(*) FROM FREE_BOARD f
+		SELECT count(*) FROM free_board f
 		inner join board_main_category m
 		on
 		f.main_category = m.id
