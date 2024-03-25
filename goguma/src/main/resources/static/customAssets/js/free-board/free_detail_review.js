@@ -401,7 +401,7 @@ function subComment(number) {
 			'style="resize: none; border: 1px solid #ccc;"></textarea>' +
 			'<div style="display: flex; justify-content: space-between; align-items: stretch;">' +
 			'<button type="button" class="btn btn-warning" onclick="onclickCommentMainEmoji()">이모티콘</button>' +
-			'<div>' +
+			'<div class="btn-list">' +
 			'<button type="button" class="btn btn-danger" onclick="deleteTag()">닫기</button>' +
 			'<button type="button" class="btn btn-primary" onclick="subCommentForm()">등록</button>' +
 			'</div>' +

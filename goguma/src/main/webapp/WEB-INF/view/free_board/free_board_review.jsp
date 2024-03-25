@@ -59,16 +59,17 @@
 .imoji-tab {
 	display: none;
 	padding: 10px;
-    border: 1px solid black;
+    background: #FFD800;
 }
 /* 메인 이모티콘 목록 */
 .main-imoji-list {
 	display: block;
-	border: 1px solid black; 
+	border: 1px solid #ccc; 
 	width: 400px; 
 	height: 70px;
 	overflow-x: auto;
   	white-space: nowrap;
+  	background: #fff;
 }
 .main-imoji-list img {
 	width: 70px;
@@ -80,13 +81,23 @@
 	width: 400px;
     height: 200px;
     overflow-y: scroll;
-    border: 1px solid black;
+    border: 1px solid #ccc;
+    background: #fff;
 }
 .sub-imoji-list img {
 	width: 70px;
 	height: 70px;
 }
+#display-click-emoji,
+#display-click-emoji-comment {
+	width: 100%;
+	background: #fff;
+}
 
+.cmt_mdf_del button:nth-of-type(1),
+.btn-list button:nth-of-type(1) {
+	margin-right: 5px;
+}
 </style>
 </head>
 <body>
