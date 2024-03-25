@@ -704,6 +704,7 @@
 <br/>
 
 ## 🍠 일정 관리
+### 노션을 활용하여 기능별로 일정 관리
 ![image](https://github.com/StarsinLiver/goguma/assets/141594965/2b241785-0fcc-48d5-8910-a6e5fcb48b1e)
 
 
