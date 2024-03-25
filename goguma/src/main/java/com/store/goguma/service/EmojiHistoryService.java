@@ -29,7 +29,6 @@ public class EmojiHistoryService {
 
 	// admin 모든 이모지 출력
 	public List<MainEmoji> findMainEmojiAll() {
-		// TODO Auto-generated method stub
 		return emojiHistoryRepository.findMainEmojiAll();
 	}
 	

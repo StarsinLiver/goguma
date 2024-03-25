@@ -7,8 +7,8 @@ IMP.init('imp37413392');
 load();
 function load(){
 	if(userInfo == ""){
-		//alert("로그인이 필요한 서비스 입니다.");
-		//location.href = "/login";
+		alert("로그인이 필요한 서비스 입니다.");
+		location.href = "/login";
 	}else{
 		IMP.request_pay({
 	      pg: "goguma",

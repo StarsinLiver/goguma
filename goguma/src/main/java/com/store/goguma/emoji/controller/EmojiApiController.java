@@ -19,15 +19,12 @@ import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.service.EmojiHistoryService;
 import com.store.goguma.service.EmojiUploadService;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/emoji/api")
 @RequiredArgsConstructor
 public class EmojiApiController {
-
-	private final HttpSession httpSession;
 
 	private final EmojiUploadService service;
 
@@ -43,7 +40,6 @@ public class EmojiApiController {
 	@GetMapping("/list/{num}")
 	public ResponseEntity<?> getEmojiMainList(@PathVariable int num) {
 		List<MainEmoji> list = service.getEmojiMainList(num);
-		System.out.println("리스트 수 : " + list.size());
 		return new ResponseEntity<List<MainEmoji>>(list, HttpStatus.OK);
 	}
 
@@ -76,7 +72,6 @@ public class EmojiApiController {
 		try {
 
 			int count = emojiHistoryService.countByUserId(userId, mainEmojiId);
-			System.out.println("count : " + count);
 			if (count > 0) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}

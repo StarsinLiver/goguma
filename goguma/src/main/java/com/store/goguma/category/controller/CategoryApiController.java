@@ -35,9 +35,6 @@ public class CategoryApiController {
 	@GetMapping("/list")
 	public ResponseEntity<?> getList(){
 		List<CategoryResponseDto> list = service.getList();
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
 		return new ResponseEntity<List<CategoryResponseDto>>(list, HttpStatus.OK);
 	}
 	

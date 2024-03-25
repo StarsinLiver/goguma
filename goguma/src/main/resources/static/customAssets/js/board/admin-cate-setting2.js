@@ -15,7 +15,12 @@ const radioTypeTexts = document.querySelectorAll(".type-span");
 let subFlag = false;
 let fileValue = "";
 const formData = new FormData();
+let userInfo = getSession();
 
+if (userInfo == "" || userInfo.role == "USER" || userInfo.role == "") {
+	alert("잘못된 접근입니다.");
+	location.href = "/";
+}
 
 load();
 function load(){
@@ -41,7 +46,7 @@ function innerFun(data){
 		for(let i = 0; i < data.length; i++){
 			innr += `
 				<li class="cate-main-box">
-			      <div href="#" class="feat-btn cate-main-title" id="${data[i].index}">
+			      <div class="feat-btn cate-main-title" id="${data[i].index}">
 			        <span class="main-title-text">${data[i].name}</span>
 			      	<span class="fas fa-caret-down first"></span>
 			      	<input type="hidden" value="1" class="main-hidden">
@@ -69,7 +74,7 @@ function subInnerFun(boxs, data){
 			for(let k = 0; k < data[i].subList.length; k++){
 				innr += `
 					<li class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
-			      	  <div href="#" class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</div>
+			      	  <div class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</div>
 					  <input type="hidden" value="1" class="sub-hidden">
 			      	</li>
 				`;
@@ -283,7 +288,7 @@ function addMainCategory(innerBody){
 	let innr = innerBody.innerHTML;
 	innr += `
 		<li class="cate-main-box">
-		  <div href="#" class="feat-btn cate-main-title" id="999">
+		  <div class="feat-btn cate-main-title" id="999">
 		    <span class="main-title-text">메인 카테고리</span>
 		  	<span class="fas fa-caret-down first"></span>
 		  	<input type="hidden" value="3" class="main-hidden">
@@ -301,7 +306,7 @@ function addSubCategory(innerBody, mainId){
 	let innr = innerBody.innerHTML;
 	innr += `
 		<li class="cate-sub-title" id="999">
-		  <div href="#" class="sub-title-text" id="999">서브 카테고리</div>
+		  <div class="sub-title-text" id="999">서브 카테고리</div>
 		  <input type="hidden" value="3" class="sub-hidden">
 		</li>
 	`;
