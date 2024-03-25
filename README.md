@@ -742,6 +742,7 @@
 - HTML5
 - CSS3
 - JavaScript : v1.16.1
+- jquery : 3.7.1
 - sockjs-client : v1.5.2
 - stomp.js : v2.3.3
 - perfect-scrollbar : v1.5.2
