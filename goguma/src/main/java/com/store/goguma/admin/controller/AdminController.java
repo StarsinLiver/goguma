@@ -236,6 +236,8 @@ public class AdminController {
 		if (page.getSearch() == null) {
 			page.setSearch("");
 		}
+		
+		log.info("page : {}" , page);
 
 		ResponsePageDTO report = adminService.selectReportAll(page);
 

@@ -88,6 +88,7 @@ textarea {
 						<div class="col-md-10">
 							<div class="b-title">
 								<h2>${boardCountRD.title}</h2>
+								<h5><a href="/product/userProduct?uId=${boardCountRD.getUid()}">${boardCountRD.userName}</a></h5>
 							</div>
 							<div class="b-info">
 								<div class="d-flex">

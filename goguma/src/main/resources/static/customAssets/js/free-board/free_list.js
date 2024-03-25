@@ -147,31 +147,40 @@ function pagingFnc(page) {
 						$('.listType').html(html);
 
 						
+						
+						// 생성된 HTML을 테이블의 tbody에 추가하는 부분 수정
 						var paging = '';
-
+						
+						// "이전" 버튼 추가
 						if (data.start > 1) {
-							paging += '<li class="page-item"><span class="page-link" onclick="startPage('
-									+ data.start
-									+ ')">이전</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.start - 1) // 현재 페이지의 이전 페이지로 이동
+						            + ')">이전</a></li>';
 						}
+						
 						for (let i = data.start; i <= data.end; i++) {
-							paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
-									+ i
-									+ ')">'
-									+ i
-									+ '</span></li>';
+						    if (i == page) {
+						        paging += '<li id="page-' + i + '" class="page-item active"><span class="page-link">'
+						                + i
+						                + '</span></li>';
+						    } else {
+						        paging += '<li id="page-' + i + '" class="page-item"><a class="page-link" href="#" onclick="changePage('
+						                + i
+						                + ')">'
+						                + i
+						                + '</a></li>';
+						    }
 						}
+						
+						// "다음" 버튼 추가
 						if (data.end < data.last) {
-							paging += '<li class="page-item"><span class="page-link" onclick="endPage('
-									+ data.end
-									+ ')">이후</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.end + 1) // 현재 페이지의 다음 페이지로 이동
+						            + ')">이후</a></li>';
 						}
-
+						
 						// 생성된 HTML을 테이블의 tbody에 추가
-						$('.pagingPos').html(paging); 
-
-
-
+						$('.pagingPos').html(paging);
 
 
 
@@ -206,28 +215,39 @@ function pagingFnc(page) {
 						// 생성된 HTML을 테이블의 tbody에 추가
 						$('.cardType').html(html);
 
-				 		var paging = '';
-
+				 				// 생성된 HTML을 테이블의 tbody에 추가하는 부분 수정
+						var paging = '';
+						
+						// "이전" 버튼 추가
 						if (data.start > 1) {
-							paging += '<li class="page-item"><span class="page-link" onclick="startPage('
-									+ data.start
-									+ ')">이전</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.start - 1) // 현재 페이지의 이전 페이지로 이동
+						            + ')">이전</a></li>';
 						}
+						
 						for (let i = data.start; i <= data.end; i++) {
-							paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
-									+ i
-									+ ')">'
-									+ i
-									+ '</span></li>';
+						    if (i == page) {
+						        paging += '<li id="page-' + i + '" class="page-item active"><span class="page-link">'
+						                + i
+						                + '</span></li>';
+						    } else {
+						        paging += '<li id="page-' + i + '" class="page-item"><a class="page-link" href="#" onclick="changePage('
+						                + i
+						                + ')">'
+						                + i
+						                + '</a></li>';
+						    }
 						}
+						
+						// "다음" 버튼 추가
 						if (data.end < data.last) {
-							paging += '<li class="page-item"><span class="page-link" onclick="endPage('
-									+ data.end
-									+ ')">이후</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.end + 1) // 현재 페이지의 다음 페이지로 이동
+						            + ')">이후</a></li>';
 						}
-
+						
 						// 생성된 HTML을 테이블의 tbody에 추가
-						$('.pagingPos').html(paging); 
+						$('.pagingPos').html(paging);
 
 					}
 				} else if(1 > data.total) {
@@ -646,7 +666,6 @@ $("button[type='submit']")
 //배너 뷰카운트 증가
 $(document).on("click", ".bannerTag", function() {
     var bannerId = $('.bannerId').val();  // 해당 배너의 ID를 가져옴
-    alert('배너 아이디 캣치' + bannerId);
 
     $.ajax({
         method: "PUT",
@@ -664,3 +683,15 @@ $(document).on("click", ".bannerTag", function() {
         }
     });
 });
+
+
+
+// 페이지 번호 클릭 이벤트에 대한 함수
+function changePage(pageNumber) {
+    // 현재 페이지 번호에 대한 강조 효과 추가
+    $('.page-item').removeClass('active'); // 모든 페이지 번호에서 'active' 클래스 제거
+    $('#page-' + pageNumber).addClass('active'); // 클릭한 페이지 번호에 'active' 클래스 추가
+
+    // 페이지 이동 처리
+    pagingFnc(pageNumber); // 해당 페이지로 이동하기 위해 pagingFnc 함수 호출
+}
