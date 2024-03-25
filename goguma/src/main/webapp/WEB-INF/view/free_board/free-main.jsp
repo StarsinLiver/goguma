@@ -187,7 +187,8 @@ max-width: 60%;
 
 		
 			<div class="container mt-8">
-				<div class="row justify-content-center">
+				<div class="row justify-content-center" style=" margin: 3% 20% 3% -36%;
+    width: 172%;">
 					<div class="col-lg-3" style="width: 22%;">
 						<h4>${category1.subCategoryName}</h4>
 						<div class="row">

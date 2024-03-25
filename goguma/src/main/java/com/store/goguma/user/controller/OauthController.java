@@ -265,7 +265,7 @@ public class OauthController {
 				// 변경된 세션의 유효 시간을 설정합니다.
 				httpSession.setMaxInactiveInterval(secondsInAWeek);
 
-				return "main";
+				return "redirect:/";
 			}
 		} else {
 

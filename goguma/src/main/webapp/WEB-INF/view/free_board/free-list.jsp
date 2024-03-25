@@ -177,7 +177,7 @@ font-size:x-large;
 		<!-- 배너 출력 end -->
 		<div class="col-lg-8">
 			<h2 class="h2font">
-				게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float: right;">메인으로</a>
+				게시판 - <span id="cateName"></span><a href="/freeBoard/main" style="float: right;">메인으로</a>
 			</h2>
 			<!-- 리스트 테이블 -->
 			<input type="hidden" value="${type.listType}" id="listType" />
