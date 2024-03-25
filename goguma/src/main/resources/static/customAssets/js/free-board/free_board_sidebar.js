@@ -47,7 +47,7 @@ $(document).ready(function() {
             });
         },
         error: function() {
-            console.log('카테고리 펄스 에러 쓋~~~');
+            console.log('카테고리 생성 실패');
         }
     });
 });
