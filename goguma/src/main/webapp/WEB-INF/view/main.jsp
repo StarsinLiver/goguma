@@ -303,7 +303,7 @@ $(document).ready(function(){
 				            
 				            console.log('로그 확인 데이터 타입으로다가: ' + type);
 				
-				            if (type == 'FREEBOARD') {
+				            if (type == 'MAIN') {
 				                // 첫 번째 버튼에만 active 클래스 추가
 				                var isActive = i === 0 ? ' active' : '';
 				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + i + '"></button>';
