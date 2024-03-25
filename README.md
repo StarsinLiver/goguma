@@ -719,7 +719,7 @@
 <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
 <img src="https://img.shields.io/badge/bootstrap-ba55d3?style=for-the-badge&logo=bootstrap&logoColor=black">
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-<img src="https://img.shields.io/badge/socketdotio-F56640?style=for-the-badge&logo=socketdotio&logoColor=white">
+<img src="https://img.shields.io/badge/socketJS-F56640?style=for-the-badge&logo=socketdotio&logoColor=white">
 </div>
 
 ###  🕵️‍♂️ Front_End
