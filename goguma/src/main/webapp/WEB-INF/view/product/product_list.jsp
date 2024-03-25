@@ -51,7 +51,7 @@
 	<%@ include file="/WEB-INF/view/product/product_aside.jsp"%>
 	<!-- aside end -->
 	<div id="flexBox"
-		style="display: flex; flex-wrap: wrap; margin-left: 5%;">
+		style="display: flex; flex-wrap: wrap; margin: 0 5% 0 5%;">
 		<!-- 개별 카드 시작 -->
 		<!-- 개별 카드 엔드 -->
 	</div>
