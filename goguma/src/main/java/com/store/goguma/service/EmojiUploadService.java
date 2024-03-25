@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +15,7 @@ import com.store.goguma.emoji.dto.EmojiHistoryReqDto;
 import com.store.goguma.emoji.dto.EmojiUploadDto;
 import com.store.goguma.entity.Emoji;
 import com.store.goguma.entity.MainEmoji;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.EmojiRepository;
 import com.store.goguma.utils.Define;
 
@@ -91,7 +93,7 @@ public class EmojiUploadService {
 	public String uploadFileProcess(MultipartFile file) {// 파일만 c드라이브에 업로드됨
         if (file.isEmpty() == false) {
             if (file.getSize() > com.store.goguma.utils.Define.MAX_IMG_FILE_SIZE) {// 5메가 제한
-                throw new RuntimeException("파일 크기가 큽니다.");
+                throw new BackPageRestfulException("파일 크기가 큽니다." , HttpStatus.BAD_REQUEST);
             }
 
             String saveDirectory = Define.UPLOAD_FILE_DERECTORY;

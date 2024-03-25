@@ -29,7 +29,6 @@ function startPage(start) {
 
 // 페이지 넘기기
 function nextPage(num) {
-	//console.log("num : " + num);
 
 	pagingFnc(num);
 }
@@ -40,7 +39,6 @@ function endPage(end) {
 	end += 1;
 	reviewPage = end;
 
-	//console.log("end : " + end);
 	pagingFnc(end);
 }
 
@@ -147,31 +145,40 @@ function pagingFnc(page) {
 						$('.listType').html(html);
 
 						
+						
+						// 생성된 HTML을 테이블의 tbody에 추가하는 부분 수정
 						var paging = '';
-
+						
+						// "이전" 버튼 추가
 						if (data.start > 1) {
-							paging += '<li class="page-item"><span class="page-link" onclick="startPage('
-									+ data.start
-									+ ')">이전</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.start - 1) // 현재 페이지의 이전 페이지로 이동
+						            + ')">이전</a></li>';
 						}
+						
 						for (let i = data.start; i <= data.end; i++) {
-							paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
-									+ i
-									+ ')">'
-									+ i
-									+ '</span></li>';
+						    if (i == page) {
+						        paging += '<li id="page-' + i + '" class="page-item active"><span class="page-link">'
+						                + i
+						                + '</span></li>';
+						    } else {
+						        paging += '<li id="page-' + i + '" class="page-item"><a class="page-link" href="#" onclick="changePage('
+						                + i
+						                + ')">'
+						                + i
+						                + '</a></li>';
+						    }
 						}
+						
+						// "다음" 버튼 추가
 						if (data.end < data.last) {
-							paging += '<li class="page-item"><span class="page-link" onclick="endPage('
-									+ data.end
-									+ ')">이후</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.end + 1) // 현재 페이지의 다음 페이지로 이동
+						            + ')">이후</a></li>';
 						}
-
+						
 						// 생성된 HTML을 테이블의 tbody에 추가
-						$('.pagingPos').html(paging); 
-
-
-
+						$('.pagingPos').html(paging);
 
 
 
@@ -206,28 +213,39 @@ function pagingFnc(page) {
 						// 생성된 HTML을 테이블의 tbody에 추가
 						$('.cardType').html(html);
 
-				 		var paging = '';
-
+				 				// 생성된 HTML을 테이블의 tbody에 추가하는 부분 수정
+						var paging = '';
+						
+						// "이전" 버튼 추가
 						if (data.start > 1) {
-							paging += '<li class="page-item"><span class="page-link" onclick="startPage('
-									+ data.start
-									+ ')">이전</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.start - 1) // 현재 페이지의 이전 페이지로 이동
+						            + ')">이전</a></li>';
 						}
+						
 						for (let i = data.start; i <= data.end; i++) {
-							paging += '<li class="page-item"><span class="page-link" onclick="nextPage('
-									+ i
-									+ ')">'
-									+ i
-									+ '</span></li>';
+						    if (i == page) {
+						        paging += '<li id="page-' + i + '" class="page-item active"><span class="page-link">'
+						                + i
+						                + '</span></li>';
+						    } else {
+						        paging += '<li id="page-' + i + '" class="page-item"><a class="page-link" href="#" onclick="changePage('
+						                + i
+						                + ')">'
+						                + i
+						                + '</a></li>';
+						    }
 						}
+						
+						// "다음" 버튼 추가
 						if (data.end < data.last) {
-							paging += '<li class="page-item"><span class="page-link" onclick="endPage('
-									+ data.end
-									+ ')">이후</span></li>';
+						    paging += '<li class="page-item"><a class="page-link" href="#" onclick="changePage('
+						            + (data.end + 1) // 현재 페이지의 다음 페이지로 이동
+						            + ')">이후</a></li>';
 						}
-
+						
 						// 생성된 HTML을 테이블의 tbody에 추가
-						$('.pagingPos').html(paging); 
+						$('.pagingPos').html(paging);
 
 					}
 				} else if(1 > data.total) {
@@ -236,7 +254,7 @@ function pagingFnc(page) {
 				}
 			},
 			error : function() {
-				alert("에러");
+				console.log("페이징 에러");
 			}
 
 		});// ajax end
@@ -413,18 +431,18 @@ $(document).ready(function() {
 							
 						}
 					} else if(1 > data.total) {
-						alert("검색된 데이터가 존재하지 않습니다.");
+						console.log("검색된 데이터가 존재하지 않습니다.");
 					}
 				},
 				error : function() {
-					alert("에러");
+					console.log("페이지 로드시 리스트 출력 에러");
 				}
 
 			});/* list ajax end*/
 		
 		 var type = "LIST";
 		
-			// banner ajax start
+		 // banner ajax start
 		 $.ajax({
 				    method: "GET",
 				    url: "/banner",
@@ -463,6 +481,7 @@ $(document).ready(function() {
 				    },
 				    error: function() {
 				        // 에러 처리
+				        console.log('배너생성 에러');
 				    }
 				}); //banner ajax종료
 			
@@ -478,9 +497,7 @@ $("button[type='submit']")
 					var searchType = $(".selectOption").val();
 					var searchKeyword = $(".search").val();
 
-					console.log('서치 타입: ' + searchType);
-					console.log('서치 내용: '
-							+ searchKeyword);
+					
 
 					$.ajax({
 								method : "GET",
@@ -630,12 +647,12 @@ $("button[type='submit']")
 												
 											}
 									}else if(1 > data.total) {
-										alert("검색된 데이터가 존재하지 않습니다.");
+										console.log("검색된 데이터가 존재하지 않습니다.");
 										//innerBody.innerHTML = `<h1>작성된 게시물이 없습니다.</h1>`;
 									}
 								},
 								error : function() {
-									alert("에러");
+									console.log("검색 에러");
 								}
 
 							})// ajax end
@@ -646,7 +663,6 @@ $("button[type='submit']")
 //배너 뷰카운트 증가
 $(document).on("click", ".bannerTag", function() {
     var bannerId = $('.bannerId').val();  // 해당 배너의 ID를 가져옴
-    alert('배너 아이디 캣치' + bannerId);
 
     $.ajax({
         method: "PUT",
@@ -656,11 +672,23 @@ $(document).on("click", ".bannerTag", function() {
         },
         success: function(data) {
             // AJAX 요청 성공 시 동작
-             alert('아작스 성공');
+            console.log('배너 뷰카운트 증가');
         },
         error: function() {
             // AJAX 요청 실패 시 동작
-             alert('아작스 실패~~~');
+            console.log('배너 뷰카운트 증가 실패');
         }
     });
 });
+
+
+
+// 페이지 번호 클릭 이벤트에 대한 함수
+function changePage(pageNumber) {
+    // 현재 페이지 번호에 대한 강조 효과 추가
+    $('.page-item').removeClass('active'); // 모든 페이지 번호에서 'active' 클래스 제거
+    $('#page-' + pageNumber).addClass('active'); // 클릭한 페이지 번호에 'active' 클래스 추가
+
+    // 페이지 이동 처리
+    pagingFnc(pageNumber); // 해당 페이지로 이동하기 위해 pagingFnc 함수 호출
+}

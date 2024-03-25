@@ -93,7 +93,7 @@
 			<div class="card mb-3">
 				<div class="card-header text-white">
 					<!-- 카드 헤더 -->
-					<h5 class="card-title" style="height:24px;"></h5>
+					<h5 class="card-title" style="height: 24px;"></h5>
 				</div>
 				<div class="card-body">
 					<table class="table text-center">
@@ -121,6 +121,9 @@
 									<td id="">${product.formatNumber(product.price)}</td>
 									<td id="">${product.formatProductCreateAt()}</td>
 									<td id=""><c:choose>
+											<c:when test="${product.productDeleteYn == 'Y'}">
+												<span style="color: red;">삭제됨</span>
+											</c:when>
 											<c:when test="${product.confirmYn eq 'Y'}">
 												<span style="color: blue;">거래 완료</span>
 											</c:when>
@@ -130,9 +133,13 @@
 										</c:choose></td>
 
 									<td id="">${product.formatHistoryCreateAt()}</td>
-									<td id="">
-										<c:if test="${product.productDeleteYn == 'N'}">
-									<a class="btn btn-warning btn-complete" href="/product/productDetail?pId=${product.getPId()}">상세 조회</a></c:if></td>
+									<td id=""><c:if test="${product.productDeleteYn == 'N'}">
+											<a class="btn btn-warning btn-complete"
+												href="/product/productDetail?pId=${product.getPId()}">상세
+												조회</a>
+										</c:if> <c:if test="${product.productDeleteYn == 'Y'}">
+											<span style="color: red;">삭제됨</span>
+										</c:if></td>
 
 									<td><c:if
 											test="${product.confirmYn == 'N' && product.productDeleteYn == 'N'}">
@@ -141,7 +148,8 @@
 												<input type="hidden" name="_method" value="delete" />
 												<button id="refundButton"
 													onclick="if(!confirm('삭제하시겠습니까?')) return false; "
-													 class="btn btn-warning btn-complete" style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;">삭제하기</button>
+													class="btn btn-warning btn-complete"
+													style="margin-bottom: -5px; margin-top: -5px; background-color: #DC3545;">삭제하기</button>
 											</form>
 										</c:if></td>
 

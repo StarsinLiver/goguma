@@ -21,7 +21,7 @@ public class Banner {
 	private String file;
 	private String client;
 	private String useYn;
-	private Integer viewCtn;
+	private Integer viewCnt;
 	private Integer price;
 	private BannerType type;
 	private String url;

@@ -3,9 +3,7 @@ package com.store.goguma.admin.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +24,6 @@ import com.store.goguma.admin.dto.PageReqDTO;
 import com.store.goguma.entity.Banner;
 import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.entity.Faq;
-import com.store.goguma.entity.MainEmoji;
 import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.service.AdminService;
@@ -236,6 +233,8 @@ public class AdminController {
 		if (page.getSearch() == null) {
 			page.setSearch("");
 		}
+		
+		log.info("page : {}" , page);
 
 		ResponsePageDTO report = adminService.selectReportAll(page);
 

@@ -103,7 +103,7 @@
 								<th>상품명</th>
 								<th>결제 금액</th>
 								<th>구매여부</th>
-								<th>환불 완료</th>
+								<th>환불 여부</th>
 								<th>환불 신청</th>
 							</tr>
 						</thead>
@@ -117,7 +117,7 @@
 								<tr id="dataRow">
 									<td id="id">${history.merchantId}</td>
 									<td id="purchaseDate">${history.createAt}</td>
-									<td id="pointName">${history.mainEmojiName}</td>
+									<td id="pointName"><a href="/emoji/detail/${history.mainEmojiId}">${history.mainEmojiName}</a></td>
 									<td id="price">${history.formatPrice()}</td>
 									<td id="refundStatus" style="color: blue;"><c:choose>
 											<c:when test="${history.confirmYn == 'Y'}">
@@ -132,7 +132,7 @@
 												<span style="color: blue;">환불완료</span>
 											</c:when>
 											<c:otherwise>
-												<span style="color: black;">처리중</span>
+												<span style="color: black;">x</span>
 											</c:otherwise>
 										</c:choose></td>
 									<td><c:if test="${history.cancelYn == 'N'}">

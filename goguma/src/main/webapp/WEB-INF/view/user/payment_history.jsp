@@ -6,7 +6,7 @@
 
 <style>
 .user-page .payment-container {
-	width: 800px;
+	width: 70%;
 	height: auto;
 	padding: 40px;
 	border-radius: 5px;
@@ -131,6 +131,7 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
+								<th>결제 번호</th>
 								<th>제품코드</th>
 								<th>구매일자</th>
 								<th>구매상품명</th>
@@ -147,6 +148,7 @@
 							<!-- 실제 데이터 행 -->
 							<c:forEach var="history" items="${histories}">
 							<tr id="dataRow">
+								<td id="id">${history.merchantId}</td>
 								<td id="id">${history.mainEmojiId}</td>
 								<td class="purchaseDate">${history.createAt}</td>
 								<td id="pointName">${history.name}</td>

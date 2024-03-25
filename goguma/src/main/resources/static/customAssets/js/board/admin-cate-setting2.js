@@ -9,6 +9,8 @@ const hideTables = document.querySelectorAll(".hide-tr");
 const fontRadios = document.querySelectorAll(".font-select-radio");
 const typeRadios = document.querySelectorAll(".type-select-radio");
 const fileInput = document.querySelector("#formFile");
+const radioFontTexts = document.querySelectorAll(".font-span");
+const radioTypeTexts = document.querySelectorAll(".type-span");
 
 let subFlag = false;
 let fileValue = "";
@@ -24,7 +26,11 @@ function load(){
 			innerFun(data);
 		},
 		error : function(){
-			alert("에러");
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "서버 에러가 발생하였습니다!",
+			});
 		}
 	});
 }
@@ -34,13 +40,14 @@ function innerFun(data){
 	if(data != ""){
 		for(let i = 0; i < data.length; i++){
 			innr += `
-				<div class="cate-main-box">
-				    <div class="cate-main-title" id="${data[i].index}">
-				        <span class="main-title-text">${data[i].name}</span>
-				        <input type="hidden" value="1" class="main-hidden">
-				    </div>
-				    <div class="cate-sub-box"></div>
-				</div>
+				<li class="cate-main-box">
+			      <div href="#" class="feat-btn cate-main-title" id="${data[i].index}">
+			        <span class="main-title-text">${data[i].name}</span>
+			      	<span class="fas fa-caret-down first"></span>
+			      	<input type="hidden" value="1" class="main-hidden">
+			      </div>
+			      <ul class="feat-show cate-sub-box"></ul>
+		      	</li>
 			`;
 		}
 		innerBody.innerHTML = innr;
@@ -61,10 +68,10 @@ function subInnerFun(boxs, data){
 		if(data[i].subList != null){
 			for(let k = 0; k < data[i].subList.length; k++){
 				innr += `
-					<div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
-				        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
-				        <input type="hidden" value="1" class="sub-hidden">
-				    </div>
+					<li class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
+			      	  <div href="#" class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</div>
+					  <input type="hidden" value="1" class="sub-hidden">
+			      	</li>
 				`;
 			}
 			boxs[i].innerHTML = innr;
@@ -162,12 +169,11 @@ function subClickEvent(){
 }
 
 function subOnChangeEvent(hidden){
-	radioOnchange(fontRadios, hidden);
-	radioOnchange(typeRadios, hidden);
+	radioOnchange(fontRadios, radioFontTexts, hidden);
+	radioOnchange(typeRadios, radioTypeTexts, hidden);
 	fileOnchange(fileInput, hidden);
 }
-
-function radioOnchange(list, hidden){
+function radioOnchange(list, textList, hidden){
 	for(let i = 0; i < list.length; i++){
 		list[i].onchange = () => {
 			subFlag = true;
@@ -178,6 +184,11 @@ function radioOnchange(list, hidden){
 			}else if(hidden.value == 2){
 				hidden.value = 5;
 			}
+		}
+	}
+	for(let i = 0; i < textList.length; i++){
+		textList[i].onclick = () => {
+			list[i].checked = true;
 		}
 	}
 }
@@ -198,7 +209,6 @@ function fileOnchange(input, hidden){
 			hidden.value = 5;
 		}
 		const reader = new FileReader();
-        
         reader.readAsDataURL(event.target.files[0]);
         reader.onload = () => {
         	fileValue = event.target.files[0];
@@ -272,13 +282,14 @@ function addSubCateBtnClick(mainTitleBoxs, subInnerBoxs){
 function addMainCategory(innerBody){
 	let innr = innerBody.innerHTML;
 	innr += `
-		<div class="cate-main-box">
-		    <div class="cate-main-title" id="999">
-		        <span class="main-title-text">메인 카테고리</span>
-		        <input type="hidden" value="3" class="main-hidden">
-		    </div>
-		    <div class="cate-sub-box"></div>
-		</div>
+		<li class="cate-main-box">
+		  <div href="#" class="feat-btn cate-main-title" id="999">
+		    <span class="main-title-text">메인 카테고리</span>
+		  	<span class="fas fa-caret-down first"></span>
+		  	<input type="hidden" value="3" class="main-hidden">
+		  </div>
+		  <ul class="feat-show cate-sub-box"></ul>
+		</li>
 	`;
 	innerBody.innerHTML = innr;
 	mainClickEvent();
@@ -289,10 +300,10 @@ function addMainCategory(innerBody){
 function addSubCategory(innerBody, mainId){
 	let innr = innerBody.innerHTML;
 	innr += `
-		<div class="cate-sub-title" id="999">
-	        <span class="sub-title-text" id="999">서브 카테고리</span>
-	        <input type="hidden" value="3" class="sub-hidden">
-	    </div>
+		<li class="cate-sub-title" id="999">
+		  <div href="#" class="sub-title-text" id="999">서브 카테고리</div>
+		  <input type="hidden" value="3" class="sub-hidden">
+		</li>
 	`;
 	innerBody.innerHTML = innr;
 	mainClickEvent();
@@ -373,7 +384,11 @@ function deleteCategoryApiFun(id, checkTitle){
 				}
 			},
 			error : function(){
-				alert("에러");
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: "서버 에러가 발생하였습니다!",
+				});
 			}
 		});
 	}
@@ -382,10 +397,6 @@ function deleteCategoryApiFun(id, checkTitle){
 
 function finalSaveBtnClick(innerBody){
 	finalSaveBtn.onclick = () => {
-		//if(fileValue == ""){
-		//	alert("이미지 파일을 첨부해주세요!");
-		//	return;
-		//}
 		let fontResult = "";
 		let typeResult = "";
 		for(let i = 0; i < fontRadios.length; i++){
@@ -416,9 +427,7 @@ function finalSaveBtnClick(innerBody){
 					return;
 				}
 			}
-			
 			let mainCateList = new Array();
-			
 			for(let i = 0; i < mainTitleBoxs.length; i++){
 				const mainObject = {
 					id : mainTitleBoxs[i].id,
@@ -450,7 +459,6 @@ function finalSaveBtnClick(innerBody){
 				}
 				mainCateList.push(mainObject);
 			}
-				console.log("최종", mainCateList);
 			formData.append("mainCateList", new Blob([JSON.stringify(mainCateList)], {type: "application/json"}));
 			formData.append("file", fileValue);
 			$.ajax({
@@ -463,11 +471,15 @@ function finalSaveBtnClick(innerBody){
 				success : function(data){
 					if(data == true){
 						alert("저장되었습니다!");
-						//location.href = "/board/cate-setting2";
+						window.location.reload();
 					}
 				},
 				error : function(){
-					alert("에러");
+					Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: "서버 에러가 발생하였습니다!",
+					});
 				}
 			});
 		}

@@ -11,8 +11,6 @@ $(document).ready(function() {
         method: "GET",
         url: "/free-board/category",
         success: function(data) {
-            console.log('카테고리 석세스 콘솔 id 확인: ' + data[0].id);
-            console.log('카테고리 석세스 콘솔 id 확인: ' + data[0].subId);
 
             var cate = "";
 
@@ -45,9 +43,22 @@ $(document).ready(function() {
                 $(".feat-btn").not(this).next(".feat-show").slideUp();
                 $(".feat-btn").not(this).find(".fas").removeClass("fa-caret-up").addClass("fa-caret-down");
             });
+            
+             // 현재 카테고리에 해당하는 data.name 값을 출력
+	         var currentCategoryName = ""; // 현재 카테고리 이름을 저장할 변수 선언
+	         // 여기에 현재 카테고리에 해당하는 data.name 값을 가져오는 코드를 작성합니다.
+	         // 예를 들어, 첫 번째 요소의 이름을 가져오려면:
+	         if (data.length > 0) {
+	             currentCategoryName = data[0].name;
+	             var categoryName = $(currentCategoryName).data('name');
+	             document.getElementById("cateName").innerText = categoryName;
+	         }
+	        
+	        
+           
         },
         error: function() {
-            console.log('카테고리 펄스 에러 쓋~~~');
+            console.log('카테고리 생성 실패');
         }
     });
 });
