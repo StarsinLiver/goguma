@@ -90,7 +90,7 @@ nav ul li {
 nav ul li:last-child {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-nav ul li a {
+nav ul li div {
   position: relative;
   color: white;
   text-decoration: none;
@@ -101,12 +101,12 @@ nav ul li a {
   width: 100%;
   border-left: 3px solid transparent;
 }
-nav ul li.active a {
+nav ul li.active div {
   color: cyan;
   background: #1e1e1e;
   border-left-color: cyan;
 }
-nav ul li a:hover {
+nav ul li div:hover {
   background: #1e1e1e;
 }
 nav ul ul {
@@ -123,17 +123,17 @@ nav ul ul li {
   line-height: 42px;
   border-top: none;
 }
-nav ul ul li a {
+nav ul ul li div {
   font-size: 17px;
   color: #e6e6e6;
   padding-left: 80px;
 }
-nav ul li.active ul li a {
+nav ul li.active ul li div {
   color: white;
   border-left-color: transparent;
 }
 
-nav ul li a span {
+nav ul li div span {
   position: absolute;
   top: 50%;
   right: 20px;
@@ -141,7 +141,7 @@ nav ul li a span {
   font-size: 22px;
   transition: transform 0.4s;
 }
-nav ul li a span.rotate {
+nav ul li div span.rotate {
   transform: translateY(-50%) rotate(-180deg);
 }
 .content {
