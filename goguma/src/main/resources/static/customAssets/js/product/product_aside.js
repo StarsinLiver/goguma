@@ -175,11 +175,11 @@ const makeCard = (content) => {
 				<div class="card-photo" style="width : 229px; height : 274px;">
 					<img src="/images/upload/${file[0]}" />
 				</div>
-				<div class="card-desc">
+				<div class="card-desc" >
 					<h2 class="card-title">${content[i].name} </h2>
 					${content[i].confirmYn == 'Y' ? '<h5 class="btn btn-danger">상품 판매가 완료되었습니다</h5>' : ''}
 					<div class="card-price">${formatNumber(content[i].price)} 원</div>
-					<div class="card-region-name">${content[i].address}</div>
+					<div class="card-region-name" >${content[i].address}</div>
 					<div class="card-counts">
 						<span>관심 ${content[i].countWishList} </span> ∙ <span>채팅 ${content[i].countChatRoom}</span>
 					</div>

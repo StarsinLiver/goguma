@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- Sidebar -->
-<aside id="user-aside" style="width : 250px;">
+<aside id="user-aside" style="width : 250px; margin-left:10%">
     <h2>검색</h2>
     <ul>
         <li><a href="#" class="search-type" data-type="title">제목 검색</a><input type="text" class="search-input" placeholder="검색어 입력" oninput="highlightSearch(this)" /></li>

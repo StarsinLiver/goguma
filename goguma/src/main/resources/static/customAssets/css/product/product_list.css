@@ -49,6 +49,17 @@
 	color: #999;
 }
 
+.card a{
+    display:block;
+    width:228.98px;
+}
+
+.card-region-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-counts {
 	margin-top: 10px;
 	font-size: 14px;
@@ -84,3 +95,4 @@
 .pagination a:hover:not(.active) {
 	background-color: #ccc;
 }
+
