@@ -5,7 +5,7 @@
 <mapper namespace="com.store.goguma.repository.BannerRepository">
 
 	<select id="findAll" resultType="com.store.goguma.entity.Banner">
-		select * from banner
+		select id  , title , file , client , use_yn as useYn , view_cnt as viewCnt , price ,url , type , create_at as createAt , update_at as updateAt , delete_at as deleteAt , delete_yn as deleteYn from banner
 		where
 		delete_yn = 'N'
 		and

@@ -29,7 +29,6 @@ function startPage(start) {
 
 // 페이지 넘기기
 function nextPage(num) {
-	//console.log("num : " + num);
 
 	pagingFnc(num);
 }
@@ -40,7 +39,6 @@ function endPage(end) {
 	end += 1;
 	reviewPage = end;
 
-	//console.log("end : " + end);
 	pagingFnc(end);
 }
 
@@ -256,7 +254,7 @@ function pagingFnc(page) {
 				}
 			},
 			error : function() {
-				alert("에러");
+				console.log("페이징 에러");
 			}
 
 		});// ajax end
@@ -286,21 +284,8 @@ $(document).ready(function() {
 				success : function(data) {
 
 					if (data != null) {
-						if (typeValue == "LIST") {
 
-							console.log("데이터 확인: 리스트로 탔음");
-							console.log("데이터 확인: "
-									+ data.dtoList[0].uid); // 받은 데이터 0번 인덱스의 uid값만 추출한 예 , uid 걍 값 확인 해본거임
-							console.log("데이터 확인: start: "
-									+ data.start);
-							console.log("데이터 확인: total: "
-									+ data.total);
-							console.log("데이터 확인: last: "
-									+ data.last);
-							console.log("데이터 확인: size: "
-									+ data.size);
-							console.log("데이터 확인: pg: "
-									+ data.pg);
+						if (typeValue == "LIST") {
 
 							// 데이터를 받아서 처리
 							var html = '';
@@ -328,6 +313,7 @@ $(document).ready(function() {
 							
 							for (var i = 0; i < data.dtoList.length; i++) {
 								var board = data.dtoList[i];
+								
 								html += '<tr>';
 								html += '<td><a href="/freeBoard/detail?id='
 										+ board.id
@@ -433,18 +419,18 @@ $(document).ready(function() {
 							
 						}
 					} else if(1 > data.total) {
-						alert("검색된 데이터가 존재하지 않습니다.");
+						console.log("검색된 데이터가 존재하지 않습니다.");
 					}
 				},
 				error : function() {
-					alert("에러");
+					console.log("페이지 로드시 리스트 출력 에러");
 				}
 
 			});/* list ajax end*/
 		
 		 var type = "LIST";
 		
-			// banner ajax start
+		 // banner ajax start
 		 $.ajax({
 				    method: "GET",
 				    url: "/banner",
@@ -462,8 +448,8 @@ $(document).ready(function() {
 				            var board = data[i];
 				            var type = data[i].type;
 				            var id = data[i].id;
-				            console.log('로그 확인 데이터 타입으로다가: ' + type);
-				            console.log('로그 확인 데이터 id로다가!!!!!!!!!!!!: ' + id);
+				            //console.log('로그 확인 데이터 타입으로다가: ' + type);
+				            //console.log('로그 확인 데이터 id로다가!!!!!!!!!!!!: ' + id);
 				
 				            if (type == 'LIST') {
 				                // 첫 번째 버튼에만 active 클래스 추가
@@ -483,6 +469,7 @@ $(document).ready(function() {
 				    },
 				    error: function() {
 				        // 에러 처리
+				        console.log('배너생성 에러');
 				    }
 				}); //banner ajax종료
 			
@@ -498,9 +485,7 @@ $("button[type='submit']")
 					var searchType = $(".selectOption").val();
 					var searchKeyword = $(".search").val();
 
-					console.log('서치 타입: ' + searchType);
-					console.log('서치 내용: '
-							+ searchKeyword);
+					
 
 					$.ajax({
 								method : "GET",
@@ -650,12 +635,12 @@ $("button[type='submit']")
 												
 											}
 									}else if(1 > data.total) {
-										alert("검색된 데이터가 존재하지 않습니다.");
+										console.log("검색된 데이터가 존재하지 않습니다.");
 										//innerBody.innerHTML = `<h1>작성된 게시물이 없습니다.</h1>`;
 									}
 								},
 								error : function() {
-									alert("에러");
+									console.log("검색 에러");
 								}
 
 							})// ajax end
@@ -675,11 +660,11 @@ $(document).on("click", ".bannerTag", function() {
         },
         success: function(data) {
             // AJAX 요청 성공 시 동작
-             alert('아작스 성공');
+//            console.log('배너 뷰카운트 증가');
         },
         error: function() {
             // AJAX 요청 실패 시 동작
-             alert('아작스 실패~~~');
+            console.log('배너 뷰카운트 증가 실패');
         }
     });
 });

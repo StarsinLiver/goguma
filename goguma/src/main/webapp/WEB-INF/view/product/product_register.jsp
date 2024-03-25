@@ -219,7 +219,7 @@ h2 {
 					id="name" placeholder="Enter name" /> 
 			</div>
 			<div class="register-form">
-				<label for="price">비용</label> <input type="number" name="price" min="0" value="0" step="1000"
+				<label for="price">비용</label> <input type="number" name="price" min="0" value="0" step="100"
 					id="price" placeholder="Enter price" /> 
 			</div>
 			<div class="register-form">

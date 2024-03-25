@@ -13,17 +13,17 @@
 				<div class="col-md-6 col-sm-12">
 					<div class="big-tagline">
 						<h2>
-							당신 근처의 <br> 지역 생활 커뮤니티
+							고민없이 <br> 구매 가능한 마켓
 						</h2>
-						<p class="lead">고민없이 구매 가능한 마켓 고구마 마켓에서 가까운 이웃과 함께해요.</p>
+						<p class="lead">고구마 마켓에서 가까운 이웃과 함께하세요.</p>
 						<a href="/product/product-list"
-							class="btn btn-light btn-radius btn-brd ban-btn">중고 거래 이용하기</a>
+							class="btn btn-light btn-radius btn-brd ban-btn">물품 보러가기</a>
 					</div>
 				</div>
 
 				<div class="app_iphone_02 wow slideInUp hidden-xs hidden-sm"
 					data-wow-duration="1s" data-wow-delay="0.5s">
-					<img src="/assets/uploads/rocket.png" alt="" class="img-responsive">
+					<img src="/assets/uploads/cloud.png" alt="" class="img-responsive">
 				</div>
 			</div>
 			<!-- end row -->
@@ -62,41 +62,56 @@
 
 	<div id="about" class="section wb nopadtop">
 		<div class="container">
-			<!-- 고구마마켓 둘러보기 시작 -->
-			<div style="display: flex; align-items: center;">
-				<h2 style="margin-right: auto;">
-					<i class="fa-solid fa-flag me-3"></i>공지사항
-				</h2>
-				<a href="/cs/notice/list" class="btn btn-warning btn-complete"
-					style="width: 10%; padding: 10px; font-size: small; font-weight: bold;">공지사항
-					바로가기</a>
-				<!-- 공지사항 바로가기 버튼 -->
-			</div>
-
+		
+			<div id="case" class="section wb">
 			<div class="container">
-				<table id="notice-table" class="table table-hover"
-					style="margin-top: 30px; margin-bottom: 30px;">
-					<thead class="thead-light text-center">
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-						</tr>
-					</thead>
-					<tbody class="text-center">
-						<c:forEach items="${noticeList}" var="notice">
-							<tr>
-								<td><a href="/cs/notice/detail/${notice.id}">${notice.id}</a></td>
-								<td><a href="/cs/notice/detail/${notice.id}">${notice.title}</a></td>
-								<td><a href="/cs/notice/detail/${notice.id}">관리자</a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+				<div class="section-title text-center">
+					<small>최신글</small>
+					<h3>중고거래</h3>
+					<p class="lead">
+						" 고구마"<br /> 사용자들이 중고 제품을 사고 팔 수 있는 온라인 플랫폼입니다. 다양한 상품 카테고리와 편리한
+						거래 시스템을 통해 사용자들은 안전하고 신속하게 거래를 진행할 수 있습니다. 저렴한 가격과 환경 보호를 위한 재활용
+						문화를 지원합니다.
+					</p>
+				</div>
+				<!-- end title -->
+
+				<div class="owl-screenshots owl-carousel owl-theme text-center">
+
+					<c:forEach var="product" items="${productList}">
+						<div class="owl-screen">
+							<div class="service-widget">
+								<div class="post-media entry wow fadeIn">
+									<c:forTokens items="${product.file}" delims="," var="file"
+										varStatus="loop">
+										<c:if test="${loop.first}">
+											<a href="/images/upload/${file}" data-rel="prettyPhoto[gal]"
+												class="hoverbutton global-radius"><i
+												class="flaticon-unlink"></i></a>
+											<img src="/images/upload/${file}" alt=""
+												class="img-responsive img-rounded">
+											<div class="magnifier"></div>
+										</c:if>
+									</c:forTokens>
+								</div>
+
+								<h3>${product.name}</h3>
+								<small><a
+									href="/product/productDetail?pId=${product.getPId()}">< 상품
+										보러 가기 ></a></small>
+							</div>
+							<!-- end service -->
+						</div>
+						<!-- end col -->
+					</c:forEach>
+				</div>
+				<!-- end owl -->
 			</div>
-
+			<!-- end container -->
+		</div>
+		<!-- end section -->
+		
 			<hr class="hr1">
-
 			<!-- Categories Start -->
 			<div class="container-xxl py-5 category">
 				<div class="container">
@@ -163,7 +178,7 @@
 
 			
 				<!-- 배너 출력 start -->
-		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px;  margin-left: 23%;">
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px auto;">
 			<!--  광고 하단 버튼 생성 위치 -->
 		  <div class="carousel-indicators btn" style="left: 0px">
 		  </div>
@@ -181,55 +196,6 @@
 		  </button>
 		</div>
 		<!-- 배너 출력 end -->
-
-
-		<div id="case" class="section wb">
-			<div class="container">
-				<div class="section-title text-center">
-					<small>최신글</small>
-					<h3>중고거래</h3>
-					<p class="lead">
-						" 고구마"<br /> 사용자들이 중고 제품을 사고 팔 수 있는 온라인 플랫폼입니다. 다양한 상품 카테고리와 편리한
-						거래 시스템을 통해 사용자들은 안전하고 신속하게 거래를 진행할 수 있습니다. 저렴한 가격과 환경 보호를 위한 재활용
-						문화를 지원합니다.
-					</p>
-				</div>
-				<!-- end title -->
-
-				<div class="owl-screenshots owl-carousel owl-theme text-center">
-
-					<c:forEach var="product" items="${productList}">
-						<div class="owl-screen">
-							<div class="service-widget">
-								<div class="post-media entry wow fadeIn">
-									<c:forTokens items="${product.file}" delims="," var="file"
-										varStatus="loop">
-										<c:if test="${loop.first}">
-											<a href="/images/upload/${file}" data-rel="prettyPhoto[gal]"
-												class="hoverbutton global-radius"><i
-												class="flaticon-unlink"></i></a>
-											<img src="/images/upload/${file}" alt=""
-												class="img-responsive img-rounded">
-											<div class="magnifier"></div>
-										</c:if>
-									</c:forTokens>
-								</div>
-
-								<h3>${product.name}</h3>
-								<small><a
-									href="/product/productDetail?pId=${product.getPId()}">< 상품
-										보러 가기 ></a></small>
-							</div>
-							<!-- end service -->
-						</div>
-						<!-- end col -->
-					</c:forEach>
-				</div>
-				<!-- end owl -->
-			</div>
-			<!-- end container -->
-		</div>
-		<!-- end section -->
 
 		<div class="parallax section lb">
 			<div class="container">
@@ -270,13 +236,49 @@
 			<!-- end container -->
 		</div>
 		<!-- end section -->
+		
+		<!-- 고구마마켓 둘러보기 시작 -->
+		<div class="container">
+			<div style="display: flex; align-items: center; margin-top: 10px;">
+				<h2 style="margin-right: auto;">
+					<i class="fa-solid fa-flag me-3"></i>공지사항
+				</h2>
+				<a href="/cs/notice/list" class="btn btn-warning btn-complete"
+					style="width: 10%; padding: 10px; font-size: small; font-weight: bold;">공지사항
+					바로가기</a>
+				<!-- 공지사항 바로가기 버튼 -->
+			</div>
+
+			<div class="container" style="margin: 10px 0;">
+				<table id="notice-table" class="table table-hover"
+					style="margin-top: 30px; margin-bottom: 30px;">
+					<thead class="thead-light text-center">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+						</tr>
+					</thead>
+					<tbody class="text-center">
+						<c:forEach items="${noticeList}" var="notice">
+							<tr>
+								<td><a href="/cs/notice/detail/${notice.id}">${notice.id}</a></td>
+								<td><a href="/cs/notice/detail/${notice.id}">${notice.title}</a></td>
+								<td><a href="/cs/notice/detail/${notice.id}">관리자</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<!-- container end -->
+		</div>
 	</div>
 </div>
 <script src="/customAssets/js/chat_aside.js"></script>
 <script>
 $(document).ready(function(){
 	
-	var type = "FREEBOARD"
+	var type = "MAIN"
 	
 		// banner ajax start
 		$.ajax({
@@ -286,9 +288,9 @@ $(document).ready(function(){
 						type: type,
 					},
 				    success: function(data) {
-				        console.log('data확인 배너 리스트 석세스: ' + data); //
-				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
-				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
+//				        console.log('data확인 배너 리스트 석세스: ' + data); //
+//				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
+//				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
 				        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
 				
 				        var btn = "";
@@ -303,7 +305,7 @@ $(document).ready(function(){
 				            
 				            console.log('로그 확인 데이터 타입으로다가: ' + type);
 				
-				            if (type == 'FREEBOARD') {
+				            if (type == 'MAIN') {
 				                // 첫 번째 버튼에만 active 클래스 추가
 				                var isActive = i === 0 ? ' active' : '';
 				                btn += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" class="' + isActive + '" aria-current="true" aria-label="Slide ' + i + '"></button>';

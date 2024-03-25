@@ -1,60 +1,14 @@
-<div class="cate-main-box">
-    <div class="cate-main-title" id="${data[i].index}">
-        <span class="main-title-text">${data[i].name}</span>
-    </div>
-    <div class="cate-sub-box">
-    
-	    <div class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
-	        <span class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</span>
-	    </div>
-    
-    </div>
-</div>
+<li class="cate-main-box">
+  <div href="#" class="feat-btn cate-main-title" id="${data[i].index}">
+    <span class="main-title-text">${data[i].name}</span>
+  	<span class="fas fa-caret-down first"></span>
+  	<input type="hidden" value="1" class="main-hidden">
+  </div>
+  <ul class="feat-show cate-sub-box"></ul>
+</li>
 
-
-const mainObject = {
-	mainIndex : 999,
-	mainInnrHTML : "",
-	mainTitle : "",
-	subObject : null
-};
-const subObject = {
-	mainIndex : i,
-	subIndex : 0,
-	subInnrHTML : "",
-	subTitle : ""
-};
-const mainList = new Array();
-const subList = new Array();
-
-
-const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
-const mainTitleTexts = document.querySelectorAll(".main-title-text");
-
-const subCateTitles = document.querySelectorAll(".cate-sub-title");
-const subCateTexts = document.querySelectorAll(".sub-title-text");
-
-
-
-// 공통 함수----------------------------------------------------------------
-function borderBlack(boxs){
-	for(let v = 0; v < boxs.length; v++){
-		boxs[v].style.border = "1px solid black";
-	}
-}
-
-const mainTitleBoxs = document.querySelectorAll(".cate-main-title");
-const subCateTitles = document.querySelectorAll(".cate-sub-title");
-
-=====================================================================================================================
-
-
-
-
-
-
-
-
-
-
-
+<li class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
+  <div href="#" class="sub-title-text" id="${data[i].subList[k].index}">
+  		${data[i].subList[k].name}</div>
+  <input type="hidden" value="1" class="sub-hidden">
+</li>

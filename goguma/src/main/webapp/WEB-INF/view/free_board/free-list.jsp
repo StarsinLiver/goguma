@@ -14,7 +14,7 @@
 }
 
 .form-select {
-	width: calc(13% - 5px); /* 셀렉트 박스 폭 조절 */
+	width: calc(15% - 5px); /* 셀렉트 박스 폭 조절 */
 }
 
 h2 {
@@ -25,16 +25,19 @@ h2 {
 
 /* background 적용 css */
 .mt-4 {
-	margin-top: -0.5rem !important;
-	background-image: url("/images/upload/${type.backGround}");
-	background-size: cover; /* 이미지를 요소에 맞게 조절 */
-	background-repeat: no-repeat; /* 이미지 반복을 하지 않음 */
+    margin-top: -0.5rem !important;
+    background-image: url("/images/upload/${type.backGround}");
+    background-size: cover; / 이미지를 요소에 맞게 조절 /
+    background-repeat: repeat; / 이미지 반복을 하지 않음 */
+    background-size: 51%;
 }
 
 /* 폰트 적용을 위한 css */
 .col-lg-8 {
 	font-family: ${	type.font},sans-serif;
+	margin: 100px;
 	font-size:large;
+	
 }
 
 .h2font {
@@ -177,7 +180,7 @@ font-size:x-large;
 		<!-- 배너 출력 end -->
 		<div class="col-lg-8">
 			<h2 class="h2font">
-				게시판 - 카테고리 이름 <a href="/freeBoard/main" style="float: right;">메인으로</a>
+				게시판 - <span id="cateName"></span><a href="/freeBoard/main" style="float: right;">메인으로</a>
 			</h2>
 			<!-- 리스트 테이블 -->
 			<input type="hidden" value="${type.listType}" id="listType" />

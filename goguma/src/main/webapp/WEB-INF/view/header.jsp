@@ -147,12 +147,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav ms-auto p-4 p-lg-0" style="float: right;">
-					<a href="/" class="nav-item nav-link active">Home</a>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">중고거래</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/product/product-list" class="dropdown-item">리스트</a> <a
+							<a href="/product/product-list" class="dropdown-item">전체 조회</a> <a
 								href="/product/write" class="dropdown-item">상품 등록</a> <a
 								href="/chat/room" class="dropdown-item">채팅하기</a> <a
 								href="/emoji/list" class="dropdown-item">이모티콘 상점</a>
@@ -163,7 +162,7 @@
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">자유게시판</a>
 						<div class="dropdown-menu fade-down m-0">
-							<a href="/freeBoard/main" class="dropdown-item">리스트</a>
+							<a href="/freeBoard/main" class="dropdown-item">메인</a>
 
 						</div>
 					</div>
@@ -176,9 +175,6 @@
 								href="/cs/faq/list" class="dropdown-item">자주 묻는 질문</a>
 						</div>
 					</div>
-
-
-					<a href="/about" class="nav-item nav-link">회사 소개</a>
 					<c:if test="${principal.role == 'USER'}">
 						<a href="/user/info"
 							class="btn btn-warning py-4 px-lg-5 d-none d-lg-block btn--login">마이페이지<i

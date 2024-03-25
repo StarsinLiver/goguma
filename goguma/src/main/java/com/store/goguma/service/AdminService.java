@@ -67,9 +67,9 @@ public class AdminService {
 
 	// 환불 완료
 	@Transactional
-	public void updateCancelYnPayment(String merchantId) {
+	public void updateCancelYnPayment(String merchantId , String reason) {
 
-		repository.updateCancelYnPayment(merchantId);
+		repository.updateCancelYnPayment(merchantId , reason);
 
 	}
 

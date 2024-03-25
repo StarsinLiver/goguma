@@ -147,7 +147,7 @@ public class AdminRestController {
 
 			// 환불 신청이 완료 되었다면 cancel_Yn = 'Y'
 			if (isTrue) {
-				adminService.updateCancelYnPayment(merchantId);
+				adminService.updateCancelYnPayment(merchantId ,reason);
 				return new ResponseEntity<>(HttpStatus.OK);
 			}
 			// merchantId로 환불 사유 검색

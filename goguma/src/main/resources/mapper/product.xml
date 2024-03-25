@@ -197,7 +197,7 @@
 
 	<select id="adminFindAll"
 		resultType="com.store.goguma.admin.dto.AdminProductDto">
-		SELECT P.p_id as pId ,
+		SELECT p.p_id as pId ,
 		p.name as productName ,
 		p.address as
 		productAddress ,
@@ -220,9 +220,9 @@
 		historyCreateAt,
 		u.u_id as userId ,
 		u.name as userName
-		FROM PRODUCT P
+		FROM product p
 		inner JOIN user host
-		ON P.HOST_ID = host.U_ID
+		ON p.HOST_ID = host.U_ID
 		left join product_history
 		h
 		on p.p_id = h.p_id
@@ -245,9 +245,9 @@
 
 	<select id="adminCountFindAll" resultType="int">
 		SELECT count(*)
-		FROM PRODUCT P
-		inner JOIN USER host
-		ON P.HOST_ID =
+		FROM product p
+		inner JOIN user host
+		ON p.HOST_ID =
 		host.U_ID
 		left join product_history h
 		on p.p_id = h.p_id

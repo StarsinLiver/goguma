@@ -23,7 +23,6 @@ IMP.init('imp37413392');
 let mainEmojiNum = 0;
 let userInfo = getSession();
 
-
 // 단위 포맷
 const formatNumber = (number) => {
 	const formattedNumber = number.toLocaleString('en-US', { style: 'decimal' });
@@ -104,6 +103,10 @@ function innerFun(list) {
 }
 
 orderBtn.onclick = () => {
+	if(userInfo == ""){
+		alert("로그인이 필요한 서비스 입니다.");
+		location.href = "/login";
+	}
 
 	// 구매 여부 확인
 	$.ajax({

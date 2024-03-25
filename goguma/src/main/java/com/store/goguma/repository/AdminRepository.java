@@ -27,7 +27,7 @@ public interface AdminRepository {
 
 	EmojiHistory selectCancelByMaerchantId(String merchantId);
 
-	void updateCancelYnPayment(String merchantId);
+	void updateCancelYnPayment(@Param("merchantId") String merchantId , @Param("reason") String reason);
 
 	boolean modifyAdminEmojiModify(EmojiModifyDTO dto);
 

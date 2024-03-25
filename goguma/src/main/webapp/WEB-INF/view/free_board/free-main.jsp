@@ -100,6 +100,10 @@ h4 {
 	text-align: center;
 }
 
+.container{
+max-width: 60%; 
+
+}
 
 
 </style>
@@ -108,13 +112,13 @@ h4 {
 <!-- aside 시작 -->
 <div style="display: flex;">
 <div
-	style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start; border-right: 1px solid;">
+	style="width: 13.6%; width: 13.6%; display: flex; flex-direction: column; align-items: flex-start;">
 	<%@ include file="/WEB-INF/view/free_board/free_board_aside.jsp"%>
 </div>
 <!-- aside 끝 -->
 <div class="container mt-4">
 
-	<div class="row justify-content-center">
+	<div class="row justify-content-center" style="margin-top: 1%; margin-bottom: 3%;">
 		<!-- 배너 출력 start -->
 		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 200px; max-width: 1000px; margin: 20px">
 			<!--  광고 하단 버튼 생성 위치 -->
@@ -134,8 +138,8 @@ h4 {
 		  </button>
 		</div>
 		<!-- 배너 출력 end -->
-		<div class="col-lg-4">
-			<h2>
+		<div class="col-lg-4" style="width: 66.33333%;">
+			<h2> 
 				베스트 사진게시물
 			</h2>
 			<div class="row">
@@ -160,7 +164,7 @@ h4 {
 		</div>
 
 		<!-- 리스트 형식의 글 목록 -->
-		<div class="col-lg-4">
+		<div class="col-lg-4" style=" width: 66.33333%;">
 			<h2>
 				베스트 게시물
 			</h2>
@@ -183,7 +187,8 @@ h4 {
 
 		
 			<div class="container mt-8">
-				<div class="row justify-content-center">
+				<div class="row justify-content-center" style=" margin: 3% 20% 3% -36%;
+    width: 172%;">
 					<div class="col-lg-3" style="width: 22%;">
 						<h4>${category1.subCategoryName}</h4>
 						<div class="row">

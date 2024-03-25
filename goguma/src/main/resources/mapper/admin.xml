@@ -81,7 +81,7 @@
 	<!-- 환불 완료 처리 -->
 	<update id="updateCancelYnPayment">
 
-		UPDATE emoji_history SET cancel_yn = 'Y' WHERE
+		UPDATE emoji_history SET cancel_yn = 'Y' , update_at = now() , cancel_reason = #{reason} WHERE
 		merchant_id = #{merchantId};
 
 	</update>

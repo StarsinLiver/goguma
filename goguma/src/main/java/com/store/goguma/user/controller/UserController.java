@@ -107,9 +107,7 @@ public class UserController {
 		String email = sessionUser.getEmail();
 		String social = sessionUser.getSocial();
 
-		log.info("social : " + social);
-		log.info("이메일 : " + email);
-
+		log.info("유저 정보 수정 : {}" , dto);
 		
 		
 		dto.setEmail(email);

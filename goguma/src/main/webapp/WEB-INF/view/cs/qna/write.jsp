@@ -42,7 +42,7 @@
                 </td>
             </tr>
         </table>
-        <button type="button" class="qna-write-insert-btn">문의하기</button>
+        <button type="button" class="qna-write-insert-btn" style="width : 600px;">문의하기</button>
         </div>
     </div>
 <script src="/customAssets/js/cs/qna/write.js"></script>

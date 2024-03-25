@@ -15,28 +15,19 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
   datasource:
-    url: jdbc:mysql://localhost:3306/goguma?serverTimeZone=Asia/Seoul
+    url: jdbc:mysql://database-1.c7kyw86ese9j.ap-northeast-2.rds.amazonaws.com:3306/goguma?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    username: StarsinLiver
     password: asd1234
   devtools:
     restart:
-      enabled: true
-
-#  datasource:
-#    url: jdbc:mysql://13.211.47.78/goguma?serverTimeZone=Asia/Seoul
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: root
-#    password: Sa1953vb!
-#  devtools:
-#    restart:
-#      enabled: true
+      enabled: false
 
 
 #  sql:
 #    init: # 초기 sql 파일 읽기
 #      mode: never #  always : 서버 실행시마다 data, schema 읽음, never : 읽지 않음
-##      이부분은 gradle implementation h2 일때만 사용
+##     이부분은 gradle implementation h2 일때만 사용
 #      schema-locations: # 스키마 (테이블 생성 등)
 #        - classpath:schema.sql
 #      data-locations: # 샘플 데이터

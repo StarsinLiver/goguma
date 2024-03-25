@@ -38,7 +38,7 @@ public class CategoryService {
 		log.info("addCategory : map  : {} " , map);
 		for(int i = 0; i < dtos.size(); i++) {
 			if(dtos.get(i).getFlag() == 1) {
-				subCatoryAdd(dtos.get(i).getSubList(), map, 999);
+				subCatoryAdd(dtos.get(i).getSubList(), map, dtos.get(i).getId());
 			}else if(dtos.get(i).getFlag() == 2) {
 				int result = repository.mainCategoryModify(dtos.get(i).toEntity());
 				if(result == 0) {

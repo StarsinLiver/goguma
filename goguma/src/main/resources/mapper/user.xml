@@ -12,10 +12,8 @@
 
 	<update id="updateUser">
 		update `user` set
-		<if test="#{zip} == null || #{tel} == null">
-			`zip`=#{zip},
-			`address`=#{address},
-		</if>
+		`zip`=#{zip},
+		`address`=#{address},
 		`tel`=#{tel},
 		`file`=#{file},
 		`update_at`=NOW()
@@ -53,7 +51,7 @@
 
 	<select id="findProfileById"
 		resultType="com.store.goguma.user.dto.UserProfileDto">
-		select u.* , ifnull((SELECT COUNT(*) FROM PRODUCT WHERE
+		select u.* , ifnull((SELECT COUNT(*) FROM product WHERE
 		host_id = #{userId}), 0) as countProduct
 		,ifnull((select count(*) from
 		qna where u_id = #{userId}), 0) as countQna, ifnull((select count(*)

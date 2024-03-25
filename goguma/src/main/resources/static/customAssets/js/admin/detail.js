@@ -26,6 +26,11 @@ IMP.init('imp37413392');
 let mainEmojiNum = 0;
 let userInfo = getSession();
 
+const formatNumber = (number) => {
+	const formattedNumber = number.toLocaleString('en-US', { style: 'decimal' });
+	return formattedNumber;
+}
+
 load();
 
 function load() {
@@ -78,8 +83,8 @@ function innerMain(data) {
 	mainTitle1.textContent = data.name;
 	mainTitle2.textContent = data.name;
 	changeTitle.value = data.name;
-	mainPrice[0].textContent = data.price;
-	mainPrice[1].textContent = data.price;
+	mainPrice[0].textContent = formatNumber(data.price);
+	mainPrice[1].textContent = formatNumber(data.price);
 	changePrice.value = data.price;
 }
 

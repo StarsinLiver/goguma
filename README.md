@@ -4,6 +4,10 @@
 <br/>
 
 # 1️⃣ 프로젝트 구조
+#### domain : com.store.goguma
+#### 각각 기능별 [관리자 , 유저 , 자유게시판 ...]로 구분
+ <br/>
+  <br/>
 <details>
   <summary> 프로젝트 구조 보기</summary>
 
@@ -676,21 +680,33 @@
 
 
 # 2️⃣ 프로젝트 개요
+## 🍠 고구마마켓
+- 고구마마켓은 사용자들이 <b>[고]</b>민 없이 중고 상품을 <b>[구]</b>매할 수 있는 온라인 <b>[마]</b>켓 플랫폼입니다. <br/><br/> 이 플랫폼은 사용자들이 중고 상품을 구매하고 판매할 수 있는 기능을 제공하며, 사용자 간의 신뢰를 기반으로 한 거래가 이루어집니다. 또한 사용자들 간의 상호 작용을 촉진하여 커뮤니티를 활성화하는 것을 목표로 합니다.
 
-## 🍠 고구마 이름의 유래
-- 
+<br/>
+
+## 🍠 비즈니스 모델
+1. 이모티콘 구매 : 사용자가 상품을 구매시 일정 비율의 수수료가 발생합니다. <br/>
+2. 광고 배너 : 유료로 광고 공간을 제공하여 광고주의 상품 노출량을 높입니다.
 
 <br/>
 <br/>
 
 ## 🍠 역할 분담
 
-|Name|이산하 [ 팀장 ]|강민|정영재|이지민|김병준|
+|Name|[ 팀장 ] <br/> 이산하|강민|정영재|이지민|김병준|
 |---|---|---|---|---|---|
-|**position**|채팅 , 상품 , 메인|고객센터 , 이모티콘 , 자유게시판 (카테고리)|관리자 , 자유게시판 (리스트,배너)|유저 , 자유게시판 (리뷰)|상품 , 자유게시판 (상세조회)|
+|**position**|채팅 , 상품 , 관리자 , 메인|고객센터 , 이모티콘 , 자유게시판 (카테고리)|관리자 , 자유게시판 (리스트,배너)|유저 , 자유게시판 (리뷰)|상품 , 자유게시판 (상세조회)|
 
+### 프로젝트 기간: 총 11일 (03/11 ~ 03/25)
 
-- 프로젝트 기간: 총 11일 (03/11 ~ 03/25)
+<br/>
+<br/>
+
+## 🍠 일정 관리
+### 노션을 활용하여 기능별로 일정 관리
+![image](https://github.com/StarsinLiver/goguma/assets/141594965/2b241785-0fcc-48d5-8910-a6e5fcb48b1e)
+
 
 <br/>
 <br/>
@@ -710,9 +726,11 @@
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
 <img src="https://img.shields.io/badge/bootstrap-ba55d3?style=for-the-badge&logo=bootstrap&logoColor=black">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/socketJS-F56640?style=for-the-badge&logo=socketdotio&logoColor=white">
 </div>
 
-###  🕵️‍♂️Front_End
+###  🕵️‍♂️ Front_End
 <details>
 <summary> FrontEnd</summary>
 <div markdown="1">
@@ -724,6 +742,7 @@
 - HTML5
 - CSS3
 - JavaScript : v1.16.1
+- jquery : v3.7.1
 - sockjs-client : v1.5.2
 - stomp.js : v2.3.3
 - perfect-scrollbar : v1.5.2
@@ -733,11 +752,14 @@
 - owl.carousel : v2.1.0
 - retina : v2.1.0
 - daum map : v2
+- summernote : 0.8.18
 
 </div>
 </details>
 
-###  🕵️‍♂️Back_End
+<br/>
+
+###  🕵️‍♂️ Back_End
 <details>
 <summary>BackEnd</summary>
 <div markdown="1">
@@ -749,11 +771,37 @@
 - JSP
 - JSTL : v2.0.0
 - Apache Tomcat : v10.0
+- net.nurigo:javaSDK : v2.2
+- starter-websocket
+- lombok : v1.18.32
 </div>
 
 </details>
 
-### 📡API
+<br/>
+
+### :herb: 개발 툴
+<details>
+<summary>개발 툴</summary>
+
+- eclipse [sts4] : v4.22.0
+- Mysql v8..46 
+</details>
+
+<br/>
+
+### :octocat: 협력 툴
+<details>
+<summary>협력 툴</summary>
+
+- github
+- gitbash
+- discord 
+</details>
+
+<br/>
+
+### 📡 API
 <details>
 <summary>API</summary> 
 <div markdown="1">
@@ -828,6 +876,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 찜 목록 확인
 </details>
 
+<br/>
+
 #### 관리자 (MASTER , ADMIN)
 <details>
   <summary> 기능 보기</summary>
@@ -844,6 +894,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 자유게시판 관리 [카테고리 관리]
 </details>
 
+<br/>
+
 #### 중고 거래
 <details>
   <summary> 기능 보기</summary>
@@ -855,6 +907,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 이모티콘
 </details>
 
+<br/>
+
 #### 자유 게시판
 <details>
   <summary> 기능 보기</summary>
@@ -863,6 +917,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 - 좋아요
 - 댓글 등록
 </details>
+
+<br/>
 
 #### 고객 센터
 <details>

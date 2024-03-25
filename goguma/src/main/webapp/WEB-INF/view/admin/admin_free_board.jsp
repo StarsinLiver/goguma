@@ -122,7 +122,7 @@
 							<c:forEach items="${freeBoardList}" var="freeBoard">
 								<tr id="dataRow">
 									<td id="">${freeBoard.id}</td>
-									<td id="">${freeBoard.title}</td>
+									<td id=""><a href="/freeBoard/detail?id=${freeBoard.id}">${freeBoard.title}</a></td>
 									<td id="">${freeBoard.formatCreateAt()}</td>
 									<td id="">${freeBoard.mainCategoryName}</td>
 									<td id="">${freeBoard.subCategoryName}</td>
