@@ -58,10 +58,12 @@
 		</a>
 	</section>
 	<section id="article-description">
-		<h1 property="schema:name" id="article-title" style="margin-top: 0px">
+		<div property="schema:name" id="article-title" style="margin-top: 0px">
+		<h1>
 			${product.name}
+			</h1>
 			<div class="d-flex justify-content-start align-items-center"
-				style="float: right; margin-top: -20px;">
+				style="float: right; margin-top: -80px;">
 
 				<!-- 채팅 버튼 -->
 				<div style="">
@@ -204,7 +206,7 @@
 				</c:choose>
 				</c:if>
 			</div>
-		</h1>
+		</div>
 
 		<p id="article-category">
 			타이틀 ∙
