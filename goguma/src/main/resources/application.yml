@@ -15,9 +15,9 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
   datasource:
-    url: jdbc:mysql://localhost:3306/goguma?serverTimeZone=Asia/Seoul
+    url: jdbc:mysql://database-1.c7kyw86ese9j.ap-northeast-2.rds.amazonaws.com:3306/goguma?serverTimeZone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    username: StarsinLiver
     password: asd1234
   devtools:
     restart:

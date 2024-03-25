@@ -284,6 +284,7 @@ $(document).ready(function() {
 				success : function(data) {
 
 					if (data != null) {
+
 						if (typeValue == "LIST") {
 
 							// 데이터를 받아서 처리
@@ -312,6 +313,7 @@ $(document).ready(function() {
 							
 							for (var i = 0; i < data.dtoList.length; i++) {
 								var board = data.dtoList[i];
+								
 								html += '<tr>';
 								html += '<td><a href="/freeBoard/detail?id='
 										+ board.id

@@ -35,7 +35,7 @@
 		</tr>
 		<tr class="">
 			<td class="">
-				<button type="button" class="qna-write-insert-btn">faq등록</button>
+				<button type="button" class="qna-write-insert-btn">등록</button>
 			</td>
 		</tr>
 	</table>

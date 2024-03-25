@@ -45,7 +45,7 @@
 						name="answerContent">${qna.answerContent}</textarea></td>
 			</tr>
 		</table>
-		<button class="qna-write-insert-btn">답변하기</button>
+		<button class="qna-write-insert-btn" style="width : 600px;">답변하기</button>
 	</form>
 </div>
 
