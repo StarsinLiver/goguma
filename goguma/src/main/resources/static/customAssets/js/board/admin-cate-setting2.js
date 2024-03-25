@@ -475,7 +475,6 @@ function finalSaveBtnClick(innerBody){
 				}
 				mainCateList.push(mainObject);
 			}
-			console.log("마지막 카테고리", mainCateList);
 			formData.append("mainCateList", new Blob([JSON.stringify(mainCateList)], {type: "application/json"}));
 			formData.append("file", fileValue);
 			$.ajax({
@@ -488,7 +487,7 @@ function finalSaveBtnClick(innerBody){
 				success : function(data){
 					if(data == true){
 						alert("저장되었습니다!");
-						//window.location.reload();
+						window.location.reload();
 					}
 				},
 				error : function(){
