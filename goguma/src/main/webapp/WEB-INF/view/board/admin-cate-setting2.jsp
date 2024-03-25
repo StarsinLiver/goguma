@@ -239,7 +239,7 @@ nav ul li div span.rotate {
 			                    <button type="button" class="switch-cate-btn">전체 선택 해제</button>
 			                    <button type="button" class="delete-cate-btn">카테고리 삭제</button>
 			                </div>
-						</th>
+						</td>
 					</tr>
 				</table>
                 <div class="save-button-box">
