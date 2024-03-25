@@ -279,7 +279,7 @@ function addSubCateBtnClick(mainTitleBoxs, subInnerBoxs){
 			alert("메인 카테고리를 선택해주세요!");
 			return;
 		}else{
-			addSubCategory(subInnerBoxs[mainClickCheck]);
+			addSubCategory(subInnerBoxs[mainClickCheck], mainTitleBoxs[mainClickCheck].id);
 		}
 	}
 }
@@ -304,12 +304,23 @@ function addMainCategory(innerBody){
 
 function addSubCategory(innerBody, mainId){
 	let innr = innerBody.innerHTML;
-	innr += `
-		<li class="cate-sub-title" id="999">
-		  <div class="sub-title-text" id="999">서브 카테고리</div>
-		  <input type="hidden" value="3" class="sub-hidden">
-		</li>
-	`;
+	if(mainId == 999){
+		innr += `
+			<li class="cate-sub-title" id="999">
+			  <div class="sub-title-text" id="999">서브 카테고리</div>
+			  <input type="hidden" value="3" class="sub-hidden">
+			</li>
+		`;
+	}else {
+		innr += `
+			<li class="cate-sub-title" id="${mainId}">
+			  <div class="sub-title-text" id="999">서브 카테고리</div>
+			  <input type="hidden" value="3" class="sub-hidden">
+			</li>
+		`;
+	}
+	
+	
 	innerBody.innerHTML = innr;
 	mainClickEvent();
 	subClickEvent();
@@ -464,6 +475,7 @@ function finalSaveBtnClick(innerBody){
 				}
 				mainCateList.push(mainObject);
 			}
+			console.log("마지막 카테고리", mainCateList);
 			formData.append("mainCateList", new Blob([JSON.stringify(mainCateList)], {type: "application/json"}));
 			formData.append("file", fileValue);
 			$.ajax({
@@ -476,7 +488,7 @@ function finalSaveBtnClick(innerBody){
 				success : function(data){
 					if(data == true){
 						alert("저장되었습니다!");
-						window.location.reload();
+						//window.location.reload();
 					}
 				},
 				error : function(){

@@ -8,6 +8,7 @@
 </li>
 
 <li class="cate-sub-title" id="${data[i].subList[k].mainIndex}">
-  <div href="#" class="sub-title-text" id="${data[i].subList[k].index}">${data[i].subList[k].name}</div>
+  <div href="#" class="sub-title-text" id="${data[i].subList[k].index}">
+  		${data[i].subList[k].name}</div>
   <input type="hidden" value="1" class="sub-hidden">
 </li>
