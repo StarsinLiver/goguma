@@ -21,7 +21,7 @@ let amount = 0;
 let pageId = location.pathname.split("/")[3];
 IMP.init('imp37413392');
 let mainEmojiNum = 0;
-
+let userInfo = getSession();
 
 // 단위 포맷
 const formatNumber = (number) => {
@@ -103,7 +103,6 @@ function innerFun(list) {
 }
 
 orderBtn.onclick = () => {
-	let userInfo = getSession();
 	if(userInfo == ""){
 		alert("로그인이 필요한 서비스 입니다.");
 		location.href = "/login";
