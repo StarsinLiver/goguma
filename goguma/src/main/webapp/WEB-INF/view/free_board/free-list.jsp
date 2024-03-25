@@ -14,7 +14,7 @@
 }
 
 .form-select {
-	width: calc(13% - 5px); /* 셀렉트 박스 폭 조절 */
+	width: calc(15% - 5px); /* 셀렉트 박스 폭 조절 */
 }
 
 h2 {
@@ -34,7 +34,9 @@ h2 {
 /* 폰트 적용을 위한 css */
 .col-lg-8 {
 	font-family: ${	type.font},sans-serif;
+	margin: 100px;
 	font-size:large;
+	
 }
 
 .h2font {
