@@ -276,7 +276,7 @@
 <script>
 $(document).ready(function(){
 	
-	var type = "FREEBOARD"
+	var type = "MAIN"
 	
 		// banner ajax start
 		$.ajax({
