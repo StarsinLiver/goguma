@@ -213,7 +213,7 @@ public class FreeboardController {
 		} else {
 			String file = fileService.uploadFileProcess(boardFormDTO.getMultipartFile());
 			boardFormDTO.setFile(file);
-		}
+		} 
 		
 		int result = freeBoardService.updateFreeBoard(boardFormDTO);
 		if (result == 0) {
