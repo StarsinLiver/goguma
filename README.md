@@ -742,6 +742,7 @@
 - HTML5
 - CSS3
 - JavaScript : v1.16.1
+- jquery : v3.7.1
 - sockjs-client : v1.5.2
 - stomp.js : v2.3.3
 - perfect-scrollbar : v1.5.2
@@ -751,6 +752,7 @@
 - owl.carousel : v2.1.0
 - retina : v2.1.0
 - daum map : v2
+- summernote : 0.8.18
 
 </div>
 </details>
