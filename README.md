@@ -772,7 +772,7 @@
 <details>
 <summary>개발 툴</summary>
 
-- eclipse [sts4]
+- eclipse [sts4] : v4.22.0
 - Mysql v8..46 
 </details>
 
