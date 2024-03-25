@@ -34,10 +34,6 @@ vertical-align: middle;
 
 
 
-
-
-
-
 * {
   margin: 0;
   padding: 0;
@@ -186,10 +182,9 @@ nav ul li a span.rotate {
                 <div class="cate-box"></div>
             </div>
             <div class="right-box">
-                <!-- ========================================== -->
                 <table class="table">
 					<tr class="tr">
-						<th class="th">게시판 이름 입력</th>
+						<th class="th">게시판 이름</th>
 						<td class="td">
 							<input type="text" class="cate-input">
 						</td>
@@ -200,15 +195,15 @@ nav ul li a span.rotate {
 							<div class="radio-all-box">
 								<div class="radio-box">
 									<input type="radio" value="Dongle" name="font" class="font-select-radio" checked>
-									<span>Dongle 폰트</span>
+									<span class="font-span">Dongle 폰트</span>
 								</div>
 								<div class="radio-box">
 									<input type="radio" value="Gamja Flower" name="font" class="font-select-radio">
-									<span>Gamja Flower 폰트</span>
+									<span class="font-span">Gamja Flower 폰트</span>
 								</div>
 								<div class="radio-box">
 									<input type="radio" value="Sunflower" name="font" class="font-select-radio">
-									<span>Sunflower 폰트</span>
+									<span class="font-span">Sunflower 폰트</span>
 								</div>
 							</div>
 						</td>
@@ -219,11 +214,11 @@ nav ul li a span.rotate {
 							<div class="radio-all-box">
 								<div class="radio-box">
 									<input type="radio" value="LIST" name="type" class="type-select-radio" checked>
-									<span>리스트 형식</span>
+									<span class="type-span">리스트 형식</span>
 								</div>
 								<div class="radio-box">
 									<input type="radio" value="CARD" name="type" class="type-select-radio">
-									<span>카드 형식</span>
+									<span class="type-span">카드 형식</span>
 								</div>
 							</div>
 						</td>
