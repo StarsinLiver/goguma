@@ -286,9 +286,9 @@ $(document).ready(function(){
 						type: type,
 					},
 				    success: function(data) {
-				        console.log('data확인 배너 리스트 석세스: ' + data); //
-				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
-				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
+//				        console.log('data확인 배너 리스트 석세스: ' + data); //
+//				        console.log('data확인 배너 리스트 석세스: ' + data.length); // 배열 길이 찍힘
+//				        console.log('data확인 배너 리스트 석세스: ' + data.length / 3);
 				        // 배열 길이 찍힘 어딜가든 세군데 다 들어갈 것이고 그러면 무조건 3군데에 같은 배너가 들어갈테니 총량/3 만큼 버튼이 생기게 할예정
 				
 				        var btn = "";
