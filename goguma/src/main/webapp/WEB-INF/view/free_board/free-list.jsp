@@ -25,10 +25,11 @@ h2 {
 
 /* background 적용 css */
 .mt-4 {
-	margin-top: -0.5rem !important;
-	background-image: url("/images/upload/${type.backGround}");
-	background-size: cover; /* 이미지를 요소에 맞게 조절 */
-	background-repeat: no-repeat; /* 이미지 반복을 하지 않음 */
+    margin-top: -0.5rem !important;
+    background-image: url("/images/upload/${type.backGround}");
+    background-size: cover; / 이미지를 요소에 맞게 조절 /
+    background-repeat: repeat; / 이미지 반복을 하지 않음 */
+    background-size: 51%;
 }
 
 /* 폰트 적용을 위한 css */
