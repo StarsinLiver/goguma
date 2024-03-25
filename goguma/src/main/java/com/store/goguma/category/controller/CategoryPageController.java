@@ -27,4 +27,9 @@ public class CategoryPageController {
 	public String cateSetting3() {
 		return "board/freeBoard_modify";
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "board/free_board_aside";
+	}
 }

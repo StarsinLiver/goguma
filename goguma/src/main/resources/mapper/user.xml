@@ -51,22 +51,19 @@
 		where u_id = #{uId};
 	</update>
 
-	<select id="findProfileById" resultType="com.store.goguma.user.dto.UserProfileDto">
-		select u.* , ifnull(count(p.p_id), 0) as countProduct
-		,ifnull(count(q.id), 0) as countQna, ifnull(count(w.u_id), 0) countWishList from user u
-		left join product p
-		on p.host_id = u.u_id
-		left join qna q
-		on q.u_id = u.u_id
-		left join wish_list w
-		on w.u_id = u.u_id
+	<select id="findProfileById"
+		resultType="com.store.goguma.user.dto.UserProfileDto">
+		select u.* , ifnull((SELECT COUNT(*) FROM PRODUCT WHERE
+		host_id = #{userId}), 0) as countProduct
+		,ifnull((select count(*) from
+		qna where u_id = #{userId}), 0) as countQna, ifnull((select count(*)
+		from wish_list where u_id = #{userId}), 0) countWishList from user u
 		where
-		u.u_id = #{userId}
-		group by u.u_id
+		u.u_id = #{userId};
 	</select>
-	
+
 	<update id="deleteUser">
-		update user 
+		update user
 		set delete_yn = 'Y' , delete_at = now()
 		where u_id = #{userId}
 	</update>

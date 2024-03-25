@@ -121,7 +121,7 @@
 									<td id="">${banner.title}</td>
 									<td id="">${banner.client}</td>
 									<td id="">${banner.useYn}</td>
-									<td id="">${banner.viewCtn}</td>
+									<td id="">${banner.viewCnt}</td>
 									<td id="">${banner.formatNumber(banner.price)}</td>
 									<td id="">${banner.type}</td>
 									<td id=""><a href="/admin/banner/update/${banner.id}"
