@@ -935,4 +935,4 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 <br/>
 
 # 6️⃣ 시연
-[![Video Label](http://img.youtube.com/vi/YAjSjuUJ2bw/0.jpg)](https://youtu.be/YAjSjuUJ2bw)
+{% include video id="YAjSjuUJ2bw" provider="youtube" %}
