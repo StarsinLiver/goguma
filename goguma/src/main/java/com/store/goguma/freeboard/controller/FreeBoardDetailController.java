@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.store.goguma.freeboard.dto.FreeBoardDetailAndUserDTO;
 import com.store.goguma.freeboard.dto.FreeBoardRecommendationDTO;
 import com.store.goguma.freeboard.dto.FreeBoardViewDTO;
+import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.handler.exception.LoginRestfulException;
 import com.store.goguma.report.dto.ReportDTO;
 import com.store.goguma.service.FreeBoardRecommendationService;
@@ -83,6 +84,11 @@ public class FreeBoardDetailController {
 	    
 	    dto.setHostId(hostId);	
 	    dto.setCallId(user.getUId());
+	    
+	    if(hostId == user.getUId()) {
+	    	throw new BackPageRestfulException(Define.NO_VALID_REPORT, HttpStatus.BAD_REQUEST);
+	    	
+	    }
 
 	    reportService.addReport(dto);
 	    
