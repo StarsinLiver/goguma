@@ -2,7 +2,6 @@ package com.store.goguma.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,14 +9,15 @@ import com.store.goguma.cs.dto.FaqRequestDto;
 import com.store.goguma.entity.Faq;
 import com.store.goguma.repository.FaqRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FaqService {
 	
-	@Autowired
-	private FaqRepository repository;
+	private final FaqRepository repository;
 
 	public List<Faq> getFaqList() {
 		return repository.getFaqList();

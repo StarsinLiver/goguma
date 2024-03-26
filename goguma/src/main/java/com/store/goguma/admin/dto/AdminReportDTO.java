@@ -2,19 +2,16 @@ package com.store.goguma.admin.dto;
 
 import java.util.List;
 
-import com.store.goguma.entity.EmojiHistory;
 import com.store.goguma.report.dto.ReportDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 public class AdminReportDTO {
 	

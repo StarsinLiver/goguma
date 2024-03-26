@@ -1,14 +1,10 @@
 package com.store.goguma.utils.page;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
+@Data
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PageReq {
 

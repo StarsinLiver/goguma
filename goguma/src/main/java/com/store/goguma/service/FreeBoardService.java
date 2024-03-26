@@ -41,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FreeBoardService {
 	
 	
-	final private FreeBoardRepository freeBoardRepository;
+	private final FreeBoardRepository freeBoardRepository;
 
 	private final FreeBoardViewRepository freeBoardViewRepository;
 

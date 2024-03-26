@@ -319,8 +319,6 @@ function addSubCategory(innerBody, mainId){
 			</li>
 		`;
 	}
-	
-	
 	innerBody.innerHTML = innr;
 	mainClickEvent();
 	subClickEvent();
