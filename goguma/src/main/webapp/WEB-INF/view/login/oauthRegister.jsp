@@ -204,8 +204,9 @@ h2 {
 			<br>
 			<!-- TODO: 버튼에 좌우 마진 잡혀 있어서 그런지 크기가 안커짐 나중에 수정 요망 -->
 			<button type="submit" class="btn btn-warning" id="socialRegister"
-				name="socialRegister"
-				style="margin: auto; display: block; width:250px;">가입 하기</button>
+                name="socialRegister"
+                style="margin: auto; display: block;    font-size: large;   margin: auto;
+                display: block;   height: 60px;    width: 150px;">가입 하기</button>
 		</form>
 	</div>
 </section>

@@ -100,7 +100,7 @@
 					<button type="submit" class="btn btn-warning btn-complete">검색</button>
 				</form>
 			</div>
-			<div class="card mb-3">
+			<div class="card mb-3" style="min-width: 1050px">
 				<div class="card-header text-white" style="height: 40px;"></div>
 				<div class="card-body">
 					<table class="table text-center">
