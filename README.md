@@ -852,7 +852,8 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 # 4️⃣ SiteMap
 
-<img src="https://github.com/Kira7124/PlaceStation/assets/136421992/41233a00-a93a-40c8-893d-eedd33762208">
+![image](https://github.com/StarsinLiver/goguma/assets/141594965/2ca206cd-ab8e-4ef9-a031-7ef1be4b44a7)
+
 
 <br/>
 <br/>

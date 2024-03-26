@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +18,8 @@ import com.store.goguma.handler.exception.BackPageRestfulException;
 import com.store.goguma.repository.EmojiRepository;
 import com.store.goguma.utils.Define;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * @fileName : EmojiUploadService.java
  * @Project : goguma
@@ -28,10 +29,10 @@ import com.store.goguma.utils.Define;
  */
 
 @Service
+@RequiredArgsConstructor
 public class EmojiUploadService {
 	
-	@Autowired
-	private EmojiRepository repository;
+	private final EmojiRepository repository;
 
 	public boolean emojiFileUpload(EmojiUploadDto dto, List<MultipartFile> files) {
 		String fileName = uploadProcess(files.get(0));

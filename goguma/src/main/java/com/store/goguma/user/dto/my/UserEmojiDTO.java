@@ -6,14 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 // main_emoji , Emoji_history 테이블 조인
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 public class UserEmojiDTO {
 	

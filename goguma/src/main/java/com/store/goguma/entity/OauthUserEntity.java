@@ -1,12 +1,14 @@
 package com.store.goguma.entity;
 
-import java.security.Timestamp;
-
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OauthUserEntity {
 
 	private String email;

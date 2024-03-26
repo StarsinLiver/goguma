@@ -7,6 +7,11 @@ const btn = document.querySelector(".qna-write-insert-btn");
 let userInfo = getSession();
 let optionFlag = 0;
 
+if(userInfo == ""){
+	alert("로그인이 필요한 서비스입니다.");
+	location.href = "/login";
+}
+
 btn.onclick = () => {
 	for(let i = 1; i < options.length; i++){
 		if(options[i].selected == true){

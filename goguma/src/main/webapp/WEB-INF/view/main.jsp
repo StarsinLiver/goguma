@@ -88,7 +88,7 @@
 											<a href="/images/upload/${file}" data-rel="prettyPhoto[gal]"
 												class="hoverbutton global-radius"><i
 												class="flaticon-unlink"></i></a>
-											<img src="/images/upload/${file}" alt=""
+											<img src="/images/upload/${file}" alt="" style="height: 250px;"
 												class="img-responsive img-rounded">
 											<div class="magnifier"></div>
 										</c:if>

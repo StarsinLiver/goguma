@@ -49,6 +49,7 @@ public class Define {
     public static final String NO_VALID_ADDRESS = "주소를 적어주세요";
     public static final String NO_VALID_DESCRIPTION = "설명를 적어주세요";
     public static final String NO_VALID_ACCESS = "권한이 없습니다.";
+    public static final String NO_VALID_REPORT = "자기 자신은 신고할 수 없습니다.";
     
     public static final int DEFAULT_TEMPERATURE_SCORE = 50;
     public static final int FIVE = 5;
