@@ -935,6 +935,3 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 <br/>
 
 # 6️⃣ 시연
-
-<img src="https://www.youtube.com/watch?v=YAjSjuUJ2bw" style="width:200px">
-</img>
