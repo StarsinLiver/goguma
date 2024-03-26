@@ -3,16 +3,12 @@ package com.store.goguma.utils.page;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class PageRes<Object> {
     //    쿼리 결과를 저장할 배열
     private List<Object> content;

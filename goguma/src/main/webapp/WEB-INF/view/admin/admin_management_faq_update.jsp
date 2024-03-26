@@ -34,7 +34,7 @@
 			</tr>
 		</table>
 		<div style="text-align: center;">
-		<button type="submit" class="qna-write-insert-btn" >수정</button>
+			<button type="submit" class="qna-write-insert-btn" style="width: 150px" >수정</button>
 		</div>
 	</form>
 	
