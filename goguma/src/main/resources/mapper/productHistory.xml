@@ -18,7 +18,12 @@
 	</insert>
 
 	<select id="countTemperatureUser" resultType="int">
-		select count(*) from product_history
-		where u_id = #{userId} and confirm_yn = 'Y';
+		select count(*)
+		from
+		product_history h
+		inner join product p
+		on p.p_id = h.p_id
+		where h.confirm_yn = 'Y'
+		and p.host_id = #{userId} or h.u_id = #{userId}
 	</select>
 </mapper>
