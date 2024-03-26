@@ -935,4 +935,4 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 <br/>
 
 # 6️⃣ 시연
-{% include video id="YAjSjuUJ2bw" provider="youtube" %}
+<iframe width="853" height="480" src="https://www.youtube.com/embed/YAjSjuUJ2bw" title="고구마 마켓 프로젝트 시연 영상" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
