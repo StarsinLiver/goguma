@@ -938,5 +938,6 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 |메인화면, 회원가입, 로그인|
 |------|
-|![도서목록](https://github.com/bugger0330/BookHub/assets/126323071/2e7c5f90-460f-4f6f-a132-e7a0fde43392)|
+|![메인화면, 회원가입, 로그인](![image](https://github.com/StarsinLiver/goguma/assets/92834334/8dae48fd-0b73-4578-a263-2a46f8720d8b)
+)|
 
