@@ -133,7 +133,7 @@
 				</div>
 				<!-- 모달 -->
 				<div id="myModal" class="modal">
-					<div class="modal-content">
+					<div class="modal-content" style="width : 20%">
 
 						<div id="modalContent"></div>
 						<span class="close" onclick="closeModal()">&times;</span>
