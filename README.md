@@ -936,8 +936,7 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 # 6️⃣ 시연
 
-|메인화면 및 회원가입, 로그인|
+|메인화면, 회원가입, 로그인|
 |------|
-|![image](https://github.com/StarsinLiver/goguma/assets/92834334/a27a9c47-3a51-433f-a9b6-fa9df69292bf
-)|
+|![도서목록](https://github.com/bugger0330/BookHub/assets/126323071/2e7c5f90-460f-4f6f-a132-e7a0fde43392)|
 
