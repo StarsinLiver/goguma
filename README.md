@@ -940,3 +940,118 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 |------|
 |[![image.gif](https://i.postimg.cc/6QWCGcH3/image.gif)](https://postimg.cc/mPnPvYWf)|
 
+|관리자 - 1대1 문의 관리|
+|------|
+|[![1-1.gif](https://i.postimg.cc/8CRSYCCY/1-1.gif)](https://postimg.cc/3yxV4Ymj)|
+
+|관리자 - 공지사항 등록 , 수정, 삭제|
+|------|
+|[![image.gif](https://i.postimg.cc/4dxS14HV/image.gif)](https://postimg.cc/Z9XHbSc5)|
+
+|관리자 - 광고 관리|
+|------|
+|[![image.gif](https://i.postimg.cc/Y9DyDcQV/image.gif)](https://postimg.cc/BLDgtVYc)|
+
+|관리자 - 권한 수정 1번|
+|------|
+|[![1.gif](https://i.postimg.cc/5NCkgRy7/1.gif)](https://postimg.cc/CzwNLJjk)|
+
+|관리자 - 권한 수정 2번|
+|------|
+|[![2.gif](https://i.postimg.cc/7PFyq7TR/2.gif)](https://postimg.cc/F1V6ZYpb)|
+
+|관리자 - 상품 관리|
+|------|
+|[![image.gif](https://i.postimg.cc/fL11Tnkd/image.gif)](https://postimg.cc/r0CfQH1y)|
+
+|관리자 - 신고 관리|
+|------|
+|[![image.gif](https://i.postimg.cc/VNVVDQqh/image.gif)](https://postimg.cc/GBvKmfSP)|
+
+|관리자 - 이모티콘 결제 내역 , 환불|
+|------|
+|[![image.gif](https://i.postimg.cc/nzm02scs/image.gif)](https://postimg.cc/jwsHdSfK)|
+
+|관리자 - 이모티콘 등록|
+|------|
+|[![image.gif](https://i.postimg.cc/K8YfVp8h/image.gif)](https://postimg.cc/9rvywp9L)|
+
+|관리자 - 이모티콘 삭제|
+|------|
+|[![image.gif](https://i.postimg.cc/B62BDdMH/image.gif)](https://postimg.cc/gXkhbB92)|
+
+|관리자 - 이모티콘 수정|
+|------|
+|[![image.gif](https://i.postimg.cc/y6XTNCJz/image.gif)](https://postimg.cc/7bhzBcMB)|
+
+|관리자 - 자유게시판 관리|
+|------|
+|[![image.gif](https://i.postimg.cc/D0BsPFsJ/image.gif)](https://postimg.cc/q66zpP14)|
+
+|관리자 - 자주 묻는 질문|
+|------|
+|[![image.gif](https://i.postimg.cc/4d1hXZWL/image.gif)](https://postimg.cc/CBzKNyTk)|
+
+|관리자 - 정보 수정|
+|------|
+|[![image.gif](https://i.postimg.cc/Yq0mB5YR/image.gif)](https://postimg.cc/JGwhbdTH)|
+
+|관리자 - 채팅 관리|
+|------|
+|[![image.gif](https://i.postimg.cc/k4wDks5L/image.gif)](https://postimg.cc/5YYxzwLm)|
+
+|관리자 - 채팅 삭제|
+|------|
+|[![image.gif](https://i.postimg.cc/C1MxH847/image.gif)](https://postimg.cc/xk7Q9chN)|
+
+|관리자 - 카테고리 수정 , 삭제|
+|------|
+|[![image.gif](https://i.postimg.cc/4xTZQtfc/image.gif)](https://postimg.cc/svKtVMZf)|
+
+|관리자 - 카테고리 추가|
+|------|
+|[![image.gif](https://i.postimg.cc/Kz4y8DN6/image.gif)](https://postimg.cc/0Mg4tmhn)|
+
+|관리자 - 카테고리수정|
+|------|
+|[![image.gif](https://i.postimg.cc/yxZ4F62n/image.gif)](https://postimg.cc/tnpMbbqV)|
+
+|상품 - 전체조회|
+|------|
+|[![image.gif](https://i.postimg.cc/MZCXgnZ6/image.gif)](https://postimg.cc/6Th9v5Gg)|
+
+|유저 - 문의하기|
+|------|
+|[![image.gif](https://i.postimg.cc/3wxw2p1B/image.gif)](https://postimg.cc/pm3xHmgh)|
+
+|유저 - 상품 수정|
+|------|
+|[![image.gif](https://i.postimg.cc/FFLHbhy2/image.gif)](https://postimg.cc/JtR8MVdq)|
+
+|유저 - 상품 판매 등록|
+|------|
+|[![image.gif](https://i.postimg.cc/FsbFqGnp/image.gif)](https://postimg.cc/9rMjwP2w)|
+
+|유저 - 이모티콘 구매|
+|------|
+|[![image.gif](https://i.postimg.cc/cJzdYzrx/image.gif)](https://postimg.cc/yJFqCvmt)|
+
+|유저 - 이모티콘 환불|
+|------|
+|[![image.gif](https://i.postimg.cc/SR64BNVR/image.gif)](https://postimg.cc/dZVgdFbc)|
+
+|유저 - 채팅|
+|------|
+|[![image.gif](https://i.postimg.cc/qMG0QqzZ/image.gif)](https://postimg.cc/HVjfkp0Q)|
+
+|유저 - 회원정보 수정|
+|------|
+|[![image.gif](https://i.postimg.cc/SxT4FPL6/image.gif)](https://postimg.cc/18q2DJjX)|
+
+|자유 게시판 - 리뷰|
+|------|
+|[![image.gif](https://i.postimg.cc/tTPG6CKk/image.gif)](https://postimg.cc/hzSYWgPQ)|
+
+|자유게시판 - 자유게시물 등록|
+|------|
+|[![image.gif](https://i.postimg.cc/520c33c6/image.gif)](https://postimg.cc/6yD16CpX)|
