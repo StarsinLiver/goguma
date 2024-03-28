@@ -1055,3 +1055,4 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 |자유게시판 - 자유게시물 등록|
 |------|
 |[![image.gif](https://i.postimg.cc/520c33c6/image.gif)](https://postimg.cc/6yD16CpX)|
+<img src="(https://i.postimg.cc/520c33c6/image.gif)](https://postimg.cc/6yD16CpX) width="200" height="400"/>
