@@ -976,11 +976,14 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 # 자유 게시판
 
-| 메인 | 상세페이지 | 게시글 작성 | 리뷰 등록/삭제 |
-|------|------------|--------------|----------------|
-| ![메인](https://i.postimg.cc/520c33c6/image.gif) | ![상세페이지](https://i.postimg.cc/tTPG6CKk/image.gif) | ![게시글 작성](https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07) | ![리뷰 등록/삭제](https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0) |
+| 메인 | 상세페이지 |
+|------|------------|
+| ![메인](https://i.postimg.cc/520c33c6/image.gif) | ![상세페이지](https://i.postimg.cc/tTPG6CKk/image.gif) |
 
-## 리뷰 등록/삭제
+| 게시글 작성 | 리뷰 등록/삭제 |
+|--------------|----------------|
+| ![게시글 작성](https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07) | ![리뷰 등록/삭제](https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0) |
+
 
 <p>리뷰 등록/삭제</p>
 <img src="https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0" width="400" height="200" alt="Image 3">
