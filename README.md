@@ -1052,11 +1052,11 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
   <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
     <div style="margin-right: 20px;">
       <p>게시글 작성</p>
-      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07" width="400" height="200" alt="Image 3">
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07" width="300" height="200" alt="Image 3">
     </div>
     <div>
       <p>리뷰 등록/삭제</p>
-      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0" width="400" height="200" alt="Image 3">
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0" width="300" height="200" alt="Image 3">
     </div>
   </div>
 </div>
