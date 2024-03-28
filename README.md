@@ -938,90 +938,47 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 # 메인화면, 회원가입, 로그인
 
-[![image.gif](https://i.postimg.cc/6QWCGcH3/image.gif)](https://postimg.cc/mPnPvYWf)
+| 메인화면 | 회원가입 | 로그인 |
+|---------|---------|--------|
+| [![image.gif](https://i.postimg.cc/6QWCGcH3/image.gif)](https://postimg.cc/mPnPvYWf) | | |
 
 ## 관리자
 
-### 1대1 문의 사항
-<p>1대1 문의 사항</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/bd6de7fc-a35c-49fc-b7b4-a5f1c7254440" width="400" height="200" alt="Image 1">
+| 1대1 문의 사항 | 공지사항 등록 / 삭제 | 광고 베너 관리 |
+|----------------|----------------------|----------------|
+| ![1대1 문의 사항](https://github.com/StarsinLiver/goguma/assets/113073333/bd6de7fc-a35c-49fc-b7b4-a5f1c7254440) | ![공지사항 등록 / 삭제](https://github.com/StarsinLiver/goguma/assets/113073333/331f11a0-4923-4799-a2f1-7faf66904c79) | ![광고 베너 관리](https://github.com/StarsinLiver/goguma/assets/113073333/3d0b9af0-bd9f-4348-bdf2-d9ccb2d0369f) |
 
-### 공지사항 등록 / 삭제
-<p>공지사항 등록 / 삭제</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/331f11a0-4923-4799-a2f1-7faf66904c79" width="400" height="200" alt="Image 2">
-
-### 광고 베너 관리
-<p>광고 베너 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/3d0b9af0-bd9f-4348-bdf2-d9ccb2d0369f" width="400" height="200" alt="Image 2">
-
-### 상품 관리
-<p>상품 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/cdb65ec5-b787-41fd-91d2-8530cd1efe3c" width="400" height="200" alt="Image 1">
-
-### 신고 관리
-<p>신고 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/5418ea31-b797-479f-aba3-b49b5af60b2c" width="400" height="200" alt="Image 2">
-
-### 이모티콘 관리
-<p>이모티콘 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/c799d2fe-e3d3-46f2-bbda-aa4b68a0b2c1" width="400" height="200" alt="Image 2">
+| 상품 관리 | 신고 관리 | 이모티콘 관리 |
+|------------|------------|---------------|
+| ![상품 관리](https://github.com/StarsinLiver/goguma/assets/113073333/cdb65ec5-b787-41fd-91d2-8530cd1efe3c) | ![신고 관리](https://github.com/StarsinLiver/goguma/assets/113073333/5418ea31-b797-479f-aba3-b49b5af60b2c) | ![이모티콘 관리](https://github.com/StarsinLiver/goguma/assets/113073333/c799d2fe-e3d3-46f2-bbda-aa4b68a0b2c1) |
 
 ### 자유게시판 관리
-<p>자유게시판 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/1f32b16f-dbd3-4521-92fb-25aaff4bb7a1" width="400" height="200" alt="Image 1">
 
-### 자주 묻는 질문 관리
-<p>자주 묻는 질문 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/d1f9ab76-ce0b-4b1e-a614-25558953a52e" width="400" height="200" alt="Image 2">
-
-### 채팅 관리
-<p>채팅 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/0b2d1877-0c70-4fb9-8bd9-f0a39697cce7" width="400" height="200" alt="Image 2">
+| 자유게시판 관리 | 자주 묻는 질문 관리 | 채팅 관리 |
+|-----------------|----------------------|------------|
+| ![자유게시판 관리](https://github.com/StarsinLiver/goguma/assets/113073333/1f32b16f-dbd3-4521-92fb-25aaff4bb7a1) | ![자주 묻는 질문 관리](https://github.com/StarsinLiver/goguma/assets/113073333/d1f9ab76-ce0b-4b1e-a614-25558953a52e) | ![채팅 관리](https://github.com/StarsinLiver/goguma/assets/113073333/0b2d1877-0c70-4fb9-8bd9-f0a39697cce7) |
 
 ## 유저
 
-### 문의하기
-<p>문의하기</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/7ba5f6df-307d-4ec2-b949-8c4e6b5817fe" width="400" height="200" alt="Image 1">
+| 문의하기 | 이모티콘 구매 / 환불 |
+|----------|----------------------|
+| ![문의하기](https://github.com/StarsinLiver/goguma/assets/113073333/7ba5f6df-307d-4ec2-b949-8c4e6b5817fe) | ![이모티콘 구매 / 환불](https://github.com/StarsinLiver/goguma/assets/113073333/4b623c06-3337-4e65-8d33-46af36fce924) |
 
-### 이모티콘 구매 / 환불
-<p>이모티콘 구매 / 환불</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/4b623c06-3337-4e65-8d33-46af36fce924" width="400" height="200" alt="Image 2">
-
-### 채팅
-<p>채팅</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/ecc83541-baf3-4015-96c1-98e5595508ef" width="400" height="200" alt="Image 3">
-
-### 상품 관리
-<p>상품 관리</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/5bb50acc-a2a6-4c74-8926-0011ccaf5d21" width="400" height="200" alt="Image 3">
+| 채팅 | 상품 관리 |
+|------|------------|
+| ![채팅](https://github.com/StarsinLiver/goguma/assets/113073333/ecc83541-baf3-4015-96c1-98e5595508ef) | ![상품 관리](https://github.com/StarsinLiver/goguma/assets/113073333/5bb50acc-a2a6-4c74-8926-0011ccaf5d21) |
 
 # 상품 관리
 
-### 상품 조회 / 검색
-<p>상품 조회 / 검색</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/70c4cb15-8937-43c4-b091-195ac21699a9" width="400" height="200" alt="Image 1">
-
-### 상품 상세
-<p>상품 상세</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/a6d71ea9-b76d-41cb-9a9a-749ba6615ef7" width="400" height="200" alt="Image 2">
-
-### 상품 등록 / 수정
-<p>상품 등록 / 수정</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/e19309be-8437-46f8-a6ed-882d4c17bd88" width="400" height="200" alt="Image 2">
+| 상품 조회 / 검색 | 상품 상세 | 상품 등록 / 수정 |
+|-------------------|------------|------------------|
+| ![상품 조회 / 검색](https://github.com/StarsinLiver/goguma/assets/113073333/70c4cb15-8937-43c4-b091-195ac21699a9) | ![상품 상세](https://github.com/StarsinLiver/goguma/assets/113073333/a6d71ea9-b76d-41cb-9a9a-749ba6615ef7) | ![상품 등록 / 수정](https://github.com/StarsinLiver/goguma/assets/113073333/e19309be-8437-46f8-a6ed-882d4c17bd88) |
 
 # 자유 게시판
 
-<p>메인</p>
-<img src="https://i.postimg.cc/520c33c6/image.gif" width="400" height="200" alt="Image 1">
-
-<p>상세페이지</p>
-<img src="https://i.postimg.cc/tTPG6CKk/image.gif" width="400" height="200" alt="Image 2">
-
-## 게시글 작성
-
-<p>게시글 작성</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07" width="400" height="200" alt="Image 3">
+| 메인 | 상세페이지 | 게시글 작성 | 리뷰 등록/삭제 |
+|------|------------|--------------|----------------|
+| ![메인](https://i.postimg.cc/520c33c6/image.gif) | ![상세페이지](https://i.postimg.cc/tTPG6CKk/image.gif) | ![게시글 작성](https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07) | ![리뷰 등록/삭제](https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0) |
 
 ## 리뷰 등록/삭제
 
