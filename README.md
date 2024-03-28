@@ -952,8 +952,6 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 |------------|------------|---------------|
 | ![상품 관리](https://github.com/StarsinLiver/goguma/assets/113073333/cdb65ec5-b787-41fd-91d2-8530cd1efe3c) | ![신고 관리](https://github.com/StarsinLiver/goguma/assets/113073333/5418ea31-b797-479f-aba3-b49b5af60b2c) | ![이모티콘 관리](https://github.com/StarsinLiver/goguma/assets/113073333/c799d2fe-e3d3-46f2-bbda-aa4b68a0b2c1) |
 
-### 자유게시판 관리
-
 | 자유게시판 관리 | 자주 묻는 질문 관리 | 채팅 관리 |
 |-----------------|----------------------|------------|
 | ![자유게시판 관리](https://github.com/StarsinLiver/goguma/assets/113073333/1f32b16f-dbd3-4521-92fb-25aaff4bb7a1) | ![자주 묻는 질문 관리](https://github.com/StarsinLiver/goguma/assets/113073333/d1f9ab76-ce0b-4b1e-a614-25558953a52e) | ![채팅 관리](https://github.com/StarsinLiver/goguma/assets/113073333/0b2d1877-0c70-4fb9-8bd9-f0a39697cce7) |
@@ -984,6 +982,3 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 |--------------|----------------|
 | ![게시글 작성](https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07) | ![리뷰 등록/삭제](https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0) |
 
-
-<p>리뷰 등록/삭제</p>
-<img src="https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0" width="400" height="200" alt="Image 3">
