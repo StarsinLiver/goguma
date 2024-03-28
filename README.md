@@ -938,9 +938,9 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 # 메인화면, 회원가입, 로그인
 
-| 메인화면 | 회원가입 | 로그인 |
-|---------|---------|--------|
-| [![image.gif](https://i.postimg.cc/6QWCGcH3/image.gif)](https://postimg.cc/mPnPvYWf) | | |
+| 메인화면 / 회원가입 / 로그인 |
+|---------|
+| [![image.gif](https://i.postimg.cc/6QWCGcH3/image.gif)](https://postimg.cc/mPnPvYWf) |
 
 ## 관리자
 
