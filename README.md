@@ -936,123 +936,127 @@ testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0
 
 # 6️⃣ 시연
 
-|메인화면, 회원가입, 로그인|
+|<h1>메인화면, 회원가입, 로그인</h1>|
 |------|
 |[![image.gif](https://i.postimg.cc/6QWCGcH3/image.gif)](https://postimg.cc/mPnPvYWf)|
+<br/>
+<h1>관리자</h1>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>1대1 문의 사항</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/bd6de7fc-a35c-49fc-b7b4-a5f1c7254440" width="400" height="200" alt="Image 1">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>공지사항 등록 / 삭제</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/331f11a0-4923-4799-a2f1-7faf66904c79" width="400" height="200" alt="Image 2">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>광고 베너 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/3d0b9af0-bd9f-4348-bdf2-d9ccb2d0369f" width="400" height="200" alt="Image 2">
+    </div>
+  </div>
+</div>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>상품 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/cdb65ec5-b787-41fd-91d2-8530cd1efe3c" width="400" height="200" alt="Image 1">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>신고 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/5418ea31-b797-479f-aba3-b49b5af60b2c" width="400" height="200" alt="Image 2">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>이모티콘 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/c799d2fe-e3d3-46f2-bbda-aa4b68a0b2c1" width="400" height="200" alt="Image 2">
+    </div>
+  </div>
+</div>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>자유게시판 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/1f32b16f-dbd3-4521-92fb-25aaff4bb7a1" width="400" height="200" alt="Image 1">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>자주 묻는 질문 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/d1f9ab76-ce0b-4b1e-a614-25558953a52e" width="400" height="200" alt="Image 2">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>채팅 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/0b2d1877-0c70-4fb9-8bd9-f0a39697cce7" width="400" height="200" alt="Image 2">
+    </div>
+  </div>
+</div>
+<br/><br/>
+<h1>유저</h1>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>문의하기</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/7ba5f6df-307d-4ec2-b949-8c4e6b5817fe" width="400" height="200" alt="Image 1">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>이모티콘 구매 / 환불</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/4b623c06-3337-4e65-8d33-46af36fce924" width="400" height="200" alt="Image 2">
+    </div>
+  </div>
+</div>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>채팅</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/ecc83541-baf3-4015-96c1-98e5595508ef" width="400" height="200" alt="Image 3">
+    </div>
+    <div>
+      <p>상품 관리</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/5bb50acc-a2a6-4c74-8926-0011ccaf5d21" width="400" height="200" alt="Image 3">
+    </div>
+  </div>
+</div>
+<br/><br/>
+<h1>상품 관리</h1>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>상품 조회 / 검색</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/70c4cb15-8937-43c4-b091-195ac21699a9" width="400" height="200" alt="Image 1">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>상품 상세</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/a6d71ea9-b76d-41cb-9a9a-749ba6615ef7" width="400" height="200" alt="Image 2">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>상품 등록 / 수정</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/e19309be-8437-46f8-a6ed-882d4c17bd88" width="400" height="200" alt="Image 2">
+    </div>
+  </div>
+</div>
+<br/><br/>
+<h1>자유 게시판</h1>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>메인</p>
+      <img src="https://i.postimg.cc/520c33c6/image.gif" width="400" height="200" alt="Image 1">
+    </div>
+    <div style="margin-right: 20px;">
+      <p>상세페이지</p>
+      <img src="https://i.postimg.cc/tTPG6CKk/image.gif" width="400" height="200" alt="Image 2">
+    </div>
+  </div>
+</div>
 
-|관리자 - 1대1 문의 관리|
-|------|
-|[![1-1.gif](https://i.postimg.cc/8CRSYCCY/1-1.gif)](https://postimg.cc/3yxV4Ymj)|
-
-|관리자 - 공지사항 등록 , 수정, 삭제|
-|------|
-|[![image.gif](https://i.postimg.cc/4dxS14HV/image.gif)](https://postimg.cc/Z9XHbSc5)|
-
-|관리자 - 광고 관리|
-|------|
-|[![image.gif](https://i.postimg.cc/Y9DyDcQV/image.gif)](https://postimg.cc/BLDgtVYc)|
-
-|관리자 - 권한 수정 1번|
-|------|
-|[![1.gif](https://i.postimg.cc/5NCkgRy7/1.gif)](https://postimg.cc/CzwNLJjk)|
-
-|관리자 - 권한 수정 2번|
-|------|
-|[![2.gif](https://i.postimg.cc/7PFyq7TR/2.gif)](https://postimg.cc/F1V6ZYpb)|
-
-|관리자 - 상품 관리|
-|------|
-|[![image.gif](https://i.postimg.cc/fL11Tnkd/image.gif)](https://postimg.cc/r0CfQH1y)|
-
-|관리자 - 신고 관리|
-|------|
-|[![image.gif](https://i.postimg.cc/VNVVDQqh/image.gif)](https://postimg.cc/GBvKmfSP)|
-
-|관리자 - 이모티콘 결제 내역 , 환불|
-|------|
-|[![image.gif](https://i.postimg.cc/nzm02scs/image.gif)](https://postimg.cc/jwsHdSfK)|
-
-|관리자 - 이모티콘 등록|
-|------|
-|[![image.gif](https://i.postimg.cc/K8YfVp8h/image.gif)](https://postimg.cc/9rvywp9L)|
-
-|관리자 - 이모티콘 삭제|
-|------|
-|[![image.gif](https://i.postimg.cc/B62BDdMH/image.gif)](https://postimg.cc/gXkhbB92)|
-
-|관리자 - 이모티콘 수정|
-|------|
-|[![image.gif](https://i.postimg.cc/y6XTNCJz/image.gif)](https://postimg.cc/7bhzBcMB)|
-
-|관리자 - 자유게시판 관리|
-|------|
-|[![image.gif](https://i.postimg.cc/D0BsPFsJ/image.gif)](https://postimg.cc/q66zpP14)|
-
-|관리자 - 자주 묻는 질문|
-|------|
-|[![image.gif](https://i.postimg.cc/4d1hXZWL/image.gif)](https://postimg.cc/CBzKNyTk)|
-
-|관리자 - 정보 수정|
-|------|
-|[![image.gif](https://i.postimg.cc/Yq0mB5YR/image.gif)](https://postimg.cc/JGwhbdTH)|
-
-|관리자 - 채팅 관리|
-|------|
-|[![image.gif](https://i.postimg.cc/k4wDks5L/image.gif)](https://postimg.cc/5YYxzwLm)|
-
-|관리자 - 채팅 삭제|
-|------|
-|[![image.gif](https://i.postimg.cc/C1MxH847/image.gif)](https://postimg.cc/xk7Q9chN)|
-
-|관리자 - 카테고리 수정 , 삭제|
-|------|
-|[![image.gif](https://i.postimg.cc/4xTZQtfc/image.gif)](https://postimg.cc/svKtVMZf)|
-
-|관리자 - 카테고리 추가|
-|------|
-|[![image.gif](https://i.postimg.cc/Kz4y8DN6/image.gif)](https://postimg.cc/0Mg4tmhn)|
-
-|관리자 - 카테고리수정|
-|------|
-|[![image.gif](https://i.postimg.cc/yxZ4F62n/image.gif)](https://postimg.cc/tnpMbbqV)|
-
-|상품 - 전체조회|
-|------|
-|[![image.gif](https://i.postimg.cc/MZCXgnZ6/image.gif)](https://postimg.cc/6Th9v5Gg)|
-
-|유저 - 문의하기|
-|------|
-|[![image.gif](https://i.postimg.cc/3wxw2p1B/image.gif)](https://postimg.cc/pm3xHmgh)|
-
-|유저 - 상품 수정|
-|------|
-|[![image.gif](https://i.postimg.cc/FFLHbhy2/image.gif)](https://postimg.cc/JtR8MVdq)|
-
-|유저 - 상품 판매 등록|
-|------|
-|[![image.gif](https://i.postimg.cc/FsbFqGnp/image.gif)](https://postimg.cc/9rMjwP2w)|
-
-|유저 - 이모티콘 구매|
-|------|
-|[![image.gif](https://i.postimg.cc/cJzdYzrx/image.gif)](https://postimg.cc/yJFqCvmt)|
-
-|유저 - 이모티콘 환불|
-|------|
-|[![image.gif](https://i.postimg.cc/SR64BNVR/image.gif)](https://postimg.cc/dZVgdFbc)|
-
-|유저 - 채팅|
-|------|
-|[![image.gif](https://i.postimg.cc/qMG0QqzZ/image.gif)](https://postimg.cc/HVjfkp0Q)|
-
-|유저 - 회원정보 수정|
-|------|
-|[![image.gif](https://i.postimg.cc/SxT4FPL6/image.gif)](https://postimg.cc/18q2DJjX)|
-
-|자유 게시판 - 리뷰|
-|------|
-|[![image.gif](https://i.postimg.cc/tTPG6CKk/image.gif)](https://postimg.cc/hzSYWgPQ)|
-
-|자유게시판 - 자유게시물 등록|
-|------|
-|[![image.gif](https://i.postimg.cc/520c33c6/image.gif)](https://postimg.cc/6yD16CpX)|
-<img src="https://i.postimg.cc/520c33c6/image.gif" width="300" height="200"/>
+<div align="center">
+  <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+    <div style="margin-right: 20px;">
+      <p>게시글 작성</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/2fab8979-ef43-43d6-929b-15a785febe07" width="400" height="200" alt="Image 3">
+    </div>
+    <div>
+      <p>리뷰 등록/삭제</p>
+      <img src="https://github.com/StarsinLiver/goguma/assets/113073333/aa89d0ec-14fe-453f-88db-c730b397c4e0" width="400" height="200" alt="Image 3">
+    </div>
+  </div>
+</div>
